@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mapleM-Project</title>
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUITE@2/fonts/variable/woff2/SUITE-Variable.css"
+    rel="stylesheet">
+  <script>
+    (function () {
+      const storedTheme = localStorage.getItem('vite-ui-theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (storedTheme === 'dark' || (storedTheme !== 'light' && prefersDark)) {
+        document.documentElement.classList.add('dark');
+      }
+    })();
+  </script>
+  <script type="module" src="/src/main.tsx"></script>
+
+</head>
+
+<body>
+  <noscript>
+    이 사이트는 JavaScript를 필요로 합니다. JavaScript를 활성화해 주세요.
+  </noscript>
+  <div id="root"></div>
+</body>
+
+</html>

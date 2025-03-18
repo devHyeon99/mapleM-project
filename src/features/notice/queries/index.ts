@@ -1,0 +1,1 @@
+export { useNoticeQuery } from './useNoticeQuery';

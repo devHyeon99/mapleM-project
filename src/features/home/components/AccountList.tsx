@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { AccountAddDialog } from '@/features/home/components';
+import { AccountDialog } from '@/features/home/components';
 import { useAccountStore } from '@/store/useAccountStore';
 import { Plus } from 'lucide-react';
 import { AccountData } from '@/types/account';
@@ -31,7 +31,7 @@ export const AccountList = ({ accounts }: AccountListProps) => {
         >
           <Plus />
         </Button>
-        <AccountAddDialog
+        <AccountDialog
           open={open}
           setOpen={setOpen}
           mode='add'

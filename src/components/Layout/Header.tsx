@@ -9,6 +9,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
+import { CharacterHelpDialog } from '@/features/character/components/CharacterHelpDialog';
 import { HeaderMenuGroup } from './HeaderMenuGroup';
 
 interface HeaderProps {
@@ -22,6 +23,7 @@ export const Header = ({
   title,
   showBackButton = false,
   showMenuBar = false,
+  showCharacterHelpButton = false,
 }: HeaderProps) => {
   const navigate = useNavigate();
 
@@ -80,6 +82,9 @@ export const Header = ({
           </SheetContent>
         </Sheet>
       )}
+
+      {/* 도움말 다이얼로그 */}
+      {showCharacterHelpButton && <CharacterHelpDialog />}
     </header>
   );
 };

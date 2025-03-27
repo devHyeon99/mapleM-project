@@ -157,3 +157,27 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+.swiper {
+  @apply rounded-md
+}
+
+.custom-bullet {
+  background-color: #EEC6B2 !important;
+}
+
+.custom-bullet-active {
+  background-color: #F29325 !important;
+}
+
+.dark .custom-bullet {
+  background-color: #424242 !important;
+}
+
+.dark .custom-bullet-active {
+  background-color: #757575 !important;
+}
+
+.custom-header-button {
+  @apply relative text-base hover:bg-transparent text-black/50 dark:text-white hover:text-primary after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-primary dark:after:bg-white after:scale-x-0 hover:after:scale-x-100 after:origin-left after:transition-transform
+}

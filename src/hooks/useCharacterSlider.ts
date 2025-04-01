@@ -1,8 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
-import { Character } from '@/types/account';
+import { CharacterData } from '@/types/character';
 import type { Swiper as SwiperInstance } from 'swiper';
 
-export function useCharacterSlider(characters: Character[]) {
+export function useCharacterSlider(characters: CharacterData[]) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [swiperKey, setSwiperKey] = useState(characters.length);
   const [isBeginning, setIsBeginning] = useState(true);

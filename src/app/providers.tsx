@@ -1,14 +1,19 @@
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, useEffect } from 'react';
 import { BrowserRouter } from 'react-router';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ThemeProvider } from '@/components/theme/theme-provider';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { Toaster } from '@/components/ui/sonner';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { checkAndResetTasks } from '@/utils/taskUtils';
 
 const queryClient = new QueryClient();
 
 export function Providers({ children }: PropsWithChildren) {
+  useEffect(() => {
+    checkAndResetTasks();
+  }, []);
+
   return (
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>

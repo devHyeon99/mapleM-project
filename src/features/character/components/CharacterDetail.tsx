@@ -66,7 +66,7 @@ export function CharacterDetail({ character }: CharacterDetailProps) {
                   aria-current={questCategory === key ? 'page' : undefined}
                   className={`py-1 text-base font-medium transition-all duration-200 ease-in-out ${
                     questCategory === key
-                      ? 'text-foreground text-lg font-bold'
+                      ? 'text-foreground font-bold'
                       : 'text-muted-foreground hover:text-foreground'
                   }`}
                 >
@@ -92,9 +92,9 @@ export function CharacterDetail({ character }: CharacterDetailProps) {
                   variant='ghost'
                   onClick={() => setBossCategory(key)}
                   aria-current={bossCategory === key ? 'page' : undefined}
-                  className={`py-1 font-medium transition-all duration-200 ease-in-out ${
+                  className={`py-1 text-base font-medium transition-all duration-200 ease-in-out ${
                     bossCategory === key
-                      ? 'text-foreground text-base font-bold'
+                      ? 'text-foreground font-bold'
                       : 'text-muted-foreground hover:text-foreground'
                   }`}
                 >
@@ -127,7 +127,7 @@ export function CharacterDetail({ character }: CharacterDetailProps) {
             aria-current={activeTab === key ? 'page' : undefined}
             className={`py-1 text-base font-medium transition-all duration-200 ease-in-out ${
               activeTab === key
-                ? 'text-foreground font-bold text-lg'
+                ? 'text-foreground font-bold'
                 : 'text-muted-foreground hover:text-foreground'
             }`}
           >

@@ -27,7 +27,7 @@ export function CharacterHelpDialog() {
             효율적으로 관리할 수 있습니다.
           </DialogDescription>
         </DialogHeader>
-        <div className='overflow-y-auto max-h-[60vh] space-y-4 leading-relaxed pr-2'>
+        <div className='overflow-y-auto max-h-[60vh] space-y-4 leading-relaxed p-2'>
           <section>
             <h3 className='font-bold'>캐릭터 추가 및 관리</h3>
             <ul className='list-disc pl-4 font-light'>

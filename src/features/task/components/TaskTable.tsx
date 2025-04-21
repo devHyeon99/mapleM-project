@@ -77,7 +77,7 @@ export function TaskTable<TData, TValue>({
   return (
     <div className='flex-1'>
       <div className='flex justify-end gap-2 py-2'>
-        <h2 className='flex-1 self-center font-medium'>{head} 관리</h2>
+        <h2 className='flex-1 self-center font-semibold'>{head} 관리</h2>
         <Button
           variant='ghost'
           className='h-8 w-8 p-0 [&_svg]:!size-5'

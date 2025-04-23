@@ -56,3 +56,11 @@ function getThursdayWeekStart(date: Date): Date {
   thursday.setDate(date.getDate() - distance);
   return thursday;
 }
+
+// 생성된지 몇일 됐는지 구하는 함수
+export const getDaysSince = (dateString: string): number => {
+  const createdDate = new Date(dateString);
+  const today = new Date();
+  const diffTime = today.getTime() - createdDate.getTime();
+  return Math.floor(diffTime / (1000 * 60 * 60 * 24));
+};

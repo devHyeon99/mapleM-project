@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Skeleton } from '@/components/ui/skeleton';
 import { CharacterData } from '@/types/character';
 import { characterImageMap } from '@/constants/character_name';
+import { cn } from '@/lib/utils';
 
 export interface CharacterCardProps {
   characterBasicData: CharacterData['basic'];
@@ -23,11 +24,12 @@ export const CharacterCard = ({
   return (
     <button
       type='button'
-      className={`flex flex-col justify-end items-center w-full h-32 border rounded-md bg-card cursor-pointer hover:border-primary/70 ${
-        selected
-          ? 'shadow-[0_0_1px_1px_rgba(242,147,37,1)] dark:outline-gray-200 dark:shadow-[0_0_1px_1px_rgba(156,163,175,0.3)]'
-          : ''
-      }`}
+      className={cn(
+        'flex flex-col justify-end items-center w-full h-32 border rounded-md bg-card cursor-pointer',
+        'hover:border-primary/70 dark:hover:border-white/50',
+        selected &&
+          'shadow-[0_0_1px_1px_rgba(242,147,37,1)] dark:shadow-[0_0_1px_1px_rgb(242,243,244)]'
+      )}
       onClick={onClick}
     >
       <div className='flex flex-col flex-1 justify-center gap-2 items-center'>

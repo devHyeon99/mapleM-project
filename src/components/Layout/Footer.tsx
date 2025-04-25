@@ -4,7 +4,7 @@ export const Footer = () => {
       <p className='text-xs font-light'>
         © 2025 MMGG. 엘리시움 자유
         <br />
-        This is an unofficial site and is not affiliated with NEXON Korea. Data
+        This is an unofficial site and is not associated with NEXON Korea. Data
         based on NEXON Open API.
       </p>
     </footer>

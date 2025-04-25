@@ -6,6 +6,7 @@ import {
   CharacterDetail,
   CharacterCard,
   CharacterAddDialog,
+  CharacterDeleteDialog,
 } from '@/features/character/components';
 import { CharacterData } from '@/types/character';
 import { useCharacterSlider } from '@/hooks/useCharacterSlider';
@@ -24,9 +25,9 @@ export function CharacterSlider() {
   const [selectedCharacter, setSelectedCharacter] =
     useState<CharacterData | null>(null);
 
-  const updateSelectedCharacter = async (char: CharacterData) => {
-    if (currentAccount === null) return;
+  if (currentAccount === null) return;
 
+  const updateSelectedCharacter = async (char: CharacterData) => {
     try {
       const updatedChar = await getCharacter(currentAccount.id, char.id);
 
@@ -70,12 +71,11 @@ export function CharacterSlider() {
       <div className='flex justify-between items-center'>
         <h2 className='text-lg font-semibold'>캐릭터 관리</h2>
         <div className='flex items-center gap-2'>
-          <Button className='swiper-button-prev' size='icon'>
-            <ChevronLeft />
+          <Button className='swiper-button-prev' size='icon' aria-label='이전'>
+            <ChevronLeft className='size-5' aria-hidden />
           </Button>
-
-          <Button className='swiper-button-next' size='icon'>
-            <ChevronRight />
+          <Button className='swiper-button-next' size='icon' aria-label='다음'>
+            <ChevronRight className='size-5' aria-hidden />
           </Button>
         </div>
       </div>
@@ -86,6 +86,10 @@ export function CharacterSlider() {
               characterBasicData={char.basic}
               onClick={() => updateSelectedCharacter(char)}
               selected={selectedCharacter?.id === char.id}
+            />
+            <CharacterDeleteDialog
+              account={currentAccount.id}
+              character={char.id}
             />
           </SwiperSlide>
         ))}

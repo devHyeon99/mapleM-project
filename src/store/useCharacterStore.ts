@@ -20,7 +20,10 @@ interface CharacterStoreState {
     characterId: string,
     forceUpdate?: boolean
   ) => Promise<CharacterData | null>;
-  removeCharacter: (accountId: string, characterId: string) => void;
+  removeCharacter: (
+    accountId: string,
+    characterId: string
+  ) => { removed: boolean };
   removeCharactersByAccountId: (accountId: string) => void; // 연쇄 삭제용
   updateCharacterData: (
     accountId: string,
@@ -144,19 +147,29 @@ export const useCharacterStore = create<CharacterStoreState>()(
       },
 
       removeCharacter: (accountId, characterId) => {
+        let removed = false;
+
         set(
           produce((state: CharacterStoreState) => {
-            if (state.charactersByAccountId[accountId]) {
-              state.charactersByAccountId[accountId] =
-                state.charactersByAccountId[accountId].filter(
-                  (char) => char.id !== characterId
-                );
+            const characters = state.charactersByAccountId[accountId];
+            if (characters) {
+              const newList = characters.filter(
+                (char) => char.id !== characterId
+              );
+              if (newList.length !== characters.length) {
+                state.charactersByAccountId[accountId] = newList;
+                removed = true;
+              }
             }
           })
         );
-        // 캐릭터에 대한 퀘스트 제거
-        useQuestStore.getState().removeQuestsByCharacterId(characterId);
-        useBossStore.getState().removeBossesByCharacterId(characterId);
+
+        if (removed) {
+          useQuestStore.getState().removeQuestsByCharacterId(characterId);
+          useBossStore.getState().removeBossesByCharacterId(characterId);
+        }
+
+        return { removed };
       },
 
       removeCharactersByAccountId: (accountId) => {

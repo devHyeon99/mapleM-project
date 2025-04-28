@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -13,6 +14,7 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
+  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
@@ -28,7 +30,6 @@ import { SERVER_LIST } from '@/constants/server_list';
 export const CharacterAddDialog = () => {
   const [serverName, setServerName] = useState(''); // 서버 이름 상태
   const [nickName, setNickName] = useState(''); // 닉네임 상태
-  const [open, setOpen] = useState(false); // 다이얼로그 열림 상태
   const currentAccountId = useAccountStore((state) => state.currentAccountId);
   const addCharacter = useCharacterStore((state) => state.addCharacter);
 
@@ -42,7 +43,6 @@ export const CharacterAddDialog = () => {
     try {
       addCharacter(currentAccountId, serverName, nickName);
       toast.success('캐릭터 추가가 완료되었습니다.', { duration: 3000 });
-      setOpen(false);
       setServerName('');
       setNickName('');
     } catch (error) {
@@ -52,7 +52,7 @@ export const CharacterAddDialog = () => {
   };
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog>
       <DialogTrigger asChild>
         <Button
           className='flex w-full h-32 [&_svg]:!size-6'
@@ -61,7 +61,7 @@ export const CharacterAddDialog = () => {
           tooltip='캐릭터 추가'
           tooltipSide='bottom'
         >
-          <Plus />
+          <Plus aria-hidden />
         </Button>
       </DialogTrigger>
       <DialogContent className='gap-0 sm:max-w-[425px]'>
@@ -81,6 +81,7 @@ export const CharacterAddDialog = () => {
                 </SelectTrigger>
                 <SelectContent>
                   <SelectGroup>
+                    <SelectLabel>서버 목록</SelectLabel>
                     {SERVER_LIST.map((server) => (
                       <SelectItem key={server.name} value={server.name}>
                         {server.name}
@@ -103,6 +104,9 @@ export const CharacterAddDialog = () => {
             </div>
           </div>
           <DialogFooter>
+            <DialogClose asChild>
+              <Button variant='outline'>취소</Button>
+            </DialogClose>
             <Button type='submit'>추가</Button>
           </DialogFooter>
         </form>

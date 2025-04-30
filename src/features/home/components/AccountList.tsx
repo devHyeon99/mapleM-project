@@ -1,19 +1,12 @@
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { AccountDialog } from '@/features/home/components';
-import { useAccountStore } from '@/store/useAccountStore';
-import { Plus } from 'lucide-react';
 import { AccountData } from '@/types/account';
 import { AccountCard } from './AccountCard';
+import { AccountAddButton } from './AccountAddButton';
 
 interface AccountListProps {
   accounts: AccountData[];
 }
 
 export const AccountList = ({ accounts }: AccountListProps) => {
-  const [open, setOpen] = useState(false);
-  const addAccount = useAccountStore((state) => state.addAccount);
-
   return (
     <section className='flex flex-col' aria-labelledby='account-section-title'>
       <header
@@ -22,24 +15,7 @@ export const AccountList = ({ accounts }: AccountListProps) => {
         <h2 id='account-section-title' className='flex-1 text-xl font-semibold'>
           계정관리
         </h2>
-        <Button
-          className='[&_svg]:!size-6'
-          size='icon'
-          onClick={() => setOpen(true)}
-          tooltip='계정 추가'
-          aria-label='계정 추가'
-        >
-          <Plus />
-        </Button>
-        <AccountDialog
-          open={open}
-          setOpen={setOpen}
-          mode='add'
-          onSubmit={(name) => {
-            const result = addAccount(name);
-            return result;
-          }}
-        />
+        <AccountAddButton />
       </header>
       <ul className='grid gap-4'>
         {accounts.length > 0 ? (

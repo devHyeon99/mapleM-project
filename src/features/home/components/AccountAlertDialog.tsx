@@ -1,5 +1,4 @@
 import {
-  AlertDialog,
   AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
@@ -13,14 +12,12 @@ import { toast } from 'sonner';
 
 type AccountAlertDialogProps = {
   accountId: string;
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
+  onCloseAutoFocus: (e?: Event) => void;
 };
 
 export const AccountAlertDialog = ({
   accountId,
-  open,
-  onOpenChange,
+  onCloseAutoFocus,
 }: AccountAlertDialogProps) => {
   const deleteSelected = useAccountStore(
     (state) => state.deleteSelectedAccount
@@ -36,19 +33,22 @@ export const AccountAlertDialog = ({
   };
 
   return (
-    <AlertDialog open={open} onOpenChange={onOpenChange}>
-      <AlertDialogContent>
-        <AlertDialogHeader>
-          <AlertDialogTitle>정말 계정을 삭제하시겠습니까?</AlertDialogTitle>
-          <AlertDialogDescription>
-            저장된 계정 정보가 모두 삭제됩니다.
-          </AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogCancel>취소</AlertDialogCancel>
-          <AlertDialogAction onClick={handleDelete}>삭제</AlertDialogAction>
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog>
+    <AlertDialogContent
+      onCloseAutoFocus={(e) => {
+        e.preventDefault();
+        onCloseAutoFocus();
+      }}
+    >
+      <AlertDialogHeader>
+        <AlertDialogTitle>정말 계정을 삭제하시겠습니까?</AlertDialogTitle>
+        <AlertDialogDescription>
+          저장된 계정 정보가 모두 삭제됩니다.
+        </AlertDialogDescription>
+      </AlertDialogHeader>
+      <AlertDialogFooter>
+        <AlertDialogCancel>취소</AlertDialogCancel>
+        <AlertDialogAction onClick={handleDelete}>삭제</AlertDialogAction>
+      </AlertDialogFooter>
+    </AlertDialogContent>
   );
 };

@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -102,6 +103,11 @@ export const TaskManager = React.memo(
                 />
               </div>
               <DialogFooter className='mt-4'>
+                <DialogClose asChild>
+                  <Button type='button' variant='outline'>
+                    닫기
+                  </Button>
+                </DialogClose>
                 <Button type='submit' className='text-base font-medium'>
                   저장
                 </Button>

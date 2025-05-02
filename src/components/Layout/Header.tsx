@@ -27,7 +27,7 @@ export const Header = ({
 }: HeaderProps) => {
   const navigate = useNavigate();
 
-  const handleBack = () => navigate(-1);
+  const handleBack = () => navigate('/');
 
   return (
     <header className='bg-background flex items-center justify-between pb-6'>

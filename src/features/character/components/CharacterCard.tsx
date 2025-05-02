@@ -3,6 +3,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { CharacterData } from '@/types/character';
 import { characterImageMap } from '@/constants/character_name';
 import { cn } from '@/lib/utils';
+import { loadedImageCache } from '@/utils/imageCacheUtils';
 
 export interface CharacterCardProps {
   characterBasicData: CharacterData['basic'];
@@ -19,7 +20,16 @@ export const CharacterCard = ({
     characterImageMap[character_job_name] ||
     '/src/assets/images/jobs/default.png';
 
-  const [isImageLoaded, setIsImageLoaded] = useState(false);
+  const [isImageLoaded, setIsImageLoaded] = useState(
+    loadedImageCache.has(imageFile)
+  );
+
+  const handleLoad = () => {
+    if (!isImageLoaded) {
+      loadedImageCache.add(imageFile);
+      setIsImageLoaded(true);
+    }
+  };
 
   return (
     <button
@@ -46,8 +56,8 @@ export const CharacterCard = ({
             width='48'
             height='48'
             loading='lazy'
-            onLoad={() => setIsImageLoaded(true)}
-            onError={() => setIsImageLoaded(true)}
+            onLoad={handleLoad}
+            onError={handleLoad}
           />
         </div>
         <span>{character_name}</span>

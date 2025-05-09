@@ -23,9 +23,19 @@ export const NoticeCard = ({
           {title}
         </CardTitle>
       </CardHeader>
-      <CardContent className='pb-8'>
+      <CardContent className='pb-8 h-full'>
         {loading ? (
-          <div className='flex-1 text-center text-muted h-full'>로딩 중...</div>
+          <ul className='flex flex-col justify-between gap-5 h-full'>
+            {Array.from({ length: 5 }).map((_, index) => (
+              <li
+                className='flex flex-col lg:flex-row lg:justify-between animate-pulse'
+                key={index}
+              >
+                <div className='h-5 bg-muted rounded w-full max-w-[800px]'></div>
+                <div className='h-5 bg-muted rounded w-20 mt-2 lg:mt-0 self-end lg:self-auto'></div>
+              </li>
+            ))}
+          </ul>
         ) : (
           <ul className='flex flex-col gap-5'>
             {notices.map((notice) => (
@@ -37,7 +47,7 @@ export const NoticeCard = ({
                   href={notice.url}
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='font-medium truncate hover:font-normal outline-ring/50'
+                  className='font-medium truncate hover:font-normal outline-ring/50 max-w-[800px]'
                 >
                   {notice.title}
                 </a>

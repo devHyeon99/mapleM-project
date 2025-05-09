@@ -55,13 +55,14 @@ export const CharacterAddDialog = () => {
     <Dialog>
       <DialogTrigger asChild>
         <Button
-          className='flex w-full h-32 [&_svg]:!size-6'
+          variant='outline'
+          className='flex w-full h-32'
           size='icon'
           aria-label='캐릭터 추가'
           tooltip='캐릭터 추가'
           tooltipSide='bottom'
         >
-          <Plus aria-hidden />
+          <Plus aria-hidden className='size-6' />
         </Button>
       </DialogTrigger>
       <DialogContent className='gap-0 sm:max-w-[425px]'>
@@ -105,7 +106,7 @@ export const CharacterAddDialog = () => {
           </div>
           <DialogFooter>
             <DialogClose asChild>
-              <Button variant='outline'>취소</Button>
+              <Button variant='secondary'>취소</Button>
             </DialogClose>
             <Button type='submit'>추가</Button>
           </DialogFooter>

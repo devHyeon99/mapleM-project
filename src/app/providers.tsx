@@ -7,7 +7,28 @@ import { Toaster } from '@/components/ui/sonner';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { checkAndResetTasks } from '@/utils/taskUtils';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 5 * 60 * 1000,
+      gcTime: 10 * 60 * 1000,
+      retry: (failureCount, error) => {
+        if (
+          error &&
+          typeof error === 'object' &&
+          'status' in error &&
+          (error as { status?: number }).status === 404
+        ) {
+          return false;
+        }
+        return failureCount < 3;
+      },
+    },
+    mutations: {
+      retry: 1,
+    },
+  },
+});
 
 export function Providers({ children }: PropsWithChildren) {
   useEffect(() => {

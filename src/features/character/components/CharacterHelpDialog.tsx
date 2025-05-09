@@ -15,8 +15,8 @@ export function CharacterHelpDialog() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button size='icon' className='[&_svg]:!size-5' tooltip='도움말'>
-          <CircleHelp></CircleHelp>
+        <Button variant='ghost' size='icon'>
+          <CircleHelp className='size-6' />
         </Button>
       </DialogTrigger>
       <DialogContent className='sm:max-w-[800px]'>

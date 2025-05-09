@@ -2,7 +2,7 @@ import { Layout, Header } from '@/components/Layout';
 import { CharacterSlider } from '@/features/character/components';
 import { useCurrentAccountData } from '@/hooks/useCurrentAccountData';
 
-export function AccountManagerPage() {
+const AccountManagerPage = () => {
   const { currentAccount } = useCurrentAccountData();
 
   if (!currentAccount) {
@@ -28,4 +28,6 @@ export function AccountManagerPage() {
       </div>
     </Layout>
   );
-}
+};
+
+export default AccountManagerPage;

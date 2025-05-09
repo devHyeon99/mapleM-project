@@ -46,6 +46,7 @@ const jobNameToFileName: Record<string, string> = {
   와일드헌터: 'wildhunter',
   윈드브레이커: 'windbreaker',
   제논: 'xenon',
+  아이엘: 'iel',
 };
 
 export const characterImageMap: Record<string, string> = {};

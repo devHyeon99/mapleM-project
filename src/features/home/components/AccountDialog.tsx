@@ -31,7 +31,7 @@ export const AccountDialog = ({
     e.preventDefault();
     updateAccount(accountId, { name });
     onClose(false);
-    toast.success('계정이 수정되었습니다.');
+    toast.success('계정이 수정되었습니다.', { duration: 1500 });
   };
 
   return (

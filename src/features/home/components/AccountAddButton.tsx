@@ -38,12 +38,12 @@ export const AccountAddButton = () => {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button
-          className='[&_svg]:!size-6'
+          variant='ghost'
           size='icon'
           tooltip='계정 추가'
           aria-label='계정 추가'
         >
-          <Plus />
+          <Plus className='size-6' />
         </Button>
       </DialogTrigger>
       <DialogContent className='gap-0 sm:max-w-[425px]'>

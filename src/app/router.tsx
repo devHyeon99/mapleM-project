@@ -1,23 +1,54 @@
-import { Routes, Route } from 'react-router';
-import { AccountManagerPage } from '@/pages/Account/AccountManagerPage';
-import { LoginPage } from '@/pages/Auth/Login/LoginPage';
-import { RequireAccountRoute } from '@/components/router/RequireAccountRoute';
+import { lazy } from 'react';
+import { Routes, Route, Navigate } from 'react-router';
+import { RequiredProfileRoute } from '@/components/router/RequiredProfileRoute';
+import { PublicOnlyRoute } from '@/components/router/PublicOnlyRoute';
+import { ROUTES } from '@/constants/routes';
 import HomePage from '@/pages/Home/HomePage';
+
+const LoginPage = lazy(() => import('@/pages/Auth/LoginPage'));
+const RegisterPage = lazy(() => import('@/pages/Auth/RegisterPage'));
+const AccountManagerPage = lazy(
+  () => import('@/pages/Account/AccountManagerPage')
+);
+const NotFoundPage = lazy(() =>
+  Promise.resolve({
+    default: () => <div>404 - 페이지를 찾을 수 없습니다.</div>,
+  })
+);
 
 export const Router = () => {
   return (
     <Routes>
-      <Route path='/' element={<HomePage />} />
+      <Route path={ROUTES.HOME} element={<HomePage />} />
+
       <Route
-        path='/account'
+        path={ROUTES.LOGIN}
         element={
-          <RequireAccountRoute>
-            <AccountManagerPage />
-          </RequireAccountRoute>
+          <PublicOnlyRoute>
+            <LoginPage />
+          </PublicOnlyRoute>
         }
       />
-      <Route path='/login' element={<LoginPage />} />
-      <Route path='*' element={<div>404 - 페이지를 찾을 수 없습니다.</div>} />
+      <Route
+        path={ROUTES.REGISTER}
+        element={
+          <PublicOnlyRoute>
+            <RegisterPage />
+          </PublicOnlyRoute>
+        }
+      />
+
+      <Route
+        path={ROUTES.ACCOUNT}
+        element={
+          <RequiredProfileRoute>
+            <AccountManagerPage />
+          </RequiredProfileRoute>
+        }
+      />
+
+      <Route path={ROUTES.NOT_FOUND} element={<NotFoundPage />} />
+      <Route path='*' element={<Navigate to={ROUTES.NOT_FOUND} replace />} />
     </Routes>
   );
 };

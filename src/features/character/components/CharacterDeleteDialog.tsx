@@ -39,7 +39,7 @@ export function CharacterDeleteDialog({
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <Button
-          variant='default'
+          variant='secondary'
           className='flex flex-row justify-center items-center w-full p-2 mt-2'
           aria-label='캐릭터 삭제'
           tooltip='캐릭터 삭제'

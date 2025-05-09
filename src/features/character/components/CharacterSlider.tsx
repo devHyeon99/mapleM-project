@@ -71,11 +71,25 @@ export function CharacterSlider() {
       <div className='flex justify-between items-center'>
         <h2 className='text-lg font-semibold'>캐릭터 관리</h2>
         <div className='flex items-center gap-2'>
-          <Button className='swiper-button-prev' size='icon' aria-label='이전'>
-            <ChevronLeft className='size-5' aria-hidden />
+          <Button
+            variant='ghost'
+            className='swiper-button-prev'
+            size='icon'
+            aria-label='이전 슬라이드'
+            tooltip='이전 슬라이드'
+            tooltipSide='bottom'
+          >
+            <ChevronLeft className='size-6' aria-hidden />
           </Button>
-          <Button className='swiper-button-next' size='icon' aria-label='다음'>
-            <ChevronRight className='size-5' aria-hidden />
+          <Button
+            variant='ghost'
+            className='swiper-button-next'
+            size='icon'
+            aria-label='다음 슬라이드'
+            tooltip='다음 슬라이드'
+            tooltipSide='bottom'
+          >
+            <ChevronRight className='size-6' aria-hidden />
           </Button>
         </div>
       </div>

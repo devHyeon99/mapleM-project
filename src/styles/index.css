@@ -32,10 +32,10 @@ body {
   --destructive-foreground: hsl(0, 0%, 100%);
 
   --muted: hsl(35, 91%, 95%);
-  --muted-foreground: hsl(34, 15%, 45%);
+  --muted-foreground: hsl(36, 15%, 36%);
 
-  --border: hsl(35, 91%, 90%);
-  --input: hsl(35, 91%, 90%);
+  --border: hsl(34, 86%, 80%);
+  --input: hsl(34, 86%, 80%);
   --ring: hsl(34, 89%, 55%);
 
   --radius: 0.6rem;

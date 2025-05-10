@@ -62,11 +62,15 @@ export const AccountList = ({ accounts }: AccountListProps) => {
             계정관리
           </h2>
         </header>
-        <div className='flex flex-col p-4 border rounded-md bg-card '>
-          <aside className='py-2 text-muted-foreground text-center'>
+        <div className='flex flex-col items-center p-4 border rounded-md bg-card '>
+          <aside className='py-2 text-muted-foreground text-center font-semibold'>
             로그인을 통해 캐릭터를 관리해보세요.
           </aside>
-          <Button variant='link' className='text-base' asChild>
+          <Button
+            variant='link'
+            className='font-bold text-base text-foreground hover:text-primary'
+            asChild
+          >
             <Link to='/login'>로그인 페이지로 이동</Link>
           </Button>
         </div>

@@ -60,7 +60,7 @@ export const Header = ({
           <Button
             asChild
             variant='link'
-            className='pr-0 font-semibold text-base'
+            className='pr-0 font-bold text-lg text-foreground hover:text-primary'
           >
             <Link to='/login'>로그인</Link>
           </Button>

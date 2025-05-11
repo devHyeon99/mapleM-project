@@ -81,7 +81,6 @@ export function TaskTable<TData, TValue>({
         <Button
           variant='ghost'
           className='h-8 w-8 p-0 [&_svg]:!size-5'
-          tooltip='상태 변경'
           onClick={() => {
             const selectedRows = table.getFilteredSelectedRowModel().rows;
             if (selectedRows.length === 0) {
@@ -99,7 +98,6 @@ export function TaskTable<TData, TValue>({
         <Button
           variant='ghost'
           className='h-8 w-8 p-0 [&_svg]:!size-5'
-          tooltip='할 일 삭제'
           onClick={openDialog}
         >
           <span className='sr-only'>일정 삭제</span>

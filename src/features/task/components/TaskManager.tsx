@@ -75,7 +75,6 @@ export const TaskManager = React.memo(
               variant='ghost'
               size='icon'
               className='h-8 w-8 p-0 [&_svg]:!size-6'
-              tooltip='할 일 추가'
             >
               <Plus />
             </Button>

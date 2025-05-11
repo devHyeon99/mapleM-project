@@ -31,7 +31,6 @@ const AccountCardMenu = ({ acid }: AccountCardMenuProps) => {
               size='icon'
               variant='ghost'
               aria-label='계정 편집'
-              tooltip='계정 편집'
             >
               <Ellipsis aria-hidden />
             </Button>

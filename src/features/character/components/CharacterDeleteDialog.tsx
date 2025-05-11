@@ -42,8 +42,6 @@ export function CharacterDeleteDialog({
           variant='secondary'
           className='flex flex-row justify-center items-center w-full p-2 mt-2'
           aria-label='캐릭터 삭제'
-          tooltip='캐릭터 삭제'
-          tooltipSide='bottom'
         >
           <Trash2 className='size-5' aria-hidden />
         </Button>

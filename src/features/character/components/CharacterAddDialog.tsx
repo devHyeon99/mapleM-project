@@ -59,8 +59,6 @@ export const CharacterAddDialog = () => {
           className='flex w-full h-32'
           size='icon'
           aria-label='캐릭터 추가'
-          tooltip='캐릭터 추가'
-          tooltipSide='bottom'
         >
           <Plus aria-hidden className='size-6' />
         </Button>

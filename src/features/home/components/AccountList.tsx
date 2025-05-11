@@ -63,7 +63,7 @@ export const AccountList = ({ accounts }: AccountListProps) => {
           </h2>
         </header>
         <div className='flex flex-col items-center p-4 border rounded-md bg-card '>
-          <aside className='py-2 text-muted-foreground text-center font-semibold'>
+          <aside className='py-2 text-muted-foreground text-center font-medium'>
             로그인을 통해 캐릭터를 관리해보세요.
           </aside>
           <Button

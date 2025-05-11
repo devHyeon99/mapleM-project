@@ -53,14 +53,16 @@ export const Header = ({
       <div className='absolute w-full -top-1 right-0 flex justify-end gap-4'>
         {/* 3. isLoading을 최우선으로 체크합니다. */}
         {isLoading ? (
-          <div className='flex items-center gap-2 py-2 pl-4'>로그인</div>
+          <div className='flex items-center gap-2 py-2 pl-4 font-bold'>
+            로그인
+          </div>
         ) : user && userData ? (
           <User user={userData} />
         ) : (
           <Button
             asChild
             variant='link'
-            className='pr-0 font-bold text-lg text-foreground hover:text-primary'
+            className='pr-0 font-bold text-base text-foreground hover:text-primary'
           >
             <Link to='/login'>로그인</Link>
           </Button>

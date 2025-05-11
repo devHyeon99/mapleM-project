@@ -37,12 +37,7 @@ export const AccountAddButton = () => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button
-          variant='ghost'
-          size='icon'
-          tooltip='계정 추가'
-          aria-label='계정 추가'
-        >
+        <Button variant='ghost' size='icon' aria-label='계정 추가'>
           <Plus className='size-6' />
         </Button>
       </DialogTrigger>

@@ -76,8 +76,6 @@ export function CharacterSlider() {
             className='swiper-button-prev'
             size='icon'
             aria-label='이전 슬라이드'
-            tooltip='이전 슬라이드'
-            tooltipSide='bottom'
           >
             <ChevronLeft className='size-6' aria-hidden />
           </Button>
@@ -86,8 +84,6 @@ export function CharacterSlider() {
             className='swiper-button-next'
             size='icon'
             aria-label='다음 슬라이드'
-            tooltip='다음 슬라이드'
-            tooltipSide='bottom'
           >
             <ChevronRight className='size-6' aria-hidden />
           </Button>

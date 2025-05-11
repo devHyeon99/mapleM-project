@@ -1,4 +1,4 @@
-import { createClient } from 'npm:@supabase/supabase-js@2';
+import { createClient, AuthApiError } from 'npm:@supabase/supabase-js@2';
 import { corsHeaders } from '../_shared/cors.ts';
 
 const supabaseAdmin = createClient(
@@ -44,6 +44,13 @@ Deno.serve(async (req) => {
       });
 
     if (signInError) {
+      if (
+        signInError instanceof AuthApiError &&
+        signInError.message === 'Email not confirmed'
+      ) {
+        throw new Error('이메일 인증을 완료해주세요.');
+      }
+      // 그 외의 로그인 에러 (예: 비밀번호 불일치)
       throw new Error('아이디 또는 비밀번호가 올바르지 않습니다.');
     }
 

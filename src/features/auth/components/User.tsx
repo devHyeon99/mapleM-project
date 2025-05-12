@@ -1,7 +1,6 @@
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { supabase } from '@/lib/supabase/client';
 import { Bell, ChevronsUpDown, LogOut, Settings } from 'lucide-react';
-
 import { Button } from '@/components/ui/button';
 import {
   AlertDialog,
@@ -36,7 +35,6 @@ export function User({
 }) {
   const navigate = useNavigate();
 
-  // 1. 로그아웃 로직을 컴포넌트 내부에 직접 정의합니다.
   const handleLogout = async () => {
     await supabase.auth.signOut();
     navigate('/');
@@ -44,7 +42,6 @@ export function User({
   };
 
   return (
-    // 2. AlertDialog가 DropdownMenu 전체를 감싸는 구조로 변경합니다.
     <AlertDialog>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
@@ -73,27 +70,27 @@ export function User({
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
-            <DropdownMenuItem>
+            <DropdownMenuItem onSelect={() => alert('준비중')}>
               <Bell />
               알림
             </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Settings />
-              설정
+            <DropdownMenuItem asChild>
+              <Link to='/account'>
+                <Settings />
+                <span>설정</span>
+              </Link>
             </DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
-          {/* 3. 로그아웃 메뉴 아이템이 AlertDialog를 열도록 Trigger로 만듭니다. */}
           <AlertDialogTrigger asChild>
             <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-              <LogOut className='size-4' />
+              <LogOut />
               <span>로그아웃</span>
             </DropdownMenuItem>
           </AlertDialogTrigger>
         </DropdownMenuContent>
       </DropdownMenu>
 
-      {/* 4. AlertDialog의 내용 부분입니다. */}
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>로그아웃 하시겠습니까?</AlertDialogTitle>

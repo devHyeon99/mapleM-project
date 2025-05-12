@@ -7,9 +7,13 @@ import HomePage from '@/pages/Home/HomePage';
 
 const LoginPage = lazy(() => import('@/pages/Auth/LoginPage'));
 const RegisterPage = lazy(() => import('@/pages/Auth/RegisterPage'));
+const AccountSettingPage = lazy(
+  () => import('@/pages/Auth/AccountSettingPage')
+);
 const AccountManagerPage = lazy(
   () => import('@/pages/Account/AccountManagerPage')
 );
+
 const NotFoundPage = lazy(() =>
   Promise.resolve({
     default: () => <div>404 - 페이지를 찾을 수 없습니다.</div>,
@@ -39,10 +43,19 @@ export const Router = () => {
       />
 
       <Route
-        path={ROUTES.ACCOUNT}
+        path={ROUTES.MANAGE}
         element={
           <RequiredProfileRoute>
             <AccountManagerPage />
+          </RequiredProfileRoute>
+        }
+      />
+
+      <Route
+        path={ROUTES.ACCOUNT}
+        element={
+          <RequiredProfileRoute>
+            <AccountSettingPage />
           </RequiredProfileRoute>
         }
       />

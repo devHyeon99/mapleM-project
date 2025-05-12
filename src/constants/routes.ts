@@ -3,5 +3,6 @@ export const ROUTES = {
   ACCOUNT: '/account',
   LOGIN: '/login',
   REGISTER: '/REGISTER',
+  MANAGE: '/manage',
   NOT_FOUND: '/404',
 } as const;

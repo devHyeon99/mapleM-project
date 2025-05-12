@@ -40,7 +40,7 @@ export function Providers({ children }: PropsWithChildren) {
       <QueryClientProvider client={queryClient}>
         <ThemeProvider defaultTheme='system' storageKey='vite-ui-theme'>
           <TooltipProvider>
-            <Toaster visibleToasts={1} position='top-center' />
+            <Toaster richColors visibleToasts={1} position='top-center' />
             {children}
           </TooltipProvider>
         </ThemeProvider>

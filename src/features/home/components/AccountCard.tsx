@@ -29,7 +29,7 @@ export const AccountCard = ({
           <div className='flex gap-2'>
             {link && (
               <Link
-                to={`/account`}
+                to='/manage'
                 className='flex justify-center items-center w-9 h-9 [&_svg]:!size-5'
                 aria-label={`${name} 계정 상세페이지`}
                 onClick={() => setCurrentAccountId(id)}

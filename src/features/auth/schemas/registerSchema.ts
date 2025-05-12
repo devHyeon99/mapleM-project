@@ -1,25 +1,35 @@
 import { z } from 'zod';
 
-export const RegisterSchema = z.object({
+export const registerSchema = z.object({
+  // 아이디: 'username' 필드, 영어/숫자 조합, 5-20자
   username: z
     .string()
-    .min(4, '아이디는 4자 이상이어야 합니다.')
-    .regex(/^[a-zA-Z0-9]+$/, '사용 할 수 없는 아이디 입니다.'),
+    .min(5, { message: '아이디는 5자 이상이어야 합니다.' })
+    .max(20, { message: '아이디는 20자를 넘을 수 없습니다.' })
+    .regex(/^[a-zA-Z0-9]+$/, {
+      message: '아이디는 영어와 숫자의 조합으로만 가능합니다.',
+    }),
 
+  // 비밀번호: 8자 이상, 영어/숫자/특수문자 포함
   password: z
     .string()
-    .min(8, '비밀번호는 8자 이상이어야 합니다.')
-    .regex(
-      /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).+$/,
-      '영문, 숫자, 특수문자를 하나 이상 포함해야 합니다.'
-    ),
+    .min(8, { message: '비밀번호는 8자 이상이어야 합니다.' })
+    .regex(/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/, {
+      message: '비밀번호는 영어, 숫자, 특수문자를 모두 포함해야 합니다.',
+    }),
 
+  // 닉네임: 2-10자, 한글/영어/숫자 허용
   nickname: z
     .string()
-    .min(2, '닉네임은 2자 이상이어야 합니다.')
-    .regex(/^[가-힣a-zA-Z0-9]+$/, '사용 할 수 없는 닉네임 입니다.'),
+    .min(2, { message: '닉네임은 2자 이상이어야 합니다.' })
+    .max(10, { message: '닉네임은 10자를 넘을 수 없습니다.' })
+    .regex(/^[a-zA-Z0-9가-힣]+$/, {
+      message: '닉네임은 한글, 영어, 숫자만 사용 가능합니다.',
+    }),
 
-  email: z.string().email('유효한 이메일 주소를 입력해주세요.'),
+  // 이메일: 유효한 이메일 형식
+  email: z.string().email({ message: '올바른 이메일 형식이 아닙니다.' }),
 });
 
-export type RegisterFormData = z.infer<typeof RegisterSchema>;
+// 스키마로부터 TypeScript 타입 추론
+export type RegisterFormValues = z.infer<typeof registerSchema>;

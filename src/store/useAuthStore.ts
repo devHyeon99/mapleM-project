@@ -4,6 +4,7 @@ import { Session, User } from '@supabase/supabase-js';
 export interface Profile {
   id: string;
   nickname: string | null;
+  nickname_last_changed_at: string;
   updated_at: string;
 }
 

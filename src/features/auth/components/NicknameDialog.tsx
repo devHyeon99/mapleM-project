@@ -11,6 +11,7 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { Loader2 } from 'lucide-react';
 
 const DialogContentNoClose = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
@@ -34,23 +35,23 @@ DialogContentNoClose.displayName = 'DialogContentNoClose';
 
 interface NicknameDialogProps {
   open: boolean;
-  onOpenChange: (open: boolean) => void;
   nickname: string;
   onNicknameChange: (value: string) => void;
   isSubmitting: boolean;
   onSubmit: (e: React.FormEvent) => Promise<void>;
+  errorMessage: string | null;
 }
 
 export const NicknameDialog = ({
   open,
-  onOpenChange,
   nickname,
   onNicknameChange,
   isSubmitting,
   onSubmit,
+  errorMessage,
 }: NicknameDialogProps) => {
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog open={open}>
       <DialogContentNoClose
         className='sm:max-w-[425px]'
         onInteractOutside={(e) => e.preventDefault()}
@@ -63,18 +64,28 @@ export const NicknameDialog = ({
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={onSubmit}>
-          <div className='grid gap-4 py-4'>
+          <div className='grid gap-2 py-4'>
             <Input
               id='nickname'
-              placeholder='닉네임을 입력하세요'
+              placeholder='2글자 이상 입력하세요'
               value={nickname}
               onChange={(e) => onNicknameChange(e.target.value)}
               required
+              data-error={!!errorMessage}
+              className='data-[error=true]:border-destructive'
             />
+            {errorMessage && (
+              <p className='text-sm font-medium text-destructive'>
+                {errorMessage}
+              </p>
+            )}
           </div>
           <DialogFooter>
-            <Button type='submit' disabled={isSubmitting}>
-              {isSubmitting ? '저장 중...' : '저장하기'}
+            <Button type='submit' disabled={isSubmitting} className='w-full'>
+              {isSubmitting && (
+                <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+              )}
+              {isSubmitting ? '저장 중...' : '닉네임 저장'}
             </Button>
           </DialogFooter>
         </form>

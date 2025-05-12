@@ -54,7 +54,7 @@ export function LoginForm({
                 <CardTitle className='text-2xl font-bold'>
                   MMGG 로그인
                 </CardTitle>
-                <CardDescription className='text-muted-foreground text-balance'>
+                <CardDescription className='text-muted-foreground text-balance text-base'>
                   로그인을 통해 다양한 서비스를 이용해보세요.
                 </CardDescription>
               </CardHeader>

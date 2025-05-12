@@ -20,7 +20,7 @@ export const LoginPage = () => {
     const { error } = await signInWithUsername(formData);
 
     if (error) {
-      setError(error.message);
+      setError(error);
     }
 
     setIsPending(false);

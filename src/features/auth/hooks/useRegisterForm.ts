@@ -7,11 +7,13 @@ import {
 } from '@/features/auth/schemas/registerSchema';
 import { signUpWithEmail } from '@/lib/supabase/auth';
 import { checkUsernameExists, checkNicknameExists } from '@/lib/supabase/auth';
+import { useNavigate } from 'react-router';
 
-// 중복 확인 상태 타입 (변경 없음)
 type CheckStatus = 'idle' | 'checking' | 'available' | 'unavailable';
 
 export const useRegisterForm = () => {
+  const navigate = useNavigate();
+
   const [usernameStatus, setUsernameStatus] = useState<CheckStatus>('idle');
   const [nicknameStatus, setNicknameStatus] = useState<CheckStatus>('idle');
   const [showPassword, setShowPassword] = useState(false);
@@ -24,17 +26,13 @@ export const useRegisterForm = () => {
       email: '',
       nickname: '',
     },
-    // onBlur 모드는 Zod 유효성 검사를 포커스가 떠날 때 실행합니다.
     mode: 'onBlur',
   });
 
-  // 1. onBlur 이벤트에서 사용할 아이디 중복 검사 함수
   const handleUsernameBlur = async () => {
-    // 먼저 Zod의 기본 유효성 검사를 실행합니다.
     const isUsernameValid = await form.trigger('username');
-    // 유효성 검사에 실패하면 (예: 글자 수 미만) 중복 검사를 실행하지 않습니다.
     if (!isUsernameValid) {
-      setUsernameStatus('idle'); // 상태 초기화
+      setUsernameStatus('idle');
       return;
     }
 
@@ -53,7 +51,6 @@ export const useRegisterForm = () => {
     }
   };
 
-  // 2. onBlur 이벤트에서 사용할 닉네임 중복 검사 함수
   const handleNicknameBlur = async () => {
     const isNicknameValid = await form.trigger('nickname');
     if (!isNicknameValid) {
@@ -76,7 +73,6 @@ export const useRegisterForm = () => {
     }
   };
 
-  // onSubmit 로직은 최종 방어선으로 그대로 유지합니다.
   const onSubmit = async (data: RegisterFormValues) => {
     try {
       const [isUsernameTaken, isNicknameTaken] = await Promise.all([
@@ -98,7 +94,12 @@ export const useRegisterForm = () => {
       const response = await signUpWithEmail(data);
       if (response.error) throw response.error;
 
-      alert('회원가입 성공! 이메일을 확인하여 가입을 완료해주세요.');
+      navigate('/login', {
+        state: {
+          message: '회원가입이 완료되었습니다. 이메일 인증 후 로그인해주세요.',
+        },
+        replace: true,
+      });
     } catch (error) {
       console.error('회원가입 중 오류 발생:', error);
 
@@ -121,8 +122,8 @@ export const useRegisterForm = () => {
     onSubmit,
     usernameStatus,
     nicknameStatus,
-    handleUsernameBlur, // onBlur 핸들러를 UI 컴포넌트로 전달
-    handleNicknameBlur, // onBlur 핸들러를 UI 컴포넌트로 전달
+    handleUsernameBlur,
+    handleNicknameBlur,
     showPassword,
     toggleShowPassword,
   };

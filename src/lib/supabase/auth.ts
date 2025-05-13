@@ -32,28 +32,40 @@ export const signUpWithEmail = async (formData: RegisterFormValues) => {
 // 아이디 + 비밀번호 로그인
 export const signInWithUsername = async (formData: LoginFormData) => {
   try {
+    // 1. Edge Function 호출
     const { data, error: invokeError } = await supabase.functions.invoke(
       'custom-username-login',
       { body: formData }
     );
 
+    // invokeError는 FunctionsHttpError를 포함하며, 아래 catch 블록에서 처리됨
     if (invokeError) throw invokeError;
-    if (data.error) throw new Error(data.error);
 
+    // 2. 성공 시 세션 설정
     const { error: sessionError } = await supabase.auth.setSession(
       data.session
     );
+
     if (sessionError) throw sessionError;
 
+    // 에러가 없으면 성공 데이터 반환
     return { data, error: null };
   } catch (err: unknown) {
+    // 3. 모든 에러를 여기서 일관되게 처리
     let errorMessage = '알 수 없는 오류가 발생했습니다.';
+
+    // 서버가 4xx, 5xx 상태 코드로 응답하면 FunctionsHttpError가 발생
     if (err instanceof FunctionsHttpError) {
+      // Edge Function에서 보낸 JSON 본문을 파싱
       const errorJson = await err.context.json();
-      errorMessage = errorJson.error || '함수 실행 중 오류가 발생했습니다.';
+      // 서버에서 정의한 에러 메시지를 그대로 사용
+      errorMessage = errorJson.error;
     } else if (err instanceof Error) {
+      // 세션 설정 오류 등 다른 에러 처리
       errorMessage = err.message;
     }
+
+    // 최종적으로 처리된 에러 메시지를 담은 Error 객체를 던짐
     throw new Error(errorMessage);
   }
 };

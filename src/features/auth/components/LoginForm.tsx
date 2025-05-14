@@ -145,6 +145,13 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
                     )}
                   </div>
                 </div>
+                <Button
+                  variant='link'
+                  className='justify-self-end p-0 h-fit'
+                  asChild
+                >
+                  <Link to='/login'>비밀번호 찾기</Link>
+                </Button>
                 {errors.password && (
                   <p className='text-sm text-destructive'>
                     {errors.password.message}
@@ -156,13 +163,24 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
                   {serverError}
                 </p>
               )}
-              <Button
-                type='submit'
-                className='w-full text-base'
-                disabled={isPending}
-              >
-                {isPending ? '로그인 중...' : '로그인'}
-              </Button>
+              <div className='grid gap-2'>
+                <Button
+                  type='submit'
+                  className='w-full text-base'
+                  disabled={isPending}
+                >
+                  {isPending ? '로그인 중...' : '로그인'}
+                </Button>
+                <div className='flex justify-center items-center'>
+                  <Button variant='link' asChild>
+                    <Link to='/register'>회원가입</Link>
+                  </Button>
+                  <Button variant='link' asChild>
+                    <Link to='/login'>아이디 찾기</Link>
+                  </Button>
+                </div>
+              </div>
+
               <div className='after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t'>
                 <span className='bg-card text-muted-foreground relative z-10 px-2'>
                   OR
@@ -185,15 +203,6 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
                   <span className='hidden'>Google 계정으로 로그인</span>
                 </div>
               </button>
-              <div className='flex justify-center items-center'>
-                <Button
-                  variant='link'
-                  className='!py-0 text-base text-foreground hover:text-primary'
-                  asChild
-                >
-                  <Link to='/register'>이메일 회원가입</Link>
-                </Button>
-              </div>
             </form>
           </div>
           <div className='bg-muted relative hidden md:block'>

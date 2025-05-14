@@ -2,13 +2,11 @@ import { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Link } from 'react-router';
-
 import {
   LoginSchema,
   LoginFormData,
 } from '@/features/auth/schemas/loginSchema';
 import { signInWithUsername, signInWithGoogle } from '@/lib/supabase/auth';
-
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import {
@@ -21,20 +19,30 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import GoogleLogo from '@/assets/google.svg?react';
+import { Eye, EyeOff, XCircle } from 'lucide-react';
 
 export type LoginFormProps = React.ComponentProps<'div'>;
 
 export function LoginForm({ className, ...props }: LoginFormProps) {
   const [isPending, setIsPending] = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
+  const [showPassword, setShowPassword] = useState(false);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
+    watch,
   } = useForm<LoginFormData>({
     resolver: zodResolver(LoginSchema),
   });
+
+  const passwordValue = watch('password');
+  const toggleShowPassword = () => setShowPassword((prev) => !prev);
+  const clearPassword = () => {
+    setValue('password', '', { shouldValidate: true });
+  };
 
   const handleUsernameLogin: SubmitHandler<LoginFormData> = async (
     formData
@@ -67,7 +75,6 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
       console.error(e);
       setServerError('로그인 중 문제가 발생했습니다.');
     } finally {
-      // ✅ Google 로그인 시도 후에도 항상 실행됩니다.
       setIsPending(false);
     }
   };
@@ -81,7 +88,6 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
               onSubmit={handleSubmit(handleUsernameLogin)}
               className='flex flex-col gap-6'
             >
-              {/* ... (나머지 JSX 코드는 변경 없음) ... */}
               <CardHeader className='flex flex-col items-center text-center p-0'>
                 <CardTitle className='text-2xl font-bold'>
                   MMGG 로그인
@@ -101,11 +107,44 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
               </div>
               <div className='grid gap-3'>
                 <Label htmlFor='password'>비밀번호</Label>
-                <Input
-                  id='password'
-                  type='password'
-                  {...register('password')}
-                />
+                <div className='relative'>
+                  <Input
+                    id='password'
+                    type={showPassword ? 'text' : 'password'}
+                    {...register('password')}
+                    className='pr-20'
+                  />
+                  <div className='absolute inset-y-0 right-0 flex items-center pr-0.5'>
+                    <Button
+                      type='button'
+                      variant='ghost'
+                      size='icon'
+                      className='hover:bg-transparent py-2 px-1 h-auto cursor-pointer'
+                      onClick={toggleShowPassword}
+                    >
+                      {showPassword ? (
+                        <EyeOff className='size-4 text-muted-foreground' />
+                      ) : (
+                        <Eye className='size-4 text-muted-foreground' />
+                      )}
+                      <span className='sr-only'>
+                        {showPassword ? '비밀번호 숨기기' : '비밀번호 보기'}
+                      </span>
+                    </Button>
+                    {passwordValue && (
+                      <Button
+                        type='button'
+                        variant='ghost'
+                        size='icon'
+                        className='hover:bg-transparent py-2 px-1 h-auto cursor-pointer'
+                        onClick={clearPassword}
+                      >
+                        <XCircle className='size-4 text-muted-foreground' />
+                        <span className='sr-only'>비밀번호 지우기</span>
+                      </Button>
+                    )}
+                  </div>
+                </div>
                 {errors.password && (
                   <p className='text-sm text-destructive'>
                     {errors.password.message}
@@ -147,13 +186,12 @@ export function LoginForm({ className, ...props }: LoginFormProps) {
                 </div>
               </button>
               <div className='flex justify-center items-center'>
-                <span>아직 계정이 없으신가요?</span>
                 <Button
                   variant='link'
                   className='!py-0 text-base text-foreground hover:text-primary'
                   asChild
                 >
-                  <Link to='/register'>회원가입</Link>
+                  <Link to='/register'>이메일 회원가입</Link>
                 </Button>
               </div>
             </form>

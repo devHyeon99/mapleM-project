@@ -77,7 +77,6 @@ export const RegisterForm = () => {
             )}
           />
 
-          {/* 비밀번호 필드 (변경 없음) */}
           <FormField
             control={form.control}
             name='password'
@@ -87,31 +86,36 @@ export const RegisterForm = () => {
                 <div className='relative'>
                   <FormControl>
                     <Input
-                      // showPassword 상태에 따라 type을 'password' 또는 'text'로 변경
                       type={showPassword ? 'text' : 'password'}
                       placeholder='영어 + 숫자 + 특수문자 포함 8자 이상'
                       {...field}
-                      // 오른쪽에 아이콘 버튼 공간을 확보하기 위해 padding 추가
                       className='pr-10'
                     />
                   </FormControl>
-                  <Button
-                    type='button'
-                    variant='ghost'
-                    size='sm'
-                    className='absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent'
-                    onClick={toggleShowPassword}
-                  >
-                    {/* showPassword 상태에 따라 다른 아이콘을 렌더링 */}
-                    {showPassword ? (
-                      <EyeOff className='h-4 w-4' aria-hidden='true' />
-                    ) : (
-                      <Eye className='h-4 w-4' aria-hidden='true' />
-                    )}
-                    <span className='sr-only'>
-                      {showPassword ? '비밀번호 숨기기' : '비밀번호 보기'}
-                    </span>
-                  </Button>
+                  <div className='absolute inset-y-0 right-0 flex items-center pr-0.5'>
+                    <Button
+                      type='button'
+                      variant='ghost'
+                      size='icon'
+                      className='p-2 h-auto hover:bg-transparent cursor-pointer'
+                      onClick={toggleShowPassword}
+                    >
+                      {showPassword ? (
+                        <EyeOff
+                          className='size-4 text-muted-foreground'
+                          aria-hidden='true'
+                        />
+                      ) : (
+                        <Eye
+                          className='size-4 text-muted-foreground'
+                          aria-hidden='true'
+                        />
+                      )}
+                      <span className='sr-only'>
+                        {showPassword ? '비밀번호 숨기기' : '비밀번호 보기'}
+                      </span>
+                    </Button>
+                  </div>
                 </div>
                 <FormMessage />
               </FormItem>
@@ -125,7 +129,6 @@ export const RegisterForm = () => {
               <FormItem>
                 <FormLabel>닉네임</FormLabel>
                 <FormControl>
-                  {/* onBlur 이벤트에 핸들러 함수를 연결합니다. */}
                   <Input
                     placeholder='한글 + 영어 + 숫자 포함 2~10자'
                     {...field}
@@ -138,7 +141,6 @@ export const RegisterForm = () => {
             )}
           />
 
-          {/* 이메일 필드 (변경 없음) */}
           <FormField
             control={form.control}
             name='email'

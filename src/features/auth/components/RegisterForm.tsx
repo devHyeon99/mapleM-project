@@ -48,7 +48,7 @@ export const RegisterForm = () => {
   };
 
   return (
-    <div className='w-full max-w-sm rounded-lg border border-border bg-card p-6'>
+    <div className='w-full max-w-md rounded-lg border border-border bg-card p-6'>
       <Form {...form}>
         <h2 className='mb-2 w-full text-center text-2xl font-bold'>
           MMGG 회원가입

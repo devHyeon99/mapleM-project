@@ -121,3 +121,59 @@
     @apply bg-background text-foreground;
   }
 }
+
+@keyframes textCyclePrimary {
+
+  /* '메엠지지' 애니메이션 */
+  0%,
+  35% {
+    opacity: 1;
+  }
+
+  /* 나타난 상태 유지 */
+  45%,
+  95% {
+    opacity: 0;
+  }
+
+  /* 사라진 상태 유지 (이때 다른 텍스트가 보임) */
+  100% {
+    opacity: 1;
+  }
+
+  /* 다음 사이클을 위해 다시 나타남 */
+}
+
+@keyframes textCycleSecondary {
+
+  /* 'MMGG' 애니메이션 */
+  0%,
+  50% {
+    opacity: 0;
+  }
+
+  /* 사라진 상태 유지 (이때 다른 텍스트가 보임) */
+  60%,
+  85% {
+    opacity: 1;
+  }
+
+  /* 나타난 상태 유지 */
+  95%,
+  100% {
+    opacity: 0;
+  }
+
+  /* 다음 사이클을 위해 다시 사라짐 */
+}
+
+/* 커스텀 유틸리티 클래스 정의 (변경 없음) */
+@layer utilities {
+  .animate-text-cycle-primary {
+    animation: textCyclePrimary 5s ease-in-out infinite;
+  }
+
+  .animate-text-cycle-secondary {
+    animation: textCycleSecondary 5s ease-in-out infinite;
+  }
+}

@@ -81,6 +81,9 @@ const MbNav = () => (
                 </SheetClose>
               </li>
             ))}
+            <li>
+              <ModeToggle />
+            </li>
           </ul>
         </nav>
       </SheetContent>
@@ -98,7 +101,9 @@ const Header = () => {
           <Button variant="link" className="text-[15px] font-semibold" asChild>
             <Link href="/login">로그인</Link>
           </Button>
-          <ModeToggle></ModeToggle>
+          <div className="hidden md:block">
+            <ModeToggle />
+          </div>
           <MbNav />
         </div>
       </div>

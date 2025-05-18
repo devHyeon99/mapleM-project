@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { cn } from "@/lib/utils";
+import { ThemeProvider } from "@/components/theme-provider";
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
 
@@ -28,25 +28,37 @@ type RootLayoutProps = {
 const RootLayout = ({ children }: Readonly<RootLayoutProps>) => {
   return (
     <html lang="ko" className={pretendard.className} suppressHydrationWarning>
-      <body className={cn("bg-background min-h-screen antialiased")}>
-        <div className="relative flex min-h-screen flex-col">
+      <body className="bg-background relative flex min-h-screen flex-col antialiased">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
           <Header />
-          <main className="container mx-auto grid flex-1 grid-cols-1 gap-8 px-4 py-8 xl:grid-cols-6">
-            {/* --- 오른쪽 사이드바 (추후 광고 영역) --- */}
-            <aside className="hidden xl:block" aria-label="왼쪽 사이드바">
-              <div className="sticky top-20 flex h-96 items-center justify-center rounded-lg"></div>
-            </aside>
+          <main className="flex-1 py-8">
+            <div className="grid grid-cols-1 gap-8 px-4 lg:mx-auto lg:max-w-[1080px] 2xl:max-w-[1800px] 2xl:grid-cols-[200px_1fr_200px]">
+              {/* --- 왼쪽 사이드바 --- */}
+              <aside className="hidden 2xl:block" aria-label="왼쪽 사이드바">
+                <div className="sticky top-20 flex h-96 items-center justify-center rounded-lg">
+                  {/* 광고가 들어올 예정인 빈 공간 */}
+                </div>
+              </aside>
 
-            <div className="bg-red-50 xl:col-span-4">{children}</div>
+              {/* --- 메인 콘텐츠 --- */}
+              <div>{children}</div>
 
-            {/* --- 오른쪽 사이드바 (추후 광고 영역) --- */}
-            <aside className="hidden xl:block" aria-label="오른쪽 사이드바">
-              <div className="sticky top-20 flex h-96 items-center justify-center rounded-lg"></div>
-            </aside>
+              {/* --- 오른쪽 사이드바 --- */}
+              <aside className="hidden 2xl:block" aria-label="오른쪽 사이드바">
+                <div className="sticky top-20 flex h-96 items-center justify-center rounded-lg">
+                  {/* 광고가 들어올 예정인 빈 공간 */}
+                </div>
+              </aside>
+            </div>
           </main>
 
           <Footer />
-        </div>
+        </ThemeProvider>
       </body>
     </html>
   );

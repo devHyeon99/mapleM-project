@@ -122,6 +122,11 @@
   }
 }
 
+@utility container {
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
 @keyframes textCyclePrimary {
 
   /* '메엠지지' 애니메이션 */
@@ -170,10 +175,10 @@
 /* 커스텀 유틸리티 클래스 정의 (변경 없음) */
 @layer utilities {
   .animate-text-cycle-primary {
-    animation: textCyclePrimary 5s ease-in-out infinite;
+    animation: textCyclePrimary 10s ease-in-out infinite;
   }
 
   .animate-text-cycle-secondary {
-    animation: textCycleSecondary 5s ease-in-out infinite;
+    animation: textCycleSecondary 10s ease-in-out infinite;
   }
 }

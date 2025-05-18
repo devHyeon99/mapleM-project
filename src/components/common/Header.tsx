@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -8,8 +10,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Menu } from "lucide-react";
-import Link from "next/link";
+import { ModeToggle } from "./ModeToggle";
 
 const navLinks = [
   { href: "/scheduler", label: "스케줄러" },
@@ -26,10 +27,10 @@ const Logo = () => (
     aria-label="MMGG 홈으로 가기"
   >
     <div className="relative h-6 w-24">
-      <strong className="animate-text-cycle-primary absolute inset-0 flex items-center justify-center font-bold">
+      <strong className="animate-text-cycle-primary absolute inset-0 flex items-center justify-center text-xl font-bold md:text-2xl">
         메엠지지
       </strong>
-      <strong className="animate-text-cycle-secondary absolute inset-0 flex items-center justify-center font-bold">
+      <strong className="animate-text-cycle-secondary absolute inset-0 flex items-center justify-center text-xl font-bold md:text-2xl">
         MMGG
       </strong>
     </div>
@@ -44,12 +45,9 @@ const PcNav = () => (
     <ul className="flex items-center">
       {navLinks.map((link) => (
         <li key={link.href}>
-          <Link
-            href={link.href}
-            className="hover:text-foreground/80 px-4 py-2 transition-colors"
-          >
-            {link.label}
-          </Link>
+          <Button variant="link" className="text-[15px] font-semibold" asChild>
+            <Link href={link.href}>{link.label}</Link>
+          </Button>
         </li>
       ))}
     </ul>
@@ -61,7 +59,7 @@ const MbNav = () => (
     <Sheet>
       <SheetTrigger asChild>
         <Button variant="ghost" size="icon" aria-label="메뉴 열기">
-          <Menu size={20} />
+          <Menu className="size-5" />
         </Button>
       </SheetTrigger>
       <SheetContent side="right">
@@ -72,17 +70,14 @@ const MbNav = () => (
           </SheetDescription>
           <Logo />
         </SheetHeader>
-        <nav aria-label="모바일 메뉴" className="mt-8 flex flex-col gap-2">
-          <ul className="flex flex-col">
+        <nav aria-label="모바일 메뉴" className="flex flex-col gap-2">
+          <ul className="flex flex-col items-center gap-4 p-4">
             {navLinks.map((link) => (
               <li key={link.href}>
                 <SheetClose asChild>
-                  <Link
-                    href={link.href}
-                    className="hover:text-foreground/80 block py-3 text-lg font-medium transition-colors"
-                  >
-                    {link.label}
-                  </Link>
+                  <Button variant="link" className="text-[15px]" asChild>
+                    <Link href={link.href}>{link.label}</Link>
+                  </Button>
                 </SheetClose>
               </li>
             ))}
@@ -95,14 +90,15 @@ const MbNav = () => (
 
 const Header = () => {
   return (
-    <header className="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 flex w-full justify-center border-b backdrop-blur">
-      <div className="container mx-auto flex h-14 items-center justify-between px-4 md:justify-around">
+    <header className="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 flex min-h-20 w-full items-center justify-center border-b backdrop-blur">
+      <div className="container flex h-14 items-center justify-between md:justify-around">
         <Logo />
         <PcNav />
         <div className="flex items-center">
-          <Button variant="link" asChild>
+          <Button variant="link" className="text-[15px] font-semibold" asChild>
             <Link href="/login">로그인</Link>
           </Button>
+          <ModeToggle></ModeToggle>
           <MbNav />
         </div>
       </div>

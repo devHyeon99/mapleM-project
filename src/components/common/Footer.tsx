@@ -4,8 +4,9 @@ const Footer = () => {
       <p className="text-xs font-light">
         © 2025 MMGG.
         <br />
-        This is an unofficial site and is not associated with NEXON Korea. Data
-        based on NEXON Open API.
+        This is an unofficial site and is not associated with NEXON Korea.
+        <br />
+        Data based on NEXON Open API.
       </p>
     </footer>
   );

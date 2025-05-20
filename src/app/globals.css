@@ -172,7 +172,18 @@
   /* 다음 사이클을 위해 다시 사라짐 */
 }
 
-/* 커스텀 유틸리티 클래스 정의 (변경 없음) */
+@keyframes slide-in-from-right {
+  from {
+    transform: translateX(10px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
 @layer utilities {
   .animate-text-cycle-primary {
     animation: textCyclePrimary 10s ease-in-out infinite;
@@ -180,5 +191,9 @@
 
   .animate-text-cycle-secondary {
     animation: textCycleSecondary 10s ease-in-out infinite;
+  }
+
+  .animate-slide-in-from-right {
+    animation: slide-in-from-right 0.2s ease-out forwards;
   }
 }

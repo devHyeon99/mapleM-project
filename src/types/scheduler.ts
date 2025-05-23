@@ -15,9 +15,11 @@ export interface Character {
 export interface Task {
   id: string;
   label: string;
+  period: "daily" | "weekly" | "monthly";
 }
 
 export interface Boss {
   id: string;
   label: string;
+  period: "daily" | "weekly" | "monthly";
 }

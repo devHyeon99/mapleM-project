@@ -10,7 +10,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { ModeToggle } from "./ModeToggle";
+import { ModeToggle } from "@/components/common/ModeToggle";
 
 const navLinks = [
   { href: "/scheduler", label: "스케줄러" },
@@ -27,10 +27,10 @@ const Logo = () => (
     aria-label="MMGG 홈으로 가기"
   >
     <div className="relative h-6 w-24">
-      <strong className="animate-text-cycle-primary absolute inset-0 flex items-center justify-center text-xl font-bold md:text-2xl">
+      <strong className="animate-text-cycle-primary absolute inset-0 flex items-center justify-start text-xl font-bold md:text-2xl">
         메엠지지
       </strong>
-      <strong className="animate-text-cycle-secondary absolute inset-0 flex items-center justify-center text-xl font-bold md:text-2xl">
+      <strong className="animate-text-cycle-secondary absolute inset-0 flex items-center justify-start text-xl font-bold md:text-2xl">
         MMGG
       </strong>
     </div>

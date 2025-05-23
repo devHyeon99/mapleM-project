@@ -83,38 +83,44 @@ export const CharacterSelector = ({
           />
         </div>
       </div>
-      <Card className="items-center py-0">
-        <ToggleGroup
-          type="single"
-          className="grid grid-cols-2 gap-2 p-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6"
-          value={selectedCharacterId || ""}
-          onValueChange={onCharacterChange}
-        >
-          {characters.map((char) => (
-            <ToggleGroupItem
-              key={char.id}
-              value={char.id}
-              className="flex h-auto min-w-39 items-center justify-start gap-2 rounded-md border p-2"
-            >
-              <Image
-                src={char.avatarUrl}
-                alt={char.name}
-                width={40}
-                height={40}
-                className="rounded-full"
-              />
-              <div className="w-full text-left">
-                <span className="font-semibold">{char.name}</span>
-                <span className="text-muted-foreground block text-xs">
-                  {char.job}
-                </span>
-                <span className="text-muted-foreground block text-xs">
-                  Lv.{char.level}
-                </span>
-              </div>
-            </ToggleGroupItem>
-          ))}
-        </ToggleGroup>
+      <Card className="min-h-17 items-center py-0">
+        {characters.length === 0 ? (
+          <p className="text-muted-foreground flex flex-1 items-center text-sm">
+            캐릭터 추가 버튼을 통해 관리할 캐릭터를 추가해보세요!
+          </p>
+        ) : (
+          <ToggleGroup
+            type="single"
+            className="grid grid-cols-2 gap-2 p-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6"
+            value={selectedCharacterId || ""}
+            onValueChange={onCharacterChange}
+          >
+            {characters.map((char) => (
+              <ToggleGroupItem
+                key={char.id}
+                value={char.id}
+                className="flex h-auto min-w-39 items-center justify-start gap-2 rounded-md border p-2"
+              >
+                <Image
+                  src={char.avatarUrl}
+                  alt={char.name}
+                  width={40}
+                  height={40}
+                  className="rounded-full"
+                />
+                <div className="w-full text-left">
+                  <span className="font-semibold">{char.name}</span>
+                  <span className="text-muted-foreground block text-xs">
+                    {char.job}
+                  </span>
+                  <span className="text-muted-foreground block text-xs">
+                    Lv.{char.level}
+                  </span>
+                </div>
+              </ToggleGroupItem>
+            ))}
+          </ToggleGroup>
+        )}
       </Card>
     </section>
   );

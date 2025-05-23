@@ -12,6 +12,7 @@ import {
   DialogClose,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { Loader2 } from "lucide-react";
 
 interface ActionDialogProps {
   trigger: React.ReactNode;
@@ -20,6 +21,9 @@ interface ActionDialogProps {
   children: React.ReactNode;
   onAction: () => void;
   actionText?: string;
+  isActionPending?: boolean;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 }
 
 export const ActionDialog = ({
@@ -29,19 +33,26 @@ export const ActionDialog = ({
   children,
   onAction,
   actionText = "확인",
+  isActionPending = false,
+  open,
+  onOpenChange,
 }: ActionDialogProps) => {
-  const [open, setOpen] = React.useState(false);
-
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault(); // 페이지 새로고침 방지
+    event.preventDefault();
     onAction();
-    setOpen(false); // 액션 후 자동으로 닫기
   };
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
-      <DialogContent>
+      <DialogContent
+        onPointerDownOutside={(e) => {
+          if (isActionPending) e.preventDefault();
+        }}
+        onEscapeKeyDown={(e) => {
+          if (isActionPending) e.preventDefault();
+        }}
+      >
         <form onSubmit={handleSubmit}>
           <DialogHeader>
             <DialogTitle>{title}</DialogTitle>
@@ -50,15 +61,24 @@ export const ActionDialog = ({
             )}
           </DialogHeader>
 
-          {children}
+          <fieldset disabled={isActionPending}>{children}</fieldset>
 
           <DialogFooter className="mt-4">
             <DialogClose asChild>
-              <Button type="button" variant="outline">
+              <Button
+                type="button"
+                variant="outline"
+                disabled={isActionPending}
+              >
                 취소
               </Button>
             </DialogClose>
-            <Button type="submit">{actionText}</Button>
+            <Button type="submit" disabled={isActionPending}>
+              {isActionPending && (
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              )}
+              {actionText}
+            </Button>
           </DialogFooter>
         </form>
       </DialogContent>

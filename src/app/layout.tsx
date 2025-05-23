@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
-import Header from "@/components/common/Header";
-import Footer from "@/components/common/Footer";
-import { Toaster } from "@/components/ui/sonner";
+import Header from "@/components/Layout/Header";
+import Footer from "@/components/Layout/Footer";
+import { Providers } from "@/components/providers/Providers";
+import { ThemeProvider } from "@/components/providers/theme-provider";
+import { MswProvider } from "../components/providers/MswProvider";
 
 const pretendard = localFont({
   src: "../../public/fonts/PretendardStdVariable.woff2",
@@ -36,30 +37,38 @@ const RootLayout = ({ children }: Readonly<RootLayoutProps>) => {
           enableSystem
           disableTransitionOnChange
         >
-          <Header />
-          <main className="flex-1 py-6">
-            <div className="grid grid-cols-1 gap-8 px-4 lg:mx-auto lg:max-w-[1080px] 2xl:max-w-[1800px] 2xl:grid-cols-[200px_1fr_200px]">
-              {/* --- 왼쪽 사이드바 --- */}
-              <aside className="hidden 2xl:block" aria-label="왼쪽 사이드바">
-                <div className="sticky top-20 flex h-96 items-center justify-center rounded-lg">
-                  {/* 광고가 들어올 예정인 빈 공간 */}
+          <MswProvider>
+            <Providers>
+              <Header />
+              <main className="flex-1 py-6">
+                <div className="grid grid-cols-1 gap-8 px-4 lg:mx-auto lg:max-w-[1080px] 2xl:max-w-[1800px] 2xl:grid-cols-[200px_1fr_200px]">
+                  {/* --- 왼쪽 사이드바 --- */}
+                  <aside
+                    className="hidden 2xl:block"
+                    aria-label="왼쪽 사이드바"
+                  >
+                    <div className="sticky top-20 flex h-96 items-center justify-center rounded-lg">
+                      {/* 광고가 들어올 예정인 빈 공간 */}
+                    </div>
+                  </aside>
+
+                  {/* --- 메인 콘텐츠 --- */}
+                  {children}
+
+                  {/* --- 오른쪽 사이드바 --- */}
+                  <aside
+                    className="hidden 2xl:block"
+                    aria-label="오른쪽 사이드바"
+                  >
+                    <div className="sticky top-20 flex h-96 items-center justify-center rounded-lg">
+                      {/* 광고가 들어올 예정인 빈 공간 */}
+                    </div>
+                  </aside>
                 </div>
-              </aside>
-
-              {/* --- 메인 콘텐츠 --- */}
-              <div>{children}</div>
-
-              {/* --- 오른쪽 사이드바 --- */}
-              <aside className="hidden 2xl:block" aria-label="오른쪽 사이드바">
-                <div className="sticky top-20 flex h-96 items-center justify-center rounded-lg">
-                  {/* 광고가 들어올 예정인 빈 공간 */}
-                </div>
-              </aside>
-            </div>
-          </main>
-
-          <Footer />
-          <Toaster position="top-center" expand visibleToasts={3} />
+              </main>
+              <Footer />
+            </Providers>
+          </MswProvider>
         </ThemeProvider>
       </body>
     </html>

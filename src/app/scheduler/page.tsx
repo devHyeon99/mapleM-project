@@ -4,20 +4,32 @@ import { useScheduler } from "@/hooks/useScheduler";
 import { AccountSelector } from "@/components/domain/scheduler/AccountSelector";
 import { CharacterSelector } from "@/components/domain/scheduler/CharacterSelector";
 import { ScheduleDetails } from "@/components/domain/scheduler/ScheduleDetails";
+import { useAccounts } from "@/hooks/useAccounts";
+import { useCharacters } from "@/hooks/useCharacters";
 
 const SchedulerPage = () => {
   const {
     accounts,
     selectedAccountId,
-    selectedCharacterId,
-    charactersForSelectedAccount,
-    selectedCharacter,
     handleAccountChange,
-    handleCharacterChange,
     handleAddAccount,
     handleDeleteAccount,
+    loading,
+    isAddingAccount,
+    isDeletingAccount,
+    error,
+  } = useAccounts();
+
+  const {
+    charactersForSelectedAccount,
+    selectedCharacter,
+    selectedCharacterId,
     handleAddCharacter,
+    handleCharacterChange,
     handleDeleteCharacter,
+  } = useCharacters(selectedAccountId);
+
+  const {
     tasks,
     bosses,
     checkedItems,
@@ -41,9 +53,14 @@ const SchedulerPage = () => {
     <div className="flex flex-col gap-6">
       <AccountSelector
         accounts={accounts}
+        selectedAccountId={selectedAccountId}
         onAccountChange={handleAccountChange}
         onAddAccount={handleAddAccount}
         onDeleteAccount={handleDeleteAccount}
+        loading={loading}
+        isAddingAccount={isAddingAccount}
+        isDeletingAccount={isDeletingAccount}
+        error={error}
       />
 
       {selectedAccountId && (

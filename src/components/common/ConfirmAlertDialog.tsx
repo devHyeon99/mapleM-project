@@ -3,7 +3,6 @@
 import * as React from "react";
 import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
@@ -12,6 +11,8 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { Button } from "@/components/ui/button";
+import { Loader2 } from "lucide-react";
 
 interface ConfirmAlertDialogProps {
   trigger: React.ReactNode;
@@ -19,6 +20,9 @@ interface ConfirmAlertDialogProps {
   description: string;
   onConfirm: () => void;
   confirmText?: string;
+  isConfirmPending?: boolean;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 }
 
 export const ConfirmAlertDialog = ({
@@ -27,9 +31,12 @@ export const ConfirmAlertDialog = ({
   description,
   onConfirm,
   confirmText = "확인",
+  isConfirmPending = false,
+  open,
+  onOpenChange,
 }: ConfirmAlertDialogProps) => {
   return (
-    <AlertDialog>
+    <AlertDialog open={open} onOpenChange={onOpenChange}>
       <AlertDialogTrigger asChild>{trigger}</AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
@@ -37,10 +44,19 @@ export const ConfirmAlertDialog = ({
           <AlertDialogDescription>{description}</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>취소</AlertDialogCancel>
-          <AlertDialogAction onClick={onConfirm}>
+          <AlertDialogCancel disabled={isConfirmPending}>
+            취소
+          </AlertDialogCancel>
+          <Button
+            variant="destructive"
+            onClick={onConfirm}
+            disabled={isConfirmPending}
+          >
+            {isConfirmPending && (
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            )}
             {confirmText}
-          </AlertDialogAction>
+          </Button>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

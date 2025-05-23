@@ -92,7 +92,6 @@ export const ScheduleDetails = ({
 
         {/* 과제 관리 */}
         <TabsContent value="tasks" className="mt-4">
-          {/* 레이아웃 확장성 고려: lg 사이즈에서는 3열 그리드로 변경하여 가독성 확보 */}
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
             {/* 일일 과제 */}
             <ScheduleCard
@@ -146,7 +145,7 @@ export const ScheduleDetails = ({
               }
             </ScheduleCard>
 
-            {/* 월간 과제 - 신규 추가 */}
+            {/* 월간 과제 */}
             <ScheduleCard
               title="월간 과제"
               completedCount={monthlyTasksCount}
@@ -229,7 +228,7 @@ export const ScheduleDetails = ({
               }
             </ScheduleCard>
 
-            {/* 월간 보스 - 신규 추가 */}
+            {/* 월간 보스 */}
             <ScheduleCard
               title="월간 보스"
               completedCount={monthlyBossesCount}

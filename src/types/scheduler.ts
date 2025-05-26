@@ -5,11 +5,11 @@ export interface Account {
 
 export interface Character {
   id: string;
-  accountId: string;
+  account_id: string;
+  ocid: string;
   name: string;
   level: number;
   job: string;
-  avatarUrl: string;
 }
 
 export interface Task {

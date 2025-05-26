@@ -24,8 +24,12 @@ const SchedulerPage = () => {
     charactersForSelectedAccount,
     selectedCharacter,
     selectedCharacterId,
-    handleAddCharacter,
+    isCharactersLoading,
+    isCharactersError,
+    isAddingCharacter,
+    isDeletingCharacter,
     handleCharacterChange,
+    handleAddCharacter,
     handleDeleteCharacter,
   } = useCharacters(selectedAccountId);
 
@@ -70,6 +74,9 @@ const SchedulerPage = () => {
           onCharacterChange={handleCharacterChange}
           onAddCharacter={handleAddCharacter}
           onDeleteCharacter={handleDeleteCharacter}
+          isAddingCharacter={isAddingCharacter}
+          isDeletingCharacter={isDeletingCharacter}
+          isCharactersLoading={isCharactersLoading}
         />
       )}
 

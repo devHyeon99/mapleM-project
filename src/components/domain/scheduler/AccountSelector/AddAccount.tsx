@@ -27,11 +27,10 @@ const formSchema = z.object({
     }),
 });
 
+type FormValues = z.infer<typeof formSchema>;
+
 interface AddAccountProps {
-  onAddAccount: (
-    name: string,
-    options?: { onSuccess?: () => void; onError?: (error: Error) => void },
-  ) => void;
+  onAddAccount: (name: string) => void;
   isAddingAccount: boolean;
   disabled: boolean;
 }
@@ -43,30 +42,33 @@ export const AddAccount = ({
 }: AddAccountProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       accountName: "",
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    onAddAccount(values.accountName, {
-      onSuccess: () => {
-        toast.success("계정 생성이 완료되었습니다.");
-        form.reset();
-        setIsOpen(false);
-      },
-      onError: (error) => {
-        toast.error(`계정 생성에 실패했습니다: ${error.message}`);
-      },
-    });
+  const onSubmit = (values: FormValues) => {
+    onAddAccount(values.accountName);
+    form.reset();
+    setIsOpen(false);
+    toast.success(`"${values.accountName}" 계정 생성이 완료되었습니다.`);
   };
 
   return (
     <ActionDialog
       open={isOpen}
-      onOpenChange={setIsOpen}
+      onOpenChange={(open) => {
+        if (isAddingAccount) {
+          return;
+        }
+
+        if (!open) {
+          form.reset();
+        }
+        setIsOpen(open);
+      }}
       trigger={
         <Button variant="outline" size="sm" disabled={disabled}>
           <UserPlus className="mr-2 h-4 w-4" />
@@ -75,13 +77,12 @@ export const AddAccount = ({
       }
       title="새 계정 추가"
       description={
-        <>
-          <span>스케줄러로 관리할 계정의 이름을 입력해주세요.</span>
-          <br />
-          <span className="text-red-400">
+        <span className="text-muted-foreground flex flex-col text-sm">
+          <span>계정은 최대 4개까지 생성 가능합니다.</span>
+          <span className="text-red-500">
             실제 아이디, 이메일을 적지마세요.
           </span>
-        </>
+        </span>
       }
       actionText="추가"
       isActionPending={isAddingAccount || form.formState.isSubmitting}

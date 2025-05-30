@@ -94,7 +94,9 @@ export const AccountSelector = ({
           <AddAccount
             onAddAccount={onAddAccount}
             isAddingAccount={isAddingAccount}
-            disabled={isButtonDisabled || isDeletingAccount}
+            disabled={
+              isButtonDisabled || isDeletingAccount || accounts.length >= 4
+            }
           />
           <ManageAccounts
             accounts={accounts}

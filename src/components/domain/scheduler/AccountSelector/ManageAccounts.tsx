@@ -43,11 +43,11 @@ export const ManageAccounts = ({
       <DialogContent>
         <DialogHeader>
           <DialogTitle>계정 관리</DialogTitle>
-          <DialogDescription>
-            계정을 삭제할 수 있습니다. <br className="md:hidden" />
-            <strong className="text-red-500">
+          <DialogDescription className="flex flex-col">
+            <span>계정을 삭제할 수 있습니다.</span>
+            <span className="text-red-500">
               삭제된 계정은 복구할 수 없습니다.
-            </strong>
+            </span>
           </DialogDescription>
         </DialogHeader>
         <div className="space-y-2 py-4">

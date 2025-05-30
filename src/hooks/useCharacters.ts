@@ -27,7 +27,9 @@ export const useCharacters = (selectedAccountId: string | null) => {
   } = useQuery({
     queryKey: ["characters", selectedAccountId],
     queryFn: () => fetchCharacters(selectedAccountId!),
-    enabled: !!selectedAccountId,
+    enabled:
+      !!selectedAccountId &&
+      !String(selectedAccountId).startsWith("optimistic-"),
   });
 
   const { mutate: handleAddCharacter, isPending: isAddingCharacter } =

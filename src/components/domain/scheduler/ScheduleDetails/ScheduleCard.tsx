@@ -5,9 +5,20 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Plus } from "lucide-react";
 import { ActionDialog } from "@/components/common/ActionDialog";
+
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 
 interface ScheduleCardProps {
   title: string;
@@ -19,6 +30,17 @@ interface ScheduleCardProps {
   children: (isEditMode: boolean) => React.ReactNode;
 }
 
+const formSchema = z.object({
+  itemName: z
+    .string()
+    .min(2, { message: "항목 이름은 2글자 이상이어야 합니다." })
+    .regex(/^[a-zA-Z0-9가-힣]*$/, {
+      message: "사용할 수 없는 이름입니다. (영문, 숫자, 한글만 허용)",
+    }),
+});
+
+type FormValues = z.infer<typeof formSchema>;
+
 export const ScheduleCard = ({
   title,
   completedCount,
@@ -29,15 +51,20 @@ export const ScheduleCard = ({
   children,
 }: ScheduleCardProps) => {
   const [isEditMode, setIsEditMode] = useState(false);
-  const [newItemName, setNewItemName] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+
+  const form = useForm<FormValues>({
+    resolver: zodResolver(formSchema),
+    defaultValues: { itemName: "" },
+  });
 
   const percentage =
     totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0;
 
-  const handleConfirmAddItem = () => {
-    if (newItemName.trim() === "") return;
-    onAddItem(newItemName);
-    setNewItemName("");
+  const handleSubmit = (values: FormValues) => {
+    onAddItem(values.itemName.trim());
+    form.reset();
+    setIsOpen(false);
   };
 
   return (
@@ -87,6 +114,13 @@ export const ScheduleCard = ({
         <div className="pt-2">{children(isEditMode)}</div>
         <div className="pt-2">
           <ActionDialog
+            open={isOpen}
+            onOpenChange={(open) => {
+              if (!open) {
+                form.reset();
+              }
+              setIsOpen(open);
+            }}
             trigger={
               <Button
                 variant="ghost"
@@ -98,24 +132,35 @@ export const ScheduleCard = ({
             }
             title={`새로운 ${title} 추가`}
             description="추가할 항목의 이름을 입력해주세요."
-            onAction={handleConfirmAddItem}
+            onAction={form.handleSubmit(handleSubmit)}
             actionText="추가"
+            form={`add-item-form-${title}`}
           >
-            <div className="grid gap-4 py-4">
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="item-name" className="text-right">
-                  {title} 이름
-                </Label>
-                <Input
-                  id="item-name"
-                  name="item-name"
-                  value={newItemName}
-                  onChange={(e) => setNewItemName(e.target.value)}
-                  placeholder="새 항목 이름..."
-                  className="col-span-3"
+            <Form {...form}>
+              <form
+                id={`add-item-form-${title}`}
+                onSubmit={form.handleSubmit(handleSubmit)}
+                className="grid gap-4 py-4"
+              >
+                <FormField
+                  control={form.control}
+                  name="itemName"
+                  render={({ field }) => (
+                    <FormItem className="grid grid-cols-4 items-center gap-4">
+                      <FormLabel className="text-right">{title} 이름</FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          placeholder="새 항목 이름..."
+                          className="col-span-3"
+                        />
+                      </FormControl>
+                      <FormMessage className="col-span-4 text-center" />
+                    </FormItem>
+                  )}
                 />
-              </div>
-            </div>
+              </form>
+            </Form>
           </ActionDialog>
         </div>
       </CardContent>

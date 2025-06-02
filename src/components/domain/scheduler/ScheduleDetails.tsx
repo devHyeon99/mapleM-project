@@ -8,8 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { ScheduleCard } from "./ScheduleCard";
-import { ChecklistItem } from "./ChecklistItem";
+import { ScheduleContentGrid } from "./ScheduleDetails/ScheduleContentGrid";
 import type { Character, Task } from "@/types/scheduler";
 
 interface ScheduleDetailsProps {
@@ -35,8 +34,8 @@ interface ScheduleDetailsProps {
   ) => void;
   onDeleteTask: (taskId: string) => void;
   onDeleteBoss: (bossId: string) => void;
-  onEditTask: (taskId: string) => void;
-  onEditBoss: (bossId: string) => void;
+  onEditTask: (taskId: string, newLabel: string) => void;
+  onEditBoss: (bossId: string, newLabel: string) => void;
 }
 
 export const ScheduleDetails = ({
@@ -59,6 +58,18 @@ export const ScheduleDetails = ({
   onEditTask,
   onEditBoss,
 }: ScheduleDetailsProps) => {
+  // 가독성을 위해 카운트 객체를 미리 만들어 둡니다.
+  const taskCounts = {
+    daily: dailyTasksCount,
+    weekly: weeklyTasksCount,
+    monthly: monthlyTasksCount,
+  };
+  const bossCounts = {
+    daily: dailyBossesCount,
+    weekly: weeklyBossesCount,
+    monthly: monthlyBossesCount,
+  };
+
   return (
     <section>
       <Tabs defaultValue="tasks">
@@ -92,168 +103,32 @@ export const ScheduleDetails = ({
 
         {/* 과제 관리 */}
         <TabsContent value="tasks" className="mt-4">
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-            {/* 일일 과제 */}
-            <ScheduleCard
-              title="일일 과제"
-              completedCount={dailyTasksCount}
-              totalCount={tasks.daily.length}
-              onSelectAll={() => onBulkUpdate(tasks.daily, true)}
-              onReset={() => onBulkUpdate(tasks.daily, false)}
-              onAddItem={(taskName) => onAddTask("daily", taskName)}
-            >
-              {(isEditMode) =>
-                tasks.daily.map((task) => (
-                  <ChecklistItem
-                    key={task.id}
-                    item={task}
-                    isChecked={!!checkedItems[task.id]}
-                    onCheckedChange={(checked) =>
-                      onCheckChange(task.id, checked)
-                    }
-                    onDelete={() => onDeleteTask(task.id)}
-                    onEdit={() => onEditTask(task.id)}
-                    isEditMode={isEditMode}
-                  />
-                ))
-              }
-            </ScheduleCard>
-
-            {/* 주간 과제 */}
-            <ScheduleCard
-              title="주간 과제"
-              completedCount={weeklyTasksCount}
-              totalCount={tasks.weekly.length}
-              onSelectAll={() => onBulkUpdate(tasks.weekly, true)}
-              onReset={() => onBulkUpdate(tasks.weekly, false)}
-              onAddItem={(taskName) => onAddTask("weekly", taskName)}
-            >
-              {(isEditMode) =>
-                tasks.weekly.map((task) => (
-                  <ChecklistItem
-                    key={task.id}
-                    item={task}
-                    isChecked={!!checkedItems[task.id]}
-                    onCheckedChange={(checked) =>
-                      onCheckChange(task.id, checked)
-                    }
-                    onDelete={() => onDeleteTask(task.id)}
-                    onEdit={() => onEditTask(task.id)}
-                    isEditMode={isEditMode}
-                  />
-                ))
-              }
-            </ScheduleCard>
-
-            {/* 월간 과제 */}
-            <ScheduleCard
-              title="월간 과제"
-              completedCount={monthlyTasksCount}
-              totalCount={tasks.monthly.length}
-              onSelectAll={() => onBulkUpdate(tasks.monthly, true)}
-              onReset={() => onBulkUpdate(tasks.monthly, false)}
-              onAddItem={(taskName) => onAddTask("monthly", taskName)}
-            >
-              {(isEditMode) =>
-                tasks.monthly.map((task) => (
-                  <ChecklistItem
-                    key={task.id}
-                    item={task}
-                    isChecked={!!checkedItems[task.id]}
-                    onCheckedChange={(checked) =>
-                      onCheckChange(task.id, checked)
-                    }
-                    onDelete={() => onDeleteTask(task.id)}
-                    onEdit={() => onEditTask(task.id)}
-                    isEditMode={isEditMode}
-                  />
-                ))
-              }
-            </ScheduleCard>
-          </div>
+          <ScheduleContentGrid
+            typeLabel="과제"
+            data={tasks}
+            counts={taskCounts}
+            checkedItems={checkedItems}
+            onCheckChange={onCheckChange}
+            onBulkUpdate={onBulkUpdate}
+            onAddItem={onAddTask}
+            onDeleteItem={onDeleteTask}
+            onEditItem={onEditTask}
+          />
         </TabsContent>
 
         {/* 보스 관리 */}
         <TabsContent value="bosses" className="mt-4">
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-            {/* 일일 보스 */}
-            <ScheduleCard
-              title="일일 보스"
-              completedCount={dailyBossesCount}
-              totalCount={bosses.daily.length}
-              onSelectAll={() => onBulkUpdate(bosses.daily, true)}
-              onReset={() => onBulkUpdate(bosses.daily, false)}
-              onAddItem={(bossName) => onAddBoss("daily", bossName)}
-            >
-              {(isEditMode) =>
-                bosses.daily.map((boss) => (
-                  <ChecklistItem
-                    key={boss.id}
-                    item={boss}
-                    isChecked={!!checkedItems[boss.id]}
-                    onCheckedChange={(checked) =>
-                      onCheckChange(boss.id, checked)
-                    }
-                    onDelete={() => onDeleteBoss(boss.id)}
-                    onEdit={() => onEditBoss(boss.id)}
-                    isEditMode={isEditMode}
-                  />
-                ))
-              }
-            </ScheduleCard>
-
-            {/* 주간 보스 */}
-            <ScheduleCard
-              title="주간 보스"
-              completedCount={weeklyBossesCount}
-              totalCount={bosses.weekly.length}
-              onSelectAll={() => onBulkUpdate(bosses.weekly, true)}
-              onReset={() => onBulkUpdate(bosses.weekly, false)}
-              onAddItem={(bossName) => onAddBoss("weekly", bossName)}
-            >
-              {(isEditMode) =>
-                bosses.weekly.map((boss) => (
-                  <ChecklistItem
-                    key={boss.id}
-                    item={boss}
-                    isChecked={!!checkedItems[boss.id]}
-                    onCheckedChange={(checked) =>
-                      onCheckChange(boss.id, checked)
-                    }
-                    onDelete={() => onDeleteBoss(boss.id)}
-                    onEdit={() => onEditBoss(boss.id)}
-                    isEditMode={isEditMode}
-                  />
-                ))
-              }
-            </ScheduleCard>
-
-            {/* 월간 보스 */}
-            <ScheduleCard
-              title="월간 보스"
-              completedCount={monthlyBossesCount}
-              totalCount={bosses.monthly.length}
-              onSelectAll={() => onBulkUpdate(bosses.monthly, true)}
-              onReset={() => onBulkUpdate(bosses.monthly, false)}
-              onAddItem={(bossName) => onAddBoss("monthly", bossName)}
-            >
-              {(isEditMode) =>
-                bosses.monthly.map((boss) => (
-                  <ChecklistItem
-                    key={boss.id}
-                    item={boss}
-                    isChecked={!!checkedItems[boss.id]}
-                    onCheckedChange={(checked) =>
-                      onCheckChange(boss.id, checked)
-                    }
-                    onDelete={() => onDeleteBoss(boss.id)}
-                    onEdit={() => onEditBoss(boss.id)}
-                    isEditMode={isEditMode}
-                  />
-                ))
-              }
-            </ScheduleCard>
-          </div>
+          <ScheduleContentGrid
+            typeLabel="보스"
+            data={bosses}
+            counts={bossCounts}
+            checkedItems={checkedItems}
+            onCheckChange={onCheckChange}
+            onBulkUpdate={onBulkUpdate}
+            onAddItem={onAddBoss}
+            onDeleteItem={onDeleteBoss}
+            onEditItem={onEditBoss}
+          />
         </TabsContent>
       </Tabs>
     </section>

@@ -23,7 +23,7 @@ const formSchema = z.object({
     .string()
     .min(2, { message: "계정 이름은 2글자 이상이어야 합니다." })
     .regex(/^[a-zA-Z0-9가-힣]*$/, {
-      message: "사용할 수 없는 계정 이름입니다.",
+      message: "사용할 수 없는 계정 이름입니다. (영문, 숫자, 한글만 허용)",
     }),
 });
 
@@ -106,7 +106,7 @@ export const AddAccount = ({
                     />
                   </FormControl>
                 </div>
-                <FormMessage className="mt-2 text-center" />
+                <FormMessage className="mt-2" />
               </FormItem>
             )}
           />

@@ -12,14 +12,13 @@ export interface Character {
   job: string;
 }
 
-export interface Task {
+export interface ChecklistItemData {
   id: string;
   label: string;
   period: "daily" | "weekly" | "monthly";
+  type: "task" | "boss";
+  character_id: string;
 }
 
-export interface Boss {
-  id: string;
-  label: string;
-  period: "daily" | "weekly" | "monthly";
-}
+export type Task = ChecklistItemData;
+export type Boss = ChecklistItemData;

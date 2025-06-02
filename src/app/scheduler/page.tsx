@@ -34,24 +34,28 @@ const SchedulerPage = () => {
   } = useCharacters(selectedAccountId);
 
   const {
-    tasks,
-    bosses,
-    checkedItems,
-    dailyTasksCount,
-    weeklyTasksCount,
-    monthlyTasksCount,
-    dailyBossesCount,
-    weeklyBossesCount,
-    monthlyBossesCount,
-    handleCheckChange,
-    handleBulkUpdate,
-    handleAddTask,
-    handleAddBoss,
-    handleDeleteTask,
-    handleDeleteBoss,
-    handleEditTask,
-    handleEditBoss,
-  } = useScheduler();
+    handleCheckChange: onCheckChange,
+    handleBulkUpdate: onBulkUpdate,
+    handleAddTask: onAddTask,
+    handleAddBoss: onAddBoss,
+    handleDeleteTask: onDeleteTask,
+    handleDeleteBoss: onDeleteBoss,
+    handleEditTask: onEditTask,
+    handleEditBoss: onEditBoss,
+    ...schedulerData // 나머지 모든 속성(tasks, bosses, counts 등)은 schedulerData 객체에
+  } = useScheduler(selectedCharacterId);
+
+  // 핸들러들을 별도의 객체로 묶어서 보내어 가독성 높임
+  const schedulerHandlers = {
+    onCheckChange,
+    onBulkUpdate,
+    onAddTask,
+    onAddBoss,
+    onDeleteTask,
+    onDeleteBoss,
+    onEditTask,
+    onEditBoss,
+  };
 
   return (
     <div className="flex flex-col gap-6">
@@ -83,23 +87,8 @@ const SchedulerPage = () => {
       {selectedCharacter && (
         <ScheduleDetails
           character={selectedCharacter}
-          tasks={tasks}
-          bosses={bosses}
-          checkedItems={checkedItems}
-          dailyTasksCount={dailyTasksCount}
-          weeklyTasksCount={weeklyTasksCount}
-          monthlyTasksCount={monthlyTasksCount}
-          dailyBossesCount={dailyBossesCount}
-          weeklyBossesCount={weeklyBossesCount}
-          monthlyBossesCount={monthlyBossesCount}
-          onCheckChange={handleCheckChange}
-          onBulkUpdate={handleBulkUpdate}
-          onAddTask={handleAddTask}
-          onAddBoss={handleAddBoss}
-          onDeleteTask={handleDeleteTask}
-          onDeleteBoss={handleDeleteBoss}
-          onEditTask={handleEditTask}
-          onEditBoss={handleEditBoss}
+          {...schedulerData}
+          {...schedulerHandlers}
         />
       )}
     </div>

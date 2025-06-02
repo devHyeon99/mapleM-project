@@ -27,6 +27,7 @@ export const useCharacters = (selectedAccountId: string | null) => {
   } = useQuery({
     queryKey: ["characters", selectedAccountId],
     queryFn: () => fetchCharacters(selectedAccountId!),
+    staleTime: 1000 * 60 * 5,
     enabled:
       !!selectedAccountId &&
       !String(selectedAccountId).startsWith("optimistic-"),

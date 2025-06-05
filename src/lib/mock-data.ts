@@ -1,10 +1,4 @@
-import type {
-  Account,
-  Character,
-  Task,
-  Boss,
-  ChecklistItemData,
-} from "@/types/scheduler";
+import type { Account, Character, ChecklistItemData } from "@/types/scheduler";
 
 // =========================================
 // === 계정(Account) 목 데이터

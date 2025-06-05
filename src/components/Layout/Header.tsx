@@ -99,7 +99,7 @@ const Header = () => {
         <PcNav />
         <div className="flex items-center">
           <Button variant="link" className="text-[15px] font-semibold" asChild>
-            <Link href="/login">로그인</Link>
+            <Link href="/auth/login">로그인</Link>
           </Button>
           <div className="hidden md:block">
             <ModeToggle />

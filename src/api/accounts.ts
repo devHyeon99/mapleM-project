@@ -2,7 +2,17 @@ import type { Account } from "@/types/scheduler";
 import { supabase } from "@/utils/supabase/client";
 
 export const fetchAccounts = async (): Promise<Account[]> => {
-  const { data, error } = await supabase.from("accounts").select("*");
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
+
+  if (userError || !user) throw new Error("로그인이 필요합니다.");
+
+  const { data, error } = await supabase
+    .from("accounts")
+    .select("*")
+    .eq("user_id", user.id);
 
   if (error) {
     console.error("Supabase fetch error:", error);
@@ -12,9 +22,16 @@ export const fetchAccounts = async (): Promise<Account[]> => {
 };
 
 export const createAccount = async (name: string): Promise<Account[]> => {
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
+
+  if (userError || !user) throw new Error("로그인이 필요합니다.");
+
   const { data, error } = await supabase
     .from("accounts")
-    .insert([{ name }])
+    .insert([{ name, user_id: user.id }])
     .select();
 
   if (error) {

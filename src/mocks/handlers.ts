@@ -111,7 +111,7 @@ export const handlers = [
       account_id: mockSessionAccountId,
       ocid: `mock_ocid_${crypto.randomUUID()}`,
       name,
-      job: "신입",
+      job: "iel",
       level: 1,
     };
     mockCharacters.push(newCharacter);

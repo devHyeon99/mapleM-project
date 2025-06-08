@@ -43,7 +43,18 @@ export const createAccount = async (name: string): Promise<Account[]> => {
 };
 
 export const deleteAccount = async (id: string): Promise<void> => {
-  const { error } = await supabase.from("accounts").delete().eq("id", id);
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
+
+  if (userError || !user) throw new Error("로그인이 필요합니다.");
+
+  const { error } = await supabase
+    .from("accounts")
+    .delete()
+    .eq("id", id)
+    .eq("user_id", user.id);
 
   if (error) {
     console.error("Supabase delete error:", error);

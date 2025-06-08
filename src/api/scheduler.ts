@@ -1,5 +1,3 @@
-// /lib/api/scheduler.ts
-
 import { supabase } from "@/utils/supabase/client";
 import type { ChecklistItemData } from "@/types/scheduler";
 
@@ -16,7 +14,6 @@ export const getScheduleItems = async (characterId: string) => {
     .from("schedule_items")
     .select("*")
     .eq("character_id", characterId);
-
   if (error) throw new Error(error.message);
 
   const items: {
@@ -36,6 +33,48 @@ export const getScheduleItems = async (characterId: string) => {
   });
 
   return items;
+};
+
+// ScheduleItem 삭제
+export const deleteScheduleItem = async (itemId: string) => {
+  const { error } = await supabase
+    .from("schedule_items")
+    .delete()
+    .eq("id", itemId);
+
+  if (error) throw new Error(error.message);
+  return { success: true };
+};
+
+// ScheduleItem 추가
+export const addScheduleItem = async (
+  newItem: Omit<ChecklistItemData, "id"> & {
+    type: "task" | "boss";
+    character_id: string;
+  },
+) => {
+  const { data, error } = await supabase
+    .from("schedule_items")
+    .insert([newItem])
+    .select();
+
+  if (error) throw new Error(error.message);
+  return data[0];
+};
+
+// ScheduleItem 수정
+export const editScheduleItem = async (itemId: string, newLabel: string) => {
+  const trimmed = newLabel.trim();
+  if (!trimmed) throw new Error("스케줄 이름은 비어 있을 수 없습니다.");
+
+  const { data, error } = await supabase
+    .from("schedule_items")
+    .update([{ label: trimmed }])
+    .eq("id", itemId)
+    .select();
+
+  if (error) throw new Error(error.message);
+  return data?.[0];
 };
 
 // 체크된 항목 조회
@@ -92,46 +131,4 @@ export const updateCheckedItems = async ({
   }
 
   return { success: true };
-};
-
-// ScheduleItem 삭제
-export const deleteScheduleItem = async (itemId: string) => {
-  const { error } = await supabase
-    .from("schedule_items")
-    .delete()
-    .eq("id", itemId);
-
-  if (error) throw new Error(error.message);
-  return { success: true };
-};
-
-// ScheduleItem 추가
-export const addScheduleItem = async (
-  newItem: Omit<ChecklistItemData, "id"> & {
-    type: "task" | "boss";
-    character_id: string;
-  },
-) => {
-  const { data, error } = await supabase
-    .from("schedule_items")
-    .insert([newItem])
-    .select();
-
-  if (error) throw new Error(error.message);
-  return data[0];
-};
-
-// ScheduleItem 수정
-export const editScheduleItem = async (itemId: string, newLabel: string) => {
-  const trimmed = newLabel.trim();
-  if (!trimmed) throw new Error("스케줄 이름은 비어 있을 수 없습니다.");
-
-  const { data, error } = await supabase
-    .from("schedule_items")
-    .update([{ label: trimmed }])
-    .eq("id", itemId)
-    .select();
-
-  if (error) throw new Error(error.message);
-  return data?.[0];
 };

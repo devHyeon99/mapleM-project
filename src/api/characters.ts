@@ -10,6 +10,7 @@ export const fetchCharacters = async (
     .select("*")
     .eq("account_id", accountId); // 'accountId'가 아닌 'account_id' 컬럼명 사용
 
+  console.log(data);
   if (error) {
     console.error("Supabase fetch characters error:", error);
     throw error;
@@ -19,6 +20,7 @@ export const fetchCharacters = async (
 
 // 캐릭터 추가
 export const addCharacter = async (newCharacter: {
+  account_id: string;
   name: string;
   world_name: string;
 }): Promise<Character> => {

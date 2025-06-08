@@ -35,7 +35,12 @@ export const useCharacters = (selectedAccountId: string | null) => {
 
   const { mutate: handleAddCharacter, isPending: isAddingCharacter } =
     useMutation({
-      mutationFn: addCharacter,
+      mutationFn: (newCharacterData: { name: string; world_name: string }) => {
+        return addCharacter({
+          ...newCharacterData,
+          account_id: selectedAccountId!,
+        });
+      },
 
       onMutate: async (newCharacterData: {
         name: string;

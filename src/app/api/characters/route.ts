@@ -41,7 +41,7 @@ export async function POST(request: Request) {
     );
   }
 
-  const { name, world_name } = await request.json();
+  const { account_id, name, world_name } = await request.json();
 
   if (!name || !world_name) {
     return NextResponse.json(
@@ -84,7 +84,7 @@ export async function POST(request: Request) {
 
     // 5. DB에 저장할 데이터 조합 (인증된 사용자 ID 사용)
     const characterToSave = {
-      account_id: user.id, // ❗️ 요청 본문이 아닌, 인증된 사용자 ID를 사용
+      account_id,
       ocid,
       name: nexonData.character_name,
       job: nexonData.character_job_name,

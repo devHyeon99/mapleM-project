@@ -4,6 +4,7 @@ import "./globals.css";
 import { Providers } from "@/components/providers/Providers";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { MswProvider } from "@/components/providers/MswProvider";
+import { MockSessionProvider } from "@/components/providers/MockSessionProvider";
 
 const pretendard = localFont({
   src: "../../public/fonts/PretendardStdVariable.woff2",
@@ -31,7 +32,9 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <MswProvider>
-            <Providers>{children}</Providers>
+            <Providers>
+              <MockSessionProvider>{children}</MockSessionProvider>
+            </Providers>
           </MswProvider>
         </ThemeProvider>
       </body>

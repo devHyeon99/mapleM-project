@@ -8,9 +8,8 @@ export const fetchCharacters = async (
   const { data, error } = await supabase
     .from("characters")
     .select("*")
-    .eq("account_id", accountId); // 'accountId'가 아닌 'account_id' 컬럼명 사용
+    .eq("account_id", accountId);
 
-  console.log(data);
   if (error) {
     console.error("Supabase fetch characters error:", error);
     throw error;

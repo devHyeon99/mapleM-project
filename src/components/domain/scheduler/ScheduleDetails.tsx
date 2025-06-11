@@ -1,18 +1,13 @@
 "use client";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { ScheduleContentGrid } from "./ScheduleDetails/ScheduleContentGrid";
 import type { Character, Task } from "@/types/scheduler";
+import { CharacterBasicInfo } from "./CharacterBasicInfo";
 
 interface ScheduleDetailsProps {
   character: Character;
+  isLoading: boolean;
   tasks: { daily: Task[]; weekly: Task[]; monthly: Task[] };
   bosses: { daily: Task[]; weekly: Task[]; monthly: Task[] };
   checkedItems: { [key: string]: boolean };
@@ -40,6 +35,7 @@ interface ScheduleDetailsProps {
 
 export const ScheduleDetails = ({
   character,
+  isLoading,
   tasks,
   bosses,
   checkedItems,
@@ -58,7 +54,6 @@ export const ScheduleDetails = ({
   onEditTask,
   onEditBoss,
 }: ScheduleDetailsProps) => {
-  // 가독성을 위해 카운트 객체를 미리 만들어 둡니다.
   const taskCounts = {
     daily: dailyTasksCount,
     weekly: weeklyTasksCount,
@@ -86,19 +81,7 @@ export const ScheduleDetails = ({
 
         {/* 기본 정보 */}
         <TabsContent value="info" className="mt-4">
-          <Card>
-            <CardHeader>
-              <CardTitle>{character.name}</CardTitle>
-              <CardDescription>
-                Lv.{character.level} {character.job}
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p>
-                넥슨 API를 통해 가져온 상세 캐릭터 정보가 여기에 표시됩니다.
-              </p>
-            </CardContent>
-          </Card>
+          <CharacterBasicInfo ocid={character.ocid} />
         </TabsContent>
 
         {/* 과제 관리 */}
@@ -113,6 +96,7 @@ export const ScheduleDetails = ({
             onAddItem={onAddTask}
             onDeleteItem={onDeleteTask}
             onEditItem={onEditTask}
+            isLoading={isLoading}
           />
         </TabsContent>
 
@@ -128,6 +112,7 @@ export const ScheduleDetails = ({
             onAddItem={onAddBoss}
             onDeleteItem={onDeleteBoss}
             onEditItem={onEditBoss}
+            isLoading={isLoading}
           />
         </TabsContent>
       </Tabs>

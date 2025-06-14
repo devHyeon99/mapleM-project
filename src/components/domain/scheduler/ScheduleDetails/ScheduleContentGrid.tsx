@@ -3,6 +3,7 @@
 import { ScheduleCard } from "./ScheduleCard";
 import { ChecklistItem } from "./ChecklistItem";
 import type { ChecklistItemData } from "@/types/scheduler";
+import { ChecklistItemSkeleton } from "./ChecklistItemSkeleton";
 
 const CATEGORIES = [
   { key: "daily", title: "일일" },
@@ -14,6 +15,7 @@ type CategoryKey = "daily" | "weekly" | "monthly";
 
 interface ScheduleContentGridProps {
   typeLabel: string;
+  isLoading: boolean;
   data: Record<CategoryKey, ChecklistItemData[]>;
   counts: Record<CategoryKey, number>;
   checkedItems: { [key: string]: boolean };
@@ -34,6 +36,7 @@ export const ScheduleContentGrid = ({
   onAddItem,
   onDeleteItem,
   onEditItem,
+  isLoading = false,
 }: ScheduleContentGridProps) => {
   return (
     <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
@@ -48,17 +51,23 @@ export const ScheduleContentGrid = ({
           onAddItem={(itemName) => onAddItem(key, itemName)}
         >
           {(isEditMode) =>
-            data[key].map((item) => (
-              <ChecklistItem
-                key={item.id}
-                item={item}
-                isChecked={!!checkedItems[item.id]}
-                onCheckedChange={(checked) => onCheckChange(item.id, checked)}
-                onDelete={() => onDeleteItem(item.id)}
-                onEdit={(newLabel) => onEditItem(item.id, newLabel)}
-                isEditMode={isEditMode}
-              />
-            ))
+            isLoading
+              ? Array.from({ length: 4 }).map((_, i) => (
+                  <ChecklistItemSkeleton key={i} />
+                ))
+              : data[key].map((item) => (
+                  <ChecklistItem
+                    key={item.id}
+                    item={item}
+                    isChecked={!!checkedItems[item.id]}
+                    onCheckedChange={(checked) =>
+                      onCheckChange(item.id, checked)
+                    }
+                    onDelete={() => onDeleteItem(item.id)}
+                    onEdit={(newLabel) => onEditItem(item.id, newLabel)}
+                    isEditMode={isEditMode}
+                  />
+                ))
           }
         </ScheduleCard>
       ))}

@@ -27,11 +27,8 @@ const Logo = () => (
     aria-label="MMGG 홈으로 가기"
   >
     <div className="relative h-6 w-24">
-      <strong className="animate-text-cycle-primary absolute inset-0 flex items-center justify-start text-xl font-bold md:text-2xl">
+      <strong className="absolute inset-0 flex items-center justify-start pl-1 text-xl font-bold md:text-2xl">
         메엠지지
-      </strong>
-      <strong className="animate-text-cycle-secondary absolute inset-0 flex items-center justify-start text-xl font-bold md:text-2xl">
-        MMGG
       </strong>
     </div>
   </Link>

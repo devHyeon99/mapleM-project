@@ -21,32 +21,37 @@ export const useScheduler = (characterId: string | null) => {
   // =========================================
   // === 데이터 조회 (useQuery)
   // =========================================
-  const { data: items, isLoading: isLoadingItems } = useQuery({
+  const {
+    data: items = {
+      tasks: { daily: [], weekly: [], monthly: [] },
+      bosses: { daily: [], weekly: [], monthly: [] },
+    },
+    isLoading: isLoadingItems,
+    isFetching: isFetchingItems,
+  } = useQuery({
     queryKey: scheduleQueryKey,
     queryFn: () => getScheduleItems(characterId!),
     enabled: !!characterId,
     staleTime: 1000 * 60 * 5,
-    initialDataUpdatedAt: 0,
-    initialData: {
+    placeholderData: {
       tasks: { daily: [], weekly: [], monthly: [] },
       bosses: { daily: [], weekly: [], monthly: [] },
     },
   });
 
-  const { data: checkedItems, isLoading: isLoadingCheckedItems } = useQuery({
-    queryKey: checkedItemsQueryKey,
-    queryFn: () => getCheckedItems(characterId!),
-    enabled: !!characterId,
-    staleTime: 1000 * 60 * 5,
-    initialDataUpdatedAt: 0,
-    initialData: {},
-  });
+  const { data: checkedItems = {}, isLoading: isLoadingCheckedItems } =
+    useQuery({
+      queryKey: checkedItemsQueryKey,
+      queryFn: () => getCheckedItems(characterId!),
+      enabled: !!characterId,
+      staleTime: 1000 * 60 * 5,
+      placeholderData: {},
+    });
 
   // =========================================
   // === 데이터 변경 (useMutation)
   // =========================================
 
-  // 체크 상태 변경 뮤테이션
   const { mutate: updateChecks } = useMutation({
     mutationFn: updateCheckedItems,
     onMutate: async ({ itemsToUpdate }) => {
@@ -77,7 +82,6 @@ export const useScheduler = (characterId: string | null) => {
     },
   });
 
-  // 아이템 삭제 뮤테이션
   const { mutate: deleteItem } = useMutation({
     mutationFn: deleteScheduleItem,
     onMutate: async (itemId: string) => {
@@ -85,7 +89,6 @@ export const useScheduler = (characterId: string | null) => {
       const previousItems =
         queryClient.getQueryData<typeof items>(scheduleQueryKey);
 
-      // 캐시에서 아이템 제거
       const newItems = JSON.parse(JSON.stringify(previousItems));
       for (const type of ["tasks", "bosses"]) {
         for (const period of ["daily", "weekly", "monthly"]) {
@@ -110,7 +113,6 @@ export const useScheduler = (characterId: string | null) => {
     },
   });
 
-  // 아이템 추가 뮤테이션
   const { mutate: addItem } = useMutation({
     mutationFn: addScheduleItem,
     onMutate: async (newItemData) => {
@@ -118,13 +120,11 @@ export const useScheduler = (characterId: string | null) => {
       const previousItems =
         queryClient.getQueryData<typeof items>(scheduleQueryKey);
 
-      // 낙관적 업데이트를 위한 임시 아이템 생성
       const optimisticItem: ChecklistItemData = {
         id: `optimistic-${Date.now()}`,
         ...newItemData,
       };
 
-      // 캐시에 임시 아이템 추가
       const newItems = JSON.parse(JSON.stringify(previousItems));
       newItems[newItemData.type === "task" ? "tasks" : "bosses"][
         newItemData.period
@@ -145,7 +145,6 @@ export const useScheduler = (characterId: string | null) => {
     },
   });
 
-  // 아이템 수정 뮤테이션
   const { mutate: editItem } = useMutation({
     mutationFn: ({ id, newLabel }: { id: string; newLabel: string }) =>
       editScheduleItem(id, newLabel),
@@ -154,7 +153,6 @@ export const useScheduler = (characterId: string | null) => {
       const previousItems =
         queryClient.getQueryData<typeof items>(scheduleQueryKey);
 
-      // 캐시에서 아이템 라벨 수정
       const newItems = JSON.parse(JSON.stringify(previousItems));
       for (const type of ["tasks", "bosses"]) {
         for (const period of ["daily", "weekly", "monthly"]) {
@@ -233,7 +231,7 @@ export const useScheduler = (characterId: string | null) => {
     bosses,
     checkedItems,
     ...counts,
-    isLoading: isLoadingItems || isLoadingCheckedItems,
+    isLoading: isLoadingItems || isFetchingItems || isLoadingCheckedItems,
     handleCheckChange,
     handleBulkUpdate,
     handleAddTask,

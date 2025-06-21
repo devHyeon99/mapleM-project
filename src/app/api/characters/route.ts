@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-// 'anon' 키를 사용하는 표준 서버 클라이언트를 가져옵니다.
 import { createClient } from "@/utils/supabase/server";
 
 // 넥슨 API 응답에 대한 타입 정의

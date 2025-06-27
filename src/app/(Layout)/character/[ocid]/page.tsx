@@ -26,10 +26,8 @@ export default function CharacterPage({ params }: CharacterPageProps) {
   };
 
   return (
-    <div>
-      <div className="mb-6 flex flex-col items-center">
-        <CharacterSearch onSearch={handleSearch} />
-      </div>
+    <div className="flex w-full flex-1 flex-col items-center gap-6">
+      <CharacterSearch onSearch={handleSearch} />
       <h1 className="sr-only">캐릭터 검색 결과</h1>
       <CharacterBasicInfo ocid={currentOcid} />
     </div>

@@ -75,7 +75,7 @@ export const CharacterSearch = ({ onSearch }: CharacterSearchProps) => {
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
-            <SelectLabel>월드 목록</SelectLabel>
+            <SelectLabel className="font-bold">월드 목록</SelectLabel>
             {WORLD_NAMES.map((w) => (
               <SelectItem key={w} value={w}>
                 {w}

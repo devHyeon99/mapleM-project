@@ -39,7 +39,7 @@ const PcNav = () => (
     aria-label="메인 메뉴"
     className="hidden items-center justify-center space-x-1 text-sm font-medium md:flex"
   >
-    <ul className="flex items-center">
+    <ul className="hidden items-center">
       {navLinks.map((link) => (
         <li key={link.href}>
           <Button variant="link" className="text-[15px] font-semibold" asChild>
@@ -52,7 +52,7 @@ const PcNav = () => (
 );
 
 const MbNav = () => (
-  <div className="md:hidden">
+  <div className="hidden">
     <Sheet>
       <SheetTrigger asChild>
         <Button variant="ghost" size="icon" aria-label="메뉴 열기">
@@ -72,7 +72,7 @@ const MbNav = () => (
             {navLinks.map((link) => (
               <li key={link.href}>
                 <SheetClose asChild>
-                  <Button variant="link" className="text-[15px]" asChild>
+                  <Button variant="link" className="hidden text-[15px]" asChild>
                     <Link href={link.href}>{link.label}</Link>
                   </Button>
                 </SheetClose>
@@ -91,14 +91,18 @@ const MbNav = () => (
 const Header = () => {
   return (
     <header className="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 flex min-h-20 w-full items-center justify-center border-b backdrop-blur">
-      <div className="container flex h-14 items-center justify-between md:justify-around">
+      <div className="container flex h-14 max-w-7xl items-center justify-between md:justify-around">
         <Logo />
         <PcNav />
         <div className="flex items-center">
-          <Button variant="link" className="text-[15px] font-semibold" asChild>
+          <Button
+            variant="link"
+            className="hidden text-[15px] font-semibold"
+            asChild
+          >
             <Link href="/auth/login">로그인</Link>
           </Button>
-          <div className="hidden md:block">
+          <div className="block">
             <ModeToggle />
           </div>
           <MbNav />

@@ -82,7 +82,7 @@ export const ItemIconBase = React.forwardRef<HTMLDivElement, ItemIconBaseProps>(
 
         {/* 우상단 스타포스 */}
         {showStar && (
-          <span className="absolute top-0 right-0 flex h-2.5 w-2.5 items-center justify-center rounded-bl-xs bg-[#FFC300] text-[8px] text-black">
+          <span className="absolute top-0 right-0 flex h-2.5 w-2.5 items-center justify-center rounded-bl-xs bg-[#FFC300] text-[8px] font-semibold text-black">
             {star}
           </span>
         )}

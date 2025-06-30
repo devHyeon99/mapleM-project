@@ -21,15 +21,16 @@ export function useCharacterApi<T>({
     queryFn: async () => {
       if (!ocid) throw new Error("ocid가 필요합니다.");
 
-      const res = await fetch(`${endpoint}?ocid=${ocid}`, {
+      const baseUrl =
+        typeof window === "undefined" ? process.env.NEXT_PUBLIC_BASE_URL : "";
+
+      const res = await fetch(`${baseUrl}${endpoint}?ocid=${ocid}`, {
         cache: "no-store",
       });
 
       if (!res.ok) {
-        const error = await res.json();
-        throw new Error(
-          error.error?.message || "API 요청 중 문제가 발생했습니다.",
-        );
+        const error = await res.json().catch(() => ({}));
+        throw new Error(error.error?.message || `API 요청 실패: ${res.status}`);
       }
 
       const json: ApiResponse<T> = await res.json();

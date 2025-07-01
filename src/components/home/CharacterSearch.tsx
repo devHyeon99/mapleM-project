@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -14,6 +13,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { WORLD_NAMES } from "@/constants/worlds";
+import { useCharacterSearch } from "@/hooks/useCharacterSearch";
 
 interface CharacterSearchProps {
   onSearch?: (ocid: string) => void;
@@ -22,35 +22,12 @@ interface CharacterSearchProps {
 export const CharacterSearch = ({ onSearch }: CharacterSearchProps) => {
   const [query, setQuery] = useState("");
   const [world, setWorld] = useState<(typeof WORLD_NAMES)[number]>("스카니아");
-  const [loading, setLoading] = useState(false);
-  const router = useRouter();
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const { loading, searchCharacter } = useCharacterSearch(onSearch);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const trimmed = query.trim();
-    if (!trimmed) return;
-
-    setLoading(true);
-    try {
-      const res = await fetch(
-        `/api/characters/ocid?character_name=${encodeURIComponent(
-          trimmed,
-        )}&world_name=${encodeURIComponent(world)}`,
-      );
-
-      if (!res.ok) throw new Error("OCID 요청 실패");
-      const resJson = await res.json();
-      const ocid = resJson.data?.ocid ?? resJson.ocid;
-      if (!ocid) throw new Error("OCID를 찾을 수 없습니다.");
-
-      if (onSearch) onSearch(ocid);
-      else router.push(`/character/${ocid}`);
-    } catch (error) {
-      alert("캐릭터 정보를 불러오는데 실패했습니다.");
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
+    searchCharacter(query, world);
   };
 
   return (

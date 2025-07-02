@@ -21,7 +21,7 @@ interface CharacterSearchProps {
 
 export const CharacterSearch = ({ onSearch }: CharacterSearchProps) => {
   const [query, setQuery] = useState("");
-  const [world, setWorld] = useState<(typeof WORLD_NAMES)[number]>("스카니아");
+  const [world, setWorld] = useState<(typeof WORLD_NAMES)[number]>("전체");
 
   const { loading, searchCharacter } = useCharacterSearch(onSearch);
 

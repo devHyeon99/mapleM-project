@@ -1,4 +1,5 @@
 export const WORLD_NAMES = [
+  "전체",
   "스카니아",
   "루나",
   "제니스",

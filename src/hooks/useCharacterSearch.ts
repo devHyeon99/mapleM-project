@@ -29,6 +29,13 @@ export function useCharacterSearch(onSearch?: (ocid: string) => void) {
 
     setLoading(true);
     try {
+      // ✅ 전체 월드 검색 시 목록 페이지로 이동
+      if (world === "전체") {
+        router.push(`/characters?name=${encodeURIComponent(trimmed)}`);
+        return;
+      }
+
+      // ✅ 특정 월드 검색 시 기존 로직
       const res = await fetch(
         `/api/characters/ocid?character_name=${encodeURIComponent(trimmed)}&world_name=${encodeURIComponent(world)}`,
       );

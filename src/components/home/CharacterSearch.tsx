@@ -46,7 +46,7 @@ export const CharacterSearch = ({ onSearch }: CharacterSearchProps) => {
       >
         <SelectTrigger
           aria-label="월드 선택"
-          className="!bg-secondary !h-12 w-25 rounded-xs lg:w-31.5"
+          className="!bg-secondary !h-12 min-w-25 rounded-xs lg:w-31.5"
         >
           <SelectValue placeholder="월드" />
         </SelectTrigger>

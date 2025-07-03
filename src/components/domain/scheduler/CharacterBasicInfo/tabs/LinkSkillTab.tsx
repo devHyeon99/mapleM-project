@@ -25,7 +25,15 @@ export const LinkSkillTab = ({ ocid }: LinkSkillTabProps) => {
 
   if (isLoading) return <LoadingCard message="링크 스킬 정보 불러오는중..." />;
   if (isError) return <p>데이터를 불러오는 중 오류가 발생했습니다.</p>;
-  if (!data) return <p>데이터 없음</p>;
+  if (!data || data?.link_skill.length === 0)
+    return (
+      <section className="rounded-md border p-3">
+        <p className="text-muted-foreground text-sm whitespace-pre-line">
+          2025.09.18 API 업데이트 이후 접속 하지 않았거나, 장착한 링크스킬이
+          없습니다.
+        </p>
+      </section>
+    );
 
   const defaultPreset = data.use_prest_no.toString();
 

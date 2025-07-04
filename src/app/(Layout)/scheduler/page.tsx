@@ -25,7 +25,6 @@ const SchedulerPage = () => {
     selectedCharacter,
     selectedCharacterId,
     isCharactersLoading,
-    isCharactersError,
     isAddingCharacter,
     isDeletingCharacter,
     handleCharacterChange,

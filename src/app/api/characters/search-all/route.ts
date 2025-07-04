@@ -26,8 +26,8 @@ export async function GET(req: Request) {
 
   const worlds = WORLD_NAMES.filter((w) => w !== "전체");
 
-  const chunkSize = 2; // 한 번에 병렬 처리할 월드 수
-  const delayMs = 400; // chunk 사이 대기 시간(ms)
+  const chunkSize = 3; // 한 번에 병렬 처리할 월드 수
+  const delayMs = 100; // chunk 사이 대기 시간(ms)
 
   const characters: CharacterSummary[] = [];
 

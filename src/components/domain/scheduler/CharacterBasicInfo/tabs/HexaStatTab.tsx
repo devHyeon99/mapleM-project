@@ -19,7 +19,14 @@ export const HexaStatTab = ({ ocid }: HexaStatTabProps) => {
         오류 발생: {(error as Error).message}
       </div>
     );
-  if (!data) return <div className="p-3 text-sm">데이터가 없습니다.</div>;
+  if (!data || data.hexamatrix_stat.length === 0)
+    return (
+      <section className="rounded-md border p-3">
+        <p className="text-muted-foreground text-sm whitespace-pre-line">
+          2025.09.18 API 업데이트 이후 접속 하지 않았거나, HEXA스탯이 없습니다.
+        </p>
+      </section>
+    );
 
   const hexaStatData = data as CharacterHexaMatrixStat;
   const statCores = hexaStatData.hexamatrix_stat ?? [];

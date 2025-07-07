@@ -52,8 +52,8 @@ export const CharacterBasicInfo = ({ ocid }: CharacterBasicInfoProps) => {
                 </div>
               </div>
               <div className="flex w-full flex-col gap-2">
-                <Skeleton className="h-9 w-full" />
-                <Skeleton className="h-74 w-full" />
+                <Skeleton className="h-10 w-full" />
+                <Skeleton className="h-90 w-full" />
               </div>
             </div>
           )}

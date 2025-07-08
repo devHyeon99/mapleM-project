@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -23,6 +25,10 @@ const navLinks = [
 const Logo = () => (
   <Link
     href="/"
+    onClick={(e) => {
+      e.preventDefault();
+      window.location.href = "/";
+    }}
     className="flex items-center space-x-2"
     aria-label="MMGG 홈으로 가기"
   >

@@ -14,20 +14,28 @@ import {
 } from "@/components/ui/select";
 import { WORLD_NAMES } from "@/constants/worlds";
 import { useCharacterSearch } from "@/hooks/useCharacterSearch";
+// 커스텀 훅 import
+import { usePersistentWorld } from "@/hooks/usePersistentWorld";
 
 interface CharacterSearchProps {
   onSearch?: (ocid: string) => void;
 }
 
+type WorldName = (typeof WORLD_NAMES)[number];
+
 export const CharacterSearch = ({ onSearch }: CharacterSearchProps) => {
   const [query, setQuery] = useState("");
-  const [world, setWorld] = useState<(typeof WORLD_NAMES)[number]>("전체");
+  const [world, setWorld] = usePersistentWorld();
 
   const { loading, searchCharacter } = useCharacterSearch(onSearch);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     searchCharacter(query, world);
+  };
+
+  const handleWorldChange = (value: string) => {
+    setWorld(value as WorldName);
   };
 
   return (
@@ -38,12 +46,7 @@ export const CharacterSearch = ({ onSearch }: CharacterSearchProps) => {
       className="relative flex w-full max-w-3xl items-center gap-2"
     >
       {/* 월드 선택 */}
-      <Select
-        value={world}
-        onValueChange={(value) =>
-          setWorld(value as (typeof WORLD_NAMES)[number])
-        }
-      >
+      <Select value={world} onValueChange={handleWorldChange}>
         <SelectTrigger
           aria-label="월드 선택"
           className="!bg-secondary !h-12 min-w-25 rounded-xs lg:w-31.5"

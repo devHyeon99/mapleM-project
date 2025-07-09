@@ -24,7 +24,7 @@ export const CharacterBasicInfo = ({ ocid }: CharacterBasicInfoProps) => {
       aria-labelledby="character-info-title"
       className="w-full max-w-3xl"
     >
-      <Card className="rounded-sm border-none shadow-none">
+      <Card className="rounded-sm">
         <CardHeader className="px-4">
           <CardTitle id="character-info-title">캐릭터 기본정보</CardTitle>
           <CardDescription>

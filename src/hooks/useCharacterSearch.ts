@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { WORLD_NAMES } from "@/constants/worlds";
+import { saveSearchHistory } from "@/utils/localStorage";
 
 export function useCharacterSearch(onSearch?: (ocid: string) => void) {
   const [loading, setLoading] = useState(false);
@@ -29,13 +30,13 @@ export function useCharacterSearch(onSearch?: (ocid: string) => void) {
 
     setLoading(true);
     try {
-      // ✅ 전체 월드 검색 시 목록 페이지로 이동
       if (world === "전체") {
         router.push(`/characters?name=${encodeURIComponent(trimmed)}`);
+
+        saveSearchHistory(trimmed, world);
         return;
       }
 
-      // ✅ 특정 월드 검색 시 기존 로직
       const res = await fetch(
         `/api/characters/ocid?character_name=${encodeURIComponent(trimmed)}&world_name=${encodeURIComponent(world)}`,
       );
@@ -44,6 +45,8 @@ export function useCharacterSearch(onSearch?: (ocid: string) => void) {
       const resJson = await res.json();
       const ocid = resJson.data?.ocid ?? resJson.ocid;
       if (!ocid) throw new Error("OCID를 찾을 수 없습니다.");
+
+      saveSearchHistory(trimmed, world);
 
       if (onSearch) onSearch(ocid);
       else router.push(`/character/${ocid}`);

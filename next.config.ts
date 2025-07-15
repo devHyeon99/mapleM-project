@@ -2,7 +2,14 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ["open.api.nexon.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "open.api.nexon.com",
+        port: "",
+        pathname: "/static/maplestorym/**",
+      },
+    ],
   },
 };
 

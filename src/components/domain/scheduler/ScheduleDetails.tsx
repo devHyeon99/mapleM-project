@@ -3,7 +3,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScheduleContentGrid } from "./ScheduleDetails/ScheduleContentGrid";
 import type { Character, Task } from "@/types/scheduler";
-import { CharacterBasicInfo } from "./CharacterBasicInfo";
+import { CharacterDetail } from "../character/CharacterDetail";
 
 interface ScheduleDetailsProps {
   character: Character;
@@ -81,7 +81,7 @@ export const ScheduleDetails = ({
 
         {/* 기본 정보 */}
         <TabsContent value="info" className="mt-4">
-          <CharacterBasicInfo ocid={character.ocid} />
+          <CharacterDetail ocid={character.ocid} />
         </TabsContent>
 
         {/* 과제 관리 */}

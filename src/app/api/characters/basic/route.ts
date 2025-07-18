@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
-
-const NEXON_API_BASE_URL = "https://open.api.nexon.com/maplestorym/v1";
+import { getCharacterDetails } from "@/lib/nexonApi";
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
@@ -13,85 +12,28 @@ export async function GET(req: Request) {
     );
   }
 
-  const NEXON_API_KEY = process.env.NEXON_API_KEY;
-  if (!NEXON_API_KEY) {
-    return NextResponse.json(
-      {
-        error: {
-          name: "ServerConfigError",
-          message: "NEXON_API_KEY가 설정되지 않았습니다.",
-        },
-      },
-      { status: 500 },
-    );
-  }
-
-  const headers = { "x-nxopen-api-key": NEXON_API_KEY };
-
   try {
-    // 호출할 API 정의
-    const requests = {
-      basic: fetch(`${NEXON_API_BASE_URL}/character/basic?ocid=${ocid}`, {
-        headers,
-      }),
-      guild: fetch(`${NEXON_API_BASE_URL}/character/guild?ocid=${ocid}`, {
-        headers,
-      }),
-      equip: fetch(
-        `${NEXON_API_BASE_URL}/character/item-equipment?ocid=${ocid}`,
-        {
-          headers,
-        },
-      ),
-      android: fetch(
-        `${NEXON_API_BASE_URL}/character/android-equipment?ocid=${ocid}`,
-        { headers },
-      ),
-    };
+    const combinedData = await getCharacterDetails(ocid);
+    return NextResponse.json(combinedData);
+  } catch (err: unknown) {
+    const error = err instanceof Error ? err : new Error("알 수 없는 오류");
 
-    // 병렬 실행
-    const responses = await Promise.all(Object.values(requests));
-
-    // 에러 응답 체크
-    if (responses.some((res) => !res.ok)) {
-      const errors = await Promise.all(
-        responses.map((res) => res.json().catch(() => null)),
+    // lib에서 발생시킨 에러를 여기서 잡아서 처리
+    if (error.message === "NEXON_API_KEY가 설정되지 않았습니다.") {
+      return NextResponse.json(
+        { error: { name: "ServerConfigError", message: error.message } },
+        { status: 500 },
       );
-      const firstError = errors.find((err) => err?.error)?.error ?? {
-        name: "NexonApiError",
-        message: "Nexon API 요청 실패",
-      };
-
-      return NextResponse.json({ error: firstError }, { status: 502 });
     }
 
-    // JSON 변환
-    const [basicData, guildData, equipData, androidData] = await Promise.all(
-      responses.map((res) => res.json()),
-    );
-
-    // 안드로이드/하트 데이터 구조 해체
-    const { android_equipment, heart_equipment } = androidData ?? {};
-
-    // 최종 합친 데이터 반환
-    return NextResponse.json({
-      data: {
-        ...basicData,
-        guild_name: guildData.guild_name ?? null,
-        item_equipment: equipData.item_equipment ?? [],
-        android_equipment: android_equipment ?? null,
-        heart_equipment: heart_equipment ?? null,
-      },
-    });
-  } catch (err: unknown) {
     return NextResponse.json(
       {
         error: {
           name: "InternalServerError",
-          message: err instanceof Error ? err.message : "알 수 없는 오류",
+          message: error.message,
         },
       },
-      { status: 500 },
+      { status: 502 }, // 넥슨 API 오류일 수 있으므로 502 (Bad Gateway)
     );
   }
 }

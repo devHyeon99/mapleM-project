@@ -16,19 +16,19 @@ import { VmatrixTab } from "./tabs/VmatrixTab";
 import { HexaSkillTab } from "./tabs/HexaSkillTab";
 import { HexaStatTab } from "./tabs/HexaStatTab";
 
-interface CharacterBasicInfoTabsProps {
+interface CharacterDetailTabsProps {
   ocid: string;
   items: CharacterItemEquipment[];
   android: CharacterAndroidEquipment | null;
   heart: CharacterHeartEquipment | null;
 }
 
-export const CharacterBasicInfoTabs = ({
+export const CharacterDetailTabs = ({
   ocid,
   items,
   android,
   heart,
-}: CharacterBasicInfoTabsProps) => (
+}: CharacterDetailTabsProps) => (
   <Tabs defaultValue="item" className="w-[340px] gap-4">
     <TabsList className="grid h-auto w-full grid-cols-7 [grid-template-rows:auto_auto] gap-[2px] rounded-xs border pt-1.5">
       {/* 1열 */}

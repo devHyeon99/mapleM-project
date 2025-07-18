@@ -6,18 +6,42 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useCharacterBasicInfo } from "@/hooks/useCharacterBasicInfo";
-import { CharacterProfileCard } from "./CharacterBasicInfo/CharacterProfileCard";
-import { CharacterBasicInfoTabs } from "./CharacterBasicInfo/CharacterBasicInfoTabs";
+import { CharacterProfileCard } from "./CharacterDetail/CharacterProfileCard";
+import { CharacterDetailTabs } from "./CharacterDetail/CharacterDetailTabs";
 import { CharacterBasicInfo as CharacterBasicInfoType } from "@/types/character";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useQuery } from "@tanstack/react-query";
+import { characterQueryKeys } from "@/queries/characterQueryKeys";
+
+interface CharacterDetailsResponse {
+  data: CharacterBasicInfoType;
+}
+
+const fetchCharacterDetails = async (
+  ocid: string,
+): Promise<CharacterDetailsResponse> => {
+  const res = await fetch(`/api/characters/basic?ocid=${ocid}`);
+  if (!res.ok) {
+    const errorData = await res.json();
+    throw new Error(
+      errorData.error?.message || "캐릭터 정보를 불러오는데 실패했습니다.",
+    );
+  }
+  return res.json();
+};
 
 interface CharacterBasicInfoProps {
   ocid: string;
 }
 
-export const CharacterBasicInfo = ({ ocid }: CharacterBasicInfoProps) => {
-  const { data, isLoading, isError, error } = useCharacterBasicInfo(ocid);
+export const CharacterDetail = ({ ocid }: CharacterBasicInfoProps) => {
+  const detailsKey = characterQueryKeys.details(ocid);
+  const { data, isLoading, isError, error } = useQuery({
+    queryKey: detailsKey,
+    queryFn: () => fetchCharacterDetails(ocid),
+  });
+
+  const characterData = data?.data;
 
   return (
     <section
@@ -39,8 +63,7 @@ export const CharacterBasicInfo = ({ ocid }: CharacterBasicInfoProps) => {
             <div className="flex flex-col gap-5">
               <div className="flex h-85.5 w-[340px] flex-col items-center gap-4 rounded-md border p-2">
                 <Skeleton className="h-24 w-24 rounded-full" />{" "}
-                {/* 캐릭터 이미지 */}
-                <Skeleton className="h-4 w-32" /> {/* 캐릭터 이름 */}
+                <Skeleton className="h-4 w-32" />
                 <div className="flex w-[300px] flex-col gap-2">
                   <Skeleton className="h-4 w-1/2" />
                   <Skeleton className="h-4 w-1/2" />
@@ -62,14 +85,17 @@ export const CharacterBasicInfo = ({ ocid }: CharacterBasicInfoProps) => {
               오류: {(error as Error).message}
             </p>
           )}
-          {data && (
+
+          {characterData && (
             <>
-              <CharacterProfileCard data={data as CharacterBasicInfoType} />
-              <CharacterBasicInfoTabs
+              <CharacterProfileCard
+                data={characterData as CharacterBasicInfoType}
+              />
+              <CharacterDetailTabs
                 ocid={ocid}
-                items={data.item_equipment ?? []}
-                android={data.android_equipment ?? null}
-                heart={data.heart_equipment ?? null}
+                items={characterData.item_equipment ?? []}
+                android={characterData.android_equipment ?? null}
+                heart={characterData.heart_equipment ?? null}
               />
             </>
           )}

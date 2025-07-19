@@ -24,7 +24,7 @@ export const CharacterSearch = () => {
   const [query, setQuery] = useState("");
   const [showHistory, setShowHistory] = useState(false);
   const [world, setWorld] = usePersistentWorld();
-  const [isPending, startTransition] = useTransition(); // ⬅️ useTransition 도입
+  const [isPending, startTransition] = useTransition();
 
   const searchContainerRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
@@ -61,7 +61,7 @@ export const CharacterSearch = () => {
     // 라우팅 경로 분기
     if (world === "전체") {
       // "전체" 월드 검색 (CSR 페이지로 라우팅)
-      path = `/characters/${encodeURIComponent(trimmedName)}`;
+      path = `/characters?name=${encodeURIComponent(trimmedName)}`;
     } else {
       // "단일" 월드 검색 (SEO를 위한 SSR 페이지로 라우팅)
       path = `/character/${encodeURIComponent(world)}/${encodeURIComponent(

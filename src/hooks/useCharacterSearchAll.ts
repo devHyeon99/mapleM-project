@@ -1,25 +1,34 @@
 import { useQuery } from "@tanstack/react-query";
-import { toast } from "sonner";
-import type { CharacterSummary } from "@/app/api/characters/search-all/route";
 
-export function useCharacterSearchAll(name?: string) {
-  return useQuery<CharacterSummary[], Error>({
-    queryKey: ["characters", name],
-    queryFn: async () => {
-      if (!name) return [];
-      try {
-        const res = await fetch(
-          `/api/characters/search-all?name=${encodeURIComponent(name)}`,
-        );
-        if (!res.ok) throw new Error("캐릭터 검색 실패");
-        const data = await res.json();
-        return data.characters ?? [];
-      } catch (err) {
-        toast.warning("캐릭터 목록을 불러오지 못했습니다.");
-        throw err as Error;
-      }
-    },
-    enabled: !!name,
-    staleTime: 1000 * 60,
-  });
+interface CharacterBasicInfo {
+  ocid: string;
+  character_name: string;
+  world_name: string;
 }
+
+const fetchCharactersAll = async (
+  name: string,
+): Promise<CharacterBasicInfo[]> => {
+  const res = await fetch(
+    `/api/characters/search-all?name=${encodeURIComponent(name)}`,
+  );
+  if (!res.ok) {
+    const errorData = await res.json();
+    throw new Error(
+      errorData.error?.message || "전체 월드 검색에 실패했습니다.",
+    );
+  }
+  return res.json();
+};
+
+/**
+ * 전체 월드 캐릭터 검색 훅
+ */
+export const useCharacterSearchAll = (name?: string) => {
+  return useQuery({
+    queryKey: ["characters", "all", name],
+    queryFn: () => fetchCharactersAll(name!), //
+    enabled: !!name,
+    staleTime: 1000 * 60 * 1,
+  });
+};

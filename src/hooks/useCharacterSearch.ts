@@ -1,64 +1,108 @@
-"use client";
-
-import { useState } from "react";
+import { useState, useRef, useEffect, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { toast } from "sonner";
-import { WORLD_NAMES } from "@/constants/worlds";
+import { usePersistentWorld } from "@/hooks/usePersistentWorld";
 import { saveSearchHistory } from "@/utils/localStorage";
+import { WORLD_NAMES } from "@/constants/worlds";
+import { toast } from "sonner";
 
-export function useCharacterSearch(onSearch?: (ocid: string) => void) {
-  const [loading, setLoading] = useState(false);
+type WorldName = (typeof WORLD_NAMES)[number];
+
+const VALIDATION_REGEX = /^[a-zA-Z0-9가-힣]{2,8}$/;
+const VALIDATION_ERROR_MESSAGE =
+  "캐릭터명은 2~8자의 한글, 영어, 숫자만 가능합니다.";
+
+export const useCharacterSearch = () => {
+  const [query, setQuery] = useState("");
+  const [showHistory, setShowHistory] = useState(false);
+  const [world, setWorld] = usePersistentWorld();
+  const [isPending, startTransition] = useTransition();
+  const searchContainerRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
-  const searchCharacter = async (
-    name: string,
-    world: (typeof WORLD_NAMES)[number],
-  ) => {
-    const trimmed = name.trim();
-    if (!trimmed) {
-      toast.warning("캐릭터 닉네임을 입력해주세요.");
-      return;
-    }
-
-    const validName = /^[가-힣a-zA-Z0-9]{2,8}$/;
-    if (!validName.test(trimmed)) {
-      toast.warning(
-        "한글, 영문, 숫자로 이루어진 2~8자의 닉네임만 검색 가능합니다.",
-      );
-      return;
-    }
-
-    setLoading(true);
-    try {
-      if (world === "전체") {
-        router.push(`/characters?name=${encodeURIComponent(trimmed)}`);
-
-        saveSearchHistory(trimmed, world);
-        return;
+  // 외부 클릭 감지 로직
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        searchContainerRef.current &&
+        !searchContainerRef.current.contains(event.target as Node)
+      ) {
+        setShowHistory(false);
       }
-
-      const res = await fetch(
-        `/api/characters/ocid?character_name=${encodeURIComponent(trimmed)}&world_name=${encodeURIComponent(world)}`,
-      );
-
-      if (!res.ok) throw new Error("OCID 요청 실패");
-      const resJson = await res.json();
-      const ocid = resJson.data?.ocid ?? resJson.ocid;
-      if (!ocid) throw new Error("OCID를 찾을 수 없습니다.");
-
-      saveSearchHistory(trimmed, world);
-
-      if (onSearch) onSearch(ocid);
-      else router.push(`/character/${ocid}`);
-    } catch (error) {
-      toast.warning(
-        "캐릭터 정보를 불러오는데 실패했습니다. (존재하지 않는 캐릭터이거나 2022년 1월 1일 이후 접속하지 않은 캐릭터입니다.)",
-      );
-      console.error(error);
-    } finally {
-      setLoading(false);
     }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [searchContainerRef]); // ref는 변경되지 않으므로, 의존성 배열에 searchContainerRef만 있어도 됨.
+
+  // 라우팅 및 히스토리 저장 로직
+  const navigateToCharacter = (name: string, world: WorldName) => {
+    const trimmedName = name.trim();
+    if (!trimmedName) return;
+
+    saveSearchHistory(trimmedName, world);
+    setShowHistory(false); // 검색 시 히스토리 패널 닫기
+
+    const path =
+      world === "전체"
+        ? `/characters?name=${encodeURIComponent(trimmedName)}`
+        : `/character/${encodeURIComponent(world)}/${encodeURIComponent(
+            trimmedName,
+          )}`;
+
+    startTransition(() => {
+      router.push(path);
+    });
   };
 
-  return { loading, searchCharacter };
-}
+  // 폼 제출 핸들러
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const trimmedQuery = query.trim();
+
+    if (!VALIDATION_REGEX.test(trimmedQuery)) {
+      toast.error("입력 오류", {
+        description: VALIDATION_ERROR_MESSAGE,
+      });
+      return;
+    }
+
+    navigateToCharacter(trimmedQuery, world);
+  };
+
+  // 월드 변경 핸들러
+  const handleWorldChange = (value: string) => {
+    setWorld(value as WorldName);
+  };
+
+  // 검색 기록 클릭 핸들러
+  const handleHistorySearch = (name: string, world: WorldName) => {
+    setQuery(name);
+    setWorld(world);
+    navigateToCharacter(name, world);
+  };
+
+  // Input 포커스 핸들러
+  const handleInputFocus = () => {
+    setShowHistory(true);
+  };
+
+  // Input 변경 핸들러
+  const handleQueryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQuery(e.target.value);
+  };
+
+  // 훅이 반환할 값들
+  return {
+    query,
+    world,
+    isPending,
+    showHistory,
+    searchContainerRef,
+    handleSubmit,
+    handleWorldChange,
+    handleHistorySearch,
+    handleInputFocus,
+    handleQueryChange,
+  };
+};

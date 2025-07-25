@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/select";
 import { WORLD_NAMES } from "@/constants/worlds";
 import { Search, Loader2 } from "lucide-react";
-import { CharacterSearchHistory } from "./CharacterSearchHistory";
+import { CharacterSearchHistory } from "@/components/domain/character-search/CharacterSearchHistory";
 import { useCharacterSearch } from "@/hooks/useCharacterSearch";
 
 export const CharacterSearch = () => {
@@ -71,7 +71,7 @@ export const CharacterSearch = () => {
           variant="ghost"
           size="icon"
           disabled={isPending || !query.trim()}
-          className="absolute right-0 mr-0.5 h-[45px] w-12 cursor-pointer rounded-xs"
+          className="absolute right-0 mr-0.5 h-[45px] w-12 cursor-pointer rounded-xs hover:bg-transparent"
           aria-label="캐릭터 검색"
         >
           {isPending ? (

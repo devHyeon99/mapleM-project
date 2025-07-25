@@ -5,7 +5,8 @@ import {
   dehydrate,
 } from "@tanstack/react-query";
 import { notFound } from "next/navigation";
-import { CharacterSearch } from "@/components/home/CharacterSearch";
+import { CharacterSearch } from "@/components/domain/character-search/CharacterSearch";
+
 import { getOcid, getCharacterDetails } from "@/lib/nexonApi";
 import { characterQueryKeys } from "@/queries/characterQueryKeys";
 import { CharacterDetail } from "@/components/domain/character/CharacterDetail";

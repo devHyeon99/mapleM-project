@@ -1,6 +1,4 @@
-import { CharacterSearch } from "@/components/home/CharacterSearch";
-
-// 새로 만든 HomeBoardTabs 컴포넌트를 import 합니다.
+import { CharacterSearch } from "@/components/domain/character-search/CharacterSearch";
 import { NoticeTabs } from "@/components/home/NoticeTabs";
 
 export default function Home() {

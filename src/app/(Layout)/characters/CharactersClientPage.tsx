@@ -4,7 +4,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import { Card, CardContent } from "@/components/ui/card";
 import { useCharacterSearchAll } from "@/hooks/useCharacterSearchAll";
 import { LoadingCard } from "@/components/common/LoadingCard";
-import { CharacterSearch } from "@/components/home/CharacterSearch";
+import { CharacterSearch } from "@/components/domain/character-search/CharacterSearch";
 
 export default function CharactersClientPage() {
   const searchParams = useSearchParams();

@@ -2,6 +2,7 @@
 
 import { useSearchHistory } from "@/hooks/useSearchHistory";
 import { WORLD_NAMES } from "@/constants/worlds";
+import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
 
 type WorldName = (typeof WORLD_NAMES)[number];
@@ -20,7 +21,7 @@ export const CharacterSearchHistory = ({
     name: string,
     world: WorldName,
   ) => {
-    e.stopPropagation(); // 상위 검색 버튼 이벤트 실행 방지
+    e.stopPropagation();
     removeHistoryItem(name, world);
   };
 
@@ -30,18 +31,19 @@ export const CharacterSearchHistory = ({
 
       {history.length > 0 ? (
         <>
-          <ul className="space-y-1">
-            {history.map((item, index) => (
+          <ul className="space-y-2">
+            {history.map((item) => (
               <li
-                key={index}
-                className="relative flex items-center justify-between text-sm"
+                key={`${item.name}-${item.world}`}
+                className="flex items-center justify-between gap-1 text-sm"
               >
-                <button
+                <Button
                   type="button"
+                  variant="outline"
+                  className="h-full flex-1 cursor-pointer justify-start rounded-sm !bg-transparent p-2 text-left" // 왼쪽 정렬
                   onClick={() =>
                     onHistorySearch(item.name, item.world as WorldName)
                   }
-                  className="bg-card hover:bg-input/50 h-full flex-1 cursor-pointer rounded border p-2 text-left"
                   aria-label={`${item.name} (${item.world}) 캐릭터 검색`}
                 >
                   <span className="text-sm font-semibold">
@@ -50,28 +52,34 @@ export const CharacterSearchHistory = ({
                       {item.world}
                     </strong>
                   </span>
-                </button>
+                </Button>
 
-                <button
+                <Button
                   type="button"
+                  variant="ghost"
+                  size="icon"
+                  className="w-fit flex-shrink-0 cursor-pointer justify-end px-1 hover:!bg-transparent"
                   onClick={(e) =>
                     handleDelete(e, item.name, item.world as WorldName)
                   }
-                  className="absolute right-2 cursor-pointer"
                   aria-label={`${item.name} 검색 기록 삭제`}
                 >
-                  <X className="size-5" />
-                </button>
+                  <X className="size-5 text-red-400" />
+                </Button>
               </li>
             ))}
           </ul>
-          <button
-            type="button"
-            onClick={clearAllHistory}
-            className="text-muted-foreground absolute right-4 mt-2 w-fit cursor-pointer text-right text-sm underline underline-offset-4"
-          >
-            전체 삭제
-          </button>
+
+          <div className="mt-4 mr-1 flex justify-end">
+            <Button
+              type="button"
+              variant="link"
+              onClick={clearAllHistory}
+              className="text-muted-foreground h-auto rounded-none p-0 text-sm underline underline-offset-4"
+            >
+              전체 삭제
+            </Button>
+          </div>
         </>
       ) : (
         <p className="text-muted-foreground text-sm font-semibold">

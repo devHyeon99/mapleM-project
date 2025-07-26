@@ -9,6 +9,7 @@ export interface CharacterBasicInfo {
   character_gender?: string;
   character_image?: string;
   character_exp?: number;
+  character_exp_rate?: string;
   character_date_create?: string;
   character_date_last_login?: string;
   character_date_last_logout?: string;

@@ -28,7 +28,7 @@ export function sortItemsBySlot(
   if (android) {
     map["안드로이드"] = {
       item_name: android.android_name,
-      item_icon: `https://open.api.nexon.com/static/maplestorym/asset/icon/${android.android_icon}`,
+      item_icon: android.android_icon,
       item_grade: android.android_grade,
       item_equipment_slot_name: "안드로이드",
       starforce_upgrade: null,

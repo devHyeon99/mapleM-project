@@ -29,9 +29,26 @@ export const useCharacterSearch = () => {
         setShowHistory(false);
       }
     }
+
+    function handleFocusOutside(event: FocusEvent) {
+      // 'focusin' 이벤트는 포커스가 들어올 때 발생
+      // 포커스가 들어온 대상(event.target)이
+      // 우리 검색 컨테이너(searchContainerRef.current)에 포함되어 있지 않다면, 포커스가 밖으로 나갔다고 간주
+
+      if (
+        searchContainerRef.current &&
+        !searchContainerRef.current.contains(event.target as Node)
+      ) {
+        setShowHistory(false);
+      }
+    }
+
     document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("focusin", handleFocusOutside);
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
+      document.addEventListener("focusin", handleFocusOutside);
     };
   }, [searchContainerRef]); // ref는 변경되지 않으므로, 의존성 배열에 searchContainerRef만 있어도 됨.
 

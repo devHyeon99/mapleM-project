@@ -26,7 +26,7 @@ export function NoticeTabs() {
           <div className="rounded-sm border p-4">
             <div className="mb-4 flex justify-between border-b">
               <h2 className="text-xl font-semibold">공지사항</h2>
-              <Button variant="link" className="cursor-pointer pr-0" asChild>
+              <Button variant="link" className="cursor-pointer p-0" asChild>
                 <a
                   href="https://maplestorym.nexon.com/1198/board/1211/list"
                   target="_blank"
@@ -44,7 +44,7 @@ export function NoticeTabs() {
           <div className="rounded-sm border p-4">
             <div className="mb-4 flex justify-between border-b">
               <h2 className="text-xl font-semibold">패치노트</h2>
-              <Button variant="link" className="cursor-pointer pr-0" asChild>
+              <Button variant="link" className="cursor-pointer p-0" asChild>
                 <a
                   href="https://maplestorym.nexon.com/1198/board/1215/list"
                   target="_blank"
@@ -62,7 +62,7 @@ export function NoticeTabs() {
           <div className="rounded-sm border p-4">
             <div className="mb-4 flex justify-between border-b">
               <h2 className="text-xl font-semibold">이벤트</h2>
-              <Button variant="link" className="cursor-pointer pr-0" asChild>
+              <Button variant="link" className="cursor-pointer p-0" asChild>
                 <a
                   href="https://maplestorym.nexon.com/1198/board/1378/list"
                   target="_blank"

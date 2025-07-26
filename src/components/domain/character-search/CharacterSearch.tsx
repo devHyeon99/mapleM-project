@@ -42,6 +42,7 @@ export const CharacterSearch = () => {
           <SelectTrigger
             aria-label="월드 선택"
             className="!h-12 min-w-25 rounded-xs lg:w-31.5"
+            disabled={isPending}
           >
             <SelectValue placeholder="월드" />
           </SelectTrigger>

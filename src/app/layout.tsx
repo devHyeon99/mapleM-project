@@ -33,7 +33,8 @@ export const metadata: Metadata = {
     default: "메엠지지 - 메이플스토리M 캐릭터 조회",
     template: "%s | 메엠지지",
   },
-  description: "메이플스토리M 캐릭터 검색 서비스",
+  description:
+    "메엠지지(MMGG)에서 메이플스토리M 캐릭터 검색, 스케줄러, 파티모집, 길드모집 등 게임 플레이에 유용한 모든 정보를 확인하세요.",
 
   keywords: [
     "메이플스토리M",

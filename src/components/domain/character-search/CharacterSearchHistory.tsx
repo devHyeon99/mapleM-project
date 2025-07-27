@@ -35,12 +35,12 @@ export const CharacterSearchHistory = ({
             {history.map((item) => (
               <li
                 key={`${item.name}-${item.world}`}
-                className="flex items-center justify-between gap-1 text-sm"
+                className="hover:bg-input flex items-center justify-between gap-1 text-sm"
               >
                 <Button
                   type="button"
                   variant="outline"
-                  className="h-full flex-1 cursor-pointer justify-start rounded-sm !bg-transparent p-2 text-left" // 왼쪽 정렬
+                  className="h-full flex-1 cursor-pointer justify-start border-none !bg-transparent p-2 text-left shadow-none"
                   onClick={() =>
                     onHistorySearch(item.name, item.world as WorldName)
                   }
@@ -75,7 +75,7 @@ export const CharacterSearchHistory = ({
               type="button"
               variant="link"
               onClick={clearAllHistory}
-              className="text-muted-foreground h-auto rounded-none p-0 text-sm underline underline-offset-4"
+              className="text-muted-foreground h-auto cursor-pointer rounded-none p-0 text-sm underline underline-offset-4"
             >
               전체 삭제
             </Button>

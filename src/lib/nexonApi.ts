@@ -1,6 +1,7 @@
 const NEXON_API_KEY = process.env.NEXON_API_KEY;
 const NEXON_API_BASE_URL = "https://open.api.nexon.com/maplestorym/v1";
-const REVALIDATE_TIME_IN_SECONDS = 300; // 5분
+const REVALIDATE_TIME_IN_SECONDS = 600;
+const REVALIDATE_OCID_SECONDS = 60 * 60 * 24;
 
 // 이 함수들은 서버에서만 호출되어야 함
 
@@ -10,7 +11,7 @@ export const getOcid = async (world: string, name: string) => {
     `${NEXON_API_BASE_URL}/id?character_name=${name}&world_name=${world}`,
     {
       headers: { "x-nxopen-api-key": NEXON_API_KEY! },
-      next: { revalidate: REVALIDATE_TIME_IN_SECONDS },
+      next: { revalidate: REVALIDATE_OCID_SECONDS },
     },
   );
   if (!res.ok) throw new Error(`${world} 월드 ${name} 캐릭터 OCID 조회 실패`);
@@ -27,8 +28,7 @@ export const getCharacterBasicInfo = async (ocid: string) => {
     `${NEXON_API_BASE_URL}/character/basic?ocid=${ocid}`,
     {
       headers: { "x-nxopen-api-key": NEXON_API_KEY },
-      // 넥슨 API 데이터는 revalidate 타임을 설정하는 것이 좋습니다.
-      next: { revalidate: 300 }, // 5분
+      next: { revalidate: REVALIDATE_TIME_IN_SECONDS },
     },
   );
 
@@ -78,9 +78,7 @@ export const getCharacterDetails = async (ocid: string) => {
   // 병렬 실행
   const responses = await Promise.all(Object.values(requests));
 
-  // 3. 에러 응답 체크 (하나라도 실패하면 에러)
   if (responses.some((res) => !res.ok)) {
-    // 실제 프로덕션에서 더 정교한 에러 처리가 필요
     throw new Error("Nexon API 요청 중 일부가 실패했습니다.");
   }
 
@@ -119,7 +117,7 @@ export const getOcidForSearch = async (world: string, name: string) => {
     )}&world_name=${encodeURIComponent(world)}`,
     {
       headers: { "x-nxopen-api-key": NEXON_API_KEY },
-      next: { revalidate: 60 }, // 1분
+      next: { revalidate: REVALIDATE_TIME_IN_SECONDS }, // 1분
     },
   );
 

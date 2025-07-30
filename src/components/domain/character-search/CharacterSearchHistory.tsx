@@ -40,7 +40,7 @@ export const CharacterSearchHistory = ({
                 <Button
                   type="button"
                   variant="outline"
-                  className="h-full flex-1 cursor-pointer justify-start border-none !bg-transparent p-2 text-left shadow-none"
+                  className="h-full flex-1 cursor-pointer justify-start border-none !bg-transparent p-2 pl-0.5 text-left shadow-none"
                   onClick={() =>
                     onHistorySearch(item.name, item.world as WorldName)
                   }

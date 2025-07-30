@@ -20,7 +20,9 @@ interface CharacterDetailsResponse {
 const fetchCharacterDetails = async (
   ocid: string,
 ): Promise<CharacterDetailsResponse> => {
-  const res = await fetch(`/api/characters/basic?ocid=${ocid}`);
+  const res = await fetch(`/api/characters/basic?ocid=${ocid}`, {
+    next: { revalidate: 600 },
+  });
   if (!res.ok) {
     const errorData = await res.json();
     throw new Error(
@@ -39,6 +41,11 @@ export const CharacterDetail = ({ ocid }: CharacterBasicInfoProps) => {
   const { data, isLoading, isError, error } = useQuery({
     queryKey: detailsKey,
     queryFn: () => fetchCharacterDetails(ocid),
+    staleTime: 10 * 60 * 1000,
+    gcTime: 30 * 60 * 1000,
+    refetchOnMount: true,
+    refetchOnWindowFocus: true,
+    refetchInterval: 30 * 60 * 1000,
   });
 
   const characterData = data?.data;

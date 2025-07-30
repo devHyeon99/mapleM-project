@@ -30,11 +30,11 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://maplemgg.com"),
 
   title: {
-    default: "메엠지지 - 메이플스토리M 캐릭터 조회",
+    default: "메엠지지 - 메이플스토리M 캐릭터 검색",
     template: "%s | 메엠지지",
   },
   description:
-    "메엠지지(MMGG)에서 메이플스토리M 캐릭터 검색, 스케줄러, 파티모집, 길드모집 등 게임 플레이에 유용한 모든 정보를 확인하세요.",
+    "메엠지지(MMGG)에서 메이플스토리M 캐릭터 검색, 스케줄러, 파티모집, 길드모집 등 게임 플레이에 유용한 모든 정보를 확인하세요. 메이플M 캐릭터 검색, 메엠 캐릭터 검색을 활용해서 많은 정보를 얻어가세요.",
 
   keywords: [
     "메이플스토리M",
@@ -52,8 +52,9 @@ export const metadata: Metadata = {
   ],
 
   openGraph: {
-    title: "메엠지지 | MMGG 메이플스토리M 캐릭터 검색 서비스",
-    description: "실시간 메이플스토리M 캐릭터 정보를 검색하고 분석하세요.",
+    title: "메엠지지 - 메이플스토리M 캐릭터 검색",
+    description:
+      "메엠지지(MMGG)에서 메이플스토리M 캐릭터 검색, 스케줄러, 파티모집, 길드모집 등 게임 플레이에 유용한 모든 정보를 확인하세요. 메이플M 캐릭터 검색, 메엠 캐릭터 검색을 활용해서 많은 정보를 얻어가세요.",
     url: "https://maplemgg.com",
     siteName: "메엠지지",
     images: [
@@ -61,7 +62,7 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 502,
         height: 267,
-        alt: "메엠지지 서비스 미리보기 이미지",
+        alt: "메엠지지 미리보기 이미지",
       },
     ],
     locale: "ko_KR",
@@ -70,8 +71,9 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "메엠지지 | MMGG 메이플스토리M 캐릭터 검색 서비스",
-    description: "실시간 메이플스토리M 캐릭터 정보를 검색하고 분석하세요.",
+    title: "메엠지지 - 메이플스토리M 캐릭터 검색",
+    description:
+      "메엠지지(MMGG)에서 메이플스토리M 캐릭터 검색, 스케줄러, 파티모집, 길드모집 등 게임 플레이에 유용한 모든 정보를 확인하세요. 메이플M 캐릭터 검색, 메엠 캐릭터 검색을 활용해서 많은 정보를 얻어가세요.",
     images: ["/og-image.png"],
   },
 
@@ -118,12 +120,13 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-      </head>
-      <body className="bg-background relative flex min-h-screen flex-col antialiased">
         <Script
           src="https://openapi.nexon.com/js/analytics.js?app_id=241136"
-          strategy="lazyOnload"
+          strategy="afterInteractive"
+          async
         />
+      </head>
+      <body className="bg-background relative flex min-h-screen flex-col antialiased">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

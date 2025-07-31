@@ -45,10 +45,12 @@ export interface CharacterItemEquipment {
   item_equipment_page_name: string;
   item_equipment_slot_name: string;
   item_grade: string;
+  item_combat_power?: number;
   starforce_upgrade?: string | null;
   starforce_remain_count?: number;
   equipment_level?: number;
   item_gender?: string;
+  cuttable_count?: number;
   transmission_able?: string;
   todd_able?: string;
   item_additional_option_grade?: string | null;

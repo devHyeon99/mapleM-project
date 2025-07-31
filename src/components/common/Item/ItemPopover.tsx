@@ -17,6 +17,7 @@ import { ItemAdditionalPotential } from "./ItemAdditionalPotential";
 import { ItemSoul } from "./ItemSoul";
 import { ItemEmblem } from "./ItemEmblem";
 import { ItemDescription } from "./ItemDescription";
+import { ItemInfo } from "./ItemInfo";
 
 interface ItemPopoverProps {
   item: CharacterItemEquipment;
@@ -43,6 +44,7 @@ export const ItemPopover = ({ item, children }: ItemPopoverProps) => {
         {/* 옵션들 */}
         <div className="space-y-2 pt-2">
           <ItemStarforce item={item} />
+          <ItemInfo item={item} />
           <ItemBaseOption item={item} />
           <ItemAdditionalOption item={item} />
           <ItemPotential item={item} />

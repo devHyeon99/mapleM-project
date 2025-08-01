@@ -1,7 +1,6 @@
 "use client";
 
-import Image from "next/image";
-import * as React from "react"; // React와 forwardRef를 import 합니다.
+import * as React from "react";
 import { CharacterItemEquipment } from "@/types/character";
 import { getGradeInfo } from "@/utils/getGradeInfo";
 import { POTENTIAL_GRADE_MAP } from "@/constants/gradeMap";
@@ -44,8 +43,8 @@ export const ItemIconBase = React.forwardRef<HTMLDivElement, ItemIconBaseProps>(
 
     return (
       <div
-        ref={ref} // 전달받은 ref를 div에 연결합니다.
-        {...props} // 전달받은 나머지 props(onClick 등)를 div에 적용합니다.
+        ref={ref} // 전달받은 ref를 div에 연결
+        {...props} // 전달받은 나머지 props(onClick 등)를 div에 적용
         style={{ width: size, height: size }}
         className={cn(
           "relative flex cursor-pointer items-center justify-center rounded-xs border-2 bg-white",
@@ -87,13 +86,14 @@ export const ItemIconBase = React.forwardRef<HTMLDivElement, ItemIconBaseProps>(
           </span>
         )}
 
-        <Image
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
           src={item_icon}
           alt={item_name}
-          width={size - 6}
-          height={size - 6}
-          unoptimized
-          className="h-auto w-auto object-contain"
+          width={40}
+          height={40}
+          loading="lazy"
+          className="h-auto w-auto"
         />
       </div>
     );

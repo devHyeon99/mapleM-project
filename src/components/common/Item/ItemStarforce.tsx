@@ -13,8 +13,8 @@ export const ItemStarforce = ({ item }: Props) => {
   return (
     <div className="border-b pb-2 text-sm">
       <div className="flex items-center gap-1">
-        <p className="font-bold">스타포스</p>
-        <span className="text-muted-foreground text-xs font-semibold">
+        <p>스타포스</p>
+        <span className="text-muted-foreground text-xs">
           ({item.starforce_upgrade}성)
         </span>
       </div>

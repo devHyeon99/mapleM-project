@@ -1,13 +1,12 @@
-"use client";
+// ItemCashIconBase.tsx
 
-import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { CashItemEquipment } from "@/types/cashItem";
 import { forwardRef } from "react";
 
 interface ItemCashIconBaseProps
   extends React.HTMLAttributes<HTMLButtonElement> {
-  item: CashItemEquipment;
+  item: Pick<CashItemEquipment, "cash_item_icon" | "cash_item_name">;
   size?: number;
 }
 
@@ -26,13 +25,14 @@ export const ItemCashIconBase = forwardRef<
       style={{ width: `${size}px`, height: `${size}px` }}
       {...rest}
     >
-      <Image
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
         src={item.cash_item_icon}
         alt={item.cash_item_name}
-        width={size - 6}
-        height={size - 6}
-        unoptimized
-        className="h-auto w-auto object-contain"
+        width={40}
+        height={40}
+        loading="lazy"
+        className="h-auto w-auto"
       />
     </button>
   );

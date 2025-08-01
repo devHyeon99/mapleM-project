@@ -18,9 +18,7 @@ export const ItemHeader = ({ item }: Props) => {
       />
 
       {/* 아이템 이름 */}
-      <span className={`self-start font-bold ${grade?.textColor}`}>
-        {item.item_name}
-      </span>
+      <span className={`self-start ${grade?.textColor}`}>{item.item_name}</span>
     </div>
   );
 };

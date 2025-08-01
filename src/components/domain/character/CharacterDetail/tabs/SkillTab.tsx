@@ -12,7 +12,7 @@ interface SkillTabProps {
 
 export const SkillTab = ({ ocid }: SkillTabProps) => {
   const { data, isLoading, isError } = useCharacterSkill(ocid);
-  console.log(data);
+
   if (isLoading) return <LoadingCard message="스킬 정보 불러오는중..." />;
 
   if (isError || !data || !data.skill) {

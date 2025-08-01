@@ -1,6 +1,5 @@
 import { CharacterItemEquipment } from "@/types/character";
 import { getGradeInfo } from "@/utils/getGradeInfo";
-import { cn } from "@/lib/utils";
 
 interface Props {
   item: CharacterItemEquipment;
@@ -18,7 +17,7 @@ export const ItemPotential = ({ item }: Props) => {
 
   return (
     <div className="border-b pb-2 text-sm">
-      <p className={cn("font-bold", gradeInfo?.textColor)}>
+      <p className={gradeInfo?.textColor}>
         {gradeInfo ? `[${gradeInfo.label}] 잠재능력` : "잠재능력"}
       </p>
       <dl>

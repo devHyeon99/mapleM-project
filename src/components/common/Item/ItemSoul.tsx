@@ -15,9 +15,9 @@ export const ItemSoul = ({ item }: Props) => {
         <div>
           <dt className="sr-only">소울 이름</dt>
           <dd>
-            <strong className="text-[#FF8939]">
+            <span className="text-[#b23400] dark:text-[#FF8939]">
               {item.soul_info.soul_name}
-            </strong>
+            </span>
             <span aria-hidden="true"> 적용</span>
           </dd>
         </div>

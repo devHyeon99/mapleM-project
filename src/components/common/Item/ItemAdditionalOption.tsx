@@ -17,7 +17,7 @@ export const ItemAdditionalOption = ({ item }: Props) => {
 
   return (
     <div className="border-b pb-2 text-sm">
-      <p className="font-bold">추가 옵션</p>
+      <p>추가 옵션</p>
       <dl>
         {item.item_additional_option.map((opt) => (
           <div key={opt.option_no} className={gradeInfo?.textColor}>

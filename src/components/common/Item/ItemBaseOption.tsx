@@ -12,20 +12,20 @@ export const ItemBaseOption = ({ item }: Props) => {
 
   return (
     <div className="border-b pb-2 text-sm">
-      <p className="font-bold">기본 옵션</p>
+      <p>기본 옵션</p>
       <dl>
         {options.map((opt, idx) => (
           <div key={idx} className="flex gap-1">
             <dt>{opt.name}</dt>
-            <dd className="text-[#FF8939]">{opt.value}</dd>
+            <dd className="text-[#b23400] dark:text-[#FF8939]">{opt.value}</dd>
           </div>
         ))}
-        <div className="flex gap-1">
+        {/* <div className="flex gap-1">
           <dt>아이템 전투력</dt>
           <dd className="text-[#FF8939]">
             {item.item_combat_power?.toLocaleString() ?? 0}
           </dd>
-        </div>
+        </div> */}
       </dl>
     </div>
   );

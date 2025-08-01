@@ -31,7 +31,7 @@ export const ItemPopover = ({ item, children }: ItemPopoverProps) => {
       <PopoverContent
         side="right"
         align="center"
-        className="popover-center bg-popover/98 relative w-72 rounded-lg border-2 p-4 shadow-lg"
+        className="popover-center bg-popover/98 relative w-72 rounded-lg border-2 p-4 font-medium shadow-lg"
       >
         {/* 닫기 버튼 */}
         <PopoverPrimitive.Close className="absolute top-2 right-2 opacity-70 hover:opacity-100">

@@ -90,7 +90,7 @@ const MbNav = () => (
   </div>
 );
 
-const Header = () => {
+export const Header = () => {
   return (
     <header className="bg-background/95 supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 flex min-h-20 w-full items-center justify-center border-b backdrop-blur">
       <div className="container flex h-14 max-w-7xl items-center justify-between md:justify-around">
@@ -113,5 +113,3 @@ const Header = () => {
     </header>
   );
 };
-
-export default Header;

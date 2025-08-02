@@ -1,7 +1,7 @@
 "use client";
 
-import { useNoticeData } from "@/hooks/useNoticeData";
-import { BoardListSkeleton } from "./BoardSkeleton";
+import { useNoticeData } from "@/widgets/notice-tabs/model/useNoticeData";
+import { BoardListSkeleton } from "@/shared/ui/BoardListSkeleton";
 
 export function NoticeListTab() {
   const { data, isLoading, isError, error } = useNoticeData("notice");

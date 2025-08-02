@@ -1,9 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useGoogleLogin } from "@/hooks/useGoogleLogin";
+import { useGoogleLogin } from "../model/useGoogleLogin";
 
-export function GoogleLoginButton() {
+export const GoogleLoginButton = () => {
   const { signInWithGoogle, loading } = useGoogleLogin();
 
   return (
@@ -29,4 +29,4 @@ export function GoogleLoginButton() {
       </div>
     </button>
   );
-}
+};

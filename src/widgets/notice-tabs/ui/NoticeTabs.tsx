@@ -1,12 +1,12 @@
 "use client";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/ui/tabs";
-import { NoticeListTab } from "@/components/home/board/NoticeListTab";
-import { PatchNotesTab } from "@/components/home/board/PatchNotesTab";
-import { EventListTab } from "@/components/home/board/EventListTab";
 import { Button } from "@/shared/ui/button";
+import { NoticeListTab } from "./NoticeListTab";
+import { PatchNotesTab } from "./PatchNotesTab";
+import { EventListTab } from "./EventListTab";
 
-export function NoticeTabs() {
+export const NoticeTabs = () => {
   return (
     <div className="w-full max-w-3xl">
       <Tabs defaultValue="notice" className="w-full">
@@ -78,4 +78,4 @@ export function NoticeTabs() {
       </Tabs>
     </div>
   );
-}
+};

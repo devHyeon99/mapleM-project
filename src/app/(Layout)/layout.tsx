@@ -1,5 +1,4 @@
-import Header from "@/components/Layout/Header";
-import Footer from "@/components/Layout/Footer";
+import { Header, Footer } from "@/widgets/layout";
 
 export default function LayoutGroup({
   children,

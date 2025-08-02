@@ -4,7 +4,7 @@ interface BoardListSkeletonProps {
   count?: number;
 }
 
-export function BoardListSkeleton({ count = 5 }: BoardListSkeletonProps) {
+export const BoardListSkeleton = ({ count = 5 }: BoardListSkeletonProps) => {
   const skeletonItems = Array.from({ length: count });
 
   return (
@@ -17,4 +17,4 @@ export function BoardListSkeleton({ count = 5 }: BoardListSkeletonProps) {
       ))}
     </div>
   );
-}
+};

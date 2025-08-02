@@ -14,7 +14,7 @@ import { Button } from "@/shared/ui/button";
 import { Input } from "@/shared/ui/input";
 import { Label } from "@/shared/ui/label";
 import { Separator } from "@/shared/ui/separator";
-import { GoogleLoginButton } from "./GoogleLoginButton";
+import { GoogleLoginButton } from "@/features/auth-google-login";
 
 function OrDivider() {
   return (
@@ -27,7 +27,7 @@ function OrDivider() {
   );
 }
 
-export default function LoginCard() {
+export const LoginCard = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
@@ -123,4 +123,4 @@ export default function LoginCard() {
       </CardContent>
     </Card>
   );
-}
+};

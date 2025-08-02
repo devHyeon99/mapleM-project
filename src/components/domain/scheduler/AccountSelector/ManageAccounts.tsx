@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import type { Account } from "@/types/scheduler";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -10,7 +10,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
+} from "@/shared/ui/dialog";
 import { Settings } from "lucide-react";
 import { AccountListItem } from "./AccountListItem";
 

@@ -2,7 +2,7 @@ import { CashItemEquipment } from "@/types/cashItem";
 import {
   CASH_EQUIP_SLOT_ORDER_ONEPIECE,
   CASH_EQUIP_SLOT_ORDER_TOPBOTTOM,
-} from "@/constants/cash_slot";
+} from "@/shared/config/constants/cash_slot";
 
 export function sortCashItemsBySlot(items: CashItemEquipment[]) {
   const map: Record<string, CashItemEquipment> = {};

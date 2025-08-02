@@ -3,9 +3,9 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { Separator } from "@/components/ui/separator";
-import { Card, CardContent } from "@/components/ui/card";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/shared/ui/tabs";
+import { Separator } from "@/shared/ui/separator";
+import { Card, CardContent } from "@/shared/ui/card";
 import { SkillGridDisplay } from "./SkillGridDisplay";
 import { type CharacterEquipmentSkill } from "@/types/skill";
 

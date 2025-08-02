@@ -1,4 +1,4 @@
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "@/shared/ui/card";
 import { type CharacterSkillPreset } from "@/types/skill";
 
 interface SkillPresetProps {

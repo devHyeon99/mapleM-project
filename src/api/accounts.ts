@@ -1,5 +1,5 @@
 import type { Account } from "@/types/scheduler";
-import { supabase } from "@/utils/supabase/client";
+import { supabase } from "@/shared/api/supabase/client";
 
 export const fetchAccounts = async (): Promise<Account[]> => {
   const {

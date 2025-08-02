@@ -7,8 +7,8 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Card } from "@/components/ui/card";
+} from "@/shared/ui/select";
+import { Card } from "@/shared/ui/card";
 import { AlertCircle } from "lucide-react";
 import { AddAccount } from "./AccountSelector/AddAccount";
 import { ManageAccounts } from "./AccountSelector/ManageAccounts";

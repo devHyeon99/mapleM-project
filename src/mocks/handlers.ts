@@ -5,7 +5,7 @@ import {
   MOCK_CHARACTERS,
   MOCK_SCHEDULE_ITEMS,
   MOCK_CHECKED_ITEMS,
-} from "@/lib/mock-data";
+} from "@/shared/config/mock-data";
 import type { Account, Character, ChecklistItemData } from "@/types/scheduler";
 
 type NewScheduleItemPayload = Omit<ChecklistItemData, "id"> & {

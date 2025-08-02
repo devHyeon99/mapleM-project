@@ -1,8 +1,8 @@
 "use client";
 
 import { useSearchHistory } from "@/hooks/useSearchHistory";
-import { WORLD_NAMES } from "@/constants/worlds";
-import { Button } from "@/components/ui/button";
+import { WORLD_NAMES } from "@/shared/config/constants/worlds";
+import { Button } from "@/shared/ui/button";
 import { X } from "lucide-react";
 
 type WorldName = (typeof WORLD_NAMES)[number];

@@ -1,7 +1,7 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Button } from "@/shared/ui/button";
+import { Input } from "@/shared/ui/input";
 import {
   Select,
   SelectContent,
@@ -10,8 +10,8 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { WORLD_NAMES } from "@/constants/worlds";
+} from "@/shared/ui/select";
+import { WORLD_NAMES } from "@/shared/config/constants/worlds";
 import { Search, Loader2 } from "lucide-react";
 import { CharacterSearchHistory } from "@/components/domain/character-search/CharacterSearchHistory";
 import { useCharacterSearch } from "@/hooks/useCharacterSearch";

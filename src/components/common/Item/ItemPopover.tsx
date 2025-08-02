@@ -1,11 +1,7 @@
 "use client";
 
 import * as PopoverPrimitive from "@radix-ui/react-popover";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui/popover";
 import { CharacterItemEquipment } from "@/types/character";
 import { X } from "lucide-react";
 import { ItemHeader } from "./ItemHeader";

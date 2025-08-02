@@ -6,7 +6,7 @@ import {
 import {
   EQUIP_SLOT_ORDER_ONEPIECE,
   EQUIP_SLOT_ORDER_TOPBOTTOM,
-} from "@/constants/item_slot";
+} from "@/shared/config/constants/item_slot";
 
 export function sortItemsBySlot(
   items: CharacterItemEquipment[],

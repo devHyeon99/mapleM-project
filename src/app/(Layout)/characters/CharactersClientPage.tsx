@@ -1,13 +1,13 @@
 "use client";
 
 import { useSearchParams, useRouter } from "next/navigation";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "@/shared/ui/card";
 import { useCharacterSearchAll } from "@/hooks/useCharacterSearchAll";
 import { LoadingCard } from "@/components/common/LoadingCard";
 import { CharacterSearch } from "@/components/domain/character-search/CharacterSearch";
 import Link from "next/link";
 import { AlertTriangle, Loader2 } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/shared/lib/utils";
 import { useState } from "react";
 
 export default function CharactersClientPage() {

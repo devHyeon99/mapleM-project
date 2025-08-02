@@ -1,7 +1,7 @@
 "use client";
 
-import { Separator } from "@/components/ui/separator";
-import { COLOR_RANGE_LABEL } from "@/constants/color_prism";
+import { Separator } from "@/shared/ui/separator";
+import { COLOR_RANGE_LABEL } from "@/shared/config/constants/color_prism";
 import { CashItemEquipment } from "@/types/cashItem";
 
 interface Props {

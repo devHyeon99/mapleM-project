@@ -1,5 +1,5 @@
 import type { Character } from "@/types/scheduler";
-import { supabase } from "@/utils/supabase/client";
+import { supabase } from "@/shared/api/supabase/client";
 
 // 캐릭터 목록 조회
 export const fetchCharacters = async (

@@ -2,7 +2,7 @@
 
 import type { Character } from "@/types/scheduler";
 import Image from "next/image";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { ToggleGroup, ToggleGroupItem } from "@/shared/ui/toggle-group";
 
 interface CharacterListProps {
   characters: Character[];

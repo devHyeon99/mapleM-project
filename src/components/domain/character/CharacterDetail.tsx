@@ -5,11 +5,11 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from "@/shared/ui/card";
 import { CharacterProfileCard } from "./CharacterDetail/CharacterProfileCard";
 import { CharacterDetailTabs } from "./CharacterDetail/CharacterDetailTabs";
 import { CharacterBasicInfo as CharacterBasicInfoType } from "@/types/character";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skeleton } from "@/shared/ui/skeleton";
 import { useQuery } from "@tanstack/react-query";
 import { characterQueryKeys } from "@/queries/characterQueryKeys";
 

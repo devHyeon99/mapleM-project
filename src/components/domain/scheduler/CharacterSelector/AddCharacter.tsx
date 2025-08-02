@@ -8,16 +8,16 @@ import { UseMutateFunction } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { UserPlus } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/ui/button";
 import { ActionDialog } from "@/components/common/ActionDialog";
-import { Input } from "@/components/ui/input";
+import { Input } from "@/shared/ui/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/shared/ui/select";
 import {
   Form,
   FormControl,
@@ -25,8 +25,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { WORLD_NAMES } from "@/constants/worlds";
+} from "@/shared/ui/form";
+import { WORLD_NAMES } from "@/shared/config/constants/worlds";
 
 const formSchema = z.object({
   name: z

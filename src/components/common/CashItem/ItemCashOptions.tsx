@@ -1,6 +1,6 @@
 "use client";
 
-import { Separator } from "@/components/ui/separator";
+import { Separator } from "@/shared/ui/separator";
 import { CashItemEquipment } from "@/types/cashItem";
 
 interface Props {

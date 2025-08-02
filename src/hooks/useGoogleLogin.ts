@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import { supabase } from "@/utils/supabase/client";
+import { supabase } from "@/shared/api/supabase/client";
 
 export function useGoogleLogin() {
   const [loading, setLoading] = useState(false);

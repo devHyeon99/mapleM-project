@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { WORLD_NAMES } from "@/constants/worlds";
+import { WORLD_NAMES } from "@/shared/config/constants/worlds";
 
 const SEARCH_HISTORY_KEY = "characterSearchHistory";
 

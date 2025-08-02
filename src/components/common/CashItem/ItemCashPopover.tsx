@@ -3,11 +3,7 @@
 "use client";
 
 import * as PopoverPrimitive from "@radix-ui/react-popover";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui/popover";
 import { X } from "lucide-react";
 import { CashItemEquipment } from "@/types/cashItem";
 import { ItemCashIconBase } from "./ItemCashIconBase";

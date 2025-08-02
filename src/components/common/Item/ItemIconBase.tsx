@@ -3,8 +3,8 @@
 import * as React from "react";
 import { CharacterItemEquipment } from "@/types/character";
 import { getGradeInfo } from "@/utils/getGradeInfo";
-import { POTENTIAL_GRADE_MAP } from "@/constants/gradeMap";
-import { cn } from "@/lib/utils";
+import { POTENTIAL_GRADE_MAP } from "@/shared/config/constants/gradeMap";
+import { cn } from "@/shared/lib/utils";
 
 interface ItemIconBaseProps {
   item: CharacterItemEquipment;

@@ -2,16 +2,12 @@
 
 import * as PopoverPrimitive from "@radix-ui/react-popover";
 import Image from "next/image";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { Card, CardContent } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/shared/ui/tabs";
+import { Card, CardContent } from "@/shared/ui/card";
+import { Separator } from "@/shared/ui/separator";
 import { useCharacterLinkSkill } from "@/hooks/useCharacterLinkSkill";
 import { mergeLinkSkills } from "@/utils/mergeLinkSkills";
-import {
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-} from "@/components/ui/popover";
+import { Popover, PopoverTrigger, PopoverContent } from "@/shared/ui/popover";
 import { parseSkillOptions } from "@/utils/parseSkillOptions";
 import { X } from "lucide-react";
 import { LoadingCard } from "@/components/common/LoadingCard";

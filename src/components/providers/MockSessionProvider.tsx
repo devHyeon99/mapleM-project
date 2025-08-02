@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { patchGetUserForDev } from "@/utils/supabase/mockUser";
+import { patchGetUserForDev } from "@/shared/api/supabase/mockUser";
 
 export function MockSessionProvider({
   children,

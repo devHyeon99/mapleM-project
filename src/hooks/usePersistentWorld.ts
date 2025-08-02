@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { WORLD_NAMES } from "@/constants/worlds";
+import { WORLD_NAMES } from "@/shared/config/constants/worlds";
 
 // sessionStorage에 월드 이름을 저장하기 위한 고유 키
 const SELECTED_WORLD_KEY = "maple_selected_world";

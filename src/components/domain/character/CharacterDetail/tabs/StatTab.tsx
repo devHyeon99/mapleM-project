@@ -1,17 +1,13 @@
 "use client";
 
-import { Separator } from "@/components/ui/separator";
+import { Separator } from "@/shared/ui/separator";
 import * as PopoverPrimitive from "@radix-ui/react-popover";
-import {
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-} from "@/components/ui/popover";
+import { Popover, PopoverTrigger, PopoverContent } from "@/shared/ui/popover";
 import { Search, X } from "lucide-react";
 import { useCharacterStatSet } from "@/hooks/useCharacterStat";
 import { LoadingCard } from "@/components/common/LoadingCard";
 import { aggregateOptions } from "@/utils/aggregateOptions";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/ui/button";
 import { formatSetName } from "@/utils/formatSetName";
 
 interface StatTabProps {

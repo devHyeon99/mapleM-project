@@ -1,4 +1,8 @@
-import { GRADE_MAP, POTENTIAL_GRADE_MAP, GradeKey } from "@/constants/gradeMap";
+import {
+  GRADE_MAP,
+  POTENTIAL_GRADE_MAP,
+  GradeKey,
+} from "@/shared/config/constants/gradeMap";
 
 export function getGradeInfo(grade: string | null | undefined) {
   if (!grade) return null;

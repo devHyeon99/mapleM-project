@@ -3,8 +3,8 @@ import {
   CharacterHeartEquipment,
   CharacterItemEquipment,
 } from "@/types/character";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Separator } from "@/components/ui/separator";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/ui/tabs";
+import { Separator } from "@/shared/ui/separator";
 import { ItemTab } from "./tabs/ItemTab";
 import { CashItemTab } from "./tabs/CashItemTab";
 import { JewelTab } from "./tabs/JewelTab";

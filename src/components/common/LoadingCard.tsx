@@ -1,4 +1,4 @@
-import { Card } from "@/components/ui/card";
+import { Card } from "@/shared/ui/card";
 import { Loader2 } from "lucide-react";
 
 interface LoadingCardProps {

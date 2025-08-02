@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/shared/ui/card";
+import { Button } from "@/shared/ui/button";
 import { RefreshCw } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { PAGE_LAYOUT } from "@/constants/skill_page";
+import { cn } from "@/shared/lib/utils";
+import { PAGE_LAYOUT } from "@/shared/config/constants/skill_page";
 import { stripSkillLevel } from "@/utils/stripSkillLevel";
 import { type CharacterEquipmentSkill } from "@/types/skill";
 

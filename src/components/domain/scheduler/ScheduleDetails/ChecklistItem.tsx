@@ -1,12 +1,12 @@
 "use client";
 
-import { Checkbox } from "@/components/ui/checkbox";
-import { cn } from "@/lib/utils";
+import { Checkbox } from "@/shared/ui/checkbox";
+import { cn } from "@/shared/lib/utils";
 import { FilePenLine, Trash2 } from "lucide-react";
 import { ConfirmAlertDialog } from "@/components/common/ConfirmAlertDialog";
 import { ActionDialog } from "@/components/common/ActionDialog";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Button } from "@/shared/ui/button";
+import { Input } from "@/shared/ui/input";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -18,7 +18,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from "@/shared/ui/form";
 
 interface ChecklistItemProps {
   item: { id: string; label: string };

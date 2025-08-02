@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getCharacterDetails } from "@/lib/nexonApi";
+import { getCharacterDetails } from "@/shared/api/nexonApi";
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);

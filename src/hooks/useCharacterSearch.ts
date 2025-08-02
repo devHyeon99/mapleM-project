@@ -2,7 +2,7 @@ import { useState, useRef, useEffect, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { usePersistentWorld } from "@/hooks/usePersistentWorld";
 import { saveSearchHistory } from "@/utils/localStorage";
-import { WORLD_NAMES } from "@/constants/worlds";
+import { WORLD_NAMES } from "@/shared/config/constants/worlds";
 import { toast } from "sonner";
 
 type WorldName = (typeof WORLD_NAMES)[number];

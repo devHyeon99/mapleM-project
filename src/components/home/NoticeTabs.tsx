@@ -1,10 +1,10 @@
 "use client";
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/ui/tabs";
 import { NoticeListTab } from "@/components/home/board/NoticeListTab";
 import { PatchNotesTab } from "@/components/home/board/PatchNotesTab";
 import { EventListTab } from "@/components/home/board/EventListTab";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/ui/button";
 
 export function NoticeTabs() {
   return (

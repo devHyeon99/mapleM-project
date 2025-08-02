@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/ui/button";
 import { ConfirmAlertDialog } from "@/components/common/ConfirmAlertDialog";
 import { Trash2 } from "lucide-react";
 import { toast } from "sonner";

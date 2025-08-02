@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { createClient } from "@/utils/supabase/server";
+import { createClient } from "@/shared/api/supabase/server";
 
 // 넥슨 API 응답에 대한 타입 정의
 interface NexonOcidResponse {

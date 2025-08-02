@@ -1,6 +1,6 @@
 "use client";
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/ui/tabs";
 import { ScheduleContentGrid } from "./ScheduleDetails/ScheduleContentGrid";
 import type { Character, Task } from "@/types/scheduler";
 import { CharacterDetail } from "../character/CharacterDetail";

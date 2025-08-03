@@ -61,7 +61,7 @@ export function groupSetsIntoRows(
  *
  * 반환 예: [[5,5,5,2]]  // 17개의 경우
  */
-export function getStarRows(
+export function getStarforce(
   totalStars: unknown,
   setSize: number = STAR_SET_SIZE,
   setsPerRow: number = STAR_SETS_PER_ROW,

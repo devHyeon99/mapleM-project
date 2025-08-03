@@ -1,5 +1,5 @@
-import { CharacterItemEquipment } from "@/types/character";
-import { parseOptions } from "@/utils/parseOptions";
+import { CharacterItemEquipment } from "../model";
+import { parseOptions } from "../lib";
 
 interface Props {
   item: CharacterItemEquipment;

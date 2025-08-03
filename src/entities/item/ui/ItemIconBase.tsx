@@ -1,8 +1,8 @@
 "use client";
 
 import * as React from "react";
-import { CharacterItemEquipment } from "@/types/character";
-import { getGradeInfo } from "@/utils/getGradeInfo";
+import { CharacterItemEquipment } from "../model";
+import { getGradeInfo } from "../lib";
 import { POTENTIAL_GRADE_MAP } from "@/shared/config/constants/gradeMap";
 import { cn } from "@/shared/lib/utils";
 

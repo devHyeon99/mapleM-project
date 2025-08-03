@@ -1,8 +1,8 @@
 "use client";
 
-import { CharacterItemEquipment } from "@/types/character";
-import { ItemPopover } from "@/components/common/Item/ItemPopover";
-import { ItemIconBase } from "@/components/common/Item/ItemIconBase";
+import { CharacterItemEquipment } from "../model";
+import { ItemPopover } from "./ItemPopover";
+import { ItemIconBase } from "./ItemIconBase";
 
 interface ItemIconProps {
   item: CharacterItemEquipment;

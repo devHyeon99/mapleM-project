@@ -3,9 +3,9 @@ import {
   CharacterItemEquipment,
   CharacterAndroidEquipment,
   CharacterHeartEquipment,
-} from "@/types/character";
-import { ItemIcon } from "@/components/common/Item/ItemIcon";
-import { sortItemsBySlot } from "@/utils/sortItems";
+} from "@/entities/item/model";
+import { ItemIcon } from "@/entities/item";
+import { sortItems } from "@/entities/item/lib";
 
 interface ItemTabProps {
   items: CharacterItemEquipment[];
@@ -24,7 +24,7 @@ export const ItemTab = ({ items, android, heart }: ItemTabProps) => {
       </section>
     );
   }
-  const sortedItems = sortItemsBySlot(items, android, heart);
+  const sortedItems = sortItems(items, android, heart);
 
   return (
     <div className="relative grid grid-cols-7 gap-1">

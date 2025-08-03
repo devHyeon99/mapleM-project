@@ -2,13 +2,13 @@ import {
   CharacterItemEquipment,
   CharacterAndroidEquipment,
   CharacterHeartEquipment,
-} from "@/types/character";
+} from "../model/types";
 import {
   EQUIP_SLOT_ORDER_ONEPIECE,
   EQUIP_SLOT_ORDER_TOPBOTTOM,
 } from "@/shared/config/constants/item_slot";
 
-export function sortItemsBySlot(
+export function sortItems(
   items: CharacterItemEquipment[],
   android: CharacterAndroidEquipment | null,
   heart: CharacterHeartEquipment | null,

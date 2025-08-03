@@ -1,6 +1,6 @@
-import { CharacterItemEquipment } from "@/types/character";
-import { getGradeInfo } from "@/utils/getGradeInfo";
-import { ItemIconBase } from "@/components/common/Item/ItemIconBase";
+import { CharacterItemEquipment } from "../model";
+import { getGradeInfo } from "../lib";
+import { ItemIconBase } from "./ItemIconBase";
 
 interface Props {
   item: CharacterItemEquipment;

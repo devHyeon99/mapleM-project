@@ -1,4 +1,4 @@
-import { CharacterItemEquipment } from "@/types/character";
+import { CharacterItemEquipment } from "../model";
 
 interface Props {
   item: CharacterItemEquipment;

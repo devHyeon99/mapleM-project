@@ -1,5 +1,5 @@
-import { CharacterItemEquipment } from "@/types/character";
-import { getGradeInfo } from "@/utils/getGradeInfo";
+import { CharacterItemEquipment } from "../model";
+import { getGradeInfo } from "../lib";
 
 interface Props {
   item: CharacterItemEquipment;

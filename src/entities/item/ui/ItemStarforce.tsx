@@ -1,13 +1,13 @@
-import { CharacterItemEquipment } from "@/types/character";
-import { getStarRows } from "@/utils/getStarforce";
-import { StarIcon } from "@/components/common/StarIcon";
+import { CharacterItemEquipment } from "../model";
+import { getStarforce } from "../lib";
+import { StarIcon } from "@/shared/ui/StarIcon";
 
 interface Props {
   item: CharacterItemEquipment;
 }
 
 export const ItemStarforce = ({ item }: Props) => {
-  const starRows = getStarRows(item.starforce_upgrade);
+  const starRows = getStarforce(item.starforce_upgrade);
   if (starRows.length === 0) return null;
 
   return (

@@ -1,7 +1,5 @@
-// ItemCashIconBase.tsx
-
 import { cn } from "@/shared/lib/utils";
-import { CashItemEquipment } from "@/types/cashItem";
+import { CashItemEquipment } from "../model";
 import { forwardRef } from "react";
 
 interface ItemCashIconBaseProps

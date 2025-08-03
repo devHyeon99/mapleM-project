@@ -1,10 +1,10 @@
-import { CashItemEquipment } from "@/types/cashItem";
+import { CashItemEquipment } from "../model";
 import {
   CASH_EQUIP_SLOT_ORDER_ONEPIECE,
   CASH_EQUIP_SLOT_ORDER_TOPBOTTOM,
 } from "@/shared/config/constants/cash_slot";
 
-export function sortCashItemsBySlot(items: CashItemEquipment[]) {
+export function sortCashItems(items: CashItemEquipment[]) {
   const map: Record<string, CashItemEquipment> = {};
   items.forEach((item) => {
     map[item.cash_item_equipment_slot_name] = item;

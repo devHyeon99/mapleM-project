@@ -1,7 +1,7 @@
 "use client";
 
 import { Separator } from "@/shared/ui/separator";
-import { CashItemEquipment } from "@/types/cashItem";
+import { CashItemEquipment } from "../model";
 
 interface Props {
   options: CashItemEquipment["cash_item_option"];

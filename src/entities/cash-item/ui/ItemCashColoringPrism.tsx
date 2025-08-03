@@ -2,7 +2,7 @@
 
 import { Separator } from "@/shared/ui/separator";
 import { COLOR_RANGE_LABEL } from "@/shared/config/constants/color_prism";
-import { CashItemEquipment } from "@/types/cashItem";
+import { CashItemEquipment } from "../model";
 
 interface Props {
   coloringPrism: CashItemEquipment["cash_item_coloring_prism"];

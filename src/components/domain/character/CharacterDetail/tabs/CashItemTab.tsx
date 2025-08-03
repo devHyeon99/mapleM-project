@@ -1,9 +1,9 @@
 "use client";
 
-import { ItemCashPopover } from "@/components/common/CashItem/ItemCashPopover";
+import { ItemCashPopover } from "@/entities/cash-item";
 import { LoadingCard } from "@/components/common/LoadingCard";
 import { useCharacterCashEquipment } from "@/hooks/useCharacterCashEquipment";
-import { sortCashItemsBySlot } from "@/utils/sortCashItems";
+import { sortCashItems } from "@/entities/cash-item/lib";
 
 interface CashItemTabProps {
   ocid: string;
@@ -34,7 +34,7 @@ export const CashItemTab = ({ ocid }: CashItemTabProps) => {
     );
   }
 
-  const sortedItems = sortCashItemsBySlot(data.cash_item_equipment);
+  const sortedItems = sortCashItems(data.cash_item_equipment);
 
   return (
     <div className="grid grid-cols-7 gap-1">

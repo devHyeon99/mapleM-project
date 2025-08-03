@@ -1,4 +1,4 @@
-import { ColorRange } from "@/types/cashItem";
+import { ColorRange } from "@/entities/cash-item/model";
 
 export const COLOR_RANGE_LABEL: Record<Exclude<ColorRange, null>, string> = {
   "1": "전체계열",

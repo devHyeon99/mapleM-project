@@ -5,7 +5,7 @@ import {
   fetchAccounts,
   createAccount,
   deleteAccount as apiDeleteAccount,
-} from "@/api/accounts";
+} from "@/shared/api/accounts";
 import { Account } from "@/types/scheduler";
 import { toast } from "sonner";
 import { useState } from "react";

@@ -6,7 +6,7 @@ import {
   fetchCharacters,
   addCharacter,
   deleteCharacter,
-} from "@/api/characters";
+} from "@/shared/api/characters";
 import { Character } from "@/types/scheduler";
 
 export const useCharacters = (selectedAccountId: string | null) => {

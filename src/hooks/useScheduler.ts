@@ -9,7 +9,7 @@ import {
   deleteScheduleItem,
   addScheduleItem,
   editScheduleItem,
-} from "@/api/scheduler";
+} from "@/shared/api/scheduler";
 import type { ChecklistItemData } from "@/types/scheduler";
 import { toast } from "sonner";
 

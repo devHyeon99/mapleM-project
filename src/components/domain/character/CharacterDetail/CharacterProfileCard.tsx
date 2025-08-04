@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
-import { InfoRow } from "@/components/common/InfoRow";
-import { InfoDateRow } from "@/components/common/InfoDateRow";
+import { InfoRow } from "@/shared/ui/InfoRow";
+import { InfoDateRow } from "@/shared/ui/InfoDateRow";
 import { CharacterBasicInfo } from "@/types/character";
 
 interface CharacterProfileCardProps {

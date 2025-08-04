@@ -1,7 +1,7 @@
 "use client";
 
 import { ItemCashPopover } from "@/entities/cash-item";
-import { LoadingCard } from "@/components/common/LoadingCard";
+import { LoadingCard } from "@/shared/ui/LoadingCard";
 import { useCharacterCashEquipment } from "@/hooks/useCharacterCashEquipment";
 import { sortCashItems } from "@/entities/cash-item/lib";
 

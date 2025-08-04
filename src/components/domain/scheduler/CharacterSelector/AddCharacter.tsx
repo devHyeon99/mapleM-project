@@ -9,7 +9,7 @@ import { toast } from "sonner";
 import { UserPlus } from "lucide-react";
 
 import { Button } from "@/shared/ui/button";
-import { ActionDialog } from "@/components/common/ActionDialog";
+import { ActionDialog } from "@/shared/ui/ActionDialog";
 import { Input } from "@/shared/ui/input";
 import {
   Select,

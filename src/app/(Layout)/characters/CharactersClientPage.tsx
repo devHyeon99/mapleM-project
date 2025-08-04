@@ -3,7 +3,7 @@
 import { useSearchParams, useRouter } from "next/navigation";
 import { Card, CardContent } from "@/shared/ui/card";
 import { useCharacterSearchAll } from "@/hooks/useCharacterSearchAll";
-import { LoadingCard } from "@/components/common/LoadingCard";
+import { LoadingCard } from "@/shared/ui/LoadingCard";
 import { CharacterSearch } from "@/components/domain/character-search/CharacterSearch";
 import Link from "next/link";
 import { AlertTriangle, Loader2 } from "lucide-react";

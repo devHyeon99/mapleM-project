@@ -10,7 +10,7 @@ import { mergeLinkSkills } from "@/utils/mergeLinkSkills";
 import { Popover, PopoverTrigger, PopoverContent } from "@/shared/ui/popover";
 import { parseSkillOptions } from "@/utils/parseSkillOptions";
 import { X } from "lucide-react";
-import { LoadingCard } from "@/components/common/LoadingCard";
+import { LoadingCard } from "@/shared/ui/LoadingCard";
 
 interface LinkSkillTabProps {
   ocid: string;

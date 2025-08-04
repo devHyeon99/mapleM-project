@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { usePersistentWorld } from "@/hooks/usePersistentWorld";
-import { saveSearchHistory } from "@/utils/localStorage";
+import { usePersistentWorld } from "@/shared/lib/hooks/usePersistentWorld";
+import { saveSearchHistory } from "@/shared/lib/localStorage";
 import { WORLD_NAMES } from "@/shared/config/constants/worlds";
 import { toast } from "sonner";
 

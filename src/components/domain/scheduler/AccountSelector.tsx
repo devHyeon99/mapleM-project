@@ -12,7 +12,7 @@ import { Card } from "@/shared/ui/card";
 import { AlertCircle } from "lucide-react";
 import { AddAccount } from "./AccountSelector/AddAccount";
 import { ManageAccounts } from "./AccountSelector/ManageAccounts";
-import { LoadingCard } from "@/components/common/LoadingCard";
+import { LoadingCard } from "@/shared/ui/LoadingCard";
 
 interface AccountSelectorProps {
   accounts: Account[];

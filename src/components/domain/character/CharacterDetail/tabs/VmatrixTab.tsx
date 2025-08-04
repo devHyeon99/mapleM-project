@@ -1,6 +1,6 @@
 "use client";
 
-import { LoadingCard } from "@/components/common/LoadingCard";
+import { LoadingCard } from "@/shared/ui/LoadingCard";
 import { useCharacterVmatrix } from "@/hooks/useCharacterVmatrix";
 import { CharacterVMatrix } from "@/types/Vmatrix";
 

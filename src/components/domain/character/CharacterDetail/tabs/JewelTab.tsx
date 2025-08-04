@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/ui/tabs";
 import { useCharacterJewel } from "@/hooks/useCharacterJewel";
-import { LoadingCard } from "@/components/common/LoadingCard";
+import { LoadingCard } from "@/shared/ui/LoadingCard";
 
 interface JewelInfo {
   slot_no: number;

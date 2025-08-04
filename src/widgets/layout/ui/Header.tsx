@@ -12,7 +12,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/shared/ui/sheet";
-import { ModeToggle } from "@/components/common/ModeToggle";
+import { ModeToggle } from "@/shared/ui/ModeToggle";
 
 const navLinks = [
   { href: "/scheduler", label: "스케줄러" },

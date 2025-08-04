@@ -3,7 +3,7 @@
 import { useMemo, useCallback } from "react";
 import type { Character } from "@/types/scheduler";
 import { Card } from "@/shared/ui/card";
-import { LoadingCard } from "@/components/common/LoadingCard";
+import { LoadingCard } from "@/shared/ui/LoadingCard";
 import {
   AddCharacter,
   DeleteCharacter,

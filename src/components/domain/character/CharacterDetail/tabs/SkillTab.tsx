@@ -2,7 +2,7 @@
 
 import { useCharacterSkill } from "@/hooks/useCharacterSkill";
 import { Separator } from "@/shared/ui/separator";
-import { LoadingCard } from "@/components/common/LoadingCard";
+import { LoadingCard } from "@/shared/ui/LoadingCard";
 import { SkillSettings } from "@/components/domain/skill/SkillSettings";
 import { SkillPreset } from "@/components/domain/skill/SkillPreset";
 

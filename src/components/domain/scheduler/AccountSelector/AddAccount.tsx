@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Button } from "@/shared/ui/button";
-import { ActionDialog } from "@/components/common/ActionDialog";
+import { ActionDialog } from "@/shared/ui/ActionDialog";
 import { Input } from "@/shared/ui/input";
 import {
   Form,

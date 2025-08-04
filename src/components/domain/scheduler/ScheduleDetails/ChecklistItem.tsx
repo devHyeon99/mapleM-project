@@ -3,8 +3,8 @@
 import { Checkbox } from "@/shared/ui/checkbox";
 import { cn } from "@/shared/lib/utils";
 import { FilePenLine, Trash2 } from "lucide-react";
-import { ConfirmAlertDialog } from "@/components/common/ConfirmAlertDialog";
-import { ActionDialog } from "@/components/common/ActionDialog";
+import { ConfirmAlertDialog } from "@/shared/ui/ConfirmAlertDialog";
+import { ActionDialog } from "@/shared/ui/ActionDialog";
 import { Button } from "@/shared/ui/button";
 import { Input } from "@/shared/ui/input";
 import { useEffect, useState } from "react";

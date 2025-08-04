@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/shared/ui/card";
 import { Progress } from "@/shared/ui/progress";
 import { Input } from "@/shared/ui/input";
 import { Plus } from "lucide-react";
-import { ActionDialog } from "@/components/common/ActionDialog";
+import { ActionDialog } from "@/shared/ui/ActionDialog";
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";

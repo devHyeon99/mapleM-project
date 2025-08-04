@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useCharacterSymbol } from "@/hooks/useCharacterSymbol";
-import { LoadingCard } from "@/components/common/LoadingCard";
+import { LoadingCard } from "@/shared/ui/LoadingCard";
 
 interface SymbolTabProps {
   ocid: string;

@@ -3,7 +3,7 @@
 import { useCharacterHexaStat } from "@/hooks/useCharacterHexaStat";
 import { CharacterHexaMatrixStat } from "@/types/HexaStat";
 import { Separator } from "@/shared/ui/separator";
-import { LoadingCard } from "@/components/common/LoadingCard";
+import { LoadingCard } from "@/shared/ui/LoadingCard";
 
 interface HexaStatTabProps {
   ocid: string;

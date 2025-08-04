@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useCharacterHexaSkill } from "@/hooks/useCharacterHexaSkill";
 import { CharacterHexaMatrix } from "@/types/HexaSkill";
-import { LoadingCard } from "@/components/common/LoadingCard";
+import { LoadingCard } from "@/shared/ui/LoadingCard";
 
 interface HexaSkillTabProps {
   ocid: string;

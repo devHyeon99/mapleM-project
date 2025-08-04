@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import type { Account } from "@/types/scheduler";
 import { Button } from "@/shared/ui/button";
-import { ConfirmAlertDialog } from "@/components/common/ConfirmAlertDialog";
+import { ConfirmAlertDialog } from "@/shared/ui/ConfirmAlertDialog";
 import { Trash2 } from "lucide-react";
 import { toast } from "sonner";
 

@@ -1,11 +1,9 @@
 "use client";
 
-import { useScheduler } from "@/entities/scheduler";
+import { useScheduler, useAccounts, useCharacters } from "@/entities/scheduler";
 import { AccountSelector } from "@/components/domain/scheduler/AccountSelector";
 import { CharacterSelector } from "@/components/domain/scheduler/CharacterSelector";
 import { ScheduleDetails } from "@/components/domain/scheduler/ScheduleDetails";
-import { useAccounts } from "@/hooks/useAccounts";
-import { useCharacters } from "@/hooks/useCharacters";
 
 const SchedulerPage = () => {
   const {

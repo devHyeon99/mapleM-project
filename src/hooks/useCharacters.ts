@@ -7,7 +7,7 @@ import {
   addCharacter,
   deleteCharacter,
 } from "@/shared/api/characters";
-import { Character } from "@/types/scheduler";
+import type { Character } from "@/entities/scheduler";
 
 export const useCharacters = (selectedAccountId: string | null) => {
   const queryClient = useQueryClient();

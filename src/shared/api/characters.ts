@@ -1,4 +1,4 @@
-import type { Character } from "@/types/scheduler";
+import type { Character } from "@/entities/scheduler";
 import { supabase } from "@/shared/api/supabase/client";
 
 // 캐릭터 목록 조회

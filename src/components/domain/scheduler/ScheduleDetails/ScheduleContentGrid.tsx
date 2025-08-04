@@ -2,7 +2,7 @@
 
 import { ScheduleCard } from "./ScheduleCard";
 import { ChecklistItem } from "./ChecklistItem";
-import type { ChecklistItemData } from "@/types/scheduler";
+import type { ChecklistItemData } from "@/entities/scheduler";
 import { ChecklistItemSkeleton } from "./ChecklistItemSkeleton";
 
 const CATEGORIES = [

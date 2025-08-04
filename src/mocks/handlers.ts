@@ -6,7 +6,11 @@ import {
   MOCK_SCHEDULE_ITEMS,
   MOCK_CHECKED_ITEMS,
 } from "@/shared/config/mock-data";
-import type { Account, Character, ChecklistItemData } from "@/types/scheduler";
+import type {
+  Account,
+  Character,
+  ChecklistItemData,
+} from "@/entities/scheduler";
 
 type NewScheduleItemPayload = Omit<ChecklistItemData, "id"> & {
   type: "task" | "boss";

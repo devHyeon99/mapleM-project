@@ -10,7 +10,7 @@ import {
   addScheduleItem,
   editScheduleItem,
 } from "@/shared/api/scheduler";
-import type { ChecklistItemData } from "@/types/scheduler";
+import type { ChecklistItemData } from "@/entities/scheduler";
 import { toast } from "sonner";
 
 export const useScheduler = (characterId: string | null) => {

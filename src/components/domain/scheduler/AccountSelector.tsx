@@ -1,6 +1,6 @@
 "use client";
 
-import type { Account } from "@/types/scheduler";
+import type { Account } from "@/entities/scheduler";
 import {
   Select,
   SelectContent,

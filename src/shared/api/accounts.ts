@@ -1,4 +1,4 @@
-import type { Account } from "@/types/scheduler";
+import type { Account } from "@/entities/scheduler";
 import { supabase } from "@/shared/api/supabase/client";
 
 export const fetchAccounts = async (): Promise<Account[]> => {

@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useCallback } from "react";
-import type { Character } from "@/types/scheduler";
+import type { Character } from "@/entities/scheduler";
 import { Card } from "@/shared/ui/card";
 import { LoadingCard } from "@/shared/ui/LoadingCard";
 import {

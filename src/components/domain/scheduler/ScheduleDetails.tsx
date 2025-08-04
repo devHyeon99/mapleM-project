@@ -2,7 +2,7 @@
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/ui/tabs";
 import { ScheduleContentGrid } from "./ScheduleDetails/ScheduleContentGrid";
-import type { Character, Task } from "@/types/scheduler";
+import type { Character, Task } from "@/entities/scheduler";
 import { CharacterDetail } from "../character/CharacterDetail";
 
 interface ScheduleDetailsProps {

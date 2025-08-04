@@ -1,5 +1,5 @@
 import { supabase } from "@/shared/api/supabase/client";
-import type { ChecklistItemData } from "@/types/scheduler";
+import type { ChecklistItemData } from "@/entities/scheduler";
 
 interface DBScheduleItem {
   id: string;

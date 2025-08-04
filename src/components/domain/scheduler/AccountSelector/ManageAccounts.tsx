@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import type { Account } from "@/types/scheduler";
+import type { Account } from "@/entities/scheduler";
 import { Button } from "@/shared/ui/button";
 import {
   Dialog,

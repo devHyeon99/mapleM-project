@@ -1,4 +1,8 @@
-import type { Account, Character, ChecklistItemData } from "@/types/scheduler";
+import type {
+  Account,
+  Character,
+  ChecklistItemData,
+} from "@/entities/scheduler";
 
 // =========================================
 // === 계정(Account) 목 데이터

@@ -1,6 +1,6 @@
 "use client";
 
-import type { Character } from "@/types/scheduler";
+import type { Character } from "@/entities/scheduler";
 import Image from "next/image";
 import { ToggleGroup, ToggleGroupItem } from "@/shared/ui/toggle-group";
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useScheduler } from "@/hooks/useScheduler";
+import { useScheduler } from "@/entities/scheduler";
 import { AccountSelector } from "@/components/domain/scheduler/AccountSelector";
 import { CharacterSelector } from "@/components/domain/scheduler/CharacterSelector";
 import { ScheduleDetails } from "@/components/domain/scheduler/ScheduleDetails";

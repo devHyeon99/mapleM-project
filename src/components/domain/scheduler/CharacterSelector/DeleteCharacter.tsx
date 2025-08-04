@@ -5,7 +5,7 @@ import { Button } from "@/shared/ui/button";
 import { ConfirmAlertDialog } from "@/shared/ui/ConfirmAlertDialog";
 import { Trash2 } from "lucide-react";
 import { toast } from "sonner";
-import type { Character } from "@/types/scheduler";
+import type { Character } from "@/entities/scheduler";
 
 interface DeleteCharacterProps {
   selectedCharacter: Character | undefined;

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import type { Account } from "@/types/scheduler";
+import type { Account } from "@/entities/scheduler";
 import { Button } from "@/shared/ui/button";
 import { ConfirmAlertDialog } from "@/shared/ui/ConfirmAlertDialog";
 import { Trash2 } from "lucide-react";

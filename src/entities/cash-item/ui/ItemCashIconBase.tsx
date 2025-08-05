@@ -1,5 +1,5 @@
 import { cn } from "@/shared/lib/utils";
-import { CashItemEquipment } from "../model";
+import { CashItemEquipment } from "@/entities/cash-item";
 import { forwardRef } from "react";
 
 interface ItemCashIconBaseProps

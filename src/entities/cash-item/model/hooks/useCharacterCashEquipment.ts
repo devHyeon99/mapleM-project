@@ -1,4 +1,4 @@
-import { CharacterCashEquipment } from "@/entities/cash-item/model";
+import type { CharacterCashEquipment } from "@/entities/cash-item";
 import { useCharacterApi } from "@/shared/api/hooks/useCharacterApi";
 
 export const useCharacterCashEquipment = (ocid: string | null) =>

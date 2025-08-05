@@ -5,7 +5,7 @@
 import * as PopoverPrimitive from "@radix-ui/react-popover";
 import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui/popover";
 import { X } from "lucide-react";
-import { CashItemEquipment } from "../model";
+import { CashItemEquipment } from "@/entities/cash-item";
 import { ItemCashIconBase } from "./ItemCashIconBase";
 import { ItemCashInfo } from "./ItemCashInfo";
 import { ItemCashOptions } from "./ItemCashOptions";

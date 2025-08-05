@@ -1,4 +1,4 @@
-import { CashItemEquipment } from "../model";
+import { CashItemEquipment } from "@/entities/cash-item";
 import {
   CASH_EQUIP_SLOT_ORDER_ONEPIECE,
   CASH_EQUIP_SLOT_ORDER_TOPBOTTOM,

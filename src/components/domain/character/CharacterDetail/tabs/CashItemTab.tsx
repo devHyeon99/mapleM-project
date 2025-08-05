@@ -2,8 +2,8 @@
 
 import { ItemCashPopover } from "@/entities/cash-item";
 import { LoadingCard } from "@/shared/ui/LoadingCard";
-import { useCharacterCashEquipment } from "@/hooks/useCharacterCashEquipment";
-import { sortCashItems } from "@/entities/cash-item/lib";
+import { useCharacterCashEquipment } from "@/entities/cash-item";
+import { sortCashItems } from "@/entities/cash-item";
 
 interface CashItemTabProps {
   ocid: string;

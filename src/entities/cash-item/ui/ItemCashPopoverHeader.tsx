@@ -1,5 +1,5 @@
 import { ItemCashIconBase } from "./ItemCashIconBase";
-import { CashItemEquipment } from "../model";
+import { CashItemEquipment } from "@/entities/cash-item";
 
 interface Props {
   item: Pick<CashItemEquipment, "cash_item_icon" | "cash_item_name">;

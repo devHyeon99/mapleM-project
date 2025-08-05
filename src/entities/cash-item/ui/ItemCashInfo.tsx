@@ -1,4 +1,4 @@
-import { CashItemEquipment } from "../model";
+import { CashItemEquipment } from "@/entities/cash-item";
 
 interface Props {
   item: CashItemEquipment;

@@ -1,5 +1,5 @@
-import { CharacterVMatrix } from "@/types/Vmatrix";
-import { useCharacterApi } from "./useCharacterApi";
+import type { CharacterVMatrix } from "@/entities/skill/model";
+import { useCharacterApi } from "@/shared/api/hooks/useCharacterApi";
 
 export const useCharacterVmatrix = (ocid: string | null) =>
   useCharacterApi<CharacterVMatrix>({

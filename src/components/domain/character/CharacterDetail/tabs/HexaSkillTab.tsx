@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useCharacterHexaSkill } from "@/hooks/useCharacterHexaSkill";
-import { CharacterHexaMatrix } from "@/types/HexaSkill";
+import { useCharacterHexaSkill } from "@/entities/skill/model";
+import type { CharacterHexaMatrix } from "@/entities/skill/model";
 import { LoadingCard } from "@/shared/ui/LoadingCard";
 
 interface HexaSkillTabProps {

@@ -1,6 +1,6 @@
 "use client";
 
-import { useCharacterSkill } from "@/hooks/useCharacterSkill";
+import { useCharacterSkill } from "@/entities/skill/model";
 import { Separator } from "@/shared/ui/separator";
 import { LoadingCard } from "@/shared/ui/LoadingCard";
 import { SkillSettings } from "@/components/domain/skill/SkillSettings";

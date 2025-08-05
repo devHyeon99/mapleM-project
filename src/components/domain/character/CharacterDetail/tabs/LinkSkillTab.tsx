@@ -5,10 +5,10 @@ import Image from "next/image";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/shared/ui/tabs";
 import { Card, CardContent } from "@/shared/ui/card";
 import { Separator } from "@/shared/ui/separator";
-import { useCharacterLinkSkill } from "@/hooks/useCharacterLinkSkill";
-import { mergeLinkSkills } from "@/utils/mergeLinkSkills";
+import { useCharacterLinkSkill } from "@/entities/skill/model";
+import { mergeLinkSkills } from "@/entities/skill/lib/mergeLinkSkills";
 import { Popover, PopoverTrigger, PopoverContent } from "@/shared/ui/popover";
-import { parseSkillOptions } from "@/utils/parseSkillOptions";
+import { parseSkillOptions } from "@/entities/skill/lib/parseSkillOptions";
 import { X } from "lucide-react";
 import { LoadingCard } from "@/shared/ui/LoadingCard";
 

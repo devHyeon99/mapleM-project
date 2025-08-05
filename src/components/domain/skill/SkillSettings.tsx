@@ -1,5 +1,3 @@
-// src/components/skill/SkillSettings.tsx
-
 "use client";
 
 import { useState, useMemo } from "react";
@@ -7,7 +5,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/shared/ui/tabs";
 import { Separator } from "@/shared/ui/separator";
 import { Card, CardContent } from "@/shared/ui/card";
 import { SkillGridDisplay } from "./SkillGridDisplay";
-import { type CharacterEquipmentSkill } from "@/types/skill";
+import type { CharacterEquipmentSkill } from "@/entities/skill/model";
 
 interface SkillSettingsProps {
   equipmentSkills: CharacterEquipmentSkill[];

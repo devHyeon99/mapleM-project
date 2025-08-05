@@ -6,8 +6,8 @@ import { Button } from "@/shared/ui/button";
 import { RefreshCw } from "lucide-react";
 import { cn } from "@/shared/lib/utils";
 import { PAGE_LAYOUT } from "@/shared/config/constants/skill_page";
-import { stripSkillLevel } from "@/utils/stripSkillLevel";
-import { type CharacterEquipmentSkill } from "@/types/skill";
+import { stripSkillLevel } from "@/entities/skill/lib/stripSkillLevel";
+import type { CharacterEquipmentSkill } from "@/entities/skill/model";
 
 interface SkillGridDisplayProps {
   skills: CharacterEquipmentSkill[];

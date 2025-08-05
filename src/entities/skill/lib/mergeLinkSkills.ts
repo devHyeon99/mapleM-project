@@ -1,4 +1,4 @@
-import { LinkSkillInfo } from "@/types/linkskill";
+import type { LinkSkillInfo } from "@/entities/skill/model";
 
 function parseEffect(effect: string): Record<string, number> {
   const effectMap: Record<string, number> = {};

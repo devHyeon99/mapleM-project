@@ -1,8 +1,8 @@
 "use client";
 
 import { LoadingCard } from "@/shared/ui/LoadingCard";
-import { useCharacterVmatrix } from "@/hooks/useCharacterVmatrix";
-import { CharacterVMatrix } from "@/types/Vmatrix";
+import { useCharacterVmatrix } from "@/entities/skill/model";
+import type { CharacterVMatrix } from "@/entities/skill/model";
 
 interface VmatrixTabProps {
   ocid: string;

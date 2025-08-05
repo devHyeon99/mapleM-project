@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/shared/ui/card";
-import { type CharacterSkillPreset } from "@/types/skill";
+import type { CharacterSkillPreset } from "@/entities/skill/model";
 
 interface SkillPresetProps {
   presets: CharacterSkillPreset[];

@@ -1,5 +1,5 @@
 import { CharacterBasicInfo } from "@/types/character";
-import { useCharacterApi } from "./useCharacterApi";
+import { useCharacterApi } from "@/shared/api/hooks/useCharacterApi";
 
 export const useCharacterBasicInfo = (ocid: string | null) =>
   useCharacterApi<CharacterBasicInfo>({

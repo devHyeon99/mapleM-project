@@ -1,5 +1,5 @@
-import { LinkSkillResponse } from "@/types/linkskill";
-import { useCharacterApi } from "./useCharacterApi";
+import type { LinkSkillResponse } from "@/entities/skill/model";
+import { useCharacterApi } from "@/shared/api/hooks/useCharacterApi";
 
 export const useCharacterLinkSkill = (ocid: string | null) =>
   useCharacterApi<LinkSkillResponse>({

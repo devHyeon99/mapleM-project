@@ -1,5 +1,5 @@
-import { CharacterSkillData } from "@/types/skill";
-import { useCharacterApi } from "./useCharacterApi";
+import type { CharacterSkillData } from "@/entities/skill/model";
+import { useCharacterApi } from "@/shared/api/hooks/useCharacterApi";
 
 export const useCharacterSkill = (ocid: string | null) =>
   useCharacterApi<CharacterSkillData>({

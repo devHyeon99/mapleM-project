@@ -2,7 +2,7 @@ import {
   CharacterItemEquipment,
   CharacterAndroidEquipment,
   CharacterHeartEquipment,
-} from "../model/types";
+} from "@/shared/model/types/nexon-models";
 import {
   EQUIP_SLOT_ORDER_ONEPIECE,
   EQUIP_SLOT_ORDER_TOPBOTTOM,

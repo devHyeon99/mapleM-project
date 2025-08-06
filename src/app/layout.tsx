@@ -3,10 +3,10 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Script from "next/script";
 
-import { Providers } from "@/components/providers/Providers";
-import { ThemeProvider } from "@/components/providers/theme-provider";
-import { MswProvider } from "@/components/providers/MswProvider";
-import { MockSessionProvider } from "@/components/providers/MockSessionProvider";
+import { Providers } from "@/app/providers/Providers";
+import { ThemeProvider } from "@/app/providers/theme-provider";
+import { MswProvider } from "@/app/providers/MswProvider";
+import { MockSessionProvider } from "@/app/providers/MockSessionProvider";
 
 const pretendard = localFont({
   src: "../../public/fonts/PretendardStdVariable.woff2",

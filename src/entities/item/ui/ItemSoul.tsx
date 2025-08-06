@@ -1,4 +1,4 @@
-import { CharacterItemEquipment } from "../model";
+import { CharacterItemEquipment } from "@/shared/model/types/nexon-models";
 
 interface Props {
   item: CharacterItemEquipment;

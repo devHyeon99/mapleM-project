@@ -8,7 +8,7 @@ import { notFound } from "next/navigation";
 import { CharacterSearch } from "@/components/domain/character-search/CharacterSearch";
 
 import { getOcid, getCharacterDetails } from "@/shared/api/nexonApi";
-import { characterQueryKeys } from "@/queries/characterQueryKeys";
+import { characterQueryKeys } from "@/entities/character";
 import { CharacterDetail } from "@/components/domain/character/CharacterDetail";
 
 // Next.js 15에서는 params가 Promise<{ world: string; name: string }> 형태로 들어옴

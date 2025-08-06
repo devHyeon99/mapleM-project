@@ -1,7 +1,9 @@
 "use client";
 
-import { useCharacterHexaStat } from "@/hooks/useCharacterHexaStat";
-import { CharacterHexaMatrixStat } from "@/types/HexaStat";
+import {
+  useCharacterHexaStat,
+  CharacterHexaMatrixStat,
+} from "@/entities/character";
 import { Separator } from "@/shared/ui/separator";
 import { LoadingCard } from "@/shared/ui/LoadingCard";
 

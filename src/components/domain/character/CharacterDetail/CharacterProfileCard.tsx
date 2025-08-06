@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { InfoRow } from "@/shared/ui/InfoRow";
 import { InfoDateRow } from "@/shared/ui/InfoDateRow";
-import { CharacterBasicInfo } from "@/types/character";
+import { CharacterBasicInfo } from "@/entities/character";
 
 interface CharacterProfileCardProps {
   data: CharacterBasicInfo;

@@ -1,4 +1,4 @@
-import { CharacterItemEquipment } from "../model";
+import { CharacterItemEquipment } from "@/shared/model/types/nexon-models";
 import { getStarforce } from "../lib";
 import { StarIcon } from "@/shared/ui/StarIcon";
 

@@ -3,7 +3,7 @@ import {
   CharacterItemEquipment,
   CharacterAndroidEquipment,
   CharacterHeartEquipment,
-} from "@/entities/item/model";
+} from "@/shared/model/types/nexon-models";
 import { ItemIcon } from "@/entities/item";
 import { sortItems } from "@/entities/item/lib";
 

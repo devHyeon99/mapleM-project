@@ -8,10 +8,10 @@ import {
 } from "@/shared/ui/card";
 import { CharacterProfileCard } from "./CharacterDetail/CharacterProfileCard";
 import { CharacterDetailTabs } from "./CharacterDetail/CharacterDetailTabs";
-import { CharacterBasicInfo as CharacterBasicInfoType } from "@/types/character";
+import { CharacterBasicInfo as CharacterBasicInfoType } from "@/entities/character";
 import { Skeleton } from "@/shared/ui/skeleton";
 import { useQuery } from "@tanstack/react-query";
-import { characterQueryKeys } from "@/queries/characterQueryKeys";
+import { characterQueryKeys } from "@/entities/character";
 
 interface CharacterDetailsResponse {
   data: CharacterBasicInfoType;

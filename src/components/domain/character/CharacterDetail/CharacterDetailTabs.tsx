@@ -2,7 +2,7 @@ import {
   CharacterAndroidEquipment,
   CharacterHeartEquipment,
   CharacterItemEquipment,
-} from "@/types/character";
+} from "@/shared/model/types/nexon-models";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/ui/tabs";
 import { Separator } from "@/shared/ui/separator";
 import { ItemTab } from "./tabs/ItemTab";

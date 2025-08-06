@@ -2,7 +2,7 @@
 
 import * as PopoverPrimitive from "@radix-ui/react-popover";
 import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui/popover";
-import { CharacterItemEquipment } from "@/types/character";
+import { CharacterItemEquipment } from "@/shared/model/types/nexon-models";
 import { X } from "lucide-react";
 import { ItemHeader } from "./ItemHeader";
 import { ItemStarforce } from "./ItemStarforce";

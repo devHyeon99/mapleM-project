@@ -1,7 +1,7 @@
 "use client";
 
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
-import { ApiResponse } from "@/shared/model/types";
+import { ApiResponse } from "@/shared/model/types/ApiResponse";
 
 interface Options {
   ocid: string | null;

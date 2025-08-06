@@ -2,15 +2,8 @@
 
 import Image from "next/image";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/ui/tabs";
-import { useCharacterJewel } from "@/hooks/useCharacterJewel";
+import { useCharacterJewel, JewelInfo } from "@/entities/character";
 import { LoadingCard } from "@/shared/ui/LoadingCard";
-
-interface JewelInfo {
-  slot_no: number;
-  jewel_icon: string;
-  jewel_name: string;
-  jewel_option: string;
-}
 
 const JewelDisplay = ({ jewel }: { jewel: JewelInfo }) => {
   const match = jewel.jewel_option.match(/^([^\d]+)([\d.,%+]+.*)$/);

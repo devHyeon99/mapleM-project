@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useCharacterSymbol } from "@/hooks/useCharacterSymbol";
+import { useCharacterSymbol } from "@/entities/character";
 import { LoadingCard } from "@/shared/ui/LoadingCard";
 
 interface SymbolTabProps {

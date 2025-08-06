@@ -1,4 +1,4 @@
-import { CharacterSymbol } from "@/types/symbol";
+import { CharacterSymbol } from "@/entities/character";
 import { useCharacterApi } from "@/shared/api/hooks/useCharacterApi";
 
 export const useCharacterSymbol = (ocid: string | null) =>

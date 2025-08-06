@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { CharacterItemEquipment } from "../model";
+import { CharacterItemEquipment } from "@/shared/model/types/nexon-models";
 import { getGradeInfo } from "../lib";
 import { POTENTIAL_GRADE_MAP } from "@/shared/config/constants/gradeMap";
 import { cn } from "@/shared/lib/utils";

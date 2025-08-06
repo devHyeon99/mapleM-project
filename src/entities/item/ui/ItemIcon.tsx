@@ -1,6 +1,6 @@
 "use client";
 
-import { CharacterItemEquipment } from "../model";
+import { CharacterItemEquipment } from "@/shared/model/types/nexon-models";
 import { ItemPopover } from "./ItemPopover";
 import { ItemIconBase } from "./ItemIconBase";
 

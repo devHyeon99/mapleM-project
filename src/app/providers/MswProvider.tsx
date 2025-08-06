@@ -4,7 +4,7 @@ import { useState, useEffect, ReactNode } from "react";
 
 const initMSW = async () => {
   if (typeof window !== "undefined" && process.env.NODE_ENV === "development") {
-    const { worker } = await import("@/mocks/browser");
+    const { worker } = await import("@/app/lib/msw/browser");
 
     await worker.start({
       onUnhandledRequest(req) {

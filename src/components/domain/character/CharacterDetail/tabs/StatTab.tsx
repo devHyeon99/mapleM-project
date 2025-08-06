@@ -4,18 +4,20 @@ import { Separator } from "@/shared/ui/separator";
 import * as PopoverPrimitive from "@radix-ui/react-popover";
 import { Popover, PopoverTrigger, PopoverContent } from "@/shared/ui/popover";
 import { Search, X } from "lucide-react";
-import { useCharacterStatSet } from "@/hooks/useCharacterStat";
+import {
+  useCharacterStat,
+  aggregateOptions,
+  formatSetName,
+} from "@/entities/character";
 import { LoadingCard } from "@/shared/ui/LoadingCard";
-import { aggregateOptions } from "@/utils/aggregateOptions";
 import { Button } from "@/shared/ui/button";
-import { formatSetName } from "@/utils/formatSetName";
 
 interface StatTabProps {
   ocid: string;
 }
 
 export const StatTab = ({ ocid }: StatTabProps) => {
-  const { data, isLoading, isError, error } = useCharacterStatSet(ocid);
+  const { data, isLoading, isError, error } = useCharacterStat(ocid);
 
   if (isLoading) {
     return <LoadingCard message="스탯 및 세트효과 정보 불러오는중..." />;

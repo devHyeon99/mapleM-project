@@ -1,4 +1,4 @@
-import { CharacterHexaMatrixStat } from "@/types/HexaStat";
+import { CharacterHexaMatrixStat } from "@/entities/character";
 import { useCharacterApi } from "@/shared/api/hooks/useCharacterApi";
 
 export const useCharacterHexaStat = (ocid: string | null) =>

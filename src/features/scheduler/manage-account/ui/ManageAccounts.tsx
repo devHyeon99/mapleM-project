@@ -1,7 +1,10 @@
 "use client";
 
 import { useState } from "react";
+
 import type { Account } from "@/entities/scheduler";
+import { AccountListItem } from "@/entities/scheduler";
+import { DeleteAccountButton } from "@/features/scheduler/delete-account";
 import { Button } from "@/shared/ui/button";
 import {
   Dialog,
@@ -12,7 +15,6 @@ import {
   DialogTrigger,
 } from "@/shared/ui/dialog";
 import { Settings } from "lucide-react";
-import { AccountListItem } from "./AccountListItem";
 
 interface ManageAccountsProps {
   accounts: Account[];
@@ -57,12 +59,13 @@ export const ManageAccounts = ({
             </p>
           ) : (
             accounts.map((account) => (
-              <AccountListItem
-                key={account.id}
-                account={account}
-                onDeleteAccount={onDeleteAccount}
-                isDeleting={isDeletingAccount}
-              />
+              <AccountListItem key={account.id} account={account}>
+                <DeleteAccountButton
+                  account={account}
+                  onDeleteAccount={onDeleteAccount}
+                  isDeleting={isDeletingAccount}
+                />
+              </AccountListItem>
             ))
           )}
         </div>

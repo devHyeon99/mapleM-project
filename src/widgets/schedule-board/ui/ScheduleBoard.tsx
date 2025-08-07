@@ -13,7 +13,7 @@ const CATEGORIES = [
 
 type CategoryKey = "daily" | "weekly" | "monthly";
 
-interface ScheduleContentGridProps {
+interface ScheduleBoardProps {
   typeLabel: string;
   isLoading: boolean;
   data: Record<CategoryKey, ChecklistItemData[]>;
@@ -26,7 +26,7 @@ interface ScheduleContentGridProps {
   onEditItem: (itemId: string, newLabel: string) => void;
 }
 
-export const ScheduleContentGrid = ({
+export const ScheduleBoard = ({
   typeLabel,
   data,
   counts,
@@ -37,7 +37,7 @@ export const ScheduleContentGrid = ({
   onDeleteItem,
   onEditItem,
   isLoading = false,
-}: ScheduleContentGridProps) => {
+}: ScheduleBoardProps) => {
   return (
     <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
       {CATEGORIES.map(({ key, title }) => (

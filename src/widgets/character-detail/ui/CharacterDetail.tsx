@@ -6,8 +6,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/shared/ui/card";
-import { CharacterProfileCard } from "./CharacterDetail/CharacterProfileCard";
-import { CharacterDetailTabs } from "./CharacterDetail/CharacterDetailTabs";
+import { CharacterProfileCard } from "./CharacterProfileCard";
+import { CharacterDetailTabs } from "./CharacterDetailTabs";
 import { CharacterBasicInfo as CharacterBasicInfoType } from "@/entities/character";
 import { Skeleton } from "@/shared/ui/skeleton";
 import { useQuery } from "@tanstack/react-query";

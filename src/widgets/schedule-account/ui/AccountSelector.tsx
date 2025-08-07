@@ -10,8 +10,8 @@ import {
 } from "@/shared/ui/select";
 import { Card } from "@/shared/ui/card";
 import { AlertCircle } from "lucide-react";
-import { AddAccount } from "./AccountSelector/AddAccount";
-import { ManageAccounts } from "./AccountSelector/ManageAccounts";
+import { AddAccount } from "./AddAccount";
+import { ManageAccounts } from "./ManageAccounts";
 import { LoadingCard } from "@/shared/ui/LoadingCard";
 
 interface AccountSelectorProps {

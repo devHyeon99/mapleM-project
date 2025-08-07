@@ -3,8 +3,8 @@
 import { useCharacterSkill } from "@/entities/skill/model";
 import { Separator } from "@/shared/ui/separator";
 import { LoadingCard } from "@/shared/ui/LoadingCard";
-import { SkillSettings } from "@/components/domain/skill/SkillSettings";
-import { SkillPreset } from "@/components/domain/skill/SkillPreset";
+import { SkillSettings } from "./SkillSettings";
+import { SkillPreset } from "./SkillPreset";
 
 interface SkillTabProps {
   ocid: string;

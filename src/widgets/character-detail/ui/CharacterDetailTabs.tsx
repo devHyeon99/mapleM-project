@@ -5,16 +5,18 @@ import {
 } from "@/shared/model/types/nexon-models";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/ui/tabs";
 import { Separator } from "@/shared/ui/separator";
-import { ItemTab } from "./tabs/ItemTab";
-import { CashItemTab } from "./tabs/CashItemTab";
-import { JewelTab } from "./tabs/JewelTab";
-import { SymbolTab } from "./tabs/SymbolTab";
-import { StatTab } from "./tabs/StatTab";
-import { LinkSkillTab } from "./tabs/LinkSkillTab";
-import { SkillTab } from "./tabs/SkillTab";
-import { VmatrixTab } from "./tabs/VmatrixTab";
-import { HexaSkillTab } from "./tabs/HexaSkillTab";
-import { HexaStatTab } from "./tabs/HexaStatTab";
+import {
+  ItemTab,
+  CashItemTab,
+  JewelTab,
+  SymbolTab,
+  StatTab,
+  LinkSkillTab,
+  SkillTab,
+  VmatrixTab,
+  HexaSkillTab,
+  HexaStatTab,
+} from "./tabs";
 
 interface CharacterDetailTabsProps {
   ocid: string;

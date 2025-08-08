@@ -1,9 +1,9 @@
 "use client";
 
 import { useScheduler, useAccounts, useCharacters } from "@/entities/scheduler";
-import { AccountSelector } from "@/widgets/schedule-account";
-import { CharacterSelector } from "@/widgets/schedule-character";
-import { ScheduleBoard } from "@/widgets/schedule-board";
+import { AccountSelector } from "@/widgets/scheduler-account";
+import { CharacterSelector } from "@/widgets/scheduler-character";
+import { ScheduleBoard } from "@/widgets/scheduler-board";
 import { CharacterDetail } from "@/widgets/character-detail";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/ui/tabs";
 

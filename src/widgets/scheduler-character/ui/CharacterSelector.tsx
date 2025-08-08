@@ -4,9 +4,9 @@ import { useMemo, useCallback } from "react";
 import type { Character } from "@/entities/scheduler";
 import { Card } from "@/shared/ui/card";
 import { LoadingCard } from "@/shared/ui/LoadingCard";
-import { AddCharacter } from "./AddCharacter";
+import { AddCharacter } from "@/features/scheduler/add-character";
+import { DeleteCharacter } from "@/features/scheduler/delete-character";
 import { CharacterList } from "./CharacterList";
-import { DeleteCharacter } from "./DeleteCharacter";
 
 interface CharacterSelectorProps {
   characters: Character[];

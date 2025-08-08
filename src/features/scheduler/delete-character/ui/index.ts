@@ -1,0 +1,1 @@
+export { DeleteCharacter } from "./DeleteCharacter";

@@ -1,4 +1,4 @@
-import { CharacterSearch } from "@/components/domain/character-search/CharacterSearch";
+import { CharacterSearch } from "@/features/character-search";
 import { NoticeTabs } from "@/widgets/notice-tabs";
 
 export default function Home() {

@@ -1,6 +1,6 @@
 "use client";
 
-import { useSearchHistory } from "@/hooks/useSearchHistory";
+import { useSearchHistory } from "../model";
 import { WORLD_NAMES } from "@/shared/config/constants/worlds";
 import { Button } from "@/shared/ui/button";
 import { X } from "lucide-react";

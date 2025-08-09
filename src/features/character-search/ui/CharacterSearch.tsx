@@ -13,8 +13,8 @@ import {
 } from "@/shared/ui/select";
 import { WORLD_NAMES } from "@/shared/config/constants/worlds";
 import { Search, Loader2 } from "lucide-react";
-import { CharacterSearchHistory } from "@/components/domain/character-search/CharacterSearchHistory";
-import { useCharacterSearch } from "@/hooks/useCharacterSearch";
+import { CharacterSearchHistory } from "./CharacterSearchHistory";
+import { useCharacterSearch } from "../model";
 
 export const CharacterSearch = () => {
   const {

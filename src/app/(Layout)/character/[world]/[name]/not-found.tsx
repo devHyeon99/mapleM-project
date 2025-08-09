@@ -1,6 +1,6 @@
 "use client";
 
-import { CharacterSearch } from "@/components/domain/character-search/CharacterSearch";
+import { CharacterSearch } from "@/features/character-search";
 import { AlertTriangle } from "lucide-react";
 import { useParams } from "next/navigation";
 

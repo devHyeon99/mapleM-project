@@ -1,5 +1,3 @@
-"use client";
-
 interface Props {
   description: string | null | undefined;
 }

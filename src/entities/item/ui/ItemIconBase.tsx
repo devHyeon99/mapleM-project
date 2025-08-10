@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react";
 import { CharacterItemEquipment } from "@/shared/model/types/nexon-models";
 import { getGradeInfo } from "../lib";

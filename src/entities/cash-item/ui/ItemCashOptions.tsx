@@ -1,5 +1,3 @@
-"use client";
-
 import { Separator } from "@/shared/ui/separator";
 import { CashItemEquipment } from "@/entities/cash-item";
 

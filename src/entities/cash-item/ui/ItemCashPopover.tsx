@@ -1,7 +1,3 @@
-// ItemCashPopover.tsx (최종 수정)
-
-"use client";
-
 import * as PopoverPrimitive from "@radix-ui/react-popover";
 import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui/popover";
 import { X } from "lucide-react";

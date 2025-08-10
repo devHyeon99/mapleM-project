@@ -1,5 +1,3 @@
-"use client";
-
 import { Separator } from "@/shared/ui/separator";
 import { COLOR_RANGE_LABEL } from "@/shared/config/constants/color_prism";
 import { CashItemEquipment } from "@/entities/cash-item";

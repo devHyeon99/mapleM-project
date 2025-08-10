@@ -1,5 +1,3 @@
-"use client";
-
 import * as PopoverPrimitive from "@radix-ui/react-popover";
 import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui/popover";
 import { CharacterItemEquipment } from "@/shared/model/types/nexon-models";

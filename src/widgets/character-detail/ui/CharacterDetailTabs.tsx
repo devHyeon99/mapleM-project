@@ -2,7 +2,8 @@ import {
   CharacterAndroidEquipment,
   CharacterHeartEquipment,
   CharacterItemEquipment,
-} from "@/shared/model/types/nexon-models";
+  CharacterSetInfo,
+} from "@/entities/character";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/ui/tabs";
 import { Separator } from "@/shared/ui/separator";
 import {
@@ -23,6 +24,7 @@ interface CharacterDetailTabsProps {
   items: CharacterItemEquipment[];
   android: CharacterAndroidEquipment | null;
   heart: CharacterHeartEquipment | null;
+  setEffect: CharacterSetInfo[];
 }
 
 export const CharacterDetailTabs = ({
@@ -30,6 +32,7 @@ export const CharacterDetailTabs = ({
   items,
   android,
   heart,
+  setEffect,
 }: CharacterDetailTabsProps) => (
   <Tabs defaultValue="item" className="w-[340px] gap-4">
     <TabsList className="grid h-auto w-full grid-cols-7 [grid-template-rows:auto_auto] gap-[2px] rounded-xs border pt-1.5">
@@ -76,7 +79,12 @@ export const CharacterDetailTabs = ({
     </TabsList>
 
     <TabsContent value="item">
-      <ItemTab items={items} android={android} heart={heart} />
+      <ItemTab
+        items={items}
+        android={android}
+        heart={heart}
+        setEffect={setEffect}
+      />
     </TabsContent>
     <TabsContent value="cashItem">
       <CashItemTab ocid={ocid} />

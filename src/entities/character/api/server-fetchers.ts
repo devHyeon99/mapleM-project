@@ -71,6 +71,10 @@ export const getCharacterDetails = async (ocid: string) => {
       `${NEXON_API_BASE_URL}/character/android-equipment?ocid=${ocid}`,
       fetchOptions,
     ),
+    setEffect: fetch(
+      `${NEXON_API_BASE_URL}/character/set-effect?ocid=${ocid}`,
+      fetchOptions,
+    ),
   };
 
   // 병렬 실행
@@ -81,9 +85,8 @@ export const getCharacterDetails = async (ocid: string) => {
   }
 
   // JSON 변환
-  const [basicData, guildData, equipData, androidData] = await Promise.all(
-    responses.map((res) => res.json()),
-  );
+  const [basicData, guildData, equipData, androidData, setEffectData] =
+    await Promise.all(responses.map((res) => res.json()));
 
   // 데이터 조합
   const { android_equipment, heart_equipment } = androidData ?? {};
@@ -96,6 +99,7 @@ export const getCharacterDetails = async (ocid: string) => {
       item_equipment: equipData.item_equipment ?? [],
       android_equipment: android_equipment ?? null,
       heart_equipment: heart_equipment ?? null,
+      set_effect: setEffectData?.set_info ?? [],
     },
   };
 };

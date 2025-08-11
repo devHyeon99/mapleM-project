@@ -15,41 +15,28 @@ export async function GET(request: Request) {
   }
 
   try {
-    const requests = {
-      stat: fetch(`${NEXON_API_BASE_URL}/character/stat?ocid=${ocid}`, {
+    const res = await fetch(
+      `${NEXON_API_BASE_URL}/character/stat?ocid=${ocid}`,
+      {
         headers: { "x-nxopen-api-key": NEXON_API_KEY! },
         cache: "no-store",
-      }),
-      setEffect: fetch(
-        `${NEXON_API_BASE_URL}/character/set-effect?ocid=${ocid}`,
-        {
-          headers: { "x-nxopen-api-key": NEXON_API_KEY! },
-          cache: "no-store",
-        },
-      ),
-    };
+      },
+    );
 
-    const responses = await Promise.all(Object.values(requests));
-
-    if (responses.some((res) => !res.ok)) {
-      const errors = await Promise.all(
-        responses.map((res) => res.text().catch(() => null)),
-      );
-      const firstError = errors.find((e) => e) ?? "Nexon API 요청 실패";
+    if (!res.ok) {
+      const errorText = await res.text().catch(() => "Unknown Error");
       return NextResponse.json(
-        { error: { name: "NexonAPIError", message: firstError } },
-        { status: 502 },
+        { error: { name: "NexonAPIError", message: errorText } },
+        { status: res.status },
       );
     }
 
-    const [statData, setEffectData] = await Promise.all(
-      responses.map((res) => res.json()),
-    );
+    const statData = await res.json();
 
     return NextResponse.json({
       data: {
         stat: statData ?? null,
-        set_effect: setEffectData?.set_info ?? [],
+        // set_effect 제거됨
       },
     });
   } catch (err) {

@@ -1,8 +1,8 @@
-import { CharacterStatSetResponse } from "@/entities/character";
+import { CharacterStatResponse } from "@/entities/character";
 import { useCharacterApi } from "@/shared/api/hooks/useCharacterApi";
 
 export const useCharacterStat = (ocid: string | null) =>
-  useCharacterApi<CharacterStatSetResponse>({
+  useCharacterApi<CharacterStatResponse>({
     ocid,
     endpoint: "/api/character/stat",
   });

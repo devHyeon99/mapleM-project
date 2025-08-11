@@ -1,8 +1,8 @@
-import { CharacterBasicInfo } from "@/entities/character";
+import { CharacterDetailData } from "@/entities/character";
 import { useCharacterApi } from "@/shared/api/hooks/useCharacterApi";
 
 export const useCharacterBasicInfo = (ocid: string | null) =>
-  useCharacterApi<CharacterBasicInfo>({
+  useCharacterApi<CharacterDetailData>({
     ocid,
     endpoint: "/api/character/basic",
   });

@@ -8,13 +8,13 @@ import {
 } from "@/shared/ui/card";
 import { CharacterProfileCard } from "./CharacterProfileCard";
 import { CharacterDetailTabs } from "./CharacterDetailTabs";
-import { CharacterBasicInfo as CharacterBasicInfoType } from "@/entities/character";
+import { CharacterDetailData } from "@/entities/character";
 import { Skeleton } from "@/shared/ui/skeleton";
 import { useQuery } from "@tanstack/react-query";
 import { characterQueryKeys } from "@/entities/character";
 
 interface CharacterDetailsResponse {
-  data: CharacterBasicInfoType;
+  data: CharacterDetailData;
 }
 
 const fetchCharacterDetails = async (
@@ -94,14 +94,13 @@ export const CharacterDetail = ({ ocid }: CharacterBasicInfoProps) => {
 
           {characterData && (
             <>
-              <CharacterProfileCard
-                data={characterData as CharacterBasicInfoType}
-              />
+              <CharacterProfileCard data={characterData} />
               <CharacterDetailTabs
                 ocid={ocid}
                 items={characterData.item_equipment ?? []}
                 android={characterData.android_equipment ?? null}
                 heart={characterData.heart_equipment ?? null}
+                setEffect={characterData.set_effect ?? []}
               />
             </>
           )}

@@ -1,16 +1,8 @@
 "use client";
 
 import { Separator } from "@/shared/ui/separator";
-import * as PopoverPrimitive from "@radix-ui/react-popover";
-import { Popover, PopoverTrigger, PopoverContent } from "@/shared/ui/popover";
-import { Search, X } from "lucide-react";
-import {
-  useCharacterStat,
-  aggregateOptions,
-  formatSetName,
-} from "@/entities/character";
+import { useCharacterStat } from "@/entities/character";
 import { LoadingCard } from "@/shared/ui/LoadingCard";
-import { Button } from "@/shared/ui/button";
 
 interface StatTabProps {
   ocid: string;
@@ -20,7 +12,7 @@ export const StatTab = ({ ocid }: StatTabProps) => {
   const { data, isLoading, isError, error } = useCharacterStat(ocid);
 
   if (isLoading) {
-    return <LoadingCard message="스탯 및 세트효과 정보 불러오는중..." />;
+    return <LoadingCard message="스탯 정보 불러오는중..." />;
   }
 
   if (isError) {
@@ -41,7 +33,7 @@ export const StatTab = ({ ocid }: StatTabProps) => {
     );
   }
 
-  const { stat, set_effect } = data;
+  const { stat } = data;
 
   return (
     <div className="flex flex-col gap-3">
@@ -65,107 +57,6 @@ export const StatTab = ({ ocid }: StatTabProps) => {
             );
           })}
         </ul>
-      </section>
-
-      {/* 세트 효과 영역 */}
-      <section className="rounded-md border p-3">
-        <div className="mb-2 flex items-center justify-between">
-          <h2 className="font-semibold">장착중인 장비 세트 효과</h2>
-          {set_effect.length > 0 && (
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button variant="ghost" size="sm" className="cursor-pointer">
-                  전체보기
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent
-                side="right"
-                align="center"
-                className="popover-center bg-popover/98 relative w-65 rounded-lg border-2 p-4 shadow-lg"
-              >
-                <PopoverPrimitive.Close className="absolute top-3 right-3 opacity-70 hover:opacity-100">
-                  <X className="h-5 w-5" />
-                </PopoverPrimitive.Close>
-                <p className="mb-2 font-semibold">
-                  장착중인 장비 세트 효과 총합
-                </p>
-                <Separator className="mb-2" />
-
-                <ul className="flex flex-col gap-1 text-sm">
-                  {aggregateOptions(
-                    set_effect.flatMap((set) =>
-                      set.set_option.split(/,(?!\d{3})/).map((o) => o.trim()),
-                    ),
-                  ).map((opt, i) => (
-                    <li key={i} className="text-muted-foreground">
-                      {opt}
-                    </li>
-                  ))}
-                </ul>
-              </PopoverContent>
-            </Popover>
-          )}
-        </div>
-        <Separator className="mb-2" />
-
-        {set_effect.length === 0 ? (
-          <p className="text-muted-foreground text-sm">
-            2025.09.18 API 업데이트 이후 접속하지 않았거나,
-            <br />
-            장착중인 장비 세트 효과가 없습니다.
-          </p>
-        ) : (
-          <ul className="space-y-2 text-sm">
-            {set_effect.map((set, idx) => (
-              <li key={idx}>
-                <div className="flex items-center justify-between gap-1">
-                  <span className="font-medium">
-                    {set.set_name}{" "}
-                    <span className="text-[#FF7E54]">({set.set_count})</span>
-                  </span>
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <Button
-                        size="icon"
-                        variant="ghost"
-                        className="cursor-pointer"
-                        aria-label={`${set.set_name} 옵션 보기`}
-                      >
-                        <Search className="size-4" />
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent
-                      side="right"
-                      align="center"
-                      className="popover-center bg-popover/98 relative w-65 rounded-lg border-2 p-4 shadow-lg"
-                    >
-                      <PopoverPrimitive.Close className="absolute top-3 right-3 opacity-70 hover:opacity-100">
-                        <X className="h-5 w-5" />
-                      </PopoverPrimitive.Close>
-                      <p className="mb-2 font-semibold">
-                        {formatSetName(set.set_name, set.set_count)}
-                      </p>
-                      <Separator className="mb-2" />
-                      <ul className="flex flex-col gap-1">
-                        {set.set_option
-                          .split(/,(?!\d{3})/)
-                          .map((opt) => opt.trim())
-                          .map((opt, i) => (
-                            <li
-                              key={i}
-                              className="text-muted-foreground text-sm"
-                            >
-                              {opt}
-                            </li>
-                          ))}
-                      </ul>
-                    </PopoverContent>
-                  </Popover>
-                </div>
-              </li>
-            ))}
-          </ul>
-        )}
       </section>
     </div>
   );

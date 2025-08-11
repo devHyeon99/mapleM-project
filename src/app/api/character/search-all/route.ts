@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { WORLD_NAMES } from "@/shared/config/constants/worlds";
-import { getOcidForSearch } from "@/shared/api/nexonApi";
+import { getOcidForSearch } from "@/entities/character";
 
 export interface CharacterSummary {
   world_name: string;

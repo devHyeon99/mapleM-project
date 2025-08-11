@@ -4,5 +4,5 @@ import { useCharacterApi } from "@/shared/api/hooks/useCharacterApi";
 export const useCharacterHexaSkill = (ocid: string | null) =>
   useCharacterApi<CharacterHexaMatrix>({
     ocid,
-    endpoint: "/api/characters/hexa-skill",
+    endpoint: "/api/character/hexa-skill",
   });

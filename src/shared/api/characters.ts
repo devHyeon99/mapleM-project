@@ -23,7 +23,7 @@ export const addCharacter = async (newCharacter: {
   name: string;
   world_name: string;
 }): Promise<Character> => {
-  const response = await fetch("/api/characters", {
+  const response = await fetch("/api/character", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

@@ -37,7 +37,7 @@ export const CharacterProfileCard = ({ data }: CharacterProfileCardProps) => {
       <dl className="flex w-full flex-col gap-2 text-sm">
         <InfoRow label="레벨">{data.character_level}</InfoRow>
         <InfoRow label="EXP">{data.character_exp_rate ?? "0"}%</InfoRow>
-        <InfoRow label="직업">{data.character_job_name}</InfoRow>
+        <InfoRow label="직업">{data.character_class}</InfoRow>
         <InfoRow label="월드">{data.world_name}</InfoRow>
         <InfoRow label="길드">{data.guild_name ?? "길드없음"}</InfoRow>
 

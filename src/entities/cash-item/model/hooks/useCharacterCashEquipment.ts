@@ -4,5 +4,5 @@ import { useCharacterApi } from "@/shared/api/hooks/useCharacterApi";
 export const useCharacterCashEquipment = (ocid: string | null) =>
   useCharacterApi<CharacterCashEquipment>({
     ocid,
-    endpoint: "/api/characters/cash",
+    endpoint: "/api/character/cash",
   });

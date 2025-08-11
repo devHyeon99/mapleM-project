@@ -11,7 +11,7 @@ export interface CharacterBasicInfo {
   character_name: string;
   world_name: string;
   character_level: number;
-  character_job_name: string;
+  character_class: string;
   character_gender?: string;
   character_image?: string;
   character_exp?: number;

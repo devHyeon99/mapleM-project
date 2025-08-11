@@ -1,5 +1,7 @@
 "use client";
 
+import { getDetailedTimeAgo } from "@/shared/lib/date";
+
 interface InfoDateRowProps {
   label: string;
   date?: string;
@@ -17,6 +19,12 @@ export const InfoDateRow = ({ label, date, withTime }: InfoDateRowProps) => {
       <dd>
         <time dateTime={d.toISOString()}>
           {withTime ? d.toLocaleString() : d.toLocaleDateString()}
+
+          {label === "생성일" && (
+            <span className="text-muted-foreground ml-2 text-xs font-semibold">
+              ({getDetailedTimeAgo(date)})
+            </span>
+          )}
         </time>
       </dd>
     </div>

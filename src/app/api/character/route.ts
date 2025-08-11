@@ -10,7 +10,7 @@ interface NexonBasicInfoResponse {
   character_name: string;
   world_name: string;
   character_level: number;
-  character_job_name: string;
+  character_class: string;
 }
 
 // 넥슨 API 기본 URL
@@ -86,7 +86,7 @@ export async function POST(request: Request) {
       account_id,
       ocid,
       name: nexonData.character_name,
-      job: nexonData.character_job_name,
+      job: nexonData.character_class,
       level: nexonData.character_level,
     };
 

@@ -10,7 +10,7 @@ const fetchCharactersAll = async (
   name: string,
 ): Promise<CharacterBasicInfo[]> => {
   const res = await fetch(
-    `/api/characters/search-all?name=${encodeURIComponent(name)}`,
+    `/api/character/search-all?name=${encodeURIComponent(name)}`,
   );
   if (!res.ok) {
     const errorData = await res.json();

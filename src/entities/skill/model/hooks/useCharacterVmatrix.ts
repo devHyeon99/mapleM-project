@@ -4,5 +4,5 @@ import { useCharacterApi } from "@/shared/api/hooks/useCharacterApi";
 export const useCharacterVmatrix = (ocid: string | null) =>
   useCharacterApi<CharacterVMatrix>({
     ocid,
-    endpoint: "/api/characters/vmatrix",
+    endpoint: "/api/character/vmatrix",
   });

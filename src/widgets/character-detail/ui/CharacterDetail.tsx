@@ -20,7 +20,7 @@ interface CharacterDetailsResponse {
 const fetchCharacterDetails = async (
   ocid: string,
 ): Promise<CharacterDetailsResponse> => {
-  const res = await fetch(`/api/characters/basic?ocid=${ocid}`, {
+  const res = await fetch(`/api/character/basic?ocid=${ocid}`, {
     cache: "no-store",
   });
   if (!res.ok) {

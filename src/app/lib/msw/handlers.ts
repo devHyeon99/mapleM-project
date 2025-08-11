@@ -107,7 +107,7 @@ export const handlers = [
     return HttpResponse.json(filteredCharacters);
   }),
 
-  http.post("/api/characters", async ({ request }) => {
+  http.post("/api/character", async ({ request }) => {
     const { name } = (await request.json()) as { name: string };
     const mockSessionAccountId = "acc1"; // 테스트를 위해 첫 번째 계정에 추가
     const newCharacter: Character = {

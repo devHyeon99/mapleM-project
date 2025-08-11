@@ -4,5 +4,5 @@ import { useCharacterApi } from "@/shared/api/hooks/useCharacterApi";
 export const useCharacterStat = (ocid: string | null) =>
   useCharacterApi<CharacterStatSetResponse>({
     ocid,
-    endpoint: "/api/characters/stat",
+    endpoint: "/api/character/stat",
   });

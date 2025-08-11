@@ -21,7 +21,7 @@ const fetchCharacterDetails = async (
   ocid: string,
 ): Promise<CharacterDetailsResponse> => {
   const res = await fetch(`/api/characters/basic?ocid=${ocid}`, {
-    next: { revalidate: 600 },
+    cache: "no-store",
   });
   if (!res.ok) {
     const errorData = await res.json();
@@ -42,10 +42,9 @@ export const CharacterDetail = ({ ocid }: CharacterBasicInfoProps) => {
     queryKey: detailsKey,
     queryFn: () => fetchCharacterDetails(ocid),
     staleTime: 10 * 60 * 1000,
-    gcTime: 30 * 60 * 1000,
+    gcTime: 10 * 60 * 1000,
     refetchOnMount: true,
     refetchOnWindowFocus: true,
-    refetchInterval: 30 * 60 * 1000,
   });
 
   const characterData = data?.data;

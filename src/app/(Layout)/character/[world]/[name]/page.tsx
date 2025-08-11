@@ -6,7 +6,6 @@ import {
 } from "@tanstack/react-query";
 import { notFound } from "next/navigation";
 import { CharacterSearch } from "@/features/character-search";
-
 import { getOcid, getCharacterDetails } from "@/shared/api/nexonApi";
 import { characterQueryKeys } from "@/entities/character";
 import { CharacterDetail } from "@/widgets/character-detail";

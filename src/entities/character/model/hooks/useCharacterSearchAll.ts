@@ -27,8 +27,11 @@ const fetchCharactersAll = async (
 export const useCharacterSearchAll = (name?: string) => {
   return useQuery({
     queryKey: ["characters", "all", name],
-    queryFn: () => fetchCharactersAll(name!), //
+    queryFn: () => fetchCharactersAll(name!),
     enabled: !!name,
-    staleTime: 1000 * 60 * 1,
+    staleTime: 10 * 60 * 1000,
+    gcTime: 10 * 60 * 1000,
+    refetchOnMount: true,
+    refetchOnWindowFocus: true,
   });
 };

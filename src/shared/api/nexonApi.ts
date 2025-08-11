@@ -1,7 +1,5 @@
 const NEXON_API_KEY = process.env.NEXON_API_KEY;
 const NEXON_API_BASE_URL = "https://open.api.nexon.com/maplestorym/v1";
-const REVALIDATE_TIME_IN_SECONDS = 600;
-const REVALIDATE_OCID_SECONDS = 60 * 60 * 24;
 
 // 이 함수들은 서버에서만 호출되어야 함
 
@@ -11,7 +9,7 @@ export const getOcid = async (world: string, name: string) => {
     `${NEXON_API_BASE_URL}/id?character_name=${name}&world_name=${world}`,
     {
       headers: { "x-nxopen-api-key": NEXON_API_KEY! },
-      next: { revalidate: REVALIDATE_OCID_SECONDS },
+      cache: "no-store",
     },
   );
   if (!res.ok) throw new Error(`${world} 월드 ${name} 캐릭터 OCID 조회 실패`);
@@ -28,7 +26,7 @@ export const getCharacterBasicInfo = async (ocid: string) => {
     `${NEXON_API_BASE_URL}/character/basic?ocid=${ocid}`,
     {
       headers: { "x-nxopen-api-key": NEXON_API_KEY },
-      next: { revalidate: REVALIDATE_TIME_IN_SECONDS },
+      cache: "no-store",
     },
   );
 
@@ -51,9 +49,9 @@ export const getCharacterDetails = async (ocid: string) => {
 
   const headers = { "x-nxopen-api-key": NEXON_API_KEY };
 
-  const fetchOptions = {
+  const fetchOptions: RequestInit = {
     headers: headers,
-    next: { revalidate: REVALIDATE_TIME_IN_SECONDS },
+    cache: "no-store",
   };
 
   const requests = {
@@ -117,7 +115,7 @@ export const getOcidForSearch = async (world: string, name: string) => {
     )}&world_name=${encodeURIComponent(world)}`,
     {
       headers: { "x-nxopen-api-key": NEXON_API_KEY },
-      next: { revalidate: REVALIDATE_TIME_IN_SECONDS }, // 1분
+      cache: "no-store",
     },
   );
 

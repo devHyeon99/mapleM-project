@@ -1,9 +1,4 @@
-import {
-  CharacterAndroidEquipment,
-  CharacterHeartEquipment,
-  CharacterItemEquipment,
-  CharacterSetInfo,
-} from "@/entities/character";
+import { CharacterDetailData } from "@/entities/character";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/ui/tabs";
 import { Separator } from "@/shared/ui/separator";
 import {
@@ -19,99 +14,101 @@ import {
   HexaStatTab,
 } from "./tabs";
 
+export const MAIN_TABS = [
+  { value: "item", label: "장비" },
+  { value: "cashItem", label: "외형" },
+  { value: "stat", label: "스탯" },
+  { value: "Jewel", label: "쥬얼" },
+  { value: "Symbol", label: "심볼" },
+  { value: "LinkSkill", label: "링크" },
+  { value: "Skill", label: "스킬" },
+] as const;
+
+export const SUB_TABS = [
+  { value: "Vmatrix", label: "V매트릭스" },
+  { value: "HexaSkill", label: "HEXA스킬" },
+  { value: "HexaStat", label: "HEXA스탯" },
+] as const;
+
+// 전체 탭 리스트 (Content 렌더링용)
+export const ALL_TABS = [...MAIN_TABS, ...SUB_TABS];
+
 interface CharacterDetailTabsProps {
   ocid: string;
-  items: CharacterItemEquipment[];
-  android: CharacterAndroidEquipment | null;
-  heart: CharacterHeartEquipment | null;
-  setEffect: CharacterSetInfo[];
+  characterData: CharacterDetailData;
 }
 
 export const CharacterDetailTabs = ({
   ocid,
-  items,
-  android,
-  heart,
-  setEffect,
-}: CharacterDetailTabsProps) => (
-  <Tabs defaultValue="item" className="w-[340px] gap-4">
-    <TabsList className="grid h-auto w-full grid-cols-7 [grid-template-rows:auto_auto] gap-[2px] rounded-xs border pt-1.5">
-      {/* 1열 */}
-      <TabsTrigger value="item" className="rounded-sm">
-        장비
-      </TabsTrigger>
-      <TabsTrigger value="cashItem" className="rounded-sm">
-        외형
-      </TabsTrigger>
-      <TabsTrigger value="stat" className="rounded-sm">
-        스탯
-      </TabsTrigger>
-      <TabsTrigger value="Jewel" className="rounded-sm">
-        쥬얼
-      </TabsTrigger>
-      <TabsTrigger value="Symbol" className="rounded-sm">
-        심볼
-      </TabsTrigger>
-      <TabsTrigger value="LinkSkill" className="rounded-sm">
-        링크
-      </TabsTrigger>
-      <TabsTrigger value="Skill" className="rounded-sm">
-        스킬
-      </TabsTrigger>
+  characterData,
+}: CharacterDetailTabsProps) => {
+  // 탭 value에 따라 렌더링할 컴포넌트를 반환하는 함수
+  const renderTabContent = (value: string) => {
+    switch (value) {
+      case "item":
+        // ItemTab만 유일하게 전체 데이터(characterData)가 필요
+        return <ItemTab data={characterData} />;
 
-      {/* 🔽 시각적 구분선 (첫 줄 끝에 세로 구분선) */}
-      <div className="col-span-7 my-1">
-        <Separator />
-      </div>
+      // 나머지 탭들은 ocid만 있으면 됨
+      case "cashItem":
+        return <CashItemTab ocid={ocid} />;
+      case "stat":
+        return <StatTab ocid={ocid} />;
+      case "Jewel":
+        return <JewelTab ocid={ocid} />;
+      case "Symbol":
+        return <SymbolTab ocid={ocid} />;
+      case "LinkSkill":
+        return <LinkSkillTab ocid={ocid} />;
+      case "Skill":
+        return <SkillTab ocid={ocid} />;
+      case "Vmatrix":
+        return <VmatrixTab ocid={ocid} />;
+      case "HexaSkill":
+        return <HexaSkillTab ocid={ocid} />;
+      case "HexaStat":
+        return <HexaStatTab ocid={ocid} />;
+      default:
+        return null;
+    }
+  };
 
-      {/* 2열 */}
-      <div className="col-span-7 mb-[1px] grid w-full grid-cols-3 gap-[2px]">
-        <TabsTrigger value="Vmatrix" className="w-full rounded-sm">
-          V매트릭스
-        </TabsTrigger>
-        <TabsTrigger value="HexaSkill" className="w-full rounded-sm">
-          HEXA스킬
-        </TabsTrigger>
-        <TabsTrigger value="HexaStat" className="w-full rounded-sm">
-          HEXA스탯
-        </TabsTrigger>
-      </div>
-    </TabsList>
+  return (
+    <Tabs defaultValue="item" className="w-[340px] gap-4">
+      {/* --- 탭 버튼 리스트 (Trigger) --- */}
+      <TabsList className="grid h-auto w-full grid-cols-7 [grid-template-rows:auto_auto] gap-[2px] rounded-xs border pt-1.5">
+        {/* Main Tabs */}
+        {MAIN_TABS.map((tab) => (
+          <TabsTrigger key={tab.value} value={tab.value} className="rounded-sm">
+            {tab.label}
+          </TabsTrigger>
+        ))}
 
-    <TabsContent value="item">
-      <ItemTab
-        items={items}
-        android={android}
-        heart={heart}
-        setEffect={setEffect}
-      />
-    </TabsContent>
-    <TabsContent value="cashItem">
-      <CashItemTab ocid={ocid} />
-    </TabsContent>
-    <TabsContent value="stat">
-      <StatTab ocid={ocid} />
-    </TabsContent>
-    <TabsContent value="Jewel">
-      <JewelTab ocid={ocid} />
-    </TabsContent>
-    <TabsContent value="Symbol">
-      <SymbolTab ocid={ocid} />
-    </TabsContent>
-    <TabsContent value="LinkSkill">
-      <LinkSkillTab ocid={ocid} />
-    </TabsContent>
-    <TabsContent value="Skill">
-      <SkillTab ocid={ocid} />
-    </TabsContent>
-    <TabsContent value="Vmatrix">
-      <VmatrixTab ocid={ocid} />
-    </TabsContent>
-    <TabsContent value="HexaSkill">
-      <HexaSkillTab ocid={ocid} />
-    </TabsContent>
-    <TabsContent value="HexaStat">
-      <HexaStatTab ocid={ocid} />
-    </TabsContent>
-  </Tabs>
-);
+        {/* 구분선 */}
+        <div className="col-span-7 my-1">
+          <Separator />
+        </div>
+
+        {/* Sub Tabs */}
+        <div className="col-span-7 mb-[1px] grid w-full grid-cols-3 gap-[2px]">
+          {SUB_TABS.map((tab) => (
+            <TabsTrigger
+              key={tab.value}
+              value={tab.value}
+              className="w-full rounded-sm"
+            >
+              {tab.label}
+            </TabsTrigger>
+          ))}
+        </div>
+      </TabsList>
+
+      {/* --- 탭 내용 (Content) --- */}
+      {ALL_TABS.map((tab) => (
+        <TabsContent key={tab.value} value={tab.value}>
+          {renderTabContent(tab.value)}
+        </TabsContent>
+      ))}
+    </Tabs>
+  );
+};

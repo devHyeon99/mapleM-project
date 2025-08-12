@@ -1,3 +1,8 @@
+import {
+  CharacterDetailData,
+  CharacterEquipmentResponse,
+} from "../model/types/character";
+
 const NEXON_API_KEY = process.env.NEXON_API_KEY;
 const NEXON_API_BASE_URL = "https://open.api.nexon.com/maplestorym/v1";
 
@@ -41,7 +46,9 @@ export const getCharacterBasicInfo = async (ocid: string) => {
 };
 
 /** 캐릭터 기본 정보 조회 */
-export const getCharacterDetails = async (ocid: string) => {
+export const getCharacterDetails = async (
+  ocid: string,
+): Promise<{ data: CharacterDetailData }> => {
   const NEXON_API_KEY = process.env.NEXON_API_KEY;
   if (!NEXON_API_KEY) {
     throw new Error("NEXON_API_KEY가 설정되지 않았습니다.");
@@ -88,19 +95,36 @@ export const getCharacterDetails = async (ocid: string) => {
   const [basicData, guildData, equipData, androidData, setEffectData] =
     await Promise.all(responses.map((res) => res.json()));
 
+  // 장비 데이터를 정확한 타입으로 인식시킴
+  const equipResponse = equipData as CharacterEquipmentResponse;
+
   // 데이터 조합
   const { android_equipment, heart_equipment } = androidData ?? {};
 
-  // NextResponse.json이 아닌, 순수 객체를 반환
+  // CharacterDetailData 타입에 맞춰 객체 구성
+  const combinedData: CharacterDetailData = {
+    // 1. 기본 정보 (Basic API 응답 그대로 사용: level, exp, gender 등 포함)
+    ...basicData,
+
+    // 2. 추가 정보
+    guild_name: guildData.guild_name ?? null,
+
+    // 3. 장비 정보 (프리셋 포함)
+    use_preset_no: equipResponse.use_preset_no,
+    soul_set_option: equipResponse.soul_set_option,
+    item_equipment: equipResponse.item_equipment ?? [],
+    equipment_preset: equipResponse.equipment_preset ?? [],
+
+    // 4. 기타 장비
+    android_equipment: android_equipment ?? null,
+    heart_equipment: heart_equipment ?? null,
+
+    // 5. 세트 효과 (구조 주의: set_info)
+    set_effect: setEffectData?.set_info ?? [],
+  };
+
   return {
-    data: {
-      ...basicData,
-      guild_name: guildData.guild_name ?? null,
-      item_equipment: equipData.item_equipment ?? [],
-      android_equipment: android_equipment ?? null,
-      heart_equipment: heart_equipment ?? null,
-      set_effect: setEffectData?.set_info ?? [],
-    },
+    data: combinedData,
   };
 };
 

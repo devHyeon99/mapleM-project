@@ -8,29 +8,12 @@ import {
 } from "@/shared/ui/card";
 import { CharacterProfileCard } from "./CharacterProfileCard";
 import { CharacterDetailTabs } from "./CharacterDetailTabs";
-import { CharacterDetailData } from "@/entities/character";
-import { Skeleton } from "@/shared/ui/skeleton";
 import { useQuery } from "@tanstack/react-query";
-import { characterQueryKeys } from "@/entities/character";
-
-interface CharacterDetailsResponse {
-  data: CharacterDetailData;
-}
-
-const fetchCharacterDetails = async (
-  ocid: string,
-): Promise<CharacterDetailsResponse> => {
-  const res = await fetch(`/api/character/basic?ocid=${ocid}`, {
-    cache: "no-store",
-  });
-  if (!res.ok) {
-    const errorData = await res.json();
-    throw new Error(
-      errorData.error?.message || "캐릭터 정보를 불러오는데 실패했습니다.",
-    );
-  }
-  return res.json();
-};
+import {
+  characterQueryKeys,
+  fetchCharacterDetails,
+} from "@/entities/character";
+import { CharacterDetailSkeleton } from "./CharacterDetailSkeleton";
 
 interface CharacterBasicInfoProps {
   ocid: string;
@@ -38,6 +21,7 @@ interface CharacterBasicInfoProps {
 
 export const CharacterDetail = ({ ocid }: CharacterBasicInfoProps) => {
   const detailsKey = characterQueryKeys.details(ocid);
+
   const { data, isLoading, isError, error } = useQuery({
     queryKey: detailsKey,
     queryFn: () => fetchCharacterDetails(ocid),
@@ -48,7 +32,7 @@ export const CharacterDetail = ({ ocid }: CharacterBasicInfoProps) => {
   });
 
   const characterData = data?.data;
-
+  console.log(characterData);
   return (
     <section
       aria-labelledby="character-info-title"
@@ -65,27 +49,7 @@ export const CharacterDetail = ({ ocid }: CharacterBasicInfoProps) => {
         </CardHeader>
 
         <CardContent className="flex flex-col items-center justify-center gap-4 px-0">
-          {isLoading && (
-            <div className="flex flex-col gap-5">
-              <div className="flex h-85.5 w-[340px] flex-col items-center gap-4 rounded-md border p-2">
-                <Skeleton className="h-24 w-24 rounded-full" />{" "}
-                <Skeleton className="h-4 w-32" />
-                <div className="flex w-[300px] flex-col gap-2">
-                  <Skeleton className="h-4 w-1/2" />
-                  <Skeleton className="h-4 w-1/2" />
-                  <Skeleton className="h-4 w-1/2" />
-                  <Skeleton className="h-4 w-1/2" />
-                  <Skeleton className="h-4 w-3/4" />
-                  <Skeleton className="h-4 w-full" />
-                  <Skeleton className="h-4 w-full" />
-                </div>
-              </div>
-              <div className="flex w-full flex-col gap-2">
-                <Skeleton className="h-10 w-full" />
-                <Skeleton className="h-90 w-full" />
-              </div>
-            </div>
-          )}
+          {isLoading && <CharacterDetailSkeleton />}
           {isError && (
             <p role="alert" className="text-red-500">
               오류: {(error as Error).message}
@@ -95,13 +59,7 @@ export const CharacterDetail = ({ ocid }: CharacterBasicInfoProps) => {
           {characterData && (
             <>
               <CharacterProfileCard data={characterData} />
-              <CharacterDetailTabs
-                ocid={ocid}
-                items={characterData.item_equipment ?? []}
-                android={characterData.android_equipment ?? null}
-                heart={characterData.heart_equipment ?? null}
-                setEffect={characterData.set_effect ?? []}
-              />
+              <CharacterDetailTabs ocid={ocid} characterData={characterData} />
             </>
           )}
         </CardContent>

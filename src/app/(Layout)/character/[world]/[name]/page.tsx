@@ -1,57 +1,49 @@
 import React from "react";
-import {
-  HydrationBoundary,
-  QueryClient,
-  dehydrate,
-} from "@tanstack/react-query";
-import { notFound } from "next/navigation";
+import { HydrationBoundary } from "@tanstack/react-query";
 import { CharacterSearch } from "@/features/character-search";
-import { getOcid, getCharacterDetails } from "@/entities/character";
-import { characterQueryKeys } from "@/entities/character";
 import { CharacterDetail } from "@/widgets/character-detail";
+import { getCharacterPageData } from "./_lib/getCharacterPageData";
+import { Metadata } from "next";
 
-// Next.js 15에서는 params가 Promise<{ world: string; name: string }> 형태로 들어옴
 interface CharacterPageProps {
-  params: Promise<{
-    world: string;
-    name: string;
-  }>;
+  params: Promise<{ world: string; name: string }>;
 }
 
-export default async function CharacterPage({ params }: CharacterPageProps) {
-  // 반드시 await 해야 함
+// 동적 메타데이터 생성
+export async function generateMetadata({
+  params,
+}: CharacterPageProps): Promise<Metadata> {
   const { world, name } = await params;
 
-  const decodedWorld = decodeURIComponent(world);
-  const decodedName = decodeURIComponent(name);
+  // 데이터 로딩 함수 재사용 (Request Memoization 덕분에 API 요청 비용 0)
+  const { decodedName, decodedWorld, ocid } = await getCharacterPageData(
+    world,
+    name,
+  );
 
-  const queryClient = new QueryClient();
+  // ocid가 없으면(캐릭터 못 찾음) 기본값 반환
+  if (!ocid) return { title: "캐릭터를 찾을 수 없음" };
 
-  // --- OCID 조회 ---
-  const ocidKey = characterQueryKeys.ocid(decodedWorld, decodedName);
-  const ocidData = await queryClient
-    .fetchQuery({
-      queryKey: ocidKey,
-      queryFn: () => getOcid(decodedWorld, decodedName),
-    })
-    .catch(() => notFound());
+  return {
+    title: {
+      absolute: `${decodedName} (${decodedWorld}) - 캐릭터 정보 - 메이플스토리M`,
+    },
+    description: `메이플스토리M ${decodedWorld} 서버 ${decodedName} 캐릭터의 아이템, 코디, 스킬, 기본 정보를 확인하세요.`,
+    openGraph: {
+      title: `${decodedName} - 메이플스토리M 캐릭터 검색`,
+      description: `레벨, 직업, 아이템, 스킬 등 ${decodedName}님의 상세 정보`,
+      images: ["/og-image.png"],
+    },
+  };
+}
 
-  const ocid = ocidData?.ocid;
-  if (!ocid) notFound();
+// 실제 페이지
+export default async function CharacterPage({ params }: CharacterPageProps) {
+  const { world, name } = await params;
 
-  // --- 캐릭터 상세 정보 (병렬 4개) Prefetch ---
-  const detailsKey = characterQueryKeys.details(ocid);
-  try {
-    await queryClient.prefetchQuery({
-      queryKey: detailsKey,
-      queryFn: () => getCharacterDetails(ocid),
-    });
-  } catch (error) {
-    console.error("상세 정보 Prefetch 실패:", error);
-  }
-
-  // --- Hydration ---
-  const dehydratedState = dehydrate(queryClient);
+  // 데이터 로딩 (위 generateMetadata랑 똑같은 함수 호출해도 안전함)
+  const { dehydratedState, ocid, decodedName, decodedWorld } =
+    await getCharacterPageData(world, name);
 
   return (
     <div className="flex w-full flex-1 flex-col items-center gap-6">

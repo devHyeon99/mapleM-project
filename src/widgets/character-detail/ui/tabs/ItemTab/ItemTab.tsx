@@ -1,27 +1,28 @@
 "use client";
 
-import {
-  CharacterItemEquipment,
-  CharacterAndroidEquipment,
-  CharacterHeartEquipment,
-  CharacterSetInfo,
-} from "@/entities/character";
+import { CharacterDetailData } from "@/entities/character";
 import { ItemIcon } from "@/entities/item";
 import { sortItems } from "@/entities/item/lib";
-import { SetEffectDialog } from "./SetEffectDialog"; // 분리한 컴포넌트 import
+import { SetEffectDialog } from "./SetEffectDialog";
 
 interface ItemTabProps {
-  items: CharacterItemEquipment[];
-  android: CharacterAndroidEquipment | null;
-  heart: CharacterHeartEquipment | null;
-  setEffect: CharacterSetInfo[] | null;
+  data: CharacterDetailData;
 }
 
-export const ItemTab = ({ items, android, heart, setEffect }: ItemTabProps) => {
-  const hasNoItems = items.length === 0;
+export const ItemTab = ({ data }: ItemTabProps) => {
+  const {
+    item_equipment: items,
+    android_equipment: android,
+    heart_equipment: heart,
+    set_effect: setEffect,
+  } = data;
+
+  // 데이터 유효성 검사 (items가 없으면 빈 배열 처리)
+  const safeItems = items ?? [];
+  const hasNoItems = safeItems.length === 0;
 
   // 아이템 정렬
-  const sortedItems = sortItems(items, android, heart);
+  const sortedItems = sortItems(safeItems, android ?? null, heart ?? null);
 
   return (
     <div className="flex flex-col gap-4">
@@ -48,8 +49,8 @@ export const ItemTab = ({ items, android, heart, setEffect }: ItemTabProps) => {
         </div>
       )}
 
-      {/* 2. 세트 효과 버튼 영역 (분리된 컴포넌트 사용) */}
-      <SetEffectDialog setEffect={setEffect} />
+      {/* 2. 세트 효과 버튼 영역 */}
+      <SetEffectDialog setEffect={setEffect ?? []} />
     </div>
   );
 };

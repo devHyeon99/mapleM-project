@@ -27,42 +27,42 @@ const jsonLd = {
 };
 
 export const metadata: Metadata = {
+  // 기본 URL 설정
   metadataBase: new URL("https://maplemgg.com"),
 
+  // 사이트 타이틀
   title: {
-    default: "메엠지지 - 메이플스토리M 캐릭터 검색",
+    default: "메엠지지 - 메이플스토리M 캐릭터 검색 & 종합 정보",
     template: "%s | 메엠지지",
   },
-  description:
-    "메엠지지(MMGG)에서 메이플스토리M 캐릭터 검색, 스케줄러, 파티모집, 길드모집 등 게임 플레이에 유용한 모든 정보를 확인하세요. 메이플M 캐릭터 검색, 메엠 캐릭터 검색을 활용해서 많은 정보를 얻어가세요.",
 
+  // 사이트 설명
+  description:
+    "메이플스토리M 캐릭터 검색은 메엠지지. 캐릭터 정보 조회, 장비, 스킬, 코디, 공략 등 게임 플레이에 유용한 모든 정보를 확인하세요.",
+
+  // 키워드
   keywords: [
     "메이플스토리M",
-    "메M",
+    "메이플M",
+    "메엠",
     "메엠지지",
     "MMGG",
     "캐릭터 검색",
     "전적 검색",
-    "캐릭터 정보",
-    "메이플M",
-    "메엠 캐릭터 검색",
-    "메이플스토리M 캐릭터 검색",
-    "모바일 메이플",
-    "모바일 메이플 캐릭터 검색",
+    "장비 조회",
   ],
 
+  // 오픈 그래프 (SNS 공유)
   openGraph: {
     title: "메엠지지 - 메이플스토리M 캐릭터 검색",
-    description:
-      "메엠지지(MMGG)에서 메이플스토리M 캐릭터 검색, 스케줄러, 파티모집, 길드모집 등 게임 플레이에 유용한 모든 정보를 확인하세요. 메이플M 캐릭터 검색, 메엠 캐릭터 검색을 활용해서 많은 정보를 얻어가세요.",
-    url: "https://maplemgg.com",
+    description: "메이플스토리M 캐릭터 정보, 장비, 코디를 한눈에 확인하세요.",
     siteName: "메엠지지",
     images: [
       {
         url: "/og-image.png",
-        width: 502,
-        height: 267,
-        alt: "메엠지지 미리보기 이미지",
+        width: 1200,
+        height: 630,
+        alt: "메엠지지 미리보기",
       },
     ],
     locale: "ko_KR",
@@ -72,8 +72,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "메엠지지 - 메이플스토리M 캐릭터 검색",
-    description:
-      "메엠지지(MMGG)에서 메이플스토리M 캐릭터 검색, 스케줄러, 파티모집, 길드모집 등 게임 플레이에 유용한 모든 정보를 확인하세요. 메이플M 캐릭터 검색, 메엠 캐릭터 검색을 활용해서 많은 정보를 얻어가세요.",
+    description: "메이플스토리M 캐릭터 정보, 장비, 코디를 한눈에 확인하세요.",
     images: ["/og-image.png"],
   },
 
@@ -95,7 +94,7 @@ export const metadata: Metadata = {
   },
 
   alternates: {
-    canonical: "https://maplemgg.com",
+    canonical: "./",
   },
 
   verification: {
@@ -120,11 +119,6 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <Script
-          src="https://openapi.nexon.com/js/analytics.js?app_id=241136"
-          strategy="afterInteractive"
-          async
-        />
       </head>
       <body className="bg-background relative flex min-h-screen flex-col antialiased">
         <ThemeProvider
@@ -143,6 +137,11 @@ export default function RootLayout({
             <Providers>{children}</Providers>
           )}
         </ThemeProvider>
+        {/* 넥슨 애널리틱스 */}
+        <Script
+          src="https://openapi.nexon.com/js/analytics.js?app_id=241136"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );

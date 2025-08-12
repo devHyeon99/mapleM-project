@@ -1,10 +1,11 @@
 export { ItemTab } from "./ItemTab";
+export { SkillTab } from "./SkillTab";
+
 export { CashItemTab } from "./CashItemTab";
 export { JewelTab } from "./JewelTab";
 export { SymbolTab } from "./SymbolTab";
 export { StatTab } from "./StatTab";
 export { LinkSkillTab } from "./LinkSkillTab";
-export { SkillTab } from "./SkillTab/SkillTab";
 export { VmatrixTab } from "./VmatrixTab";
 export { HexaSkillTab } from "./HexaSkillTab";
 export { HexaStatTab } from "./HexaStatTab";

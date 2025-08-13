@@ -13,7 +13,7 @@ export const ItemEmblem = ({ item }: Props) => {
 
   return (
     <div className="border-b pb-2 text-sm">
-      <p className="text-[#b23400] dark:text-[#FF8939]">
+      <p className="text-[#FF8939]">
         Lv.{emblem.emblem_level} {emblem.emblem_name}
       </p>
       <dl>

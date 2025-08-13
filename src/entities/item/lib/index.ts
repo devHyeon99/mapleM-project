@@ -1,4 +1,4 @@
-export { getGradeInfo } from "./getGradeInfo";
-export { sortItems } from "./sortItems";
-export { parseOptions } from "./parseOptions";
-export { getStarforce } from "./getStarforce";
+export * from "./getGradeInfo";
+export * from "./getStarforce";
+export * from "./parseOptions";
+export * from "./sortItems";

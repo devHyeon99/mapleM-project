@@ -17,7 +17,7 @@ export const ItemBaseOption = ({ item }: Props) => {
         {options.map((opt, idx) => (
           <div key={idx} className="flex gap-1">
             <dt>{opt.name}</dt>
-            <dd className="text-[#b23400] dark:text-[#FF8939]">{opt.value}</dd>
+            <dd className="text-[#FF8939]">{opt.value}</dd>
           </div>
         ))}
         {/* <div className="flex gap-1">

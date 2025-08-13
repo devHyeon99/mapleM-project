@@ -1,1 +1,2 @@
-export { ItemIcon } from "./ui/ItemIcon";
+export * from "./ui";
+export * from "./lib";

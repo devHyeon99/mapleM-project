@@ -32,13 +32,13 @@ export const CharacterDetail = ({ ocid }: CharacterBasicInfoProps) => {
   });
 
   const characterData = data?.data;
-  console.log(characterData);
+
   return (
     <section
       aria-labelledby="character-info-title"
       className="w-full max-w-3xl"
     >
-      <Card className="rounded-sm">
+      <Card className="rounded-xs">
         <CardHeader className="px-4">
           <CardTitle id="character-info-title">캐릭터 기본정보</CardTitle>
           <CardDescription>

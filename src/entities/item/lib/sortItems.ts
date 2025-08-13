@@ -8,11 +8,16 @@ import {
   EQUIP_SLOT_ORDER_TOPBOTTOM,
 } from "@/shared/config/constants/item_slot";
 
+export interface SortedItemSlot {
+  slotName: string;
+  item: CharacterItemEquipment | null;
+}
+
 export function sortItems(
   items: CharacterItemEquipment[],
   android: CharacterAndroidEquipment | null,
   heart: CharacterHeartEquipment | null,
-) {
+): SortedItemSlot[] {
   const map: Record<string, CharacterItemEquipment> = {};
 
   const HEART_GRADE_MAP: Record<string, string> = {
@@ -57,5 +62,8 @@ export function sortItems(
     ? EQUIP_SLOT_ORDER_ONEPIECE
     : EQUIP_SLOT_ORDER_TOPBOTTOM;
 
-  return order.map((slot) => (slot ? (map[slot] ?? null) : null));
+  return order.map((slotName) => ({
+    slotName: slotName, // 슬롯 이름 ("모자", "" 등)
+    item: map[slotName] ?? null, // 아이템 데이터
+  }));
 }

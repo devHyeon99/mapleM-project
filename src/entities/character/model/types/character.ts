@@ -123,10 +123,10 @@ export interface AndroidHeartPreset {
 
 // 장비 조회 (/item-equipment)
 export interface CharacterEquipmentResponse {
-  character_class: string;
-  use_preset_no?: number;
+  character_class: string | null;
+  use_preset_no?: number | null;
   item_equipment: CharacterItemEquipment[];
-  soul_set_option?: string;
+  soul_set_option?: string | null;
   equipment_preset?: EquipmentPreset[];
 }
 
@@ -171,13 +171,13 @@ export interface CharacterSetInfo {
 // ==========================================================================
 export interface CharacterDetailData extends CharacterBasicResponse {
   // 추가 정보
-  guild_name?: string;
+  guild_name?: string | null;
 
   // --------------------------------------------------------
   // 장비 정보 (Equipment)
   // --------------------------------------------------------
-  use_preset_no?: number; // 현재 장비 프리셋 번호
-  soul_set_option?: string;
+  use_preset_no?: number | null; // 현재 장비 프리셋 번호
+  soul_set_option?: string | null;
   item_equipment: CharacterItemEquipment[];
   equipment_preset?: EquipmentPreset[];
 

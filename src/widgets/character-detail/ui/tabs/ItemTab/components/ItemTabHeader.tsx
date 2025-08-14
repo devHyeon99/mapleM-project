@@ -2,7 +2,7 @@
 
 import { LayoutGrid, List, Layers, IdCard } from "lucide-react";
 import { SegmentedButton } from "./SegmentedButton";
-import { CharacterSetInfo } from "@/entities/character";
+import { EquipmentSetInfo } from "@/entities/character";
 import {
   Tooltip,
   TooltipContent,
@@ -20,7 +20,7 @@ interface ItemTabHeaderProps {
   onSelectPreset: (preset: number) => void;
   onChangeViewMode: (mode: "grid" | "list") => void;
   characterName: string;
-  setEffect: CharacterSetInfo[] | null;
+  setEffect: EquipmentSetInfo[] | null;
 }
 
 export const ItemTabHeader = ({
@@ -39,7 +39,7 @@ export const ItemTabHeader = ({
       <div
         role="group"
         aria-label="장비 프리셋 선택"
-        className="bg-muted flex items-center rounded-xs border p-0.5"
+        className="bg-muted flex items-center gap-0.5 rounded-xs border px-0.5 py-1 md:gap-1 md:px-[5px]"
       >
         {presets.map((num) => {
           const isActiveInGame = activePresetNo === num;
@@ -65,7 +65,7 @@ export const ItemTabHeader = ({
       </div>
 
       {/* 우측: 뷰 모드 + 액션 버튼 (통합 툴바) */}
-      <div className="bg-muted flex items-center gap-0.5 rounded-xs border p-0.5">
+      <div className="bg-muted flex items-center gap-0.5 rounded-xs border px-1.5 py-1 md:px-3.5">
         <TooltipProvider delayDuration={300}>
           {/* 스펙 카드 */}
           <SpecCardDialog

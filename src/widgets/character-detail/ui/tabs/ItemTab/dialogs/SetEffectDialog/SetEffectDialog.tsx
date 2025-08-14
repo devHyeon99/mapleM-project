@@ -1,7 +1,7 @@
 "use client";
 
 import { ReactNode } from "react";
-import { CharacterSetInfo } from "@/entities/character";
+import { EquipmentSetInfo } from "@/entities/character";
 import { Button } from "@/shared/ui/button";
 import { Separator } from "@/shared/ui/separator";
 import {
@@ -17,7 +17,7 @@ import { TotalEffectDialog } from "./TotalEffectDialog";
 import { SetEffectItem } from "./SetEffectItem";
 
 interface SetEffectDialogProps {
-  setEffect: CharacterSetInfo[] | null;
+  setEffect: EquipmentSetInfo[] | null;
   activePresetNo: number;
   trigger?: ReactNode;
 }

@@ -28,14 +28,14 @@ export const ItemGrid = ({ items, presetNo }: ItemGridProps) => {
   }
 
   return (
-    <div className="relative grid grid-cols-7 gap-1">
+    <div className="relative grid grid-cols-7 gap-x-1 gap-y-2 md:gap-x-1.5 md:gap-y-2.5">
       {items.map((slot, idx) => {
         // 빈 여백 (slotName이 빈 문자열 ""인 경우)
         if (!slot.slotName) {
           return (
             <div
               key={`spacer-${idx}`}
-              className="h-[46px] w-[46px]"
+              className="aspect-square w-full"
               aria-hidden="true"
             />
           );
@@ -44,10 +44,15 @@ export const ItemGrid = ({ items, presetNo }: ItemGridProps) => {
         // 아이템이 있는 경우
         if (slot.item) {
           return (
-            <ItemIcon
+            <div
               key={`${presetNo}-${slot.item.item_name}-${idx}`}
-              item={slot.item}
-            />
+              className="aspect-square w-full"
+            >
+              <ItemIcon
+                item={slot.item}
+                className="h-full w-full object-cover"
+              />
+            </div>
           );
         }
 
@@ -56,11 +61,11 @@ export const ItemGrid = ({ items, presetNo }: ItemGridProps) => {
           <div
             key={`empty-slot-${idx}`}
             className={cn(
-              "border-border bg-muted/20 flex h-[46px] w-[46px] items-center justify-center rounded-xs border-2 text-center",
+              "border-border bg-muted/20 flex aspect-square w-full items-center justify-center rounded-xs border-2 text-center",
             )}
             title={`${slot.slotName} 슬롯 (비어있음)`}
           >
-            <span className="text-muted-foreground text-[10px] leading-tight font-semibold select-none">
+            <span className="text-muted-foreground text-[10px] leading-tight font-semibold select-none sm:text-xs">
               {slot.slotName.replace(/\s*\(.*?\)/, "")}
             </span>
           </div>

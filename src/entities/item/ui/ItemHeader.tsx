@@ -13,8 +13,7 @@ export const ItemHeader = ({ item }: Props) => {
     <div className="flex items-center gap-2 border-b pb-3">
       <ItemIconBase
         item={item}
-        size={46}
-        className="pointer-events-none cursor-default"
+        className="pointer-events-none h-12.5 w-12.5 cursor-default"
       />
 
       {/* 아이템 이름 */}

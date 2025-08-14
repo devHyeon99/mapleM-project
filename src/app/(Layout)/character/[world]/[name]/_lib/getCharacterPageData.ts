@@ -1,7 +1,7 @@
 import { QueryClient, dehydrate } from "@tanstack/react-query";
 import { notFound } from "next/navigation";
 import {
-  getOcid,
+  getOcidForSearch,
   getCharacterDetails,
   characterQueryKeys,
 } from "@/entities/character";
@@ -17,7 +17,7 @@ export async function getCharacterPageData(world: string, name: string) {
   const ocidData = await queryClient
     .fetchQuery({
       queryKey: ocidKey,
-      queryFn: () => getOcid(decodedWorld, decodedName),
+      queryFn: () => getOcidForSearch(decodedWorld, decodedName),
     })
     .catch(() => null); // 여기서는 null 반환하고 아래에서 처리
 
@@ -26,9 +26,9 @@ export async function getCharacterPageData(world: string, name: string) {
   }
 
   const ocid = ocidData.ocid;
-
   // 2. 상세 정보 Prefetch
   const detailsKey = characterQueryKeys.details(ocid);
+
   try {
     await queryClient.prefetchQuery({
       queryKey: detailsKey,

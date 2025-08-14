@@ -53,7 +53,7 @@ export const ItemTab = ({ data }: ItemTabProps) => {
       <ItemTabHeader
         presets={[1, 2, 3]}
         selectedPreset={selectedPreset}
-        activePresetNo={activePresetNo as number}
+        activePresetNo={activePresetNo}
         viewMode={viewMode}
         onSelectPreset={setSelectedPreset}
         onChangeViewMode={setViewMode}

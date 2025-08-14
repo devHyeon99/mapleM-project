@@ -6,13 +6,11 @@ import { cn } from "@/shared/lib/utils";
 
 interface ItemIconBaseProps {
   item: CharacterItemEquipment;
-  size?: number;
-  className?: string; // className을 받을 수 있도록 추가
+  className?: string;
 }
 
 export const ItemIconBase = React.forwardRef<HTMLDivElement, ItemIconBaseProps>(
-  ({ item, size = 46, className, ...props }, ref) => {
-    // ref와 ...props를 받습니다.
+  ({ item, className, ...props }, ref) => {
     const {
       item_icon,
       item_name,
@@ -41,22 +39,21 @@ export const ItemIconBase = React.forwardRef<HTMLDivElement, ItemIconBaseProps>(
 
     return (
       <div
-        ref={ref} // 전달받은 ref를 div에 연결
-        {...props} // 전달받은 나머지 props(onClick 등)를 div에 적용
-        style={{ width: size, height: size }}
+        ref={ref}
+        {...props}
         className={cn(
-          "relative flex cursor-pointer items-center justify-center rounded-xs border-2 bg-white",
+          "relative flex h-full w-full cursor-pointer items-center justify-center rounded-xs border-2 bg-white",
           main?.borderColor ?? "border-[#9E9E9E]",
           className,
         )}
       >
-        {/* 좌상단 라벨 */}
+        {/* 좌상단 라벨 (잠재능력) */}
         {(potential || additional) && (
-          <div className="absolute top-0 left-0 flex">
+          <div className="absolute top-0 left-0 z-1 flex">
             {potential && (
               <span
                 className={cn(
-                  "flex h-2.5 w-2.5 items-center justify-center text-[8px] font-extrabold text-white",
+                  "flex h-2.5 w-2.5 items-center justify-center text-[8px] font-bold text-white md:h-3 md:w-3 md:text-[10px]",
                   potential.bgColor,
                   !additional && "rounded-br-xs",
                 )}
@@ -67,7 +64,7 @@ export const ItemIconBase = React.forwardRef<HTMLDivElement, ItemIconBaseProps>(
             {additional && (
               <span
                 className={cn(
-                  "flex h-2.5 w-2.5 items-center justify-center rounded-br-xs text-[8px] font-extrabold text-white",
+                  "flex h-2.5 w-2.5 items-center justify-center rounded-br-xs text-[8px] font-bold text-white md:h-3 md:w-3 md:text-[10px]",
                   additional.bgColor,
                 )}
               >
@@ -79,23 +76,22 @@ export const ItemIconBase = React.forwardRef<HTMLDivElement, ItemIconBaseProps>(
 
         {/* 우상단 스타포스 */}
         {showStar && (
-          <span className="absolute top-0 right-0 flex h-2.5 w-2.5 items-center justify-center rounded-bl-xs bg-[#FFC300] text-[8px] font-semibold text-black">
+          <span className="absolute top-0 right-0 z-1 flex h-2.5 w-2.5 items-center justify-center rounded-bl-xs bg-[#FFC300] text-[8px] font-semibold text-black md:h-3 md:w-3 md:text-[9px]">
             {star}
           </span>
         )}
 
+        {/* 아이템 이미지 */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={item_icon}
           alt={item_name}
-          width={40}
-          height={40}
           loading="lazy"
-          className="h-auto w-auto"
+          className="object-contain"
         />
       </div>
     );
   },
 );
 
-ItemIconBase.displayName = "ItemIconBase"; // 디버깅을 위한 displayName 설정
+ItemIconBase.displayName = "ItemIconBase";

@@ -1,19 +1,11 @@
 "use client";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/shared/ui/card";
+
 import { CharacterProfileCard } from "./CharacterProfileCard";
 import { CharacterDetailTabs } from "./CharacterDetailTabs";
 import { useQuery } from "@tanstack/react-query";
-import {
-  characterQueryKeys,
-  fetchCharacterDetails,
-} from "@/entities/character";
+import { characterQueryKeys } from "@/entities/character";
 import { CharacterDetailSkeleton } from "./CharacterDetailSkeleton";
+import { getCharacterDetailAction } from "@/entities/character";
 
 interface CharacterBasicInfoProps {
   ocid: string;
@@ -24,7 +16,7 @@ export const CharacterDetail = ({ ocid }: CharacterBasicInfoProps) => {
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: detailsKey,
-    queryFn: () => fetchCharacterDetails(ocid),
+    queryFn: () => getCharacterDetailAction(ocid),
     staleTime: 10 * 60 * 1000,
     gcTime: 10 * 60 * 1000,
     refetchOnMount: true,
@@ -33,37 +25,36 @@ export const CharacterDetail = ({ ocid }: CharacterBasicInfoProps) => {
 
   const characterData = data?.data;
 
+  const titleText = characterData
+    ? `${characterData.world_name} ${characterData.character_name} 캐릭터 정보`
+    : "캐릭터 정보 로딩 중";
+
   return (
     <section
       aria-labelledby="character-info-title"
-      className="w-full max-w-3xl"
+      aria-busy={isLoading}
+      className="flex w-full justify-center"
     >
-      <Card className="rounded-xs">
-        <CardHeader className="px-4">
-          <CardTitle id="character-info-title">캐릭터 기본정보</CardTitle>
-          <CardDescription>
-            메이플스토리M의 게임 데이터는 평균 10분 후 확인이
-            <br className="md:hidden" />
-            가능하므로 데이터가 정확히 일치하지 않을 수 있습니다.
-          </CardDescription>
-        </CardHeader>
+      {/* 로딩 상태에 따라 적절한 텍스트 제공 */}
+      <h2 className="sr-only" id="character-info-title">
+        {titleText}
+      </h2>
 
-        <CardContent className="flex flex-col items-center justify-center gap-4 px-0">
-          {isLoading && <CharacterDetailSkeleton />}
-          {isError && (
-            <p role="alert" className="text-red-500">
-              오류: {(error as Error).message}
-            </p>
-          )}
+      {isLoading && <CharacterDetailSkeleton />}
 
-          {characterData && (
-            <>
-              <CharacterProfileCard data={characterData} />
-              <CharacterDetailTabs ocid={ocid} characterData={characterData} />
-            </>
-          )}
-        </CardContent>
-      </Card>
+      {isError && (
+        <p role="alert" className="py-10 font-medium text-red-500">
+          캐릭터 정보를 불러오는데 실패했습니다.
+          <br /> {(error as Error).message}
+        </p>
+      )}
+
+      {characterData && (
+        <div className="flex w-full max-w-3xl flex-col items-center gap-4 md:flex-row md:items-start md:justify-center">
+          <CharacterProfileCard data={characterData} />
+          <CharacterDetailTabs ocid={ocid} characterData={characterData} />
+        </div>
+      )}
     </section>
   );
 };

@@ -1,6 +1,6 @@
 "use client";
 
-import { CharacterSetInfo, formatSetName } from "@/entities/character";
+import { EquipmentSetInfo, formatSetName } from "@/entities/character";
 import { Button } from "@/shared/ui/button";
 import { Separator } from "@/shared/ui/separator";
 import { Badge } from "@/shared/ui/badge";
@@ -16,7 +16,7 @@ import {
 import { Search } from "lucide-react";
 
 interface SetEffectItemProps {
-  info: CharacterSetInfo;
+  info: EquipmentSetInfo;
 }
 
 export const SetEffectItem = ({ info }: SetEffectItemProps) => {

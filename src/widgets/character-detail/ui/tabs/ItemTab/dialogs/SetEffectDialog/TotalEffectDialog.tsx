@@ -1,19 +1,20 @@
 "use client";
 
-import { CharacterSetInfo, aggregateOptions } from "@/entities/character";
+import { EquipmentSetInfo, aggregateOptions } from "@/entities/character";
 import { Button } from "@/shared/ui/button";
 import { Separator } from "@/shared/ui/separator";
 import {
   Dialog,
   DialogClose,
   DialogContent,
+  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/shared/ui/dialog";
 
 interface TotalEffectDialogProps {
-  setEffect: CharacterSetInfo[];
+  setEffect: EquipmentSetInfo[];
 }
 
 export const TotalEffectDialog = ({ setEffect }: TotalEffectDialogProps) => {
@@ -34,6 +35,9 @@ export const TotalEffectDialog = ({ setEffect }: TotalEffectDialogProps) => {
       <DialogContent className="max-h-[80vh] overflow-y-auto rounded-lg px-4 sm:max-w-md">
         <DialogHeader>
           <DialogTitle>세트 효과 총합</DialogTitle>
+          <DialogDescription className="text-muted-foreground text-sm">
+            현재 장착 중인 장비 세트 효과 총합산입니다.
+          </DialogDescription>
         </DialogHeader>
 
         <Separator className="my-2" />

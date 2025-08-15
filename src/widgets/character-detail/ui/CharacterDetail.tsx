@@ -5,7 +5,7 @@ import { CharacterDetailTabs } from "./CharacterDetailTabs";
 import { useQuery } from "@tanstack/react-query";
 import { characterQueryKeys } from "@/entities/character";
 import { CharacterDetailSkeleton } from "./CharacterDetailSkeleton";
-import { getCharacterDetailAction } from "@/entities/character";
+import { getCharacterDetailAction } from "@/entities/character/api/actions";
 
 interface CharacterBasicInfoProps {
   ocid: string;

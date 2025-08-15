@@ -21,7 +21,7 @@ export const InfoDateRow = ({ label, date, withTime }: InfoDateRowProps) => {
           {withTime ? d.toLocaleString() : d.toLocaleDateString()}
 
           {label === "생성일" && (
-            <span className="text-muted-foreground ml-2 text-xs font-semibold">
+            <span className="text-muted-foreground font-base ml-2 text-sm">
               ({getDetailedTimeAgo(date)})
             </span>
           )}

@@ -28,7 +28,7 @@ import {
   AndroidHeartPreset,
 } from "./android";
 import { CharacterUnionInfo } from "./union";
-import { LevelRankingInfo } from "./ranking";
+import { LevelRankingInfo, UnionRankingInfo } from "./ranking";
 
 // ==========================================================================
 // 통합 캐릭터 상세 정보 (CharacterDetailData)
@@ -37,11 +37,12 @@ import { LevelRankingInfo } from "./ranking";
 // ==========================================================================
 export interface CharacterDetailData extends CharacterBasicInfo {
   // --------------------------------------------------------
-  // 캐릭터 추가 정보 (Guild, Union)
+  // 캐릭터 추가 정보 (Guild, Union, Ranking)
   // --------------------------------------------------------
   guild_name?: string | null;
   level_ranking?: LevelRankingInfo | null;
   union_data?: CharacterUnionInfo | null;
+  union_ranking?: UnionRankingInfo | null;
 
   // --------------------------------------------------------
   // 장비 정보 (Equipment)

@@ -10,7 +10,7 @@ import {
 } from "./android";
 import { CharacterUnionInfo } from "./union";
 import { CharacterBasicInfo } from "./basic";
-import { LevelRankingInfo } from "./ranking";
+import { LevelRankingInfo, UnionRankingInfo } from "./ranking";
 
 // ==========================================================================
 // 4. API Response 타입 정의
@@ -31,6 +31,11 @@ export interface CharacterGuildResponse {
 
 // 유니온 정보 (/user/union)
 export type CharacterUnionResponse = CharacterUnionInfo;
+
+// 유니온 랭킹 (/ranking/union)
+export interface CharacterUnionRankingResponse {
+  ranking: UnionRankingInfo[];
+}
 
 // 장비 조회 (/item-equipment)
 export interface CharacterEquipmentResponse {

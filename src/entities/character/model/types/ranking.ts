@@ -21,3 +21,15 @@ export interface LevelRankingInfo extends RankingBasicInfo {
   guild_name?: string | null;
   guild_mark_icon?: string | null;
 }
+
+// ==========================================================================
+// 유니온 랭킹 (Union Ranking)
+// ==========================================================================
+
+export interface UnionRankingInfo extends RankingBasicInfo {
+  character_class: string;
+  union_grade: string;
+  union_grade_icon: string;
+  union_level: number;
+  guild_name?: string | null;
+}

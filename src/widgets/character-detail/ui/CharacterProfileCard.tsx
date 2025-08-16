@@ -107,6 +107,7 @@ export const CharacterProfileCard = ({ data }: CharacterProfileCardProps) => {
           width={96}
           height={96}
           className="dark:border-border h-25 w-25 -scale-x-100 transform rounded-full border-2 border-gray-300 bg-[#EAEEF3] dark:bg-[#323232]"
+          unoptimized
         />
       )}
 

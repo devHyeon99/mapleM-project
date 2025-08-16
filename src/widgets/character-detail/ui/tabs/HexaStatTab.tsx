@@ -76,7 +76,7 @@ export const HexaStatTab = ({ ocid }: HexaStatTabProps) => {
                     <span className="text-muted-foreground">
                       {page.main_stat}
                     </span>
-                    <span className="text-muted-foreground font-mono tabular-nums">
+                    <span className="text-muted-foreground font-mono">
                       Lv.{page.main_stat_level}
                     </span>
                   </div>
@@ -85,11 +85,11 @@ export const HexaStatTab = ({ ocid }: HexaStatTabProps) => {
                 {/* 서브스탯 */}
                 <div>
                   <p className="mb-1 text-sm font-semibold">서브스탯</p>
-                  <div className="text-muted-foreground flex justify-between tabular-nums">
+                  <div className="text-muted-foreground flex justify-between">
                     <span>{page.sub_1_stat}</span>
                     <span>Lv.{page.sub_1_stat_level}</span>
                   </div>
-                  <div className="text-muted-foreground flex justify-between tabular-nums">
+                  <div className="text-muted-foreground flex justify-between">
                     <span>{page.sub_2_stat}</span>
                     <span>Lv.{page.sub_2_stat_level}</span>
                   </div>

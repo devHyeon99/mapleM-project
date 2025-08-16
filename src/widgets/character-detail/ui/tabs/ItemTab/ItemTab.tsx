@@ -32,14 +32,18 @@ export const ItemTab = ({ data }: ItemTabProps) => {
     equipment_preset: presetList,
     android_equipment: android,
     heart_equipment: heart,
-    set_effect: setEffect,
-    use_preset_no: activePresetNo, // 이제 number 타입임이 보장됨 (타입 가드가 필요하다면 as number)
+    use_preset_no: activePresetNo,
   } = data;
 
   // --- 데이터 가공 로직 ---
   const currentPresetItems =
     presetList?.find((p) => p.preset_no === selectedPreset)?.item_equipment ??
     (selectedPreset === activePresetNo ? data.item_equipment : []);
+
+  const itemTabData: CharacterDetailData = {
+    ...data,
+    item_equipment: currentPresetItems,
+  };
 
   const sortedItems = sortItems(
     currentPresetItems,
@@ -51,15 +55,11 @@ export const ItemTab = ({ data }: ItemTabProps) => {
     <div className="flex flex-col gap-4">
       {/* 헤더 (프리셋 & 뷰 모드 & 버튼) */}
       <ItemTabHeader
-        presets={[1, 2, 3]}
+        data={itemTabData} // 이거 하나만 넘기면 됨
         selectedPreset={selectedPreset}
-        activePresetNo={activePresetNo}
         viewMode={viewMode}
         onSelectPreset={setSelectedPreset}
         onChangeViewMode={setViewMode}
-        // 다이얼로그용 데이터 전달
-        characterName={data.character_name}
-        setEffect={setEffect ?? []}
       />
 
       {/* 아이템 목록 */}

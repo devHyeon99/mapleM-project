@@ -9,6 +9,17 @@ interface ItemIconBaseProps {
   className?: string;
 }
 
+// 문장 레벨에 따른 이미지 번호 반환 헬퍼 함수
+const getEmblemImgNumber = (level: number) => {
+  if (level >= 1 && level <= 3) return 1;
+  if (level === 4) return 2;
+  if (level >= 5 && level <= 6) return 3;
+  if (level >= 7 && level <= 8) return 4;
+  if (level === 9) return 5;
+  if (level === 10) return 6;
+  return null; // 범위 밖이거나 0일 때
+};
+
 export const ItemIconBase = React.forwardRef<HTMLDivElement, ItemIconBaseProps>(
   ({ item, className, ...props }, ref) => {
     const {
@@ -18,6 +29,7 @@ export const ItemIconBase = React.forwardRef<HTMLDivElement, ItemIconBaseProps>(
       item_potential_option_grade,
       item_additional_potential_option_grade,
       starforce_upgrade,
+      emblem_info,
     } = item;
 
     // 등급 정보
@@ -37,13 +49,36 @@ export const ItemIconBase = React.forwardRef<HTMLDivElement, ItemIconBaseProps>(
     const star = Number.parseInt(starforce_upgrade ?? "", 10);
     const showStar = Number.isFinite(star) && star > 0;
 
+    // 문장 배경 이미지 로직
+    let backgroundImage = "none";
+    if (emblem_info?.emblem_level) {
+      const imgNum = getEmblemImgNumber(emblem_info.emblem_level);
+      if (imgNum) {
+        backgroundImage = `url('/emblem/${imgNum}.jpeg')`;
+      }
+    }
+
+    // 테두리 색상 로직
+    // 문장이 있으면 'border-amber-300', 없으면 기존 등급 색상(main.borderColor) 사용
+    const borderColor = emblem_info
+      ? "border-amber-300"
+      : (main?.borderColor ?? "border-[#9E9E9E]");
+
     return (
       <div
         ref={ref}
         {...props}
+        style={{
+          backgroundImage: backgroundImage,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
         className={cn(
-          "relative flex h-full w-full cursor-pointer items-center justify-center rounded-xs border-2 bg-white",
-          main?.borderColor ?? "border-[#9E9E9E]",
+          "@container",
+          "relative flex aspect-square h-full w-full cursor-pointer items-center justify-center rounded-xs border-2",
+          !emblem_info && "bg-white",
+          borderColor,
           className,
         )}
       >
@@ -53,7 +88,9 @@ export const ItemIconBase = React.forwardRef<HTMLDivElement, ItemIconBaseProps>(
             {potential && (
               <span
                 className={cn(
-                  "flex h-2.5 w-2.5 items-center justify-center text-[8px] font-bold text-white md:h-3 md:w-3 md:text-[10px]",
+                  "flex items-center justify-center font-bold text-white",
+                  "h-2.5 w-2.5 text-[8px]",
+                  "@[46]:h-3 @[46]:w-3 @[46]:text-[10px]",
                   potential.bgColor,
                   !additional && "rounded-br-xs",
                 )}
@@ -64,7 +101,9 @@ export const ItemIconBase = React.forwardRef<HTMLDivElement, ItemIconBaseProps>(
             {additional && (
               <span
                 className={cn(
-                  "flex h-2.5 w-2.5 items-center justify-center rounded-br-xs text-[8px] font-bold text-white md:h-3 md:w-3 md:text-[10px]",
+                  "flex items-center justify-center rounded-br-xs font-bold text-white",
+                  "h-2.5 w-2.5 text-[8px]",
+                  "@[46]:w-3 @[46]:text-[10px] @[46px]:h-3",
                   additional.bgColor,
                 )}
               >
@@ -76,7 +115,13 @@ export const ItemIconBase = React.forwardRef<HTMLDivElement, ItemIconBaseProps>(
 
         {/* 우상단 스타포스 */}
         {showStar && (
-          <span className="absolute top-0 right-0 z-1 flex h-2.5 w-2.5 items-center justify-center rounded-bl-xs bg-[#FFC300] text-[8px] font-semibold text-black md:h-3 md:w-3 md:text-[9px]">
+          <span
+            className={cn(
+              "absolute top-0 right-0 z-1 flex items-center justify-center rounded-bl-xs bg-[#FFC300] font-bold text-black",
+              "h-2.5 w-2.5 text-[8px]",
+              "@[46px]:h-3 @[46px]:w-3 @[46px]:text-[9px]",
+            )}
+          >
             {star}
           </span>
         )}
@@ -88,6 +133,7 @@ export const ItemIconBase = React.forwardRef<HTMLDivElement, ItemIconBaseProps>(
           alt={item_name}
           loading="lazy"
           className="object-contain"
+          style={{ imageRendering: "pixelated" }}
         />
       </div>
     );

@@ -20,10 +20,14 @@ export const CharacterDetailTabs = ({
       className="w-full max-w-[360px] gap-4 md:max-w-100"
     >
       {/* --- 탭 버튼 리스트 --- */}
-      <TabsList className="grid h-auto w-full grid-cols-7 [grid-template-rows:auto_auto] gap-[2px] rounded-xs border pt-1.5">
+      <TabsList className="grid h-fit w-full grid-cols-7 gap-[2px] rounded-xs border pt-1.5">
         {/*  메인 탭 */}
         {MAIN_TABS.map((tab) => (
-          <TabsTrigger key={tab.value} value={tab.value} className="rounded-sm">
+          <TabsTrigger
+            key={tab.value}
+            value={tab.value}
+            className="h-fit rounded-full"
+          >
             {tab.label}
           </TabsTrigger>
         ))}
@@ -43,7 +47,7 @@ export const CharacterDetailTabs = ({
             <TabsTrigger
               key={tab.value}
               value={tab.value}
-              className="w-full rounded-sm"
+              className="h-fit w-full rounded-full"
             >
               {tab.label}
             </TabsTrigger>

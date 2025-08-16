@@ -41,7 +41,7 @@ export const VmatrixTab = ({ ocid }: VmatrixTabProps) => {
             {skillCores.map((core) => (
               <li key={core.slot_id} className="flex justify-between">
                 <span>{core.v_core_name}</span>
-                <span className="text-muted-foreground flex w-[155px] justify-between tabular-nums">
+                <span className="text-muted-foreground flex w-[155px] justify-between">
                   <span>
                     스킬레벨: {core.v_core_level.toString().padStart(2, "0")}
                   </span>
@@ -67,7 +67,7 @@ export const VmatrixTab = ({ ocid }: VmatrixTabProps) => {
             {enhancementCores.map((core) => (
               <li key={core.slot_id} className="flex flex-col">
                 <span className="font-medium">{core.v_core_name}</span>
-                <span className="text-muted-foreground flex w-[155px] justify-between tabular-nums">
+                <span className="text-muted-foreground flex w-[155px] justify-between">
                   <span>
                     스킬레벨: {core.v_core_level.toString().padStart(2, "0")}
                   </span>

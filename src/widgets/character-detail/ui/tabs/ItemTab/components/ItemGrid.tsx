@@ -1,5 +1,6 @@
 import { ItemIcon, SortedItemSlot } from "@/entities/item";
 import { cn } from "@/shared/lib/utils";
+import { Fragment } from "react";
 
 interface ItemGridProps {
   items: SortedItemSlot[];
@@ -44,15 +45,9 @@ export const ItemGrid = ({ items, presetNo }: ItemGridProps) => {
         // 아이템이 있는 경우
         if (slot.item) {
           return (
-            <div
-              key={`${presetNo}-${slot.item.item_name}-${idx}`}
-              className="aspect-square w-full"
-            >
-              <ItemIcon
-                item={slot.item}
-                className="h-full w-full object-cover"
-              />
-            </div>
+            <Fragment key={`${presetNo}-${slot.item.item_name}-${idx}`}>
+              <ItemIcon item={slot.item} />
+            </Fragment>
           );
         }
 

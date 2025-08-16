@@ -2,7 +2,7 @@
 
 import { LayoutGrid, List, Layers, IdCard } from "lucide-react";
 import { SegmentedButton } from "./SegmentedButton";
-import { EquipmentSetInfo } from "@/entities/character";
+import { CharacterDetailData } from "@/entities/character";
 import {
   Tooltip,
   TooltipContent,
@@ -13,26 +13,25 @@ import { SpecCardDialog } from "../dialogs/SpecCardDialog";
 import { SetEffectDialog } from "../dialogs/SetEffectDialog";
 
 interface ItemTabHeaderProps {
-  presets: number[];
+  data: CharacterDetailData;
+  presets?: number[];
   selectedPreset: number;
-  activePresetNo?: number;
   viewMode: "grid" | "list";
   onSelectPreset: (preset: number) => void;
   onChangeViewMode: (mode: "grid" | "list") => void;
-  characterName: string;
-  setEffect: EquipmentSetInfo[] | null;
 }
 
 export const ItemTabHeader = ({
-  presets,
+  data,
+  presets = [1, 2, 3],
   selectedPreset,
-  activePresetNo,
   viewMode,
   onSelectPreset,
   onChangeViewMode,
-  characterName,
-  setEffect,
 }: ItemTabHeaderProps) => {
+  const activePresetNo = data.use_preset_no;
+  const setEffect = data.set_effect ?? [];
+
   return (
     <div className="flex items-center justify-between">
       {/* 좌측: 프리셋 선택 */}
@@ -69,7 +68,7 @@ export const ItemTabHeader = ({
         <TooltipProvider delayDuration={300}>
           {/* 스펙 카드 */}
           <SpecCardDialog
-            characterName={characterName}
+            data={data}
             trigger={
               <span className="inline-flex">
                 {/* DialogTrigger asChild 호환용 */}

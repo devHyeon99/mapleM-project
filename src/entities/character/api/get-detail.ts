@@ -85,6 +85,7 @@ export const getCharacterDetails = async (
     const { android_equipment, heart_equipment } = androidData ?? {};
 
     const combinedData: CharacterDetailData = {
+      ocid: ocid,
       // --- 기본 정보 ---
       ...basicData,
       guild_name: guildData.guild_name ?? null,

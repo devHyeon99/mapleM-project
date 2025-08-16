@@ -120,7 +120,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="bg-background relative flex min-h-screen flex-col antialiased">
+      <body className="bg-background relative flex min-h-screen flex-col tabular-nums antialiased">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

@@ -60,7 +60,7 @@ export const HexaSkillTab = ({ ocid }: HexaSkillTabProps) => {
                 <span className="text-muted-foreground text-xs">
                   {core.skill_description}
                 </span>
-                <span className="text-muted-foreground font-mono text-xs tabular-nums">
+                <span className="text-muted-foreground font-mono text-xs">
                   Lv.{core.slot_level.toString().padStart(2, "0")}
                 </span>
               </div>

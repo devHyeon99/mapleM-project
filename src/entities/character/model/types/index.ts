@@ -36,6 +36,7 @@ import { LevelRankingInfo, UnionRankingInfo } from "./ranking";
 // - CharacterBasicInfo를 상속받고, 나머지 정보들을 조합
 // ==========================================================================
 export interface CharacterDetailData extends CharacterBasicInfo {
+  ocid: string;
   // --------------------------------------------------------
   // 캐릭터 추가 정보 (Guild, Union, Ranking)
   // --------------------------------------------------------

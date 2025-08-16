@@ -29,7 +29,7 @@ export const ItemPopover = ({ item, children }: ItemPopoverProps) => {
       >
         {/* 닫기 버튼 */}
         <PopoverPrimitive.Close className="absolute top-2 right-2 opacity-70 hover:opacity-100">
-          <X className="h-5 w-5" />
+          <X className="size-5" />
         </PopoverPrimitive.Close>
 
         {/* 헤더 */}

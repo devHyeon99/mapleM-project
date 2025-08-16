@@ -119,6 +119,8 @@
 
   body {
     @apply bg-background text-foreground;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
   }
 }
 

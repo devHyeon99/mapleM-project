@@ -9,22 +9,22 @@ export interface VCoreEquipment {
   slot_level: number;
 
   /** V코어 이름 (예: '쉐도우 스피어', '도미니언') */
-  v_core_name: string;
+  vcore_name: string;
 
   /** V코어 레벨 (1~25) */
-  v_core_level: number;
+  vcore_level: number;
 
   /** 연결된 첫 번째 스킬 이름 */
-  v_core_skill_name_1: string;
+  vcore_skill_name1: string;
 
   /** 연결된 두 번째 스킬 이름 */
-  v_core_skill_name_2: string;
+  vcore_skill_name2: string;
 
   /** 연결된 세 번째 스킬 이름 */
-  v_core_skill_name_3: string;
+  vcore_skill_name3: string;
 
   /** V코어 타입 */
-  v_core_type: "Skill" | "Enhancement";
+  vcore_type: "Skill" | "Enhancement";
 }
 
 /**

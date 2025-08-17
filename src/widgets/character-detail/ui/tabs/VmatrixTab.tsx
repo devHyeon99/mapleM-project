@@ -10,7 +10,7 @@ interface VmatrixTabProps {
 
 export const VmatrixTab = ({ ocid }: VmatrixTabProps) => {
   const { data, isLoading, isError, error } = useCharacterVmatrix(ocid);
-
+  console.log(data);
   if (isLoading) return <LoadingCard message="V매트릭스 불러오는중..." />;
   if (isError)
     return (
@@ -23,10 +23,10 @@ export const VmatrixTab = ({ ocid }: VmatrixTabProps) => {
   const vmatrix = data as CharacterVMatrix;
 
   const skillCores = vmatrix.character_v_core_equipment.filter(
-    (core) => core.v_core_type === "Skill",
+    (core) => core.vcore_type === "Skill",
   );
   const enhancementCores = vmatrix.character_v_core_equipment.filter(
-    (core) => core.v_core_type === "Enhancement",
+    (core) => core.vcore_type === "Enhancement",
   );
 
   return (
@@ -40,10 +40,10 @@ export const VmatrixTab = ({ ocid }: VmatrixTabProps) => {
           <ul className="space-y-1">
             {skillCores.map((core) => (
               <li key={core.slot_id} className="flex justify-between">
-                <span>{core.v_core_name}</span>
+                <span>{core.vcore_name}</span>
                 <span className="text-muted-foreground flex w-[155px] justify-between">
                   <span>
-                    스킬레벨: {core.v_core_level.toString().padStart(2, "0")}
+                    스킬레벨: {core.vcore_level.toString().padStart(2, "0")}
                   </span>
                   <span>
                     슬롯레벨: {core.slot_level.toString().padStart(2, "0")}
@@ -66,23 +66,23 @@ export const VmatrixTab = ({ ocid }: VmatrixTabProps) => {
           <ul className="flex flex-col gap-2">
             {enhancementCores.map((core) => (
               <li key={core.slot_id} className="flex flex-col">
-                <span className="font-medium">{core.v_core_name}</span>
+                <span className="font-medium">{core.vcore_name}</span>
                 <span className="text-muted-foreground flex w-[155px] justify-between">
                   <span>
-                    스킬레벨: {core.v_core_level.toString().padStart(2, "0")}
+                    스킬레벨: {core.vcore_level.toString().padStart(2, "0")}
                   </span>
                   <span>
                     슬롯레벨: {core.slot_level.toString().padStart(2, "0")}
                   </span>
                 </span>
                 <span className="text-muted-foreground">
-                  스킬 1: {core.v_core_skill_name_1}
+                  스킬 1: {core.vcore_skill_name1}
                 </span>
                 <span className="text-muted-foreground">
-                  스킬 2: {core.v_core_skill_name_2}
+                  스킬 2: {core.vcore_skill_name2}
                 </span>
                 <span className="text-muted-foreground">
-                  스킬 3: {core.v_core_skill_name_3}
+                  스킬 3: {core.vcore_skill_name3}
                 </span>
               </li>
             ))}

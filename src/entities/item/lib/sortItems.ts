@@ -4,8 +4,10 @@ import {
   CharacterHeartEquipment,
 } from "@/entities/character";
 import {
-  EQUIP_SLOT_ORDER_ONEPIECE,
-  EQUIP_SLOT_ORDER_TOPBOTTOM,
+  EQUIP_SLOT_ORDER_GRID_ONEPIECE,
+  EQUIP_SLOT_ORDER_GRID_TOPBOTTOM,
+  EQUIP_SLOT_ORDER_LIST_ONEPIECE,
+  EQUIP_SLOT_ORDER_LIST_TOPBOTTOM,
 } from "@/shared/config/constants/item_slot";
 
 export interface SortedItemSlot {
@@ -13,13 +15,15 @@ export interface SortedItemSlot {
   item: CharacterItemEquipment | null;
 }
 
-export function sortItems(
+// ============================================================================
+// 공통 매핑 로직 (맵 생성 부분 분리)
+// ============================================================================
+function createItemMap(
   items: CharacterItemEquipment[],
   android: CharacterAndroidEquipment | null,
   heart: CharacterHeartEquipment | null,
-): SortedItemSlot[] {
+) {
   const map: Record<string, CharacterItemEquipment> = {};
-
   const HEART_GRADE_MAP: Record<string, string> = {
     "실버 하트": "1",
     "골드 하트": "2",
@@ -57,13 +61,49 @@ export function sortItems(
     } as CharacterItemEquipment;
   }
 
+  return map;
+}
+
+// ============================================================================
+// 정렬 함수들
+// ============================================================================
+
+// 그리드용 정렬 (빈 칸 포함)
+export function sortItems(
+  items: CharacterItemEquipment[],
+  android: CharacterAndroidEquipment | null,
+  heart: CharacterHeartEquipment | null,
+): SortedItemSlot[] {
+  const map = createItemMap(items, android, heart);
   const hasOnepiece = !!map["한벌옷"];
+
+  // 그리드용 순서 사용
   const order = hasOnepiece
-    ? EQUIP_SLOT_ORDER_ONEPIECE
-    : EQUIP_SLOT_ORDER_TOPBOTTOM;
+    ? EQUIP_SLOT_ORDER_GRID_ONEPIECE
+    : EQUIP_SLOT_ORDER_GRID_TOPBOTTOM;
 
   return order.map((slotName) => ({
-    slotName: slotName, // 슬롯 이름 ("모자", "" 등)
-    item: map[slotName] ?? null, // 아이템 데이터
+    slotName: slotName,
+    item: map[slotName] ?? null,
+  }));
+}
+
+// 리스트용 정렬 (빈 칸 없음, 순서 재배치)
+export function sortItemsForList(
+  items: CharacterItemEquipment[],
+  android: CharacterAndroidEquipment | null,
+  heart: CharacterHeartEquipment | null,
+): SortedItemSlot[] {
+  const map = createItemMap(items, android, heart);
+  const hasOnepiece = !!map["한벌옷"];
+
+  // 리스트용 순서 사용
+  const order = hasOnepiece
+    ? EQUIP_SLOT_ORDER_LIST_ONEPIECE
+    : EQUIP_SLOT_ORDER_LIST_TOPBOTTOM;
+
+  return order.map((slotName) => ({
+    slotName: slotName,
+    item: map[slotName] ?? null,
   }));
 }

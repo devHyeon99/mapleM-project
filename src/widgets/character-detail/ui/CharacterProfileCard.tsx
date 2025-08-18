@@ -127,9 +127,9 @@ export const CharacterProfileCard = ({ data }: CharacterProfileCardProps) => {
       <dl className="flex w-full flex-col gap-3 text-sm">
         <div className="flex gap-3">
           <InfoRow label="레벨">
-            {data.character_level.toLocaleString()}
+            {data.character_level?.toLocaleString()}
           </InfoRow>
-          {data.level_ranking && (
+          {data.level_ranking?.ranking != null && (
             <>
               <InfoRow label="전체랭킹">
                 {data.level_ranking.ranking.toLocaleString()}등
@@ -147,7 +147,7 @@ export const CharacterProfileCard = ({ data }: CharacterProfileCardProps) => {
         <InfoRow label="길드">{guildName}</InfoRow>
         <div className="flex gap-3">
           <InfoRow label="유니온">{unionDisplay}</InfoRow>
-          {data.union_ranking && (
+          {data.union_ranking?.ranking != null && (
             <>
               <InfoRow label="전체랭킹">
                 {data.union_ranking.ranking.toLocaleString()}등

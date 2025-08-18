@@ -2,9 +2,11 @@
 
 import { useState } from "react";
 import { CharacterDetailData } from "@/entities/character";
-import { sortItems } from "@/entities/item/lib";
+import { sortItems, sortItemsForList } from "@/entities/item/lib";
 import { ItemTabHeader } from "./components/ItemTabHeader";
 import { ItemGrid } from "./components/ItemGrid";
+import { ItemList } from "./components/ItemList";
+import { ItemTabFooter } from "./components/ItemTabFooter";
 
 interface ItemTabProps {
   data: CharacterDetailData;
@@ -45,17 +47,16 @@ export const ItemTab = ({ data }: ItemTabProps) => {
     item_equipment: currentPresetItems,
   };
 
-  const sortedItems = sortItems(
-    currentPresetItems,
-    android ?? null,
-    heart ?? null,
-  );
+  const sortedItems =
+    viewMode === "grid"
+      ? sortItems(currentPresetItems, android ?? null, heart ?? null)
+      : sortItemsForList(currentPresetItems, android ?? null, heart ?? null);
 
   return (
     <div className="flex flex-col gap-4">
       {/* 헤더 (프리셋 & 뷰 모드 & 버튼) */}
       <ItemTabHeader
-        data={itemTabData} // 이거 하나만 넘기면 됨
+        data={itemTabData}
         selectedPreset={selectedPreset}
         viewMode={viewMode}
         onSelectPreset={setSelectedPreset}
@@ -66,10 +67,18 @@ export const ItemTab = ({ data }: ItemTabProps) => {
       {viewMode === "grid" ? (
         <ItemGrid items={sortedItems} presetNo={selectedPreset} />
       ) : (
-        <div className="text-muted-foreground flex h-74 w-85 items-center justify-center py-10 text-sm">
-          리스트 뷰 준비 중입니다.
-        </div>
+        <ItemList
+          items={sortedItems}
+          presetNo={selectedPreset}
+          characterClass={data.character_class}
+        />
       )}
+
+      {/* 아이템 (잠재, 추옵) 뷰 */}
+      <ItemTabFooter
+        items={sortedItems}
+        characterClass={data.character_class}
+      />
     </div>
   );
 };

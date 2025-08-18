@@ -1,6 +1,7 @@
 import { Separator } from "@/shared/ui/separator";
 import { MergedSpecData } from "../types";
-import { SectionTitle, StatRow } from "./SpecCardCommon";
+import { SectionTitle } from "./SpecCardCommon";
+import { InfoRow } from "@/shared/ui/InfoRow";
 
 interface RightStatColumnProps {
   data: MergedSpecData;
@@ -10,11 +11,8 @@ export const RightStatColumn = ({ data }: RightStatColumnProps) => {
   // 스타포스 총합 계산
   const totalStarforce =
     data.item_equipment?.reduce((acc, item) => {
-      // 값이 null이거나 없으면 "0"으로 처리 후 정수 변환
       const starStr = item.starforce_upgrade ?? "0";
       const star = parseInt(starStr, 10);
-
-      // NaN이 아닐 경우에만 더함
       return acc + (Number.isFinite(star) ? star : 0);
     }, 0) ?? 0;
 
@@ -40,41 +38,56 @@ export const RightStatColumn = ({ data }: RightStatColumnProps) => {
     (info) => info.activate_flag === "1",
   );
 
-  // 헥사 스킬 (데이터가 없으면 빈 배열)
+  // 헥사 스킬
   const hexaSkills = data.hexa_skill_data?.hexamatrix_skill ?? [];
 
   return (
     <div className="bg-muted/50 flex h-full flex-col rounded-lg border p-3 text-sm">
-      {/* FORCE */}
+      {/* FORCE 섹션 */}
       <SectionTitle>FORCE</SectionTitle>
       <ul className="flex flex-col gap-1.5">
-        <StatRow label="스타포스" value={totalStarforce} />
-        <StatRow label="아케인 포스" value={`${totalArcaneForce}`} />
-        <StatRow label="어센틱 포스" value={`${totalAuthenticForce}`} />
+        <InfoRow as="li" className="justify-between" label="스타포스">
+          {totalStarforce}
+        </InfoRow>
+        <InfoRow as="li" className="justify-between" label="아케인 포스">
+          {totalArcaneForce}
+        </InfoRow>
+        <InfoRow as="li" className="justify-between" label="어센틱 포스">
+          {totalAuthenticForce}
+        </InfoRow>
       </ul>
 
       <Separator className="my-3" />
 
-      {/* HEXA STAT */}
+      {/* HEXA STAT 섹션 */}
       <SectionTitle>HEXA STAT</SectionTitle>
       <ul className="flex flex-col gap-1.5">
-        <StatRow
+        <InfoRow
+          as="li"
+          className="justify-between"
           label={hexaStat?.main_stat ?? "메인스탯"}
-          value={hexaStat ? `Lv.${hexaStat.main_stat_level}` : "0"}
-        />
-        <StatRow
+        >
+          {hexaStat ? `Lv.${hexaStat.main_stat_level}` : "0"}
+        </InfoRow>
+        <InfoRow
+          as="li"
+          className="justify-between"
           label={hexaStat?.sub_1_stat ?? "부스탯1"}
-          value={hexaStat ? `Lv.${hexaStat.sub_1_stat_level}` : "0"}
-        />
-        <StatRow
+        >
+          {hexaStat ? `Lv.${hexaStat.sub_1_stat_level}` : "0"}
+        </InfoRow>
+        <InfoRow
+          as="li"
+          className="justify-between"
           label={hexaStat?.sub_2_stat ?? "부스탯2"}
-          value={hexaStat ? `Lv.${hexaStat.sub_2_stat_level}` : "0"}
-        />
+        >
+          {hexaStat ? `Lv.${hexaStat.sub_2_stat_level}` : "0"}
+        </InfoRow>
       </ul>
 
       <Separator className="my-3" />
 
-      {/* HEXA SKILL */}
+      {/* HEXA SKILL 섹션 */}
       <SectionTitle>HEXA SKILL</SectionTitle>
       <ul className="grid grid-cols-6 gap-2 sm:grid-cols-5">
         {Array.from({ length: 6 }).map((_, i) => {
@@ -90,12 +103,12 @@ export const RightStatColumn = ({ data }: RightStatColumnProps) => {
                     alt={skill.skill_name}
                     width={32}
                     height={32}
-                    className="h-full w-full"
+                    className="h-full w-full object-cover"
                     style={{ imageRendering: "pixelated" }}
                   />
                 ) : (
                   // 스킬 없을 때 (빈 칸)
-                  <span className="bg-muted/20 h-full w-full border"></span>
+                  <span className="bg-muted/20 h-full w-full" />
                 )}
               </span>
               <span className="text-muted-foreground text-[10px] font-semibold">

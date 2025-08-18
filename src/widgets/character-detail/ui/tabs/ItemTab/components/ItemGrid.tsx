@@ -20,7 +20,7 @@ export const ItemGrid = ({ items, presetNo }: ItemGridProps) => {
 
   if (hasNoEquipItems) {
     return (
-      <section className="rounded-md border p-4 text-center">
+      <section className="grid min-h-78 place-content-center rounded-md border p-4 text-center">
         <p className="text-muted-foreground text-sm">
           {presetNo}번 프리셋 정보가 없습니다.
         </p>
@@ -29,7 +29,7 @@ export const ItemGrid = ({ items, presetNo }: ItemGridProps) => {
   }
 
   return (
-    <div className="relative grid grid-cols-7 gap-x-1 gap-y-2 md:gap-x-1.5 md:gap-y-2.5">
+    <div className="grid grid-cols-7 gap-x-1 gap-y-2">
       {items.map((slot, idx) => {
         // 빈 여백 (slotName이 빈 문자열 ""인 경우)
         if (!slot.slotName) {

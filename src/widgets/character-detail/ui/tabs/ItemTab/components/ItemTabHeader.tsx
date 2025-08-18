@@ -1,6 +1,6 @@
 "use client";
 
-import { LayoutGrid, List, Layers, IdCard } from "lucide-react";
+import { LayoutGrid, List, IdCard, Search } from "lucide-react";
 import { SegmentedButton } from "./SegmentedButton";
 import { CharacterDetailData } from "@/entities/character";
 import {
@@ -95,7 +95,7 @@ export const ItemTabHeader = ({
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <SegmentedButton isSelected={false}>
-                      <Layers className="size-4" />
+                      <Search className="size-4" />
                     </SegmentedButton>
                   </TooltipTrigger>
                   <TooltipContent>

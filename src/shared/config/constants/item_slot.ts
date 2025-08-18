@@ -1,5 +1,5 @@
-// 한벌옷 착용 시
-export const EQUIP_SLOT_ORDER_ONEPIECE: string[] = [
+// [그리드용]
+export const EQUIP_SLOT_ORDER_GRID_ONEPIECE: string[] = [
   "무기",
   "보조무기",
   "",
@@ -39,8 +39,7 @@ export const EQUIP_SLOT_ORDER_ONEPIECE: string[] = [
   "하트",
 ];
 
-// 상·하의 착용 시
-export const EQUIP_SLOT_ORDER_TOPBOTTOM: string[] = [
+export const EQUIP_SLOT_ORDER_GRID_TOPBOTTOM: string[] = [
   "무기",
   "보조무기",
   "",
@@ -76,6 +75,64 @@ export const EQUIP_SLOT_ORDER_TOPBOTTOM: string[] = [
   "뱃지",
   "얼굴장식",
   "눈장식",
+  "안드로이드",
+  "하트",
+];
+
+// [리스트용]
+export const EQUIP_SLOT_ORDER_LIST_ONEPIECE: string[] = [
+  "무기",
+  "보조무기",
+  "엠블렘",
+  "모자",
+  "한벌옷",
+  "장갑",
+  "신발",
+  "어깨",
+  "망토",
+  "벨트",
+  "목걸이",
+  "목걸이 (2번째 슬롯)",
+  "반지",
+  "반지 (2번째 슬롯)",
+  "반지 (3번째 슬롯)",
+  "반지 (4번째 슬롯)",
+  "귀고리",
+  "얼굴장식",
+  "눈장식",
+  "포켓",
+  "뱃지",
+  "칭호",
+  "훈장",
+  "안드로이드",
+  "하트",
+];
+
+export const EQUIP_SLOT_ORDER_LIST_TOPBOTTOM: string[] = [
+  "무기",
+  "보조무기",
+  "엠블렘",
+  "모자",
+  "상의",
+  "하의",
+  "장갑",
+  "신발",
+  "어깨",
+  "망토",
+  "벨트",
+  "목걸이",
+  "목걸이 (2번째 슬롯)",
+  "반지",
+  "반지 (2번째 슬롯)",
+  "반지 (3번째 슬롯)",
+  "반지 (4번째 슬롯)",
+  "귀고리",
+  "얼굴장식",
+  "눈장식",
+  "포켓",
+  "뱃지",
+  "칭호",
+  "훈장",
   "안드로이드",
   "하트",
 ];

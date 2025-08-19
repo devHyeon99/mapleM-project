@@ -30,7 +30,7 @@ export const ItemTabFooter = ({
   );
 
   return (
-    <div className="bg-muted/50 grid w-full grid-cols-2 gap-x-4 gap-y-1 rounded-xs border-2 p-3 text-sm">
+    <div className="bg-muted/50 grid w-full grid-cols-2 gap-x-4 gap-y-1 rounded-xs border p-3 text-sm">
       <span className="sr-only">아이템 스펙 요약</span>
 
       <span className="text-foreground col-span-2 mb-1 font-bold">TOTAL</span>
@@ -52,7 +52,7 @@ export const ItemTabFooter = ({
       </InfoRow>
 
       <InfoRow className="justify-between" label={`추옵 (${labelAtk})`}>
-        <span className="font-bold">{chuop.atk.toLocaleString()}</span>
+        <span className="font-medium">{chuop.atk.toLocaleString()}</span>
       </InfoRow>
     </div>
   );

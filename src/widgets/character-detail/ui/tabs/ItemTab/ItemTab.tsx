@@ -1,23 +1,63 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import { IdCard, Search } from "lucide-react";
+
+// Shared & UI
+import { CommonTabHeader } from "@/shared/ui/CommonTabHeader";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/shared/ui/tooltip";
+import { SegmentedButton } from "@/shared/ui/SegmentedButton";
+
+// Entities
 import { CharacterDetailData } from "@/entities/character";
 import { sortItems, sortItemsForList } from "@/entities/item/lib";
-import { ItemTabHeader } from "./components/ItemTabHeader";
+
+// Local Components
 import { ItemGrid } from "./components/ItemGrid";
 import { ItemList } from "./components/ItemList";
 import { ItemTabFooter } from "./components/ItemTabFooter";
+
+// Dialogs
+import { SetEffectDialog } from "./dialogs/SetEffectDialog";
+import { SpecCardDialog } from "./dialogs/SpecCardDialog";
 
 interface ItemTabProps {
   data: CharacterDetailData;
 }
 
 export const ItemTab = ({ data }: ItemTabProps) => {
-  // --- 상태 관리 ---
   const [selectedPreset, setSelectedPreset] = useState(data.use_preset_no ?? 1);
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
 
-  // 프리셋 정보가 아예 없는 경우 (미접속 등)
+  const {
+    equipment_preset: presetList,
+    android_equipment: android,
+    heart_equipment: heart,
+    use_preset_no: activePresetNo,
+    set_effect: setEffect = [],
+  } = data;
+
+  const currentPresetItems = useMemo(() => {
+    return (
+      presetList?.find((p) => p.preset_no === selectedPreset)?.item_equipment ??
+      (selectedPreset === activePresetNo ? data.item_equipment : [])
+    );
+  }, [presetList, selectedPreset, activePresetNo, data.item_equipment]);
+
+  const sortedItems = useMemo(() => {
+    return viewMode === "grid"
+      ? sortItems(currentPresetItems, android ?? null, heart ?? null)
+      : sortItemsForList(currentPresetItems, android ?? null, heart ?? null);
+  }, [viewMode, currentPresetItems, android, heart]);
+
+  const itemTabData: CharacterDetailData = useMemo(
+    () => ({
+      ...data,
+      item_equipment: currentPresetItems,
+    }),
+    [data, currentPresetItems],
+  );
+
   if (data.use_preset_no === null) {
     return (
       <section className="flex min-h-25 flex-col items-center justify-center gap-2 rounded-md border p-6 text-center">
@@ -29,41 +69,58 @@ export const ItemTab = ({ data }: ItemTabProps) => {
     );
   }
 
-  // --- 데이터 추출  ---
-  const {
-    equipment_preset: presetList,
-    android_equipment: android,
-    heart_equipment: heart,
-    use_preset_no: activePresetNo,
-  } = data;
+  const ActionButtons = (
+    <>
+      <SpecCardDialog
+        data={itemTabData}
+        trigger={
+          <span className="inline-flex">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <SegmentedButton isSelected={false}>
+                  <IdCard className="size-5.5" />
+                </SegmentedButton>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>스펙 카드 저장</p>
+              </TooltipContent>
+            </Tooltip>
+          </span>
+        }
+      />
 
-  // --- 데이터 가공 로직 ---
-  const currentPresetItems =
-    presetList?.find((p) => p.preset_no === selectedPreset)?.item_equipment ??
-    (selectedPreset === activePresetNo ? data.item_equipment : []);
-
-  const itemTabData: CharacterDetailData = {
-    ...data,
-    item_equipment: currentPresetItems,
-  };
-
-  const sortedItems =
-    viewMode === "grid"
-      ? sortItems(currentPresetItems, android ?? null, heart ?? null)
-      : sortItemsForList(currentPresetItems, android ?? null, heart ?? null);
+      <SetEffectDialog
+        setEffect={setEffect}
+        activePresetNo={activePresetNo ?? 1}
+        trigger={
+          <span className="inline-flex">
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <SegmentedButton isSelected={false}>
+                  <Search className="size-4" />
+                </SegmentedButton>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>세트 효과 보기</p>
+              </TooltipContent>
+            </Tooltip>
+          </span>
+        }
+      />
+    </>
+  );
 
   return (
     <div className="flex flex-col gap-4">
-      {/* 헤더 (프리셋 & 뷰 모드 & 버튼) */}
-      <ItemTabHeader
-        data={itemTabData}
+      <CommonTabHeader
+        activePresetNo={activePresetNo}
         selectedPreset={selectedPreset}
         viewMode={viewMode}
         onSelectPreset={setSelectedPreset}
         onChangeViewMode={setViewMode}
+        actions={ActionButtons}
       />
 
-      {/* 아이템 목록 */}
       {viewMode === "grid" ? (
         <ItemGrid items={sortedItems} presetNo={selectedPreset} />
       ) : (
@@ -74,7 +131,6 @@ export const ItemTab = ({ data }: ItemTabProps) => {
         />
       )}
 
-      {/* 아이템 (잠재, 추옵) 뷰 */}
       <ItemTabFooter
         items={sortedItems}
         characterClass={data.character_class}

@@ -1,4 +1,8 @@
-// 컬러링 프리즘 계열 타입
+// ============================================================================
+// 캐시 장비 (Cash Equipment)
+// ============================================================================
+
+// 컬러링 프리즘 색상 범위 타입
 export type ColorRange =
   | "1" // 전체계열
   | "2" // 빨간색
@@ -7,40 +11,62 @@ export type ColorRange =
   | "5" // 청록색
   | "6" // 파란색
   | "7" // 보라색
-  | null; // 값이 없을 수도 있음
+  | string // 혹시 모를 예외 케이스 대비
+  | null;
 
-// 캐시 아이템 옵션 (예: 추가 옵션, 잠재 능력)
+// 캐시 아이템 옵션
 export interface CashItemOption {
-  option_no: number;
-  option_name: string | null;
-  option_value: string | null;
+  option_name: string;
+  option_value: string;
 }
 
-// 캐시 아이템 프리즘 정보
+// 캐시 아이템 컬러링 프리즘 정보
 export interface CashItemColoringPrism {
-  color_range: ColorRange; // 적용 범위 (문자열로 옴, "1" 등)
-  hue: number | null; // 색조 (null 가능)
+  color_range: ColorRange; // 색상 범위
+  hue: number | null; // 색조
   saturation: number | null; // 채도
   value: number | null; // 명도
 }
 
-// 캐시 장비 슬롯 데이터
+// 개별 캐시 아이템 정보
 export interface CashItemEquipment {
-  character_look_mode?: string; // 캐릭터 외형 모드 (0: 일반모드, 1: 엔젤릭버스터인 경우 드레스 업 모드)
-  cash_item_equipment_page_name: string; // UI 카테고리 (예: "모자", "한벌옷")
-  cash_item_equipment_slot_name: string; // 구체적 슬롯명 (예: "목걸이 (2번째 슬롯)")
+  cash_item_equipment_page_name: string; // 장착 부위 (UI 카테고리)
+  cash_item_equipment_slot_name: string; // 슬롯 이름
   cash_item_name: string; // 아이템 이름
-  cash_item_icon: string; // 캐시 아이템 아이콘 (컬러링 프리즘 효과 미반영 상태)
-  cash_item_description: string; // 설명 (없으면 "")
-  cash_item_gender: string; // "공용" | "남자" | "여자"
-  cash_item_option: CashItemOption[]; // 옵션 리스트
-  date_option_expire: string | null; // 만료일 (null → 무제한)
-  cash_item_label: string | null; // 라벨 (ex: 이벤트, 신규 등)
-  cash_item_coloring_prism: CashItemColoringPrism | null; // 컬러링 프리즘 정보
+  cash_item_icon: string; // 아이콘 URL
+  cash_item_description: string; // 설명
+  cash_item_gender: string; // 성별 (명세는 number이나 실제 데이터는 string "공용" 등)
+  cash_item_option: CashItemOption[]; // 옵션 목록
+  date_option_expire: string | null; // 만료일 (UTC string or null)
+  cash_item_label: string | null; // 라벨 (마스터, 스페셜 등)
+  cash_item_coloring_prism: CashItemColoringPrism | null; // 프리즘 정보
 }
 
-// 캐시 장비 응답
-export interface CharacterCashEquipment {
-  cash_item_equipment: CashItemEquipment[]; // 착용 중인 캐시 아이템
-  additional_cash_item_equipment: CashItemEquipment[]; // 추가 캐시 아이템
+// 일반 코디 프리셋 정보
+export interface CashEquipmentPreset {
+  preset_no: number;
+  cash_item_equipment: CashItemEquipment[];
+}
+
+// 엔젤릭버스터 드레스업 모드 프리셋 정보
+export interface AdditionalCashEquipmentPreset {
+  preset_no: number;
+  additional_cash_item_equipment: CashItemEquipment[];
+}
+
+// API 응답 전체 구조 (캐시 장비 탭 메인 데이터)
+export interface CharacterCashEquipmentData {
+  character_class: string;
+  character_gender: string;
+  use_preset_no: number; // 현재 적용 중인 프리셋 번호
+  use_additional_preset_no: number; // 현재 적용 중인 드레스업 프리셋 번호
+  character_look_mode: string; // "0": 일반, "1": 드레스업
+
+  // 현재 장착 중인 장비 (프리셋과 별개로 현재 상태)
+  cash_item_equipment: CashItemEquipment[];
+  additional_cash_item_equipment: CashItemEquipment[];
+
+  // 프리셋 리스트
+  cash_equipment_preset: CashEquipmentPreset[];
+  additional_cash_equipment_preset: AdditionalCashEquipmentPreset[];
 }

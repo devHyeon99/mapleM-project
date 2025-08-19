@@ -1,37 +1,43 @@
 "use client";
 
-import { LayoutGrid, List, IdCard, Search } from "lucide-react";
-import { SegmentedButton } from "./SegmentedButton";
-import { CharacterDetailData } from "@/entities/character";
+import { LayoutGrid, List } from "lucide-react";
+import { ReactNode } from "react";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/shared/ui/tooltip";
-import { SpecCardDialog } from "../dialogs/SpecCardDialog";
-import { SetEffectDialog } from "../dialogs/SetEffectDialog";
+import { SegmentedButton } from "./SegmentedButton";
 
-interface ItemTabHeaderProps {
-  data: CharacterDetailData;
-  presets?: number[];
+interface CommonTabHeaderProps {
+  /** 현재 활성화된(인게임 적용 중인) 프리셋 번호 */
+  activePresetNo?: number | null;
+  /** 현재 사용자가 보고 있는(선택한) 프리셋 번호 */
   selectedPreset: number;
+  /** 표시할 프리셋 목록 (기본값: [1, 2, 3]) */
+  presets?: number[];
+  /** 현재 뷰 모드 */
   viewMode: "grid" | "list";
+  /** 프리셋 변경 핸들러 */
   onSelectPreset: (preset: number) => void;
+  /** 뷰 모드 변경 핸들러 */
   onChangeViewMode: (mode: "grid" | "list") => void;
+  /**
+   * 추가 액션 버튼들 (스펙카드, 세트효과 등), 뷰 모드 버튼 좌측에 구분선과 함께 배치
+   */
+  actions?: ReactNode;
 }
 
-export const ItemTabHeader = ({
-  data,
-  presets = [1, 2, 3],
+export const CommonTabHeader = ({
+  activePresetNo,
   selectedPreset,
+  presets = [1, 2, 3],
   viewMode,
   onSelectPreset,
   onChangeViewMode,
-}: ItemTabHeaderProps) => {
-  const activePresetNo = data.use_preset_no;
-  const setEffect = data.set_effect ?? [];
-
+  actions,
+}: CommonTabHeaderProps) => {
   return (
     <div className="flex items-center justify-between">
       {/* 좌측: 프리셋 선택 */}
@@ -66,54 +72,17 @@ export const ItemTabHeader = ({
       {/* 우측: 뷰 모드 + 액션 버튼 (통합 툴바) */}
       <div className="bg-muted flex items-center gap-0.5 rounded-xs border px-1.5 py-1 md:px-3.5">
         <TooltipProvider delayDuration={300}>
-          {/* 스펙 카드 */}
-          <SpecCardDialog
-            data={data}
-            trigger={
-              <span className="inline-flex">
-                {/* DialogTrigger asChild 호환용 */}
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <SegmentedButton isSelected={false}>
-                      <IdCard className="size-5.5" />
-                    </SegmentedButton>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>스펙 카드 저장</p>
-                  </TooltipContent>
-                </Tooltip>
-              </span>
-            }
-          />
+          {/* 액션 버튼들 (스펙카드, 세트효과 등) */}
+          {actions}
 
-          {/* 세트 효과 */}
-          <SetEffectDialog
-            setEffect={setEffect}
-            activePresetNo={activePresetNo ?? 1}
-            trigger={
-              <span className="inline-flex">
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <SegmentedButton isSelected={false}>
-                      <Search className="size-4" />
-                    </SegmentedButton>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>세트 효과 보기</p>
-                  </TooltipContent>
-                </Tooltip>
-              </span>
-            }
-          />
-
-          {/* 구분선  */}
-          <div className="bg-border mx-1 h-3 w-[1px]" aria-hidden="true" />
+          {/* 구분선 (액션 버튼이 있을 때만 표시) */}
+          {actions && (
+            <div className="bg-border mx-1 h-3 w-[1px]" aria-hidden="true" />
+          )}
 
           {/* 그리드 */}
           <Tooltip>
             <TooltipTrigger asChild>
-              {/* TooltipTrigger는 반드시 자식에게 ref를 전달해야 하므로 div로 감싸거나 forwardRef 필요 */}
-              {/* SegmentedButton이 forwardRef를 지원하지 않는다면 span으로 감싸는 게 안전함 */}
               <span>
                 <SegmentedButton
                   isSelected={viewMode === "grid"}

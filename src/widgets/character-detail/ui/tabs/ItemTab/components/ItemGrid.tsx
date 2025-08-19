@@ -1,6 +1,6 @@
-import { ItemIcon, SortedItemSlot } from "@/entities/item";
-import { cn } from "@/shared/lib/utils";
 import { Fragment } from "react";
+import { ItemIcon, SortedItemSlot } from "@/entities/item";
+import { ItemSlotPlaceholder } from "@/shared/ui/ItemSlotPlaceholder";
 
 interface ItemGridProps {
   items: SortedItemSlot[];
@@ -53,17 +53,7 @@ export const ItemGrid = ({ items, presetNo }: ItemGridProps) => {
 
         // 아이템은 없지만 슬롯 이름이 있는 경우 (빈 장비칸)
         return (
-          <div
-            key={`empty-slot-${idx}`}
-            className={cn(
-              "border-border bg-muted/20 flex aspect-square w-full items-center justify-center rounded-xs border-2 text-center",
-            )}
-            title={`${slot.slotName} 슬롯 (비어있음)`}
-          >
-            <span className="text-muted-foreground text-[10px] leading-tight font-semibold select-none sm:text-xs">
-              {slot.slotName.replace(/\s*\(.*?\)/, "")}
-            </span>
-          </div>
+          <ItemSlotPlaceholder key={`empty-${idx}`} label={slot.slotName} />
         );
       })}
     </div>

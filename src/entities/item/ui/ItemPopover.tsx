@@ -2,6 +2,7 @@ import * as PopoverPrimitive from "@radix-ui/react-popover";
 import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui/popover";
 import { CharacterItemEquipment } from "@/entities/character";
 import { X } from "lucide-react";
+import { ItemIconBase } from "./ItemIconBase";
 import { ItemHeader } from "./ItemHeader";
 import { ItemStarforce } from "./ItemStarforce";
 import { ItemBaseOption } from "./ItemBaseOption";
@@ -15,13 +16,16 @@ import { ItemInfo } from "./ItemInfo";
 
 interface ItemPopoverProps {
   item: CharacterItemEquipment;
-  children: React.ReactNode;
+  className?: string;
 }
 
-export const ItemPopover = ({ item, children }: ItemPopoverProps) => {
+export const ItemPopover = ({ item, className }: ItemPopoverProps) => {
   return (
     <Popover>
-      <PopoverTrigger asChild>{children}</PopoverTrigger>
+      <PopoverTrigger asChild>
+        <ItemIconBase item={item} className={className} />
+      </PopoverTrigger>
+
       <PopoverContent
         side="right"
         align="center"

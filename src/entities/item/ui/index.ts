@@ -1,1 +1,1 @@
-export { ItemIcon } from "./ItemIcon";
+export { ItemPopover } from "./ItemPopover";

@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { ItemIcon, SortedItemSlot } from "@/entities/item";
+import { ItemPopover, SortedItemSlot } from "@/entities/item";
 import { ItemSlotPlaceholder } from "@/shared/ui/ItemSlotPlaceholder";
 
 interface ItemGridProps {
@@ -46,7 +46,7 @@ export const ItemGrid = ({ items, presetNo }: ItemGridProps) => {
         if (slot.item) {
           return (
             <Fragment key={`${presetNo}-${slot.item.item_name}-${idx}`}>
-              <ItemIcon item={slot.item} />
+              <ItemPopover item={slot.item} className="cursor-pointer" />
             </Fragment>
           );
         }

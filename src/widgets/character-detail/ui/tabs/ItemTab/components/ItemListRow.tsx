@@ -1,5 +1,5 @@
 import { CharacterItemEquipment, ItemOption } from "@/entities/character";
-import { ItemIcon } from "@/entities/item";
+import { ItemPopover } from "@/entities/item";
 import { Star } from "lucide-react";
 
 interface ItemRowProps {
@@ -87,7 +87,7 @@ export const ItemRow = ({
   return (
     <div className="bg-card hover:bg-accent/50 flex w-full items-center gap-3 rounded-md border-2 p-2 shadow-sm transition-colors">
       <div className="h-12.5 w-12.5 shrink-0">
-        <ItemIcon item={item} className="h-full w-full cursor-pointer" />
+        <ItemPopover item={item} className="h-full w-full cursor-pointer" />
       </div>
 
       <div className="flex min-w-0 flex-1 flex-col justify-center gap-0.5">

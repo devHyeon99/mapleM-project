@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { ItemCashPopover } from "@/entities/cash-item";
 import { SortedCashItemSlot } from "@/entities/cash-item/lib/sortCashItems";
-import { ItemSlotPlaceholder } from "@/shared/ui/ItemSlotPlaceholder";
+import { ItemEmptySlot } from "@/shared/ui/ItemEmptySlot";
 
 interface CashItemGridProps {
   items: SortedCashItemSlot[];
@@ -36,9 +36,7 @@ export const CashItemGrid = ({ items, presetNo }: CashItemGridProps) => {
 
         // 아이템은 없지만 슬롯 이름이 있는 경우 -> 빈 칸 표시
         if (slot.slotName) {
-          return (
-            <ItemSlotPlaceholder key={`empty-${idx}`} label={slot.slotName} />
-          );
+          return <ItemEmptySlot key={`empty-${idx}`} label={slot.slotName} />;
         }
 
         // 슬롯 이름도 없는 경우 ("") -> 단순 여백

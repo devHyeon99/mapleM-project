@@ -1,6 +1,6 @@
 import { SortedCashItemSlot } from "@/entities/cash-item/lib/sortCashItems";
 import { cn } from "@/shared/lib/utils";
-import { CashItemEmpty } from "./CashItemEmpty";
+import { ItemEmptyRow } from "@/shared/ui/ItemEmptyRow";
 import { CashItemRow } from "./CashItemRow";
 
 interface CashItemListProps {
@@ -36,7 +36,7 @@ export const CashItemList = ({
 
         // 슬롯 이름은 있는데 아이템이 없는 경우 (빈 장비칸)
         if (slot.slotName) {
-          return <CashItemEmpty key={`empty-${index}`} label={slot.slotName} />;
+          return <ItemEmptyRow key={`empty-${index}`} label={slot.slotName} />;
         }
 
         // 단순 여백

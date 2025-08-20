@@ -1,7 +1,7 @@
 import { SortedItemSlot } from "@/entities/item";
 import { MAGICAL_CLASSES } from "@/shared/config/constants/magic_class";
 import { cn } from "@/shared/lib/utils";
-import { EmptyItemRow } from "./ItemListEmpty";
+import { ItemEmptyRow } from "@/shared/ui/ItemEmptyRow";
 import { ItemRow } from "./ItemListRow";
 
 interface ItemListProps {
@@ -59,7 +59,7 @@ export const ItemList = ({
           return null;
         }
 
-        return <EmptyItemRow key={`empty-${index}`} label={slot.slotName} />;
+        return <ItemEmptyRow key={`empty-${index}`} label={slot.slotName} />;
       })}
     </div>
   );

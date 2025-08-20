@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import { ItemPopover, SortedItemSlot } from "@/entities/item";
-import { ItemSlotPlaceholder } from "@/shared/ui/ItemSlotPlaceholder";
+import { ItemEmptySlot } from "@/shared/ui/ItemEmptySlot";
 
 interface ItemGridProps {
   items: SortedItemSlot[];
@@ -52,9 +52,7 @@ export const ItemGrid = ({ items, presetNo }: ItemGridProps) => {
         }
 
         // 아이템은 없지만 슬롯 이름이 있는 경우 (빈 장비칸)
-        return (
-          <ItemSlotPlaceholder key={`empty-${idx}`} label={slot.slotName} />
-        );
+        return <ItemEmptySlot key={`empty-${idx}`} label={slot.slotName} />;
       })}
     </div>
   );

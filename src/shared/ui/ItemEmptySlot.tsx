@@ -1,14 +1,11 @@
 import { cn } from "@/shared/lib/utils";
 
-interface ItemSlotPlaceholderProps {
+interface ItemEmptySlotProps {
   label: string;
   className?: string;
 }
 
-export const ItemSlotPlaceholder = ({
-  label,
-  className,
-}: ItemSlotPlaceholderProps) => {
+export const ItemEmptySlot = ({ label, className }: ItemEmptySlotProps) => {
   return (
     <div
       className={cn(

@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { CharacterItemEquipment } from "@/entities/character";
 import { ItemIconBase } from "@/entities/item/ui/ItemIconBase";
-import { SpecCardItem } from "../getSortedSpecCardItems";
+import { SpecCardItem } from "../lib/getSortedSpecCardItems";
 
 const isRealItem = (item: SpecCardItem): item is CharacterItemEquipment =>
   !("isPlaceholder" in item);

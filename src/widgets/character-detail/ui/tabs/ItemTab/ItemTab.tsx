@@ -13,13 +13,13 @@ import { CharacterDetailData } from "@/entities/character";
 import { sortItems, sortItemsForList } from "@/entities/item/lib";
 
 // Local Components
-import { ItemGrid } from "./components/ItemGrid";
-import { ItemList } from "./components/ItemList";
-import { ItemTabFooter } from "./components/ItemTabFooter";
+import { ItemGrid } from "./ItemGrid";
+import { ItemList } from "./ItemList";
+import { ItemTabFooter } from "./ItemTabFooter";
 
-// Dialogs
-import { SetEffectDialog } from "./dialogs/SetEffectDialog";
-import { SpecCardDialog } from "./dialogs/SpecCardDialog";
+// features
+import { SpecCardDialog } from "@/features/share-spec-card";
+import { SetEffectDialog } from "@/features/view-set-effect";
 
 interface ItemTabProps {
   data: CharacterDetailData;

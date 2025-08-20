@@ -1,5 +1,5 @@
 import { Separator } from "@/shared/ui/separator";
-import { MergedSpecData } from "../types";
+import { MergedSpecData } from "../model/types";
 import { SectionTitle } from "./SpecCardCommon";
 import { InfoRow } from "@/shared/ui/InfoRow";
 

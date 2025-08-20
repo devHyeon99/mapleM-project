@@ -2,17 +2,17 @@
 
 import { Loader2 } from "lucide-react";
 import { CharacterDetailData } from "@/entities/character";
-import { getSortedSpecCardItems } from "./getSortedSpecCardItems";
-import { MergedSpecData } from "./types";
+import { getSortedSpecCardItems } from "../lib/getSortedSpecCardItems";
+import { MergedSpecData } from "../model/types";
 
 import { useCharacterSymbol } from "@/entities/character/model/hooks/useCharacterSymbol";
 import { useCharacterHexaStat } from "@/entities/character/model/hooks/useCharacterHexaStat";
 import { useCharacterStat } from "@/entities/character/model/hooks/useCharacterStat";
 import { useCharacterHexaSkill } from "@/entities/skill/model/hooks/useCharacterHexaSkill";
 
-import { EquipmentGrid } from "./ui/EquipmentGrid";
-import { RightStatColumn } from "./ui/RightStatColumn";
-import { TotalStatSection } from "./ui/TotalStatSection";
+import { EquipmentGrid } from "./EquipmentGrid";
+import { RightStatColumn } from "./RightStatColumn";
+import { TotalStatSection } from "./TotalStatSection";
 
 interface SpecCardContentProps {
   ocid: string;

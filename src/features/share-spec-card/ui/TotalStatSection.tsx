@@ -1,5 +1,5 @@
 import { SectionTitle } from "./SpecCardCommon";
-import { MergedSpecData } from "../types";
+import { MergedSpecData } from "../model/types";
 import { getItemSpec } from "@/entities/item/lib/getItemSpec";
 import { InfoRow } from "@/shared/ui/InfoRow";
 

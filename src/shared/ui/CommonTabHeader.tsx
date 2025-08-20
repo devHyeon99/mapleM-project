@@ -14,7 +14,7 @@ interface CommonTabHeaderProps {
   /** 현재 활성화된(인게임 적용 중인) 프리셋 번호 */
   activePresetNo?: number | null;
   /** 현재 사용자가 보고 있는(선택한) 프리셋 번호 */
-  selectedPreset: number;
+  selectedPreset?: number | null;
   /** 표시할 프리셋 목록 (기본값: [1, 2, 3]) */
   presets?: number[];
   /** 현재 뷰 모드 */

@@ -5,7 +5,7 @@ import { ItemSlotPlaceholder } from "@/shared/ui/ItemSlotPlaceholder";
 
 interface CashItemGridProps {
   items: SortedCashItemSlot[];
-  presetNo: number;
+  presetNo?: number | null;
 }
 
 export const CashItemGrid = ({ items, presetNo }: CashItemGridProps) => {

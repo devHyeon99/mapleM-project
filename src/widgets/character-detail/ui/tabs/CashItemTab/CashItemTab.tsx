@@ -18,15 +18,16 @@ interface CashItemTabProps {
 
 export const CashItemTab = ({ ocid }: CashItemTabProps) => {
   const { data, isLoading, isError, error } = useCharacterCashEquipment(ocid);
-
-  const [selectedPreset, setSelectedPreset] = useState(1);
+  const [selectedPreset, setSelectedPreset] = useState<number | null>(
+    () => data?.use_preset_no ?? null,
+  );
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
 
   useEffect(() => {
-    if (data?.use_preset_no) {
+    if (data?.use_preset_no && selectedPreset === null) {
       setSelectedPreset(data.use_preset_no);
     }
-  }, [data?.use_preset_no]);
+  }, [data?.use_preset_no, selectedPreset]);
 
   // 현재 선택된 프리셋의 아이템 목록 추출
   const currentPresetItems = useMemo(() => {
@@ -49,7 +50,7 @@ export const CashItemTab = ({ ocid }: CashItemTabProps) => {
     return sortCashItems(currentPresetItems);
   }, [currentPresetItems]);
 
-  if (isLoading) {
+  if (isLoading || (data && selectedPreset === null)) {
     return <LoadingCard message="외형 정보 불러오는 중..." />;
   }
 

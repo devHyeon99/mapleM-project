@@ -8,7 +8,7 @@ interface Props {
 export const ItemCashPopoverHeader = ({ item }: Props) => {
   return (
     <div className="flex items-center gap-2 border-b pb-3">
-      <ItemCashIconBase item={item} />
+      <ItemCashIconBase item={item} className="h-12.5 w-12.5" />
       <span className="self-start">{item.cash_item_name}</span>
     </div>
   );

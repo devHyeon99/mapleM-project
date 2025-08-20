@@ -1,8 +1,11 @@
-import type { CharacterCashEquipmentData } from "@/entities/cash-item";
-import { useCharacterApi } from "@/shared/api/hooks/useCharacterApi";
+import { useQuery } from "@tanstack/react-query";
+import { getCashItem } from "../../api/getCashItem";
 
-export const useCharacterCashEquipment = (ocid: string | null) =>
-  useCharacterApi<CharacterCashEquipmentData>({
-    ocid,
-    endpoint: "/api/character/cash",
+export const useCharacterCashEquipment = (ocid: string) => {
+  return useQuery({
+    queryKey: ["cash-equipment", ocid],
+    queryFn: () => getCashItem(ocid),
+    enabled: !!ocid,
+    staleTime: 1000 * 60 * 10,
   });
+};

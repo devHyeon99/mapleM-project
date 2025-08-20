@@ -35,7 +35,7 @@ export interface CashItemEquipment {
   cash_item_name: string; // 아이템 이름
   cash_item_icon: string; // 아이콘 URL
   cash_item_description: string; // 설명
-  cash_item_gender: string; // 성별 (명세는 number이나 실제 데이터는 string "공용" 등)
+  cash_item_gender: string; // 성별
   cash_item_option: CashItemOption[]; // 옵션 목록
   date_option_expire: string | null; // 만료일 (UTC string or null)
   cash_item_label: string | null; // 라벨 (마스터, 스페셜 등)
@@ -54,7 +54,47 @@ export interface AdditionalCashEquipmentPreset {
   additional_cash_item_equipment: CashItemEquipment[];
 }
 
-// API 응답 전체 구조 (캐시 장비 탭 메인 데이터)
+// ============================================================================
+// 뷰티 (Beauty - Hair, Face, Skin)
+// ============================================================================
+
+// 헤어 정보
+export interface CharacterHair {
+  hair_name: string | null;
+  base_color: string | null;
+  mix_color: string | null;
+  mix_rate: string | null;
+}
+
+// 성형 정보
+export interface CharacterFace {
+  face_name: string | null;
+  base_color: string | null;
+  mix_color: string | null;
+  mix_rate: string | null;
+}
+
+// 뷰티 API 응답 전체 구조
+export interface CharacterBeautyData {
+  character_class: string;
+  character_gender: string;
+
+  // 일반 모드
+  character_hair: CharacterHair | null;
+  character_face: CharacterFace | null;
+  character_skin_name: string | null;
+
+  // 엔젤릭버스터 드레스업 모드 (미사용 시 null)
+  additional_character_hair: CharacterHair | null;
+  additional_character_face: CharacterFace | null;
+  additional_character_skin_name: string | null;
+}
+
+// ============================================================================
+// 통합 데이터 (API Response)
+// ============================================================================
+
+// API 응답 전체 구조 (캐시 장비 + 뷰티 데이터)
 export interface CharacterCashEquipmentData {
   character_class: string;
   character_gender: string;
@@ -62,11 +102,14 @@ export interface CharacterCashEquipmentData {
   use_additional_preset_no: number; // 현재 적용 중인 드레스업 프리셋 번호
   character_look_mode: string; // "0": 일반, "1": 드레스업
 
-  // 현재 장착 중인 장비 (프리셋과 별개로 현재 상태)
+  // 현재 장착 중인 장비
   cash_item_equipment: CashItemEquipment[];
   additional_cash_item_equipment: CashItemEquipment[];
 
   // 프리셋 리스트
   cash_equipment_preset: CashEquipmentPreset[];
   additional_cash_equipment_preset: AdditionalCashEquipmentPreset[];
+
+  // 뷰티
+  beauty_data: CharacterBeautyData;
 }

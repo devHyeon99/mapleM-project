@@ -13,7 +13,7 @@ export const ItemCashOptions = ({ options }: Props) => {
   return (
     <>
       <p className="pt-2 text-sm">아이템 옵션</p>
-      <ul className="space-y-1 text-sm">
+      <ul className="text-sm">
         {options.map((opt, idx) => (
           <li key={idx} className="flex gap-1">
             <span>{opt.option_name}</span>

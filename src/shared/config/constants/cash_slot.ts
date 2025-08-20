@@ -34,6 +34,10 @@ export const CASH_EQUIP_SLOT_ORDER_ONEPIECE = [
   "",
   "탈것",
   "의자",
+  "",
+  "헤어",
+  "성형",
+  "피부",
 ];
 
 export const CASH_EQUIP_SLOT_ORDER_TOPBOTTOM = [
@@ -71,4 +75,8 @@ export const CASH_EQUIP_SLOT_ORDER_TOPBOTTOM = [
   "",
   "탈것",
   "의자",
+  "",
+  "헤어",
+  "성형",
+  "피부",
 ];

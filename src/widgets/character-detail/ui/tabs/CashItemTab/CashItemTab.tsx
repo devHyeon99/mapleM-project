@@ -7,10 +7,15 @@ import { CommonTabHeader } from "@/shared/ui/CommonTabHeader";
 import { LoadingCard } from "@/shared/ui/LoadingCard";
 
 // Entities
-import { useCharacterCashEquipment, sortCashItems } from "@/entities/cash-item";
+import {
+  useCharacterCashEquipment,
+  sortCashItems,
+  convertBeautyToCashItem,
+} from "@/entities/cash-item";
 
 // Local Components
 import { CashItemGrid } from "./CashItemGrid";
+import { CashItemList } from "./CashItemList";
 
 interface CashItemTabProps {
   ocid: string;
@@ -45,10 +50,19 @@ export const CashItemTab = ({ ocid }: CashItemTabProps) => {
     );
   }, [data, selectedPreset]);
 
-  // 슬롯 순서대로 정렬
+  const beautyItems = useMemo(() => {
+    return convertBeautyToCashItem(
+      data?.beauty_data,
+      data?.character_look_mode,
+    );
+  }, [data?.beauty_data, data?.character_look_mode]);
+
+  // (뷰티 + 장비)
   const sortedItems = useMemo(() => {
-    return sortCashItems(currentPresetItems);
-  }, [currentPresetItems]);
+    // 두 배열을 합친 뒤 정렬 함수로 전달
+    const mergedItems = [...beautyItems, ...currentPresetItems];
+    return sortCashItems(mergedItems);
+  }, [currentPresetItems, beautyItems]);
 
   const isDataEmpty = !data || data.cash_item_equipment.length === 0;
 
@@ -90,9 +104,7 @@ export const CashItemTab = ({ ocid }: CashItemTabProps) => {
       {viewMode === "grid" ? (
         <CashItemGrid items={sortedItems} presetNo={selectedPreset} />
       ) : (
-        <div className="text-muted-foreground flex h-40 w-full flex-col items-center justify-center gap-2 rounded-lg border border-dashed text-sm">
-          <p>리스트 뷰는 준비 중입니다.</p>
-        </div>
+        <CashItemList items={sortedItems} presetNo={selectedPreset} />
       )}
     </div>
   );

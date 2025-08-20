@@ -50,7 +50,9 @@ export const CashItemTab = ({ ocid }: CashItemTabProps) => {
     return sortCashItems(currentPresetItems);
   }, [currentPresetItems]);
 
-  if (isLoading || (data && selectedPreset === null)) {
+  const isDataEmpty = !data || data.cash_item_equipment.length === 0;
+
+  if (isLoading || (data && !isDataEmpty && selectedPreset === null)) {
     return <LoadingCard message="외형 정보 불러오는 중..." />;
   }
 
@@ -64,10 +66,10 @@ export const CashItemTab = ({ ocid }: CashItemTabProps) => {
 
   if (!data || data.cash_item_equipment.length === 0) {
     return (
-      <section className="flex min-h-25 flex-col items-center justify-center gap-2 rounded-md border p-6 text-center">
+      <section className="bg-muted/50 flex min-h-91.5 flex-col items-center justify-center gap-2 rounded-md border p-6 text-center">
         <p className="text-muted-foreground text-sm whitespace-pre-line">
-          API 업데이트(2025.09.18) 이후 접속 기록이 없거나,{`\n`}
-          장착한 캐시 장비 정보를 불러올 수 없습니다.
+          API 업데이트 이후 접속 기록이 없거나,{`\n`}
+          장착한 장비 정보를 불러올 수 없습니다.
         </p>
       </section>
     );

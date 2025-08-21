@@ -7,7 +7,6 @@ import { MergedSpecData } from "../model/types";
 
 import { useCharacterSymbol } from "@/entities/character/model/hooks/useCharacterSymbol";
 import { useCharacterHexaStat } from "@/entities/character/model/hooks/useCharacterHexaStat";
-import { useCharacterStat } from "@/entities/character/model/hooks/useCharacterStat";
 import { useCharacterHexaSkill } from "@/entities/skill/model/hooks/useCharacterHexaSkill";
 
 import { EquipmentGrid } from "./EquipmentGrid";
@@ -28,12 +27,10 @@ export const SpecCardContent = ({
     useCharacterSymbol(ocid);
   const { data: hexaStatData, isLoading: isHexaStatLoading } =
     useCharacterHexaStat(ocid);
-  const { data: statData, isLoading: isStatLoading } = useCharacterStat(ocid);
   const { data: hexaSkillData, isLoading: isHexaSkillLoading } =
     useCharacterHexaSkill(ocid);
 
-  const isLoading =
-    isSymbolLoading || isHexaStatLoading || isStatLoading || isHexaSkillLoading;
+  const isLoading = isSymbolLoading || isHexaStatLoading || isHexaSkillLoading;
 
   // 로딩 중 UI
   if (isLoading) {
@@ -51,7 +48,6 @@ export const SpecCardContent = ({
     symbol_data: symbolData ?? null,
     hexa_stat_data: hexaStatData ?? null,
     hexa_skill_data: hexaSkillData ?? null,
-    stat_data: statData ?? null,
   };
 
   // UI 렌더링 준비

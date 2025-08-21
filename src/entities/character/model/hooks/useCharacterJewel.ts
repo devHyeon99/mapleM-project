@@ -1,8 +1,10 @@
-import { CharacterJewelEquipment } from "@/entities/character";
-import { useCharacterApi } from "@/shared/api/hooks/useCharacterApi";
+import { useQuery } from "@tanstack/react-query";
+import { getCharacterJewel } from "../../api/get-jewel";
 
-export const useCharacterJewel = (ocid: string | null) =>
-  useCharacterApi<CharacterJewelEquipment>({
-    ocid,
-    endpoint: "/api/character/jewel",
+export const useCharacterJewel = (ocid: string | null, level: number) => {
+  return useQuery({
+    queryKey: ["characterJewel", ocid, level],
+    queryFn: () => getCharacterJewel(ocid!),
+    enabled: !!ocid && level >= 100,
   });
+};

@@ -59,16 +59,19 @@ export const CharacterDetailTabs = ({
       {ALL_TABS.map((tab) => {
         const Component = TAB_COMPONENTS[tab.value];
 
-        // ItemTab만 props가 다름 -> 조건부 prop 전달
-        const props = tab.value === "item" ? { data: characterData } : { ocid };
+        // Props 동적 생성 로직 수정
+        let props: Record<string, unknown> = { ocid };
+
+        if (tab.value === "item") {
+          props = { data: characterData };
+        } else {
+          // 나머지 탭(Stat, Jewel, Skill, Vmatrix 등)은 ocid와 level을 전달
+          props = { ocid, level: characterData.character_level };
+        }
 
         return (
           <TabsContent key={tab.value} value={tab.value}>
-            {/* TypeScript가 props 타입을 추론하기 어려워할 수 있으므로
-               any 혹은 타입 단언을 사용할 수 있지만, 
-               여기서는 Component가 유효하다면 렌더링하도록 함
-            */}
-            {/* @ts-expect-error: 서로 다른 Props 타입을 동적으로 넘기기 때문에 발생하는 TS 에러 무시 (런타임엔 안전) */}
+            {/* @ts-expect-error: 서로 다른 Props 타입을 동적으로 넘기기 때문에 발생하는 TS 에러 무시 */}
             <Component {...props} />
           </TabsContent>
         );

@@ -9,13 +9,14 @@ import { useHyperStat } from "./useHyperStat";
 
 interface StatTabProps {
   ocid: string;
+  level: number;
 }
 
-export const StatTab = ({ ocid }: StatTabProps) => {
-  const { data, isLoading, isError, error } = useCharacterStat(ocid);
+export const StatTab = ({ ocid, level }: StatTabProps) => {
+  const { data, isLoading, isError, error } = useCharacterStat(ocid, level);
 
   const { selectedPreset, onSelectPreset, currentHyperStatInfo } = useHyperStat(
-    data?.hyperStat,
+    data?.hyperStat ?? undefined,
   );
 
   if (isLoading) return <LoadingCard message="스탯 정보 불러오는중..." />;
@@ -39,11 +40,11 @@ export const StatTab = ({ ocid }: StatTabProps) => {
   }
 
   const { stat, hyperStat } = data;
-  console.log(hyperStat);
+
   return (
     <div className="flex flex-col gap-3">
       {/* 기본 스탯 정보 영역 */}
-      <section className="bg-muted/50 rounded-md border p-3">
+      <section className="bg-muted/20 rounded-md border p-3">
         <h2 className="mb-2 font-semibold">캐릭터 스탯</h2>
         <Separator className="mb-2" />
         <ul className="space-y-1">
@@ -58,15 +59,17 @@ export const StatTab = ({ ocid }: StatTabProps) => {
       </section>
 
       {/* 하이퍼 스탯 정보 영역 */}
-      <section className="bg-muted/50 rounded-md border p-3">
+      <section className="bg-muted/20 rounded-md border p-3">
         <div className="mb-2 flex items-center justify-between">
           <h2 className="font-semibold">하이퍼 스탯</h2>
-          <HyperStatPresetToggle
-            count={hyperStat.preset_count}
-            active={Number(hyperStat.use_preset_no)}
-            selected={selectedPreset}
-            onSelect={onSelectPreset}
-          />
+          {hyperStat && (
+            <HyperStatPresetToggle
+              count={hyperStat.preset_count}
+              active={Number(hyperStat.use_preset_no)}
+              selected={selectedPreset}
+              onSelect={onSelectPreset}
+            />
+          )}
         </div>
         <Separator className="mb-2" />
 

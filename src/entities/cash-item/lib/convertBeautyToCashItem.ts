@@ -48,7 +48,7 @@ export const convertBeautyToCashItem = (
         { option_name: "믹스 컬러", option_value: hair.mix_color || "없음" },
         {
           option_name: "믹스 비율",
-          option_value: hair.mix_rate ? `${hair.mix_rate}%` : "-",
+          option_value: hair.mix_rate ? `${hair.mix_rate}%` : "없음",
         },
       ],
     });
@@ -71,7 +71,7 @@ export const convertBeautyToCashItem = (
         { option_name: "믹스 컬러", option_value: face.mix_color || "없음" },
         {
           option_name: "믹스 비율",
-          option_value: face.mix_rate ? `${face.mix_rate}%` : "-",
+          option_value: face.mix_rate ? `${face.mix_rate}%` : "없음",
         },
       ],
     });

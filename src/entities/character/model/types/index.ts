@@ -12,6 +12,7 @@ export * from "./jewel";
 export * from "./symbol";
 export * from "./hexa-stat";
 export * from "./ranking";
+export * from "./hyper-stat";
 
 // ==========================================================================
 // 통합 타입 조립을 위한 Import

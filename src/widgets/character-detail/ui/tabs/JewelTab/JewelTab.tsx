@@ -44,7 +44,7 @@ export const JewelTab = ({ ocid, level }: JewelTabProps) => {
   }
 
   return (
-    <div className="bg-muted/30 rounded-md border p-3">
+    <div className="rounded-md border p-3">
       <div className="flex h-full flex-col items-center">
         {/* 헤더 컴포넌트 */}
         <JewelHeader

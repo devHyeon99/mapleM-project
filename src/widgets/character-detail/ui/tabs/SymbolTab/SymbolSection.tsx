@@ -29,7 +29,7 @@ export const SymbolSection = ({ title, items }: SymbolSectionProps) => {
   if (!items || items.length === 0) return null;
 
   return (
-    <section className="bg-muted/20 rounded-md border p-3">
+    <section className="rounded-md border p-3">
       <h3 className="mb-2 flex items-center justify-between">
         <span className="font-bold">{title}</span>
         <span className="text-sm font-semibold text-[#FF7E54]">

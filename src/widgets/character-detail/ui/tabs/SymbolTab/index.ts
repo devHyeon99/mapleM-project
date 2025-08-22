@@ -1,0 +1,1 @@
+export { SymbolTab } from "./SymbolTab";

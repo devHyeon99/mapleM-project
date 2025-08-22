@@ -47,7 +47,9 @@ export const JewelPentagon = ({
                 {item}
               </p>
             ))}
-            <p className="text-muted-foreground mt-1 text-xs">현재 장착중</p>
+            <p className="text-muted-foreground mt-1 text-xs font-semibold">
+              현재 장착중
+            </p>
           </div>
         </div>
       )}

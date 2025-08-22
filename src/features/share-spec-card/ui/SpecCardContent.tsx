@@ -23,8 +23,10 @@ export const SpecCardContent = ({
   initialData,
 }: SpecCardContentProps) => {
   // API 호출
-  const { data: symbolData, isLoading: isSymbolLoading } =
-    useCharacterSymbol(ocid);
+  const { data: symbolData, isLoading: isSymbolLoading } = useCharacterSymbol(
+    ocid,
+    initialData.character_level,
+  );
   const { data: hexaStatData, isLoading: isHexaStatLoading } =
     useCharacterHexaStat(ocid);
   const { data: hexaSkillData, isLoading: isHexaSkillLoading } =

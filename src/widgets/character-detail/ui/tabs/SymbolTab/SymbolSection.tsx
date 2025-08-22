@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { SymbolItem } from "./SymbolItem";
+import { Separator } from "@/shared/ui/separator";
 
 interface SymbolData {
   symbol_name: string;
@@ -37,7 +38,7 @@ export const SymbolSection = ({ title, items }: SymbolSectionProps) => {
             : `어센틱포스 ${totalForce.toLocaleString()}`}
         </span>
       </h3>
-
+      <Separator className="my-2" />
       <ul className="flex flex-col gap-3">
         {items.map((s) => (
           <SymbolItem

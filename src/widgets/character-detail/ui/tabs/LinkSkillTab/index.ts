@@ -1,0 +1,1 @@
+export { LinkSkillTab } from "./LinkSkillTab";

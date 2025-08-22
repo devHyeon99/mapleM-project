@@ -8,7 +8,7 @@ interface SymbolItemProps {
 export const SymbolItem = ({ name, icon, level, option }: SymbolItemProps) => {
   return (
     <li className="flex items-start gap-3 py-1">
-      <div className="bg-secondary flex h-[33px] w-[33px] shrink-0 items-center justify-center rounded border p-0.5">
+      <div className="bg-secondary flex rounded border p-0.5">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={icon}

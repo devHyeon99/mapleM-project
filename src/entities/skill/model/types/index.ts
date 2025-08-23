@@ -1,4 +1,4 @@
 export * from "./HexaSkill";
-export * from "./linkskill";
-export * from "./skill";
+export * from "./link-skill";
+export * from "./skill-equipment";
 export * from "./Vmatrix";

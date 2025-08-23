@@ -10,7 +10,7 @@ interface VmatrixTabProps {
 
 export const VmatrixTab = ({ ocid }: VmatrixTabProps) => {
   const { data, isLoading, isError, error } = useCharacterVmatrix(ocid);
-  console.log(data);
+
   if (isLoading) return <LoadingCard message="V매트릭스 불러오는중..." />;
   if (isError)
     return (

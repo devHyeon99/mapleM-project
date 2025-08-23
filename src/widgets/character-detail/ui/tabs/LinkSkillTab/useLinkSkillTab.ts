@@ -18,7 +18,7 @@ export const useLinkSkillTab = (ocid: string) => {
     };
   }, [data]);
 
-  const defaultPreset = data?.use_prest_no.toString() || "1";
+  const defaultPreset = data?.use_prest_no?.toString() || "1";
   const activePreset = selectedPreset || defaultPreset;
 
   const isEmpty = !data || data.link_skill.length === 0;

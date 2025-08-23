@@ -1,17 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { Card, CardContent } from "@/shared/ui/card";
-import { Button } from "@/shared/ui/button";
-import { RefreshCw } from "lucide-react";
-import { cn } from "@/shared/lib/utils";
 import { PAGE_LAYOUT } from "@/shared/config/constants/skill_page";
-import { stripSkillLevel } from "@/entities/skill/lib/stripSkillLevel";
 import type { CharacterEquipmentSkill } from "@/entities/skill/model";
+import { SkillSlot } from "./SkillSlot";
+import { SkillPagination } from "./SkillPagination";
 
 interface SkillGridDisplayProps {
   skills: CharacterEquipmentSkill[];
-  mode: 1 | 2;
+  mode: number;
   setNo: number;
 }
 
@@ -27,67 +24,41 @@ export const SkillGridDisplay = ({
 
   if (!layout) {
     return (
-      <Card>
-        <CardContent className="text-muted-foreground p-4 text-center text-sm">
+      <div className="bg-muted/20 flex h-52 items-center justify-center rounded-md border border-dashed">
+        <p className="text-muted-foreground text-sm">
           스킬 레이아웃 정보가 없습니다.
-        </CardContent>
-      </Card>
+        </p>
+      </div>
     );
   }
 
   return (
-    <div className="relative flex flex-col gap-2">
+    <div className="relative flex flex-col items-center gap-3 py-4">
+      {/* 그리드 렌더링 영역 */}
       {layout.map((row, i) => (
-        <div key={i} className="flex items-center justify-center gap-2">
-          {row.map((slot, j) => {
-            if (!slot) {
-              return <div key={`empty-${i}-${j}`} className="h-16 w-16" />;
-            }
+        <div key={i} className="flex justify-center gap-3">
+          {row.map((slotId, j) => {
+            // 해당 슬롯 ID에 맞는 스킬 찾기
+            const skill = slotId
+              ? skills.find((s) => s.slot_id === slotId)
+              : undefined;
 
-            const skill = skills.find((s) => s.slot_id === slot);
             return (
-              <Card
-                key={slot}
-                className="flex h-16 w-16 items-center justify-center rounded-full border text-center"
-              >
-                <CardContent className="flex h-full w-full items-center justify-center p-1">
-                  {skill && (
-                    <span className="text-center text-xs font-semibold">
-                      {stripSkillLevel(skill.skill_name)}
-                    </span>
-                  )}
-                </CardContent>
-              </Card>
+              <SkillSlot
+                key={`${i}-${j}`}
+                isValidSlot={!!slotId}
+                skill={skill}
+              />
             );
           })}
         </div>
       ))}
 
-      {/* 페이지 인디케이터 */}
-      <div className="absolute right-2 bottom-12 flex gap-2">
-        <span
-          className={cn(
-            "h-2 w-2 rounded-full",
-            !showBack ? "bg-orange-500" : "bg-gray-300",
-          )}
-        />
-        <span
-          className={cn(
-            "h-2 w-2 rounded-full",
-            showBack ? "bg-orange-500" : "bg-gray-300",
-          )}
-        />
-      </div>
-
-      {/* 앞/뒤 페이지 전환 버튼 */}
-      <Button
-        size="icon"
-        variant="outline"
-        onClick={() => setShowBack((prev) => !prev)}
-        className="absolute right-0 bottom-0 cursor-pointer rounded-full"
-      >
-        <RefreshCw className="size-4" />
-      </Button>
+      {/* 페이지네이션 컨트롤 영역 */}
+      <SkillPagination
+        showBack={showBack}
+        onToggle={() => setShowBack((prev) => !prev)}
+      />
     </div>
   );
 };

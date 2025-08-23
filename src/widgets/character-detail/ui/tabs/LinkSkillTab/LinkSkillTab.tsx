@@ -36,7 +36,7 @@ export const LinkSkillTab = ({ ocid }: LinkSkillTabProps) => {
   if (isEmpty || !mergedData) {
     return (
       <TabMessageSection
-        message={`API 업데이트 이후 접속 기록이 없거나\n장착한 링크스킬이 없습니다.`}
+        message={`API 업데이트 이후 접속 기록이 없거나\n장착한 링크스킬이 없습니다.\n\n(링크 프리셋 업데이트 후 링크를 프리셋으로 착용하지 않았으면 표기되지 않습니다.)`}
       />
     );
   }

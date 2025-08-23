@@ -1,18 +1,18 @@
 "use server";
 
 import { nexonFetch, handleCommonNexonError } from "@/shared/api/nexon";
-import { LinkSkillResponse } from "../model/types/link-skill";
+import { CharacterSkillData } from "../model/types/skill-equipment";
 
-export async function getCharacterLinkSkill(
+export async function getCharacterSkillEquipment(
   ocid: string,
-): Promise<LinkSkillResponse> {
+): Promise<CharacterSkillData> {
   if (!ocid) {
     throw new Error("OCID가 누락되었습니다.");
   }
 
   try {
-    const data = await nexonFetch<LinkSkillResponse>(
-      `/character/link-skill?ocid=${ocid}`,
+    const data = await nexonFetch<CharacterSkillData>(
+      `/character/skill-equipment?ocid=${ocid}`,
       {
         cache: "no-store",
       },

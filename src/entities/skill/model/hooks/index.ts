@@ -1,4 +1,4 @@
 export { useCharacterHexaSkill } from "./useCharacterHexaSkill";
 export { useCharacterLinkSkill } from "./useCharacterLinkSkill";
-export { useCharacterSkill } from "./useCharacterSkill";
+export { useCharacterSkillEquipment } from "./useCharacterSkillEquipment";
 export { useCharacterVmatrix } from "./useCharacterVmatrix";

@@ -17,7 +17,7 @@ export const LinkSkillHeader = ({
   return (
     <div className="flex items-center justify-between">
       <div className="flex flex-col gap-0.5">
-        <h3 className="font-bold">링크스킬</h3>
+        <h3 className="font-bold">링크 스킬</h3>
         <p className="text-muted-foreground text-sm">
           {usePresetNo}페이지 장착중
         </p>

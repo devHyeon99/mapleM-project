@@ -12,7 +12,7 @@ export const SkillPagination = ({
   onToggle,
 }: SkillPaginationProps) => {
   return (
-    <div className="absolute right-0 bottom-0 flex flex-col items-center gap-2">
+    <div className="absolute right-16.25 bottom-5 flex flex-col items-center gap-2">
       {/* 인디케이터 */}
       <div className="flex gap-1.5">
         <span
@@ -33,7 +33,7 @@ export const SkillPagination = ({
         size="icon"
         variant="outline"
         onClick={onToggle}
-        className="hover:bg-muted h-10 w-10 rounded-full"
+        className="h-10 w-10 rounded-full"
       >
         <RefreshCw className="size-5" />
       </Button>

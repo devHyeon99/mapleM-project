@@ -33,7 +33,7 @@ export const SkillPreset = ({ presets }: SkillPresetProps) => {
           <h4 className="font-bold">스킬 프리셋</h4>
           <Separator className="my-2" />
         </div>
-        <div className="grid gap-2 sm:grid-cols-2">
+        <div className="grid gap-2 md:grid-cols-2">
           {presets.map((preset) => {
             const skills = [
               { name: preset.skill_name_1, icon: preset.skill_icon_1 },
@@ -58,19 +58,17 @@ export const SkillPreset = ({ presets }: SkillPresetProps) => {
                   )}
                 </div>
 
-                <div className="grid grid-cols-4 gap-2">
+                <div className="grid w-fit grid-cols-4 gap-2">
                   {skills.map((skill, idx) => (
                     <Tooltip key={idx}>
                       <TooltipTrigger asChild>
-                        <div className="flex flex-col items-center gap-1">
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
-                            src={skill.icon}
-                            alt={skill.name}
-                            className="h-8 w-8 object-contain"
-                            loading="lazy"
-                          />
-                        </div>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={skill.icon}
+                          alt={skill.name}
+                          className="h-8 w-8 object-contain"
+                          loading="lazy"
+                        />
                       </TooltipTrigger>
                       <TooltipContent side="bottom" className="text-xs">
                         {skill.name}

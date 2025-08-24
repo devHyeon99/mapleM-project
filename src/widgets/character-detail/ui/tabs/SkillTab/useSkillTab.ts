@@ -36,6 +36,7 @@ export const useSkillTab = (ocid: string) => {
     );
 
     const grouped = groupSkillsBySet(filtered);
+
     const keys = Object.keys(grouped).sort();
 
     return {

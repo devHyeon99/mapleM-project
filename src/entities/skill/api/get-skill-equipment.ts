@@ -1,6 +1,7 @@
 "use server";
 
-import { nexonFetch, handleCommonNexonError } from "@/shared/api/nexon";
+import { nexonFetch } from "@/shared/api/nexon/server";
+import { handleCommonNexonError } from "@/shared/api/nexon/handler";
 import { CharacterSkillData } from "../model/types/skill-equipment";
 
 export async function getCharacterSkillEquipment(

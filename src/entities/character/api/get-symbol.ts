@@ -1,6 +1,7 @@
 "use server";
 
-import { nexonFetch, handleCommonNexonError } from "@/shared/api/nexon";
+import { nexonFetch } from "@/shared/api/nexon/server";
+import { handleCommonNexonError } from "@/shared/api/nexon/handler";
 import { CharacterSymbol } from "../model/types/symbol";
 
 export async function getCharacterSymbol(

@@ -3,9 +3,8 @@
 import { CharacterProfileCard } from "./CharacterProfileCard";
 import { CharacterDetailTabs } from "./CharacterDetailTabs";
 import { useQuery } from "@tanstack/react-query";
-import { characterQueryKeys } from "@/entities/character";
+import { characterQueryKeys, getCharacterDetails } from "@/entities/character";
 import { CharacterDetailSkeleton } from "./CharacterDetailSkeleton";
-import { getCharacterDetailAction } from "@/entities/character/api/actions";
 
 interface CharacterBasicInfoProps {
   ocid: string;
@@ -16,11 +15,9 @@ export const CharacterDetail = ({ ocid }: CharacterBasicInfoProps) => {
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: detailsKey,
-    queryFn: () => getCharacterDetailAction(ocid),
+    queryFn: () => getCharacterDetails(ocid),
     staleTime: 10 * 60 * 1000,
     gcTime: 10 * 60 * 1000,
-    refetchOnMount: true,
-    refetchOnWindowFocus: true,
   });
 
   const characterData = data?.data;

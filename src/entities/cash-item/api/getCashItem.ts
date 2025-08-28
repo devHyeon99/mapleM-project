@@ -1,18 +1,16 @@
 "use server";
 
-import { nexonFetch, handleCommonNexonError } from "@/shared/api/nexon";
-import {
+import { nexonFetch } from "@/shared/api/nexon/server";
+import { handleCommonNexonError } from "@/shared/api/nexon/handler";
+import type {
   CharacterCashEquipmentData,
   CharacterBeautyData,
 } from "../model/types";
 
 export async function getCashItem(ocid: string) {
-  if (!ocid) {
-    throw new Error("OCID가 누락되었습니다.");
-  }
+  if (!ocid) throw new Error("OCID가 누락되었습니다.");
 
   try {
-    // 병렬 요청 (캐시 장비 + 뷰티)
     const [cashRes, beautyRes] = await Promise.all([
       nexonFetch<CharacterCashEquipmentData>(
         `/character/cashitem-equipment?ocid=${ocid}`,
@@ -24,12 +22,9 @@ export async function getCashItem(ocid: string) {
       ),
     ]);
 
-    return {
-      ...cashRes,
-      beauty_data: beautyRes,
-    };
-  } catch (error: unknown) {
-    handleCommonNexonError(error);
-    throw error;
+    return { ...cashRes, beauty_data: beautyRes };
+  } catch (e) {
+    handleCommonNexonError(e);
+    throw e;
   }
 }

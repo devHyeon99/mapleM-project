@@ -3,26 +3,16 @@ import { HydrationBoundary } from "@tanstack/react-query";
 import { CharacterSearch } from "@/features/character-search";
 import { CharacterDetail } from "@/widgets/character-detail";
 import { getCharacterPageData } from "./_lib/getCharacterPageData";
-import { Metadata } from "next";
 
 interface CharacterPageProps {
   params: Promise<{ world: string; name: string }>;
 }
 
 // 동적 메타데이터 생성
-export async function generateMetadata({
-  params,
-}: CharacterPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: CharacterPageProps) {
   const { world, name } = await params;
-
-  // 데이터 로딩 함수 재사용 (Request Memoization 덕분에 API 요청 비용 0)
-  const { decodedName, decodedWorld, ocid } = await getCharacterPageData(
-    world,
-    name,
-  );
-
-  // ocid가 없으면(캐릭터 못 찾음) 기본값 반환
-  if (!ocid) return { title: "캐릭터를 찾을 수 없음" };
+  const decodedWorld = decodeURIComponent(world);
+  const decodedName = decodeURIComponent(name);
 
   return {
     title: {
@@ -37,11 +27,10 @@ export async function generateMetadata({
   };
 }
 
-// 실제 페이지
+// 실제 페이지: 여기서만 prefetch + dehydrate
 export default async function CharacterPage({ params }: CharacterPageProps) {
   const { world, name } = await params;
 
-  // 데이터 로딩 (위 generateMetadata랑 똑같은 함수 호출해도 안전함)
   const { dehydratedState, ocid, decodedName, decodedWorld } =
     await getCharacterPageData(world, name);
 

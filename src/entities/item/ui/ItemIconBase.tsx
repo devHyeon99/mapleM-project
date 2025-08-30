@@ -64,6 +64,12 @@ export const ItemIconBase = React.forwardRef<HTMLDivElement, ItemIconBaseProps>(
       ? "border-amber-300"
       : (main?.borderColor ?? "border-[#9E9E9E]");
 
+    // 아이템 (Unknown) 으로 나올경우 이미지 깨짐 방지 처리
+    const safeIcon =
+      item_icon && item_icon.trim() !== "" && item_icon !== "(Unknown)"
+        ? item_icon
+        : "/images/item-placeholder.png";
+
     return (
       <div
         ref={ref}
@@ -129,8 +135,8 @@ export const ItemIconBase = React.forwardRef<HTMLDivElement, ItemIconBaseProps>(
         {/* 아이템 이미지 */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={item_icon}
-          alt={item_name}
+          src={safeIcon}
+          alt={item_name && item_name !== "(Unknown)" ? item_name : "아이템"}
           loading="lazy"
           className="object-contain"
           style={{ imageRendering: "pixelated" }}

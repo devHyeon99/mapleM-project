@@ -48,7 +48,7 @@ export const useCharacterSearch = () => {
 
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
-      document.addEventListener("focusin", handleFocusOutside);
+      document.removeEventListener("focusin", handleFocusOutside);
     };
   }, [searchContainerRef]); // ref는 변경되지 않으므로, 의존성 배열에 searchContainerRef만 있어도 됨.
 

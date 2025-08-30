@@ -6,5 +6,6 @@ export const useCharacterLinkSkill = (ocid: string | null) => {
     queryKey: ["characterLinkSkill", ocid],
     queryFn: () => getCharacterLinkSkill(ocid!),
     enabled: !!ocid,
+    staleTime: 10 * 60 * 1000,
   });
 };

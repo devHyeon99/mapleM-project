@@ -6,5 +6,7 @@ export const useCharacterSkillEquipment = (ocid: string | null) => {
     queryKey: ["characterSkillEquipment", ocid],
     queryFn: () => getCharacterSkillEquipment(ocid!),
     enabled: !!ocid,
+    staleTime: 10 * 60 * 1000,
+    gcTime: 10 * 60 * 1000,
   });
 };

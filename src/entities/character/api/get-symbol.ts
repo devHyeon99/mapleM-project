@@ -1,27 +1,25 @@
-"use server";
-
-import { nexonFetch } from "@/shared/api/nexon/server";
-import { handleCommonNexonError } from "@/shared/api/nexon/handler";
-import { CharacterSymbol } from "../model/types/symbol";
+import type { ApiResponse } from "@/shared/model/types/ApiResponse";
+import type { CharacterSymbol } from "../model/types/symbol";
 
 export async function getCharacterSymbol(
   ocid: string,
 ): Promise<CharacterSymbol> {
-  if (!ocid) {
-    throw new Error("OCID가 누락되었습니다.");
-  }
+  if (!ocid) throw new Error("ocid가 필요합니다.");
 
-  try {
-    const data = await nexonFetch<CharacterSymbol>(
-      `/character/symbol?ocid=${ocid}`,
-      {
-        cache: "no-store",
-      },
-    );
+  const res = await fetch(
+    `/api/character/symbol?ocid=${encodeURIComponent(ocid)}`,
+    { cache: "no-store" },
+  );
 
-    return data;
-  } catch (error: unknown) {
-    handleCommonNexonError(error);
-    throw error;
+  const json = (await res
+    .json()
+    .catch(() => ({}))) as ApiResponse<CharacterSymbol>;
+
+  if (!res.ok) {
+    throw new Error(json?.error?.message ?? `API 요청 실패: ${res.status}`);
   }
+  if (json.error) throw new Error(json.error.message);
+  if (!json.data) throw new Error("데이터가 없습니다.");
+
+  return json.data;
 }

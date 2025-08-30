@@ -1,10 +1,14 @@
-import { useQuery } from "@tanstack/react-query";
-import { getCharacterJewel } from "../../api/get-jewel";
+"use client";
 
-export const useCharacterJewel = (ocid: string | null, level: number) => {
+import { useQuery } from "@tanstack/react-query";
+import { getCharacterJewel } from "@/entities/character/api/get-jewel";
+
+export const useCharacterJewel = (ocid: string | null) => {
   return useQuery({
-    queryKey: ["characterJewel", ocid, level],
+    queryKey: ["characterJewel", ocid],
     queryFn: () => getCharacterJewel(ocid!),
-    enabled: !!ocid && level >= 100,
+    enabled: !!ocid,
+    staleTime: 10 * 60 * 1000,
+    gcTime: 15 * 60 * 1000,
   });
 };

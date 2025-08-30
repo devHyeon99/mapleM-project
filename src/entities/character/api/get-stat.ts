@@ -1,9 +1,6 @@
-"use server";
-
-import { nexonFetch } from "@/shared/api/nexon/server";
-import { handleCommonNexonError } from "@/shared/api/nexon/handler";
-import { CharacterStatContainer } from "../model/types/stat";
-import { CharacterHyperStat } from "../model/types/hyper-stat";
+import type { ApiResponse } from "@/shared/model/types/ApiResponse";
+import type { CharacterStatContainer } from "@/entities/character/model/types/stat";
+import type { CharacterHyperStat } from "@/entities/character/model/types/hyper-stat";
 
 export interface CharacterStatData {
   stat: CharacterStatContainer;
@@ -14,32 +11,24 @@ export async function getCharacterStat(
   ocid: string,
   level: number = 0,
 ): Promise<CharacterStatData> {
-  if (!ocid) {
-    throw new Error("OCID가 누락되었습니다.");
-  }
+  const q = ocid?.trim();
+  if (!q) throw new Error("ocid가 필요합니다.");
 
-  try {
-    // 140레벨 이상일 때만 하이퍼 스탯 요청 Promise 생성
-    const shouldFetchHyperStat = level >= 140;
+  const safeLevel = Number.isFinite(level) ? level : 0;
 
-    const [statData, hyperStatData] = await Promise.all([
-      nexonFetch<CharacterStatContainer>(`/character/stat?ocid=${ocid}`, {
-        cache: "no-store",
-      }),
-      // 조건부 요청: 140 미만이면 요청 안 함 (null 반환)
-      shouldFetchHyperStat
-        ? nexonFetch<CharacterHyperStat>(`/character/hyper-stat?ocid=${ocid}`, {
-            cache: "no-store",
-          })
-        : Promise.resolve(null),
-    ]);
+  const res = await fetch(
+    `/api/character/stat?ocid=${encodeURIComponent(q)}&level=${encodeURIComponent(String(safeLevel))}`,
+    { cache: "no-store" },
+  );
 
-    return {
-      stat: statData,
-      hyperStat: hyperStatData,
-    };
-  } catch (error: unknown) {
-    handleCommonNexonError(error);
-    throw error;
-  }
+  const json = (await res
+    .json()
+    .catch(() => ({}))) as ApiResponse<CharacterStatData>;
+
+  if (!res.ok)
+    throw new Error(json?.error?.message ?? `API 요청 실패: ${res.status}`);
+  if (json.error) throw new Error(json.error.message);
+  if (!json.data) throw new Error("데이터가 없습니다.");
+
+  return json.data;
 }

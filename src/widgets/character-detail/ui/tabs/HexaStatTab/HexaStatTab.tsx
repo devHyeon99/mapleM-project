@@ -20,7 +20,7 @@ export const HexaStatTab = ({ ocid, level }: HexaStatTabProps) => {
 
   if (level < 250) {
     return (
-      <TabMessageSection message="HEXA 스탯은 Lv.250 이상 이용 가능합니다." />
+      <TabMessageSection message="HEXA 스탯 시스템은 Lv.250 이상 이용 가능합니다." />
     );
   }
 

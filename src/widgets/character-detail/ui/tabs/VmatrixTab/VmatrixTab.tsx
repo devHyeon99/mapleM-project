@@ -127,7 +127,7 @@ export const VmatrixTab = ({ ocid, level }: VmatrixTabProps) => {
         ) : (
           <TabMessageSection
             className="min-h-none"
-            message="장착된 강황 코어가 없습니다."
+            message="장착된 강화 코어가 없습니다."
           />
         )}
       </VmatrixSection>

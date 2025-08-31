@@ -7,11 +7,11 @@ import { MergedSpecData } from "../model/types";
 
 import { useCharacterSymbol } from "@/entities/character/model/hooks/useCharacterSymbol";
 import { useCharacterHexaStat } from "@/entities/character/model/hooks/useCharacterHexaStat";
-import { useCharacterHexaSkill } from "@/entities/skill/model/hooks/useCharacterHexaSkill";
 
 import { EquipmentGrid } from "./EquipmentGrid";
 import { RightStatColumn } from "./RightStatColumn";
 import { TotalStatSection } from "./TotalStatSection";
+import { useCharacterHexaMatrixSkill } from "@/entities/skill";
 
 interface SpecCardContentProps {
   ocid: string;
@@ -30,7 +30,7 @@ export const SpecCardContent = ({
   const { data: hexaStatData, isLoading: isHexaStatLoading } =
     useCharacterHexaStat(ocid);
   const { data: hexaSkillData, isLoading: isHexaSkillLoading } =
-    useCharacterHexaSkill(ocid);
+    useCharacterHexaMatrixSkill(ocid, initialData.character_level);
 
   const isLoading = isSymbolLoading || isHexaStatLoading || isHexaSkillLoading;
 

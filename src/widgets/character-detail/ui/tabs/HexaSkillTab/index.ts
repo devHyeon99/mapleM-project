@@ -1,0 +1,1 @@
+export { HexaSkillTab } from "./HexaSkillTab";

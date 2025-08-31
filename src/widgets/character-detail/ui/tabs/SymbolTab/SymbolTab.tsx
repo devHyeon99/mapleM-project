@@ -19,7 +19,7 @@ export const SymbolTab = ({ ocid, level }: SymbolTabProps) => {
   // 레벨 제한 예외 처리
   if (level < 200) {
     return (
-      <TabMessageSection message="심볼 시스템은 Lv.200이상 이용 가능합니다." />
+      <TabMessageSection message="심볼 시스템은 Lv.200 이상 이용 가능합니다." />
     );
   }
 

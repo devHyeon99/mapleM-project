@@ -21,7 +21,7 @@ export const JewelTab = ({ ocid, level }: JewelTabProps) => {
 
   if (level < 100) {
     return (
-      <TabMessageSection message="쥬얼 시스템은 Lv.100이상 이용 가능합니다." />
+      <TabMessageSection message="쥬얼 시스템은 Lv.120 이상 이용 가능합니다." />
     );
   }
 

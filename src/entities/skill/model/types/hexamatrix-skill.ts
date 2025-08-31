@@ -24,7 +24,7 @@ export interface HexaMatrixSkill {
 /**
  * 캐릭터의 HEXA 매트릭스 전체 데이터
  */
-export interface CharacterHexaMatrix {
+export interface CharacterHexaMatrixSkill {
   /** HEXA 매트릭스 코어 목록 */
   hexamatrix_skill: HexaMatrixSkill[];
 }

@@ -17,7 +17,7 @@ export const VmatrixTab = ({ ocid, level }: VmatrixTabProps) => {
   if (level < VMATRIX_MIN_LEVEL) {
     return (
       <TabMessageSection
-        message={`V매트릭스 시스템은 Lv.${VMATRIX_MIN_LEVEL}이상 이용 가능합니다.`}
+        message={`V매트릭스 시스템은 Lv.${VMATRIX_MIN_LEVEL} 이상 이용 가능합니다.`}
       />
     );
   }
@@ -61,18 +61,25 @@ export const VmatrixTab = ({ ocid, level }: VmatrixTabProps) => {
   return (
     <div className="space-y-4 rounded-md border p-3 text-sm">
       <VmatrixSection title="스킬 코어">
-        <CoreList
-          items={skillCores}
-          renderItem={(core) => (
-            <div className="flex justify-between">
-              <span>{core.vcore_name}</span>
-              <span className="text-muted-foreground flex w-[155px] justify-between">
-                <span>스킬레벨: {format2(core.vcore_level)}</span>
-                <span>슬롯레벨: {format2(core.slot_level)}</span>
-              </span>
-            </div>
-          )}
-        />
+        {skillCores.length > 0 ? (
+          <CoreList
+            items={skillCores}
+            renderItem={(core) => (
+              <div className="flex justify-between">
+                <span>{core.vcore_name}</span>
+                <span className="text-muted-foreground flex w-[155px] justify-between">
+                  <span>스킬레벨: {format2(core.vcore_level)}</span>
+                  <span>슬롯레벨: {format2(core.slot_level)}</span>
+                </span>
+              </div>
+            )}
+          />
+        ) : (
+          <TabMessageSection
+            className="min-h-none"
+            message="장착된 스킬 코어가 없습니다."
+          />
+        )}
       </VmatrixSection>
 
       <VmatrixSection title="강화 코어">
@@ -98,7 +105,10 @@ export const VmatrixTab = ({ ocid, level }: VmatrixTabProps) => {
             )}
           />
         ) : (
-          <p className="text-muted-foreground">등록된 강화코어가 없습니다.</p>
+          <TabMessageSection
+            className="min-h-none"
+            message="장착된 강황 코어가 없습니다."
+          />
         )}
       </VmatrixSection>
     </div>

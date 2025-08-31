@@ -1,6 +1,6 @@
 import { CharacterDetailData } from "@/entities/character";
 import { CharacterSymbol } from "@/entities/character/model/types/symbol";
-import { CharacterHexaMatrixStat } from "@/entities/character/model/types/hexa-stat";
+import { CharacterHexaMatrixStat } from "@/entities/character/model/types/hexamatrix-stat";
 import { CharacterHexaMatrixSkill } from "@/entities/skill/model/types/hexamatrix-skill";
 
 export type MergedSpecData = CharacterDetailData & {

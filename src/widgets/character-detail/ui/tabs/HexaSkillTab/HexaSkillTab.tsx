@@ -6,6 +6,7 @@ import { TabMessageSection } from "@/shared/ui/TabMessageSection";
 import { useCharacterHexaMatrixSkill } from "@/entities/skill/model";
 import type { CharacterHexaMatrixSkill } from "@/entities/skill/model";
 import { Separator } from "@/shared/ui/separator";
+import { Fragment } from "react";
 
 interface HexaSkillTabProps {
   ocid: string;
@@ -32,7 +33,9 @@ function HexaSkillSection({
       <h2 className="pb-1 text-base font-semibold">{title}</h2>
       <ul className="space-y-2">
         {items.map((core) => (
-          <>
+          <Fragment
+            key={`${core.skill_type}-${core.skill_name}-${core.slot_level}`}
+          >
             <li
               key={`${core.skill_type}-${core.skill_name}`}
               className="flex items-start gap-3 rounded-sm"
@@ -51,7 +54,7 @@ function HexaSkillSection({
                   <span className="truncate font-semibold">
                     {core.skill_name}
                   </span>
-                  <span className="text-muted-foreground shrink-0 text-xs font-bold">
+                  <span className="shrink-0 text-xs font-bold text-[#FF7E54]">
                     Lv.{formatLevel(core.slot_level)}
                   </span>
                 </div>
@@ -64,7 +67,7 @@ function HexaSkillSection({
               </div>
             </li>
             <Separator />
-          </>
+          </Fragment>
         ))}
       </ul>
     </section>
@@ -110,7 +113,7 @@ export const HexaSkillTab = ({ ocid, level }: HexaSkillTabProps) => {
   const enhancementCores = skills.filter((s) => s.skill_type === "강화 코어");
 
   return (
-    <div className="flex flex-col gap-3 rounded-md border p-4 text-sm">
+    <div className="flex flex-col gap-3 rounded-md border p-3 text-sm">
       <HexaSkillSection title="스킬 코어" items={skillCores} />
       <HexaSkillSection title="마스터리 코어" items={masteryCores} />
       <HexaSkillSection title="강화 코어" items={enhancementCores} />

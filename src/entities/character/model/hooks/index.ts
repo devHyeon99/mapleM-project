@@ -1,4 +1,4 @@
-export { useCharacterHexaStat } from "./useCharacterHexaStat";
+export { useCharacterHexaMatrixStat } from "./useCharacterHexaMatrixStat ";
 export { useCharacterJewel } from "./useCharacterJewel";
 export { useCharacterStat } from "./useCharacterStat";
 export { useCharacterSymbol } from "./useCharacterSymbol";

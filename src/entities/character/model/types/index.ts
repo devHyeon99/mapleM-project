@@ -10,7 +10,7 @@ export * from "./api-response";
 export * from "./stat";
 export * from "./jewel";
 export * from "./symbol";
-export * from "./hexa-stat";
+export * from "./hexamatrix-stat";
 export * from "./ranking";
 export * from "./hyper-stat";
 export type { CharacterOcidData } from "./ocid";

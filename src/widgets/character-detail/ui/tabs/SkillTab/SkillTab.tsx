@@ -43,7 +43,7 @@ export const SkillTab = ({ ocid }: SkillTabProps) => {
 
   return (
     <div className="flex flex-col gap-2">
-      <div className="flex w-full max-w-[680px] flex-col rounded-md border p-4">
+      <div className="flex w-full max-w-[680px] flex-col rounded-md border p-3">
         {layout.hasEquipment && (
           <>
             <SkillTabHeader
@@ -69,7 +69,7 @@ export const SkillTab = ({ ocid }: SkillTabProps) => {
           </>
         )}
       </div>
-      <div className="rounded-md border p-4">
+      <div className="rounded-md border p-3">
         <SkillPreset presets={query.data.skill.preset} />
       </div>
     </div>

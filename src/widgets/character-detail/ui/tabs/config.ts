@@ -44,7 +44,6 @@ export const SUB_TABS: { value: TabKey; label: string }[] = [
 export const ALL_TABS = [...MAIN_TABS, ...SUB_TABS];
 
 // 탭 ID와 실제 컴포넌트 매핑
-// React.Lazy를 사용하지 않는다면 직접 매핑이 가장 빠르고 깔끔
 export const TAB_COMPONENTS = {
   item: ItemTab,
   cashItem: CashItemTab,

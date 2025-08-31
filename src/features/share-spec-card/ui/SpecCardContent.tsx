@@ -1,12 +1,13 @@
 "use client";
 
 import { Loader2 } from "lucide-react";
-import { CharacterDetailData } from "@/entities/character";
+import {
+  CharacterDetailData,
+  useCharacterHexaMatrixStat,
+  useCharacterSymbol,
+} from "@/entities/character";
 import { getSortedSpecCardItems } from "../lib/getSortedSpecCardItems";
 import { MergedSpecData } from "../model/types";
-
-import { useCharacterSymbol } from "@/entities/character/model/hooks/useCharacterSymbol";
-import { useCharacterHexaStat } from "@/entities/character/model/hooks/useCharacterHexaStat";
 
 import { EquipmentGrid } from "./EquipmentGrid";
 import { RightStatColumn } from "./RightStatColumn";
@@ -28,7 +29,7 @@ export const SpecCardContent = ({
     initialData.character_level,
   );
   const { data: hexaStatData, isLoading: isHexaStatLoading } =
-    useCharacterHexaStat(ocid);
+    useCharacterHexaMatrixStat(ocid, initialData.character_level);
   const { data: hexaSkillData, isLoading: isHexaSkillLoading } =
     useCharacterHexaMatrixSkill(ocid, initialData.character_level);
 

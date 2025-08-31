@@ -67,9 +67,19 @@ export const VmatrixTab = ({ ocid, level }: VmatrixTabProps) => {
             renderItem={(core) => (
               <div className="flex justify-between">
                 <span>{core.vcore_name}</span>
-                <span className="text-muted-foreground flex w-[155px] justify-between">
-                  <span>스킬레벨: {format2(core.vcore_level)}</span>
-                  <span>슬롯레벨: {format2(core.slot_level)}</span>
+                <span className="text-muted-foreground flex justify-between gap-3">
+                  <span>
+                    스킬레벨
+                    <span className="ml-1.5 font-semibold text-[#FF7E54]">
+                      {format2(core.vcore_level)}
+                    </span>
+                  </span>
+                  <span>
+                    슬롯레벨
+                    <span className="ml-1.5 font-semibold text-[#FF7E54]">
+                      {format2(core.slot_level)}
+                    </span>
+                  </span>
                 </span>
               </div>
             )}
@@ -91,15 +101,25 @@ export const VmatrixTab = ({ ocid, level }: VmatrixTabProps) => {
               <div className="flex flex-col">
                 <span className="font-medium">{core.vcore_name}</span>
 
-                <span className="text-muted-foreground flex w-[155px] justify-between">
-                  <span>스킬레벨: {format2(core.vcore_level)}</span>
-                  <span>슬롯레벨: {format2(core.slot_level)}</span>
+                <span className="text-muted-foreground flex gap-3">
+                  <span>
+                    스킬레벨
+                    <span className="ml-1.5 font-semibold text-[#FF7E54]">
+                      {format2(core.vcore_level)}
+                    </span>
+                  </span>
+                  <span>
+                    슬롯레벨
+                    <span className="ml-1.5 font-semibold text-[#FF7E54]">
+                      {format2(core.slot_level)}
+                    </span>
+                  </span>
                 </span>
 
                 <div className="text-muted-foreground space-y-0.5">
-                  <div>스킬 1: {core.vcore_skill_name1}</div>
-                  <div>스킬 2: {core.vcore_skill_name2}</div>
-                  <div>스킬 3: {core.vcore_skill_name3}</div>
+                  <div>스킬 1 - {core.vcore_skill_name1}</div>
+                  <div>스킬 2 - {core.vcore_skill_name2}</div>
+                  <div>스킬 3 - {core.vcore_skill_name3}</div>
                 </div>
               </div>
             )}

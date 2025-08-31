@@ -1,8 +1,14 @@
-import type { CharacterVMatrix } from "@/entities/skill/model";
-import { useCharacterApi } from "@/shared/api/hooks/useCharacterApi";
+"use client";
 
-export const useCharacterVmatrix = (ocid: string | null) =>
-  useCharacterApi<CharacterVMatrix>({
-    ocid,
-    endpoint: "/api/character/vmatrix",
+import { useQuery } from "@tanstack/react-query";
+import { getCharacterVmatrix } from "../../api/get-vmatrix";
+
+export const useCharacterVmatrix = (ocid: string | null, level: number) => {
+  return useQuery({
+    queryKey: ["characterVmatrix", ocid],
+    queryFn: () => getCharacterVmatrix(ocid!),
+    enabled: !!ocid && level >= 200,
+    staleTime: 10 * 60 * 1000,
+    gcTime: 10 * 60 * 1000,
   });
+};

@@ -1,20 +1,19 @@
 import type { ApiResponse } from "@/shared/model/types/ApiResponse";
-import type { LinkSkillResponse } from "../model/types/link-skill";
+import type { CharacterVMatrix } from "@/entities/skill/model";
 
-export async function getCharacterLinkSkill(
+export async function getCharacterVmatrix(
   ocid: string,
-): Promise<LinkSkillResponse> {
+): Promise<CharacterVMatrix> {
   const q = ocid?.trim();
   if (!q) throw new Error("ocid가 필요합니다.");
 
   const res = await fetch(
-    `/api/character/link-skill?ocid=${encodeURIComponent(q)}`,
-    { cache: "no-store" },
+    `/api/character/vmatrix?ocid=${encodeURIComponent(q)}`,
   );
 
   const json = (await res
     .json()
-    .catch(() => ({}))) as ApiResponse<LinkSkillResponse>;
+    .catch(() => ({}))) as ApiResponse<CharacterVMatrix>;
 
   if (!res.ok) {
     throw new Error(json?.error?.message ?? `API 요청 실패: ${res.status}`);

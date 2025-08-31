@@ -1,44 +1,51 @@
 import { NextResponse } from "next/server";
+import { nexonFetch } from "@/shared/api/nexon/server";
+import { handleCommonNexonError } from "@/shared/api/nexon/handler";
+import type { ApiResponse } from "@/shared/model/types/ApiResponse";
+import type { CharacterVMatrix } from "@/entities/skill/model";
 
-const NEXON_API_BASE_URL = "https://open.api.nexon.com/maplestorym/v1";
-const NEXON_API_KEY = process.env.NEXON_API_KEY;
-
-export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const ocid = searchParams.get("ocid");
+export async function GET(req: Request) {
+  const { searchParams } = new URL(req.url);
+  const ocid = searchParams.get("ocid")?.trim();
 
   if (!ocid) {
-    return NextResponse.json(
+    return NextResponse.json<ApiResponse<null>>(
       { error: { name: "BadRequest", message: "ocid가 필요합니다." } },
       { status: 400 },
     );
   }
 
   try {
-    const res = await fetch(
-      `${NEXON_API_BASE_URL}/character/vmatrix?ocid=${ocid}`,
-      {
-        headers: {
-          "x-nxopen-api-key": NEXON_API_KEY!,
-        },
-        cache: "no-store",
-      },
+    const ocidQ = encodeURIComponent(ocid);
+
+    const data = await nexonFetch<CharacterVMatrix>(
+      `/character/vmatrix?ocid=${ocidQ}`,
+      { cache: "no-store" },
     );
 
-    if (!res.ok) {
-      const errorText = await res.text();
-      return NextResponse.json(
-        { error: { name: "NexonAPIError", message: errorText } },
-        { status: res.status },
+    return NextResponse.json<ApiResponse<CharacterVMatrix>>({ data });
+  } catch (e: unknown) {
+    try {
+      handleCommonNexonError(e);
+    } catch (mapped) {
+      return NextResponse.json<ApiResponse<null>>(
+        {
+          error: {
+            name: "NexonCommonError",
+            message: (mapped as Error).message,
+          },
+        },
+        { status: 503 },
       );
     }
 
-    const data = await res.json();
-    return NextResponse.json({ data });
-  } catch (err) {
-    console.error("V매트릭스 정보 API 요청 실패:", err);
-    return NextResponse.json(
-      { error: { name: "InternalError", message: "API 요청 중 오류 발생" } },
+    return NextResponse.json<ApiResponse<null>>(
+      {
+        error: {
+          name: "InternalError",
+          message: e instanceof Error ? e.message : "오류 발생",
+        },
+      },
       { status: 500 },
     );
   }

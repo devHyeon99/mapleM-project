@@ -11,10 +11,10 @@ export const ItemStarforce = ({ item }: Props) => {
   if (starRows.length === 0) return null;
 
   return (
-    <div className="border-b pb-2 text-sm">
+    <div className="border-divider border-b py-1 text-sm">
       <div className="flex items-center gap-1">
         <p>스타포스</p>
-        <span className="text-muted-foreground text-xs">
+        <span className="text-xs text-[#a1a1a1]">
           ({item.starforce_upgrade}성)
         </span>
       </div>

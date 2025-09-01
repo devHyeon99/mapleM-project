@@ -1,31 +1,27 @@
 import { CharacterItemEquipment } from "@/entities/character";
-import { parseOptions } from "../lib";
 
 interface Props {
   item: CharacterItemEquipment;
 }
 
 export const ItemBaseOption = ({ item }: Props) => {
-  if (!item.item_option) return null;
-
-  const options = parseOptions(item.item_option);
+  if (!item.item_basic_option || item.item_basic_option.length === 0)
+    return null;
 
   return (
-    <div className="border-b pb-2 text-sm">
-      <p>기본 옵션</p>
+    <div className="border-divider border-b py-1 text-sm">
       <dl>
-        {options.map((opt, idx) => (
-          <div key={idx} className="flex gap-1">
-            <dt>{opt.name}</dt>
-            <dd className="text-[#FF8939]">{opt.value}</dd>
+        {item.item_basic_option.map((opt) => (
+          <div
+            key={opt.option_no}
+            className="grid grid-cols-[max-content_1fr] gap-x-2"
+          >
+            <dt className="whitespace-nowrap">{opt.option_name}</dt>
+            <dd className="text-right text-[#FF8939] tabular-nums">
+              {opt.option_value}
+            </dd>
           </div>
         ))}
-        {/* <div className="flex gap-1">
-          <dt>아이템 전투력</dt>
-          <dd className="text-[#FF8939]">
-            {item.item_combat_power?.toLocaleString() ?? 0}
-          </dd>
-        </div> */}
       </dl>
     </div>
   );

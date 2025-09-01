@@ -18,7 +18,7 @@ export const CommonItemPopover = ({
       <PopoverContent
         side="right"
         align="center"
-        className="popover-center bg-popover/98 relative w-72 rounded-lg border-2 p-4 font-medium shadow-lg"
+        className="popover-center bg-popover-foreground/95 dark:bg-popover/98 text-primary-foreground dark:text-primary relative w-72 rounded-lg border-2 border-[#2B2B2B]/50 p-4"
       >
         <PopoverPrimitive.Close className="absolute top-2 right-2 opacity-70 hover:opacity-100">
           <X className="size-5" />

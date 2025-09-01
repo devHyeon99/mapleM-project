@@ -23,17 +23,15 @@ export const ItemPopover = ({ item, className }: ItemPopoverProps) => {
       trigger={<ItemIconBase item={item} className={className} />}
     >
       <ItemHeader item={item} />
-      <div className="space-y-2 pt-2">
-        <ItemStarforce item={item} />
-        <ItemInfo item={item} />
-        <ItemBaseOption item={item} />
-        <ItemAdditionalOption item={item} />
-        <ItemPotential item={item} />
-        <ItemAdditionalPotential item={item} />
-        <ItemSoul item={item} />
-        <ItemEmblem item={item} />
-        <ItemDescription item={item} />
-      </div>
+      <ItemStarforce item={item} />
+      <ItemInfo item={item} />
+      <ItemBaseOption item={item} />
+      <ItemAdditionalOption item={item} />
+      <ItemPotential item={item} />
+      <ItemAdditionalPotential item={item} />
+      <ItemSoul item={item} />
+      <ItemEmblem item={item} />
+      <ItemDescription item={item} />
     </CommonItemPopover>
   );
 };

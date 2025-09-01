@@ -90,13 +90,12 @@ export const ItemIconBase = React.forwardRef<HTMLDivElement, ItemIconBaseProps>(
       >
         {/* 좌상단 라벨 (잠재능력) */}
         {(potential || additional) && (
-          <div className="absolute top-0 left-0 z-1 flex">
+          <div className="absolute top-0 left-0 z-10 flex -translate-x-0.5 -translate-y-0.5 gap-0">
             {potential && (
               <span
                 className={cn(
-                  "flex items-center justify-center font-bold text-white",
-                  "h-2.5 w-2.5 text-[8px]",
-                  "@[46]:h-3 @[46]:w-3 @[46]:text-[10px]",
+                  "flex items-center justify-center rounded-tl-xs font-bold text-white antialiased",
+                  "h-3 w-3 text-[9px]",
                   potential.bgColor,
                   !additional && "rounded-br-xs",
                 )}
@@ -107,9 +106,8 @@ export const ItemIconBase = React.forwardRef<HTMLDivElement, ItemIconBaseProps>(
             {additional && (
               <span
                 className={cn(
-                  "flex items-center justify-center rounded-br-xs font-bold text-white",
-                  "h-2.5 w-2.5 text-[8px]",
-                  "@[46]:w-3 @[46]:text-[10px] @[46px]:h-3",
+                  "flex items-center justify-center rounded-br-xs font-semibold text-white antialiased",
+                  "h-3 w-3 text-[9px]",
                   additional.bgColor,
                 )}
               >
@@ -123,9 +121,8 @@ export const ItemIconBase = React.forwardRef<HTMLDivElement, ItemIconBaseProps>(
         {showStar && (
           <span
             className={cn(
-              "absolute top-0 right-0 z-1 flex items-center justify-center rounded-bl-xs bg-[#FFC300] font-bold text-black",
-              "h-2.5 w-2.5 text-[8px]",
-              "@[46px]:h-3 @[46px]:w-3 @[46px]:text-[9px]",
+              "absolute -top-0.5 -right-0.5 z-1 flex items-center justify-center rounded-tr-xs rounded-bl-xs bg-[#FFC300] font-semibold text-black antialiased",
+              "h-3 w-3 text-[9px]",
             )}
           >
             {star}

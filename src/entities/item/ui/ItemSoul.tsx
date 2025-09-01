@@ -10,7 +10,7 @@ export const ItemSoul = ({ item }: Props) => {
   }
 
   return (
-    <div className="border-b pb-2 text-sm">
+    <div className="border-divider border-b py-1 text-sm">
       <dl>
         <div>
           <dt className="sr-only">소울 이름</dt>
@@ -21,7 +21,7 @@ export const ItemSoul = ({ item }: Props) => {
         </div>
         <div>
           <dt className="sr-only">소울 옵션</dt>
-          <dd>{item.soul_info.soul_option}</dd>
+          <dd className="">{item.soul_info.soul_option}</dd>
         </div>
       </dl>
     </div>

@@ -16,13 +16,15 @@ export const ItemAdditionalOption = ({ item }: Props) => {
   const gradeInfo = getGradeInfo(item.item_additional_option_grade);
 
   return (
-    <div className="border-b pb-2 text-sm">
-      <p>추가 옵션</p>
+    <div className="border-divider border-b py-1 text-sm">
       <dl>
         {item.item_additional_option.map((opt) => (
-          <div key={opt.option_no} className={gradeInfo?.textColor}>
-            <dt className="inline">{opt.option_name}</dt>{" "}
-            <dd className="inline">{opt.option_value}</dd>
+          <div
+            key={opt.option_no}
+            className={`grid grid-cols-[max-content_1fr] gap-x-2 ${gradeInfo?.textColor}`}
+          >
+            <dt className="whitespace-nowrap">{opt.option_name}</dt>
+            <dd className="text-right tabular-nums">{opt.option_value}</dd>
           </div>
         ))}
       </dl>

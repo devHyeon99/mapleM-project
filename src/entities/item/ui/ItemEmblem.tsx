@@ -12,7 +12,7 @@ export const ItemEmblem = ({ item }: Props) => {
   const options = parseOptions(emblem.emblem_option);
 
   return (
-    <div className="border-b pb-2 text-sm">
+    <div className="border-divider border-b py-1 text-sm">
       <p className="text-[#FF8939]">
         Lv.{emblem.emblem_level} {emblem.emblem_name}
       </p>

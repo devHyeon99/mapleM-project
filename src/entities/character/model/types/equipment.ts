@@ -30,6 +30,7 @@ export interface CharacterItemEquipment {
 
   // 옵션 리스트
   item_option?: string;
+  item_basic_option: ItemOption[];
   item_additional_option: ItemOption[];
   item_potential_option: ItemOption[];
   item_additional_potential_option: ItemOption[];

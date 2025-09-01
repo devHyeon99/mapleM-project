@@ -74,7 +74,7 @@ export const SpecCardContent = ({
 
       <div className="text-muted-foreground mt-1 flex items-center justify-between text-[11px]">
         <span className="font-medium">메엠지지 (maplemgg.com)</span>
-        <span>{new Date().toLocaleDateString()} 기준</span>
+        <span>{new Date().toLocaleDateString()}</span>
       </div>
     </div>
   );

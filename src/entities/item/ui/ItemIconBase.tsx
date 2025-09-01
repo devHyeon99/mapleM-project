@@ -90,7 +90,7 @@ export const ItemIconBase = React.forwardRef<HTMLDivElement, ItemIconBaseProps>(
       >
         {/* 좌상단 라벨 (잠재능력) */}
         {(potential || additional) && (
-          <div className="absolute top-0 left-0 z-10 flex -translate-x-0.5 -translate-y-0.5 gap-0">
+          <div className="absolute top-0 left-0 flex -translate-x-0.5 -translate-y-0.5 gap-0">
             {potential && (
               <span
                 className={cn(

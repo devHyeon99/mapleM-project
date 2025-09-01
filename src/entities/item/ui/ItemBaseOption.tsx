@@ -10,6 +10,7 @@ export const ItemBaseOption = ({ item }: Props) => {
 
   return (
     <div className="border-divider border-b py-1 text-sm">
+      <span>아이템 옵션</span>
       <dl>
         {item.item_basic_option.map((opt) => (
           <div

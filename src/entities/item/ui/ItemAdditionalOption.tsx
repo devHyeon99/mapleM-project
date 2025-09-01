@@ -17,6 +17,7 @@ export const ItemAdditionalOption = ({ item }: Props) => {
 
   return (
     <div className="border-divider border-b py-1 text-sm">
+      <span>추가 옵션</span>
       <dl>
         {item.item_additional_option.map((opt) => (
           <div

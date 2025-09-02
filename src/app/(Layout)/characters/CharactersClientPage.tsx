@@ -2,13 +2,13 @@
 
 import { useSearchParams, useRouter } from "next/navigation";
 import { Card, CardContent } from "@/shared/ui/card";
-import { useCharacterSearchAll } from "@/entities/character";
 import { LoadingCard } from "@/shared/ui/LoadingCard";
 import { CharacterSearch } from "@/features/character-search";
 import Link from "next/link";
 import { AlertTriangle, Loader2 } from "lucide-react";
 import { cn } from "@/shared/lib/utils";
 import { useState } from "react";
+import { useCharacterSearchAll } from "@/features/character-search-all";
 
 export default function CharactersClientPage() {
   const searchParams = useSearchParams();
@@ -53,10 +53,12 @@ export default function CharactersClientPage() {
       <CharacterSearch />
       <h1 className="mt-6 text-lg font-bold lg:text-xl">
         전체 월드 내{" "}
-        <strong className="text-[#E98300]">&quot;{name}&quot;</strong> 캐릭터에
-        대한 검색 결과 입니다.
+        <strong className="text-[#cc4b00] dark:text-[#ff6f1b]">
+          &quot;{name}&quot;
+        </strong>{" "}
+        캐릭터에 대한 검색 결과 입니다.
       </h1>
-      <p className="text-muted-foreground mb-4 text-sm font-bold">
+      <p className="text-muted-foreground mb-4 text-sm">
         총 {characters.length}개의 검색 결과가 있습니다.
       </p>
 
@@ -95,7 +97,7 @@ export default function CharactersClientPage() {
                     <p className="text-lg font-semibold">
                       {char.character_name}
                     </p>
-                    <p className="text-muted-foreground text-sm font-bold">
+                    <p className="text-muted-foreground text-sm">
                       {char.world_name}
                     </p>
                   </div>
@@ -109,7 +111,7 @@ export default function CharactersClientPage() {
           );
         })}
       </div>
-      <p className="text-muted-foreground mt-2 w-full max-w-3xl text-right text-sm font-bold">
+      <p className="text-muted-foreground mt-2 w-full max-w-3xl text-right text-sm">
         캐릭터가 존재하지만 검색이 되지 않는 경우가 있습니다.
       </p>
     </div>

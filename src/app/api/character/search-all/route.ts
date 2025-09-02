@@ -18,20 +18,10 @@ async function fetchOcid(
       { cache: "no-store" },
     );
 
-    return {
-      world_name: world,
-      ocid,
-      character_name: name,
-    };
+    return { world_name: world, ocid, character_name: name };
   } catch (e: unknown) {
-    // 캐릭터 없음은 정상 플로우: null
     if (isNexonNotFoundError(e)) return null;
-
-    // 점검/키 문제/429 등은 공통 에러로 throw 될 수 있음
-    handleCommonNexonError(e);
-
-    // 그 외는 상위로 던져서 search-all 전체를 500 처리하게(혹은 정책대로)
-    throw e;
+    throw e; // 여기서는 매핑하지 말고 상위로
   }
 }
 
@@ -53,21 +43,64 @@ export async function GET(req: Request) {
       worlds.map((world) => fetchOcid(world, name)),
     );
 
-    // 성공한 것만 + null 제거
-    const characters = settled
-      .filter(
-        (r): r is PromiseFulfilledResult<CharacterOcidData | null> =>
-          r.status === "fulfilled",
-      )
+    const fulfilled = settled.filter(
+      (r): r is PromiseFulfilledResult<CharacterOcidData | null> =>
+        r.status === "fulfilled",
+    );
+
+    const rejected = settled.filter(
+      (r): r is PromiseRejectedResult => r.status === "rejected",
+    );
+
+    const characters = fulfilled
       .map((r) => r.value)
       .filter((v): v is CharacterOcidData => v !== null);
 
+    // 부분 성공이면 OK
+    if (characters.length > 0) {
+      return NextResponse.json<ApiResponse<CharacterOcidData[]>>(
+        { data: characters },
+        { status: 200 },
+      );
+    }
+
+    // 성공이 하나도 없고 실패가 있으면 공통 에러 매핑해서 503/500
+    if (rejected.length > 0) {
+      try {
+        handleCommonNexonError(rejected[0].reason);
+      } catch (mapped) {
+        return NextResponse.json<ApiResponse<null>>(
+          {
+            error: {
+              name: "NexonCommonError",
+              message: (mapped as Error).message,
+            },
+          },
+          { status: 503 },
+        );
+      }
+
+      return NextResponse.json<ApiResponse<null>>(
+        {
+          error: {
+            name: "InternalError",
+            message:
+              rejected[0].reason instanceof Error
+                ? rejected[0].reason.message
+                : "오류 발생",
+          },
+        },
+        { status: 500 },
+      );
+    }
+
+    // 전부 not found(null)인 케이스 정상 빈 배열
     return NextResponse.json<ApiResponse<CharacterOcidData[]>>(
-      { data: characters },
+      { data: [] },
       { status: 200 },
     );
   } catch (e: unknown) {
-    // 여기서도 공통 에러 메시지 매핑(점검/429/키 문제 등) 시도
+    // 여기서도 공통 에러 메시지 매핑
     try {
       handleCommonNexonError(e);
     } catch (mapped) {

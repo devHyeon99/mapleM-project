@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { useCharacterLinkSkill } from "@/entities/skill/model";
+import { useCharacterLinkSkill } from "@/entities/skill";
 import { mergeLinkSkills } from "@/entities/skill/lib/mergeLinkSkills";
 
 export const useLinkSkillTab = (ocid: string) => {

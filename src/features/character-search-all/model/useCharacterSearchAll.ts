@@ -1,7 +1,5 @@
-"use client";
-
 import { useQuery } from "@tanstack/react-query";
-import { getCharacterSearchAll } from "../api/get-search-all";
+import { getCharacterSearchAll } from "@/features/character-search-all";
 
 export const useCharacterSearchAll = (name?: string) => {
   const trimmedName = name?.trim();

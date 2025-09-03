@@ -2,7 +2,7 @@
 
 import { LoadingCard } from "@/shared/ui/LoadingCard";
 import { TabMessageSection } from "@/shared/ui/TabMessageSection";
-import { useCharacterVmatrix } from "@/entities/skill/model";
+import { useCharacterVmatrix } from "@/entities/skill";
 
 interface VmatrixTabProps {
   ocid: string;

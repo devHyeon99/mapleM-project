@@ -1,16 +1,18 @@
-import { ItemIconBase } from "./ItemIconBase";
-import { ItemHeader } from "./ItemHeader";
-import { ItemStarforce } from "./ItemStarforce";
-import { ItemBaseOption } from "./ItemBaseOption";
-import { ItemAdditionalOption } from "./ItemAdditionalOption";
-import { ItemPotential } from "./ItemPotential";
-import { ItemAdditionalPotential } from "./ItemAdditionalPotential";
-import { ItemSoul } from "./ItemSoul";
-import { ItemEmblem } from "./ItemEmblem";
-import { ItemDescription } from "./ItemDescription";
-import { ItemInfo } from "./ItemInfo";
 import { CommonItemPopover } from "@/shared/ui/CommonItemPopover";
 import { CharacterItemEquipment } from "@/entities/character/model/types/equipment";
+import {
+  ItemAdditionalOption,
+  ItemAdditionalPotential,
+  ItemBaseOption,
+  ItemDescription,
+  ItemEmblem,
+  ItemHeader,
+  ItemIconBase,
+  ItemInfo,
+  ItemPotential,
+  ItemSoul,
+  ItemStarforce,
+} from "@/entities/item";
 
 interface ItemPopoverProps {
   item: CharacterItemEquipment;

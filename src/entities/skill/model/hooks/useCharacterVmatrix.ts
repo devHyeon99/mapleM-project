@@ -1,10 +1,8 @@
-"use client";
-
 import { useQuery } from "@tanstack/react-query";
-import { getCharacterVmatrix } from "../../api/get-vmatrix";
+import { getCharacterVmatrix, type CharacterVMatrix } from "@/entities/skill";
 
 export const useCharacterVmatrix = (ocid: string | null, level: number) => {
-  return useQuery({
+  return useQuery<CharacterVMatrix, Error>({
     queryKey: ["characterVmatrix", ocid],
     queryFn: () => getCharacterVmatrix(ocid!),
     enabled: !!ocid && level >= 200,

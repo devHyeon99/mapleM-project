@@ -1,1 +1,11 @@
-export { ItemPopover } from "./ItemPopover";
+export { ItemIconBase } from "./ItemIconBase";
+export { ItemHeader } from "./ItemHeader";
+export { ItemStarforce } from "./ItemStarforce";
+export { ItemInfo } from "./ItemInfo";
+export { ItemBaseOption } from "./ItemBaseOption";
+export { ItemAdditionalOption } from "./ItemAdditionalOption";
+export { ItemPotential } from "./ItemPotential";
+export { ItemAdditionalPotential } from "./ItemAdditionalPotential";
+export { ItemSoul } from "./ItemSoul";
+export { ItemEmblem } from "./ItemEmblem";
+export { ItemDescription } from "./ItemDescription";

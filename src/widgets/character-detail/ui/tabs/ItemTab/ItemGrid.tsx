@@ -1,6 +1,7 @@
 import { Fragment } from "react";
-import { ItemPopover, SortedItemSlot } from "@/entities/item";
+import { SortedItemSlot } from "@/entities/item";
 import { ItemEmptySlot } from "@/shared/ui/ItemEmptySlot";
+import { ItemPopover } from "@/widgets/item-popover";
 
 interface ItemGridProps {
   items: SortedItemSlot[];

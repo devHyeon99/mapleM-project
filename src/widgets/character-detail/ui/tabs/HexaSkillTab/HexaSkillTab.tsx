@@ -1,12 +1,14 @@
 "use client";
 
+import { Fragment } from "react";
 import Image from "next/image";
 import { LoadingCard } from "@/shared/ui/LoadingCard";
 import { TabMessageSection } from "@/shared/ui/TabMessageSection";
-import { useCharacterHexaMatrixSkill } from "@/entities/skill/model";
-import type { CharacterHexaMatrixSkill } from "@/entities/skill/model";
 import { Separator } from "@/shared/ui/separator";
-import { Fragment } from "react";
+import {
+  useCharacterHexaMatrixSkill,
+  type CharacterHexaMatrixSkill,
+} from "@/entities/skill";
 
 interface HexaSkillTabProps {
   ocid: string;

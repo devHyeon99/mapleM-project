@@ -1,6 +1,8 @@
+import {
+  getCharacterHexaMatrixSkill,
+  type CharacterHexaMatrixSkill,
+} from "@/entities/skill";
 import { useQuery } from "@tanstack/react-query";
-import { getCharacterHexaMatrixSkill } from "../../api/get-hexamatrix-skill";
-import type { CharacterHexaMatrixSkill } from "../types";
 
 export const useCharacterHexaMatrixSkill = (
   ocid: string | null,

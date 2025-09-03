@@ -1,1 +1,1 @@
-export { getSearchAll } from "./get-search-all";
+export { getCharacterSearchAll } from "./get-search-all";

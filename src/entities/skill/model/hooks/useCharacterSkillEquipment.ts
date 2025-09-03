@@ -1,8 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import { getCharacterSkillEquipment } from "../../api/get-skill-equipment";
+import {
+  getCharacterSkillEquipment,
+  type CharacterSkillData,
+} from "@/entities/skill";
 
 export const useCharacterSkillEquipment = (ocid: string | null) => {
-  return useQuery({
+  return useQuery<CharacterSkillData, Error>({
     queryKey: ["characterSkillEquipment", ocid],
     queryFn: () => getCharacterSkillEquipment(ocid!),
     enabled: !!ocid,

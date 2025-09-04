@@ -1,5 +1,5 @@
 import * as React from "react";
-import { CharacterItemEquipment } from "@/entities/character";
+import { CharacterItemEquipment } from "@/entities/item";
 import { getGradeInfo } from "../lib";
 import { POTENTIAL_GRADE_MAP } from "@/shared/config/constants/gradeMap";
 import { cn } from "@/shared/lib/utils";

@@ -1,19 +1,21 @@
 import { NextResponse } from "next/server";
 import { nexonFetch } from "@/shared/api/nexon/server";
-import { fetchRankingWithFallback } from "@/entities/character/api/fetch-ranking";
-import { handleCommonNexonError } from "@/shared/api/nexon/handler";
+import { handleCommonNexonError } from "@/shared/api/nexon";
 import type { ApiResponse } from "@/shared/model/types/ApiResponse";
+import { fetchRankingWithFallback } from "@/entities/character/api/fetch-ranking";
+import type {
+  CharacterItemEquipmentResponse,
+  CharacterEquipmentSetResponse,
+  CharacterAndroidResponse,
+} from "@/entities/item";
 import type {
   CharacterDetailData,
-  CharacterEquipmentResponse,
-  CharacterAndroidResponse,
-  CharacterUnionResponse,
   CharacterBasicResponse,
   CharacterGuildResponse,
-  CharacterEquipmentSetResponse,
+  CharacterUnionResponse,
   CharacterLevelRankingResponse,
   CharacterUnionRankingResponse,
-} from "@/entities/character/model/types";
+} from "@/entities/character";
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
@@ -32,13 +34,17 @@ export async function GET(req: Request) {
     const essentialRequests = {
       basic: nexonFetch<CharacterBasicResponse>(
         `/character/basic?ocid=${ocidQ}`,
-        { cache: "no-store" },
+        {
+          cache: "no-store",
+        },
       ),
       guild: nexonFetch<CharacterGuildResponse>(
         `/character/guild?ocid=${ocidQ}`,
-        { cache: "no-store" },
+        {
+          cache: "no-store",
+        },
       ),
-      equip: nexonFetch<CharacterEquipmentResponse>(
+      equip: nexonFetch<CharacterItemEquipmentResponse>(
         `/character/item-equipment?ocid=${ocidQ}`,
         { cache: "no-store" },
       ),
@@ -86,31 +92,35 @@ export async function GET(req: Request) {
       rankingPromises.unionRanking,
     ]);
 
-    const { android_equipment, heart_equipment } = androidData ?? {};
-
+    // 가공 로직: 여러 API 응답을 하나의 CharacterDetailData로 조립
     const combinedData: CharacterDetailData = {
       ocid,
       ...basicData,
       guild_name: guildData.guild_name ?? null,
       union_data: unionData ?? null,
 
+      // 랭킹은 첫 번째 항목만 추출하여 할당
       level_ranking: levelRankingData?.ranking?.[0] ?? null,
       union_ranking: unionRankingData?.ranking?.[0] ?? null,
 
+      // 장비 정보 매핑
       use_preset_no: equipData.use_preset_no,
       soul_set_option: equipData.soul_set_option,
       item_equipment: equipData.item_equipment ?? [],
       equipment_preset: equipData.equipment_preset ?? [],
       set_effect: equipSetEffectData.set_info ?? [],
 
-      android_equipment: android_equipment ?? null,
-      heart_equipment: heart_equipment ?? null,
+      // 안드로이드 정보 매핑
+      android_equipment: androidData?.android_equipment ?? null,
+      heart_equipment: androidData?.heart_equipment ?? null,
+      android_preset: androidData?.android_heart_equipment_preset ?? [],
     };
 
     return NextResponse.json<ApiResponse<CharacterDetailData>>({
       data: combinedData,
     });
   } catch (e: unknown) {
+    // 에러 핸들링 로직은 기존 유지
     try {
       handleCommonNexonError(e);
     } catch (mapped) {

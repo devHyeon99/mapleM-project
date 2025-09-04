@@ -1,4 +1,4 @@
-export interface CharacterBasicInfo {
+export interface CharacterBasic {
   character_name: string;
   world_name: string;
   character_level: number;
@@ -11,3 +11,5 @@ export interface CharacterBasicInfo {
   character_date_last_logout: string;
   character_image: string;
 }
+
+export type CharacterBasicResponse = CharacterBasic;

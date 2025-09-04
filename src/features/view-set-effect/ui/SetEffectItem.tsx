@@ -1,6 +1,6 @@
 "use client";
 
-import { EquipmentSetInfo, formatSetName } from "@/entities/character";
+import { EquipmentSetInfo, formatSetName } from "@/entities/item";
 import { Button } from "@/shared/ui/button";
 import { Separator } from "@/shared/ui/separator";
 import { Badge } from "@/shared/ui/badge";

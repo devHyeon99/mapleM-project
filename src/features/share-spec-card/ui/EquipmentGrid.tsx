@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { CharacterItemEquipment } from "@/entities/character";
+import { CharacterItemEquipment } from "@/entities/item";
 import { ItemIconBase } from "@/entities/item/ui/ItemIconBase";
 import { SpecCardItem } from "../lib/getSortedSpecCardItems";
 

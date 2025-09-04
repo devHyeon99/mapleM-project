@@ -1,4 +1,4 @@
-import { CharacterItemEquipment } from "@/entities/character";
+import { CharacterItemEquipment } from "@/entities/item";
 import { getStarforce } from "../lib";
 import { StarIcon } from "@/shared/ui/StarIcon";
 

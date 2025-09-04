@@ -1,5 +1,5 @@
-import { CharacterItemEquipment } from "@/entities/character";
 import { MAGICAL_CLASSES } from "@/shared/config/constants/magic_class";
+import { CharacterItemEquipment } from "@/entities/item/model/types";
 
 /**
  * 숫자 문자열 파싱

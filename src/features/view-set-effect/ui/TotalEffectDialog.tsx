@@ -1,6 +1,6 @@
 "use client";
 
-import { EquipmentSetInfo, aggregateOptions } from "@/entities/character";
+import { EquipmentSetInfo, aggregateOptions } from "@/entities/item";
 import { Button } from "@/shared/ui/button";
 import { Separator } from "@/shared/ui/separator";
 import {

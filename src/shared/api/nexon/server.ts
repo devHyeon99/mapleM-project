@@ -1,3 +1,5 @@
+import "server-only";
+
 import { NexonApiError } from "./errors";
 
 const NEXON_API_BASE_URL = "https://open.api.nexon.com/maplestorym/v1";

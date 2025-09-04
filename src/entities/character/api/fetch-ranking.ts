@@ -1,5 +1,7 @@
+import "server-only";
+
 import { nexonFetch } from "@/shared/api/nexon/server";
-import { NexonApiError } from "@/shared/api/nexon/errors";
+import { NexonApiError } from "@/shared/api/nexon";
 
 const getDateString = (daysToSubtract: number): string => {
   const date = new Date(Date.now() - daysToSubtract * 24 * 60 * 60 * 1000);

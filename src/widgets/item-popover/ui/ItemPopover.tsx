@@ -1,5 +1,5 @@
 import { CommonItemPopover } from "@/shared/ui/CommonItemPopover";
-import { CharacterItemEquipment } from "@/entities/character/model/types/equipment";
+import { CharacterItemEquipment } from "@/entities/item";
 import {
   ItemAdditionalOption,
   ItemAdditionalPotential,

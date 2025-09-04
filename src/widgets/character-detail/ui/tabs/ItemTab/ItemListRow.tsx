@@ -1,4 +1,4 @@
-import { CharacterItemEquipment, ItemOption } from "@/entities/character";
+import { CharacterItemEquipment, ItemOption } from "@/entities/item";
 import { ItemPopover } from "@/widgets/item-popover";
 import { Star } from "lucide-react";
 

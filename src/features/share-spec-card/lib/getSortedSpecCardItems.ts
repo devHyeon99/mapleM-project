@@ -1,4 +1,4 @@
-import { CharacterItemEquipment } from "@/entities/character";
+import { CharacterItemEquipment } from "@/entities/item";
 
 // --- 카드 슬롯 순서 상수 ---
 const CARD_EQUIP_SLOT_ORDER_ONEPIECE = [

@@ -2,7 +2,7 @@ import {
   CharacterItemEquipment,
   CharacterAndroidEquipment,
   CharacterHeartEquipment,
-} from "@/entities/character";
+} from "@/entities/item/model/types";
 import {
   EQUIP_SLOT_ORDER_GRID_ONEPIECE,
   EQUIP_SLOT_ORDER_GRID_TOPBOTTOM,

@@ -1,7 +1,7 @@
 "use client";
 
 import { ReactNode } from "react";
-import { EquipmentSetInfo } from "@/entities/character";
+import { EquipmentSetInfo } from "@/entities/item";
 import { Button } from "@/shared/ui/button";
 import { Separator } from "@/shared/ui/separator";
 import {

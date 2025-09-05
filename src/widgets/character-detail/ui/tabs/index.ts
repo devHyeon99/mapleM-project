@@ -8,3 +8,4 @@ export { LinkSkillTab } from "./LinkSkillTab";
 export { VmatrixTab } from "./VmatrixTab";
 export { HexaSkillTab } from "./HexaSkillTab";
 export { HexaStatTab } from "./HexaStatTab";
+export { UnionTab } from "./UnionTab";

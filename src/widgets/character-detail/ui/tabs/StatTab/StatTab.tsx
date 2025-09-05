@@ -3,7 +3,7 @@
 import { useCharacterStat } from "@/entities/character";
 import { Separator } from "@/shared/ui/separator";
 import { LoadingCard } from "@/shared/ui/LoadingCard";
-import { StatRow } from "./StatRow";
+import { InfoRow } from "@/shared/ui/InfoRow"; // InfoRow로 교체
 import { HyperStatPresetToggle } from "./HyperStatToggle";
 import { useHyperStat } from "./useHyperStat";
 
@@ -44,24 +44,29 @@ export const StatTab = ({ ocid, level }: StatTabProps) => {
   return (
     <div className="flex flex-col gap-3">
       {/* 기본 스탯 정보 영역 */}
-      <section className="rounded-md border p-3">
-        <h2 className="mb-2 font-semibold">캐릭터 스탯</h2>
+      <section className="bg-card/50 rounded-md border p-3">
+        <h2 className="mb-2 text-sm font-bold">캐릭터 스탯</h2>
         <Separator className="mb-2" />
-        <ul className="space-y-1">
+        {/* dl 태그로 시맨틱 보강 */}
+        <dl className="flex flex-col gap-1">
           {stat.stat.map((s, idx) => (
-            <StatRow
+            <InfoRow
               key={idx}
+              as="div"
+              variant="between"
               label={s.stat_name}
-              value={Number(s.stat_value).toLocaleString()}
-            />
+              isHighlight
+            >
+              {Number(s.stat_value).toLocaleString()}
+            </InfoRow>
           ))}
-        </ul>
+        </dl>
       </section>
 
       {/* 하이퍼 스탯 정보 영역 */}
-      <section className="rounded-md border p-3">
+      <section className="bg-card/50 rounded-md border p-3">
         <div className="mb-2 flex items-center justify-between">
-          <h2 className="font-semibold">하이퍼 스탯</h2>
+          <h2 className="text-sm font-bold">하이퍼 스탯</h2>
           {hyperStat && (
             <HyperStatPresetToggle
               count={hyperStat.preset_count}
@@ -74,16 +79,19 @@ export const StatTab = ({ ocid, level }: StatTabProps) => {
         <Separator className="mb-2" />
 
         {currentHyperStatInfo.length > 0 ? (
-          <ul className="space-y-1">
+          <dl className="flex flex-col gap-1">
             {currentHyperStatInfo.map((info, idx) => (
-              <StatRow
+              <InfoRow
                 key={idx}
+                as="div"
+                variant="between"
                 label={info.stat_type}
-                value={`Lv.${info.stat_level}`}
-                isLevel
-              />
+                isHighlight
+              >
+                Lv.{info.stat_level}
+              </InfoRow>
             ))}
-          </ul>
+          </dl>
         ) : (
           <div className="text-muted-foreground flex h-14 items-center justify-center text-sm">
             투자한 하이퍼 스탯이 없습니다.

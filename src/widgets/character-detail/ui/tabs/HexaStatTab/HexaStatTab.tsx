@@ -3,9 +3,11 @@
 import { Separator } from "@/shared/ui/separator";
 import { LoadingCard } from "@/shared/ui/LoadingCard";
 import { TabMessageSection } from "@/shared/ui/TabMessageSection";
+import { InfoRow } from "@/shared/ui/InfoRow"; // InfoRow 도입
 import { cn } from "@/shared/lib/utils";
 import { useCharacterHexaMatrixStat } from "@/entities/character";
 import type { CharacterHexaMatrixStat } from "@/entities/character";
+import { Badge } from "@/shared/ui/badge";
 
 interface HexaStatTabProps {
   ocid: string;
@@ -45,7 +47,7 @@ export const HexaStatTab = ({ ocid, level }: HexaStatTabProps) => {
   }
 
   return (
-    <div className="space-y-6 rounded-md border p-3 text-sm">
+    <div className="flex flex-col gap-4">
       {statCores.map((core) => (
         <HexaStatCoreSection
           key={core.stat_core_slot}
@@ -65,8 +67,7 @@ type CoreSectionProps = {
 const HexaStatCoreSection = ({ slot, statInfo }: CoreSectionProps) => {
   return (
     <section className="space-y-3">
-      <h2 className="text-base font-semibold">스탯 코어 슬롯 {slot}</h2>
-
+      <h2 className="text-sm font-bold">스탯 코어 슬롯 {slot}</h2>
       {statInfo.map((page) => (
         <HexaStatPageCard key={page.page_no} page={page} />
       ))}
@@ -84,46 +85,60 @@ const HexaStatPageCard = ({ page }: PageCardProps) => {
   return (
     <div
       className={cn(
-        "space-y-2 rounded-md border p-3 transition-colors",
-        isActive ? "border-border bg-card" : "border-border opacity-60",
+        "space-y-3 rounded-md border p-3 transition-colors",
+        isActive
+          ? "border-border bg-card/50"
+          : "border-border bg-muted/10 opacity-50",
       )}
     >
       {/* 헤더 */}
-      <div className="mb-1 flex items-center justify-between">
-        <span className="font-medium">페이지 {page.page_no}</span>
-        <span
-          className={cn(
-            "ml-1 text-xs font-semibold",
-            isActive ? "text-primary" : "text-muted-foreground font-normal",
-          )}
-        >
-          {isActive && "장착중"}
-        </span>
+      <div className="flex items-center justify-between">
+        <span className="text-sm font-bold">페이지 {page.page_no}</span>
+        {isActive && <Badge>현재 적용 중</Badge>}
       </div>
 
       <Separator />
 
-      {/* 메인 스탯 */}
-      <div>
-        <p className="mb-1 text-sm font-semibold">메인스탯</p>
-        <StatRow name={page.main_stat} level={page.main_stat_level} />
-      </div>
+      <dl className="space-y-3">
+        {/* 메인 스탯 */}
+        <div className="space-y-1">
+          <p className="text-sm font-bold tracking-wider uppercase">메인스탯</p>
+          <InfoRow
+            label={page.main_stat}
+            variant="between"
+            isHighlight={isActive}
+            valueClassName="font-semibold"
+            isNumeric
+          >
+            Lv.{page.main_stat_level}
+          </InfoRow>
+        </div>
 
-      {/* 서브 스탯 */}
-      <div>
-        <p className="mb-1 text-sm font-semibold">서브스탯</p>
-        <StatRow name={page.sub_1_stat} level={page.sub_1_stat_level} />
-        <StatRow name={page.sub_2_stat} level={page.sub_2_stat_level} />
-      </div>
-    </div>
-  );
-};
-
-const StatRow = ({ name, level }: { name: string; level: number }) => {
-  return (
-    <div className="text-muted-foreground flex justify-between">
-      <span className="font-semibold">{name}</span>
-      <span className="font-semibold text-[#FF7E54]">Lv.{level}</span>
+        {/* 서브 스탯 */}
+        <div className="space-y-1">
+          <p className="text-sm font-bold tracking-wider uppercase">서브스탯</p>
+          <div className="flex flex-col gap-1">
+            <InfoRow
+              label={page.sub_1_stat}
+              variant="between"
+              isHighlight={isActive}
+              valueClassName="font-semibold"
+              isNumeric
+            >
+              Lv.{page.sub_1_stat_level}
+            </InfoRow>
+            <InfoRow
+              label={page.sub_2_stat}
+              variant="between"
+              isHighlight={isActive}
+              valueClassName="font-semibold"
+              isNumeric
+            >
+              Lv.{page.sub_2_stat_level}
+            </InfoRow>
+          </div>
+        </div>
+      </dl>
     </div>
   );
 };

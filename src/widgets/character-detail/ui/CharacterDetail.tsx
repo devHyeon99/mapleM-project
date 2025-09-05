@@ -3,7 +3,11 @@
 import { CharacterProfileCard } from "./CharacterProfileCard";
 import { CharacterDetailTabs } from "./CharacterDetailTabs";
 import { useQuery } from "@tanstack/react-query";
-import { characterQueryKeys, getCharacterDetails } from "@/entities/character";
+import {
+  characterQueryKeys,
+  getCharacterDetails,
+  UnionCard,
+} from "@/entities/character";
 import { CharacterDetailSkeleton } from "./CharacterDetailSkeleton";
 
 interface CharacterBasicInfoProps {
@@ -48,7 +52,14 @@ export const CharacterDetail = ({ ocid }: CharacterBasicInfoProps) => {
 
       {characterData && (
         <div className="flex w-full max-w-3xl flex-col items-center gap-4 md:flex-row md:items-start md:justify-center">
-          <CharacterProfileCard data={characterData} />
+          <div className="flex w-full max-w-90 flex-col items-center gap-2">
+            <CharacterProfileCard data={characterData} />
+            <UnionCard
+              data={characterData.union_data}
+              ranking={characterData.union_ranking}
+              className="rounded-xs"
+            />
+          </div>
           <CharacterDetailTabs ocid={ocid} characterData={characterData} />
         </div>
       )}

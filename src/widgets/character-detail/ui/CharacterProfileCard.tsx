@@ -89,7 +89,7 @@ export const CharacterProfileCard = ({ data }: CharacterProfileCardProps) => {
 
   return (
     <article
-      className="bg-card relative flex h-fit w-full max-w-90 flex-col items-center gap-2 rounded-xs border p-4 pt-8 md:max-w-none md:flex-1 md:self-start"
+      className="bg-card relative flex h-fit w-full flex-col items-center gap-2 rounded-xs border p-4 pt-8 md:flex-1 md:self-start"
       aria-label={`${data.character_name} 캐릭터 상세정보`}
     >
       {/* 랭킹 업데이트 날짜 */}

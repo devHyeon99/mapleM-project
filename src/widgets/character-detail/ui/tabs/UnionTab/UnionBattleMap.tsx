@@ -46,14 +46,11 @@ export const UnionBattleMap = ({ raiderData }: UnionBattleMapProps) => {
   });
 
   return (
-    <div className="mx-auto flex w-full max-w-[400px] flex-col items-center overflow-hidden">
-      <div className="mb-2 flex w-full items-center justify-between px-1">
+    <div className="flex w-full max-w-[400px] flex-col items-center overflow-hidden">
+      <div className="mb-2 flex w-full items-center justify-between">
         <div className="flex flex-row gap-2">
           <span className="text-sm font-bold">유니온 배치도</span>
-          <Badge
-            className="text-muted-foreground w-fit text-xs"
-            variant="outline"
-          >
+          <Badge className="w-fit text-xs">
             전투지도 {raiderData.use_preset_no} 적용 중
           </Badge>
         </div>
@@ -64,14 +61,14 @@ export const UnionBattleMap = ({ raiderData }: UnionBattleMapProps) => {
           onValueChange={setActivePreset}
           className="w-auto"
         >
-          <TabsList className="h-8 p-1">
+          <TabsList className="rounded-sm border">
             {[...raiderData.battle_map]
               .sort((a, b) => a.preset_no - b.preset_no)
               .map((map) => (
                 <TabsTrigger
                   key={map.preset_no}
                   value={String(map.preset_no)}
-                  className="rounded-sm text-xs"
+                  className="data-[state=active]:bg-background! rounded-sm text-xs tabular-nums antialiased"
                 >
                   {map.preset_no}
                 </TabsTrigger>

@@ -49,7 +49,7 @@ export const UnionBattleMap = ({ raiderData }: UnionBattleMapProps) => {
     <div className="flex w-full max-w-[400px] flex-col items-center overflow-hidden">
       <div className="mb-2 flex w-full items-center justify-between">
         <div className="flex flex-row gap-2">
-          <span className="text-sm font-bold">유니온 배치도</span>
+          <span className="font-bold">유니온 배치도</span>
           <Badge className="w-fit text-xs">
             전투지도 {raiderData.use_preset_no} 적용 중
           </Badge>

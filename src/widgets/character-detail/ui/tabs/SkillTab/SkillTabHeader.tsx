@@ -35,10 +35,16 @@ export const SkillTabHeader = ({
             if (value) onModeChange(value as "A" | "B");
           }}
         >
-          <ToggleGroupItem value="A" className="h-8 w-8">
+          <ToggleGroupItem
+            value="A"
+            className="h-8 w-8 first:rounded-l-sm last:rounded-r-sm"
+          >
             A
           </ToggleGroupItem>
-          <ToggleGroupItem value="B" className="h-8 w-8">
+          <ToggleGroupItem
+            value="B"
+            className="h-8 w-8 first:rounded-l-sm last:rounded-r-sm"
+          >
             B
           </ToggleGroupItem>
         </ToggleGroup>
@@ -54,7 +60,11 @@ export const SkillTabHeader = ({
             }}
           >
             {skillSetKeys.map((setNo) => (
-              <ToggleGroupItem key={setNo} value={setNo} className="h-8 w-8">
+              <ToggleGroupItem
+                key={setNo}
+                value={setNo}
+                className="h-8 w-8 first:rounded-l-sm last:rounded-r-sm"
+              >
                 {setNo}
               </ToggleGroupItem>
             ))}

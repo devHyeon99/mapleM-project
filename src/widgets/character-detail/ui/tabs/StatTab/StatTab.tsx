@@ -46,7 +46,7 @@ export const StatTab = ({ ocid, level }: StatTabProps) => {
     <div className="flex flex-col gap-3">
       {/* 기본 스탯 정보 영역 */}
       <section className="bg-card/50 rounded-md border p-3">
-        <h2 className="mb-2 text-sm font-bold">캐릭터 스탯</h2>
+        <h2 className="mb-2 font-bold">캐릭터 스탯</h2>
         <Separator className="mb-2" />
         {/* dl 태그로 시맨틱 보강 */}
         <dl className="flex flex-col gap-1">
@@ -68,9 +68,9 @@ export const StatTab = ({ ocid, level }: StatTabProps) => {
       <section className="bg-card/50 rounded-md border p-3">
         <div className="mb-2 flex items-center justify-between">
           <div className="flex flex-row gap-2">
-            <h2 className="text-sm font-bold">하이퍼 스탯</h2>
+            <h2 className="font-bold">하이퍼 스탯</h2>
             <Badge className="text-xs">
-              프리셋 {hyperStat?.use_preset_no} 적용 중
+              {hyperStat?.use_preset_no}페이지 적용 중
             </Badge>
           </div>
 

@@ -1,5 +1,6 @@
 import { ToggleGroup, ToggleGroupItem } from "@/shared/ui/toggle-group";
 import { CharacterJewelEquipment } from "@/entities/character";
+import { Badge } from "@/shared/ui/badge";
 
 interface JewelHeaderProps {
   useJewelPageNo: number;
@@ -16,11 +17,9 @@ export const JewelHeader = ({
 }: JewelHeaderProps) => {
   return (
     <div className="flex w-full items-center justify-between">
-      <div className="flex flex-col gap-0.5">
-        <h3 className="font-bold">쥬얼 페이지</h3>
-        <p className="text-muted-foreground text-sm">
-          {useJewelPageNo}페이지 장착중
-        </p>
+      <div className="flex flex-row items-center gap-2">
+        <h2 className="font-bold">쥬얼 페이지</h2>
+        <Badge className="text-xs">{useJewelPageNo}페이지 적용 중</Badge>
       </div>
 
       <ToggleGroup
@@ -35,7 +34,7 @@ export const JewelHeader = ({
           <ToggleGroupItem
             key={page.jewel_page_no}
             value={String(page.jewel_page_no)}
-            className="h-8 w-8 p-0"
+            className="h-8 w-8 p-0 first:rounded-l-sm last:rounded-r-sm"
           >
             {page.jewel_page_no}
           </ToggleGroupItem>

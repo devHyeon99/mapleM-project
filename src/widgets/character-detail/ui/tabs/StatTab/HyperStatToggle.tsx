@@ -28,7 +28,6 @@ export const HyperStatPresetToggle = ({
         if (!v) return; // 같은 아이템 재클릭 시 빈 값 들어올 수 있음(allowDeselect 케이스)
         onSelect(Number(v));
       }}
-      className="justify-end rounded-sm"
     >
       {Array.from({ length: Math.max(0, count) }, (_, i) => {
         const presetNo = i + 1;

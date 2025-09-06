@@ -6,6 +6,7 @@ import { LoadingCard } from "@/shared/ui/LoadingCard";
 import { InfoRow } from "@/shared/ui/InfoRow"; // InfoRow로 교체
 import { HyperStatPresetToggle } from "./HyperStatToggle";
 import { useHyperStat } from "./useHyperStat";
+import { Badge } from "@/shared/ui/badge";
 
 interface StatTabProps {
   ocid: string;
@@ -66,7 +67,13 @@ export const StatTab = ({ ocid, level }: StatTabProps) => {
       {/* 하이퍼 스탯 정보 영역 */}
       <section className="bg-card/50 rounded-md border p-3">
         <div className="mb-2 flex items-center justify-between">
-          <h2 className="text-sm font-bold">하이퍼 스탯</h2>
+          <div className="flex flex-row gap-2">
+            <h2 className="text-sm font-bold">하이퍼 스탯</h2>
+            <Badge className="text-xs">
+              프리셋 {hyperStat?.use_preset_no} 적용 중
+            </Badge>
+          </div>
+
           {hyperStat && (
             <HyperStatPresetToggle
               count={hyperStat.preset_count}

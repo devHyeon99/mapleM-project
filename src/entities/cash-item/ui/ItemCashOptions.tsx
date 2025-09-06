@@ -1,4 +1,3 @@
-import { Separator } from "@/shared/ui/separator";
 import { CashItemEquipment } from "@/entities/cash-item";
 
 interface Props {
@@ -13,7 +12,7 @@ export const ItemCashOptions = ({ options }: Props) => {
   return (
     <>
       <p className="pt-2 text-sm">아이템 옵션</p>
-      <ul className="text-sm">
+      <ul className="border-divider border-b pb-2 text-sm">
         {options.map((opt, idx) => (
           <li key={idx} className="flex gap-1">
             <span>{opt.option_name}</span>
@@ -26,7 +25,6 @@ export const ItemCashOptions = ({ options }: Props) => {
           </li>
         ))}
       </ul>
-      <Separator className="my-2" role="separator" />
     </>
   );
 };

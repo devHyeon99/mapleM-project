@@ -6,7 +6,7 @@ interface Props {
 
 export const ItemCashInfo = ({ item }: Props) => {
   return (
-    <div className="border-b py-2 text-sm">
+    <div className="border-divider border-b py-2 text-sm">
       <p>아이템 정보</p>
       <dl>
         <div className="flex justify-between">

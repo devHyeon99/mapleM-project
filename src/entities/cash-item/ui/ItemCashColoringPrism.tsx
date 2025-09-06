@@ -1,4 +1,3 @@
-import { Separator } from "@/shared/ui/separator";
 import { COLOR_RANGE_LABEL } from "@/shared/config/constants/color_prism";
 import { CashItemEquipment } from "@/entities/cash-item";
 
@@ -22,8 +21,8 @@ export const ItemCashColoringPrism = ({ coloringPrism }: Props) => {
 
   return (
     <>
-      <p className="text-sm">컬러링 프리즘이 적용된 아이템입니다.</p>
-      <ul className="text-sm">
+      <p className="pt-2 text-sm">컬러링 프리즘이 적용된 아이템입니다.</p>
+      <ul className="border-divider border-b pb-2 text-sm">
         <li>
           적용 범위{" "}
           <span
@@ -66,7 +65,6 @@ export const ItemCashColoringPrism = ({ coloringPrism }: Props) => {
           </span>
         </li>
       </ul>
-      <Separator className="my-2" role="separator" />
     </>
   );
 };

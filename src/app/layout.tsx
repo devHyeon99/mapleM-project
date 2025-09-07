@@ -14,18 +14,6 @@ const pretendard = localFont({
   display: "swap",
 });
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  name: "메엠지지 (MMGG)",
-  url: "https://maplemgg.com",
-  potentialAction: {
-    "@type": "SearchAction",
-    target: "https://maplemgg.com/characters?name={search_term_string}",
-    "query-input": "required name=search_term_string",
-  },
-};
-
 export const metadata: Metadata = {
   // 기본 URL 설정
   metadataBase: new URL("https://maplemgg.com"),
@@ -111,15 +99,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const isDev = process.env.NODE_ENV === "development";
+  const isProd = process.env.NODE_ENV === "production";
 
   return (
     <html lang="ko" className={pretendard.className} suppressHydrationWarning>
-      <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-      </head>
+      <head></head>
       <body className="bg-background relative flex min-h-screen flex-col">
         <ThemeProvider
           attribute="class"
@@ -138,10 +122,12 @@ export default function RootLayout({
           )}
         </ThemeProvider>
         {/* 넥슨 애널리틱스 */}
-        <Script
-          src="https://openapi.nexon.com/js/analytics.js?app_id=241136"
-          strategy="afterInteractive"
-        />
+        {isProd && (
+          <Script
+            src="https://openapi.nexon.com/js/analytics.js?app_id=241136"
+            strategy="afterInteractive"
+          />
+        )}
       </body>
     </html>
   );

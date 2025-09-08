@@ -1,5 +1,6 @@
 import { ToggleGroup, ToggleGroupItem } from "@/shared/ui/toggle-group";
 import type { LinkSkillPreset } from "@/entities/skill/model";
+import { Badge } from "@/shared/ui/badge";
 
 interface LinkSkillHeaderProps {
   usePresetNo: number;
@@ -16,11 +17,9 @@ export const LinkSkillHeader = ({
 }: LinkSkillHeaderProps) => {
   return (
     <div className="flex items-center justify-between">
-      <div className="flex flex-col gap-0.5">
-        <h3 className="font-bold">링크 스킬</h3>
-        <p className="text-muted-foreground text-sm">
-          {usePresetNo}페이지 장착중
-        </p>
+      <div className="flex flex-row items-center gap-2">
+        <h2 className="font-bold">링크 스킬</h2>
+        <Badge className="text-xs">{usePresetNo}페이지 장착 중</Badge>
       </div>
 
       <ToggleGroup
@@ -35,7 +34,7 @@ export const LinkSkillHeader = ({
           <ToggleGroupItem
             key={preset.preset_no}
             value={preset.preset_no.toString()}
-            className="h-8 w-8 p-0"
+            className="h-8 w-8 first:rounded-l-sm last:rounded-r-sm"
           >
             {preset.preset_no}
           </ToggleGroupItem>

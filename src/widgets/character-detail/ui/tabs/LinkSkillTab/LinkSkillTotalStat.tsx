@@ -14,7 +14,7 @@ export const LinkSkillTotalStat = ({ skills }: LinkSkillTotalStatProps) => {
 
   return (
     <div className="bg-background mt-2 rounded-md border p-4 shadow-sm">
-      <h4 className="font-bold">링크 스킬 능력치 총합</h4>
+      <h3 className="font-bold">링크 스킬 능력치 총합</h3>
       <Separator className="my-3" />
       <div className="grid grid-cols-2 gap-x-4 gap-y-2">
         {totalStats.map((stat) => (

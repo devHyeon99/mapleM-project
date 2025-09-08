@@ -3,7 +3,7 @@
 import { useState } from "react"; // 추가
 import { cn } from "@/shared/lib/utils";
 import { Badge } from "@/shared/ui/badge";
-import { Tabs, TabsList, TabsTrigger } from "@/shared/ui/tabs"; // shadcn/ui 추가
+import { ToggleGroup, ToggleGroupItem } from "@/shared/ui/toggle-group";
 import type { CharacterUnionRaider } from "@/entities/character";
 
 interface UnionBattleMapProps {
@@ -48,33 +48,33 @@ export const UnionBattleMap = ({ raiderData }: UnionBattleMapProps) => {
   return (
     <div className="flex w-full max-w-[400px] flex-col items-center overflow-hidden">
       <div className="mb-2 flex w-full items-center justify-between">
-        <div className="flex flex-row gap-2">
+        <div className="flex flex-row items-center gap-2">
           <span className="font-bold">유니온 배치도</span>
           <Badge className="w-fit text-xs">
             전투지도 {raiderData.use_preset_no} 적용 중
           </Badge>
         </div>
 
-        {/* 프리셋 변경 탭 */}
-        <Tabs
+        {/* 프리셋 변경 */}
+        <ToggleGroup
+          type="single"
+          variant="outline"
           value={activePreset}
-          onValueChange={setActivePreset}
-          className="w-auto"
+          onValueChange={(v) => v && setActivePreset(v)}
         >
-          <TabsList className="rounded-sm border">
-            {[...raiderData.battle_map]
-              .sort((a, b) => a.preset_no - b.preset_no)
-              .map((map) => (
-                <TabsTrigger
-                  key={map.preset_no}
-                  value={String(map.preset_no)}
-                  className="data-[state=active]:bg-background! rounded-sm text-xs tabular-nums antialiased"
-                >
-                  {map.preset_no}
-                </TabsTrigger>
-              ))}
-          </TabsList>
-        </Tabs>
+          {[...raiderData.battle_map]
+            .sort((a, b) => a.preset_no - b.preset_no)
+            .map((map) => (
+              <ToggleGroupItem
+                key={map.preset_no}
+                value={String(map.preset_no)}
+                className="h-8 w-8 first:rounded-l-sm last:rounded-r-sm"
+                aria-label={`프리셋 ${map.preset_no}`}
+              >
+                {map.preset_no}
+              </ToggleGroupItem>
+            ))}
+        </ToggleGroup>
       </div>
 
       {/* 보드 컨테이너: 400px 안에서 22칸이 모두 보이도록 설정 */}

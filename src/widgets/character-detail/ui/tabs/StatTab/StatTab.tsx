@@ -67,7 +67,7 @@ export const StatTab = ({ ocid, level }: StatTabProps) => {
       {/* 하이퍼 스탯 정보 영역 */}
       <section className="bg-card/50 rounded-md border p-3">
         <div className="mb-2 flex items-center justify-between">
-          <div className="flex flex-row gap-2">
+          <div className="flex flex-row items-center gap-2">
             <h2 className="font-bold">하이퍼 스탯</h2>
             <Badge className="text-xs">
               {hyperStat?.use_preset_no}페이지 적용 중

@@ -62,10 +62,8 @@ export const useCharacterSearch = () => {
 
     const path =
       world === "전체"
-        ? `/characters?name=${encodeURIComponent(trimmedName)}`
-        : `/character/${encodeURIComponent(world)}/${encodeURIComponent(
-            trimmedName,
-          )}`;
+        ? `/characters/${encodeURIComponent(trimmedName)}`
+        : `/character/${encodeURIComponent(world)}/${encodeURIComponent(trimmedName)}`;
 
     startTransition(() => {
       router.push(path);

@@ -1,20 +1,37 @@
 "use client";
 
-import { useSearchParams, useRouter } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { Card, CardContent } from "@/shared/ui/card";
 import { LoadingCard } from "@/shared/ui/LoadingCard";
 import { CharacterSearch } from "@/features/character-search";
 import Link from "next/link";
 import { AlertTriangle, Loader2 } from "lucide-react";
 import { cn } from "@/shared/lib/utils";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useCharacterSearchAll } from "@/features/character-search-all";
 
-export default function CharactersClientPage() {
-  const searchParams = useSearchParams();
-  const name = searchParams.get("name") ?? undefined;
+function safeDecode(value: string) {
+  try {
+    return decodeURIComponent(value);
+  } catch {
+    return value;
+  }
+}
 
+export default function CharactersClientPage() {
+  const params = useParams<{ name?: string }>();
+  const searchParams = useSearchParams();
   const router = useRouter();
+
+  // 1순위: /characters/[name]
+  // 2순위(호환): /characters?name=
+  const name = useMemo(() => {
+    const fromParams = params?.name ? safeDecode(String(params.name)) : null;
+    if (fromParams) return fromParams;
+
+    const fromQuery = searchParams.get("name");
+    return fromQuery ? safeDecode(fromQuery) : undefined;
+  }, [params, searchParams]);
 
   const [loadingOcid, setLoadingOcid] = useState<string | null>(null);
 
@@ -25,8 +42,22 @@ export default function CharactersClientPage() {
       <div className="flex flex-col items-center gap-6">
         <CharacterSearch />
         <LoadingCard
-          message={`전체 월드에서 "${name}" 캐릭터를 찾는 중입니다... `}
+          message={`전체 월드에서 "${name ?? ""}" 캐릭터를 찾는 중입니다... `}
         />
+      </div>
+    );
+
+  if (!name)
+    return (
+      <div className="flex w-full flex-col items-center gap-6">
+        <CharacterSearch />
+        <div className="bg-card flex w-full max-w-3xl flex-col items-center justify-center gap-4 rounded-lg border p-4 text-center shadow-md">
+          <AlertTriangle className="text-destructive size-12" />
+          <p className="text-lg font-medium">캐릭터 이름을 입력해 주세요.</p>
+          <p className="text-muted-foreground">
+            위 검색창에서 캐릭터 이름을 입력하면 전체 월드에서 검색합니다.
+          </p>
+        </div>
       </div>
     );
 
@@ -65,7 +96,9 @@ export default function CharactersClientPage() {
       <div className="flex w-full max-w-3xl flex-col gap-4">
         {characters.map((char) => {
           const isLoadingThisCard = loadingOcid === char.ocid;
-          const href = `/character/${encodeURIComponent(char.world_name)}/${encodeURIComponent(char.character_name)}`;
+          const href = `/character/${encodeURIComponent(
+            char.world_name,
+          )}/${encodeURIComponent(char.character_name)}`;
 
           return (
             <Link
@@ -111,6 +144,7 @@ export default function CharactersClientPage() {
           );
         })}
       </div>
+
       <p className="text-muted-foreground mt-2 w-full max-w-3xl text-right text-sm">
         캐릭터가 존재하지만 검색이 되지 않는 경우가 있습니다.
       </p>

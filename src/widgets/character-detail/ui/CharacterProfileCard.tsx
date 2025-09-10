@@ -47,9 +47,8 @@ const DataUpdateTooltip = () => {
       <PopoverContent
         side="bottom"
         align="end"
-        className="bg-secondary w-80 p-3 opacity-95"
+        className="bg-secondary w-80 rounded-xs p-3 opacity-95"
       >
-        {/* ul 태그를 사용하거나 flex-col로 간격(gap)을 줌 */}
         <div className="flex flex-col gap-2 text-xs leading-relaxed">
           <p>
             <span className="text-foreground font-semibold">
@@ -70,6 +69,10 @@ const DataUpdateTooltip = () => {
             </span>
             <br />
             랭킹은 매일 오전 2시 30분 경에 1일 1회 집계되어 제공됩니다.
+            <br />
+            <span className="text-red-700 dark:text-red-300">
+              (현재 넥슨 API 측 오류로 인해 오전 5시 이후경에 집계됩니다.)
+            </span>
           </p>
         </div>
       </PopoverContent>
@@ -89,7 +92,7 @@ export const CharacterProfileCard = ({ data }: CharacterProfileCardProps) => {
 
   return (
     <article
-      className="bg-card relative flex h-fit w-full flex-col items-center gap-2 rounded-xs border p-4 pt-8 md:flex-1 md:self-start"
+      className="relative flex h-fit w-full flex-col items-center gap-2 rounded-xs border p-4 pt-8 md:flex-1 md:self-start"
       aria-label={`${data.character_name} 캐릭터 상세정보`}
     >
       {/* 랭킹 업데이트 날짜 */}

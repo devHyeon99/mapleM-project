@@ -1,1 +1,1 @@
-export const navLinks = [{ href: "/rankings", label: "랭킹" }] as const;
+export const navLinks = [{ href: "/ranking/level", label: "랭킹" }] as const;

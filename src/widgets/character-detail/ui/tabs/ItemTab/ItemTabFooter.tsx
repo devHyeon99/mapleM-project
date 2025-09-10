@@ -30,10 +30,8 @@ export const ItemTabFooter = ({
   );
 
   return (
-    <div className="bg-muted/50 grid w-full grid-cols-2 gap-x-4 gap-y-1 rounded-xs border p-3 text-sm">
-      <span className="sr-only">아이템 스펙 요약</span>
-
-      <span className="text-foreground col-span-2 mb-1 font-bold">TOTAL</span>
+    <div className="grid w-full grid-cols-2 gap-x-4 gap-y-1 rounded-xs border p-3 text-sm">
+      <span className="text-foreground col-span-2 mb-1">장비 스펙 요약</span>
 
       <InfoRow className="justify-between" label={`잠재 (${labelDamage}+보공)`}>
         <span className="font-medium">{potential.toFixed(2)}%</span>
@@ -47,9 +45,9 @@ export const ItemTabFooter = ({
         <span className="font-medium">{chuop.finalDamage.toFixed(2)}%</span>
       </InfoRow>
 
-      <InfoRow className="justify-between" label="추옵 (방어율 무시)">
+      {/* <InfoRow className="justify-between" label="추옵 (방어율 무시)">
         <span className="font-medium">{chuop.ignoreDef.toFixed(2)}%</span>
-      </InfoRow>
+      </InfoRow> */}
 
       <InfoRow className="justify-between" label={`추옵 (${labelAtk})`}>
         <span className="font-medium">{chuop.atk.toLocaleString()}</span>

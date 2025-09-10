@@ -13,19 +13,24 @@ function safeDecode(value: string) {
 export async function generateMetadata({
   params,
 }: {
-  params: { name: string };
+  params: Promise<{ name: string }>;
 }): Promise<Metadata> {
-  const name = safeDecode(params.name);
+  const { name } = await params;
+  const decodedName = safeDecode(name);
 
   return {
-    title: `"${name}" 전체 월드 캐릭터 검색 결과`,
-    description: `메이플스토리M "${name}" 전체 월드 캐릭터 검색 결과를 확인하세요.`,
+    title: `${decodedName} - 전체 월드 캐릭터 검색 결과`,
+    description: `메이플스토리M "${decodedName}" 전체 월드 캐릭터 검색 결과를 확인하세요.`,
     alternates: {
-      canonical: `/characters/${encodeURIComponent(name)}`,
+      canonical: `/characters/${encodeURIComponent(decodedName)}`,
+    },
+    openGraph: {
+      title: `${decodedName} - 전체 월드 캐릭터 캐릭터 검색`,
+      description: `메이플스토리M "${decodedName}" 전체 월드 캐릭터 검색 결과를 확인하세요.`,
+      images: ["/og-image.png"],
     },
   };
 }
-
 export default function CharactersNamePage() {
   return (
     <Suspense>

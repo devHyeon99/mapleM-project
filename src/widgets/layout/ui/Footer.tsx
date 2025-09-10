@@ -1,8 +1,8 @@
 export const Footer = () => {
   return (
     <footer className="text-foreground bg-background flex items-center justify-center border-t py-4 text-center">
-      <p className="text-xs font-light">
-        © 2025 MMGG.
+      <p className="text-xs antialiased">
+        © 2025 <span className="font-semibold">메엠지지.</span>
         <br />
         This is an unofficial site and is not associated with NEXON Korea.
         <br />

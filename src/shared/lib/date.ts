@@ -41,3 +41,38 @@ export const getDetailedTimeAgo = (dateString: string | Date): string => {
   if (parts.length === 0) return "오늘";
   return `${parts.join(" ")} 전`;
 };
+
+/**
+ * 한국 시간(KST) 기준으로 오늘 날짜(YYYY-MM-DD)를 반환합니다.
+ */
+export function getTodayDateKST() {
+  const now = new Date();
+  const formatter = new Intl.DateTimeFormat("ko-KR", {
+    timeZone: "Asia/Seoul",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
+
+  const parts = formatter.formatToParts(now);
+  const getPart = (type: string) =>
+    parts.find((p) => p.type === type)?.value || "";
+
+  return `${getPart("year")}-${getPart("month")}-${getPart("day")}`;
+}
+
+/**
+ * YYYY-MM-DD 형식의 문자열을 받아 하루 전 날짜를 동일한 형식으로 반환합니다.
+ */
+export function subtractOneDay(dateStr: string): string {
+  const [y, m, d] = dateStr.split("-").map(Number);
+  // JS Date의 month는 0~11이므로 m-1
+  const date = new Date(y, m - 1, d);
+  date.setDate(date.getDate() - 1);
+
+  const yyyy = date.getFullYear();
+  const mm = String(date.getMonth() + 1).padStart(2, "0");
+  const dd = String(date.getDate()).padStart(2, "0");
+
+  return `${yyyy}-${mm}-${dd}`;
+}

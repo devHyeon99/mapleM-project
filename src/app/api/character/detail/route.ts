@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import { nexonFetch } from "@/shared/api/nexon/server";
 import { handleCommonNexonError } from "@/shared/api/nexon";
 import type { ApiResponse } from "@/shared/model/types/ApiResponse";
-import { fetchRankingWithFallback } from "@/entities/character/api/fetch-ranking";
 import type {
   CharacterItemEquipmentResponse,
   CharacterEquipmentSetResponse,
@@ -16,6 +15,7 @@ import type {
   CharacterLevelRankingResponse,
   CharacterUnionRankingResponse,
 } from "@/entities/character";
+import { fetchWithRankingFallback } from "@/shared/api/nexon/ranking-fallback";
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
@@ -62,16 +62,15 @@ export async function GET(req: Request) {
     };
 
     const rankingPromises = {
-      levelRanking: fetchRankingWithFallback<CharacterLevelRankingResponse>(
+      levelRanking: fetchWithRankingFallback<CharacterLevelRankingResponse>(
         "/ranking/level",
-        ocid,
+        { ocid }, // 객체 형식으로 전달
       ),
-      unionRanking: fetchRankingWithFallback<CharacterUnionRankingResponse>(
+      unionRanking: fetchWithRankingFallback<CharacterUnionRankingResponse>(
         "/ranking/union",
-        ocid,
+        { ocid }, // 객체 형식으로 전달
       ),
     };
-
     const [
       basicData,
       guildData,

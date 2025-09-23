@@ -35,12 +35,12 @@ export const CharacterSearchHistory = ({
             {history.map((item) => (
               <li
                 key={`${item.name}-${item.world}`}
-                className="hover:bg-input flex items-center justify-between gap-1 text-sm"
+                className="flex items-center justify-between gap-1 text-sm"
               >
                 <Button
                   type="button"
-                  variant="outline"
-                  className="h-full flex-1 cursor-pointer justify-start border-none !bg-transparent p-1 text-left shadow-none"
+                  variant="ghost"
+                  className="h-full flex-1 cursor-pointer justify-start px-2 text-left shadow-none"
                   onClick={() =>
                     onHistorySearch(item.name, item.world as WorldName)
                   }
@@ -58,7 +58,7 @@ export const CharacterSearchHistory = ({
                   type="button"
                   variant="ghost"
                   size="icon"
-                  className="w-fit flex-shrink-0 cursor-pointer justify-end px-1 hover:!bg-transparent"
+                  className="w-fit flex-shrink-0 cursor-pointer justify-end px-1"
                   onClick={(e) =>
                     handleDelete(e, item.name, item.world as WorldName)
                   }

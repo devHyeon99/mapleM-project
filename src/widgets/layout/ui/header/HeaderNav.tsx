@@ -14,7 +14,7 @@ export function HeaderNav() {
               <Button
                 asChild
                 variant="ghost"
-                className="h-20 px-5 text-lg underline-offset-8 hover:bg-transparent! hover:underline"
+                className="h-20 px-10 text-lg underline-offset-8 hover:bg-transparent! hover:underline"
               >
                 <Link href={link.href}>{link.label}</Link>
               </Button>

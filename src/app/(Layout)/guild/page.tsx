@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SearchBar } from "@/features/guild-search/ui/SearchBar";
+import { GuildSearch } from "@/features/guild-search/ui/GuildSearch";
 
 export const metadata: Metadata = {
   title: "메이플스토리M 길드 검색",
@@ -27,7 +27,7 @@ export default async function GuildPage() {
       </p>
 
       <div className="w-full max-w-lg min-w-[320px]">
-        <SearchBar />
+        <GuildSearch />
       </div>
     </div>
   );

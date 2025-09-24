@@ -12,7 +12,7 @@ interface GuildHistoryItem {
   timestamp: number;
 }
 
-const MAX_HISTORY = 10;
+const MAX_HISTORY = 6;
 
 export const useGuildSearchHistory = () => {
   const [history, setHistory] = useState<GuildHistoryItem[]>([]);

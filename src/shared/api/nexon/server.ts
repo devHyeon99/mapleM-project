@@ -1,11 +1,13 @@
 import "server-only";
-
 import { NexonApiError } from "./errors";
 
 const NEXON_API_BASE_URL = "https://open.api.nexon.com/maplestorym/v1";
 
 interface NexonFetchOptions extends RequestInit {
-  cache?: RequestCache;
+  next?: {
+    revalidate?: number | false;
+    tags?: string[];
+  };
 }
 
 export async function nexonFetch<T>(
@@ -30,12 +32,10 @@ export async function nexonFetch<T>(
       error?: { name: string; message: string };
     } | null;
 
-    // 넥슨 API 에러 포맷이면 커스텀 에러로 통일
     if (errorData?.error?.name) {
       throw new NexonApiError(errorData.error.name, errorData.error.message);
     }
 
-    // 그 외 (네트워크/프록시/예상치 못한 응답)
     throw new Error(`Nexon API 요청 실패: ${res.status} ${res.statusText}`);
   }
 

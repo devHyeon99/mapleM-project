@@ -57,7 +57,7 @@ export function GuildMemberTable({
   };
 
   return (
-    <div className="space-y-4">
+    <>
       <div className="absolute top-5.5 right-6 flex justify-end">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -132,6 +132,6 @@ export function GuildMemberTable({
           </TableBody>
         </Table>
       </div>
-    </div>
+    </>
   );
 }

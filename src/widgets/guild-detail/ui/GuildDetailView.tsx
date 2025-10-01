@@ -50,7 +50,7 @@ export function GuildDetailView({
 
         {/* 길드원 탭 */}
         <TabsContent value="members">
-          <Card className="relative">
+          <Card className="relative gap-2">
             <CardHeader>
               <CardTitle className="text-lg">
                 길드원 목록 ({guildData.guild_member_count}명)

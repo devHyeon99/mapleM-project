@@ -46,7 +46,7 @@ export function GuildDetailView({
 
         {/* 길드원 탭 */}
         <TabsContent value="members">
-          <Card>
+          <Card className="relative">
             <CardHeader>
               <CardTitle className="text-lg">
                 길드원 목록 ({guildData.guild_member_count}명)
@@ -56,6 +56,7 @@ export function GuildDetailView({
               <GuildMemberTable
                 members={guildData.guild_member}
                 masterName={guildData.guild_master_name}
+                worldName={guildData.world_name}
               />
             </CardContent>
           </Card>

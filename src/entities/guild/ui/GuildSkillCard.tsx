@@ -8,30 +8,31 @@ interface GuildSkillCardProps {
 
 export function GuildSkillCard({ skill }: GuildSkillCardProps) {
   return (
-    <Card>
-      <CardContent className="flex flex-col items-center gap-2">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={skill.skill_icon}
-          alt={skill.skill_name}
-          className="size-8 flex-shrink-0 object-contain"
-        />
+    <Card className="items-start">
+      <CardContent className="w-full px-4">
+        <div className="flex gap-2 md:flex-row">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={skill.skill_icon}
+            alt={skill.skill_name}
+            className="size-8 object-contain"
+          />
 
-        <div className="flex min-w-0 flex-1 flex-col gap-1.5">
-          <div className="flex items-center justify-between gap-1">
+          <div className="grid grid-cols-[1fr_auto] items-center gap-x-2 gap-y-1">
             <span className="truncate text-sm font-bold md:text-base">
               {skill.skill_name}
             </span>
-            <Badge className="h-4 flex-shrink-0 px-1 text-xs">
+
+            <Badge className="h-4 w-11.5 flex-shrink-0 px-1.5 text-xs font-bold md:h-5 md:text-xs">
               Lv. {skill.skill_level}
             </Badge>
-          </div>
 
-          {skill.skill_option && (
-            <div className="text-muted-foreground text-center text-xs leading-relaxed">
-              {skill.skill_option}
-            </div>
-          )}
+            {skill.skill_option && (
+              <p className="text-muted-foreground col-span-2 text-xs leading-tight md:text-xs">
+                {skill.skill_option}
+              </p>
+            )}
+          </div>
         </div>
       </CardContent>
     </Card>

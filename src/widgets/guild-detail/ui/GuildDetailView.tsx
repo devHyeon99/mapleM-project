@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/shared/ui/card";
 import { fetchGuildClient } from "@/entities/guild/api/get-guild.client";
 import { GuildCard } from "@/entities/guild/ui/GuildCard";
 import { GuildSkillCard } from "@/entities/guild/ui/GuildSkillCard";
+import { GuildBuildingCard } from "@/entities/guild/ui/GuildBuildingCard";
 
 interface GuildDetailViewProps {
   worldName: string;
@@ -36,14 +37,14 @@ export function GuildDetailView({
   const EXCLUDED_SKILLS = ["길드 인원 증가", "잡화 상점 할인"];
 
   return (
-    <div className="mx-auto flex w-full max-w-4xl flex-col gap-4 py-4">
+    <div className="mx-auto flex w-full max-w-4xl flex-col gap-4">
       <GuildCard data={guildData} />
 
       <Tabs defaultValue="members" className="w-full gap-4">
         <TabsList className="grid h-12 w-full grid-cols-4">
           <TabsTrigger value="members">길드원</TabsTrigger>
           <TabsTrigger value="skills">길드 스킬</TabsTrigger>
-          <TabsTrigger value="buildings">길드 건물</TabsTrigger>
+          <TabsTrigger value="buildings">길드 시설물</TabsTrigger>
           <TabsTrigger value="ability">길드 어빌리티</TabsTrigger>
         </TabsList>
 
@@ -66,8 +67,8 @@ export function GuildDetailView({
         </TabsContent>
 
         {/* 길드 스킬 탭 */}
-        <TabsContent value="skills" className="pt-4">
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <TabsContent value="skills">
+          <div className="grid grid-cols-1 gap-2 md:grid-cols-3">
             {guildData.guild_skill
               .filter((skill) => !EXCLUDED_SKILLS.includes(skill.skill_name))
               .map((skill) => (
@@ -81,6 +82,25 @@ export function GuildDetailView({
           ).length === 0 && (
             <div className="text-muted-foreground py-20 text-center">
               활성화된 길드 스킬이 없습니다.
+            </div>
+          )}
+        </TabsContent>
+
+        {/* 길드 건물 탭 */}
+        <TabsContent value="buildings">
+          <div className="grid grid-cols-1 gap-2 md:grid-cols-3">
+            {guildData.guild_building.map((building) => (
+              <GuildBuildingCard
+                key={building.building_name}
+                building={building}
+              />
+            ))}
+          </div>
+
+          {/* 데이터가 없을 경우 */}
+          {guildData.guild_building.length === 0 && (
+            <div className="text-muted-foreground rounded-lg border border-dashed py-20 text-center">
+              활성화된 길드 건물이 없습니다.
             </div>
           )}
         </TabsContent>

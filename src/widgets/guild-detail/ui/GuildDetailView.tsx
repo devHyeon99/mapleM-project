@@ -8,6 +8,7 @@ import { fetchGuildClient } from "@/entities/guild/api/get-guild.client";
 import { GuildCard } from "@/entities/guild/ui/GuildCard";
 import { GuildSkillCard } from "@/entities/guild/ui/GuildSkillCard";
 import { GuildBuildingCard } from "@/entities/guild/ui/GuildBuildingCard";
+import { GuildAbilityCard } from "@/entities/guild/ui/GuildAbilityCard";
 
 interface GuildDetailViewProps {
   worldName: string;
@@ -105,7 +106,24 @@ export function GuildDetailView({
           )}
         </TabsContent>
 
-        {/* 나머지 탭 생략 (플레이스홀더 유지) */}
+        {/* 길드 어빌리티 탭 */}
+        <TabsContent value="ability">
+          <div className="grid grid-cols-1 gap-2 md:grid-cols-3">
+            {guildData.guild_ability.map((ability, index) => (
+              <GuildAbilityCard
+                key={`${ability.ability_no}-${index}`}
+                ability={ability}
+              />
+            ))}
+          </div>
+
+          {/* 데이터가 없을 경우 */}
+          {guildData.guild_ability.length === 0 && (
+            <div className="text-muted-foreground py-20 text-center">
+              활성화된 길드 어빌리티가 없습니다.
+            </div>
+          )}
+        </TabsContent>
       </Tabs>
     </div>
   );

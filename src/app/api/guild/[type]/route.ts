@@ -13,17 +13,36 @@ export async function GET(
     let result: unknown;
 
     if (type === "id") {
-      // world_name, guild_name 파라미터 필요
       result = await nexonFetch<{ oguild_id: string }>(
         `/guild/id?${searchParams.toString()}`,
-        { next: { revalidate: 0 } }, // ID 조회는 검색 성격이므로 캐시 최소화
+        { next: { revalidate: 0 } },
       );
     } else if (type === "basic") {
-      // oguild_id 파라미터 필요
-      result = await nexonFetch<unknown>(
-        `/guild/basic?${searchParams.toString()}`,
-        { next: { revalidate: 900 } }, // 상세 정보는 15분 캐시
-      );
+      const oguildId = searchParams.get("oguild_id");
+
+      if (oguildId) {
+        result = await nexonFetch<unknown>(
+          `/guild/basic?oguild_id=${oguildId}`,
+          { next: { revalidate: 900 } },
+        );
+      } else {
+        const idData = await nexonFetch<{ oguild_id: string }>(
+          `/guild/id?${searchParams.toString()}`,
+          { next: { revalidate: 0 } },
+        );
+
+        if (!idData?.oguild_id) {
+          return NextResponse.json(
+            { error: { message: "길드 식별자를 찾을 수 없습니다." } },
+            { status: 404 },
+          );
+        }
+
+        result = await nexonFetch<unknown>(
+          `/guild/basic?oguild_id=${idData.oguild_id}`,
+          { next: { revalidate: 900 } },
+        );
+      }
     } else {
       return NextResponse.json(
         { error: { message: "Invalid request type" } },
@@ -33,7 +52,8 @@ export async function GET(
 
     return NextResponse.json({ data: result });
   } catch (e: unknown) {
-    // 넥슨 공통 에러 핸들러로 매핑 후 반환
+    console.error("BFF API Error:", e);
+
     try {
       handleCommonNexonError(e);
     } catch (mapped: unknown) {

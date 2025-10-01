@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import Link from "next/link"; // Link 추가
+import Link from "next/link";
 import { Badge } from "@/shared/ui/badge";
 import { Button } from "@/shared/ui/button";
 import {
@@ -99,15 +99,11 @@ export function GuildMemberTable({
           </TableHeader>
           <TableBody>
             {sortedMembers.map((member) => (
-              /* asChild를 사용하여 Link가 Row의 역할을 하거나, Row 자체에 클릭 이벤트를 줄 수 있지만
-                 shadcn UI Table과 Next.js Link의 가장 안정적인 조합은 
-                 TableRow에 cursor-pointer를 주고 내부의 첫 Cell에서 전체 영역 Link를 잡는 것입니다. */
               <TableRow
                 key={member.character_name}
-                className="group relative cursor-pointer" // 클릭 가능함을 알리는 커서 추가
+                className="group relative cursor-pointer"
               >
                 <TableCell className="py-3 font-medium">
-                  {/* 전체 Row를 덮는 절대 위치 Link */}
                   <Link
                     href={`/character/${encodeURIComponent(worldName)}/${encodeURIComponent(member.character_name)}`}
                     className="absolute inset-0 z-10"

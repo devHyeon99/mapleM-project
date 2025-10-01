@@ -6,6 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/shared/ui/card";
 import { fetchGuildClient } from "@/entities/guild/api/get-guild.client";
 import { GuildCard } from "@/entities/guild/ui/GuildCard";
+import { GuildSkillCard } from "@/entities/guild/ui/GuildSkillCard";
 
 interface GuildDetailViewProps {
   worldName: string;
@@ -32,12 +33,14 @@ export function GuildDetailView({
   if (isLoading) return <div>로딩 중...</div>;
   if (error || !guildData) return <div>데이터를 불러올 수 없습니다.</div>;
 
+  const EXCLUDED_SKILLS = ["길드 인원 증가", "잡화 상점 할인"];
+
   return (
     <div className="mx-auto flex w-full max-w-4xl flex-col gap-4 py-4">
       <GuildCard data={guildData} />
 
       <Tabs defaultValue="members" className="w-full gap-4">
-        <TabsList className="bg-muted/50 grid h-12 w-full grid-cols-4">
+        <TabsList className="grid h-12 w-full grid-cols-4">
           <TabsTrigger value="members">길드원</TabsTrigger>
           <TabsTrigger value="skills">길드 스킬</TabsTrigger>
           <TabsTrigger value="buildings">길드 건물</TabsTrigger>
@@ -65,28 +68,21 @@ export function GuildDetailView({
         {/* 길드 스킬 탭 */}
         <TabsContent value="skills" className="pt-4">
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            {guildData.guild_skill.map((skill) => (
-              <Card
-                key={skill.skill_name}
-                className="flex items-center gap-4 p-4 shadow-sm"
-              >
-                <div className="bg-muted size-12 flex-shrink-0 overflow-hidden rounded-lg border">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={skill.skill_icon}
-                    alt={skill.skill_name}
-                    className="size-full object-contain"
-                  />
-                </div>
-                <div className="flex-1">
-                  <div className="font-bold">{skill.skill_name}</div>
-                  <div className="text-muted-foreground text-xs leading-relaxed">
-                    Lv. {skill.skill_level} | {skill.skill_option}
-                  </div>
-                </div>
-              </Card>
-            ))}
+            {guildData.guild_skill
+              .filter((skill) => !EXCLUDED_SKILLS.includes(skill.skill_name))
+              .map((skill) => (
+                <GuildSkillCard key={skill.skill_name} skill={skill} />
+              ))}
           </div>
+
+          {/* 필터링 후 데이터가 없을 경우 처리 */}
+          {guildData.guild_skill.filter(
+            (s) => !EXCLUDED_SKILLS.includes(s.skill_name),
+          ).length === 0 && (
+            <div className="text-muted-foreground py-20 text-center">
+              활성화된 길드 스킬이 없습니다.
+            </div>
+          )}
         </TabsContent>
 
         {/* 나머지 탭 생략 (플레이스홀더 유지) */}

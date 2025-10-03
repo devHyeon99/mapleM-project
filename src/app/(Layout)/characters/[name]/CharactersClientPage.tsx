@@ -1,6 +1,6 @@
 "use client";
 
-import { useParams, useRouter, useSearchParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import { Card, CardContent } from "@/shared/ui/card";
 import { LoadingCard } from "@/shared/ui/LoadingCard";
 import { CharacterSearch } from "@/features/character-search";
@@ -9,6 +9,9 @@ import { AlertTriangle, Loader2 } from "lucide-react";
 import { cn } from "@/shared/lib/utils";
 import { useMemo, useState } from "react";
 import { useCharacterSearchAll } from "@/features/character-search-all";
+import { useSearchHistory } from "@/features/character-search/model";
+import { WORLD_NAMES } from "@/shared/config/constants/worlds";
+type WorldName = (typeof WORLD_NAMES)[number];
 
 function safeDecode(value: string) {
   try {
@@ -21,7 +24,8 @@ function safeDecode(value: string) {
 export default function CharactersClientPage() {
   const params = useParams<{ name?: string }>();
   const searchParams = useSearchParams();
-  const router = useRouter();
+
+  const { addHistoryItem } = useSearchHistory();
 
   // 1순위: /characters/[name]
   // 2순위(호환): /characters?name=
@@ -34,7 +38,6 @@ export default function CharactersClientPage() {
   }, [params, searchParams]);
 
   const [loadingOcid, setLoadingOcid] = useState<string | null>(null);
-
   const { data: characters, isLoading } = useCharacterSearchAll(name);
 
   if (isLoading)
@@ -96,6 +99,9 @@ export default function CharactersClientPage() {
       <div className="flex w-full max-w-3xl flex-col gap-4">
         {characters.map((char) => {
           const isLoadingThisCard = loadingOcid === char.ocid;
+
+          const charWorld = char.world_name as WorldName;
+
           const href = `/character/${encodeURIComponent(
             char.world_name,
           )}/${encodeURIComponent(char.character_name)}`;
@@ -109,9 +115,9 @@ export default function CharactersClientPage() {
                   e.preventDefault();
                   return;
                 }
-                e.preventDefault();
+
+                addHistoryItem(char.character_name, charWorld);
                 setLoadingOcid(char.ocid);
-                router.push(href);
               }}
               aria-label={`${char.world_name} 월드의 ${char.character_name} 캐릭터 정보 보기`}
               aria-disabled={isAnyCardLoading && !isLoadingThisCard}

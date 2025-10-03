@@ -32,12 +32,17 @@ export async function generateMetadata({
   const { type } = await params;
   const sParams = await searchParams;
 
+  const worldName = (sParams.world_name as string) || "";
   const safeType = type as RankingType;
-  const worldName = (sParams.worldName as string) || "전체";
   const typeLabel = RANKING_LABELS[safeType] || "캐릭터";
 
-  const title = `메이플스토리M ${worldName} 월드 ${typeLabel} 랭킹`;
-  const description = `메이플스토리M ${worldName} 월드 ${typeLabel} 랭킹 정보를 확인해보세요. 순위 및 상세 데이터를 제공합니다.`;
+  const title = worldName
+    ? `메이플스토리M ${worldName} ${typeLabel} 랭킹`
+    : `메이플스토리M 전체 월드 ${typeLabel} 랭킹`;
+
+  const description = worldName
+    ? `메이플스토리M ${worldName} 월드의 ${typeLabel} 순위를 확인하세요.`
+    : `메이플스토리M 전체 월드의 ${typeLabel} 랭킹 정보를 한눈에 제공합니다.`;
 
   return {
     title,
@@ -46,7 +51,12 @@ export async function generateMetadata({
       title,
       description,
       type: "website",
-      url: `https://maplestorym.gg/ranking/${type}`,
+      url: `https://maplemgg.com/ranking/${type}${worldName ? `?world_name=${encodeURIComponent(worldName)}` : ""}`,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
     },
   };
 }

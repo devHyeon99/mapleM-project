@@ -1,8 +1,6 @@
 "use client";
 
 import * as React from "react";
-import Link from "next/link";
-import { Badge } from "@/shared/ui/badge";
 import { Button } from "@/shared/ui/button";
 import {
   DropdownMenu,
@@ -16,13 +14,13 @@ import {
 import {
   Table,
   TableBody,
-  TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/shared/ui/table";
 import { ArrowUpDown } from "lucide-react";
 import { GuildMember } from "../model/types";
+import { GuildMemberRow } from "./GuildMemberRow";
 
 interface GuildMemberTableProps {
   members: GuildMember[];
@@ -99,35 +97,12 @@ export function GuildMemberTable({
           </TableHeader>
           <TableBody>
             {sortedMembers.map((member) => (
-              <TableRow
+              <GuildMemberRow
                 key={member.character_name}
-                className="group relative cursor-pointer"
-              >
-                <TableCell className="py-3 font-medium">
-                  <Link
-                    href={`/character/${encodeURIComponent(worldName)}/${encodeURIComponent(member.character_name)}`}
-                    className="absolute inset-0 z-10"
-                    aria-label={`${member.character_name} 상세 정보 보기`}
-                  />
-                  <div className="flex min-w-0 items-center gap-2">
-                    <span>{member.character_name}</span>
-                    {member.character_name === masterName && (
-                      <Badge
-                        variant="outline"
-                        className="h-4 flex-shrink-0 border-amber-500 p-2 text-xs text-amber-500"
-                      >
-                        길드 마스터
-                      </Badge>
-                    )}
-                  </div>
-                </TableCell>
-                <TableCell className="relative z-0 text-center">
-                  {member.character_level}
-                </TableCell>
-                <TableCell className="relative z-0 text-right tabular-nums">
-                  {member.guild_activity.toLocaleString()}
-                </TableCell>
-              </TableRow>
+                member={member}
+                isMaster={member.character_name === masterName}
+                worldName={worldName}
+              />
             ))}
           </TableBody>
         </Table>

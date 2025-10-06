@@ -8,7 +8,7 @@ import { fetchGuildClient } from "@/entities/guild/api/get-guild.client";
 import { GuildCard } from "@/entities/guild/ui/GuildCard";
 import { GuildSkillCard } from "@/entities/guild/ui/GuildSkillCard";
 import { GuildBuildingCard } from "@/entities/guild/ui/GuildBuildingCard";
-import { GuildAbilityCard } from "@/entities/guild/ui/GuildAbilityCard";
+import { GuildAbilityList } from "@/entities/guild/ui/GuildAbilityList";
 
 interface GuildDetailViewProps {
   worldName: string;
@@ -26,9 +26,7 @@ export function GuildDetailView({
   } = useQuery({
     queryKey: ["guild", worldName, guildName],
     queryFn: () => fetchGuildClient({ worldName, guildName }),
-    // 15분 동안은 서버에 다시 요청하지 않고 캐시된 데이터를 씀
     staleTime: 1000 * 60 * 15,
-    // 창을 다시 포커스했을 때 갱신할지 여부 (15분 안지났으면 안함)
     refetchOnWindowFocus: false,
   });
 
@@ -76,8 +74,6 @@ export function GuildDetailView({
                 <GuildSkillCard key={skill.skill_name} skill={skill} />
               ))}
           </div>
-
-          {/* 필터링 후 데이터가 없을 경우 처리 */}
           {guildData.guild_skill.filter(
             (s) => !EXCLUDED_SKILLS.includes(s.skill_name),
           ).length === 0 && (
@@ -97,8 +93,6 @@ export function GuildDetailView({
               />
             ))}
           </div>
-
-          {/* 데이터가 없을 경우 */}
           {guildData.guild_building.length === 0 && (
             <div className="text-muted-foreground rounded-lg border border-dashed py-20 text-center">
               활성화된 길드 건물이 없습니다.
@@ -108,21 +102,7 @@ export function GuildDetailView({
 
         {/* 길드 어빌리티 탭 */}
         <TabsContent value="ability">
-          <div className="grid grid-cols-1 gap-2 md:grid-cols-3">
-            {guildData.guild_ability.map((ability, index) => (
-              <GuildAbilityCard
-                key={`${ability.ability_no}-${index}`}
-                ability={ability}
-              />
-            ))}
-          </div>
-
-          {/* 데이터가 없을 경우 */}
-          {guildData.guild_ability.length === 0 && (
-            <div className="text-muted-foreground py-20 text-center">
-              활성화된 길드 어빌리티가 없습니다.
-            </div>
-          )}
+          <GuildAbilityList abilities={guildData.guild_ability} />
         </TabsContent>
       </Tabs>
     </div>

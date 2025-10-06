@@ -8,7 +8,7 @@ interface GuildAbilityCardProps {
 
 export function GuildAbilityCard({ ability }: GuildAbilityCardProps) {
   return (
-    <Card>
+    <Card className="rounded-none">
       <CardContent className="flex items-center gap-3 px-3 md:px-4">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img

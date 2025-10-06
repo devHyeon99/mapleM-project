@@ -35,7 +35,7 @@ export const GuildSearch = () => {
   const isInvalid = Boolean(error);
 
   return (
-    <div className="relative w-full max-w-3xl" ref={searchContainerRef}>
+    <div className="relative w-full max-w-4xl" ref={searchContainerRef}>
       <form
         onSubmit={handleSubmit}
         role="search"

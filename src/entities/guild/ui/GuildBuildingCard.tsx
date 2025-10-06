@@ -23,7 +23,13 @@ export function GuildBuildingCard({ building }: GuildBuildingCardProps) {
   return (
     <Card>
       <CardContent className="flex h-full items-center px-4">
-        <div className="flex flex-1 flex-col gap-1">
+        <div className="flex flex-1 flex-col gap-1 md:h-37.5 md:justify-end">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={`/guild/building/${building.building_name}.png`}
+            alt="도서관"
+            className="h-auto w-16.5"
+          />
           <div className="flex items-center justify-between">
             <span className="text-sm font-bold md:text-base">
               {building.building_name}

@@ -44,7 +44,7 @@ export function GuildMemberRow({
             e.stopPropagation(); // 부모 Row 클릭 방지
             addHistoryItem(member.character_name, worldName as WorldName);
           }}
-          className="flex min-w-0 items-center gap-2"
+          className="flex min-w-0 flex-wrap items-center gap-2"
         >
           <span>{member.character_name}</span>
           {isMaster && (

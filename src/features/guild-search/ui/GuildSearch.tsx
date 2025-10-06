@@ -105,7 +105,7 @@ export const GuildSearch = () => {
       )}
 
       {showHistory && !error && (
-        <div className="bg-card absolute right-0 z-10 mt-1 min-h-85 w-full overflow-y-auto rounded-xs border p-4 shadow-lg lg:w-[calc(100%-136px)]">
+        <div className="bg-card absolute right-0 z-10 mt-1 min-h-85 w-full rounded-xs border p-4 lg:w-[calc(100%-136px)]">
           <GuildSearchHistory onHistorySearch={handleHistorySearch} />
         </div>
       )}

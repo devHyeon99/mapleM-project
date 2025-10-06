@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { WORLD_NAMES } from "@/shared/config/constants/worlds";
 import { Button } from "@/shared/ui/button";
 import { X } from "lucide-react";
@@ -27,7 +28,7 @@ export const GuildSearchHistory = ({
   };
 
   return (
-    <div className="w-full">
+    <>
       <h3 className="mb-2 text-left text-base font-semibold">최근 검색 기록</h3>
 
       {history.length > 0 ? (
@@ -36,30 +37,33 @@ export const GuildSearchHistory = ({
             {history.map((item) => (
               <li
                 key={`${item.name}-${item.world}`}
-                className="flex items-center justify-between gap-1 rounded-sm text-sm transition-colors"
+                className="hover:bg-accent active:bg-accent/80 dark:hover:bg-accent/50 dark:active:bg-accent/60 -mx-4 flex items-center justify-between gap-1 px-4 text-sm transition-colors duration-200"
               >
                 <Button
-                  type="button"
+                  asChild
                   variant="ghost"
-                  className="h-9 flex-1 cursor-pointer justify-start px-2 py-1 text-left shadow-none"
-                  onClick={() =>
-                    onHistorySearch(item.name, item.world as WorldName)
-                  }
-                  aria-label={`${item.world} 서버 ${item.name} 길드 검색`}
+                  className="h-9 flex-1 justify-start p-0 text-left font-normal shadow-none hover:bg-transparent!"
                 >
-                  <span className="text-sm font-semibold">
-                    {item.name}{" "}
-                    <span className="text-muted-foreground ml-1 font-normal">
-                      {item.world}
+                  <Link
+                    href={`/guild/${encodeURIComponent(item.world)}/${encodeURIComponent(item.name)}`}
+                    onClick={() =>
+                      onHistorySearch(item.name, item.world as WorldName)
+                    }
+                  >
+                    <span className="truncate font-semibold">
+                      {item.name}{" "}
+                      <span className="text-muted-foreground ml-1 font-normal">
+                        {item.world}
+                      </span>
                     </span>
-                  </span>
+                  </Link>
                 </Button>
 
                 <Button
                   type="button"
                   variant="ghost"
                   size="icon"
-                  className="flex h-9 w-9 cursor-pointer hover:bg-transparent"
+                  className="flex h-9 w-9 cursor-pointer hover:bg-transparent!"
                   onClick={(e) =>
                     handleDelete(e, item.name, item.world as WorldName)
                   }
@@ -76,7 +80,7 @@ export const GuildSearchHistory = ({
               type="button"
               variant="link"
               onClick={clearAllHistory}
-              className="text-muted-foreground h-auto cursor-pointer p-0 text-xs underline-offset-4 hover:underline"
+              className="text-muted-foreground h-auto cursor-pointer p-0 pr-2.5 text-xs underline-offset-4"
             >
               전체 삭제
             </Button>
@@ -87,6 +91,6 @@ export const GuildSearchHistory = ({
           최근 검색 기록이 없습니다.
         </p>
       )}
-    </div>
+    </>
   );
 };

@@ -36,22 +36,19 @@ export const useGuildSearch = () => {
   }, []);
 
   const executeSearch = useCallback(
-    (name: string, selectedWorld: WorldName) => {
+    (name: string, selectedWorld: WorldName, shouldNavigate = true) => {
       const trimmed = name.trim();
 
-      // 빈 값 검증
       if (!trimmed) {
         setError("길드명을 입력해 주세요.");
         return;
       }
 
-      // 글자 수 검증 (메이플M 길드명 최소 2자)
       if (trimmed.length < 2) {
         setError("길드명은 최소 2자 이상이어야 합니다.");
         return;
       }
 
-      // 특수문자 및 공백 검증 (한글, 영문, 숫자만 허용)
       const guildNameRegex = /^[가-힣a-zA-Z0-9]+$/;
       if (!guildNameRegex.test(trimmed)) {
         setError("길드명에는 특수문자나 공백을 사용할 수 없습니다.");
@@ -59,13 +56,18 @@ export const useGuildSearch = () => {
       }
 
       setError(null);
-      setIsPending(true);
+
+      if (shouldNavigate) setIsPending(true);
+
       addHistoryItem(trimmed, selectedWorld);
       setShowHistory(false);
 
-      router.push(
-        `/guild/${encodeURIComponent(selectedWorld)}/${encodeURIComponent(trimmed)}`,
-      );
+      if (shouldNavigate) {
+        router.push(
+          `/guild/${encodeURIComponent(selectedWorld)}/${encodeURIComponent(trimmed)}`,
+        );
+      }
+
       setTimeout(() => setIsPending(false), 500);
     },
     [addHistoryItem, router],
@@ -73,7 +75,7 @@ export const useGuildSearch = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    executeSearch(guildName, world);
+    executeSearch(guildName, world, true);
   };
 
   const handleWorldChange = (value: string) => {
@@ -94,7 +96,7 @@ export const useGuildSearch = () => {
   const handleHistorySearch = (name: string, selectedWorld: WorldName) => {
     setGuildName(name);
     setWorld(selectedWorld);
-    executeSearch(name, selectedWorld);
+    executeSearch(name, selectedWorld, false);
   };
 
   return {

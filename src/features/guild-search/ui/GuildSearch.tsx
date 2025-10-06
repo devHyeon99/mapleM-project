@@ -14,7 +14,7 @@ import {
 import { Search, Loader2 } from "lucide-react";
 import { GuildSearchHistory } from "./GuildSearchHistory";
 import { cn } from "@/shared/lib/utils";
-import { useGuildSearch } from "../mode/useGuildSearch";
+import { useGuildSearch } from "../model/useGuildSearch";
 
 export const GuildSearch = () => {
   const {

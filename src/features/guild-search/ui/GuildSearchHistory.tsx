@@ -4,7 +4,7 @@ import Link from "next/link";
 import { WORLD_NAMES } from "@/shared/config/constants/worlds";
 import { Button } from "@/shared/ui/button";
 import { X } from "lucide-react";
-import { useGuildSearchHistory } from "../mode/useGuildSearchHistory";
+import { useGuildSearchHistory } from "../model/useGuildSearchHistory";
 
 type WorldName = (typeof WORLD_NAMES)[number];
 

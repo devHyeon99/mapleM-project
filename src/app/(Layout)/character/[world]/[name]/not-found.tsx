@@ -1,5 +1,5 @@
+import { CharacterNotFoundView } from "@/widgets/character-detail/ui/CharacterNotFoundView";
 import { Metadata } from "next";
-import CharacterNotFoundClient from "./CharacterNotFoundClient";
 
 export const metadata: Metadata = {
   title: "캐릭터를 찾을 수 없음",
@@ -11,5 +11,5 @@ export const metadata: Metadata = {
 };
 
 export default function NotFound() {
-  return <CharacterNotFoundClient />;
+  return <CharacterNotFoundView />;
 }

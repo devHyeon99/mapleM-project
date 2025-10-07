@@ -38,7 +38,7 @@ export function GuildDetailView({
 
   return (
     <div className="flex w-full flex-col items-center">
-      <div className="mt-2 mb-4 w-full max-w-4xl">
+      <div className="mt-2 mb-4 flex w-full max-w-4xl justify-center">
         <GuildSearch />
       </div>
       <div className="mx-auto flex w-full max-w-4xl flex-col gap-4">

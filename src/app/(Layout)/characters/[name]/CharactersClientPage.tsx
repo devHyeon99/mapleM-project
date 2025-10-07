@@ -9,7 +9,7 @@ import { AlertTriangle, Loader2 } from "lucide-react";
 import { cn } from "@/shared/lib/utils";
 import { useMemo, useState } from "react";
 import { useCharacterSearchAll } from "@/features/character-search-all";
-import { useSearchHistory } from "@/features/character-search/model";
+import { useRecentSearch } from "@/shared/model/hooks/useRecentSearch";
 import { WORLD_NAMES } from "@/shared/config/constants/worlds";
 type WorldName = (typeof WORLD_NAMES)[number];
 
@@ -25,10 +25,8 @@ export default function CharactersClientPage() {
   const params = useParams<{ name?: string }>();
   const searchParams = useSearchParams();
 
-  const { addHistoryItem } = useSearchHistory();
+  const { addHistory } = useRecentSearch("character-search-history");
 
-  // 1순위: /characters/[name]
-  // 2순위(호환): /characters?name=
   const name = useMemo(() => {
     const fromParams = params?.name ? safeDecode(String(params.name)) : null;
     if (fromParams) return fromParams;
@@ -116,7 +114,7 @@ export default function CharactersClientPage() {
                   return;
                 }
 
-                addHistoryItem(char.character_name, charWorld);
+                addHistory(char.character_name, charWorld);
                 setLoadingOcid(char.ocid);
               }}
               aria-label={`${char.world_name} 월드의 ${char.character_name} 캐릭터 정보 보기`}

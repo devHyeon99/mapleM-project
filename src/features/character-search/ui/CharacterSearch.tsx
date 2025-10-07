@@ -1,93 +1,53 @@
 "use client";
 
-import { Button } from "@/shared/ui/button";
-import { Input } from "@/shared/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/shared/ui/select";
-import { WORLD_NAMES } from "@/shared/config/constants/worlds";
-import { Search, Loader2 } from "lucide-react";
-import { CharacterSearchHistory } from "./CharacterSearchHistory";
-import { useCharacterSearch } from "../model";
+import { useTransition } from "react";
+import { useRouter } from "next/navigation";
+import { SearchForm } from "@/shared/ui/SearchForm";
+import { useRecentSearch } from "@/shared/model/hooks/useRecentSearch";
+
+const VALIDATION_REGEX = /^[a-zA-Z0-9가-힣]{2,8}$/;
+const VALIDATION_ERROR_MESSAGE =
+  "캐릭터명은 2~8자의 한글, 영어, 숫자만 가능합니다.";
 
 export const CharacterSearch = () => {
-  const {
-    query,
-    world,
-    isPending,
-    showHistory,
-    searchContainerRef,
-    handleSubmit,
-    handleWorldChange,
-    handleHistorySearch,
-    handleInputFocus,
-    handleQueryChange,
-  } = useCharacterSearch();
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
+
+  const { history, addHistory, removeHistory, clearHistory } = useRecentSearch(
+    "character-search-history",
+  );
+
+  const handleValidate = (world: string, name: string): boolean => {
+    return VALIDATION_REGEX.test(name);
+  };
+
+  const handleSearch = (world: string, name: string) => {
+    addHistory(name, world);
+
+    const path =
+      world === "전체"
+        ? `/characters/${encodeURIComponent(name)}`
+        : `/character/${encodeURIComponent(world)}/${encodeURIComponent(name)}`;
+
+    startTransition(() => {
+      router.push(path);
+    });
+  };
 
   return (
-    <div className="relative w-full max-w-3xl" ref={searchContainerRef}>
-      <form
-        onSubmit={handleSubmit}
-        role="search"
-        aria-label="캐릭터 검색"
-        className="relative flex w-full items-center gap-2"
-      >
-        <Select value={world} onValueChange={handleWorldChange}>
-          <SelectTrigger
-            aria-label="월드 선택"
-            className="!h-12 min-w-25 rounded-xs lg:w-31.5"
-            disabled={isPending}
-          >
-            <SelectValue placeholder="월드" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectLabel className="font-bold">월드 목록</SelectLabel>
-              {WORLD_NAMES.map((w) => (
-                <SelectItem key={w} value={w}>
-                  {w}
-                </SelectItem>
-              ))}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-
-        <Input
-          placeholder="캐릭터 이름을 입력하세요"
-          className="!h-12 w-full rounded-xs pr-12 placeholder:text-sm"
-          value={query}
-          onChange={handleQueryChange}
-          onFocus={handleInputFocus}
-          disabled={isPending}
-        />
-
-        <Button
-          type="submit"
-          variant="ghost"
-          size="icon"
-          disabled={isPending || !query.trim()}
-          className="absolute right-0 mr-0.5 h-[45px] w-12 cursor-pointer rounded-xs hover:bg-transparent"
-          aria-label="캐릭터 검색"
-        >
-          {isPending ? (
-            <Loader2 className="size-5 animate-spin" />
-          ) : (
-            <Search className="size-5" />
-          )}
-        </Button>
-      </form>
-
-      {showHistory && (
-        <div className="bg-card absolute right-0 z-10 mt-1 min-h-85 w-full overflow-y-auto rounded-xs border p-4 shadow-lg lg:w-[calc(100%-116px)]">
-          <CharacterSearchHistory onHistorySearch={handleHistorySearch} />
-        </div>
-      )}
+    <div className="w-full max-w-3xl">
+      <SearchForm
+        lastWorldKey="character-last-world"
+        placeholder="캐릭터 이름을 입력하세요"
+        history={history}
+        onHistoryRemove={removeHistory}
+        onHistoryClear={clearHistory}
+        onValidate={handleValidate}
+        errorMessage={VALIDATION_ERROR_MESSAGE}
+        onSubmit={handleSearch}
+        includeAllWorld={true}
+        isPending={isPending}
+      />
     </div>
   );
 };

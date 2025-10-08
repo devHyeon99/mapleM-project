@@ -36,14 +36,16 @@ export const metadata: Metadata = {
 
 export default async function GuildPage() {
   return (
-    <div className="flex flex-col items-center text-center">
-      <h1 className="my-2 text-2xl font-bold md:text-3xl">길드 검색</h1>
-      <p
-        className="text-muted-foreground mb-4 text-sm md:text-base"
-        data-nosnippet
-      >
-        메이플스토리M의 길드 데이터는 평균 15분 후 확인 가능합니다.
-      </p>
+    <div className="flex flex-col items-center gap-4">
+      <div className="flex flex-col items-center gap-2">
+        <h1 className="text-2xl font-bold md:text-4xl">길드 검색</h1>
+        <p
+          className="text-foreground max-w-3xl text-base text-balance sm:text-lg"
+          data-nosnippet
+        >
+          메이플스토리M의 길드 데이터는 평균 15분 후 확인 가능합니다.
+        </p>
+      </div>
       <div className="sr-only">
         <h2>메이플스토리M 길드 정보 조회 서비스</h2>
         <p>

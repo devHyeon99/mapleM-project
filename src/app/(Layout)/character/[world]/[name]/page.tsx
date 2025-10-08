@@ -35,7 +35,7 @@ export default async function CharacterPage({ params }: CharacterPageProps) {
     await getCharacterPageData(world, name);
 
   return (
-    <div className="flex w-full flex-1 flex-col items-center justify-center gap-2.5 pt-2">
+    <div className="flex w-full flex-1 flex-col items-center justify-center gap-2.5">
       <CharacterSearch />
       <h1 className="sr-only">
         {decodedName} ({decodedWorld}) 캐릭터 검색 결과

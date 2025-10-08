@@ -1,27 +1,35 @@
 "use client";
 
 import Link from "next/link";
-import { Button } from "@/shared/ui/button";
+import { usePathname } from "next/navigation";
 import { navLinks } from "./navLinks";
+import { cn } from "@/shared/lib/utils";
 
 export function HeaderNav() {
+  const pathname = usePathname();
+
   return (
-    <nav aria-label="메인 메뉴" className="hidden max-w-3xl flex-1 md:block">
-      <ul className="flex items-center gap-1">
-        {navLinks.map((link) => {
-          return (
-            <li key={link.href}>
-              <Button
-                asChild
-                variant="ghost"
-                className="h-20 px-10 text-lg underline-offset-8 hover:bg-transparent! hover:underline"
-              >
-                <Link href={link.href}>{link.label}</Link>
-              </Button>
-            </li>
-          );
-        })}
-      </ul>
+    // ✅ gap-8로 간격을 넓히고, 폰트 크기를 text-lg로 설정
+    <nav className="hidden items-center gap-8 font-medium md:flex">
+      {navLinks.map((link) => {
+        const isActive = pathname?.startsWith(link.href);
+
+        return (
+          <Link
+            key={link.href}
+            href={link.href}
+            className={cn(
+              // ✅ text-base -> text-lg (PC 기준 시원한 크기)
+              "hover:text-foreground text-lg transition-colors",
+              isActive
+                ? "text-foreground font-semibold"
+                : "text-muted-foreground",
+            )}
+          >
+            {link.label}
+          </Link>
+        );
+      })}
     </nav>
   );
 }

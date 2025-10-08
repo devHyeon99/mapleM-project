@@ -99,7 +99,7 @@ export function SearchForm({
                 aria-invalid={isError}
                 aria-describedby={isError ? errorId : undefined}
                 className={clsx(
-                  "border-input dark:bg-input/30 flex h-12 w-full rounded-md border py-1 pr-10 pl-3 text-sm transition-colors",
+                  "border-input dark:bg-input/30 flex h-12 w-full rounded-md border py-1 pr-10 pl-3 transition-colors placeholder:text-sm md:text-sm",
                   "placeholder:text-muted-foreground outline-none disabled:cursor-not-allowed disabled:opacity-50",
                   isError
                     ? "border-destructive! focus-visible:ring-destructive/50 focus-visible:ring-[3px]"

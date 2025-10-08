@@ -4,10 +4,11 @@ export function HeaderLogo() {
   return (
     <Link
       href="/"
-      aria-label="메엠지지 홈으로 가기"
-      className="flex items-center"
+      className="mr-6 flex items-center gap-2 transition-opacity hover:opacity-90 md:mr-8"
     >
-      <strong className="text-xl md:text-2xl">메엠지지</strong>
+      <span className="text-xl font-semibold tracking-tight md:text-3xl">
+        MMGG
+      </span>
     </Link>
   );
 }

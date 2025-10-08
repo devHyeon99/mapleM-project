@@ -43,7 +43,7 @@ export default async function GuildPage() {
           className="text-foreground max-w-3xl text-base text-balance sm:text-lg"
           data-nosnippet
         >
-          메이플스토리M의 길드 데이터는 평균 15분 후 확인 가능합니다.
+          길드 데이터는 평균 15분 후 확인 가능합니다.
         </p>
       </div>
       <div className="sr-only">

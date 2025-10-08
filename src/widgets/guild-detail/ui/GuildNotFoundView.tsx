@@ -27,7 +27,7 @@ export function GuildNotFoundView() {
   }, [pathname, removeHistoryByParams]);
 
   return (
-    <div className="flex flex-col items-center justify-center py-4 text-center">
+    <div className="flex flex-col items-center justify-center text-center">
       <div className="mb-6.5 w-full max-w-4xl">
         <GuildSearch />
       </div>

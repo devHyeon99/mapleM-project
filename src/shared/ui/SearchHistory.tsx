@@ -21,7 +21,7 @@ export const SearchHistory = ({
   return (
     <Combobox.Popup
       className={clsx(
-        "bg-popover text-popover-foreground overflow-hidden rounded-md border shadow-md outline-none",
+        "text-popover-foreground h-69.5 overflow-hidden rounded-md border bg-white shadow-md outline-none dark:bg-[#181818]",
         "-ml-[138px] w-[calc(var(--anchor-width)+138px)]",
         "md:ml-0 md:w-[var(--anchor-width)]",
       )}
@@ -46,7 +46,7 @@ export const SearchHistory = ({
         aria-labelledby="recent-search-label"
       >
         {!hasHistory ? (
-          <div className="text-muted-foreground py-6 text-center text-xs">
+          <div className="text-muted-foreground py-6 text-center text-sm">
             최근 검색 기록이 없습니다.
           </div>
         ) : (
@@ -73,7 +73,10 @@ export const SearchHistory = ({
               <button
                 type="button"
                 aria-label={`${item.world} ${item.name} 검색 기록 삭제`}
-                className="text-muted-foreground hover:text-destructive focus-visible:ring-ring flex size-6 cursor-pointer items-center justify-center rounded-full opacity-0 transition-opacity group-data-[highlighted]:opacity-100 focus:opacity-100 focus-visible:opacity-100 focus-visible:ring-2 focus-visible:outline-none"
+                className={clsx(
+                  "text-muted-foreground hover:text-destructive focus-visible:ring-ring flex size-6 cursor-pointer items-center justify-center rounded-full transition-opacity focus:opacity-100 focus-visible:opacity-100 focus-visible:ring-2 focus-visible:outline-none",
+                  "opacity-100 md:opacity-0 md:group-data-[highlighted]:opacity-100",
+                )}
                 onMouseDown={(e) => {
                   e.preventDefault();
                   e.stopPropagation();

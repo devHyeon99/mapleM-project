@@ -1,6 +1,6 @@
 "use client";
 
-import { useId } from "react";
+import { useId, useState } from "react";
 import { Combobox } from "@base-ui/react/combobox";
 import { Loader2, Search, AlertCircle } from "lucide-react";
 import { clsx } from "clsx";
@@ -61,6 +61,8 @@ export function SearchForm({
   const inputId = useId();
   const errorId = useId();
 
+  const [isMouseFocus, setIsMouseFocus] = useState(false);
+
   return (
     <div className="flex w-full flex-col gap-2">
       <div className="flex w-full max-w-4xl items-center gap-2">
@@ -98,12 +100,23 @@ export function SearchForm({
                 disabled={isPending}
                 aria-invalid={isError}
                 aria-describedby={isError ? errorId : undefined}
+                onMouseDown={() => setIsMouseFocus(true)}
+                onKeyDown={() => setIsMouseFocus(false)}
+                onBlur={() => setIsMouseFocus(false)}
                 className={clsx(
                   "border-input dark:bg-input/30 flex h-12 w-full rounded-md border py-1 pr-10 pl-3 transition-colors placeholder:text-sm md:text-sm",
                   "placeholder:text-muted-foreground outline-none disabled:cursor-not-allowed disabled:opacity-50",
-                  isError
-                    ? "border-destructive! focus-visible:ring-destructive/50 focus-visible:ring-[3px]"
-                    : "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
+
+                  // 키보드 탭 이동 시에만 링 생성
+                  "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
+
+                  // 마우스 클릭 시 링, 테두리 삭제
+                  isMouseFocus &&
+                    "focus-visible:border-input! focus-visible:ring-0!",
+
+                  // 에러 상태일 때 스타일 덮어쓰기
+                  isError &&
+                    "border-destructive! focus:border-destructive! focus-visible:ring-destructive/50!",
                 )}
                 onFocus={() => setOpen(true)}
                 onClick={() => setOpen(true)}

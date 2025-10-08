@@ -1,34 +1,28 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import "./globals.css";
 import Script from "next/script";
-
+import "./globals.css";
 import { Providers } from "@/app/providers/Providers";
 import { ThemeProvider } from "@/app/providers/theme-provider";
 import { MswProvider } from "@/app/providers/MswProvider";
 import { MockSessionProvider } from "@/app/providers/MockSessionProvider";
+import { cn } from "@/shared/lib/utils";
 
 const pretendard = localFont({
-  src: "../../public/fonts/PretendardStdVariable.woff2",
+  src: "../shared/assets/fonts/PretendardStdVariable.woff2",
   variable: "--font-pretendard",
   display: "swap",
+  weight: "100 900",
 });
 
 export const metadata: Metadata = {
-  // 기본 URL 설정
   metadataBase: new URL("https://maplemgg.com"),
-
-  // 사이트 타이틀
   title: {
     default: "메엠지지 - 메이플스토리M 캐릭터 검색 & 종합 정보",
     template: "%s | 메엠지지",
   },
-
-  // 사이트 설명
   description:
     "메이플스토리M 캐릭터 검색은 메엠지지. 캐릭터 정보 조회, 장비, 스킬, 코디, 공략 등 게임 플레이에 유용한 모든 정보를 확인하세요.",
-
-  // 키워드
   keywords: [
     "메이플스토리M",
     "메이플M",
@@ -39,8 +33,6 @@ export const metadata: Metadata = {
     "전적 검색",
     "장비 조회",
   ],
-
-  // 오픈 그래프 (SNS 공유)
   openGraph: {
     title: "메엠지지 - 메이플스토리M 캐릭터 검색",
     description: "메이플스토리M 캐릭터 정보, 장비, 코디를 한눈에 확인하세요.",
@@ -56,20 +48,17 @@ export const metadata: Metadata = {
     locale: "ko_KR",
     type: "website",
   },
-
   twitter: {
     card: "summary_large_image",
     title: "메엠지지 - 메이플스토리M 캐릭터 검색",
     description: "메이플스토리M 캐릭터 정보, 장비, 코디를 한눈에 확인하세요.",
     images: ["/og-image.png"],
   },
-
   icons: {
     icon: "/favicon.png",
     shortcut: "/favicon.png",
     apple: "/favicon.png",
   },
-
   robots: {
     index: true,
     follow: true,
@@ -80,11 +69,9 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-
   alternates: {
-    canonical: "./",
+    canonical: "/",
   },
-
   verification: {
     google: "ixxZ7vNFuRu8LRZzoPtmWz-Q3btL9xUbaWyLFUceJ6Q",
   },
@@ -102,9 +89,13 @@ export default function RootLayout({
   const isProd = process.env.NODE_ENV === "production";
 
   return (
-    <html lang="ko" className={pretendard.className} suppressHydrationWarning>
-      <head></head>
-      <body className="bg-background relative flex min-h-screen flex-col">
+    <html lang="ko" suppressHydrationWarning>
+      <body
+        className={cn(
+          pretendard.variable,
+          "relative flex min-h-screen flex-col font-sans",
+        )}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -121,7 +112,8 @@ export default function RootLayout({
             <Providers>{children}</Providers>
           )}
         </ThemeProvider>
-        {/* 넥슨 애널리틱스 */}
+
+        {/* 넥슨 애널리틱스 (프로덕션만) */}
         {isProd && (
           <Script
             src="https://openapi.nexon.com/js/analytics.js?app_id=241136"

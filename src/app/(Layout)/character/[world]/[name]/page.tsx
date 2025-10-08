@@ -13,15 +13,31 @@ export async function generateMetadata({ params }: CharacterPageProps) {
   const { world, name } = await params;
   const decodedWorld = decodeURIComponent(world);
   const decodedName = decodeURIComponent(name);
+  const url = `/character/${world}/${name}`;
 
   return {
     title: {
       absolute: `${decodedName} (${decodedWorld}) - 캐릭터 정보 - 메이플스토리M`,
     },
-    description: `메이플스토리M ${decodedWorld} 서버 ${decodedName} 캐릭터의 아이템, 코디, 스킬, 기본 정보를 확인하세요.`,
+    description: `${decodedWorld} 서버 ${decodedName} 캐릭터의 상세 정보를 확인하세요.`,
+    alternates: {
+      canonical: url, // 덮어쓰기 필수
+    },
     openGraph: {
-      title: `${decodedName} - 메이플스토리M 캐릭터 검색`,
-      description: `레벨, 직업, 아이템, 스킬 등 ${decodedName}님의 상세 정보`,
+      title: `${decodedWorld} ${decodedName} 캐릭터 정보`,
+      description: `${decodedName}님의 레벨, 직업, 장비 조회`,
+      url: url,
+      images: [
+        {
+          url: "/og-image.png",
+          width: 1200,
+          height: 630,
+          alt: "메엠지지 캐릭터 검색",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
       images: ["/og-image.png"],
     },
   };
@@ -36,7 +52,9 @@ export default async function CharacterPage({ params }: CharacterPageProps) {
 
   return (
     <div className="flex w-full flex-1 flex-col items-center justify-center gap-2.5">
-      <CharacterSearch />
+      <search className="w-full max-w-3xl pt-2" aria-label="캐릭터 재검색">
+        <CharacterSearch />
+      </search>
       <h1 className="sr-only">
         {decodedName} ({decodedWorld}) 캐릭터 검색 결과
       </h1>

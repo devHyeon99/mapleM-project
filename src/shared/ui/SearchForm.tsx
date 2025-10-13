@@ -15,8 +15,8 @@ import { type SearchHistoryItem } from "@/shared/model/hooks/useRecentSearch";
 import { SearchHistory } from "./SearchHistory";
 import { useSearchForm } from "@/shared/model/hooks/useSearchForm";
 
-// --- 메인 컴포넌트 ---
 interface SearchFormProps {
+  variant?: "default" | "glass"; // 스타일 분기를 위한 프롭 추가
   history: SearchHistoryItem[];
   onHistoryRemove: (id: string) => void;
   onHistoryClear: () => void;
@@ -30,6 +30,7 @@ interface SearchFormProps {
 }
 
 export function SearchForm({
+  variant = "default", // 기본값은 default
   history,
   onHistoryRemove,
   onHistoryClear,
@@ -60,14 +61,16 @@ export function SearchForm({
 
   const inputId = useId();
   const errorId = useId();
-
   const [isMouseFocus, setIsMouseFocus] = useState(false);
+
+  const isGlass = variant === "glass";
 
   return (
     <div className="flex w-full flex-col gap-2">
       <div className="flex w-full max-w-4xl items-center gap-2">
-        {/* 월드 선택 컴포넌트  */}
+        {/* 월드 선택기 */}
         <WorldSelect
+          variant={variant}
           value={world}
           onValueChange={setWorld}
           options={worldOptions}
@@ -104,19 +107,26 @@ export function SearchForm({
                 onKeyDown={() => setIsMouseFocus(false)}
                 onBlur={() => setIsMouseFocus(false)}
                 className={clsx(
-                  "border-input dark:bg-input/30 flex h-12 w-full rounded-md border py-1 pr-10 pl-3 transition-colors placeholder:text-sm md:text-sm",
-                  "placeholder:text-muted-foreground outline-none disabled:cursor-not-allowed disabled:opacity-50",
+                  "flex h-12 w-full rounded-md py-1 pr-10 pl-3 transition-colors outline-none placeholder:text-sm md:text-sm",
 
-                  // 키보드 탭 이동 시에만 링 생성
-                  "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
+                  // 디자인 분기
+                  isGlass
+                    ? "border border-white/30 bg-white/10! text-white backdrop-blur-md placeholder:text-white/70 hover:border-white/50 dark:bg-black/30!"
+                    : "border-input text-foreground placeholder:text-muted-foreground dark:bg-input/30 border",
 
-                  // 마우스 클릭 시 링, 테두리 삭제
-                  isMouseFocus &&
-                    "focus-visible:border-input! focus-visible:ring-0!",
+                  // 포커스/링 정책 (탭 이동 시에만)
+                  isGlass
+                    ? "focus-visible:ring-[3px] focus-visible:ring-white/50"
+                    : "focus-visible:ring-ring/50 focus-visible:ring-[3px]",
 
-                  // 에러 상태일 때 스타일 덮어쓰기
+                  // 마우스 클릭 시 포커스 링 제거
+                  isMouseFocus && "focus-visible:ring-0!",
+
+                  // 에러 상태
                   isError &&
-                    "border-destructive! focus:border-destructive! focus-visible:ring-destructive/50!",
+                    "border-destructive! focus-visible:ring-destructive/50!",
+
+                  "disabled:cursor-not-allowed disabled:opacity-50",
                 )}
                 onFocus={() => setOpen(true)}
                 onClick={() => setOpen(true)}
@@ -124,7 +134,12 @@ export function SearchForm({
               <button
                 type="submit"
                 disabled={isPending}
-                className="text-muted-foreground hover:text-foreground absolute top-0 right-0 flex h-full w-10 items-center justify-center"
+                className={clsx(
+                  "absolute top-0 right-0 flex h-full w-10 items-center justify-center transition-colors",
+                  isGlass
+                    ? "text-white/80 hover:text-white"
+                    : "text-muted-foreground hover:text-foreground",
+                )}
               >
                 {isPending ? (
                   <Loader2 className="size-5 animate-spin" />
@@ -141,6 +156,7 @@ export function SearchForm({
                   history={history}
                   onClear={onHistoryClear}
                   onRemove={onHistoryRemove}
+                  variant={variant}
                 />
               </Combobox.Positioner>
             </Combobox.Portal>
@@ -148,46 +164,107 @@ export function SearchForm({
         </form>
       </div>
 
-      {/* 에러 메시지 컴포넌트 */}
-      {isError && <ErrorMessage id={errorId} message={errorMessage} />}
+      {/* 에러 메시지 (글래스 모드일 땐 텍스트 흰색 처리 고려) */}
+      {isError && (
+        <ErrorMessage
+          id={errorId}
+          message={errorMessage}
+          className={isGlass ? "text-white drop-shadow-sm" : "text-destructive"}
+        />
+      )}
     </div>
   );
 }
 
-// --- 월드 선택기 ---
+// --- 하위 컴포넌트: 월드 선택기 ---
 const WorldSelect = ({
+  variant,
   value,
   onValueChange,
   options,
   disabled,
 }: {
+  variant: "default" | "glass";
   value: string;
   onValueChange: (val: string) => void;
   options: readonly string[];
   disabled: boolean;
-}) => (
-  <Select value={value} onValueChange={onValueChange}>
-    <SelectTrigger disabled={disabled} className="h-12! w-[130px] shrink-0">
-      <SelectValue placeholder="월드" />
-    </SelectTrigger>
-    <SelectContent>
-      {options.map((w) => (
-        <SelectItem key={w} value={w}>
-          {w}
-        </SelectItem>
-      ))}
-    </SelectContent>
-  </Select>
-);
+}) => {
+  const isGlass = variant === "glass";
 
-// --- 에러 메시지 ---
-const ErrorMessage = ({ id, message }: { id: string; message: string }) => (
+  return (
+    <Select value={value} onValueChange={onValueChange}>
+      <SelectTrigger
+        disabled={disabled}
+        className={clsx(
+          "h-12! w-[130px] shrink-0 transition-all",
+          isGlass && [
+            "border-white/30 bg-white/10! text-white backdrop-blur-md dark:bg-black/30!",
+            "hover:border-white/50 hover:bg-white/20",
+            "focus:ring-white/50! focus:ring-offset-0",
+            "[&_svg]:text-white! [&_svg]:opacity-100",
+          ],
+        )}
+      >
+        <SelectValue placeholder="월드" />
+      </SelectTrigger>
+      <SelectContent
+        onCloseAutoFocus={(event) => {
+          // 만약 사용자가 이미 다른 곳 에 포커스를 주었다면
+          // Radix가 포커스를 다시 트리거로 뺏어오는 동작만 막습니다.
+          if (
+            document.activeElement &&
+            document.activeElement !== document.body
+          ) {
+            event.preventDefault();
+          }
+
+          // 이렇게 하면:
+          // - 마우스로 Input 클릭 시: Input에 포커스 유지 (경고 발생 안 함)
+          // - 키보드 Enter 시: activeElement가 body나 trigger이므로,
+          //   preventDefault가 실행되지 않아 정상적으로 Trigger로 포커스 복구 -> Tab 이동 가능
+        }}
+        className={clsx(
+          isGlass && [
+            "text-primary border-white/30 bg-white/35! backdrop-blur-3xl dark:bg-black/30!",
+            "focus:ring-white/50! focus:ring-offset-0",
+            "[&_svg]:text-black! [&_svg]:opacity-100 dark:[&_svg]:text-white!",
+          ],
+        )}
+      >
+        {options.map((w) => (
+          <SelectItem
+            key={w}
+            value={w}
+            className="hover:bg-black/7! dark:hover:bg-white/10!"
+          >
+            {w}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
+  );
+};
+
+// --- 하위 컴포넌트: 에러 메시지 ---
+const ErrorMessage = ({
+  id,
+  message,
+  className,
+}: {
+  id: string;
+  message: string;
+  className?: string;
+}) => (
   <div
     id={id}
-    className="text-destructive animate-in slide-in-from-top-1 fade-in-0 flex items-center justify-end gap-1.5 px-1 text-xs font-medium"
+    className={clsx(
+      "animate-in slide-in-from-top-1 fade-in-0 flex items-center justify-end gap-1.5 px-1 text-xs font-bold md:text-sm",
+      className,
+    )}
     role="alert"
   >
-    <AlertCircle className="size-3.5" />
+    <AlertCircle className="size-4" />
     <span>{message}</span>
   </div>
 );

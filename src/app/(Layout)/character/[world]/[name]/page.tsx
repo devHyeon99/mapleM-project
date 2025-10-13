@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: CharacterPageProps) {
     },
     description: `${decodedWorld} 서버 ${decodedName} 캐릭터의 상세 정보를 확인하세요.`,
     alternates: {
-      canonical: url, // 덮어쓰기 필수
+      canonical: url,
     },
     openGraph: {
       title: `${decodedWorld} ${decodedName} 캐릭터 정보`,
@@ -51,8 +51,11 @@ export default async function CharacterPage({ params }: CharacterPageProps) {
     await getCharacterPageData(world, name);
 
   return (
-    <div className="flex w-full flex-1 flex-col items-center justify-center gap-2.5">
-      <search className="w-full max-w-3xl pt-2" aria-label="캐릭터 재검색">
+    <div className="flex w-full flex-1 flex-col items-center justify-center gap-2.5 pt-2 pb-6">
+      <search
+        className="w-full max-w-3xl px-4 md:px-0"
+        aria-label="캐릭터 재검색"
+      >
         <CharacterSearch />
       </search>
       <h1 className="sr-only">

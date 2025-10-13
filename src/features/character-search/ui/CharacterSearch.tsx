@@ -9,7 +9,13 @@ const VALIDATION_REGEX = /^[a-zA-Z0-9가-힣]{2,8}$/;
 const VALIDATION_ERROR_MESSAGE =
   "캐릭터명은 2~8자의 한글, 영어, 숫자만 가능합니다.";
 
-export const CharacterSearch = () => {
+interface CharacterSearchProps {
+  variant?: "default" | "glass";
+}
+
+export const CharacterSearch = ({
+  variant = "default",
+}: CharacterSearchProps) => {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
 
@@ -17,7 +23,7 @@ export const CharacterSearch = () => {
     "character-search-history",
   );
 
-  const handleValidate = (world: string, name: string): boolean => {
+  const handleValidate = (_world: string, name: string): boolean => {
     return VALIDATION_REGEX.test(name);
   };
 
@@ -35,19 +41,18 @@ export const CharacterSearch = () => {
   };
 
   return (
-    <div className="w-full max-w-3xl">
-      <SearchForm
-        lastWorldKey="character-last-world"
-        placeholder="캐릭터 이름을 입력하세요"
-        history={history}
-        onHistoryRemove={removeHistory}
-        onHistoryClear={clearHistory}
-        onValidate={handleValidate}
-        errorMessage={VALIDATION_ERROR_MESSAGE}
-        onSubmit={handleSearch}
-        includeAllWorld={true}
-        isPending={isPending}
-      />
-    </div>
+    <SearchForm
+      variant={variant}
+      lastWorldKey="character-last-world"
+      placeholder="캐릭터 이름을 입력하세요"
+      history={history}
+      onHistoryRemove={removeHistory}
+      onHistoryClear={clearHistory}
+      onValidate={handleValidate}
+      errorMessage={VALIDATION_ERROR_MESSAGE}
+      onSubmit={handleSearch}
+      includeAllWorld={true}
+      isPending={isPending}
+    />
   );
 };

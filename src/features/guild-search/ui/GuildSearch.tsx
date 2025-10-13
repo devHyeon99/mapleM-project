@@ -5,11 +5,15 @@ import { useRouter } from "next/navigation";
 import { SearchForm } from "@/shared/ui/SearchForm";
 import { useRecentSearch } from "@/shared/model/hooks/useRecentSearch";
 
+interface GuildSearchProps {
+  variant?: "default" | "glass";
+}
+
 const VALIDATION_REGEX = /^[a-zA-Z0-9가-힣]{2,12}$/;
 const VALIDATION_ERROR_MESSAGE =
   "길드명은 2~12자의 한글, 영어, 숫자만 가능합니다.";
 
-export function GuildSearch() {
+export function GuildSearch({ variant }: GuildSearchProps) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
 
@@ -33,6 +37,7 @@ export function GuildSearch() {
 
   return (
     <SearchForm
+      variant={variant}
       lastWorldKey="guild-last-world"
       placeholder="길드명을 입력하세요"
       history={history}

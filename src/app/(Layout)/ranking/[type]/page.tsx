@@ -80,8 +80,8 @@ export default async function RankingPage({
   );
 
   return (
-    <div className="flex w-full items-center justify-center">
-      <section className="w-full max-w-4xl">
+    <div className="flex w-full items-center justify-center pb-4">
+      <section className="w-full max-w-4xl px-4 md:px-0">
         <h1 className="mb-4 text-center text-2xl font-bold md:text-3xl">
           메이플스토리M {RANKING_LABELS[safeType]} 랭킹
         </h1>

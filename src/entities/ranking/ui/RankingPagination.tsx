@@ -58,7 +58,7 @@ export function RankingPagination() {
   const nextGroupFirstPage = currentGroup * pagesPerGroup + 1;
 
   return (
-    <Pagination>
+    <Pagination className="pt-2">
       <PaginationContent>
         {/* [<<] 이전 그룹으로 이동 */}
         <PaginationItem>

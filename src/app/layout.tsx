@@ -13,6 +13,7 @@ const pretendard = localFont({
   variable: "--font-pretendard",
   display: "swap",
   weight: "100 900",
+  adjustFontFallback: "Arial",
 });
 
 export const metadata: Metadata = {
@@ -89,10 +90,10 @@ export default function RootLayout({
   const isProd = process.env.NODE_ENV === "production";
 
   return (
-    <html lang="ko" suppressHydrationWarning>
+    <html lang="ko" className={pretendard.variable} suppressHydrationWarning>
       <body
         className={cn(
-          pretendard.variable,
+          pretendard.className,
           "relative flex min-h-screen flex-col font-sans",
         )}
       >

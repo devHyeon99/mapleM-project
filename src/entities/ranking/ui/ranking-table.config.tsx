@@ -76,7 +76,12 @@ const Renderers = {
         alt="guild mark"
         className="h-5 w-5 rounded-xs object-contain"
       />
-      <span className="text-sm font-semibold">{item.identity.name}</span>
+      <Link
+        href={`/guild/${item.worldName}/${item.identity.name}`}
+        className="text-sm font-semibold underline-offset-4 hover:underline"
+      >
+        {item.identity.name}
+      </Link>
     </div>
   ),
 
@@ -135,7 +140,12 @@ const Renderers = {
         <RankingIcon src={item.extraInfo.imageUrl} className={imgClass} />
         {/* 텍스트가 있을 때만 렌더링 (샤레니안 일부 케이스 등) */}
         {item.extraInfo.text && (
-          <span className="max-w-[100px] text-sm">{item.extraInfo.text}</span>
+          <Link
+            href={`/guild/${item.worldName}/${item.extraInfo.text}`}
+            className="text-sm font-semibold underline-offset-4 hover:underline"
+          >
+            {item.extraInfo.text}
+          </Link>
         )}
       </div>
     );

@@ -37,7 +37,7 @@ export function GuildDetailView({
   const EXCLUDED_SKILLS = ["길드 인원 증가", "잡화 상점 할인"];
 
   return (
-    <div className="flex w-full flex-col items-center">
+    <div className="flex w-full flex-col items-center px-4 pb-6 md:px-0">
       <div className="mt-2 mb-4 flex w-full max-w-4xl justify-center">
         <GuildSearch />
       </div>

@@ -55,7 +55,7 @@ export default async function GuildPage() {
         </p>
       </div>
 
-      <div className="w-full max-w-3xl">
+      <div className="w-full max-w-3xl px-4 md:px-0">
         <GuildSearch />
       </div>
     </div>

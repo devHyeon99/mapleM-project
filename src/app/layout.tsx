@@ -4,8 +4,6 @@ import Script from "next/script";
 import "./globals.css";
 import { Providers } from "@/app/providers/Providers";
 import { ThemeProvider } from "@/app/providers/theme-provider";
-import { MswProvider } from "@/app/providers/MswProvider";
-import { MockSessionProvider } from "@/app/providers/MockSessionProvider";
 import { cn } from "@/shared/lib/utils";
 
 const pretendard = localFont({
@@ -86,7 +84,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const isDev = process.env.NODE_ENV === "development";
   const isProd = process.env.NODE_ENV === "production";
 
   return (
@@ -103,15 +100,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {isDev ? (
-            <MswProvider>
-              <Providers>
-                <MockSessionProvider>{children}</MockSessionProvider>
-              </Providers>
-            </MswProvider>
-          ) : (
-            <Providers>{children}</Providers>
-          )}
+          <Providers>{children}</Providers>
         </ThemeProvider>
 
         {/* 넥슨 애널리틱스 (프로덕션만) */}

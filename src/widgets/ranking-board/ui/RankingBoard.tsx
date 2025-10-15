@@ -15,7 +15,7 @@ interface RankingBoardProps {
 
 export function RankingBoard({ type, fetchParams }: RankingBoardProps) {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col">
       <RankingTabs />
       <RankingFilters />
       <RankingTable type={type} filters={fetchParams} />

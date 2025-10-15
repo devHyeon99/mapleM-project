@@ -1,4 +1,5 @@
 import type { ApiResponse } from "@/shared/model/types/ApiResponse";
+import { getSecondsUntilNextUpdate } from "../lib/get-cache-ttl";
 import type {
   RankingType,
   RankingResponse,
@@ -22,7 +23,7 @@ export async function getRanking<T = AnyRankingData>({
   worldName,
   ocid,
   page = 1,
-  baseUrl = "", // baseUrl 추가
+  baseUrl = "",
 }: GetRankingParams & { baseUrl?: string }): Promise<RankingResponse<T>> {
   const query = new URLSearchParams({
     page: String(page),
@@ -32,13 +33,14 @@ export async function getRanking<T = AnyRankingData>({
   if (worldName) query.append("world_name", worldName);
   if (ocid) query.append("ocid", ocid);
 
-  // baseUrl을 결합하여 절대 경로로 호출 가능하게 수정
+  const ttl = getSecondsUntilNextUpdate();
+
   const res = await fetch(
     `${baseUrl}/api/ranking/${type}?${query.toString()}`,
     {
       next: {
-        revalidate: 3600, // 1시간 동안 캐시 유지 (동일한 파라미터 요청 시 API 호출 안 함)
-        tags: [`ranking-${type}`], // 나중에 캐시 초기화가 필요할 때 사용할 태그
+        revalidate: ttl,
+        tags: [`ranking-${type}`],
       },
     },
   );

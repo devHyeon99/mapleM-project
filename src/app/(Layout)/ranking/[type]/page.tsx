@@ -2,7 +2,7 @@ import React from "react";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { HydrationBoundary } from "@tanstack/react-query";
-import { getRankingPageData } from "./_lib/getRankingPageData";
+import { getRankingPageData } from "@/entities/ranking/api/get-ranking-page-data";
 import { RANKING_TYPES } from "@/entities/ranking/model/types/ranking";
 import type { RankingType } from "@/entities/ranking/model/types/ranking";
 import { RankingBoard } from "@/widgets/ranking-board/ui/RankingBoard";
@@ -81,8 +81,8 @@ export default async function RankingPage({
 
   return (
     <div className="flex w-full items-center justify-center pb-4">
-      <section className="w-full max-w-4xl px-4 md:px-0">
-        <h1 className="mb-4 text-center text-2xl font-bold md:text-3xl">
+      <section className="wide:px-0 w-full max-w-4xl px-2">
+        <h1 className="wide:text-4xl mb-4 text-center text-2xl font-bold">
           메이플스토리M {RANKING_LABELS[safeType]} 랭킹
         </h1>
 

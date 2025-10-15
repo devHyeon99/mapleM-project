@@ -12,6 +12,7 @@ export async function getCombinedNotices(): Promise<NoticeData> {
     // 1시간 캐싱 적용
     const fetchOptions = {
       next: { revalidate: 3600 },
+      tags: ["notices", "all-notices"],
     };
 
     // 3개의 API를 병렬로 호출

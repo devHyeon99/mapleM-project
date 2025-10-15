@@ -20,7 +20,7 @@ interface NoticeCardProps {
 
 export function NoticeCard({ title, moreHref, items }: NoticeCardProps) {
   return (
-    <Card className="h-full w-full gap-2 rounded-sm">
+    <Card className="h-full w-full gap-2 rounded-xs border-none">
       <CardHeader className="flex flex-row items-center justify-between space-y-0">
         <CardTitle className="text-lg font-bold">{title}</CardTitle>
         <Button

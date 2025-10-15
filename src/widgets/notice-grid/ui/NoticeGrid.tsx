@@ -41,7 +41,7 @@ export function NoticeGrid({ data }: NoticeGridProps) {
 
   return (
     <section className="flex w-full justify-center">
-      <div className="grid w-full max-w-[1080px] grid-cols-1 gap-6 lg:grid-cols-3 lg:px-0">
+      <div className="grid w-full max-w-[1080px] grid-cols-1 gap-2 lg:grid-cols-3 lg:px-0">
         {SECTIONS.map((section) => (
           <NoticeCard
             key={section.id}

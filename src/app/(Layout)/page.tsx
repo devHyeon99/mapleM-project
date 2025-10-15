@@ -7,7 +7,7 @@ export default async function Home() {
   const noticeData = await getCombinedNotices();
 
   return (
-    <div className="flex flex-col items-center gap-6">
+    <div className="flex flex-col items-center gap-4">
       <section className="wide:px-0 relative flex h-[300px] w-full max-w-[1080px] flex-col items-center justify-center overflow-hidden rounded-none px-4 md:mx-0 md:rounded-xs xl:w-full">
         <Image
           src="/images/main-bg.jpg"
@@ -20,6 +20,7 @@ export default async function Home() {
 
         {/* 오버레이 */}
         <div className="absolute inset-0 bg-black/30 dark:bg-black/40" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0A0A0A]/50" />
 
         {/* 컨텐츠 영역 */}
         <div className="relative z-10 flex w-full flex-col items-center gap-6 text-center text-white">
@@ -41,7 +42,7 @@ export default async function Home() {
 
       {/* 공지사항 섹션 */}
       <section
-        className="wide:px-0 w-full max-w-[1080px] px-4 pb-6"
+        className="wide:px-0 w-full max-w-[1080px] pb-6"
         aria-labelledby="notice-heading"
       >
         <h2 id="notice-heading" className="sr-only">

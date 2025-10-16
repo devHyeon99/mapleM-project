@@ -1,18 +1,18 @@
 import React from "react";
 import { Metadata } from "next";
-import { notFound } from "next/navigation";
-import { HydrationBoundary } from "@tanstack/react-query";
 import { getRankingPageData } from "@/entities/ranking/api/get-ranking-page-data";
-import { RANKING_TYPES } from "@/entities/ranking/model/types/ranking";
-import type { RankingType } from "@/entities/ranking/model/types/ranking";
+import {
+  RANKING_TYPES,
+  type RankingType,
+} from "@/entities/ranking/model/types/ranking";
 import { RankingBoard } from "@/widgets/ranking-board/ui/RankingBoard";
+import { notFound } from "next/navigation";
 
 interface RankingPageProps {
   params: Promise<{ type: string }>;
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
-// 타입별 한글 라벨 매핑 (SEO 및 제목용)
 const RANKING_LABELS: Record<RankingType, string> = {
   level: "레벨",
   dojang: "무릉도장",
@@ -71,29 +71,28 @@ export default async function RankingPage({
   if (!RANKING_TYPES.includes(type as RankingType)) {
     notFound();
   }
-
   const safeType = type as RankingType;
 
-  const { dehydratedState, params: fetchParams } = await getRankingPageData(
+  const { data, params: fetchParams } = await getRankingPageData(
     safeType,
     sParams,
   );
 
   return (
     <div className="flex w-full items-center justify-center pb-4">
-      <section className="wide:px-0 w-full max-w-4xl px-2">
-        <h1 className="wide:text-4xl mb-4 text-center text-2xl font-bold">
-          메이플스토리M {RANKING_LABELS[safeType]} 랭킹
+      <section className="wide:px-0 w-full">
+        <h1 className="wide:text-2xl wide:block my-2 hidden font-semibold">
+          {RANKING_LABELS[safeType]} 랭킹
         </h1>
-
         <p className="sr-only">
           메엠지지에서 메이플스토리M {fetchParams.worldName || "전체"} 월드{" "}
           {RANKING_LABELS[safeType]} 랭킹을 확인해보세요.
         </p>
-
-        <HydrationBoundary state={dehydratedState}>
-          <RankingBoard type={safeType} fetchParams={fetchParams} />
-        </HydrationBoundary>
+        <RankingBoard
+          type={safeType}
+          initialData={data}
+          fetchParams={fetchParams}
+        />
       </section>
     </div>
   );

@@ -43,7 +43,7 @@
   --radius-xl: calc(var(--radius) + 4px);
   --color-divider: var(--divider);
 
-  --breakpoint-wide: 1096px;
+  --breakpoint-wide: 1080px;
 }
 
 :root {

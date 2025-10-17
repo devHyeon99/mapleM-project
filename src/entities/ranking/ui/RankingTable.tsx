@@ -1,7 +1,7 @@
+// src/entities/ranking/ui/RankingTable.tsx
 "use client";
 
 import { useMemo } from "react";
-import { useQuery } from "@tanstack/react-query";
 import {
   Table,
   TableBody,
@@ -11,116 +11,61 @@ import {
   TableRow,
 } from "@/shared/ui/table";
 import { cn } from "@/shared/lib/utils";
-import { getRanking } from "../api/get-ranking";
-import { rankingQueryKeys } from "../model/queries/query-keys";
-import { adaptRankingItem } from "../lib/ranking-adapter";
-import type { RankingType } from "../model/types/ranking";
 import { RANKING_COLUMNS, RankingTableContext } from "./ranking-table.config";
-import { MobileRankingCard } from "./mobile-ranking-card"; // 위에서 만든 파일 import
+import type { RankingType, AnyRankingData } from "../model/types/ranking";
+import { MobileRankingList } from "./MobileRankingList";
+
 interface RankingTableProps {
   type: RankingType;
-  filters: {
-    worldName?: string;
-    date?: string;
-    page: number; // UI 페이지 (1~500)
-  };
+  data: AnyRankingData[];
+  currentPage: number;
+  worldName?: string;
   className?: string;
 }
 
 export const RankingTable = ({
   type,
-  filters,
+  data,
+  currentPage,
+  worldName,
   className,
 }: RankingTableProps) => {
-  // 1. UI Page(1~500)를 API Page(1~50)로 변환
-  // UI 1~10페이지 -> API 1페이지
-  // UI 11~20페이지 -> API 2페이지
-  const apiPage = Math.ceil(filters.page / 10);
-
-  // 2. API 호출
-  // apiFilters에는 UI page를 제외하고, 계산된 apiPage를 넣어서 쿼리 키를 만듭니다.
-  const { page: uiPage, ...restFilters } = filters;
-
-  const { data, isLoading } = useQuery({
-    // apiPage가 1일 때는 UI 페이지 1~10을 왔다갔다 해도 키가 같으므로 캐시된 데이터를 씁니다.
-    // apiPage가 2로 바뀌면(UI 11페이지 진입) 그때 새로 요청합니다.
-    queryKey: rankingQueryKeys.list(type, { ...restFilters, page: apiPage }),
-    queryFn: () => getRanking({ type, ...restFilters, page: apiPage }),
-    // [추천] 클라이언트 캐싱 추가
-    // 5분 동안은 사용자가 페이지를 왔다 갔다 해도 서버에 요청조차 보내지 않습니다.
-    // 서버 캐싱이 있어도 네트워크 왕복 비용을 아끼기 위해 필요합니다.
-    staleTime: 1000 * 60 * 5,
-
-    // (선택) 가비지 컬렉션 시간 (기본값 5분)
-    // 메모리에서 데이터를 언제 지울지 결정합니다. staleTime보다 길거나 같게 설정합니다.
-    gcTime: 1000 * 60 * 10,
-  });
-
-  // 3. 200개 데이터 중 현재 UI 페이지에 맞는 20개 잘라내기
-  const unifiedItems = useMemo(() => {
-    if (!data?.ranking) return [];
-
-    // 현재 API 페이지 내에서의 상대적 인덱스 (0 ~ 9)
-    // 예: UI 12페이지 -> (11) % 10 = 1번째 블록
-    const relativePageIndex = (uiPage - 1) % 10;
-
+  // 1. 데이터 슬라이싱 (Server Data 200개 -> UI 20개)
+  const items = useMemo(() => {
+    if (!data || data.length === 0) return [];
+    const relativePageIndex = (currentPage - 1) % 10;
     const startIndex = relativePageIndex * 20;
-    const rawItemsSlice = data.ranking.slice(startIndex, startIndex + 20);
+    return data.slice(startIndex, startIndex + 20);
+  }, [data, currentPage]);
 
-    return rawItemsSlice.map((item) => adaptRankingItem(type, item));
-  }, [data, uiPage, type]);
-
-  // 4. 컬럼 설정 가져오기 (이전과 동일)
+  // 2. 컬럼 설정 가져오기 (Desktop용)
   const columns = useMemo(() => {
     if (type.includes("sharenian")) return RANKING_COLUMNS.sharenian;
+    if (type === "union") return RANKING_COLUMNS.union;
+    if (type === "achievement") return RANKING_COLUMNS.achievement;
     return RANKING_COLUMNS[type] || RANKING_COLUMNS.level;
   }, [type]);
 
-  // 5. 컨텍스트 (이전과 동일)
+  // 3. 컨텍스트 생성
   const context = useMemo<RankingTableContext>(
-    () => ({
-      isWorldRankingView: !!filters.worldName,
-    }),
-    [filters.worldName],
+    () => ({ isWorldRankingView: !!worldName }),
+    [worldName],
   );
 
-  if (isLoading) console.log("로딩중");
+  const hasData = items.length > 0;
 
-  const mobileStatHeader = useMemo(() => {
-    switch (type) {
-      case "level":
-      case "union":
-        return "레벨";
-      case "dojang":
-      case "kerning-m-tower":
-        return "층수";
-      case "combat-power":
-        return "전투력";
-      case "sharenian-battlefield":
-      case "sharenian-waterway":
-      case "root-of-time":
-      case "achievement":
-        return "점수";
-
-      default:
-        return "수치";
-    }
-  }, [type]);
-
-  if (!data) return null;
-  const hasData = unifiedItems.length > 0;
   return (
-    <div className={cn("bg-background rounded-md border", className)}>
+    <div className={className}>
       {/* ------------------------------------------------------- */}
-      {/* 1. 데스크탑 뷰 (md 이상에서만 보임: hidden md:block)       */}
+      {/* 1. 데스크탑 뷰 (md 이상에서만 보임) : Table              */}
       {/* ------------------------------------------------------- */}
-      <div className="hidden sm:block">
+      <div className="hidden border-b md:block">
         <Table>
           <TableHeader>
-            <TableRow className="bg-muted/50 hover:bg-muted/50">
-              {columns.map((col) => (
+            <TableRow className="bg-muted hover:bg-muted">
+              {columns.map((col, idx) => (
                 <TableHead
-                  key={col.header}
+                  key={col.header + idx}
                   className={cn("text-center", col.className)}
                 >
                   {col.header}
@@ -129,20 +74,36 @@ export const RankingTable = ({
             </TableRow>
           </TableHeader>
 
-          <TableBody>
+          <TableBody className="bg-muted/30">
             {hasData ? (
-              unifiedItems.map((item) => (
-                <TableRow key={item.id}>
-                  {columns.map((col) => (
-                    <TableCell
-                      key={`${item.id}-${col.header}`}
-                      className="text-center"
-                    >
-                      {col.cell(item, context)}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))
+              items.map((item, index) => {
+                let uniqueKey = "";
+                if ("character_name" in item) {
+                  uniqueKey = `${item.world_name}-${item.character_name}-${item.ranking}`;
+                } else if ("guild_name" in item) {
+                  uniqueKey = `${item.world_name}-${item.guild_name}-${item.ranking}`;
+                } else {
+                  // Fallback for safety
+                  const fallbackItem = item as { ranking: number };
+                  uniqueKey = `${type}-${fallbackItem.ranking}-${index}`;
+                }
+
+                return (
+                  <TableRow
+                    key={uniqueKey}
+                    className="hover:bg-muted/50 h-12.5"
+                  >
+                    {columns.map((col, colIndex) => (
+                      <TableCell
+                        key={`${uniqueKey}-${colIndex}`}
+                        className={cn("text-center", col.className)}
+                      >
+                        {col.cell(item, context)}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                );
+              })
             ) : (
               <TableRow>
                 <TableCell
@@ -158,35 +119,13 @@ export const RankingTable = ({
       </div>
 
       {/* ------------------------------------------------------- */}
-      {/* 2. 모바일 뷰 (md 미만에서만 보임: block md:hidden)        */}
+      {/* 2. 모바일 뷰 (md 미만에서만 보임) : MobileRankingList    */}
       {/* ------------------------------------------------------- */}
       <div className="block md:hidden">
         {hasData ? (
-          <div className="flex flex-col">
-            {/* [추가됨] 모바일 리스트 헤더 */}
-            <div className="bg-muted/50 text-muted-foreground flex items-center justify-between border-b px-4 py-2 text-xs font-medium">
-              <div className="flex items-center gap-4">
-                {/* MobileRankingCard의 순위 영역(w-8)과 너비를 맞춰야 정렬이 맞음 */}
-                <div className="flex w-8 justify-center">순위</div>
-                <div>정보</div>
-              </div>
-              <div>{mobileStatHeader}</div>
-            </div>
-
-            {/* 리스트 목록 */}
-            <div className="divide-y">
-              {unifiedItems.map((item) => (
-                <MobileRankingCard
-                  key={item.id}
-                  item={item}
-                  type={type}
-                  isWorldRankingView={context.isWorldRankingView}
-                />
-              ))}
-            </div>
-          </div>
+          <MobileRankingList type={type} data={items} context={context} />
         ) : (
-          <div className="text-muted-foreground flex h-32 items-center justify-center text-sm">
+          <div className="bg-background text-muted-foreground flex h-24 items-center justify-center rounded-md border text-sm">
             데이터가 없습니다.
           </div>
         )}

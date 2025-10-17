@@ -26,9 +26,14 @@ export function RankingTabs() {
 
   return (
     <Tabs value={activeType} className="w-full">
-      <TabsList className="grid h-auto w-full grid-cols-3 gap-1 rounded-sm border p-1 md:grid-cols-5 lg:grid-cols-9">
+      <TabsList className="grid h-auto w-full grid-cols-3 gap-1 rounded-xs border border-none md:grid-cols-9">
         {RANKING_TYPES.map((type) => (
-          <TabsTrigger key={type} value={type} asChild>
+          <TabsTrigger
+            className="hover:data-[state=inactive]:text-foreground h-10 rounded-none border-2 border-t-0 border-r-0 border-l-0 bg-transparent! transition-colors duration-150 data-[state=active]:border-b-orange-500! data-[state=active]:shadow-none data-[state=inactive]:text-black/60 hover:data-[state=inactive]:border-b-orange-500"
+            key={type}
+            value={type}
+            asChild
+          >
             <Link href={`/ranking/${type}`}>{RANKING_LABELS[type]}</Link>
           </TabsTrigger>
         ))}

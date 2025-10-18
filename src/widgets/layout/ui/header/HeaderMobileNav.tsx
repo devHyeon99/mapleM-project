@@ -29,7 +29,6 @@ export function HeaderMobileNav() {
           className="md:hidden"
           aria-label="메뉴 열기"
         >
-          {/* 아이콘 크기 약간 확대 */}
           <Menu className="size-6" />
         </Button>
       </SheetTrigger>

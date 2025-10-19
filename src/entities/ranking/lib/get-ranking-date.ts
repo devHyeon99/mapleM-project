@@ -1,21 +1,20 @@
-import { subDays, setHours, isBefore, format } from "date-fns";
+import { subDays, format } from "date-fns";
+import { toZonedTime } from "date-fns-tz";
 
-/**
- * 랭킹 API 호출에 필요한 날짜 문자열(yyyy-MM-dd)을 반환합니다.
- * 06:00 이전 -> 어제 날짜
- * 06:00 이후 -> 오늘 날짜
- */
-export function getRankingDate(): string {
-  const now = new Date();
+const KST_TZ = "Asia/Seoul";
+const RESET_HOUR = 6; // 오전 6시 리셋
 
-  // 오늘 오전 6시 정각 기준점
-  const todaySixAM = setHours(new Date(), 6);
-  todaySixAM.setMinutes(0);
-  todaySixAM.setSeconds(0);
-  todaySixAM.setMilliseconds(0);
+export function getRankingDate(now: Date = new Date()): string {
+  // 현재 시간(now)이 어느 나라 시간이든 상관없이, 무조건 '한국 시간'으로 변환된 Date 객체를 만듦
+  const kstNow = toZonedTime(now, KST_TZ);
 
-  // 06:00 이전이면 어제(1일 전), 이후면 오늘(0일 전)
-  const targetDate = isBefore(now, todaySixAM) ? subDays(now, 1) : now;
+  // 변환된 한국 시간의 '시(Hour)'가 6시 전인지 체크
+  // (kstNow.getHours()는 한국 시간을 기준으로 0~23을 반환함)
+  const target =
+    kstNow.getHours() < RESET_HOUR
+      ? subDays(kstNow, 1) // 6시 전이면 어제
+      : kstNow; // 6시 후면 오늘
 
-  return format(targetDate, "yyyy-MM-dd");
+  // 포맷팅 (yyyy-MM-dd)
+  return format(target, "yyyy-MM-dd");
 }

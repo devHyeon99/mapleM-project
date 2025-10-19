@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
   }
 
   if (tag) {
-    revalidateTag(tag); // 특정 태그("notices") 캐시만 즉시 삭제
+    revalidateTag(tag, {});
     return NextResponse.json({ revalidated: true, now: Date.now() });
   }
 

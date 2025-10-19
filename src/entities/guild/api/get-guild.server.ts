@@ -20,7 +20,7 @@ export async function getGuildFullData({
   const idData = await nexonFetch<{ oguild_id: string }>(
     `/guild/id?${idParams.toString()}`,
     {
-      next: { revalidate: 0 }, // 캐시 안 함 (항상 최신 확인)
+      next: { revalidate: 86400 }, // 길드를 삭제하는 경우는 잘 없음 혹시 모르니 하루 동안 캐시
     },
   );
 

@@ -30,7 +30,10 @@ export async function fetchRanking({
   return nexonFetch<RankingResponse<AnyRankingData>>(
     `/ranking/${type}?${queryParams.toString()}`,
     {
-      cache: "no-store",
+      next: {
+        revalidate: 86400,
+        tags: ["ranking", `ranking-${date}`],
+      },
     },
   );
 }

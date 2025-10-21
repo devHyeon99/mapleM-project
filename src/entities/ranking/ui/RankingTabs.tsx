@@ -4,19 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Tabs, TabsList, TabsTrigger } from "@/shared/ui/tabs";
 import { RANKING_TYPES } from "../model/types/ranking";
-
-// 각 타입별 한글 명칭 (정적 데이터)
-const RANKING_LABELS: Record<(typeof RANKING_TYPES)[number], string> = {
-  level: "레벨",
-  dojang: "무릉도장",
-  "root-of-time": "시간의 근원",
-  union: "유니온",
-  "combat-power": "전투력",
-  "kerning-m-tower": "커닝 M 타워",
-  achievement: "업적",
-  "sharenian-battlefield": "샤레니안 전장",
-  "sharenian-waterway": "지하수로",
-};
+import { RANKING_LABELS } from "../model/constants";
 
 export function RankingTabs() {
   const pathname = usePathname();

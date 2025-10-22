@@ -151,7 +151,7 @@ const SharenianInfo = ({ item }: { item: AnyRankingData }) => {
           <RankingIcon
             src={guildMark}
             alt="guild mark"
-            className="h-4 w-4 rounded-sm"
+            className="h-4 w-4 rounded-xs bg-white"
             size={16}
           />
         )}

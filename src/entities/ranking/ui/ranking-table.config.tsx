@@ -1,8 +1,7 @@
-/* eslint-disable @next/next/no-img-element */
 import React from "react";
 import Link from "next/link";
-import { cn } from "@/shared/lib/utils";
 import type { AnyRankingData } from "../model/types/ranking";
+import { RankingIcon } from "./RankingIcon";
 
 // ----------------------------------------------------------------------
 // 타입 정의 및 헬퍼
@@ -17,25 +16,6 @@ export interface ColumnDef {
   className?: string;
   cell: (item: AnyRankingData, ctx: RankingTableContext) => React.ReactNode;
 }
-
-// [헬퍼] 단순 이미지 렌더링 (에러 시 숨김 처리)
-const RankingIcon = ({
-  src,
-  className,
-}: {
-  src?: string | null;
-  className?: string;
-}) => {
-  if (!src) return null;
-  return (
-    <img
-      src={src}
-      alt="icon"
-      className={cn("object-contain", className)}
-      onError={(e) => (e.currentTarget.style.display = "none")}
-    />
-  );
-};
 
 // ----------------------------------------------------------------------
 // 셀 렌더러 (Renderers)
@@ -77,7 +57,9 @@ export const Renderers = {
           {item.guild_mark_icon && (
             <RankingIcon
               src={item.guild_mark_icon}
+              alt="guild mark"
               className="h-5 w-5 rounded-xs bg-white"
+              size={20}
             />
           )}
           <Link
@@ -163,7 +145,9 @@ export const Renderers = {
           {guildIcon && (
             <RankingIcon
               src={guildIcon}
+              alt="guild mark"
               className="h-5 w-5 rounded-xs bg-white"
+              size={20}
             />
           )}
 
@@ -190,7 +174,9 @@ export const Renderers = {
             <div key={badge.badge_no} className="group relative">
               <RankingIcon
                 src={badge.badge_icon}
+                alt="업적 뱃지"
                 className="bg-background h-8 w-8 rounded-full border border-white"
+                size={32}
               />
             </div>
           ))}
@@ -207,7 +193,9 @@ export const Renderers = {
         <div className="flex items-center justify-center">
           <RankingIcon
             src={item.grade_icon}
+            alt="길드 등급"
             className="h-8 w-8 object-contain" // 아이콘 크기 조절
+            size={32}
           />
         </div>
       );

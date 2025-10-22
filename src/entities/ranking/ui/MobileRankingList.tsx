@@ -1,11 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import { cn } from "@/shared/lib/utils";
 import type { RankingType, AnyRankingData } from "../model/types/ranking";
 import { Renderers, RankingTableContext } from "./ranking-table.config";
 import { memo } from "react";
+import { RankingIcon } from "./RankingIcon";
 
 // 한글 월드명 인코딩
 const encodeWorldName = (name: string) => encodeURIComponent(name);
@@ -25,7 +24,7 @@ const getItemKey = (
   return `${type}-${(item as { ranking: number }).ranking}-${index}`;
 };
 
-// 랭킹 타입에 따른 라벨과 값 추출 (전략 패턴 적용)
+// 랭킹 타입에 따른 라벨과 값 추출
 const getStatData = (
   item: AnyRankingData,
   type: RankingType,
@@ -59,7 +58,6 @@ const getStatData = (
       if ("max_damage" in item) value = item.max_damage.toLocaleString();
       break;
     default:
-      // Sharenian 관련 타입 처리
       if (type.includes("sharenian") && "season_score" in item) {
         value = Number(item.season_score).toLocaleString();
       }
@@ -141,38 +139,6 @@ const RankingRow = memo(
 );
 RankingRow.displayName = "RankingRow";
 
-// 아이콘 컴포넌트
-const RankingIcon = ({
-  src,
-  alt,
-  className,
-}: {
-  src?: string | null;
-  alt: string;
-  className?: string;
-}) => {
-  if (!src) return null;
-
-  const SIZE = 16;
-
-  return (
-    <div className={cn("relative shrink-0", className)}>
-      <Image
-        src={src}
-        alt={alt}
-        width={SIZE}
-        height={SIZE}
-        unoptimized
-        className="object-contain"
-        onError={(e) => {
-          const target = e.target as HTMLImageElement;
-          target.style.display = "none";
-        }}
-      />
-    </div>
-  );
-};
-
 // 샤레니안 랭킹 정보
 const SharenianInfo = ({ item }: { item: AnyRankingData }) => {
   if (!("guild_name" in item)) return null;
@@ -186,6 +152,7 @@ const SharenianInfo = ({ item }: { item: AnyRankingData }) => {
             src={guildMark}
             alt="guild mark"
             className="h-4 w-4 rounded-sm"
+            size={16}
           />
         )}
         {item.guild_name && (
@@ -219,6 +186,7 @@ const GeneralInfo = ({ item }: { item: AnyRankingData }) => {
           src={`/worlds/${encodeWorldName(item.world_name)}.png`}
           alt={item.world_name}
           className="h-3.5 w-3.5"
+          size={14} // 기존 className h-3.5 w-3.5에 맞춰 사이즈 조정 (약 14px)
         />
         <Link
           href={`/character/${item.world_name}/${item.character_name}`}

@@ -158,6 +158,7 @@ const SharenianInfo = ({ item }: { item: AnyRankingData }) => {
         {item.guild_name && (
           <Link
             href={`/guild/${item.world_name}/${item.guild_name}`}
+            prefetch={false}
             className="truncate text-sm font-bold"
           >
             {item.guild_name}
@@ -186,10 +187,11 @@ const GeneralInfo = ({ item }: { item: AnyRankingData }) => {
           src={`/worlds/${encodeWorldName(item.world_name)}.png`}
           alt={item.world_name}
           className="h-3.5 w-3.5"
-          size={14} // 기존 className h-3.5 w-3.5에 맞춰 사이즈 조정 (약 14px)
+          size={14}
         />
         <Link
           href={`/character/${item.world_name}/${item.character_name}`}
+          prefetch={false}
           className="truncate text-sm font-bold"
         >
           {item.character_name}
@@ -204,6 +206,7 @@ const GeneralInfo = ({ item }: { item: AnyRankingData }) => {
             <span className="bg-border h-2 w-[1px]" />
             <Link
               href={`/guild/${item.world_name}/${guildName}`}
+              prefetch={false}
               className="flex max-w-[100px] items-center gap-1 truncate"
             >
               {guildName}

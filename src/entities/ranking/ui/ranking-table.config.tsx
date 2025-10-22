@@ -30,6 +30,7 @@ const LinkText = ({
 }) => (
   <Link
     href={href}
+    prefetch={false}
     className="text-sm font-medium underline-offset-4 hover:text-orange-500 hover:underline"
   >
     {children}

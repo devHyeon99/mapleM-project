@@ -67,7 +67,6 @@ export function GuildAbilityList({ abilities }: GuildAbilityListProps) {
       critFeverGroup.push(ability);
     }
   });
-  console.log(abilities);
 
   // 중복 그룹 자동 분배 (ID 오름차순 정렬 -> 앞에서부터 채우기)
   damageGroup.sort((a, b) => a.ability_no - b.ability_no);

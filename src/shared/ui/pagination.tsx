@@ -48,6 +48,7 @@ function PaginationLink({
   className,
   isActive,
   size = "icon",
+  prefetch = false,
   ...props
 }: PaginationLinkProps) {
   return (
@@ -55,6 +56,7 @@ function PaginationLink({
       aria-current={isActive ? "page" : undefined}
       data-slot="pagination-link"
       data-active={isActive}
+      prefetch={prefetch}
       className={cn(
         buttonVariants({
           variant: isActive ? "outline" : "ghost",

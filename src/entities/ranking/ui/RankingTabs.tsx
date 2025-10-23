@@ -22,7 +22,9 @@ export function RankingTabs() {
             value={type}
             asChild
           >
-            <Link href={`/ranking/${type}`}>{RANKING_LABELS[type]}</Link>
+            <Link href={`/ranking/${type}`} prefetch={false}>
+              {RANKING_LABELS[type]}
+            </Link>
           </TabsTrigger>
         ))}
       </TabsList>

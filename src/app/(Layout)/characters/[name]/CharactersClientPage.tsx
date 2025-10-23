@@ -108,6 +108,7 @@ export default function CharactersClientPage() {
             <Link
               key={char.ocid}
               href={href}
+              prefetch={false}
               onClick={(e) => {
                 if (isAnyCardLoading) {
                   e.preventDefault();

@@ -40,6 +40,7 @@ export function GuildMemberRow({
         {/* 접근성용 Link */}
         <Link
           href={`/character/${encodeURIComponent(worldName)}/${encodeURIComponent(member.character_name)}`}
+          prefetch={false}
           onClick={(e) => {
             e.stopPropagation(); // 부모 Row 클릭 방지
             addHistory(member.character_name, worldName as WorldName);

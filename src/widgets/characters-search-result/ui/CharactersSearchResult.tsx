@@ -9,7 +9,7 @@ import { AlertTriangle, Loader2 } from "lucide-react";
 import { cn } from "@/shared/lib/utils";
 import { useMemo, useState } from "react";
 import { useCharacterSearchAll } from "@/features/character-search-all";
-import { useRecentSearch } from "@/shared/model/hooks/useRecentSearch";
+import { useRecentSearch } from "@/shared/lib/hooks/useRecentSearch";
 import { WORLD_NAMES } from "@/shared/config/constants/worlds";
 type WorldName = (typeof WORLD_NAMES)[number];
 
@@ -21,7 +21,7 @@ function safeDecode(value: string) {
   }
 }
 
-export default function CharactersClientPage() {
+export default function CharactersSearchResult() {
   const params = useParams<{ name?: string }>();
   const searchParams = useSearchParams();
 

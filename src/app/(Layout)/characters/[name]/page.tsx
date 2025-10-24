@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
-import CharactersClientPage from "./CharactersClientPage";
+import { CharactersSearchResult } from "@/widgets/characters-search-result";
 
 function safeDecode(value: string) {
   try {
@@ -25,7 +25,14 @@ export async function generateMetadata({
       canonical: `/characters/${encodeURIComponent(decodedName)}`,
     },
     openGraph: {
-      title: `${decodedName} - 전체 월드 캐릭터 캐릭터 검색`,
+      title: `${decodedName} - 전체 월드 캐릭터 검색`,
+      description: `메이플스토리M "${decodedName}" 전체 월드 캐릭터 검색 결과를 확인하세요.`,
+      url: `/characters/${encodeURIComponent(decodedName)}`,
+      images: ["/og-image.png"],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${decodedName} - 전체 월드 캐릭터 검색`,
       description: `메이플스토리M "${decodedName}" 전체 월드 캐릭터 검색 결과를 확인하세요.`,
       images: ["/og-image.png"],
     },
@@ -34,7 +41,7 @@ export async function generateMetadata({
 export default function CharactersNamePage() {
   return (
     <Suspense>
-      <CharactersClientPage />
+      <CharactersSearchResult />
     </Suspense>
   );
 }

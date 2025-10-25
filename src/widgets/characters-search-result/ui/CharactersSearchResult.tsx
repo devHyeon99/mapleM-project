@@ -1,108 +1,73 @@
 "use client";
 
-import { useParams, useSearchParams } from "next/navigation";
-import { Card, CardContent } from "@/shared/ui/card";
-import { LoadingCard } from "@/shared/ui/LoadingCard";
-import { CharacterSearch } from "@/features/character-search";
+import { useState, useTransition } from "react";
 import Link from "next/link";
-import { AlertTriangle, Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { AlertTriangle, ChevronRight, Loader2 } from "lucide-react";
+import { Card, CardContent } from "@/shared/ui/card";
 import { cn } from "@/shared/lib/utils";
-import { useMemo, useState } from "react";
-import { useCharacterSearchAll } from "@/features/character-search-all";
 import { useRecentSearch } from "@/shared/lib/hooks/useRecentSearch";
 import { WORLD_NAMES } from "@/shared/config/constants/worlds";
+import type { CharacterOcidData } from "@/entities/character/model/types";
+
 type WorldName = (typeof WORLD_NAMES)[number];
 
-function safeDecode(value: string) {
-  try {
-    return decodeURIComponent(value);
-  } catch {
-    return value;
-  }
+interface CharactersSearchResultProps {
+  name: string;
+  characters: CharacterOcidData[];
 }
 
-export default function CharactersSearchResult() {
-  const params = useParams<{ name?: string }>();
-  const searchParams = useSearchParams();
+// 링크 기본 동작(새 탭/중클/수정키)을 보존하면서 "일반 좌클릭"만 가로챔
+function shouldIntercept(e: React.MouseEvent<HTMLAnchorElement>) {
+  if (e.defaultPrevented) return false;
+  if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return false;
+  if (e.button !== 0) return false;
+  return true;
+}
 
+export function CharactersSearchResult({
+  name,
+  characters,
+}: CharactersSearchResultProps) {
+  const router = useRouter();
   const { addHistory } = useRecentSearch("character-search-history");
 
-  const name = useMemo(() => {
-    const fromParams = params?.name ? safeDecode(String(params.name)) : null;
-    if (fromParams) return fromParams;
+  const [isPending, startTransition] = useTransition();
+  const [pendingOcid, setPendingOcid] = useState<string | null>(null);
 
-    const fromQuery = searchParams.get("name");
-    return fromQuery ? safeDecode(fromQuery) : undefined;
-  }, [params, searchParams]);
-
-  const [loadingOcid, setLoadingOcid] = useState<string | null>(null);
-  const { data: characters, isLoading } = useCharacterSearchAll(name);
-
-  if (isLoading)
+  if (!characters || characters.length === 0) {
     return (
-      <div className="flex flex-col items-center gap-6">
-        <CharacterSearch />
-        <LoadingCard
-          message={`전체 월드에서 "${name ?? ""}" 캐릭터를 찾는 중입니다... `}
-        />
+      <div className="mt-10 flex w-full flex-col items-center justify-center">
+        <AlertTriangle className="text-destructive mb-2 size-12" />
+        <h2 className="text-xl font-bold">&quot;{name}&quot;</h2>
+        <p className="mb-2 text-lg font-medium">캐릭터를 찾을 수 없습니다.</p>
+        <p className="text-muted-foreground text-sm">
+          검색이 되지 않는 캐릭터가 있을 수 있습니다.
+        </p>
       </div>
     );
+  }
 
-  if (!name)
-    return (
-      <div className="flex w-full flex-col items-center gap-6">
-        <CharacterSearch />
-        <div className="bg-card flex w-full max-w-3xl flex-col items-center justify-center gap-4 rounded-lg border p-4 text-center shadow-md">
-          <AlertTriangle className="text-destructive size-12" />
-          <p className="text-lg font-medium">캐릭터 이름을 입력해 주세요.</p>
-          <p className="text-muted-foreground">
-            위 검색창에서 캐릭터 이름을 입력하면 전체 월드에서 검색합니다.
-          </p>
-        </div>
-      </div>
-    );
-
-  if (!characters || characters.length === 0)
-    return (
-      <div className="flex w-full flex-col items-center gap-6">
-        <CharacterSearch />
-        <div className="bg-card flex w-full max-w-3xl flex-col items-center justify-center gap-4 rounded-lg border p-4 text-center shadow-md">
-          <AlertTriangle className="text-destructive size-12" />
-          <h2 className="text-xl font-bold">&quot;{name}&quot;</h2>
-          <p className="text-lg font-medium">캐릭터를 찾을 수 없습니다.</p>
-          <p className="text-muted-foreground">
-            월드와 캐릭터 이름을 다시 확인하거나,
-            <br />위 검색창을 통해 다른 캐릭터를 검색해 보세요.
-          </p>
-        </div>
-      </div>
-    );
-
-  const isAnyCardLoading = loadingOcid !== null;
+  const isAnyCardLoading = isPending && pendingOcid !== null;
 
   return (
     <div className="flex w-full flex-col items-center">
-      <CharacterSearch />
-      <h1 className="mt-6 text-lg font-bold lg:text-xl">
-        전체 월드 내{" "}
-        <strong className="text-[#cc4b00] dark:text-[#ff6f1b]">
-          &quot;{name}&quot;
-        </strong>{" "}
-        캐릭터에 대한 검색 결과 입니다.
-      </h1>
-      <p className="text-muted-foreground mb-4 text-sm">
-        총 {characters.length}개의 검색 결과가 있습니다.
-      </p>
+      <div className="flex w-full flex-col items-center gap-1 py-10">
+        <h1 className="text-lg font-bold md:text-2xl">
+          전체 월드 내 <strong>&quot;{name}&quot;</strong> 검색 결과
+        </h1>
+        <p className="text-muted-foreground text-sm md:text-base">
+          총 {characters.length}개의 검색 결과가 있습니다.
+        </p>
+      </div>
 
-      <div className="flex w-full max-w-3xl flex-col gap-4">
+      <div className="flex w-full flex-col gap-0.5 pb-10">
         {characters.map((char) => {
-          const isLoadingThisCard = loadingOcid === char.ocid;
-
-          const charWorld = char.world_name as WorldName;
-
           const href = `/character/${encodeURIComponent(
             char.world_name,
           )}/${encodeURIComponent(char.character_name)}`;
+
+          const isLoadingThisCard = isPending && pendingOcid === char.ocid;
 
           return (
             <Link
@@ -110,24 +75,32 @@ export default function CharactersSearchResult() {
               href={href}
               prefetch={false}
               onClick={(e) => {
-                if (isAnyCardLoading) {
-                  e.preventDefault();
-                  return;
-                }
+                // 새 탭/중클/수정키 클릭은 기본 링크 동작 유지
+                if (!shouldIntercept(e)) return;
 
-                addHistory(char.character_name, charWorld);
-                setLoadingOcid(char.ocid);
+                // 일반 좌클릭만 transition 네비로 가로챔
+                e.preventDefault();
+
+                // transition 중 중복 클릭 방지
+                if (isPending) return;
+
+                // 히스토리 저장
+                addHistory(char.character_name, char.world_name as WorldName);
+
+                // 어떤 카드가 pending인지 표시용
+                setPendingOcid(char.ocid);
+
+                startTransition(() => {
+                  router.push(href);
+                });
               }}
-              aria-label={`${char.world_name} 월드의 ${char.character_name} 캐릭터 정보 보기`}
-              aria-disabled={isAnyCardLoading && !isLoadingThisCard}
-              className="focus-visible:border-ring rounded-sm transition-all outline-none focus-visible:ring-1 focus-visible:ring-offset-1"
             >
               <Card
                 className={cn(
-                  "hover:bg-muted dark:hover:bg-card/70 cursor-pointer rounded-sm py-4",
+                  "cursor-pointer rounded-xs border-none py-4 shadow-none dark:hover:bg-white/10",
                   isAnyCardLoading &&
                     !isLoadingThisCard &&
-                    "cursor-not-allowed opacity-50 hover:bg-transparent dark:hover:bg-transparent",
+                    "cursor-not-allowed opacity-50 hover:bg-transparent",
                 )}
               >
                 <CardContent className="flex items-center justify-between">
@@ -139,20 +112,18 @@ export default function CharactersSearchResult() {
                       {char.world_name}
                     </p>
                   </div>
-
-                  {isLoadingThisCard && (
-                    <Loader2 className="size-5 animate-spin" />
-                  )}
+                  <div className="text-muted-foreground flex items-center gap-1">
+                    {isLoadingThisCard && (
+                      <Loader2 className="size-5 animate-spin" />
+                    )}
+                    <ChevronRight className="size-5" aria-hidden="true" />
+                  </div>
                 </CardContent>
               </Card>
             </Link>
           );
         })}
       </div>
-
-      <p className="text-muted-foreground mt-2 w-full max-w-3xl text-right text-sm">
-        캐릭터가 존재하지만 검색이 되지 않는 경우가 있습니다.
-      </p>
     </div>
   );
 }

@@ -1,1 +1,1 @@
-export { default as CharactersSearchResult } from "./CharactersSearchResult";
+export { CharactersSearchResult } from "./CharactersSearchResult";

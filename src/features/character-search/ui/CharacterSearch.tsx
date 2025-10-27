@@ -2,52 +2,41 @@
 
 import { useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { SearchForm } from "@/shared/ui/SearchForm";
-import { useRecentSearch } from "@/shared/model/hooks/useRecentSearch";
+import { SearchForm } from "@/features/search-form";
 
 const VALIDATION_REGEX = /^[a-zA-Z0-9가-힣]{2,8}$/;
 const VALIDATION_ERROR_MESSAGE =
   "캐릭터명은 2~8자의 한글, 영어, 숫자만 가능합니다.";
 
-interface CharacterSearchProps {
-  variant?: "default" | "glass";
-}
-
-export const CharacterSearch = ({
-  variant = "default",
-}: CharacterSearchProps) => {
+export const CharacterSearch = () => {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
 
-  const { history, addHistory, removeHistory, clearHistory } = useRecentSearch(
-    "character-search-history",
-  );
+  const normalizeName = (name: string) => name.trim();
 
-  const handleValidate = (_world: string, name: string): boolean => {
-    return VALIDATION_REGEX.test(name);
+  const handleValidate = (_world: string, name: string) => {
+    return VALIDATION_REGEX.test(normalizeName(name));
   };
 
   const handleSearch = (world: string, name: string) => {
-    addHistory(name, world);
+    if (isPending) return;
+
+    const normalized = normalizeName(name);
+    if (!VALIDATION_REGEX.test(normalized)) return;
 
     const path =
       world === "전체"
-        ? `/characters/${encodeURIComponent(name)}`
-        : `/character/${encodeURIComponent(world)}/${encodeURIComponent(name)}`;
+        ? `/characters/${encodeURIComponent(normalized)}`
+        : `/character/${encodeURIComponent(world)}/${encodeURIComponent(normalized)}`;
 
-    startTransition(() => {
-      router.push(path);
-    });
+    startTransition(() => router.push(path));
   };
 
   return (
     <SearchForm
-      variant={variant}
+      historyKey="character-search-history"
       lastWorldKey="character-last-world"
       placeholder="캐릭터 이름을 입력하세요"
-      history={history}
-      onHistoryRemove={removeHistory}
-      onHistoryClear={clearHistory}
       onValidate={handleValidate}
       errorMessage={VALIDATION_ERROR_MESSAGE}
       onSubmit={handleSearch}

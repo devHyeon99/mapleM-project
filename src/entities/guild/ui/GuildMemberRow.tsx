@@ -6,7 +6,7 @@ import { Badge } from "@/shared/ui/badge";
 import { TableCell, TableRow } from "@/shared/ui/table";
 import { GuildMember } from "../model/types";
 import { WORLD_NAMES } from "@/shared/config/constants/worlds";
-import { useRecentSearch } from "@/shared/model/hooks/useRecentSearch";
+import { useRecentSearch } from "@/shared/lib/hooks/useRecentSearch";
 
 type WorldName = (typeof WORLD_NAMES)[number];
 

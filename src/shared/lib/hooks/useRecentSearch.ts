@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback } from "react";
 
 export interface SearchHistoryItem {
   id: string;
@@ -12,20 +12,23 @@ export interface SearchHistoryItem {
 const MAX_HISTORY_LIMIT = 6;
 
 export const useRecentSearch = (storageKey: string) => {
-  const [history, setHistory] = useState<SearchHistoryItem[]>([]);
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-    const saved = localStorage.getItem(storageKey);
-    if (saved) {
-      try {
-        setHistory(JSON.parse(saved));
-      } catch {
-        localStorage.removeItem(storageKey);
-      }
+  const [history, setHistory] = useState<SearchHistoryItem[]>(() => {
+    if (typeof window === "undefined") {
+      return [];
     }
-  }, [storageKey]);
+
+    const saved = localStorage.getItem(storageKey);
+    if (!saved) {
+      return [];
+    }
+
+    try {
+      return JSON.parse(saved) as SearchHistoryItem[];
+    } catch {
+      localStorage.removeItem(storageKey);
+      return [];
+    }
+  });
 
   const addHistory = useCallback(
     (name: string, world: string) => {
@@ -86,7 +89,7 @@ export const useRecentSearch = (storageKey: string) => {
   }, [storageKey]);
 
   return {
-    history: isMounted ? history : [],
+    history,
     addHistory,
     removeHistory,
     removeHistoryByParams,

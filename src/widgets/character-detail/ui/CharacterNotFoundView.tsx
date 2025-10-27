@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
-import { useRecentSearch } from "@/shared/model/hooks/useRecentSearch";
+import { useRecentSearch } from "@/shared/lib/hooks/useRecentSearch";
 import { CharacterSearch } from "@/features/character-search/ui/CharacterSearch";
 
 export function CharacterNotFoundView() {

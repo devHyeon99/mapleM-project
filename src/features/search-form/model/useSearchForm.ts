@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { WORLD_NAMES } from "@/shared/config/constants/worlds";
 
 interface UseSearchFormLogicProps {
@@ -14,23 +14,34 @@ export function useSearchForm({
   onSubmit,
   onValidate,
 }: UseSearchFormLogicProps) {
-  const [world, setWorld] = useState(includeAllWorld ? "전체" : "스카니아");
-  const [inputValue, setInputValue] = useState("");
-  const [open, setOpen] = useState(false);
-  const [isError, setIsError] = useState(false);
-
+  const defaultWorld = includeAllWorld ? "전체" : "스카니아";
   const worldOptions = includeAllWorld
     ? WORLD_NAMES
     : WORLD_NAMES.filter((w) => w !== "전체");
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const saved = localStorage.getItem(lastWorldKey);
-      if (saved && (includeAllWorld || saved !== "전체")) {
-        setWorld(saved);
-      }
+  const [world, setWorld] = useState(() => {
+    if (typeof window === "undefined") return defaultWorld;
+    const savedWorld = sessionStorage.getItem(lastWorldKey);
+    if (
+      savedWorld &&
+      (worldOptions as readonly string[]).includes(savedWorld)
+    ) {
+      return savedWorld;
     }
-  }, [lastWorldKey, includeAllWorld]);
+    return defaultWorld;
+  });
+  const [inputValue, setInputValue] = useState("");
+  const [isError, setIsError] = useState(false);
+
+  const handleWorldChange = useCallback(
+    (nextWorld: string) => {
+      if (!(worldOptions as readonly string[]).includes(nextWorld)) return;
+      const safeWorld = nextWorld as (typeof worldOptions)[number];
+      setWorld(safeWorld);
+      sessionStorage.setItem(lastWorldKey, safeWorld);
+    },
+    [lastWorldKey, worldOptions],
+  );
 
   const handleSearch = useCallback(
     (targetWorld: string, targetName: string) => {
@@ -47,9 +58,8 @@ export function useSearchForm({
       }
 
       setIsError(false);
-      setOpen(false);
       setInputValue("");
-      localStorage.setItem(lastWorldKey, targetWorld);
+      sessionStorage.setItem(lastWorldKey, targetWorld);
 
       onSubmit(targetWorld, trimmed);
     },
@@ -65,11 +75,9 @@ export function useSearchForm({
 
   return {
     world,
-    setWorld,
+    setWorld: handleWorldChange,
     inputValue,
     handleInputChange,
-    open,
-    setOpen,
     isError,
     worldOptions,
     handleSearch,

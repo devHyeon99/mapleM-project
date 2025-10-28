@@ -11,3 +11,11 @@ export const RANKING_LABELS: Record<RankingType, string> = {
   "sharenian-battlefield": "샤레니안 전장",
   "sharenian-waterway": "지하수로",
 };
+
+export const RANKING_API_ITEMS_PER_PAGE = 200;
+export const RANKING_UI_ITEMS_PER_PAGE = 20;
+export const RANKING_UI_PAGES_PER_API_PAGE =
+  RANKING_API_ITEMS_PER_PAGE / RANKING_UI_ITEMS_PER_PAGE;
+export const RANKING_MAX_API_PAGE = 50;
+export const RANKING_MAX_UI_PAGE =
+  RANKING_MAX_API_PAGE * RANKING_UI_PAGES_PER_API_PAGE;

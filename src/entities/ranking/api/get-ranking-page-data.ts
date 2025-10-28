@@ -1,34 +1,36 @@
-import { fetchRanking } from "./fetch-ranking";
 import type { RankingType } from "../model/types/ranking";
 import { getRankingDate } from "../lib/get-ranking-date";
 import { handleCommonNexonError } from "@/shared/api/nexon";
+import { getRankingTotalPages } from "./get-ranking-total-pages";
+import { RANKING_UI_PAGES_PER_API_PAGE } from "../model/constants";
+import {
+  normalizeRankingPage,
+  normalizeRankingWorldName,
+} from "../lib/ranking-query";
+import { fetchRankingCached } from "./fetch-ranking";
 
 export async function getRankingPageData(
   type: RankingType,
   searchParams: { [key: string]: string | string[] | undefined },
 ) {
-  const worldName =
-    typeof searchParams.world_name === "string"
-      ? searchParams.world_name
-      : undefined;
-
-  const uiPage =
-    typeof searchParams.page === "string" ? Number(searchParams.page) : 1;
-  const apiPage = Math.ceil(uiPage / 10);
-
+  const worldName = normalizeRankingWorldName(searchParams.world_name);
   const date = getRankingDate();
 
   try {
-    const data = await fetchRanking({
+    const totalPages = await getRankingTotalPages({
       type,
-      worldName,
       date,
-      page: apiPage,
+      worldName,
     });
+
+    const uiPage = normalizeRankingPage(searchParams.page, totalPages);
+    const apiPage = Math.ceil(uiPage / RANKING_UI_PAGES_PER_API_PAGE);
+
+    const data = await fetchRankingCached(type, date, worldName, apiPage);
 
     return {
       data,
-      params: { worldName, date, page: uiPage },
+      params: { worldName, date, page: uiPage, totalPages },
     };
   } catch (error) {
     handleCommonNexonError(error);

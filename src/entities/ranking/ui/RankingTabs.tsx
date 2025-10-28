@@ -13,8 +13,8 @@ export function RankingTabs() {
   const activeType = pathname.split("/").pop() || "level";
 
   return (
-    <Tabs value={activeType} className="w-full">
-      <TabsList className="grid h-auto w-full grid-cols-3 gap-1 rounded-xs border border-none md:grid-cols-9">
+    <Tabs value={activeType} className="w-full pt-2">
+      <TabsList className="grid h-auto w-full grid-cols-3 gap-1 rounded-xs border-b bg-transparent px-0! py-0 md:grid-cols-9">
         {RANKING_TYPES.map((type) => (
           <TabsTrigger
             className="hover:data-[state=inactive]:text-foreground h-10 rounded-none border-2 border-t-0 border-r-0 border-l-0 bg-transparent! transition-colors duration-150 data-[state=active]:border-b-orange-500! data-[state=active]:shadow-none data-[state=inactive]:text-black/60 hover:data-[state=inactive]:border-b-orange-500"
@@ -22,7 +22,11 @@ export function RankingTabs() {
             value={type}
             asChild
           >
-            <Link href={`/ranking/${type}`} prefetch={false}>
+            <Link
+              className="md:text-[15px]!"
+              href={`/ranking/${type}`}
+              prefetch={false}
+            >
               {RANKING_LABELS[type]}
             </Link>
           </TabsTrigger>

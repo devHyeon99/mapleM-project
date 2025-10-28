@@ -14,13 +14,21 @@ import { cn } from "@/shared/lib/utils";
 
 const PAGES_PER_GROUP_DESKTOP = 10;
 const PAGES_PER_GROUP_MOBILE = 5;
-const TOTAL_PAGES = 500;
 
-export function RankingPagination() {
+interface RankingPaginationProps {
+  currentPage: number;
+  totalPages: number;
+}
+
+export function RankingPagination({
+  currentPage,
+  totalPages,
+}: RankingPaginationProps) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const currentPage = Number(searchParams.get("page")) || 1;
+  // 안전한 현재 페이지 계산
+  const safeCurrentPage = Math.max(1, Math.min(currentPage, totalPages));
 
   const createPageUrl = (pageNumber: number) => {
     const params = new URLSearchParams(searchParams.toString());
@@ -28,37 +36,43 @@ export function RankingPagination() {
     return `${pathname}?${params.toString()}`;
   };
 
-  // 데스크탑 기준 그룹 계산 (1~10, 11~20)
-  const desktopGroupIndex = Math.ceil(currentPage / PAGES_PER_GROUP_DESKTOP);
+  // 데스크탑 그룹 계산
+  const desktopGroupIndex = Math.ceil(
+    safeCurrentPage / PAGES_PER_GROUP_DESKTOP,
+  );
   const startPage = (desktopGroupIndex - 1) * PAGES_PER_GROUP_DESKTOP + 1;
-  const endPage = Math.min(
-    startPage + PAGES_PER_GROUP_DESKTOP - 1,
-    TOTAL_PAGES,
+  const endPage = Math.min(startPage + PAGES_PER_GROUP_DESKTOP - 1, totalPages);
+
+  // 모바일 그룹 계산
+  const mobileGroupIndex = Math.ceil(safeCurrentPage / PAGES_PER_GROUP_MOBILE);
+  const mobileStart = (mobileGroupIndex - 1) * PAGES_PER_GROUP_MOBILE + 1;
+  const mobileEnd = Math.min(
+    mobileStart + PAGES_PER_GROUP_MOBILE - 1,
+    totalPages,
   );
 
-  // 모바일 뷰포트에서의 표시 범위 계산 (현재 페이지가 포함된 5개 구간)
-  const mobileGroupIndex = Math.ceil(currentPage / PAGES_PER_GROUP_MOBILE);
-  const mobileStart = (mobileGroupIndex - 1) * PAGES_PER_GROUP_MOBILE + 1;
-  const mobileEnd = mobileStart + PAGES_PER_GROUP_MOBILE - 1;
+  // 이전/다음 그룹 대상 페이지 (안전하게 계산)
+  const prevGroupPage = Math.max(1, startPage - PAGES_PER_GROUP_DESKTOP);
+  const nextGroupPage = Math.min(
+    totalPages,
+    startPage + PAGES_PER_GROUP_DESKTOP,
+  );
 
-  // 그룹 이동 네비게이션 타겟 계산
-  const prevGroupPage = (desktopGroupIndex - 2) * PAGES_PER_GROUP_DESKTOP + 1;
-  const nextGroupPage = desktopGroupIndex * PAGES_PER_GROUP_DESKTOP + 1;
-
-  const isFirstGroup = desktopGroupIndex <= 1;
-  const isLastGroup = nextGroupPage > TOTAL_PAGES;
+  const isFirstGroup = safeCurrentPage <= PAGES_PER_GROUP_DESKTOP;
+  const isLastGroup = endPage >= totalPages;
 
   return (
-    <Pagination className="pt-4">
+    // nav 태그 역할을 하는 Pagination 컴포넌트에 한글 레이블 추가
+    <Pagination className="pt-4" aria-label="랭킹 페이지네이션">
       <PaginationContent>
         {/* 이전 그룹 이동 (<<) */}
         <PaginationItem>
           <PaginationLink
             href={createPageUrl(prevGroupPage)}
-            aria-label="Go to previous group"
+            aria-label="이전 10페이지로 이동"
             size="icon"
             className={cn(isFirstGroup && "pointer-events-none opacity-50")}
-            aria-disabled={isFirstGroup}
+            tabIndex={isFirstGroup ? -1 : 0}
           >
             <ChevronsLeft className="h-4 w-4" />
           </PaginationLink>
@@ -67,9 +81,11 @@ export function RankingPagination() {
         {/* 이전 페이지 (<) */}
         <PaginationItem>
           <PaginationPrevious
-            href={createPageUrl(Math.max(1, currentPage - 1))}
-            className={cn(currentPage <= 1 && "pointer-events-none opacity-50")}
-            aria-disabled={currentPage <= 1}
+            href={createPageUrl(safeCurrentPage - 1)}
+            aria-label="이전 페이지로 이동"
+            className={cn(
+              safeCurrentPage <= 1 && "pointer-events-none opacity-50",
+            )}
           />
         </PaginationItem>
 
@@ -78,8 +94,8 @@ export function RankingPagination() {
           { length: endPage - startPage + 1 },
           (_, i) => startPage + i,
         ).map((page) => {
-          // 모바일 범위에 포함되지 않는 페이지는 CSS로 숨김 처리하여 Hydration 이슈 방지
           const isVisibleOnMobile = page >= mobileStart && page <= mobileEnd;
+          const isCurrent = page === safeCurrentPage;
 
           return (
             <PaginationItem
@@ -88,7 +104,8 @@ export function RankingPagination() {
             >
               <PaginationLink
                 href={createPageUrl(page)}
-                isActive={page === currentPage}
+                isActive={isCurrent}
+                aria-current={isCurrent ? "page" : undefined}
               >
                 {page}
               </PaginationLink>
@@ -99,11 +116,11 @@ export function RankingPagination() {
         {/* 다음 페이지 (>) */}
         <PaginationItem>
           <PaginationNext
-            href={createPageUrl(Math.min(TOTAL_PAGES, currentPage + 1))}
+            href={createPageUrl(safeCurrentPage + 1)}
+            aria-label="다음 페이지로 이동"
             className={cn(
-              currentPage >= TOTAL_PAGES && "pointer-events-none opacity-50",
+              safeCurrentPage >= totalPages && "pointer-events-none opacity-50",
             )}
-            aria-disabled={currentPage >= TOTAL_PAGES}
           />
         </PaginationItem>
 
@@ -111,10 +128,10 @@ export function RankingPagination() {
         <PaginationItem>
           <PaginationLink
             href={createPageUrl(nextGroupPage)}
-            aria-label="Go to next group"
+            aria-label="다음 10페이지로 이동"
             size="icon"
             className={cn(isLastGroup && "pointer-events-none opacity-50")}
-            aria-disabled={isLastGroup}
+            tabIndex={isLastGroup ? -1 : 0}
           >
             <ChevronsRight className="h-4 w-4" />
           </PaginationLink>

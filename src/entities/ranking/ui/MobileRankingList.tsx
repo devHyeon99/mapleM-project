@@ -79,12 +79,15 @@ export const MobileRankingList = ({
   context,
 }: MobileRankingListProps) => {
   return (
-    <div className="bg-background flex flex-col divide-y border-b">
+    <ul className="bg-background flex flex-col divide-y border-b">
       {/* 헤더 영역 */}
-      <div className="bg-secondary text-muted-foreground flex h-10 items-center gap-4 px-3 py-2 text-sm font-medium">
+      <li
+        aria-hidden="true"
+        className="bg-secondary flex h-10 items-center gap-4 px-3 py-2 text-sm font-medium"
+      >
         <span className="w-8 text-center">순위</span>
         <span className="w-8">정보</span>
-      </div>
+      </li>
 
       {/* 리스트 영역 */}
       {data.map((item, index) => (
@@ -95,11 +98,11 @@ export const MobileRankingList = ({
           context={context}
         />
       ))}
-    </div>
+    </ul>
   );
 };
 
-// 개별 랭킹 로우
+// 개별 랭킹
 const RankingRow = memo(
   ({
     item,
@@ -113,10 +116,15 @@ const RankingRow = memo(
     const isSharenian = type.includes("sharenian");
 
     return (
-      <div className="bg-muted/30 flex items-center justify-between p-3">
+      // 개별 행을 li로 변경
+      <li className="bg-muted/30 flex items-center justify-between p-3">
         <div className="flex min-w-0 items-center gap-4">
           <div className="flex w-8 shrink-0 flex-col items-center justify-center">
-            <span className="text-foreground text-lg font-bold">
+            {/* 순위 정보에 대한 접근성 레이블 추가 */}
+            <span
+              className="text-foreground text-lg font-bold"
+              aria-label={`순위: ${item.ranking}위`}
+            >
               {Renderers.Rank(item, context)}
             </span>
           </div>
@@ -133,7 +141,7 @@ const RankingRow = memo(
         <div className="shrink-0 pl-2">
           <StatDisplay item={item} type={type} />
         </div>
-      </div>
+      </li>
     );
   },
 );

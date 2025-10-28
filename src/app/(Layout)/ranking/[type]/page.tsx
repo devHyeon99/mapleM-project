@@ -27,6 +27,7 @@ export async function generateMetadata({
   const { type } = await params;
   const sParams = await searchParams;
 
+  // 타입 안전성 확보 및 라벨 추출
   const safeType = RANKING_TYPES.includes(type as RankingType)
     ? (type as RankingType)
     : "level";
@@ -34,36 +35,55 @@ export async function generateMetadata({
   const worldName = getStringParam(sParams.world_name);
   const typeLabel = RANKING_LABELS[safeType];
 
+  // 동적 텍스트 생성
   const title = worldName
-    ? `메이플스토리M ${worldName} ${typeLabel} 랭킹`
+    ? `메이플스토리M ${worldName} 월드 ${typeLabel} 랭킹`
     : `메이플스토리M 전체 월드 ${typeLabel} 랭킹`;
 
   const description = worldName
-    ? `메이플스토리M ${worldName} 월드의 ${typeLabel} 순위를 확인하세요.`
-    : `메이플스토리M 전체 월드의 ${typeLabel} 랭킹 정보를 한눈에 제공합니다.`;
+    ? `메이플스토리M ${worldName} 월드의 ${typeLabel} 랭킹을 확인하세요. 캐릭터 정보와 랭킹 변화를 한눈에 제공합니다.`
+    : `메이플스토리M 전체 월드의 ${typeLabel} 랭킹 정보를 확인하세요. 캐릭터 정보와 랭킹 변화를 한눈에 제공합니다.`;
 
-  const canonicalUrl = `https://maplemgg.com/ranking/${safeType}`;
+  // URL 및 이미지 경로 설정 (절대 경로 필수)
+  const baseUrl = "https://maplemgg.com";
+  const canonicalPath = `/ranking/${safeType}`;
+  const fullUrl = worldName
+    ? `${baseUrl}${canonicalPath}?world_name=${encodeURIComponent(worldName)}`
+    : `${baseUrl}${canonicalPath}`;
+
+  const ogImageUrl = `${baseUrl}/og-image.png`;
 
   return {
     title,
     description,
     alternates: {
-      canonical: worldName
-        ? `${canonicalUrl}?world_name=${encodeURIComponent(worldName)}`
-        : canonicalUrl,
+      canonical: fullUrl,
     },
     openGraph: {
       title,
       description,
       type: "website",
-      url: worldName
-        ? `${canonicalUrl}?world_name=${encodeURIComponent(worldName)}`
-        : canonicalUrl,
+      url: fullUrl,
+      siteName: "메엠지지",
+      locale: "ko_KR",
+      images: [
+        {
+          url: ogImageUrl,
+          width: 1200,
+          height: 630,
+          alt: "메엠지지 메이플스토리M 랭킹",
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
+      images: [ogImageUrl],
+    },
+    robots: {
+      index: true,
+      follow: true,
     },
   };
 }
@@ -80,7 +100,6 @@ export default async function RankingPage({
   }
   const safeType = type as RankingType;
 
-  // 데이터 페칭
   const { data, params: fetchParams } = await getRankingPageData(
     safeType,
     sParams,
@@ -89,18 +108,12 @@ export default async function RankingPage({
   return (
     <div className="flex w-full items-center justify-center pb-4">
       <section className="wide:px-0 w-full">
-        {/* 검색엔진 최적화를 위한 숨겨진 제목 */}
         <h1 className="sr-only">
           {fetchParams.worldName || "전체"} 월드 {RANKING_LABELS[safeType]} 랭킹
         </h1>
 
-        <h2 className="wide:text-2xl wide:block my-2 hidden font-semibold">
-          {RANKING_LABELS[safeType]} 랭킹
-        </h2>
-
         <p className="sr-only">
-          실시간으로 업데이트되는 메이플스토리M {RANKING_LABELS[safeType]} 순위
-          정보를 확인해보세요.
+          메이플스토리M {RANKING_LABELS[safeType]} 랭킹 정보를 확인해보세요.
         </p>
 
         <RankingBoard

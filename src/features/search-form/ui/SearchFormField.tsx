@@ -117,7 +117,7 @@ export function SearchFormField({
               }
             }}
             className={clsx(
-              "focus-visible:border-input h-14 rounded-l-none rounded-r-3xl border-none pr-12 pl-4 shadow-none placeholder:text-sm! focus-visible:ring-0",
+              "focus-visible:border-input h-14 rounded-l-none rounded-r-3xl pr-12 pl-4 placeholder:text-sm! focus-visible:ring-0 dark:border-none",
               ui.input,
             )}
           />
@@ -179,21 +179,17 @@ const WorldSelect = ({
     <Select value={value} onValueChange={onValueChange}>
       <SelectTrigger
         disabled={disabled}
-        className="relative z-0 h-14! w-[130px] shrink-0 rounded-l-3xl rounded-r-none border-0 pl-7 focus-visible:z-10 dark:[&_svg]:text-white! dark:[&_svg]:opacity-100"
+        className="relative z-0 h-14! w-[130px] shrink-0 rounded-l-3xl rounded-r-none border-r-0! pl-7 focus-visible:z-10 dark:border-0 dark:[&_svg]:text-white! dark:[&_svg]:opacity-100"
       >
         <SelectValue placeholder="월드" />
       </SelectTrigger>
       <SelectContent
         position="popper"
         sideOffset={4}
-        className="-top-1.5 -right-2 border-none"
+        className="-top-1.5 dark:border-none"
       >
         {options.map((w) => (
-          <SelectItem
-            key={w}
-            value={w}
-            className="hover:bg-black/7! dark:hover:bg-white/10!"
-          >
+          <SelectItem key={w} value={w}>
             {w}
           </SelectItem>
         ))}

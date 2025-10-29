@@ -33,7 +33,7 @@ export const SearchHistory = ({
     <div
       className={cn(
         "flex h-90 flex-col overflow-hidden rounded-md shadow-md outline-none",
-        "text-popover-foreground bg-popover",
+        "text-popover-foreground bg-popover border dark:border-none",
         "focus:ring-ring",
         className,
       )}
@@ -46,7 +46,7 @@ export const SearchHistory = ({
             variant="ghost"
             size="sm"
             onClick={onClear}
-            className="hover:text-destructive h-auto px-1 py-0 text-sm underline-offset-4 hover:underline"
+            className="hover:text-destructive h-auto px-1 py-0 text-sm underline-offset-4 hover:bg-transparent! hover:underline"
             aria-label="최근 검색 기록 전체 삭제"
           >
             전체삭제
@@ -110,14 +110,14 @@ const HistoryItemRow = ({
         }
       }}
       className={cn(
-        "group relative flex cursor-pointer items-center justify-between px-4 py-2 text-sm transition-colors outline-none dark:hover:bg-white/10",
+        "group hover:bg-accent relative flex cursor-pointer items-center justify-between px-4 py-2 text-sm transition-colors outline-none",
       )}
       aria-label={`${item.world} ${item.name} 검색`}
     >
       <div
         className={cn(
           "flex min-w-0 flex-1 items-center gap-2 rounded-sm py-1",
-          "group-focus-visible:ring-ring/60 group-focus-visible:ring-[2px] group-focus-visible:ring-offset-1 group-focus-visible:ring-offset-[#2C2C2C]",
+          "group-focus-visible:ring-ring/60 group-focus-visible:ring-[3px]",
         )}
       >
         <Clock

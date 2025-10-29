@@ -33,7 +33,7 @@ export const SearchHistory = ({
     <div
       className={cn(
         "flex h-90 flex-col overflow-hidden rounded-md shadow-md outline-none",
-        "text-popover-foreground bg-input",
+        "text-popover-foreground bg-popover",
         "focus:ring-ring",
         className,
       )}

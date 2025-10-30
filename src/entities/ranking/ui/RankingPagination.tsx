@@ -106,6 +106,7 @@ export function RankingPagination({
                 href={createPageUrl(page)}
                 isActive={isCurrent}
                 aria-current={isCurrent ? "page" : undefined}
+                className={isCurrent ? "bg-card" : ""}
               >
                 {page}
               </PaginationLink>

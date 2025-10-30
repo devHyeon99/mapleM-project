@@ -49,7 +49,7 @@ const IconWithText = ({
       <RankingIcon
         src={iconSrc}
         alt="icon"
-        className="h-5 w-5 rounded-xs bg-white"
+        className="bg-secondary h-5 w-5 rounded-xs dark:bg-white"
         size={20}
       />
     )}

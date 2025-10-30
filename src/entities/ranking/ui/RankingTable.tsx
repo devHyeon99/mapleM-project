@@ -60,8 +60,8 @@ export const RankingTable = ({
           <caption className="sr-only">
             {worldName || "전체"} 월드 {type} 랭킹 정보 테이블
           </caption>
-          <TableHeader>
-            <TableRow className="bg-muted hover:bg-muted">
+          <TableHeader className="bg-muted">
+            <TableRow>
               {columns.map((col, idx) => (
                 <TableHead
                   key={`${col.header}-${idx}`}
@@ -74,7 +74,7 @@ export const RankingTable = ({
             </TableRow>
           </TableHeader>
 
-          <TableBody className="bg-muted/30">
+          <TableBody className="bg-card">
             {hasData ? (
               items.map((item, index) => {
                 // Key 생성 로직

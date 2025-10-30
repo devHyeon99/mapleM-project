@@ -117,7 +117,7 @@ export function SearchFormField({
               }
             }}
             className={clsx(
-              "focus-visible:border-input h-14 rounded-l-none rounded-r-3xl pr-12 pl-4 placeholder:text-sm! focus-visible:ring-0 dark:border-none",
+              "focus-visible:border-border h-14 rounded-l-none rounded-r-3xl pr-12 pl-4 placeholder:text-sm! focus-visible:ring-0 dark:border-none",
               ui.input,
             )}
           />

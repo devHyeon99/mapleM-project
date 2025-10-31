@@ -1,8 +1,9 @@
 import React from "react";
 import { HydrationBoundary } from "@tanstack/react-query";
+import { notFound } from "next/navigation";
 import { CharacterSearch } from "@/features/character-search";
 import { CharacterDetail } from "@/widgets/character-detail";
-import { getCharacterPageData } from "./_lib/getCharacterPageData";
+import { getCharacterPageData } from "@/entities/character";
 
 interface CharacterPageProps {
   params: Promise<{ world: string; name: string }>;
@@ -47,8 +48,10 @@ export async function generateMetadata({ params }: CharacterPageProps) {
 export default async function CharacterPage({ params }: CharacterPageProps) {
   const { world, name } = await params;
 
-  const { dehydratedState, ocid, decodedName, decodedWorld } =
-    await getCharacterPageData(world, name);
+  const pageData = await getCharacterPageData(world, name);
+  if (!pageData) notFound();
+
+  const { dehydratedState, ocid, decodedName, decodedWorld } = pageData;
 
   return (
     <div className="flex w-full flex-1 flex-col items-center justify-center gap-2.5 pt-2 pb-6">

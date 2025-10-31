@@ -9,7 +9,6 @@ const OCID_NOT_FOUND_ERROR = "OCID_NOT_FOUND";
 
 const fetchOcidCached = unstable_cache(
   async (world: string, name: string): Promise<CharacterOcidData> => {
-    console.log("ocid API 미스");
     try {
       const { ocid } = await nexonFetch<{ ocid: string }>(
         `/id?character_name=${encodeURIComponent(name)}&world_name=${encodeURIComponent(world)}`,

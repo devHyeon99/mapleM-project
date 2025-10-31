@@ -82,8 +82,8 @@ export async function generateMetadata({
       images: [ogImageUrl],
     },
     robots: {
-      index: false,
-      follow: false,
+      index: true,
+      follow: true,
     },
   };
 }

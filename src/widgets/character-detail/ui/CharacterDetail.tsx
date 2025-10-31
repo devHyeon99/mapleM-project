@@ -1,68 +1,32 @@
-"use client";
-
 import { CharacterProfileCard } from "./CharacterProfileCard";
 import { CharacterDetailTabs } from "./CharacterDetailTabs";
-import { useQuery } from "@tanstack/react-query";
-import {
-  characterQueryKeys,
-  getCharacterDetails,
-  UnionCard,
-} from "@/entities/character";
-import { CharacterDetailSkeleton } from "./CharacterDetailSkeleton";
+import { CharacterDetailData, UnionCard } from "@/entities/character";
 
 interface CharacterBasicInfoProps {
   ocid: string;
+  characterData: CharacterDetailData;
 }
 
-export const CharacterDetail = ({ ocid }: CharacterBasicInfoProps) => {
-  const detailsKey = characterQueryKeys.details(ocid);
-
-  const { data, isLoading, isError, error } = useQuery({
-    queryKey: detailsKey,
-    queryFn: () => getCharacterDetails(ocid),
-    staleTime: 10 * 60 * 1000,
-    gcTime: 10 * 60 * 1000,
-  });
-
-  const characterData = data?.data;
-
-  const titleText = characterData
-    ? `${characterData.world_name} ${characterData.character_name} 캐릭터 정보`
-    : "캐릭터 정보 로딩 중";
+export const CharacterDetail = ({ ocid, characterData }: CharacterBasicInfoProps) => {
+  const titleText = `${characterData.world_name} ${characterData.character_name} 캐릭터 정보`;
 
   return (
-    <section
-      aria-labelledby="character-info-title"
-      aria-busy={isLoading}
-      className="flex w-full justify-center"
-    >
-      {/* 로딩 상태에 따라 적절한 텍스트 제공 */}
+    <section aria-labelledby="character-info-title" className="flex w-full justify-center">
       <h2 className="sr-only" id="character-info-title">
         {titleText}
       </h2>
 
-      {isLoading && <CharacterDetailSkeleton />}
-
-      {isError && (
-        <p role="alert" className="py-10 font-medium text-red-500">
-          캐릭터 정보를 불러오는데 실패했습니다.
-          <br /> {(error as Error).message}
-        </p>
-      )}
-
-      {characterData && (
-        <div className="flex w-full max-w-3xl flex-col items-center gap-4 md:flex-row md:items-start md:justify-center">
-          <div className="flex w-full max-w-90 flex-col items-center gap-2">
-            <CharacterProfileCard data={characterData} />
-            <UnionCard
-              data={characterData.union_data}
-              ranking={characterData.union_ranking}
-              className="rounded-xs"
-            />
-          </div>
-          <CharacterDetailTabs ocid={ocid} characterData={characterData} />
+      <div className="flex w-full max-w-3xl flex-col items-center gap-4 md:flex-row md:items-start md:justify-center">
+        <div className="flex w-full max-w-90 flex-col items-center gap-2">
+          <CharacterProfileCard data={characterData} />
+          <UnionCard
+            data={characterData.union_data}
+            ranking={characterData.union_ranking}
+            className="rounded-xs"
+          />
         </div>
-      )}
+        <CharacterDetailTabs ocid={ocid} characterData={characterData} />
+      </div>
     </section>
   );
 };

@@ -1,5 +1,4 @@
 import React from "react";
-import { HydrationBoundary } from "@tanstack/react-query";
 import { notFound } from "next/navigation";
 import { CharacterSearch } from "@/features/character-search";
 import { CharacterDetail } from "@/widgets/character-detail";
@@ -44,14 +43,13 @@ export async function generateMetadata({ params }: CharacterPageProps) {
   };
 }
 
-// 실제 페이지: 여기서만 prefetch + dehydrate
 export default async function CharacterPage({ params }: CharacterPageProps) {
   const { world, name } = await params;
 
   const pageData = await getCharacterPageData(world, name);
   if (!pageData) notFound();
 
-  const { dehydratedState, ocid, decodedName, decodedWorld } = pageData;
+  const { ocid, decodedName, decodedWorld, characterData } = pageData;
 
   return (
     <div className="flex w-full flex-1 flex-col items-center justify-center gap-2.5 pt-2 pb-6">
@@ -65,9 +63,7 @@ export default async function CharacterPage({ params }: CharacterPageProps) {
         {decodedName} ({decodedWorld}) 캐릭터 검색 결과
       </h1>
 
-      <HydrationBoundary state={dehydratedState}>
-        <CharacterDetail ocid={ocid} />
-      </HydrationBoundary>
+      <CharacterDetail ocid={ocid} characterData={characterData} />
     </div>
   );
 }

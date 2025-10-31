@@ -1,7 +1,7 @@
 import { QueryClient, dehydrate } from "@tanstack/react-query";
 import { characterQueryKeys } from "../model/queries/characterQueryKeys";
 import { getCharacterDetails } from "./get-detail";
-import { getOcidForSearch } from "./get-ocid";
+import { fetchOcid } from "@/shared/api/character/ocid.server";
 
 interface CharacterPageData {
   dehydratedState: ReturnType<typeof dehydrate>;
@@ -20,13 +20,7 @@ export async function getCharacterPageData(
 
   const queryClient = new QueryClient();
 
-  const ocidKey = characterQueryKeys.ocid(decodedWorld, decodedName);
-  const ocidData = await queryClient
-    .fetchQuery({
-      queryKey: ocidKey,
-      queryFn: () => getOcidForSearch(decodedWorld, decodedName, baseUrl),
-    })
-    .catch(() => null);
+  const ocidData = await fetchOcid(decodedWorld, decodedName).catch(() => null);
 
   if (!ocidData?.ocid) return null;
 

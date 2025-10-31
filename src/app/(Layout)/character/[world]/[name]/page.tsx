@@ -3,7 +3,7 @@ import { HydrationBoundary } from "@tanstack/react-query";
 import { notFound } from "next/navigation";
 import { CharacterSearch } from "@/features/character-search";
 import { CharacterDetail } from "@/widgets/character-detail";
-import { getCharacterPageData } from "@/entities/character";
+import { getCharacterPageData } from "@/entities/character/api/get-character-page-data";
 
 interface CharacterPageProps {
   params: Promise<{ world: string; name: string }>;

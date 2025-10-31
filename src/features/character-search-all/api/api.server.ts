@@ -1,4 +1,3 @@
-import { unstable_cache } from "next/cache";
 import { WORLD_NAMES } from "@/shared/config/constants/worlds";
 import { fetchOcid } from "@/shared/api/character/ocid.server";
 import type { CharacterOcidData } from "@/entities/character";
@@ -30,17 +29,7 @@ async function searchAllWorlds(name: string): Promise<CharacterOcidData[]> {
   return [];
 }
 
-const _getCharacterSearchAll = unstable_cache(
-  async (normalizedName: string) => {
-    return searchAllWorlds(normalizedName);
-  },
-  ["character-search-all"],
-  {
-    revalidate: 60 * 60 * 24,
-  },
-);
-
 export async function getCharacterSearchAll(name: string) {
   const normalized = normalizeCharacterName(name);
-  return _getCharacterSearchAll(normalized);
+  return searchAllWorlds(normalized);
 }

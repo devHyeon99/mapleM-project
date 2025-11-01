@@ -51,6 +51,7 @@ export function HeaderMobileNav() {
               <Link
                 key={link.href}
                 href={link.href}
+                prefetch={false}
                 onClick={() => setOpen(false)}
                 className={cn(
                   "hover:text-accent-foreground flex items-center justify-center rounded-md px-3 py-3 text-base font-medium transition-colors",

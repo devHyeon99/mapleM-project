@@ -19,6 +19,7 @@ export function HeaderNav() {
           <Link
             key={link.href}
             href={link.href}
+            prefetch={false}
             className={cn(
               "hover:text-foreground text-lg transition-colors",
               isActive

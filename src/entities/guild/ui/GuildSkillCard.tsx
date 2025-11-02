@@ -8,7 +8,7 @@ interface GuildSkillCardProps {
 
 export function GuildSkillCard({ skill }: GuildSkillCardProps) {
   return (
-    <Card className="items-start">
+    <Card className="items-start rounded-xs border-none">
       <CardContent className="w-full px-4">
         <div className="flex gap-2 md:flex-row">
           {/* eslint-disable-next-line @next/next/no-img-element */}

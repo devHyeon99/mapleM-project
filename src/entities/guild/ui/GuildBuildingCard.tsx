@@ -21,7 +21,7 @@ export function GuildBuildingCard({ building }: GuildBuildingCardProps) {
   const description = BUILDING_DESCRIPTIONS[building.building_name];
 
   return (
-    <Card>
+    <Card className="rounded-xs border-none">
       <CardContent className="flex h-full items-center px-4">
         <div className="flex flex-1 flex-col gap-1 md:h-37.5 md:justify-end">
           {/* eslint-disable-next-line @next/next/no-img-element */}

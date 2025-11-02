@@ -7,6 +7,7 @@ import { TableCell, TableRow } from "@/shared/ui/table";
 import { GuildMember } from "../model/types";
 import { WORLD_NAMES } from "@/shared/config/constants/worlds";
 import { useRecentSearch } from "@/shared/lib/hooks/useRecentSearch";
+import { ShieldCheck } from "lucide-react";
 
 type WorldName = (typeof WORLD_NAMES)[number];
 
@@ -45,16 +46,11 @@ export function GuildMemberRow({
             e.stopPropagation(); // 부모 Row 클릭 방지
             addHistory(member.character_name, worldName as WorldName);
           }}
-          className="flex min-w-0 flex-wrap items-center gap-2"
+          className="flex min-w-0 items-center gap-1"
         >
           <span>{member.character_name}</span>
           {isMaster && (
-            <Badge
-              variant="outline"
-              className="h-4 flex-shrink-0 border-amber-500 p-2 text-xs text-amber-500"
-            >
-              길드 마스터
-            </Badge>
+            <ShieldCheck aria-hidden="true" className="size-4 text-amber-500" />
           )}
         </Link>
       </TableCell>

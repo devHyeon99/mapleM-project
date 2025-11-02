@@ -1,6 +1,6 @@
 export function GuildMark({ src, name }: { src: string; name: string }) {
   return (
-    <div className="flex h-16 w-16 items-center justify-center rounded-sm border bg-white/95 shadow-sm">
+    <div className="flex h-16 w-16 items-center justify-center rounded-sm border bg-white/95 shadow-sm md:ml-6">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={src}

@@ -117,7 +117,7 @@ export function GuildAbilityList({ abilities }: GuildAbilityListProps) {
 
   // 렌더링
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       {groups.map((groupAbilities, groupIndex) => {
         const count = groupAbilities.length;
         if (count === 0) return null;
@@ -132,12 +132,12 @@ export function GuildAbilityList({ abilities }: GuildAbilityListProps) {
             key={groupIndex}
             className={`mx-auto flex flex-col ${containerWidthClass}`}
           >
-            <h3 className="bg-muted-foreground/30 rounded-t-md py-1.5 text-center text-sm font-bold shadow-sm md:text-base">
+            <h3 className="bg-secondary py-1.5 text-center text-sm font-bold shadow-sm md:text-base">
               {GROUP_TITLES[groupIndex]}
             </h3>
 
             <div
-              className={`grid grid-cols-1 gap-2 ${
+              className={`grid grid-cols-1 gap-0.5 ${
                 count >= 3
                   ? "md:grid-cols-3"
                   : count === 2

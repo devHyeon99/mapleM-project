@@ -1,7 +1,7 @@
 import "server-only";
 
 import { nexonFetch } from "@/shared/api/nexon/server";
-import { fetchWithRankingFallback } from "@/shared/api/nexon/ranking-fallback";
+import { getRankingDate } from "@/shared/lib/ranking-date";
 import type {
   CharacterItemEquipmentResponse,
   CharacterEquipmentSetResponse,
@@ -21,6 +21,11 @@ export async function fetchCharacterDetail(ocid: string): Promise<CharacterDetai
   if (!trimmedOcid) throw new Error("ocid가 필요합니다.");
 
   const ocidQ = encodeURIComponent(trimmedOcid);
+  const rankingDate = getRankingDate();
+  const rankingQuery = new URLSearchParams({
+    date: rankingDate,
+    ocid: trimmedOcid,
+  }).toString();
 
   const essentialRequests = {
     basic: nexonFetch<CharacterBasicResponse>(`/character/basic?ocid=${ocidQ}`, {
@@ -47,13 +52,17 @@ export async function fetchCharacterDetail(ocid: string): Promise<CharacterDetai
   };
 
   const rankingPromises = {
-    levelRanking: fetchWithRankingFallback<CharacterLevelRankingResponse>(
-      "/ranking/level",
-      { ocid: trimmedOcid },
+    levelRanking: nexonFetch<CharacterLevelRankingResponse>(
+      `/ranking/level?${rankingQuery}`,
+      {
+        next: { revalidate: 86400 },
+      },
     ),
-    unionRanking: fetchWithRankingFallback<CharacterUnionRankingResponse>(
-      "/ranking/union",
-      { ocid: trimmedOcid },
+    unionRanking: nexonFetch<CharacterUnionRankingResponse>(
+      `/ranking/union?${rankingQuery}`,
+      {
+        next: { revalidate: 86400 },
+      },
     ),
   };
 

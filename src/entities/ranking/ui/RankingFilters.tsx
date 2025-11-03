@@ -9,7 +9,7 @@ import {
   SelectValue,
 } from "@/shared/ui/select";
 import { WORLD_NAMES } from "@/shared/config/constants/worlds";
-import { getRankingDate } from "../lib/get-ranking-date";
+import { getRankingDate } from "@/shared/lib/ranking-date";
 
 export function RankingFilters() {
   const router = useRouter();

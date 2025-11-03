@@ -1,5 +1,5 @@
 import type { RankingType } from "../model/types/ranking";
-import { getRankingDate } from "../lib/get-ranking-date";
+import { getRankingDate } from "@/shared/lib/ranking-date";
 import { handleCommonNexonError } from "@/shared/api/nexon";
 import { getRankingTotalPages } from "./get-ranking-total-pages";
 import { RANKING_UI_PAGES_PER_API_PAGE } from "../model/constants";

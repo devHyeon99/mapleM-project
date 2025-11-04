@@ -5,7 +5,8 @@ interface InfoRowProps {
   label: string;
   children: ReactNode;
   className?: string;
-  /** * 최상위 컨테이너 태그
+  /**
+   * 최상위 컨테이너 태그
    * @default "div"
    */
   as?: ElementType;
@@ -13,13 +14,20 @@ interface InfoRowProps {
    * 레이아웃 정렬 방식
    */
   variant?: "between" | "start";
-  /** variant가 "start"일 때 적용할 간격 */
-  gap?: string;
-  /** * 숫자의 너비를 일정하게 유지 (tabular-nums)
+  /**
+   * 라벨/값 시맨틱 태그 사용 여부
+   * - description: dt/dd
+   * - plain: span/span
+   * @default "plain"
+   */
+  semantic?: "description" | "plain";
+  /**
+   * 숫자의 너비를 일정하게 유지 (tabular-nums)
    * @default false
    */
   isNumeric?: boolean;
-  /** * 값(Value) 텍스트 강조 여부 (현재 다크모드 전용)
+  /**
+   * 값(Value) 텍스트 강조 여부 (현재 다크모드 전용)
    * @default false
    */
   isHighlight?: boolean;
@@ -33,20 +41,20 @@ export const InfoRow = ({
   className,
   as: Component = "div",
   variant = "start",
-  gap = "gap-1",
+  semantic = "plain",
   isNumeric = false,
   isHighlight = false,
   labelClassName,
   valueClassName,
 }: InfoRowProps) => {
-  const LabelTag = Component === "div" ? "dt" : "span";
-  const ValueTag = Component === "div" ? "dd" : "span";
+  const LabelTag = semantic === "description" ? "dt" : "span";
+  const ValueTag = semantic === "description" ? "dd" : "span";
 
   return (
     <Component
       className={cn(
         "flex items-center text-sm",
-        variant === "between" ? "justify-between" : cn("justify-start", gap),
+        variant === "between" ? "justify-between" : "justify-start gap-1",
         className,
       )}
     >
@@ -58,9 +66,7 @@ export const InfoRow = ({
       <ValueTag
         className={cn(
           "shrink-0 font-medium",
-          // 조건부 tabular-nums 적용
           isNumeric && "tabular-nums",
-          // 다크모드에서만 하이라이트 색상 적용, 라이트모드는 기본 foreground 유지
           isHighlight ? "text-[#FF7E54]" : "text-foreground",
           valueClassName,
         )}
@@ -69,4 +75,10 @@ export const InfoRow = ({
       </ValueTag>
     </Component>
   );
+};
+
+type InfoDescriptionRowProps = Omit<InfoRowProps, "semantic">;
+
+export const InfoDescriptionRow = (props: InfoDescriptionRowProps) => {
+  return <InfoRow {...props} semantic="description" />;
 };

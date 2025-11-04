@@ -3,7 +3,7 @@
 import { useCharacterStat } from "@/entities/character";
 import { Separator } from "@/shared/ui/separator";
 import { LoadingCard } from "@/shared/ui/LoadingCard";
-import { InfoRow } from "@/shared/ui/InfoRow"; // InfoRow로 교체
+import { InfoDescriptionRow } from "@/shared/ui/InfoRow";
 import { HyperStatPresetToggle } from "./HyperStatToggle";
 import { useHyperStat } from "./useHyperStat";
 import { Badge } from "@/shared/ui/badge";
@@ -51,7 +51,7 @@ export const StatTab = ({ ocid, level }: StatTabProps) => {
         {/* dl 태그로 시맨틱 보강 */}
         <dl className="flex flex-col gap-1">
           {stat.stat.map((s, idx) => (
-            <InfoRow
+            <InfoDescriptionRow
               key={idx}
               as="div"
               variant="between"
@@ -59,7 +59,7 @@ export const StatTab = ({ ocid, level }: StatTabProps) => {
               isHighlight
             >
               {Number(s.stat_value).toLocaleString()}
-            </InfoRow>
+            </InfoDescriptionRow>
           ))}
         </dl>
       </section>
@@ -88,7 +88,7 @@ export const StatTab = ({ ocid, level }: StatTabProps) => {
         {currentHyperStatInfo.length > 0 ? (
           <dl className="flex flex-col gap-1">
             {currentHyperStatInfo.map((info, idx) => (
-              <InfoRow
+              <InfoDescriptionRow
                 key={idx}
                 as="div"
                 variant="between"
@@ -96,7 +96,7 @@ export const StatTab = ({ ocid, level }: StatTabProps) => {
                 isHighlight
               >
                 Lv.{info.stat_level}
-              </InfoRow>
+              </InfoDescriptionRow>
             ))}
           </dl>
         ) : (

@@ -3,7 +3,7 @@
 import { Separator } from "@/shared/ui/separator";
 import { LoadingCard } from "@/shared/ui/LoadingCard";
 import { TabMessageSection } from "@/shared/ui/TabMessageSection";
-import { InfoRow } from "@/shared/ui/InfoRow"; // InfoRow 도입
+import { InfoDescriptionRow } from "@/shared/ui/InfoRow";
 import { cn } from "@/shared/lib/utils";
 import { useCharacterHexaMatrixStat } from "@/entities/character";
 import type { CharacterHexaMatrixStat } from "@/entities/character";
@@ -103,7 +103,7 @@ const HexaStatPageCard = ({ page }: PageCardProps) => {
         {/* 메인 스탯 */}
         <div className="space-y-1">
           <p className="text-sm font-bold tracking-wider uppercase">메인스탯</p>
-          <InfoRow
+          <InfoDescriptionRow
             label={page.main_stat}
             variant="between"
             isHighlight={isActive}
@@ -111,14 +111,14 @@ const HexaStatPageCard = ({ page }: PageCardProps) => {
             isNumeric
           >
             Lv.{page.main_stat_level}
-          </InfoRow>
+          </InfoDescriptionRow>
         </div>
 
         {/* 서브 스탯 */}
         <div className="space-y-1">
           <p className="text-sm font-bold tracking-wider uppercase">서브스탯</p>
           <div className="flex flex-col gap-1">
-            <InfoRow
+            <InfoDescriptionRow
               label={page.sub_1_stat}
               variant="between"
               isHighlight={isActive}
@@ -126,8 +126,8 @@ const HexaStatPageCard = ({ page }: PageCardProps) => {
               isNumeric
             >
               Lv.{page.sub_1_stat_level}
-            </InfoRow>
-            <InfoRow
+            </InfoDescriptionRow>
+            <InfoDescriptionRow
               label={page.sub_2_stat}
               variant="between"
               isHighlight={isActive}
@@ -135,7 +135,7 @@ const HexaStatPageCard = ({ page }: PageCardProps) => {
               isNumeric
             >
               Lv.{page.sub_2_stat_level}
-            </InfoRow>
+            </InfoDescriptionRow>
           </div>
         </div>
       </dl>

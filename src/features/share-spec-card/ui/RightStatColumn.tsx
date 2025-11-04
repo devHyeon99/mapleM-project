@@ -46,13 +46,13 @@ export const RightStatColumn = ({ data }: RightStatColumnProps) => {
       {/* FORCE 섹션 */}
       <SectionTitle>FORCE</SectionTitle>
       <ul className="flex flex-col gap-1.5">
-        <InfoRow as="li" className="justify-between" label="스타포스">
+        <InfoRow as="li" variant="between" label="스타포스">
           {totalStarforce}
         </InfoRow>
-        <InfoRow as="li" className="justify-between" label="아케인 포스">
+        <InfoRow as="li" variant="between" label="아케인 포스">
           {totalArcaneForce}
         </InfoRow>
-        <InfoRow as="li" className="justify-between" label="어센틱 포스">
+        <InfoRow as="li" variant="between" label="어센틱 포스">
           {totalAuthenticForce}
         </InfoRow>
       </ul>
@@ -64,21 +64,21 @@ export const RightStatColumn = ({ data }: RightStatColumnProps) => {
       <ul className="flex flex-col gap-1.5">
         <InfoRow
           as="li"
-          className="justify-between"
+          variant="between"
           label={hexaStat?.main_stat ?? "메인스탯"}
         >
           {hexaStat ? `Lv.${hexaStat.main_stat_level}` : "0"}
         </InfoRow>
         <InfoRow
           as="li"
-          className="justify-between"
+          variant="between"
           label={hexaStat?.sub_1_stat ?? "부스탯1"}
         >
           {hexaStat ? `Lv.${hexaStat.sub_1_stat_level}` : "0"}
         </InfoRow>
         <InfoRow
           as="li"
-          className="justify-between"
+          variant="between"
           label={hexaStat?.sub_2_stat ?? "부스탯2"}
         >
           {hexaStat ? `Lv.${hexaStat.sub_2_stat_level}` : "0"}

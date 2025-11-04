@@ -1,32 +1,31 @@
 "use client";
 
 import Image from "next/image";
-import { InfoRow } from "@/shared/ui/InfoRow";
+import { InfoDescriptionRow } from "@/shared/ui/InfoRow";
 import { InfoDateRow } from "@/shared/ui/InfoDateRow";
 import { CharacterDetailData } from "@/entities/character";
 import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui/popover";
 import { CircleHelp } from "lucide-react";
-import { useMemo } from "react";
+const NUMBER_FORMATTER = new Intl.NumberFormat("ko-KR");
 
-// --------------------------------------------------------------------------
-// 1. Logic Separation (Custom Hook)
-// --------------------------------------------------------------------------
-const useCharacterProfileLogic = (data: CharacterDetailData) => {
-  return useMemo(() => {
-    const expRate = data.character_exp_rate ?? "0";
-    const guildName = data.guild_name ?? "길드없음";
+interface RankingRowsProps {
+  overallRanking?: number | null;
+  worldRanking?: number | null;
+}
 
-    const rawUnionLevel = data.union_data?.union_level ?? 0;
+const RankingRows = ({ overallRanking, worldRanking }: RankingRowsProps) => {
+  if (overallRanking == null || worldRanking == null) return null;
 
-    const unionDisplay =
-      rawUnionLevel > 0 ? `${rawUnionLevel.toLocaleString()} ` : "0";
-
-    return {
-      expRate,
-      guildName,
-      unionDisplay,
-    };
-  }, [data]);
+  return (
+    <>
+      <InfoDescriptionRow label="전체랭킹">
+        {NUMBER_FORMATTER.format(overallRanking)}등
+      </InfoDescriptionRow>
+      <InfoDescriptionRow label="월드랭킹">
+        {NUMBER_FORMATTER.format(worldRanking)}등
+      </InfoDescriptionRow>
+    </>
+  );
 };
 
 // --------------------------------------------------------------------------
@@ -47,7 +46,7 @@ const DataUpdateTooltip = () => {
       <PopoverContent
         side="bottom"
         align="end"
-        className="bg-secondary w-80 rounded-xs p-3 opacity-95"
+        className="bg-secondary w-80 rounded-xs p-3"
       >
         <div className="flex flex-col gap-2 text-xs leading-relaxed">
           <p>
@@ -68,11 +67,7 @@ const DataUpdateTooltip = () => {
               3. 랭킹 업데이트
             </span>
             <br />
-            랭킹은 매일 오전 2시 30분 경에 1일 1회 집계되어 제공됩니다.
-            <br />
-            <span className="text-red-700 dark:text-red-300">
-              (현재 넥슨 API 측 오류로 인해 오전 5시 이후경에 집계됩니다.)
-            </span>
+            랭킹은 매일 오전 6시 경에 1일 1회 집계되어 제공됩니다.
           </p>
         </div>
       </PopoverContent>
@@ -88,17 +83,21 @@ interface CharacterProfileCardProps {
 }
 
 export const CharacterProfileCard = ({ data }: CharacterProfileCardProps) => {
-  const { expRate, guildName, unionDisplay } = useCharacterProfileLogic(data);
+  const expRate = data.character_exp_rate ?? "0";
+  const guildName = data.guild_name ?? "길드없음";
+  const rawUnionLevel = data.union_data?.union_level ?? 0;
+  const unionDisplay =
+    rawUnionLevel > 0 ? NUMBER_FORMATTER.format(rawUnionLevel) : "0";
 
   return (
     <article
-      className="relative flex h-fit w-full flex-col items-center gap-2 rounded-xs border p-4 pt-8 md:flex-1 md:self-start"
+      className="bg-card relative flex h-fit w-full flex-col items-center gap-2 rounded-xs p-4 pt-8 md:flex-1 md:self-start"
       aria-label={`${data.character_name} 캐릭터 상세정보`}
     >
       {/* 랭킹 업데이트 날짜 */}
       {data.level_ranking && (
         <div className="text-muted-foreground absolute top-2 left-4 text-xs font-semibold">
-          랭킹 업데이트 날짜 - {data.level_ranking?.date.replace(/-/g, ".")}
+          랭킹 업데이트 - {data.level_ranking?.date.replace(/-/g, ".")}
         </div>
       )}
       {/* 캐릭터 이미지 */}
@@ -110,6 +109,7 @@ export const CharacterProfileCard = ({ data }: CharacterProfileCardProps) => {
           width={96}
           height={96}
           className="dark:border-border h-25 w-25 -scale-x-100 transform rounded-full border-2 border-gray-300 bg-[#EAEEF3] dark:bg-[#323232]"
+          priority
           unoptimized
         />
       )}
@@ -129,37 +129,27 @@ export const CharacterProfileCard = ({ data }: CharacterProfileCardProps) => {
       {/* 상세 정보 그리드 */}
       <dl className="flex w-full flex-col gap-3 text-sm">
         <div className="flex gap-3">
-          <InfoRow label="레벨">
-            {data.character_level?.toLocaleString()}
-          </InfoRow>
-          {data.level_ranking?.ranking != null && (
-            <>
-              <InfoRow label="전체랭킹">
-                {data.level_ranking.ranking.toLocaleString()}등
-              </InfoRow>
-              <InfoRow label="월드랭킹">
-                {data.level_ranking.world_ranking}등
-              </InfoRow>
-            </>
-          )}
+          <InfoDescriptionRow label="레벨">
+            {NUMBER_FORMATTER.format(data.character_level)}
+          </InfoDescriptionRow>
+          <RankingRows
+            overallRanking={data.level_ranking?.ranking}
+            worldRanking={data.level_ranking?.world_ranking}
+          />
         </div>
 
-        <InfoRow label="EXP">{expRate}%</InfoRow>
-        <InfoRow label="직업">{data.character_class}</InfoRow>
-        <InfoRow label="월드">{data.world_name}</InfoRow>
-        <InfoRow label="길드">{guildName}</InfoRow>
+        <InfoDescriptionRow label="EXP">{expRate}%</InfoDescriptionRow>
+        <InfoDescriptionRow label="직업">
+          {data.character_class}
+        </InfoDescriptionRow>
+        <InfoDescriptionRow label="월드">{data.world_name}</InfoDescriptionRow>
+        <InfoDescriptionRow label="길드">{guildName}</InfoDescriptionRow>
         <div className="flex gap-3">
-          <InfoRow label="유니온">{unionDisplay}</InfoRow>
-          {data.union_ranking?.ranking != null && (
-            <>
-              <InfoRow label="전체랭킹">
-                {data.union_ranking.ranking.toLocaleString()}등
-              </InfoRow>
-              <InfoRow label="월드랭킹">
-                {data.union_ranking.world_ranking}등
-              </InfoRow>
-            </>
-          )}
+          <InfoDescriptionRow label="유니온">{unionDisplay}</InfoDescriptionRow>
+          <RankingRows
+            overallRanking={data.union_ranking?.ranking}
+            worldRanking={data.union_ranking?.world_ranking}
+          />
         </div>
 
         {/* 날짜 정보 그룹 */}

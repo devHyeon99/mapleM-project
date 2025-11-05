@@ -1,6 +1,6 @@
 import { CharacterProfileCard } from "./CharacterProfileCard";
 import { CharacterDetailTabs } from "./CharacterDetailTabs";
-import { CharacterDetailData, UnionCard } from "@/entities/character";
+import { CharacterDetailData } from "@/entities/character";
 
 interface CharacterBasicInfoProps {
   ocid: string;
@@ -22,15 +22,13 @@ export const CharacterDetail = ({
         {titleText}
       </h2>
 
-      <div className="flex w-full max-w-3xl flex-col items-center gap-4 md:flex-row md:items-start md:justify-center">
-        <div className="flex w-full flex-col items-center gap-1">
+      <div className="flex w-full max-w-5xl flex-col gap-2">
+        <div className="flex w-full flex-col">
           <CharacterProfileCard data={characterData} />
-          <UnionCard
-            data={characterData.union_data}
-            ranking={characterData.union_ranking}
-          />
         </div>
-        <CharacterDetailTabs ocid={ocid} characterData={characterData} />
+        <div className="flex w-full flex-col">
+          <CharacterDetailTabs ocid={ocid} characterData={characterData} />
+        </div>
       </div>
     </section>
   );

@@ -1,33 +1,31 @@
 "use client";
 
 import { LayoutGrid, List } from "lucide-react";
-import { ReactNode } from "react";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/shared/ui/tooltip";
-import { SegmentedButton } from "./SegmentedButton";
+import { cn } from "@/shared/lib/utils";
+import { ToggleGroup, ToggleGroupItem } from "@/shared/ui/toggle-group";
 
 interface CommonTabHeaderProps {
-  /** 현재 활성화된(인게임 적용 중인) 프리셋 번호 */
   activePresetNo?: number | null;
-  /** 현재 사용자가 보고 있는(선택한) 프리셋 번호 */
   selectedPreset?: number | null;
-  /** 표시할 프리셋 목록 (기본값: [1, 2, 3]) */
   presets?: number[];
-  /** 현재 뷰 모드 */
   viewMode: "grid" | "list";
-  /** 프리셋 변경 핸들러 */
   onSelectPreset: (preset: number) => void;
-  /** 뷰 모드 변경 핸들러 */
   onChangeViewMode: (mode: "grid" | "list") => void;
-  /**
-   * 추가 액션 버튼들 (스펙카드, 세트효과 등), 뷰 모드 버튼 좌측에 구분선과 함께 배치
-   */
-  actions?: ReactNode;
+  className?: string;
 }
+
+const VIEW_MODE_OPTIONS = [
+  {
+    value: "grid",
+    label: "그리드 보기",
+    icon: LayoutGrid,
+  },
+  {
+    value: "list",
+    label: "리스트 보기",
+    icon: List,
+  },
+] as const;
 
 export const CommonTabHeader = ({
   activePresetNo,
@@ -36,85 +34,85 @@ export const CommonTabHeader = ({
   viewMode,
   onSelectPreset,
   onChangeViewMode,
-  actions,
+  className,
 }: CommonTabHeaderProps) => {
   return (
-    <div className="flex items-center justify-between">
-      {/* 좌측: 프리셋 선택 */}
-      <div
-        role="group"
-        aria-label="장비 프리셋 선택"
-        className="bg-muted flex items-center gap-0.5 rounded-xs border px-0.5 py-1 md:gap-1 md:px-[5px]"
-      >
-        {presets.map((num) => {
-          const isActiveInGame = activePresetNo === num;
-          const isSelected = selectedPreset === num;
+    <section
+      aria-label="탭 헤더 컨트롤"
+      className={cn(
+        "bg-card flex w-full flex-wrap items-center justify-between gap-3 rounded-xs px-2 sm:px-4",
+        className,
+      )}
+    >
+      <div className="flex min-w-0 items-center">
+        <div>
+          <p className="text-foreground sr-only text-sm font-semibold">
+            프리셋
+          </p>
+          <p className="sr-only">현재 적용 중인 프리셋은 점으로 표시됩니다.</p>
+        </div>
 
-          return (
-            <SegmentedButton
-              key={num}
-              isSelected={isSelected}
-              onClick={() => onSelectPreset(num)}
-              className={
-                isActiveInGame && !isSelected ? "text-primary font-bold" : ""
-              }
-              title={`${num}번 프리셋${isActiveInGame ? " (현재 적용 중)" : ""}`}
-            >
-              {num}
-              {isActiveInGame && (
-                <span className="bg-primary absolute top-1 right-1 h-1 w-1 rounded-full" />
-              )}
-            </SegmentedButton>
-          );
-        })}
+        <ToggleGroup
+          type="single"
+          value={selectedPreset != null ? String(selectedPreset) : undefined}
+          onValueChange={(value) => {
+            if (!value) return;
+            onSelectPreset(Number(value));
+          }}
+          variant="outline"
+          aria-label="장비 프리셋 선택"
+        >
+          {presets.map((preset) => {
+            const isActiveInGame = activePresetNo === preset;
+            return (
+              <ToggleGroupItem
+                key={preset}
+                value={String(preset)}
+                aria-label={`${preset}번 프리셋`}
+                className="text-muted-foreground relative min-w-9 px-3 text-xs font-semibold md:text-sm"
+              >
+                <span>프리셋 {preset}</span>
+                {isActiveInGame && (
+                  <span
+                    className="absolute top-1 right-1 size-1.5 rounded-full bg-orange-500"
+                    aria-hidden="true"
+                  />
+                )}
+              </ToggleGroupItem>
+            );
+          })}
+        </ToggleGroup>
       </div>
 
-      {/* 우측: 뷰 모드 + 액션 버튼 (통합 툴바) */}
-      <div className="bg-muted flex items-center gap-0.5 rounded-xs border px-1.5 py-1 md:px-3.5">
-        <TooltipProvider delayDuration={300}>
-          {/* 액션 버튼들 (스펙카드, 세트효과 등) */}
-          {actions}
+      <div className="flex items-center gap-2">
+        <span className="text-muted-foreground sr-only text-xs font-medium">
+          보기 방식
+        </span>
+        <ToggleGroup
+          type="single"
+          value={viewMode}
+          onValueChange={(value) => {
+            if (value !== "grid" && value !== "list") return;
+            onChangeViewMode(value);
+          }}
+          variant="outline"
+          aria-label="보기 방식 선택"
+        >
+          {VIEW_MODE_OPTIONS.map((option) => {
+            const Icon = option.icon;
 
-          {/* 구분선 (액션 버튼이 있을 때만 표시) */}
-          {actions && (
-            <div className="bg-border mx-1 h-3 w-[1px]" aria-hidden="true" />
-          )}
-
-          {/* 그리드 */}
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <span>
-                <SegmentedButton
-                  isSelected={viewMode === "grid"}
-                  onClick={() => onChangeViewMode("grid")}
-                >
-                  <LayoutGrid className="size-4" />
-                </SegmentedButton>
-              </span>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>그리드 보기</p>
-            </TooltipContent>
-          </Tooltip>
-
-          {/* 리스트 */}
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <span>
-                <SegmentedButton
-                  isSelected={viewMode === "list"}
-                  onClick={() => onChangeViewMode("list")}
-                >
-                  <List className="size-4" />
-                </SegmentedButton>
-              </span>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>리스트 보기</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
+            return (
+              <ToggleGroupItem
+                key={option.value}
+                value={option.value}
+                aria-label={option.label}
+              >
+                <Icon className="size-4" />
+              </ToggleGroupItem>
+            );
+          })}
+        </ToggleGroup>
       </div>
-    </div>
+    </section>
   );
 };

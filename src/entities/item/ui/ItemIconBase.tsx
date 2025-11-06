@@ -134,8 +134,7 @@ export const ItemIconBase = React.forwardRef<HTMLDivElement, ItemIconBaseProps>(
         <img
           src={safeIcon}
           alt={item_name && item_name !== "(Unknown)" ? item_name : "아이템"}
-          loading="lazy"
-          className="object-contain"
+          className="max-h-full max-w-full object-contain"
           style={{ imageRendering: "pixelated" }}
         />
       </div>

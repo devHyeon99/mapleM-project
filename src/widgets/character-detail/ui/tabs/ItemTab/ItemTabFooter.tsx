@@ -30,18 +30,18 @@ export const ItemTabFooter = ({
   );
 
   return (
-    <div className="grid w-full grid-cols-2 gap-x-4 gap-y-1 rounded-xs border p-3 text-sm">
+    <div className="bg-card grid w-full grid-cols-2 gap-x-4 gap-y-1 rounded-xs p-4 text-sm">
       <span className="text-foreground col-span-2 mb-1">장비 스펙 요약</span>
 
-      <InfoRow variant="between" label={`잠재 (${labelDamage}+보공)`}>
+      <InfoRow variant="between" label={`잠재 (${labelDamage}+보공)`} isNumeric>
         <span className="font-medium">{potential.toFixed(2)}%</span>
       </InfoRow>
 
-      <InfoRow variant="between" label={`에디 (${labelDamage}+보공)`}>
+      <InfoRow variant="between" label={`에디 (${labelDamage}+보공)`} isNumeric>
         <span className="font-medium">{additional.toFixed(2)}%</span>
       </InfoRow>
 
-      <InfoRow variant="between" label="추옵 (최종 대미지)">
+      <InfoRow variant="between" label="추옵 (최종 대미지)" isNumeric>
         <span className="font-medium">{chuop.finalDamage.toFixed(2)}%</span>
       </InfoRow>
 
@@ -49,7 +49,7 @@ export const ItemTabFooter = ({
         <span className="font-medium">{chuop.ignoreDef.toFixed(2)}%</span>
       </InfoRow> */}
 
-      <InfoRow variant="between" label={`추옵 (${labelAtk})`}>
+      <InfoRow variant="between" label={`추옵 (${labelAtk})`} isNumeric>
         <span className="font-medium">{chuop.atk.toLocaleString()}</span>
       </InfoRow>
     </div>

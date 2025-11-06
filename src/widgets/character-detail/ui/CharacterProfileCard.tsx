@@ -68,7 +68,7 @@ const DataUpdateTooltip = () => {
               3. 랭킹 업데이트
             </span>
             <br />
-            랭킹은 매일 오전 6시 경에 1일 1회 집계되어 제공됩니다.
+            랭킹은 매일 오전 6시경에 1일 1회 집계되어 제공됩니다.
           </p>
         </div>
       </PopoverContent>
@@ -93,12 +93,12 @@ export const CharacterProfileCard = ({ data }: CharacterProfileCardProps) => {
 
   return (
     <article
-      className="bg-card relative w-full flex-col rounded-xs p-6"
+      className="bg-card relative w-full flex-col rounded-xs p-4 shadow-sm sm:p-6"
       aria-label={`${data.character_name} 캐릭터 상세정보`}
     >
       {/* 랭킹 업데이트 날짜 */}
       {data.level_ranking && (
-        <div className="text-muted-foreground absolute top-3 left-6 text-xs font-semibold">
+        <div className="text-muted-foreground absolute top-3 left-4 text-xs font-semibold sm:left-6">
           랭킹 업데이트 - {data.level_ranking?.date.replace(/-/g, ".")}
         </div>
       )}

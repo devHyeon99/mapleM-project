@@ -2,17 +2,19 @@ import { CharacterItemEquipment, ItemOption } from "@/entities/item";
 import { ItemPopover } from "@/widgets/item-popover";
 import { Star } from "lucide-react";
 
-interface ItemRowProps {
+interface ItemListRowProps {
   item: CharacterItemEquipment;
+  isLast?: boolean;
   mainDamageType: string;
   mainAtkType: string;
 }
 
-export const ItemRow = ({
+export const ItemListRow = ({
   item,
+  isLast = false,
   mainDamageType,
   mainAtkType,
-}: ItemRowProps) => {
+}: ItemListRowProps) => {
   const TARGET_STATS = [
     mainAtkType,
     mainDamageType,
@@ -67,14 +69,15 @@ export const ItemRow = ({
     return summaryList.join(", ");
   };
 
-  // 잠재 (잠재 + 에디셔널)
-  const potentialOptions = [
-    ...(item.item_potential_option ?? []),
-    ...(item.item_additional_potential_option ?? []),
-  ];
+  const potentialOptions = item.item_potential_option ?? [];
   const potentialSummary = getSummaryFromOptions(potentialOptions);
 
-  // 추가옵션
+  const additionalPotentialOptions =
+    item.item_additional_potential_option ?? [];
+  const additionalPotentialSummary = getSummaryFromOptions(
+    additionalPotentialOptions,
+  );
+
   const additionalOptions = item.item_additional_option ?? [];
   const additionalSummary = getSummaryFromOptions(additionalOptions);
 
@@ -85,8 +88,13 @@ export const ItemRow = ({
       : null;
 
   return (
-    <div className="bg-card hover:bg-accent/50 flex w-full items-center gap-3 rounded-md border-2 p-2 shadow-sm transition-colors">
-      <div className="h-12.5 w-12.5 shrink-0">
+    <div
+      className={[
+        "bg-card hover:bg-accent/50 flex w-full items-center gap-3 p-4 transition-colors",
+        isLast ? "" : "border-b",
+      ].join(" ")}
+    >
+      <div className="h-12.5 w-12.5 shrink-0 self-start">
         <ItemPopover item={item} className="h-full w-full cursor-pointer" />
       </div>
 
@@ -103,7 +111,7 @@ export const ItemRow = ({
           )}
         </div>
 
-        <div className="flex flex-row gap-2">
+        <div className="flex flex-col gap-0.5">
           {/* 잠재능력 */}
           {potentialSummary && (
             <p className="text-muted-foreground truncate text-xs">
@@ -116,7 +124,17 @@ export const ItemRow = ({
             </p>
           )}
 
-          {/* 추가옵션 */}
+          {additionalPotentialSummary && (
+            <p className="text-muted-foreground truncate text-xs">
+              <span className="inline-block min-w-[24px] font-bold text-purple-500 dark:text-purple-400">
+                에디
+              </span>
+              <span className="text-foreground/80 font-semibold">
+                {additionalPotentialSummary}
+              </span>
+            </p>
+          )}
+
           {additionalSummary && (
             <p className="text-muted-foreground truncate text-xs">
               <span className="inline-block min-w-[24px] font-bold text-green-600 dark:text-green-400">

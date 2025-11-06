@@ -1,25 +1,15 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { IdCard, Search } from "lucide-react";
 
-// Shared & UI
 import { CommonTabHeader } from "@/shared/ui/CommonTabHeader";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/shared/ui/tooltip";
-import { SegmentedButton } from "@/shared/ui/SegmentedButton";
 
-// Entities
 import { CharacterDetailData } from "@/entities/character";
 import { sortItems, sortItemsForList } from "@/entities/item/lib";
 
-// Local Components
 import { ItemGrid } from "./ItemGrid";
 import { ItemList } from "./ItemList";
 import { ItemTabFooter } from "./ItemTabFooter";
-
-// features
-import { SpecCardDialog } from "@/features/share-spec-card";
-import { SetEffectDialog } from "@/features/view-set-effect";
 
 interface ItemTabProps {
   data: CharacterDetailData;
@@ -34,7 +24,6 @@ export const ItemTab = ({ data }: ItemTabProps) => {
     android_equipment: android,
     heart_equipment: heart,
     use_preset_no: activePresetNo,
-    set_effect: setEffect = [],
   } = data;
 
   const currentPresetItems = useMemo(() => {
@@ -50,14 +39,6 @@ export const ItemTab = ({ data }: ItemTabProps) => {
       : sortItemsForList(currentPresetItems, android ?? null, heart ?? null);
   }, [viewMode, currentPresetItems, android, heart]);
 
-  const itemTabData: CharacterDetailData = useMemo(
-    () => ({
-      ...data,
-      item_equipment: currentPresetItems,
-    }),
-    [data, currentPresetItems],
-  );
-
   if (data.use_preset_no === null) {
     return (
       <section className="bg-muted/50 flex min-h-91.5 flex-col items-center justify-center gap-2 rounded-md border p-6 text-center">
@@ -69,72 +50,39 @@ export const ItemTab = ({ data }: ItemTabProps) => {
     );
   }
 
-  const ActionButtons = (
-    <>
-      <SpecCardDialog
-        data={itemTabData}
-        trigger={
-          <span className="inline-flex">
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <SegmentedButton isSelected={false}>
-                  <IdCard className="size-5.5" />
-                </SegmentedButton>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>스펙 카드 저장</p>
-              </TooltipContent>
-            </Tooltip>
-          </span>
-        }
-      />
-
-      <SetEffectDialog
-        setEffect={setEffect}
-        activePresetNo={activePresetNo ?? 1}
-        trigger={
-          <span className="inline-flex">
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <SegmentedButton isSelected={false}>
-                  <Search className="size-4" />
-                </SegmentedButton>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>세트 효과 보기</p>
-              </TooltipContent>
-            </Tooltip>
-          </span>
-        }
-      />
-    </>
-  );
+  const commonHeaderProps = {
+    activePresetNo,
+    selectedPreset,
+    viewMode,
+    onSelectPreset: setSelectedPreset,
+    onChangeViewMode: setViewMode,
+  } as const;
 
   return (
-    <div className="flex flex-col gap-4">
-      <CommonTabHeader
-        activePresetNo={activePresetNo}
-        selectedPreset={selectedPreset}
-        viewMode={viewMode}
-        onSelectPreset={setSelectedPreset}
-        onChangeViewMode={setViewMode}
-        actions={ActionButtons}
-      />
-
-      {viewMode === "grid" ? (
-        <ItemGrid items={sortedItems} presetNo={selectedPreset} />
-      ) : (
-        <ItemList
+    <div className="flex flex-col gap-2">
+      <div className="bg-card relative flex flex-col gap-4 rounded-xs shadow-sm">
+        {viewMode === "grid" ? (
+          <div className="mx-auto flex w-full flex-col items-center gap-4 py-4">
+            <CommonTabHeader {...commonHeaderProps} />
+            <ItemGrid items={sortedItems} presetNo={selectedPreset} />
+          </div>
+        ) : (
+          <div className="pt-4">
+            <CommonTabHeader {...commonHeaderProps} />
+            <ItemList
+              items={sortedItems}
+              presetNo={selectedPreset}
+              characterClass={data.character_class}
+            />
+          </div>
+        )}
+      </div>
+      <div className="mx-auto w-full shadow-sm">
+        <ItemTabFooter
           items={sortedItems}
-          presetNo={selectedPreset}
           characterClass={data.character_class}
         />
-      )}
-
-      <ItemTabFooter
-        items={sortedItems}
-        characterClass={data.character_class}
-      />
+      </div>
     </div>
   );
 };

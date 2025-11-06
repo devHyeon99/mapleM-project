@@ -43,7 +43,9 @@ export const CharacterDetailTabs = ({
     const hasOverflow = scrollWidth - clientWidth > 1;
 
     setIsAtStart(!hasOverflow || scrollLeft <= 1);
-    setIsAtEnd(!hasOverflow || Math.ceil(scrollLeft + clientWidth) >= scrollWidth - 1);
+    setIsAtEnd(
+      !hasOverflow || Math.ceil(scrollLeft + clientWidth) >= scrollWidth - 1,
+    );
   }, []);
 
   useEffect(() => {
@@ -95,7 +97,9 @@ export const CharacterDetailTabs = ({
     LinkSkill: <LinkSkillTab ocid={ocid} />,
     Skill: <SkillTab ocid={ocid} />,
     Vmatrix: <VmatrixTab ocid={ocid} level={characterData.character_level} />,
-    HexaSkill: <HexaSkillTab ocid={ocid} level={characterData.character_level} />,
+    HexaSkill: (
+      <HexaSkillTab ocid={ocid} level={characterData.character_level} />
+    ),
     HexaStat: <HexaStatTab ocid={ocid} level={characterData.character_level} />,
     Union: (
       <UnionTab
@@ -156,7 +160,7 @@ export const CharacterDetailTabs = ({
             ref={scrollRef}
             onScroll={handleScroll}
             className={cn(
-              "flex h-12 w-full items-center justify-start rounded-none bg-transparent",
+              "flex h-12 w-full items-center justify-start rounded-none bg-transparent p-0 shadow-sm",
               "overflow-x-auto overflow-y-hidden scroll-smooth whitespace-nowrap",
               "[-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
             )}
@@ -170,7 +174,7 @@ export const CharacterDetailTabs = ({
                   value={tab.value}
                   aria-describedby={`${tab.value}-tab-description`}
                   className={cn(
-                    "text-muted-foreground relative h-12 shrink-0 rounded-none border-0 border-b-2 px-5 text-sm font-semibold",
+                    "text-muted-foreground relative h-12 shrink-0 rounded-none border-0 border-b-2 px-5 text-sm font-semibold shadow-none!",
                     "hover:text-foreground! hover:cursor-pointer",
                     "data-[state=active]:text-foreground data-[state=active]:border-orange-500 data-[state=active]:bg-transparent! dark:data-[state=active]:border-b-orange-500",
                   )}

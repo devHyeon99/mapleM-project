@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import { SortedItemSlot } from "@/entities/item";
 import { ItemEmptySlot } from "@/shared/ui/ItemEmptySlot";
 import { ItemPopover } from "@/widgets/item-popover";
@@ -9,6 +8,8 @@ interface ItemGridProps {
 }
 
 export const ItemGrid = ({ items, presetNo }: ItemGridProps) => {
+  const slotSizeClass = "w-[clamp(3rem,7vw,3.6875rem)]";
+
   // 안드로이드와 하트를 제외한 순수 장비 아이템만 필터링해서 체크
   const hasNoEquipItems = items.every((slot) => {
     // 안드로이드나 하트 슬롯은 검사에서 제외 (무조건 true 반환해서 통과시킴)
@@ -19,42 +20,57 @@ export const ItemGrid = ({ items, presetNo }: ItemGridProps) => {
     return slot.item === null;
   });
 
-  if (hasNoEquipItems) {
-    return (
-      <section className="grid min-h-78 place-content-center rounded-md border p-4 text-center">
-        <p className="text-muted-foreground text-sm">
-          {presetNo}번 프리셋 정보가 없습니다.
-        </p>
-      </section>
-    );
-  }
-
   return (
-    <div className="grid grid-cols-7 gap-x-1 gap-y-2">
-      {items.map((slot, idx) => {
-        // 빈 여백 (slotName이 빈 문자열 ""인 경우)
-        if (!slot.slotName) {
+    <div className="relative mx-auto w-fit">
+      <div
+        className="grid w-fit grid-cols-7 gap-1"
+        aria-hidden={hasNoEquipItems}
+      >
+        {items.map((slot, idx) => {
+          // 빈 여백 (slotName이 빈 문자열 ""인 경우)
+          if (!slot.slotName) {
+            return (
+              <div
+                key={`spacer-${idx}`}
+                className={`aspect-square ${slotSizeClass}`}
+                aria-hidden="true"
+              />
+            );
+          }
+
+          // 아이템이 있는 경우
+          if (slot.item) {
+            return (
+              <div
+                key={`${presetNo}-${slot.item.item_name}-${idx}`}
+                className={`aspect-square ${slotSizeClass}`}
+              >
+                <ItemPopover
+                  item={slot.item}
+                  className="h-full w-full cursor-pointer shadow-sm"
+                />
+              </div>
+            );
+          }
+
+          // 아이템은 없지만 슬롯 이름이 있는 경우 (빈 장비칸)
           return (
-            <div
-              key={`spacer-${idx}`}
-              className="aspect-square w-full"
-              aria-hidden="true"
+            <ItemEmptySlot
+              key={`empty-${idx}`}
+              label={slot.slotName}
+              className={`aspect-square ${slotSizeClass}`}
             />
           );
-        }
+        })}
+      </div>
 
-        // 아이템이 있는 경우
-        if (slot.item) {
-          return (
-            <Fragment key={`${presetNo}-${slot.item.item_name}-${idx}`}>
-              <ItemPopover item={slot.item} className="cursor-pointer" />
-            </Fragment>
-          );
-        }
-
-        // 아이템은 없지만 슬롯 이름이 있는 경우 (빈 장비칸)
-        return <ItemEmptySlot key={`empty-${idx}`} label={slot.slotName} />;
-      })}
+      {hasNoEquipItems && (
+        <div className="bg-card/70 absolute inset-0 flex items-center justify-center text-center backdrop-blur-[2px]">
+          <p className="text-muted-foreground text-sm font-bold">
+            {presetNo}번 프리셋 정보가 없습니다.
+          </p>
+        </div>
+      )}
     </div>
   );
 };

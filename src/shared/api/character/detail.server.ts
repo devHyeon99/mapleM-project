@@ -4,7 +4,6 @@ import { nexonFetch } from "@/shared/api/nexon/server";
 import { getRankingDate } from "@/shared/lib/ranking-date";
 import type {
   CharacterItemEquipmentResponse,
-  CharacterEquipmentSetResponse,
   CharacterAndroidResponse,
 } from "@/entities/item";
 import type {
@@ -42,10 +41,6 @@ export async function fetchCharacterDetail(ocid: string): Promise<CharacterDetai
       `/character/android-equipment?ocid=${ocidQ}`,
       { cache: "no-store" },
     ),
-    setEffect: nexonFetch<CharacterEquipmentSetResponse>(
-      `/character/set-effect?ocid=${ocidQ}`,
-      { cache: "no-store" },
-    ),
     union: nexonFetch<CharacterUnionResponse>(`/user/union?ocid=${ocidQ}`, {
       cache: "no-store",
     }),
@@ -71,7 +66,6 @@ export async function fetchCharacterDetail(ocid: string): Promise<CharacterDetai
     guildData,
     equipData,
     androidData,
-    equipSetEffectData,
     unionData,
     levelRankingData,
     unionRankingData,
@@ -80,7 +74,6 @@ export async function fetchCharacterDetail(ocid: string): Promise<CharacterDetai
     essentialRequests.guild,
     essentialRequests.equip,
     essentialRequests.android,
-    essentialRequests.setEffect,
     essentialRequests.union,
     rankingPromises.levelRanking,
     rankingPromises.unionRanking,
@@ -97,7 +90,6 @@ export async function fetchCharacterDetail(ocid: string): Promise<CharacterDetai
     soul_set_option: equipData.soul_set_option,
     item_equipment: equipData.item_equipment ?? [],
     equipment_preset: equipData.equipment_preset ?? [],
-    set_effect: equipSetEffectData.set_info ?? [],
     android_equipment: androidData?.android_equipment ?? null,
     heart_equipment: androidData?.heart_equipment ?? null,
     android_preset: androidData?.android_heart_equipment_preset ?? [],

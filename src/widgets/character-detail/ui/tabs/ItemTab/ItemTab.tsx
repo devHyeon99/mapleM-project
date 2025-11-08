@@ -77,9 +77,10 @@ export const ItemTab = ({ data }: ItemTabProps) => {
           </div>
         )}
       </div>
-      <div className="mx-auto w-full shadow-sm">
+      <div className="mx-auto w-full">
         <ItemTabFooter
           items={sortedItems}
+          presetNo={selectedPreset}
           characterClass={data.character_class}
         />
       </div>

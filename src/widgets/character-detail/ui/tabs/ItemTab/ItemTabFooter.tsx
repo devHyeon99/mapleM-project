@@ -1,14 +1,17 @@
 import { SortedItemSlot } from "@/entities/item";
-import { getItemSpec } from "@/entities/item/lib/getItemSpec";
-import { InfoRow } from "@/shared/ui/InfoRow";
+
+import { ItemSetEffectCard } from "./ItemSetEffectCard";
+import { ItemSpecSummaryCard } from "./ItemSpecSummaryCard";
 
 interface ItemTabFooterProps {
   items: SortedItemSlot[];
+  presetNo: number;
   characterClass: string;
 }
 
 export const ItemTabFooter = ({
   items,
+  presetNo,
   characterClass,
 }: ItemTabFooterProps) => {
   const hasNoEquipItems = items.every((slot) => {
@@ -22,36 +25,14 @@ export const ItemTabFooter = ({
     return null;
   }
 
-  const itemList = items.map((slot) => slot.item);
-
-  const { labelDamage, labelAtk, potential, additional, chuop } = getItemSpec(
-    itemList,
-    characterClass,
-  );
-
   return (
-    <div className="bg-card grid w-full grid-cols-2 gap-x-4 gap-y-1 rounded-xs p-4 text-sm">
-      <span className="text-foreground col-span-2 mb-1">장비 스펙 요약</span>
-
-      <InfoRow variant="between" label={`잠재 (${labelDamage}+보공)`} isNumeric>
-        <span className="font-medium">{potential.toFixed(2)}%</span>
-      </InfoRow>
-
-      <InfoRow variant="between" label={`에디 (${labelDamage}+보공)`} isNumeric>
-        <span className="font-medium">{additional.toFixed(2)}%</span>
-      </InfoRow>
-
-      <InfoRow variant="between" label="추옵 (최종 대미지)" isNumeric>
-        <span className="font-medium">{chuop.finalDamage.toFixed(2)}%</span>
-      </InfoRow>
-
-      {/* <InfoRow variant="between" label="추옵 (방어율 무시)">
-        <span className="font-medium">{chuop.ignoreDef.toFixed(2)}%</span>
-      </InfoRow> */}
-
-      <InfoRow variant="between" label={`추옵 (${labelAtk})`} isNumeric>
-        <span className="font-medium">{chuop.atk.toLocaleString()}</span>
-      </InfoRow>
+    <div className="grid w-full shadow-sm">
+      <ItemSpecSummaryCard
+        items={items}
+        presetNo={presetNo}
+        characterClass={characterClass}
+      />
+      <ItemSetEffectCard items={items} />
     </div>
   );
 };

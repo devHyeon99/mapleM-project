@@ -43,6 +43,9 @@ export const ItemList = ({
 
   return (
     <div className={cn("flex w-full flex-col pt-4", className)}>
+      <p className="text-muted-foreground pr-4 text-right text-xs">
+        아이템 옵션은 각 캐릭터 직업에 맞는 유효 옵션만 노출됩니다.
+      </p>
       {items.map((slot, index) => {
         if (slot.item) {
           return (

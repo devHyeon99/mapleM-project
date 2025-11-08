@@ -111,14 +111,14 @@ export const ItemListRow = ({
           )}
         </div>
 
-        <div className="flex flex-col gap-0.5">
+        <div className="flex flex-col gap-2 md:flex-row">
           {/* 잠재능력 */}
           {potentialSummary && (
             <p className="text-muted-foreground truncate text-xs">
-              <span className="inline-block min-w-[24px] font-bold text-blue-500 dark:text-blue-400">
+              <span className="inline-block min-w-[24px] font-semibold text-blue-500 dark:text-blue-400">
                 잠재
               </span>
-              <span className="text-foreground/80 font-semibold">
+              <span className="text-foreground/70 font-medium">
                 {potentialSummary}
               </span>
             </p>
@@ -126,10 +126,10 @@ export const ItemListRow = ({
 
           {additionalPotentialSummary && (
             <p className="text-muted-foreground truncate text-xs">
-              <span className="inline-block min-w-[24px] font-bold text-purple-500 dark:text-purple-400">
+              <span className="inline-block min-w-[24px] font-semibold text-purple-500 dark:text-purple-400">
                 에디
               </span>
-              <span className="text-foreground/80 font-semibold">
+              <span className="text-foreground/70 font-medium">
                 {additionalPotentialSummary}
               </span>
             </p>
@@ -137,10 +137,10 @@ export const ItemListRow = ({
 
           {additionalSummary && (
             <p className="text-muted-foreground truncate text-xs">
-              <span className="inline-block min-w-[24px] font-bold text-green-600 dark:text-green-400">
+              <span className="inline-block min-w-[24px] font-semibold text-green-600 dark:text-green-400">
                 추옵
               </span>
-              <span className="text-foreground/80 font-semibold">
+              <span className="text-foreground/70 font-medium">
                 {additionalSummary}
               </span>
             </p>

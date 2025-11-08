@@ -11,7 +11,7 @@ export const ItemEmptyRow = ({ label, className }: EmptyItemRowProps) => {
   return (
     <div
       className={cn(
-        "flex w-full items-center gap-3 rounded-lg border-2 p-2 opacity-90",
+        "flex w-full cursor-not-allowed items-center gap-3 border-b p-4 opacity-90",
         className,
       )}
     >

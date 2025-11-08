@@ -7,7 +7,7 @@ export default function LayoutGroup({
 }) {
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="bg-background sticky top-0 z-50 mx-auto w-full max-w-[1080px]">
+      <header className="bg-background sticky top-0 z-50 w-full">
         <Header />
       </header>
 

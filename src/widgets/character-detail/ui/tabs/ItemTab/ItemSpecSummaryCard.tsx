@@ -27,7 +27,7 @@ export const ItemSpecSummaryCard = ({
   );
 
   return (
-    <section className="bg-card flex w-full flex-col rounded-xs p-4 pb-0">
+    <section className="bg-card flex w-full flex-col rounded-xs p-4">
       <h3 className="text-foreground mb-4 font-bold">장비 스펙 요약</h3>
       <Accordion
         type="single"

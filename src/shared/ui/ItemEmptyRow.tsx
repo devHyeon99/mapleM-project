@@ -17,7 +17,7 @@ export const ItemEmptyRow = ({ label, className }: EmptyItemRowProps) => {
     >
       {/* 왼쪽 아이콘 박스 */}
       <div className="bg-muted/70 flex h-12 w-12 shrink-0 items-center justify-center rounded-xs border-2">
-        <span className="text-muted-foreground px-1 text-center text-xs break-keep">
+        <span className="text-muted-foreground px-1 text-center text-xs">
           {displayLabel}
         </span>
       </div>

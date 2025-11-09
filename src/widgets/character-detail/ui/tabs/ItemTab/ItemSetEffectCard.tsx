@@ -27,7 +27,7 @@ export const ItemSetEffectCard = ({ items }: ItemSetEffectCardProps) => {
   }
 
   return (
-    <section className="bg-card flex w-full flex-col rounded-xs p-4">
+    <section className="bg-card flex w-full flex-col rounded-xs p-4 pt-0">
       <span className="text-foreground block pb-4 font-bold">
         장비 세트 효과
       </span>

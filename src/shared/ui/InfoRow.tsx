@@ -54,7 +54,7 @@ export const InfoRow = ({
     <Component
       className={cn(
         "flex items-center text-sm",
-        variant === "between" ? "justify-between" : "justify-start gap-1",
+        variant === "between" ? "justify-between" : "justify-start gap-2",
         className,
       )}
     >

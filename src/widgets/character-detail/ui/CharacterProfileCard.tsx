@@ -4,10 +4,27 @@ import Image from "next/image";
 import Link from "next/link";
 import { InfoDescriptionRow } from "@/shared/ui/InfoRow";
 import { InfoDateRow } from "@/shared/ui/InfoDateRow";
+import { HelpPopover } from "@/shared/ui/HelpPopover";
 import { CharacterDetailData } from "@/entities/character";
-import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui/popover";
-import { CircleHelp } from "lucide-react";
+
 const NUMBER_FORMATTER = new Intl.NumberFormat("ko-KR");
+const DATA_UPDATE_GUIDE_ITEMS = [
+  {
+    title: "1. 데이터 갱신",
+    description:
+      "게임 데이터는 평균 10분 후 반영되므로 실제와 차이가 있을 수 있습니다.",
+  },
+  {
+    title: "2. 랭킹 정보",
+    description:
+      "서버 전체 10,000등 이내의 캐릭터만 랭킹이 표기됩니다.",
+  },
+  {
+    title: "3. 랭킹 업데이트",
+    description:
+      "랭킹은 매일 오전 6시경에 1일 1회 집계되어 제공됩니다.",
+  },
+] as const;
 
 interface RankingRowsProps {
   overallRanking?: number | null;
@@ -29,56 +46,6 @@ const RankingRows = ({ overallRanking, worldRanking }: RankingRowsProps) => {
   );
 };
 
-// --------------------------------------------------------------------------
-// 2. Component Extraction (Sub-component)
-// --------------------------------------------------------------------------
-const DataUpdateTooltip = () => {
-  return (
-    <Popover>
-      <PopoverTrigger asChild>
-        <button
-          type="button"
-          aria-label="데이터 갱신 주기 안내"
-          className="text-muted-foreground hover:text-foreground absolute top-3 right-3 transition-colors"
-        >
-          <CircleHelp className="size-5" />
-        </button>
-      </PopoverTrigger>
-      <PopoverContent
-        side="bottom"
-        align="end"
-        className="bg-secondary w-80 rounded-xs p-3"
-      >
-        <div className="flex flex-col gap-2 text-xs leading-relaxed">
-          <p>
-            <span className="text-foreground font-semibold">
-              1. 데이터 갱신
-            </span>
-            <br />
-            게임 데이터는 평균 10분 후 반영되므로 실제와 차이가 있을 수
-            있습니다.
-          </p>
-          <p>
-            <span className="text-foreground font-semibold">2. 랭킹 정보</span>
-            <br />
-            서버 전체 10,000등 이내의 캐릭터만 랭킹이 표기됩니다.
-          </p>
-          <p>
-            <span className="text-foreground font-semibold">
-              3. 랭킹 업데이트
-            </span>
-            <br />
-            랭킹은 매일 오전 6시경에 1일 1회 집계되어 제공됩니다.
-          </p>
-        </div>
-      </PopoverContent>
-    </Popover>
-  );
-};
-
-// --------------------------------------------------------------------------
-// 3. Main Component
-// --------------------------------------------------------------------------
 interface CharacterProfileCardProps {
   data: CharacterDetailData;
 }
@@ -191,7 +158,11 @@ export const CharacterProfileCard = ({ data }: CharacterProfileCardProps) => {
       </div>
 
       {/* 도움말 팝오버 컴포넌트 */}
-      <DataUpdateTooltip />
+      <HelpPopover
+        ariaLabel="데이터 갱신 주기 안내"
+        items={DATA_UPDATE_GUIDE_ITEMS}
+        triggerClassName="absolute top-3 right-3"
+      />
     </article>
   );
 };

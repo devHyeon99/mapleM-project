@@ -1,21 +1,5 @@
 import { ItemOption } from "./item-option";
 
-// ==========================================================================
-// 1. API Response 타입 (넥슨 API 응답 구조)
-// ==========================================================================
-
-/** 안드로이드 장비 조회 API 응답 (/character/android-equipment) */
-export interface CharacterAndroidResponse {
-  use_preset_no?: number;
-  android_equipment: CharacterAndroidEquipment | null;
-  heart_equipment: CharacterHeartEquipment | null;
-  android_heart_equipment_preset?: AndroidHeartPreset[];
-}
-
-// ==========================================================================
-// 2. 도메인 모델 (UI 및 로직에서 사용할 구조)
-// ==========================================================================
-
 export interface CashItemColoringPrism {
   color_range: string;
   hue: string;

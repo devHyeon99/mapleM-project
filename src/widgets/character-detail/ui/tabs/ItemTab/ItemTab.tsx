@@ -57,7 +57,7 @@ export const ItemTab = ({ data }: ItemTabProps) => {
     onSelectPreset: setSelectedPreset,
     onChangeViewMode: setViewMode,
   } as const;
-
+  console.log(sortedItems);
   return (
     <div className="flex flex-col gap-2">
       <div className="bg-card relative flex flex-col gap-4 rounded-xs shadow-sm">

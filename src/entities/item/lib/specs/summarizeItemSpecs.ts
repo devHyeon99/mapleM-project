@@ -1,13 +1,7 @@
 import { MAGICAL_CLASSES } from "@/shared/config/constants/magic_class";
 import { CharacterItemEquipment } from "@/entities/item/model/types";
-
-/**
- * 숫자 문자열 파싱
- */
-const parseValue = (value: string | undefined | null): number => {
-  if (!value) return 0;
-  return parseFloat(value.replace(/[^0-9.]/g, "")) || 0;
-};
+import { parseItemOption } from "../options/parseOptionValues";
+import { OPTION_KEYS } from "../options/optionConstants";
 
 /**
  * 아이템 목록과 직업을 받아 모든 스펙 합계를 계산하는 통합 함수
@@ -20,8 +14,12 @@ export const getItemSpec = (
 
   // 직업 타입 판별 및 타겟 설정
   const isMagical = MAGICAL_CLASSES.includes(characterClass);
-  const targetDamage = isMagical ? "마법 대미지" : "물리 대미지";
-  const targetAtk = isMagical ? "마법 공격력" : "물리 공격력";
+  const targetDamage = isMagical
+    ? OPTION_KEYS.MAGICAL_DAMAGE
+    : OPTION_KEYS.PHYSICAL_DAMAGE;
+  const targetAtk = isMagical
+    ? OPTION_KEYS.MAGICAL_ATTACK
+    : OPTION_KEYS.PHYSICAL_ATTACK;
 
   // UI 표기용 라벨
   const labelDamage = isMagical ? "마댐" : "물댐";
@@ -44,32 +42,35 @@ export const getItemSpec = (
 
     // 잠재능력 -> 물/마댐 + 보공
     item.item_potential_option?.forEach((opt) => {
+      const parsed = parseItemOption(opt.option_name, opt.option_value);
       if (
-        opt.option_name === targetDamage ||
-        opt.option_name === "보스 공격력"
+        parsed.normalizedName === targetDamage ||
+        parsed.normalizedName === OPTION_KEYS.BOSS_DAMAGE
       ) {
-        summary.potential += parseValue(opt.option_value);
+        summary.potential += parsed.numericValue ?? 0;
       }
     });
 
     // 에디셔널 -> 물/마댐 + 보공
     item.item_additional_potential_option?.forEach((opt) => {
+      const parsed = parseItemOption(opt.option_name, opt.option_value);
       if (
-        opt.option_name === targetDamage ||
-        opt.option_name === "보스 공격력"
+        parsed.normalizedName === targetDamage ||
+        parsed.normalizedName === OPTION_KEYS.BOSS_DAMAGE
       ) {
-        summary.additional += parseValue(opt.option_value);
+        summary.additional += parsed.numericValue ?? 0;
       }
     });
 
     // 추가옵션 -> 최종, 방무, 공/마
     item.item_additional_option?.forEach((opt) => {
-      if (opt.option_name === "최종 대미지") {
-        summary.chuop.finalDamage += parseValue(opt.option_value);
-      } else if (opt.option_name === "방어율 무시") {
-        summary.chuop.ignoreDef += parseValue(opt.option_value);
-      } else if (opt.option_name === targetAtk) {
-        summary.chuop.atk += parseValue(opt.option_value);
+      const parsed = parseItemOption(opt.option_name, opt.option_value);
+      if (parsed.normalizedName === OPTION_KEYS.FINAL_DAMAGE) {
+        summary.chuop.finalDamage += parsed.numericValue ?? 0;
+      } else if (parsed.normalizedName === OPTION_KEYS.IGNORE_DEFENSE) {
+        summary.chuop.ignoreDef += parsed.numericValue ?? 0;
+      } else if (parsed.normalizedName === targetAtk) {
+        summary.chuop.atk += parsed.numericValue ?? 0;
       }
     });
   });

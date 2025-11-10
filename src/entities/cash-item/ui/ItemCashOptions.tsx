@@ -17,7 +17,7 @@ export const ItemCashOptions = ({ options }: Props) => {
           <li key={idx} className="flex gap-1">
             <span>{opt.option_name}</span>
             <span
-              className="text-[#FF8939]"
+              className="text-orange-400"
               aria-label={`${opt.option_name} ${opt.option_value}`}
             >
               {opt.option_value ?? "-"}

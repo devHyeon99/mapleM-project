@@ -1,4 +1,4 @@
-import { CharacterItemEquipment } from "@/entities/item";
+import { CharacterItemEquipment } from "../model/types";
 import { getGradeInfo } from "../lib";
 
 interface Props {

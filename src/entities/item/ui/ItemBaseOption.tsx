@@ -1,4 +1,4 @@
-import { CharacterItemEquipment } from "@/entities/item";
+import { CharacterItemEquipment } from "../model/types";
 
 interface Props {
   item: CharacterItemEquipment;
@@ -18,7 +18,7 @@ export const ItemBaseOption = ({ item }: Props) => {
             className="grid grid-cols-[max-content_1fr] gap-x-2"
           >
             <dt className="whitespace-nowrap">{opt.option_name}</dt>
-            <dd className="text-right text-[#FF8939] tabular-nums">
+            <dd className="text-right text-orange-400 tabular-nums">
               {opt.option_value}
             </dd>
           </div>

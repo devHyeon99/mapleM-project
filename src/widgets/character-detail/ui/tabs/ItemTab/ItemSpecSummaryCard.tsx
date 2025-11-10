@@ -1,5 +1,5 @@
 import { SortedItemSlot } from "@/entities/item";
-import { getItemSpec } from "@/entities/item/lib/getItemSpec";
+import { getItemSpec } from "@/entities/item/lib";
 import { InfoRow } from "@/shared/ui/InfoRow";
 import { HelpPopover } from "@/shared/ui/HelpPopover";
 import {

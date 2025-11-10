@@ -1,27 +1,5 @@
 import { ItemOption } from "./item-option";
 
-// ==========================================================================
-// 1. API Response 타입 (넥슨 API 응답 구조)
-// ==========================================================================
-
-/** 장비 조회 API 응답 (/character/item-equipment) */
-export interface CharacterItemEquipmentResponse {
-  character_class: string | null;
-  use_preset_no?: number | null;
-  item_equipment: CharacterItemEquipment[];
-  soul_set_option?: string | null;
-  equipment_preset?: EquipmentPreset[];
-}
-
-/** 장비 세트 효과 조회 API 응답 (/character/set-effect) */
-export interface CharacterEquipmentSetResponse {
-  set_info: EquipmentSetInfo[];
-}
-
-// ==========================================================================
-// 2. 도메인 모델 (UI 및 로직에서 사용할 구조)
-// ==========================================================================
-
 /** 장비 아이템 상세 구조 */
 export interface CharacterItemEquipment {
   item_name: string;

@@ -1,6 +1,6 @@
 import { SectionTitle } from "./SpecCardCommon";
 import { MergedSpecData } from "../model/types";
-import { getItemSpec } from "@/entities/item/lib/getItemSpec";
+import { getItemSpec } from "@/entities/item/lib";
 import { InfoRow } from "@/shared/ui/InfoRow";
 
 interface TotalStatSectionProps {

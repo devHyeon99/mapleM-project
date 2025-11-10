@@ -7,7 +7,7 @@ export const GRADE_MAP = {
   },
   유니크: {
     label: "U",
-    textColor: "text-[#FF8939]",
+    textColor: "text-orange-400",
     borderColor: "border-[#FF8939]",
     bgColor: "bg-[#FF8939]",
   },

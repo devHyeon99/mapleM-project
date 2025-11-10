@@ -2,7 +2,13 @@ import {
   CharacterItemEquipment,
   CharacterAndroidEquipment,
   CharacterHeartEquipment,
+  ItemDisplay,
 } from "@/entities/item/model/types";
+import {
+  toAndroidDisplay,
+  toEquipmentDisplay,
+  toHeartDisplay,
+} from "@/entities/item/model/mappers";
 import {
   EQUIP_SLOT_ORDER_GRID_ONEPIECE,
   EQUIP_SLOT_ORDER_GRID_TOPBOTTOM,
@@ -12,7 +18,7 @@ import {
 
 export interface SortedItemSlot {
   slotName: string;
-  item: CharacterItemEquipment | null;
+  item: ItemDisplay | null;
 }
 
 // ============================================================================
@@ -23,42 +29,21 @@ function createItemMap(
   android: CharacterAndroidEquipment | null,
   heart: CharacterHeartEquipment | null,
 ) {
-  const map: Record<string, CharacterItemEquipment> = {};
-  const HEART_GRADE_MAP: Record<string, string> = {
-    "실버 하트": "1",
-    "골드 하트": "2",
-    "티타늄 하트": "3",
-  };
+  const map: Record<string, ItemDisplay> = {};
 
   items.forEach((item) => {
-    map[item.item_equipment_slot_name] = item;
+    const displayItem = toEquipmentDisplay(item);
+    map[displayItem.item_equipment_slot_name] = displayItem;
   });
 
   if (android) {
-    map["안드로이드"] = {
-      item_name: android.android_name,
-      item_icon: android.android_icon,
-      item_grade: android.android_grade,
-      item_equipment_slot_name: "안드로이드",
-      starforce_upgrade: null,
-      item_potential_option_grade: null,
-      item_additional_potential_option_grade: null,
-      item_description: android.android_description,
-    } as CharacterItemEquipment;
+    const displayAndroid = toAndroidDisplay(android);
+    map[displayAndroid.item_equipment_slot_name] = displayAndroid;
   }
 
   if (heart) {
-    map["하트"] = {
-      item_name: heart.heart_name,
-      item_icon: heart.heart_icon,
-      item_grade: HEART_GRADE_MAP[heart.heart_name] ?? "0",
-      item_equipment_slot_name: "하트",
-      starforce_upgrade: null,
-      item_potential_option_grade: heart.item_potential_option_grade,
-      item_additional_option_grade: heart.item_additional_option_grade,
-      item_additional_option: heart.item_additional_option,
-      item_potential_option: heart.item_potential_option,
-    } as CharacterItemEquipment;
+    const displayHeart = toHeartDisplay(heart);
+    map[displayHeart.item_equipment_slot_name] = displayHeart;
   }
 
   return map;

@@ -1,5 +1,5 @@
 import { CashItemEquipment } from "@/entities/cash-item";
-import { ItemCashPopover } from "@/entities/cash-item"; // 아까 만든 팝오버
+import { ItemCashDialog } from "@/features/item-popover";
 import { Badge } from "@/shared/ui/badge"; // Badge 컴포넌트가 없다면 div로 대체 가능
 
 interface CashItemRowProps {
@@ -27,7 +27,7 @@ export const CashItemRow = ({ item }: CashItemRowProps) => {
   return (
     <div className="bg-card hover:bg-accent/50 flex w-full items-center gap-3 rounded-md border-2 p-2 shadow-sm transition-colors">
       <div className="h-12.5 w-12.5 shrink-0">
-        <ItemCashPopover item={item} />
+        <ItemCashDialog item={item} />
       </div>
 
       <div className="flex min-w-0 flex-1 flex-col justify-center gap-1">

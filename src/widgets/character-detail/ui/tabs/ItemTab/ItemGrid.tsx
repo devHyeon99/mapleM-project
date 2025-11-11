@@ -1,6 +1,6 @@
 import { SortedItemSlot } from "@/entities/item";
+import { ItemDialog } from "@/features/item-popover";
 import { ItemEmptySlot } from "@/shared/ui/ItemEmptySlot";
-import { ItemPopover } from "@/widgets/item-popover";
 
 interface ItemGridProps {
   items: SortedItemSlot[];
@@ -45,7 +45,7 @@ export const ItemGrid = ({ items, presetNo }: ItemGridProps) => {
                 key={`${presetNo}-${slot.item.item_name}-${idx}`}
                 className={`aspect-square ${slotSizeClass}`}
               >
-                <ItemPopover
+                <ItemDialog
                   item={slot.item}
                   className="h-full w-full cursor-pointer shadow-sm"
                 />

@@ -1,5 +1,5 @@
 import { CharacterItemEquipment, ItemOption } from "@/entities/item";
-import { ItemPopover } from "@/widgets/item-popover";
+import { ItemDialog } from "@/features/item-popover";
 import { Star } from "lucide-react";
 
 interface ItemListRowProps {
@@ -95,7 +95,7 @@ export const ItemListRow = ({
       ].join(" ")}
     >
       <div className="h-12.5 w-12.5 shrink-0 self-start">
-        <ItemPopover item={item} className="h-full w-full cursor-pointer" />
+        <ItemDialog item={item} className="h-full w-full cursor-pointer" />
       </div>
 
       <div className="flex min-w-0 flex-1 flex-col justify-center gap-0.5">

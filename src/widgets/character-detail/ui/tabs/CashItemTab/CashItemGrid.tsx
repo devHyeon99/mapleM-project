@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { ItemCashPopover } from "@/entities/cash-item";
+import { ItemCashDialog } from "@/features/item-popover";
 import { SortedCashItemSlot } from "@/entities/cash-item/lib/sortCashItems";
 import { ItemEmptySlot } from "@/shared/ui/ItemEmptySlot";
 
@@ -29,7 +29,7 @@ export const CashItemGrid = ({ items, presetNo }: CashItemGridProps) => {
         if (slot.item) {
           return (
             <Fragment key={`${presetNo}-${slot.item.cash_item_name}-${idx}`}>
-              <ItemCashPopover item={slot.item} />
+              <ItemCashDialog item={slot.item} />
             </Fragment>
           );
         }

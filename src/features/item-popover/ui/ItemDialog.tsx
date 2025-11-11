@@ -1,6 +1,5 @@
-import { CommonItemPopover } from "@/shared/ui/CommonItemPopover";
-import { CharacterItemEquipment } from "@/entities/item";
 import {
+  CharacterItemEquipment,
   ItemAdditionalOption,
   ItemAdditionalPotential,
   ItemBaseOption,
@@ -13,16 +12,18 @@ import {
   ItemSoul,
   ItemStarforce,
 } from "@/entities/item";
+import { ItemDialogFrame } from "./ItemDialogFrame";
 
-interface ItemPopoverProps {
+interface ItemDialogProps {
   item: CharacterItemEquipment;
   className?: string;
 }
 
-export const ItemPopover = ({ item, className }: ItemPopoverProps) => {
+export const ItemDialog = ({ item, className }: ItemDialogProps) => {
   return (
-    <CommonItemPopover
+    <ItemDialogFrame
       trigger={<ItemIconBase item={item} className={className} />}
+      title={`${item.item_name} 상세 정보`}
     >
       <ItemHeader item={item} />
       <ItemStarforce item={item} />
@@ -34,6 +35,6 @@ export const ItemPopover = ({ item, className }: ItemPopoverProps) => {
       <ItemSoul item={item} />
       <ItemEmblem item={item} />
       <ItemDescription item={item} />
-    </CommonItemPopover>
+    </ItemDialogFrame>
   );
 };

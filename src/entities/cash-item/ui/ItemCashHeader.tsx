@@ -5,7 +5,7 @@ interface Props {
   item: Pick<CashItemEquipment, "cash_item_icon" | "cash_item_name">;
 }
 
-export const ItemCashPopoverHeader = ({ item }: Props) => {
+export const ItemCashHeader = ({ item }: Props) => {
   return (
     <div className="border-divider flex items-center gap-2 border-b pb-3">
       <ItemCashIconBase item={item} className="h-12.5 w-12.5" />

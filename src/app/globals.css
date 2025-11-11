@@ -90,7 +90,7 @@
   --sidebar-border: oklch(0.910 0 0);
   --sidebar-ring: oklch(0.708 0 0);
 
-  --divider: oklch(0.708 0 0);
+  --divider: oklch(0.408 0 0);
 }
 
 .dark {

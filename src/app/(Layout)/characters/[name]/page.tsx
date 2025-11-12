@@ -45,7 +45,7 @@ export default async function CharactersPage({
 
   return (
     <div className="flex w-full flex-col items-center">
-      <search className="w-full max-w-3xl px-4 pt-2 md:px-0">
+      <search className="w-full max-w-3xl px-4 pt-2">
         <CharacterSearch />
       </search>
 

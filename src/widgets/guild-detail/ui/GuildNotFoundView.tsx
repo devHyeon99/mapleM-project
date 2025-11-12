@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { useRecentSearch } from "@/shared/lib/hooks/useRecentSearch";
 import { GuildSearch } from "@/features/guild-search/ui/GuildSearch";
+import { AlertTriangle } from "lucide-react";
 
 export function GuildNotFoundView() {
   const pathname = usePathname();
@@ -28,10 +29,11 @@ export function GuildNotFoundView() {
 
   return (
     <div className="flex flex-col items-center justify-center text-center">
-      <div className="mb-6.5 w-full max-w-4xl">
+      <div className="mb-6.5 w-full max-w-3xl px-4 pt-2">
         <GuildSearch />
       </div>
-      <h2 className="mb-2 text-2xl font-bold tracking-tight md:text-3xl">
+      <AlertTriangle className="text-destructive mb-2 size-12" />
+      <h2 className="mb-2 text-xl font-medium tracking-tight">
         길드 정보를 찾을 수 없습니다
       </h2>
       <p className="text-muted-foreground mb-8 text-sm md:text-base">

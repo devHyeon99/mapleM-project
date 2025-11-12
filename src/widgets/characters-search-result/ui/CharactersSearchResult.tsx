@@ -37,12 +37,16 @@ export function CharactersSearchResult({
 
   if (!characters || characters.length === 0) {
     return (
-      <div className="mt-10 flex w-full flex-col items-center justify-center">
+      <div className="mt-6.5 flex w-full flex-col items-center justify-center">
         <AlertTriangle className="text-destructive mb-2 size-12" />
-        <h2 className="text-xl font-bold">&quot;{name}&quot;</h2>
-        <p className="mb-2 text-lg font-medium">캐릭터를 찾을 수 없습니다.</p>
-        <p className="text-muted-foreground text-sm">
-          검색이 되지 않는 캐릭터가 있을 수 있습니다.
+        <h2 className="mb-1 text-xl font-medium">{name}</h2>
+        <p className="mb-2 text-xl font-medium tracking-tight">
+          캐릭터를 찾을 수 없습니다
+        </p>
+        <p className="text-muted-foreground mb-8 text-center text-sm">
+          캐릭터 닉네임이 정확한지 다시 확인해주세요.
+          <br />
+          삭제되었거나 존재하지 않는 캐릭터일 수 있습니다.
         </p>
       </div>
     );

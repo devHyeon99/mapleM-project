@@ -1,4 +1,5 @@
 import * as React from "react";
+import Image from "next/image";
 import { CharacterItemEquipment } from "../model/types";
 import { getGradeInfo } from "../lib";
 import { POTENTIAL_GRADE_MAP } from "../lib/grade/gradeConstants";
@@ -69,6 +70,8 @@ export const ItemIconBase = React.forwardRef<HTMLDivElement, ItemIconBaseProps>(
       item_icon && item_icon.trim() !== "" && item_icon !== "(Unknown)"
         ? item_icon
         : "/images/item-placeholder.png";
+    const safeName =
+      item_name && item_name !== "(Unknown)" ? item_name : "아이템";
 
     return (
       <div
@@ -130,12 +133,15 @@ export const ItemIconBase = React.forwardRef<HTMLDivElement, ItemIconBaseProps>(
         )}
 
         {/* 아이템 이미지 */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <Image
           src={safeIcon}
-          alt={item_name && item_name !== "(Unknown)" ? item_name : "아이템"}
+          alt={safeName}
+          width={1}
+          height={1}
+          loading="lazy"
+          unoptimized
           className="max-h-full max-w-full object-contain"
-          style={{ imageRendering: "pixelated" }}
+          style={{ width: "auto", height: "auto", imageRendering: "pixelated" }}
         />
       </div>
     );

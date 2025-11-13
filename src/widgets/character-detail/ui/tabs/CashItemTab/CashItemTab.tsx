@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 // Shared & UI
 import { CommonTabHeader } from "@/shared/ui/CommonTabHeader";
@@ -27,12 +27,7 @@ export const CashItemTab = ({ ocid }: CashItemTabProps) => {
     () => data?.use_preset_no ?? null,
   );
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
-
-  useEffect(() => {
-    if (data?.use_preset_no && selectedPreset === null) {
-      setSelectedPreset(data.use_preset_no);
-    }
-  }, [data?.use_preset_no, selectedPreset]);
+  const effectiveSelectedPreset = selectedPreset ?? data?.use_preset_no ?? null;
 
   // 현재 선택된 프리셋의 아이템 목록 추출
   const currentPresetItems = useMemo(() => {
@@ -41,14 +36,16 @@ export const CashItemTab = ({ ocid }: CashItemTabProps) => {
     const activePresetNo = data?.use_preset_no;
 
     // 프리셋 리스트에서 선택된 번호 찾기
-    const presetData = presetList.find((p) => p.preset_no === selectedPreset);
+    const presetData = presetList.find(
+      (p) => p.preset_no === effectiveSelectedPreset,
+    );
 
     // 프리셋 데이터가 있으면 사용, 없으면(현재 적용 중인 프리셋과 같다면) 메인 데이터 사용
     return (
       presetData?.cash_item_equipment ??
-      (selectedPreset === activePresetNo ? currentItemsRaw : [])
+      (effectiveSelectedPreset === activePresetNo ? currentItemsRaw : [])
     );
-  }, [data, selectedPreset]);
+  }, [data, effectiveSelectedPreset]);
 
   const beautyItems = useMemo(() => {
     return convertBeautyToCashItem(
@@ -64,9 +61,7 @@ export const CashItemTab = ({ ocid }: CashItemTabProps) => {
     return sortCashItems(mergedItems);
   }, [currentPresetItems, beautyItems]);
 
-  const isDataEmpty = !data || data.cash_item_equipment.length === 0;
-
-  if (isLoading || (data && !isDataEmpty && selectedPreset === null)) {
+  if (isLoading) {
     return <LoadingCard message="외형 정보 불러오는 중..." />;
   }
 
@@ -89,23 +84,29 @@ export const CashItemTab = ({ ocid }: CashItemTabProps) => {
     );
   }
 
-  return (
-    <div className="flex flex-col gap-4">
-      {/* 헤더 */}
-      <CommonTabHeader
-        activePresetNo={data.use_preset_no}
-        selectedPreset={selectedPreset}
-        viewMode={viewMode}
-        onSelectPreset={setSelectedPreset}
-        onChangeViewMode={setViewMode}
-      />
+  const commonHeaderProps = {
+    activePresetNo: data.use_preset_no,
+    selectedPreset: effectiveSelectedPreset,
+    viewMode,
+    onSelectPreset: setSelectedPreset,
+    onChangeViewMode: setViewMode,
+  } as const;
 
-      {/* 컨텐츠 영역 */}
-      {viewMode === "grid" ? (
-        <CashItemGrid items={sortedItems} presetNo={selectedPreset} />
-      ) : (
-        <CashItemList items={sortedItems} presetNo={selectedPreset} />
-      )}
+  return (
+    <div className="flex flex-col gap-2">
+      <div className="bg-card relative flex flex-col gap-4 rounded-xs shadow-sm">
+        {viewMode === "grid" ? (
+          <div className="mx-auto flex w-full flex-col items-center gap-4 py-4">
+            <CommonTabHeader {...commonHeaderProps} />
+            <CashItemGrid items={sortedItems} presetNo={effectiveSelectedPreset} />
+          </div>
+        ) : (
+          <div className="pt-4">
+            <CommonTabHeader {...commonHeaderProps} />
+            <CashItemList items={sortedItems} presetNo={effectiveSelectedPreset} />
+          </div>
+        )}
+      </div>
     </div>
   );
 };

@@ -10,14 +10,16 @@ export const ItemBaseOption = ({ item }: Props) => {
 
   return (
     <div className="border-divider border-b py-1 text-sm">
-      <span>아이템 옵션</span>
+      <span className="font-medium">아이템 옵션</span>
       <dl>
         {item.item_basic_option.map((opt) => (
           <div
             key={opt.option_no}
             className="grid grid-cols-[max-content_1fr] gap-x-2"
           >
-            <dt className="whitespace-nowrap">{opt.option_name}</dt>
+            <dt className="whitespace-nowrap text-[#a1a1a1]">
+              {opt.option_name}
+            </dt>
             <dd className="text-right text-orange-400 tabular-nums">
               {opt.option_value}
             </dd>

@@ -15,7 +15,7 @@ export const ItemInfo = ({ item }: Props) => {
         {/* 착용레벨 */}
         <div className="grid grid-cols-[max-content_1fr] gap-x-2">
           <dt className="whitespace-nowrap text-[#a1a1a1]">착용레벨</dt>
-          <dd className="text-right text-[#a1a1a1] tabular-nums">
+          <dd className="text-right text-orange-400 tabular-nums">
             {item.equipment_level}
           </dd>
         </div>
@@ -23,7 +23,7 @@ export const ItemInfo = ({ item }: Props) => {
         {/* 분류 */}
         <div className="grid grid-cols-[max-content_1fr] gap-x-2">
           <dt className="whitespace-nowrap text-[#a1a1a1]">분류</dt>
-          <dd className="text-right text-[#a1a1a1]">
+          <dd className="text-right text-orange-400">
             {item.item_equipment_page_name}
           </dd>
         </div>
@@ -33,7 +33,7 @@ export const ItemInfo = ({ item }: Props) => {
           <dt className="whitespace-nowrap text-[#a1a1a1]">
             남은 카르마 가위 횟수
           </dt>
-          <dd className="text-right text-[#a1a1a1] tabular-nums">
+          <dd className="text-right text-orange-400 tabular-nums">
             {item.cuttable_count}
           </dd>
         </div>

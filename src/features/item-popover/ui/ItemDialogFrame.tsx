@@ -125,7 +125,7 @@ export const ItemDialogFrame = ({
           <DialogClose asChild>
             <Button
               type="button"
-              className="w-full rounded-none border-none bg-[#323232] text-white shadow-none hover:bg-[#323232]/90 dark:hover:bg-white/10!"
+              className="w-full rounded-none border-none bg-[#323232] text-white shadow-none transition-none hover:bg-[#323232]/90! dark:hover:bg-white/10!"
             >
               닫기
             </Button>

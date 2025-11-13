@@ -1,4 +1,5 @@
 import * as React from "react";
+import Image from "next/image";
 import { cn } from "@/shared/lib/utils";
 import { CashItemEquipment } from "@/entities/cash-item";
 
@@ -11,6 +12,18 @@ export const ItemCashIconBase = React.forwardRef<
   HTMLDivElement,
   ItemCashIconBaseProps
 >(({ item, className, ...props }, ref) => {
+  const safeIcon =
+    item.cash_item_icon &&
+    item.cash_item_icon.trim() !== "" &&
+    item.cash_item_icon !== "(Unknown)"
+      ? item.cash_item_icon
+      : "/images/item-placeholder.png";
+
+  const safeName =
+    item.cash_item_name && item.cash_item_name !== "(Unknown)"
+      ? item.cash_item_name
+      : "아이템";
+
   return (
     <div
       ref={ref}
@@ -22,13 +35,15 @@ export const ItemCashIconBase = React.forwardRef<
         className,
       )}
     >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={item.cash_item_icon}
-        alt={item.cash_item_name}
+      <Image
+        src={safeIcon}
+        alt={safeName}
+        width={1}
+        height={1}
         loading="lazy"
-        className="object-contain"
-        style={{ imageRendering: "pixelated" }}
+        unoptimized
+        className="max-h-full max-w-full object-contain"
+        style={{ width: "auto", height: "auto", imageRendering: "pixelated" }}
       />
     </div>
   );

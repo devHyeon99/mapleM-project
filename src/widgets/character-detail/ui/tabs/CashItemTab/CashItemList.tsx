@@ -1,7 +1,7 @@
 import { SortedCashItemSlot } from "@/entities/cash-item/lib/sortCashItems";
 import { cn } from "@/shared/lib/utils";
 import { ItemEmptyRow } from "@/shared/ui/ItemEmptyRow";
-import { CashItemRow } from "./CashItemRow";
+import { CashItemListRow } from "./CashItemListRow";
 
 interface CashItemListProps {
   items: SortedCashItemSlot[];
@@ -14,11 +14,15 @@ export const CashItemList = ({
   presetNo,
   className,
 }: CashItemListProps) => {
+  const lastItemIndex = items.reduce((lastIndex, slot, index) => {
+    return slot.item ? index : lastIndex;
+  }, -1);
+
   const hasNoEquipItems = items.every((slot) => slot.item === null);
 
   if (hasNoEquipItems) {
     return (
-      <section className="grid min-h-78 place-content-center rounded-md border p-4 text-center">
+      <section className="grid min-h-78 place-content-center text-center">
         <p className="text-muted-foreground text-sm">
           {presetNo}번 프리셋 정보가 없습니다.
         </p>
@@ -27,19 +31,22 @@ export const CashItemList = ({
   }
 
   return (
-    <div className={cn("flex w-full flex-col gap-2", className)}>
+    <div className={cn("flex w-full flex-col pt-4", className)}>
       {items.map((slot, index) => {
-        // 아이템이 있는 경우
         if (slot.item) {
-          return <CashItemRow key={`item-${index}`} item={slot.item} />;
+          return (
+            <CashItemListRow
+              key={`item-${index}`}
+              item={slot.item}
+              isLast={index === lastItemIndex}
+            />
+          );
         }
 
-        // 슬롯 이름은 있는데 아이템이 없는 경우 (빈 장비칸)
         if (slot.slotName) {
           return <ItemEmptyRow key={`empty-${index}`} label={slot.slotName} />;
         }
 
-        // 단순 여백
         return null;
       })}
     </div>

@@ -20,51 +20,37 @@ export const ItemCashColoringPrism = ({ coloringPrism }: Props) => {
   const colorRangeLabel = color_range ? COLOR_RANGE_LABEL[color_range] : "";
 
   return (
-    <>
-      <p className="pt-2 text-sm">컬러링 프리즘이 적용된 아이템입니다.</p>
-      <ul className="border-divider border-b pb-2 text-sm">
-        <li>
-          적용 범위{" "}
-          <span
-            className="text-[#FF7E54]"
-            aria-label={`적용 범위: ${colorRangeLabel}`}
-          >
+    <div className="border-divider border-b py-1 text-sm">
+      <p>컬러링 프리즘</p>
+      <dl>
+        <div className="grid grid-cols-[max-content_1fr] gap-x-2">
+          <dt className="whitespace-nowrap">적용 범위</dt>
+          <dd className="text-right text-orange-400" aria-label={`적용 범위: ${colorRangeLabel}`}>
             {colorRangeLabel}
-          </span>
-        </li>
-
-        <li className="flex gap-4">
-          <span>
-            색조{" "}
-            <span
-              className="text-[#FF7E54]"
-              aria-label={`색조 값: ${hue ?? 0}`}
-            >
-              {formatPrismValue(hue)}
-            </span>
-          </span>
-
-          <span>
-            채도{" "}
-            <span
-              className="text-[#FF7E54]"
-              aria-label={`채도 값: ${saturation ?? 0}`}
-            >
-              {formatPrismValue(saturation)}
-            </span>
-          </span>
-
-          <span>
-            명도{" "}
-            <span
-              className="text-[#FF7E54]"
-              aria-label={`명도 값: ${value ?? 0}`}
-            >
-              {formatPrismValue(value)}
-            </span>
-          </span>
-        </li>
-      </ul>
-    </>
+          </dd>
+        </div>
+        <div className="grid grid-cols-[max-content_1fr] gap-x-2">
+          <dt className="whitespace-nowrap">색조</dt>
+          <dd className="text-right text-orange-400 tabular-nums" aria-label={`색조 값: ${hue ?? 0}`}>
+            {formatPrismValue(hue)}
+          </dd>
+        </div>
+        <div className="grid grid-cols-[max-content_1fr] gap-x-2">
+          <dt className="whitespace-nowrap">채도</dt>
+          <dd
+            className="text-right text-orange-400 tabular-nums"
+            aria-label={`채도 값: ${saturation ?? 0}`}
+          >
+            {formatPrismValue(saturation)}
+          </dd>
+        </div>
+        <div className="grid grid-cols-[max-content_1fr] gap-x-2">
+          <dt className="whitespace-nowrap">명도</dt>
+          <dd className="text-right text-orange-400 tabular-nums" aria-label={`명도 값: ${value ?? 0}`}>
+            {formatPrismValue(value)}
+          </dd>
+        </div>
+      </dl>
+    </div>
   );
 };

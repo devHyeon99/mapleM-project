@@ -10,21 +10,26 @@ export const ItemCashOptions = ({ options }: Props) => {
   }
 
   return (
-    <>
-      <p className="pt-2 text-sm">아이템 옵션</p>
-      <ul className="border-divider border-b pb-2 text-sm">
+    <div className="border-divider border-b py-1 text-sm">
+      <span>아이템 옵션</span>
+      <dl>
         {options.map((opt, idx) => (
-          <li key={idx} className="flex gap-1">
-            <span>{opt.option_name}</span>
-            <span
-              className="text-orange-400"
+          <div
+            key={`${opt.option_name}-${idx}`}
+            className="grid grid-cols-[max-content_1fr] gap-x-2"
+          >
+            <dt className="whitespace-nowrap text-[#a1a1a1]">
+              {opt.option_name}
+            </dt>
+            <dd
+              className="text-right text-orange-400 tabular-nums"
               aria-label={`${opt.option_name} ${opt.option_value}`}
             >
               {opt.option_value ?? "-"}
-            </span>
-          </li>
+            </dd>
+          </div>
         ))}
-      </ul>
-    </>
+      </dl>
+    </div>
   );
 };

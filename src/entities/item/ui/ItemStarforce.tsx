@@ -12,10 +12,10 @@ export const ItemStarforce = ({ item }: Props) => {
 
   return (
     <div className="border-divider border-b py-1 text-sm">
-      <div className="flex items-center gap-1">
-        <p>스타포스</p>
-        <span className="text-xs text-[#a1a1a1]">
-          ({item.starforce_upgrade}성)
+      <div className="flex items-center justify-between">
+        <p className="font-medium">스타포스</p>
+        <span className="text-xs text-orange-400">
+          {item.starforce_upgrade}성
         </span>
       </div>
 

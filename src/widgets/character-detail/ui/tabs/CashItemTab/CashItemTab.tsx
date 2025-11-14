@@ -92,7 +92,6 @@ export const CashItemTab = ({ ocid }: CashItemTabProps) => {
     onChangeViewMode: setViewMode,
   } as const;
 
-  console.log(data);
   return (
     <div className="flex flex-col gap-2">
       <div className="bg-card relative flex flex-col gap-4 rounded-xs shadow-sm">

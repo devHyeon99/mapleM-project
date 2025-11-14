@@ -14,14 +14,14 @@ const getCashLabelStyle = (label: string | null) => {
   return "text-muted-foreground";
 };
 
-export const CashItemListRow = ({ item, isLast = false }: CashItemListRowProps) => {
-  const optionSummary = item.cash_item_option
-    .map((opt) => `${opt.option_name} ${opt.option_value}`)
-    .join(", ");
-
-  const infoSummary = [item.cash_item_equipment_page_name, item.cash_item_gender]
-    .filter(Boolean)
-    .join(" | ");
+export const CashItemListRow = ({
+  item,
+  isLast = false,
+}: CashItemListRowProps) => {
+  const displayName =
+    item.miracle_anvil_item_name && item.miracle_anvil_item_name.trim() !== ""
+      ? item.miracle_anvil_item_name
+      : item.cash_item_name;
 
   return (
     <div
@@ -36,30 +36,15 @@ export const CashItemListRow = ({ item, isLast = false }: CashItemListRowProps) 
 
       <div className="flex min-w-0 flex-1 flex-col justify-center gap-0.5">
         <div className="mb-0.5 flex items-center justify-between gap-2">
-          <span className="truncate text-base leading-none font-semibold">
-            {item.cash_item_name}
-          </span>
+          <span className="text-base font-semibold">{displayName}</span>
           {item.cash_item_label && (
             <span
               className={`shrink-0 text-xs font-semibold ${getCashLabelStyle(item.cash_item_label)}`}
             >
-              {item.cash_item_label}
+              {item.cash_item_label} 라벨
             </span>
           )}
         </div>
-
-        {infoSummary && (
-          <p className="text-muted-foreground truncate text-xs">{infoSummary}</p>
-        )}
-
-        {optionSummary && (
-          <p className="text-muted-foreground truncate text-xs">
-            <span className="inline-block min-w-[24px] font-semibold text-green-600 dark:text-green-400">
-              옵션
-            </span>
-            <span className="text-foreground/70 font-medium">{optionSummary}</span>
-          </p>
-        )}
       </div>
     </div>
   );

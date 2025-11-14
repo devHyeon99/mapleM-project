@@ -38,14 +38,16 @@ export const EQUIPMENT_SET_DEFINITIONS: EquipmentSetDefinition[] = [
 ];
 
 function normalizeItemName(
-  itemName: string,
+  itemName: string | null | undefined,
   strategy: ItemNameNormalization = "none",
 ) {
+  const safeItemName = itemName ?? "";
+
   if (strategy === "stripBracketPrefix") {
-    return itemName.replace(/^\[[^\]]+\]\s*/, "");
+    return safeItemName.replace(/^\[[^\]]+\]\s*/, "");
   }
 
-  return itemName;
+  return safeItemName;
 }
 
 // 아이템이 특정 세트 정의에 포함되는지 판별
@@ -53,8 +55,9 @@ function isMatchingSetItem(
   item: CharacterItemEquipment,
   definition: EquipmentSetDefinition,
 ) {
+  const rawItemName = item.item_name ?? "";
   const normalizedItemName = normalizeItemName(
-    item.item_name,
+    rawItemName,
     definition.nameNormalization,
   );
 
@@ -66,19 +69,19 @@ function isMatchingSetItem(
   }
 
   const hasExactName =
-    definition.itemNames?.includes(item.item_name) ||
+    definition.itemNames?.includes(rawItemName) ||
     definition.itemNames?.includes(normalizedItemName) ||
     false;
   const hasPrefix =
     definition.itemNamePrefixes?.some(
       (prefix) =>
-        item.item_name.startsWith(prefix) ||
+        rawItemName.startsWith(prefix) ||
         normalizedItemName.startsWith(prefix),
     ) ?? false;
   const hasSuffix =
     definition.itemNameSuffixes?.some(
       (suffix) =>
-        item.item_name.endsWith(suffix) || normalizedItemName.endsWith(suffix),
+        rawItemName.endsWith(suffix) || normalizedItemName.endsWith(suffix),
     ) ?? false;
   const hasMatcher =
     definition.itemMatchers?.some((matcher) =>
@@ -94,6 +97,8 @@ function isMatchingItemMatcher(
   matcher: EquipmentSetItemMatcher,
   normalizedItemName: string,
 ) {
+  const rawItemName = item.item_name ?? "";
+
   if (
     matcher.itemGrades?.length &&
     !matcher.itemGrades.includes(item.item_grade)
@@ -124,7 +129,7 @@ function isMatchingItemMatcher(
 
   if (
     matcher.itemName &&
-    matcher.itemName !== item.item_name &&
+    matcher.itemName !== rawItemName &&
     matcher.itemName !== normalizedItemName
   ) {
     return false;
@@ -132,7 +137,7 @@ function isMatchingItemMatcher(
 
   if (
     matcher.itemNamePrefix &&
-    !item.item_name.startsWith(matcher.itemNamePrefix) &&
+    !rawItemName.startsWith(matcher.itemNamePrefix) &&
     !normalizedItemName.startsWith(matcher.itemNamePrefix)
   ) {
     return false;
@@ -140,7 +145,7 @@ function isMatchingItemMatcher(
 
   if (
     matcher.itemNameSuffix &&
-    !item.item_name.endsWith(matcher.itemNameSuffix) &&
+    !rawItemName.endsWith(matcher.itemNameSuffix) &&
     !normalizedItemName.endsWith(matcher.itemNameSuffix)
   ) {
     return false;

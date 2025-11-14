@@ -34,9 +34,12 @@ export interface CashItemEquipment {
   cash_item_equipment_slot_name: string; // 슬롯 이름
   cash_item_name: string; // 아이템 이름
   cash_item_icon: string; // 아이콘 URL
+  miracle_anvil_item_name: string | null; // 신비의 모루 외형 아이템 이름
+  miracle_anvil_item_icon: string | null; // 신비의 모루 외형 아이콘 URL
   cash_item_description: string; // 설명
-  cash_item_gender: string; // 성별
+  cash_item_gender: number | string | null; // 장착 가능 성별(공식 API: int64), 내부 변환 문자열 호환
   cash_item_option: CashItemOption[]; // 옵션 목록
+  date_expire: string | null; // 캐시 아이템 유효 기간
   date_option_expire: string | null; // 만료일 (UTC string or null)
   cash_item_label: string | null; // 라벨 (마스터, 스페셜 등)
   cash_item_coloring_prism: CashItemColoringPrism | null; // 프리즘 정보

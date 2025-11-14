@@ -2,7 +2,13 @@ import { ItemCashIconBase } from "./ItemCashIconBase";
 import { CashItemEquipment } from "@/entities/cash-item";
 
 interface Props {
-  item: Pick<CashItemEquipment, "cash_item_icon" | "cash_item_name">;
+  item: Pick<
+    CashItemEquipment,
+    | "cash_item_icon"
+    | "cash_item_name"
+    | "miracle_anvil_item_icon"
+    | "miracle_anvil_item_name"
+  >;
 }
 
 export const ItemCashHeader = ({ item }: Props) => {

@@ -4,7 +4,13 @@ import { cn } from "@/shared/lib/utils";
 import { CashItemEquipment } from "@/entities/cash-item";
 
 interface ItemCashIconBaseProps {
-  item: Pick<CashItemEquipment, "cash_item_icon" | "cash_item_name">;
+  item: Pick<
+    CashItemEquipment,
+    | "cash_item_icon"
+    | "cash_item_name"
+    | "miracle_anvil_item_icon"
+    | "miracle_anvil_item_name"
+  >;
   className?: string;
 }
 
@@ -12,17 +18,21 @@ export const ItemCashIconBase = React.forwardRef<
   HTMLDivElement,
   ItemCashIconBaseProps
 >(({ item, className, ...props }, ref) => {
+  const displayIcon =
+    item.miracle_anvil_item_icon && item.miracle_anvil_item_icon.trim() !== ""
+      ? item.miracle_anvil_item_icon
+      : item.cash_item_icon;
+  const displayName =
+    item.miracle_anvil_item_name && item.miracle_anvil_item_name.trim() !== ""
+      ? item.miracle_anvil_item_name
+      : item.cash_item_name;
+
   const safeIcon =
-    item.cash_item_icon &&
-    item.cash_item_icon.trim() !== "" &&
-    item.cash_item_icon !== "(Unknown)"
-      ? item.cash_item_icon
+    displayIcon && displayIcon.trim() !== "" && displayIcon !== "(Unknown)"
+      ? displayIcon
       : "/images/item-placeholder.png";
 
-  const safeName =
-    item.cash_item_name && item.cash_item_name !== "(Unknown)"
-      ? item.cash_item_name
-      : "아이템";
+  const safeName = displayName && displayName !== "(Unknown)" ? displayName : "아이템";
 
   return (
     <div

@@ -92,18 +92,25 @@ export const CashItemTab = ({ ocid }: CashItemTabProps) => {
     onChangeViewMode: setViewMode,
   } as const;
 
+  console.log(data);
   return (
     <div className="flex flex-col gap-2">
       <div className="bg-card relative flex flex-col gap-4 rounded-xs shadow-sm">
         {viewMode === "grid" ? (
           <div className="mx-auto flex w-full flex-col items-center gap-4 py-4">
             <CommonTabHeader {...commonHeaderProps} />
-            <CashItemGrid items={sortedItems} presetNo={effectiveSelectedPreset} />
+            <CashItemGrid
+              items={sortedItems}
+              presetNo={effectiveSelectedPreset}
+            />
           </div>
         ) : (
           <div className="pt-4">
             <CommonTabHeader {...commonHeaderProps} />
-            <CashItemList items={sortedItems} presetNo={effectiveSelectedPreset} />
+            <CashItemList
+              items={sortedItems}
+              presetNo={effectiveSelectedPreset}
+            />
           </div>
         )}
       </div>

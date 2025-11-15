@@ -1,285 +1,18 @@
 import { CharacterItemEquipment } from "@/entities/item";
 
+import { ActiveEquipmentSet, EQUIPMENT_SET_DEFINITIONS } from "../model";
 import {
-  ActiveEquipmentSet,
-  EquipmentSetDefinition,
-  EquipmentSetItemMatcher,
-  ItemNameNormalization,
-  ResolvedSetEffectRow,
-} from "../model";
+  applyGenesisLuckyItem,
+  findGenesisLuckyWeapon,
+} from "./genesisLuckyItem";
+import { isMatchingSetItem } from "./matchSetItems";
 import {
-  ARCANE_SHADE_SET,
-  ABSOLABS_SET,
-  CHALLENGER_SET,
-  ROOT_ABYSS_UNIQUE_SET,
-  ROOT_ABYSS_LEGENDARY_SET,
-  PENSALIR_LEGENDARY_SET,
-  PENSALIR_UNIQUE_SET,
-  MUSPELL_LEGENDARY_SET,
-  MUSPELL_UNIQUE_SET,
-  DAWN_BOSS_SET,
-  COMMANDER_LOOT_SET,
-  EXPEDITION_BOSS_LOOT_SET,
-} from "../model";
+  combineEffects,
+  resolveSetEffects,
+  resolveStarForceEffects,
+} from "./resolveSetEffects";
 
-export const EQUIPMENT_SET_DEFINITIONS: EquipmentSetDefinition[] = [
-  ARCANE_SHADE_SET,
-  ABSOLABS_SET,
-  CHALLENGER_SET,
-  ROOT_ABYSS_UNIQUE_SET,
-  ROOT_ABYSS_LEGENDARY_SET,
-  PENSALIR_LEGENDARY_SET,
-  PENSALIR_UNIQUE_SET,
-  MUSPELL_LEGENDARY_SET,
-  MUSPELL_UNIQUE_SET,
-  DAWN_BOSS_SET,
-  COMMANDER_LOOT_SET,
-  EXPEDITION_BOSS_LOOT_SET,
-];
-
-const GENESIS_LUCKY_ITEM_SET_IDS = new Set<string>([
-  ARCANE_SHADE_SET.id,
-  ABSOLABS_SET.id,
-  CHALLENGER_SET.id,
-  ROOT_ABYSS_UNIQUE_SET.id,
-  ROOT_ABYSS_LEGENDARY_SET.id,
-]);
-
-function isGenesisLuckyWeapon(item: CharacterItemEquipment) {
-  return (
-    item.item_equipment_slot_name === "무기" &&
-    (item.item_name ?? "").includes("제네시스")
-  );
-}
-
-function canApplyGenesisLuckyWeapon(definition: EquipmentSetDefinition) {
-  return GENESIS_LUCKY_ITEM_SET_IDS.has(definition.id);
-}
-
-function normalizeItemName(
-  itemName: string | null | undefined,
-  strategy: ItemNameNormalization = "none",
-) {
-  const safeItemName = itemName ?? "";
-
-  if (strategy === "stripBracketPrefix") {
-    return safeItemName.replace(/^\[[^\]]+\]\s*/, "");
-  }
-
-  return safeItemName;
-}
-
-// 아이템이 특정 세트 정의에 포함되는지 판별
-function isMatchingSetItem(
-  item: CharacterItemEquipment,
-  definition: EquipmentSetDefinition,
-) {
-  const rawItemName = item.item_name ?? "";
-  const normalizedItemName = normalizeItemName(
-    rawItemName,
-    definition.nameNormalization,
-  );
-
-  if (
-    definition.itemGrades?.length &&
-    !definition.itemGrades.includes(item.item_grade)
-  ) {
-    return false;
-  }
-
-  const hasExactName =
-    definition.itemNames?.includes(rawItemName) ||
-    definition.itemNames?.includes(normalizedItemName) ||
-    false;
-  const hasPrefix =
-    definition.itemNamePrefixes?.some(
-      (prefix) =>
-        rawItemName.startsWith(prefix) ||
-        normalizedItemName.startsWith(prefix),
-    ) ?? false;
-  const hasSuffix =
-    definition.itemNameSuffixes?.some(
-      (suffix) =>
-        rawItemName.endsWith(suffix) || normalizedItemName.endsWith(suffix),
-    ) ?? false;
-  const hasMatcher =
-    definition.itemMatchers?.some((matcher) =>
-      isMatchingItemMatcher(item, matcher, normalizedItemName),
-    ) ?? false;
-
-  return hasExactName || hasPrefix || hasSuffix || hasMatcher;
-}
-
-// 이름/부위/등급 조건 단위 매처 검사
-function isMatchingItemMatcher(
-  item: CharacterItemEquipment,
-  matcher: EquipmentSetItemMatcher,
-  normalizedItemName: string,
-) {
-  const rawItemName = item.item_name ?? "";
-
-  if (
-    matcher.itemGrades?.length &&
-    !matcher.itemGrades.includes(item.item_grade)
-  ) {
-    return false;
-  }
-
-  if (
-    matcher.equipmentLevels?.length &&
-    !matcher.equipmentLevels.includes(item.equipment_level ?? -1)
-  ) {
-    return false;
-  }
-
-  if (
-    matcher.itemSlotName &&
-    matcher.itemSlotName !== item.item_equipment_slot_name
-  ) {
-    return false;
-  }
-
-  if (
-    matcher.itemPageName &&
-    matcher.itemPageName !== item.item_equipment_page_name
-  ) {
-    return false;
-  }
-
-  if (
-    matcher.itemName &&
-    matcher.itemName !== rawItemName &&
-    matcher.itemName !== normalizedItemName
-  ) {
-    return false;
-  }
-
-  if (
-    matcher.itemNamePrefix &&
-    !rawItemName.startsWith(matcher.itemNamePrefix) &&
-    !normalizedItemName.startsWith(matcher.itemNamePrefix)
-  ) {
-    return false;
-  }
-
-  if (
-    matcher.itemNameSuffix &&
-    !rawItemName.endsWith(matcher.itemNameSuffix) &&
-    !normalizedItemName.endsWith(matcher.itemNameSuffix)
-  ) {
-    return false;
-  }
-
-  return true;
-}
-
-// 현재 세트 수에 맞는 세트 효과만 해석
-function resolveSetEffects(
-  definition: EquipmentSetDefinition,
-  count: number,
-): ResolvedSetEffectRow[] {
-  if (count < definition.minSetCount) {
-    return [];
-  }
-
-  const normalizedCount = Math.min(count, definition.maxSetCount);
-
-  return definition.setEffects
-    .map((effect) => {
-      const availableCounts = Object.keys(effect.values)
-        .map(Number)
-        .filter((value) => value <= normalizedCount)
-        .sort((a, b) => a - b);
-      const appliedCount = availableCounts.at(-1);
-
-      return {
-        key: effect.key,
-        label: effect.label,
-        unit: effect.unit,
-        value: appliedCount == null ? null : effect.values[appliedCount],
-      };
-    })
-    .filter((effect) => effect.value !== null);
-}
-
-// 부위별 스타포스를 세트 합산용 숫자로 변환
-function parseStarForce(item: CharacterItemEquipment): number {
-  const value = item.starforce_upgrade;
-  if (!value) return 0;
-
-  const parsedValue = Number.parseInt(value, 10) || 0;
-  const isDoubleCountedSlot =
-    item.item_equipment_slot_name === "한벌옷" ||
-    item.item_equipment_page_name === "한벌옷";
-
-  return isDoubleCountedSlot ? parsedValue * 2 : parsedValue;
-}
-
-// 누적 스타포스에 맞는 스타포스 세트 효과 해석
-function resolveStarForceEffects(
-  definition: EquipmentSetDefinition,
-  totalStarForce: number,
-): {
-  appliedThreshold: number | null;
-  effects: ResolvedSetEffectRow[];
-} {
-  if (!definition.starForceEffects?.length) {
-    return {
-      appliedThreshold: null,
-      effects: [],
-    };
-  }
-
-  const thresholds = definition.starForceEffects
-    .flatMap((effect) => Object.keys(effect.values).map(Number))
-    .filter((value, index, array) => array.indexOf(value) === index)
-    .sort((a, b) => a - b);
-
-  const appliedThreshold =
-    thresholds.filter((threshold) => totalStarForce >= threshold).at(-1) ??
-    null;
-
-  const effects = definition.starForceEffects
-    .map((effect) => {
-      return {
-        key: effect.key,
-        label: effect.label,
-        unit: effect.unit,
-        value:
-          appliedThreshold === null ? null : effect.values[appliedThreshold],
-      };
-    })
-    .filter((effect) => effect.value !== null);
-
-  return {
-    appliedThreshold,
-    effects,
-  };
-}
-
-// 세트 효과와 스타포스 효과를 하나로 합산
-function combineEffects(
-  setEffects: ResolvedSetEffectRow[],
-  starForceEffects: ResolvedSetEffectRow[],
-): ResolvedSetEffectRow[] {
-  const effectMap = new Map<string, ResolvedSetEffectRow>();
-
-  [...setEffects, ...starForceEffects].forEach((effect) => {
-    const existing = effectMap.get(effect.key);
-
-    if (!existing) {
-      effectMap.set(effect.key, { ...effect });
-      return;
-    }
-
-    effectMap.set(effect.key, {
-      ...existing,
-      value: (existing.value ?? 0) + (effect.value ?? 0),
-    });
-  });
-
-  return Array.from(effectMap.values());
-}
+export { EQUIPMENT_SET_DEFINITIONS } from "../model";
 
 // 착용 장비 기준으로 활성 세트 효과 목록 계산
 export function getActiveEquipmentSets(
@@ -288,27 +21,19 @@ export function getActiveEquipmentSets(
   const equippedItems = items.filter(
     (item): item is CharacterItemEquipment => !!item,
   );
-  const genesisLuckyWeapon = equippedItems.find(isGenesisLuckyWeapon) ?? null;
+  const genesisLuckyWeapon = findGenesisLuckyWeapon(equippedItems);
 
   return EQUIPMENT_SET_DEFINITIONS.map((definition) => {
     const matchedItems = equippedItems.filter((item) =>
       isMatchingSetItem(item, definition),
     );
-    const baseCount = matchedItems.length;
-    const luckyItemApplied =
-      !!genesisLuckyWeapon &&
-      canApplyGenesisLuckyWeapon(definition) &&
-      baseCount >= 3 &&
-      baseCount < definition.maxSetCount;
-    const count = luckyItemApplied ? baseCount + 1 : baseCount;
-    const totalStarForce = matchedItems.reduce((sum, item) => {
-      return sum + parseStarForce(item);
-    }, 0);
-    const effectiveStarForce = luckyItemApplied
-      ? totalStarForce + parseStarForce(genesisLuckyWeapon)
-      : totalStarForce;
+    const { count, totalStarForce } = applyGenesisLuckyItem(
+      definition,
+      matchedItems,
+      genesisLuckyWeapon,
+    );
     const { appliedThreshold, effects: starForceEffects } =
-      resolveStarForceEffects(definition, effectiveStarForce);
+      resolveStarForceEffects(definition, totalStarForce);
     const setEffects = resolveSetEffects(definition, count);
 
     return {
@@ -318,7 +43,7 @@ export function getActiveEquipmentSets(
         displayName: definition.displayName,
         count,
         effects: setEffects,
-        totalStarForce: effectiveStarForce,
+        totalStarForce,
         appliedStarForceThreshold: appliedThreshold,
         starForceEffects,
         combinedEffects: combineEffects(setEffects, starForceEffects),

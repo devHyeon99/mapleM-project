@@ -37,6 +37,25 @@ export const EQUIPMENT_SET_DEFINITIONS: EquipmentSetDefinition[] = [
   EXPEDITION_BOSS_LOOT_SET,
 ];
 
+const GENESIS_LUCKY_ITEM_SET_IDS = new Set<string>([
+  ARCANE_SHADE_SET.id,
+  ABSOLABS_SET.id,
+  CHALLENGER_SET.id,
+  ROOT_ABYSS_UNIQUE_SET.id,
+  ROOT_ABYSS_LEGENDARY_SET.id,
+]);
+
+function isGenesisLuckyWeapon(item: CharacterItemEquipment) {
+  return (
+    item.item_equipment_slot_name === "무기" &&
+    (item.item_name ?? "").includes("제네시스")
+  );
+}
+
+function canApplyGenesisLuckyWeapon(definition: EquipmentSetDefinition) {
+  return GENESIS_LUCKY_ITEM_SET_IDS.has(definition.id);
+}
+
 function normalizeItemName(
   itemName: string | null | undefined,
   strategy: ItemNameNormalization = "none",
@@ -266,17 +285,30 @@ function combineEffects(
 export function getActiveEquipmentSets(
   items: Array<CharacterItemEquipment | null | undefined>,
 ): ActiveEquipmentSet[] {
+  const equippedItems = items.filter(
+    (item): item is CharacterItemEquipment => !!item,
+  );
+  const genesisLuckyWeapon = equippedItems.find(isGenesisLuckyWeapon) ?? null;
+
   return EQUIPMENT_SET_DEFINITIONS.map((definition) => {
-    const matchedItems = items.filter(
-      (item): item is CharacterItemEquipment =>
-        !!item && isMatchingSetItem(item, definition),
+    const matchedItems = equippedItems.filter((item) =>
+      isMatchingSetItem(item, definition),
     );
-    const count = matchedItems.length;
+    const baseCount = matchedItems.length;
+    const luckyItemApplied =
+      !!genesisLuckyWeapon &&
+      canApplyGenesisLuckyWeapon(definition) &&
+      baseCount >= 3 &&
+      baseCount < definition.maxSetCount;
+    const count = luckyItemApplied ? baseCount + 1 : baseCount;
     const totalStarForce = matchedItems.reduce((sum, item) => {
       return sum + parseStarForce(item);
     }, 0);
+    const effectiveStarForce = luckyItemApplied
+      ? totalStarForce + parseStarForce(genesisLuckyWeapon)
+      : totalStarForce;
     const { appliedThreshold, effects: starForceEffects } =
-      resolveStarForceEffects(definition, totalStarForce);
+      resolveStarForceEffects(definition, effectiveStarForce);
     const setEffects = resolveSetEffects(definition, count);
 
     return {
@@ -286,7 +318,7 @@ export function getActiveEquipmentSets(
         displayName: definition.displayName,
         count,
         effects: setEffects,
-        totalStarForce,
+        totalStarForce: effectiveStarForce,
         appliedStarForceThreshold: appliedThreshold,
         starForceEffects,
         combinedEffects: combineEffects(setEffects, starForceEffects),

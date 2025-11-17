@@ -1,6 +1,5 @@
 "use client";
 
-import * as React from "react";
 import { ToggleGroup, ToggleGroupItem } from "@/shared/ui/toggle-group";
 
 interface HyperStatPresetToggleProps {
@@ -16,31 +15,36 @@ export const HyperStatPresetToggle = ({
   selected,
   onSelect,
 }: HyperStatPresetToggleProps) => {
-  // ToggleGroup은 string value를 쓰는 경우가 많아서 string으로 매핑
-  const value = String(selected || active || 1);
+  const value = String(selected ?? active ?? 1);
 
   return (
     <ToggleGroup
       type="single"
       variant="outline"
+      size="sm"
       value={value}
       onValueChange={(v) => {
-        if (!v) return; // 같은 아이템 재클릭 시 빈 값 들어올 수 있음(allowDeselect 케이스)
+        if (!v) return;
         onSelect(Number(v));
       }}
     >
       {Array.from({ length: Math.max(0, count) }, (_, i) => {
         const presetNo = i + 1;
-        const isActive = presetNo === active;
 
         return (
           <ToggleGroupItem
             key={presetNo}
             value={String(presetNo)}
             aria-label={`하이퍼 스탯 프리셋 ${presetNo}`}
-            className="h-8 w-8 p-0 first:rounded-l-sm last:rounded-r-sm"
+            className="relative"
           >
-            {isActive ? `${presetNo}` : `${presetNo}`}
+            {presetNo}
+            {presetNo === active && (
+              <span
+                className="absolute top-1 right-1 size-1 rounded-full bg-orange-500"
+                aria-hidden="true"
+              />
+            )}
           </ToggleGroupItem>
         );
       })}

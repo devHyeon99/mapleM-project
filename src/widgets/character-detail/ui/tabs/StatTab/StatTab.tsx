@@ -6,12 +6,27 @@ import { LoadingCard } from "@/shared/ui/LoadingCard";
 import { InfoDescriptionRow } from "@/shared/ui/InfoRow";
 import { HyperStatPresetToggle } from "./HyperStatToggle";
 import { useHyperStat } from "./useHyperStat";
-import { Badge } from "@/shared/ui/badge";
+import { HelpPopover } from "@/shared/ui/HelpPopover";
 
 interface StatTabProps {
   ocid: string;
   level: number;
 }
+
+const STAT_HELP_ITEMS = [
+  {
+    title: "캐릭터 스탯 도움말",
+    description:
+      "현재 표기되는 스탯은 아이템 착용, 강화, 버프 등 캐릭터에 적용된 효과로 스탯 값이 게임 내 데이터와 상이할 수 있습니다.",
+  },
+] as const;
+
+const formatStatValue = (value: string) => {
+  const normalizedValue = value.replaceAll(",", "");
+  const numericValue = Number(normalizedValue);
+
+  return Number.isFinite(numericValue) ? numericValue.toLocaleString() : value;
+};
 
 export const StatTab = ({ ocid, level }: StatTabProps) => {
   const { data, isLoading, isError, error } = useCharacterStat(ocid, level);
@@ -43,35 +58,39 @@ export const StatTab = ({ ocid, level }: StatTabProps) => {
   const { stat, hyperStat } = data;
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex w-full flex-col gap-1 md:flex-row">
       {/* 기본 스탯 정보 영역 */}
-      <section className="bg-card/50 rounded-md border p-3">
-        <h2 className="mb-2 font-bold">캐릭터 스탯</h2>
+      <section className="bg-card w-full p-3">
+        <div className="mb-2 flex items-center justify-between">
+          <h2 className="flex h-8 items-center font-bold">캐릭터 스탯</h2>
+          <HelpPopover
+            ariaLabel="캐릭터 스탯 도움말"
+            items={STAT_HELP_ITEMS}
+            iconClassName="size-5"
+          />
+        </div>
         <Separator className="mb-2" />
         {/* dl 태그로 시맨틱 보강 */}
         <dl className="flex flex-col gap-1">
-          {stat.stat.map((s, idx) => (
+          {stat.stat.map((s) => (
             <InfoDescriptionRow
-              key={idx}
+              key={s.stat_name}
               as="div"
               variant="between"
               label={s.stat_name}
               isHighlight
             >
-              {Number(s.stat_value).toLocaleString()}
+              {formatStatValue(s.stat_value)}
             </InfoDescriptionRow>
           ))}
         </dl>
       </section>
 
       {/* 하이퍼 스탯 정보 영역 */}
-      <section className="bg-card/50 rounded-md border p-3">
+      <section className="bg-card w-full p-3">
         <div className="mb-2 flex items-center justify-between">
           <div className="flex flex-row items-center gap-2">
             <h2 className="font-bold">하이퍼 스탯</h2>
-            <Badge className="text-xs">
-              {hyperStat?.use_preset_no}페이지 적용 중
-            </Badge>
           </div>
 
           {hyperStat && (
@@ -87,16 +106,21 @@ export const StatTab = ({ ocid, level }: StatTabProps) => {
 
         {currentHyperStatInfo.length > 0 ? (
           <dl className="flex flex-col gap-1">
-            {currentHyperStatInfo.map((info, idx) => (
-              <InfoDescriptionRow
-                key={idx}
-                as="div"
-                variant="between"
-                label={info.stat_type}
-                isHighlight
-              >
-                Lv.{info.stat_level}
-              </InfoDescriptionRow>
+            {currentHyperStatInfo.map((info) => (
+              <>
+                <InfoDescriptionRow
+                  key={`${info.stat_type}-${info.stat_level}`}
+                  as="div"
+                  variant="between"
+                  label={info.stat_type}
+                  isHighlight
+                >
+                  Lv.{info.stat_level}
+                </InfoDescriptionRow>
+                <p className="text-foreground mb-1 text-xs">
+                  {info.stat_increase}
+                </p>
+              </>
             ))}
           </dl>
         ) : (

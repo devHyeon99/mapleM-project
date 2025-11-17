@@ -74,7 +74,7 @@ export const CommonTabHeader = ({
                 <span>프리셋 {preset}</span>
                 {isActiveInGame && (
                   <span
-                    className="absolute top-1 right-1 size-1.5 rounded-full bg-orange-500"
+                    className="absolute top-1 right-1 size-1.5 rounded-full bg-orange-400"
                     aria-hidden="true"
                   />
                 )}

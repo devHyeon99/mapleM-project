@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import type {
-  CharacterAndroidEquipment,
-  CharacterHeartEquipment,
+  AndroidEquipment,
+  HeartEquipment,
   CharacterItemEquipment,
 } from "../types";
 import {
@@ -30,7 +30,7 @@ describe("toItemDisplay mappers", () => {
   });
 
   it("android 정보를 표시용 아이템으로 정규화한다", () => {
-    const android: CharacterAndroidEquipment = {
+    const android: AndroidEquipment = {
       android_name: "메르세데스 안드로이드",
       android_nickname: "메르",
       android_icon: "/android.png",
@@ -50,7 +50,7 @@ describe("toItemDisplay mappers", () => {
   });
 
   it("heart 이름에 따라 등급을 매핑하고 옵션 배열을 유지한다", () => {
-    const heart: CharacterHeartEquipment = {
+    const heart: HeartEquipment = {
       heart_name: "골드 하트",
       heart_icon: "/heart.png",
       heart_description: "heart desc",

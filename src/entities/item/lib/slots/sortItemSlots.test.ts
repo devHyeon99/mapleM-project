@@ -6,8 +6,8 @@ import {
   EQUIP_SLOT_ORDER_LIST_TOPBOTTOM,
 } from "@/shared/config/constants/item_slot";
 import type {
-  CharacterAndroidEquipment,
-  CharacterHeartEquipment,
+  AndroidEquipment,
+  HeartEquipment,
   CharacterItemEquipment,
 } from "../../model/types";
 import { sortItems, sortItemsForList } from "./sortItemSlots";
@@ -28,7 +28,7 @@ const createEquipment = (
   ...overrides,
 });
 
-const android: CharacterAndroidEquipment = {
+const android: AndroidEquipment = {
   android_name: "테스트 안드로이드",
   android_nickname: "안드",
   android_icon: "/android.png",
@@ -40,7 +40,7 @@ const android: CharacterAndroidEquipment = {
   android_cash_item_equipment: [],
 };
 
-const heart: CharacterHeartEquipment = {
+const heart: HeartEquipment = {
   heart_name: "골드 하트",
   heart_icon: "/heart.png",
   heart_description: "heart desc",

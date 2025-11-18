@@ -3,7 +3,6 @@
 import { useMemo, useState } from "react";
 
 // Shared & UI
-import { CommonTabHeader } from "@/shared/ui/CommonTabHeader";
 import { LoadingCard } from "@/shared/ui/LoadingCard";
 
 // Entities
@@ -16,6 +15,7 @@ import {
 // Local Components
 import { CashItemGrid } from "./CashItemGrid";
 import { CashItemList } from "./CashItemList";
+import { CashItemTabHeader } from "./CashItemTabHeader";
 
 interface CashItemTabProps {
   ocid: string;
@@ -84,20 +84,21 @@ export const CashItemTab = ({ ocid }: CashItemTabProps) => {
     );
   }
 
-  const commonHeaderProps = {
-    activePresetNo: data.use_preset_no,
-    selectedPreset: effectiveSelectedPreset,
-    viewMode,
-    onSelectPreset: setSelectedPreset,
-    onChangeViewMode: setViewMode,
-  } as const;
-
   return (
     <div className="flex flex-col gap-2">
       <div className="bg-card relative flex flex-col gap-4 rounded-xs shadow-sm">
         {viewMode === "grid" ? (
           <div className="mx-auto flex w-full flex-col items-center gap-4 py-4">
-            <CommonTabHeader {...commonHeaderProps} />
+            <CashItemTabHeader
+              activePresetNo={data.use_preset_no}
+              selectedPreset={effectiveSelectedPreset}
+              presets={data.cash_equipment_preset?.map(
+                (preset) => preset.preset_no,
+              )}
+              viewMode={viewMode}
+              onSelectPreset={setSelectedPreset}
+              onChangeViewMode={setViewMode}
+            />
             <CashItemGrid
               items={sortedItems}
               presetNo={effectiveSelectedPreset}
@@ -105,7 +106,17 @@ export const CashItemTab = ({ ocid }: CashItemTabProps) => {
           </div>
         ) : (
           <div className="pt-4">
-            <CommonTabHeader {...commonHeaderProps} />
+            <CashItemTabHeader
+              activePresetNo={data.use_preset_no}
+              selectedPreset={effectiveSelectedPreset}
+              presets={data.cash_equipment_preset?.map(
+                (preset) => preset.preset_no,
+              )}
+              viewMode={viewMode}
+              onSelectPreset={setSelectedPreset}
+              onChangeViewMode={setViewMode}
+              className="w-full px-4"
+            />
             <CashItemList
               items={sortedItems}
               presetNo={effectiveSelectedPreset}

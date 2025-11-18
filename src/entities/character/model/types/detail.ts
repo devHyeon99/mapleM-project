@@ -2,9 +2,9 @@ import {
   CharacterItemEquipment,
   EquipmentPreset,
   EquipmentSetInfo,
-  CharacterAndroidEquipment,
-  CharacterHeartEquipment,
-  AndroidHeartPreset,
+  AndroidEquipment,
+  HeartEquipment,
+  AndroidHeartEquipmentPreset,
 } from "@/entities/item";
 import { CharacterBasic } from "./basic";
 import { CharacterUnion } from "./union";
@@ -32,7 +32,7 @@ export interface CharacterDetailData extends CharacterBasic {
 
   // 안드로이드 정보
   android_use_preset_no?: number;
-  android_equipment?: CharacterAndroidEquipment | null;
-  heart_equipment?: CharacterHeartEquipment | null;
-  android_preset?: AndroidHeartPreset[];
+  android_equipment?: AndroidEquipment | null;
+  heart_equipment?: HeartEquipment | null;
+  android_preset?: AndroidHeartEquipmentPreset[];
 }

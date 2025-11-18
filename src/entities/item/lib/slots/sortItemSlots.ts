@@ -1,7 +1,7 @@
 import {
+  AndroidEquipment,
   CharacterItemEquipment,
-  CharacterAndroidEquipment,
-  CharacterHeartEquipment,
+  HeartEquipment,
   ItemDisplay,
 } from "@/entities/item/model/types";
 import {
@@ -26,8 +26,8 @@ export interface SortedItemSlot {
 // ============================================================================
 function createItemMap(
   items: CharacterItemEquipment[],
-  android: CharacterAndroidEquipment | null,
-  heart: CharacterHeartEquipment | null,
+  android: AndroidEquipment | null,
+  heart: HeartEquipment | null,
 ) {
   const map: Record<string, ItemDisplay> = {};
 
@@ -56,8 +56,8 @@ function createItemMap(
 // 그리드용 정렬 (빈 칸 포함)
 export function sortItems(
   items: CharacterItemEquipment[],
-  android: CharacterAndroidEquipment | null,
-  heart: CharacterHeartEquipment | null,
+  android: AndroidEquipment | null,
+  heart: HeartEquipment | null,
 ): SortedItemSlot[] {
   const map = createItemMap(items, android, heart);
   const hasOnepiece = !!map["한벌옷"];
@@ -76,8 +76,8 @@ export function sortItems(
 // 리스트용 정렬 (빈 칸 없음, 순서 재배치)
 export function sortItemsForList(
   items: CharacterItemEquipment[],
-  android: CharacterAndroidEquipment | null,
-  heart: CharacterHeartEquipment | null,
+  android: AndroidEquipment | null,
+  heart: HeartEquipment | null,
 ): SortedItemSlot[] {
   const map = createItemMap(items, android, heart);
   const hasOnepiece = !!map["한벌옷"];

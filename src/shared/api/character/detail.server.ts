@@ -87,6 +87,7 @@ export async function fetchCharacterDetail(ocid: string): Promise<CharacterDetai
     level_ranking: levelRankingData?.ranking?.[0] ?? null,
     union_ranking: unionRankingData?.ranking?.[0] ?? null,
     use_preset_no: equipData.use_preset_no,
+    android_use_preset_no: androidData?.use_preset_no,
     soul_set_option: equipData.soul_set_option,
     item_equipment: equipData.item_equipment ?? [],
     equipment_preset: equipData.equipment_preset ?? [],

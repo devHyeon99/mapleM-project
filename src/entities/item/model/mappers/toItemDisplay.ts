@@ -1,6 +1,6 @@
 import {
-  CharacterAndroidEquipment,
-  CharacterHeartEquipment,
+  AndroidEquipment,
+  HeartEquipment,
   CharacterItemEquipment,
   ItemDisplay,
 } from "../types";
@@ -18,7 +18,7 @@ export function toEquipmentDisplay(item: CharacterItemEquipment): ItemDisplay {
   };
 }
 
-export function toAndroidDisplay(android: CharacterAndroidEquipment): ItemDisplay {
+export function toAndroidDisplay(android: AndroidEquipment): ItemDisplay {
   return {
     source: "android",
     item_name: android.android_name,
@@ -37,7 +37,7 @@ export function toAndroidDisplay(android: CharacterAndroidEquipment): ItemDispla
   };
 }
 
-export function toHeartDisplay(heart: CharacterHeartEquipment): ItemDisplay {
+export function toHeartDisplay(heart: HeartEquipment): ItemDisplay {
   return {
     source: "heart",
     item_name: heart.heart_name,

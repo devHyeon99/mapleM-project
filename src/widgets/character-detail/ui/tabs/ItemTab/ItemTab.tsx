@@ -1,43 +1,31 @@
 "use client";
 
-import { useMemo, useState } from "react";
-
-import { CommonTabHeader } from "@/shared/ui/CommonTabHeader";
-
 import { CharacterDetailData } from "@/entities/character";
-import { sortItems, sortItemsForList } from "@/entities/item/lib";
 
 import { ItemGrid } from "./ItemGrid";
+import { ItemTabHeader } from "./ItemTabHeader";
 import { ItemList } from "./ItemList";
 import { ItemTabFooter } from "./ItemTabFooter";
+import { useItemTab } from "./useItemTab";
 
 interface ItemTabProps {
   data: CharacterDetailData;
 }
 
 export const ItemTab = ({ data }: ItemTabProps) => {
-  const [selectedPreset, setSelectedPreset] = useState(data.use_preset_no ?? 1);
-  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
-
   const {
-    equipment_preset: presetList,
-    android_equipment: android,
-    heart_equipment: heart,
-    use_preset_no: activePresetNo,
-  } = data;
-
-  const currentPresetItems = useMemo(() => {
-    return (
-      presetList?.find((p) => p.preset_no === selectedPreset)?.item_equipment ??
-      (selectedPreset === activePresetNo ? data.item_equipment : [])
-    );
-  }, [presetList, selectedPreset, activePresetNo, data.item_equipment]);
-
-  const sortedItems = useMemo(() => {
-    return viewMode === "grid"
-      ? sortItems(currentPresetItems, android ?? null, heart ?? null)
-      : sortItemsForList(currentPresetItems, android ?? null, heart ?? null);
-  }, [viewMode, currentPresetItems, android, heart]);
+    activeAndroidPresetNo,
+    activePresetNo,
+    availableAndroidPresetNos,
+    availablePresetNos,
+    effectiveSelectedAndroidPreset,
+    effectiveSelectedPreset,
+    setSelectedAndroidPreset,
+    setSelectedPreset,
+    setViewMode,
+    sortedItems,
+    viewMode,
+  } = useItemTab(data);
 
   if (data.use_preset_no === null) {
     return (
@@ -50,28 +38,43 @@ export const ItemTab = ({ data }: ItemTabProps) => {
     );
   }
 
-  const commonHeaderProps = {
-    activePresetNo,
-    selectedPreset,
-    viewMode,
-    onSelectPreset: setSelectedPreset,
-    onChangeViewMode: setViewMode,
-  } as const;
-
   return (
     <div className="flex flex-col gap-2">
       <div className="bg-card relative flex flex-col gap-4 rounded-xs shadow-sm">
         {viewMode === "grid" ? (
           <div className="mx-auto flex w-full flex-col items-center gap-4 py-4">
-            <CommonTabHeader {...commonHeaderProps} />
-            <ItemGrid items={sortedItems} presetNo={selectedPreset} />
+            <ItemTabHeader
+              activePresetNo={activePresetNo}
+              activeAndroidPresetNo={activeAndroidPresetNo}
+              selectedPreset={effectiveSelectedPreset}
+              selectedAndroidPreset={effectiveSelectedAndroidPreset}
+              equipmentPresets={availablePresetNos}
+              androidPresets={availableAndroidPresetNos}
+              viewMode={viewMode}
+              onSelectPreset={setSelectedPreset}
+              onSelectAndroidPreset={setSelectedAndroidPreset}
+              onChangeViewMode={setViewMode}
+            />
+            <ItemGrid items={sortedItems} presetNo={effectiveSelectedPreset} />
           </div>
         ) : (
           <div className="pt-4">
-            <CommonTabHeader {...commonHeaderProps} />
+            <ItemTabHeader
+              activePresetNo={activePresetNo}
+              activeAndroidPresetNo={activeAndroidPresetNo}
+              selectedPreset={effectiveSelectedPreset}
+              selectedAndroidPreset={effectiveSelectedAndroidPreset}
+              equipmentPresets={availablePresetNos}
+              androidPresets={availableAndroidPresetNos}
+              viewMode={viewMode}
+              onSelectPreset={setSelectedPreset}
+              onSelectAndroidPreset={setSelectedAndroidPreset}
+              onChangeViewMode={setViewMode}
+              className="w-full px-4"
+            />
             <ItemList
               items={sortedItems}
-              presetNo={selectedPreset}
+              presetNo={effectiveSelectedPreset}
               characterClass={data.character_class}
             />
           </div>
@@ -80,7 +83,7 @@ export const ItemTab = ({ data }: ItemTabProps) => {
       <div className="mx-auto w-full">
         <ItemTabFooter
           items={sortedItems}
-          presetNo={selectedPreset}
+          presetNo={effectiveSelectedPreset}
           characterClass={data.character_class}
         />
       </div>

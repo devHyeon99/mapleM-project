@@ -2,9 +2,9 @@ import { ItemOption } from "./item-option";
 
 export interface CashItemColoringPrism {
   color_range: string;
-  hue: string;
-  saturation: string;
-  value: string;
+  hue: number;
+  saturation: number;
+  value: number;
 }
 
 /** 안드로이드가 착용한 캐시 아이템 */
@@ -20,7 +20,7 @@ export interface AndroidCashItemEquipment {
 }
 
 /** 안드로이드 본체 정보 */
-export interface CharacterAndroidEquipment {
+export interface AndroidEquipment {
   android_name: string;
   android_nickname: string;
   android_icon: string;
@@ -34,7 +34,7 @@ export interface CharacterAndroidEquipment {
 }
 
 /** 기계 심장 정보 */
-export interface CharacterHeartEquipment {
+export interface HeartEquipment {
   heart_name: string;
   heart_icon: string;
   heart_description: string;
@@ -45,8 +45,16 @@ export interface CharacterHeartEquipment {
 }
 
 /** 안드로이드 프리셋 구조 */
-export interface AndroidHeartPreset {
+export interface AndroidHeartEquipmentPreset {
   preset_no: number;
-  android_equipment: CharacterAndroidEquipment | null;
-  heart_equipment: CharacterHeartEquipment | null;
+  android_equipment: AndroidEquipment | null;
+  heart_equipment: HeartEquipment | null;
+}
+
+/** 안드로이드 장비 조회 API 응답 (/character/android-equipment) */
+export interface CharacterAndroidEquipment {
+  use_preset_no?: number;
+  android_equipment: AndroidEquipment | null;
+  heart_equipment: HeartEquipment | null;
+  android_heart_equipment_preset?: AndroidHeartEquipmentPreset[];
 }

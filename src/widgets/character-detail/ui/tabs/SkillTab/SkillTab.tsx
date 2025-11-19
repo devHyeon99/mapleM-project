@@ -28,7 +28,7 @@ export const SkillTab = ({ ocid }: SkillTabProps) => {
   if (!query.data || !query.data.skill) {
     return (
       <TabMessageSection
-        message={`캐릭터가 접속한 기록이 없어\n스킬 데이터를 불러올 수 없습니다.`}
+        message={`캐릭터가 접속한 기록이 없어 스킬 데이터를 불러올 수 없습니다.`}
       />
     );
   }

@@ -16,6 +16,7 @@ import {
 import { CashItemGrid } from "./CashItemGrid";
 import { CashItemList } from "./CashItemList";
 import { CashItemTabHeader } from "./CashItemTabHeader";
+import { TabMessageSection } from "@/shared/ui/TabMessageSection";
 
 interface CashItemTabProps {
   ocid: string;
@@ -75,12 +76,9 @@ export const CashItemTab = ({ ocid }: CashItemTabProps) => {
 
   if (!data || data.cash_item_equipment.length === 0) {
     return (
-      <section className="bg-muted/50 flex min-h-91.5 flex-col items-center justify-center gap-2 rounded-md border p-6 text-center">
-        <p className="text-muted-foreground text-sm whitespace-pre-line">
-          API 업데이트 이후 접속 기록이 없거나,{`\n`}
-          장착한 장비 정보를 불러올 수 없습니다.
-        </p>
-      </section>
+      <TabMessageSection
+        message={`API 업데이트 이후 접속 기록이 없거나\n장착한 장비 정보를 불러올 수 없습니다.`}
+      />
     );
   }
 

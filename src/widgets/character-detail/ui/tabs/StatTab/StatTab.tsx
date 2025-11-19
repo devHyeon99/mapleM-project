@@ -1,5 +1,7 @@
 "use client";
 
+import { Fragment } from "react";
+
 import { useCharacterStat } from "@/entities/character";
 import { Separator } from "@/shared/ui/separator";
 import { LoadingCard } from "@/shared/ui/LoadingCard";
@@ -107,9 +109,8 @@ export const StatTab = ({ ocid, level }: StatTabProps) => {
         {currentHyperStatInfo.length > 0 ? (
           <dl className="flex flex-col gap-1">
             {currentHyperStatInfo.map((info) => (
-              <>
+              <Fragment key={`${info.stat_type}-${info.stat_level}`}>
                 <InfoDescriptionRow
-                  key={`${info.stat_type}-${info.stat_level}`}
                   as="div"
                   variant="between"
                   label={info.stat_type}
@@ -120,7 +121,7 @@ export const StatTab = ({ ocid, level }: StatTabProps) => {
                 <p className="text-foreground mb-1 text-xs">
                   {info.stat_increase}
                 </p>
-              </>
+              </Fragment>
             ))}
           </dl>
         ) : (

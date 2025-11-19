@@ -1,7 +1,6 @@
 import { SortedItemSlot } from "@/entities/item";
 import { getItemSpec } from "@/entities/item/lib";
 import { InfoRow } from "@/shared/ui/InfoRow";
-import { HelpPopover } from "@/shared/ui/HelpPopover";
 import {
   Accordion,
   AccordionContent,
@@ -15,14 +14,6 @@ interface ItemSpecSummaryCardProps {
   presetNo: number;
   characterClass: string;
 }
-
-const ITEM_SPEC_HELP_ITEMS = [
-  {
-    title: "1. 안드로이드 하트",
-    description:
-      "현재 안드로이드 하트는 모든 프리셋에 하나만 공통으로 적용됩니다. 따라서 사냥용 프리셋에 보스용 하트가 보이거나, 보스용 프리셋에 사냥용 하트가 표시될 수 있습니다.",
-  },
-] as const;
 
 export const ItemSpecSummaryCard = ({
   items,
@@ -38,14 +29,7 @@ export const ItemSpecSummaryCard = ({
 
   return (
     <section className="bg-card flex w-full flex-col rounded-xs p-4">
-      <div className="mb-4 flex flex-row items-center justify-between">
-        <h3 className="text-foreground font-bold">장비 스펙 요약</h3>
-        <HelpPopover
-          ariaLabel="장비 스펙 요약 도움말"
-          items={ITEM_SPEC_HELP_ITEMS}
-          iconClassName="size-5"
-        />
-      </div>
+      <h3 className="text-foreground mb-4 font-bold">장비 스펙 요약</h3>
       <Accordion
         type="single"
         collapsible

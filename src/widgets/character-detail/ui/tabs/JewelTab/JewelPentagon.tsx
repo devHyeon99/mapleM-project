@@ -42,8 +42,8 @@ export const JewelPentagon = ({
       {String(activePageData.jewel_page_no) === String(useJewelPageNo) && (
         <div className="pointer-events-none absolute top-1/2 left-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center">
           <div className="flex flex-col items-center rounded-lg p-2 text-center text-sm font-medium">
-            {parseSetOption?.map((item) => (
-              <p key={item + "-idx"} className="text-foreground">
+            {parseSetOption?.map((item, index) => (
+              <p key={`${item}-${index}`} className="text-foreground">
                 {item}
               </p>
             ))}

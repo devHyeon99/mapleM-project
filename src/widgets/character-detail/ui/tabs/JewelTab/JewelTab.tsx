@@ -16,10 +16,10 @@ interface JewelTabProps {
 export const JewelTab = ({ ocid, level }: JewelTabProps) => {
   const { data, isLoading, isError, error } = useCharacterJewel(ocid, level);
 
-  const { selectedPage, setSelectedPage, activePageData, parseSetOption } =
+  const { selectedPage, setSelectedPage, activePageData, parsedSetOption } =
     useJewelTab(data);
 
-  if (level < 100) {
+  if (level < 120) {
     return (
       <TabMessageSection message="쥬얼 시스템은 Lv.120 이상 이용 가능합니다." />
     );
@@ -44,7 +44,7 @@ export const JewelTab = ({ ocid, level }: JewelTabProps) => {
   }
 
   return (
-    <div className="rounded-md border p-3">
+    <div className="bg-card p-3">
       <div className="flex h-full flex-col items-center">
         {/* 헤더 컴포넌트 */}
         <JewelHeader
@@ -61,7 +61,7 @@ export const JewelTab = ({ ocid, level }: JewelTabProps) => {
           <JewelPentagon
             activePageData={activePageData}
             useJewelPageNo={data.use_jewel_page_no}
-            parseSetOption={parseSetOption}
+            parseSetOption={parsedSetOption}
           />
         )}
       </div>

@@ -1,10 +1,22 @@
 import Image from "next/image";
 import { JewelInfo } from "@/entities/character";
 
+const splitJewelOption = (option: string) => {
+  const trimmedOption = option.trim();
+  const numericStartIndex = trimmedOption.search(/[+-]?\d/);
+
+  if (numericStartIndex <= 0) {
+    return { label: trimmedOption, value: "" };
+  }
+
+  return {
+    label: trimmedOption.slice(0, numericStartIndex).trim(),
+    value: trimmedOption.slice(numericStartIndex).trim(),
+  };
+};
+
 export const JewelDisplay = ({ jewel }: { jewel: JewelInfo }) => {
-  const match = jewel.jewel_option.match(/^([^\d]+)([\d.,%+]+.*)$/);
-  const label = match ? match[1].trim() : jewel.jewel_option;
-  const value = match ? match[2].trim() : "";
+  const { label, value } = splitJewelOption(jewel.jewel_option);
 
   return (
     <div className="flex h-21.5 w-24 flex-col items-center text-center text-xs">

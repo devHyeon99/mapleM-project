@@ -2,6 +2,7 @@ import { Separator } from "@/shared/ui/separator";
 import { MergedSpecData } from "../model/types";
 import { SectionTitle } from "./SpecCardCommon";
 import { InfoRow } from "@/shared/ui/InfoRow";
+import { sumSymbolForce } from "@/shared/lib/symbol-force";
 
 interface RightStatColumnProps {
   data: MergedSpecData;
@@ -17,20 +18,10 @@ export const RightStatColumn = ({ data }: RightStatColumnProps) => {
     }, 0) ?? 0;
 
   // 아케인 포스 합산
-  const totalArcaneForce =
-    data.symbol_data?.arcane_symbol?.reduce((acc, symbol) => {
-      const match = symbol.symbol_option.match(/아케인포스 증가 (\d+)/);
-      const forceValue = match ? parseInt(match[1], 10) : 0;
-      return acc + forceValue;
-    }, 0) ?? 0;
+  const totalArcaneForce = sumSymbolForce(data.symbol_data?.arcane_symbol);
 
   // 어센틱 포스 합산
-  const totalAuthenticForce =
-    data.symbol_data?.authentic_symbol?.reduce((acc, symbol) => {
-      const match = symbol.symbol_option.match(/어센틱포스 증가 (\d+)/);
-      const forceValue = match ? parseInt(match[1], 10) : 0;
-      return acc + forceValue;
-    }, 0) ?? 0;
+  const totalAuthenticForce = sumSymbolForce(data.symbol_data?.authentic_symbol);
 
   // 헥사 스탯
   const firstCore = data.hexa_stat_data?.hexamatrix_stat?.[0];

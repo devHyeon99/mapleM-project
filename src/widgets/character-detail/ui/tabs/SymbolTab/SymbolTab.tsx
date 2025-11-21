@@ -15,6 +15,12 @@ export const SymbolTab = ({ ocid, level }: SymbolTabProps) => {
     ocid,
     Number(level),
   );
+  const arcaneSymbols = Array.isArray(data?.arcane_symbol)
+    ? data.arcane_symbol
+    : [];
+  const authenticSymbols = Array.isArray(data?.authentic_symbol)
+    ? data.authentic_symbol
+    : [];
 
   // 레벨 제한 예외 처리
   if (level < 200) {
@@ -28,9 +34,11 @@ export const SymbolTab = ({ ocid, level }: SymbolTabProps) => {
 
   // 에러 상태
   if (isError) {
+    const errorMessage =
+      error instanceof Error ? error.message : "알 수 없는 오류가 발생했습니다.";
     return (
       <div className="p-4 text-sm text-red-500">
-        오류 발생: {(error as Error).message}
+        오류 발생: {errorMessage}
       </div>
     );
   }
@@ -38,7 +46,7 @@ export const SymbolTab = ({ ocid, level }: SymbolTabProps) => {
   // 데이터 없음 예외 처리 (심볼 둘 다 없을 때)
   if (
     !data ||
-    (data.arcane_symbol.length === 0 && data.authentic_symbol.length === 0)
+    (arcaneSymbols.length === 0 && authenticSymbols.length === 0)
   ) {
     return (
       <TabMessageSection
@@ -48,15 +56,15 @@ export const SymbolTab = ({ ocid, level }: SymbolTabProps) => {
   }
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="bg-card flex flex-col gap-2 md:flex-row md:justify-between">
       {/* 아케인 심볼 섹션 */}
-      {data.arcane_symbol.length > 0 && (
-        <SymbolSection title="아케인 심볼" items={data.arcane_symbol} />
+      {arcaneSymbols.length > 0 && (
+        <SymbolSection title="아케인 심볼" items={arcaneSymbols} />
       )}
 
       {/* 어센틱 심볼 섹션 */}
-      {data.authentic_symbol.length > 0 && (
-        <SymbolSection title="어센틱 심볼" items={data.authentic_symbol} />
+      {authenticSymbols.length > 0 && (
+        <SymbolSection title="어센틱 심볼" items={authenticSymbols} />
       )}
     </div>
   );

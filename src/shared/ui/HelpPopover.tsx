@@ -1,7 +1,7 @@
 "use client";
 
 import { ReactNode } from "react";
-import { CircleHelp } from "lucide-react";
+import { CircleAlert, CircleHelp } from "lucide-react";
 import { cn } from "@/shared/lib/utils";
 import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui/popover";
 
@@ -13,6 +13,7 @@ interface HelpPopoverItem {
 interface HelpPopoverProps {
   ariaLabel: string;
   items: readonly HelpPopoverItem[];
+  iconType?: "help" | "exclamation";
   triggerClassName?: string;
   iconClassName?: string;
   contentClassName?: string;
@@ -23,12 +24,15 @@ interface HelpPopoverProps {
 export const HelpPopover = ({
   ariaLabel,
   items,
+  iconType = "help",
   triggerClassName,
   iconClassName,
   contentClassName,
   side = "bottom",
   align = "end",
 }: HelpPopoverProps) => {
+  const Icon = iconType === "exclamation" ? CircleAlert : CircleHelp;
+
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -40,7 +44,7 @@ export const HelpPopover = ({
             triggerClassName,
           )}
         >
-          <CircleHelp className={cn("size-5", iconClassName)} />
+          <Icon className={cn("size-5", iconClassName)} />
         </button>
       </PopoverTrigger>
 

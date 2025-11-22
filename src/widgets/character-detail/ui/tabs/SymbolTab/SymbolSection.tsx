@@ -10,10 +10,7 @@ interface SymbolSectionProps {
 }
 
 export const SymbolSection = ({ title, items }: SymbolSectionProps) => {
-  const safeItems = useMemo(
-    () => (Array.isArray(items) ? items : []),
-    [items],
-  );
+  const safeItems = useMemo(() => (Array.isArray(items) ? items : []), [items]);
 
   // 포스 합산 로직
   const totalForce = useMemo(() => {
@@ -24,7 +21,7 @@ export const SymbolSection = ({ title, items }: SymbolSectionProps) => {
   if (safeItems.length === 0) return null;
 
   return (
-    <section className="flex-1 p-3">
+    <section className="bg-card flex-1 p-3">
       <h3 className="mb-2 flex items-center justify-between">
         <span className="font-bold">{title}</span>
         <span className="text-sm font-semibold text-[#FF7E54]">

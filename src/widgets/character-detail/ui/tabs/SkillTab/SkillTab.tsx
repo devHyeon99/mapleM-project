@@ -42,8 +42,8 @@ export const SkillTab = ({ ocid }: SkillTabProps) => {
   }
 
   return (
-    <div className="flex flex-col gap-2">
-      <div className="flex w-full max-w-[680px] flex-col rounded-md border p-3">
+    <div className="flex flex-col gap-2 md:flex-row md:items-stretch">
+      <div className="bg-card flex w-full flex-1 basis-0 min-w-0 flex-col p-3">
         {layout.hasEquipment && (
           <>
             <SkillTabHeader
@@ -56,6 +56,7 @@ export const SkillTab = ({ ocid }: SkillTabProps) => {
 
             {layout.hasSetData ? (
               <SkillGridDisplay
+                key={`${ui.mode}-${ui.setNo}`}
                 setNo={Number(ui.setNo)}
                 mode={layout.modeNumber}
                 skills={layout.currentSetSkills}
@@ -69,7 +70,7 @@ export const SkillTab = ({ ocid }: SkillTabProps) => {
           </>
         )}
       </div>
-      <div className="rounded-md border p-3">
+      <div className="bg-card flex w-full flex-1 basis-0 min-w-0 flex-col p-3">
         <SkillPreset presets={query.data.skill.preset} />
       </div>
     </div>

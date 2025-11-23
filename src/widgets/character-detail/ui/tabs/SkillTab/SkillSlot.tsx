@@ -1,10 +1,5 @@
 import type { CharacterEquipmentSkill } from "@/entities/skill/model";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/shared/ui/tooltip";
+import { SkillIconTooltip } from "./SkillIconTooltip";
 
 interface SkillSlotProps {
   skill?: CharacterEquipmentSkill;
@@ -31,22 +26,11 @@ export const SkillSlot = ({ skill }: SkillSlotProps) => {
         </span>
       ) : (
         // 일반 스킬 (이미지 렌더링)
-        <TooltipProvider delayDuration={200}>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={skill.skill_icon}
-                alt={skill.skill_name}
-                loading="lazy"
-                className="h-8 w-8 object-contain"
-              />
-            </TooltipTrigger>
-            <TooltipContent side="bottom" className="text-xs">
-              <p>{skill.skill_name}</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
+        <SkillIconTooltip
+          src={skill.skill_icon}
+          alt={skill.skill_name}
+          tooltip={skill.skill_name}
+        />
       )}
     </div>
   );

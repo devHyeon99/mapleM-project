@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from "react";
+import { useMemo, useState } from "react";
 import {
   useCharacterSkillEquipment,
   type CharacterEquipmentSkill,
@@ -19,14 +19,14 @@ export const useSkillTab = (ocid: string) => {
   const { data, isLoading, isError, error } = useCharacterSkillEquipment(ocid);
 
   const [mode, setMode] = useState<"A" | "B">("B");
-  const [setNo, setSetNo] = useState<string>("1");
+  const [setNoState, setSetNo] = useState<string>("1");
 
   const computed = useMemo(() => {
     if (!data?.skill?.equipment_skill) {
       return {
-        groupedSkills: {} as Record<string, CharacterEquipmentSkill[]>,
         skillSetKeys: [] as string[],
         modeNumber: 2 as 1 | 2,
+        currentSetNo: "1",
         currentSetSkills: [] as CharacterEquipmentSkill[],
       };
     }
@@ -39,24 +39,17 @@ export const useSkillTab = (ocid: string) => {
 
     const grouped = groupSkillsBySet(filtered);
 
-    const keys = Object.keys(grouped).sort();
+    const keys = Object.keys(grouped).sort((a, b) => Number(a) - Number(b));
+
+    const currentSetNo = keys.includes(setNoState) ? setNoState : (keys[0] ?? "1");
 
     return {
-      groupedSkills: grouped,
       skillSetKeys: keys,
       modeNumber: modeNum,
-      currentSetSkills: grouped[setNo] || [],
+      currentSetNo,
+      currentSetSkills: grouped[currentSetNo] || [],
     };
-  }, [data, mode, setNo]);
-
-  useEffect(() => {
-    if (
-      computed.skillSetKeys.length > 0 &&
-      !computed.skillSetKeys.includes(setNo)
-    ) {
-      setSetNo(computed.skillSetKeys[0]);
-    }
-  }, [computed.skillSetKeys, setNo]);
+  }, [data, mode, setNoState]);
 
   const hasEquipment = (data?.skill?.equipment_skill?.length ?? 0) > 0;
   const hasPreset = (data?.skill?.preset?.length ?? 0) > 0;
@@ -71,7 +64,7 @@ export const useSkillTab = (ocid: string) => {
     ui: {
       mode,
       setMode,
-      setNo,
+      setNo: computed.currentSetNo,
       setSetNo,
     },
     layout: {

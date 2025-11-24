@@ -45,7 +45,8 @@ export const SkillGridDisplay = ({
           left: number;
           bottom: number;
         }>,
-        paginationLeft: BASE_LAYOUT_WIDTH - PAGINATION_BASE_RIGHT - PAGINATION_SIZE,
+        paginationLeft:
+          BASE_LAYOUT_WIDTH - PAGINATION_BASE_RIGHT - PAGINATION_SIZE,
         paginationBottom: PAGINATION_BASE_BOTTOM,
       };
     }
@@ -79,7 +80,7 @@ export const SkillGridDisplay = ({
   }, [layout]);
 
   return (
-    <div className="relative w-full">
+    <div className="relative w-full py-4">
       <div
         className="relative mx-auto w-full"
         style={{

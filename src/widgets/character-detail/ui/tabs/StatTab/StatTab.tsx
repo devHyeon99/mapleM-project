@@ -62,7 +62,7 @@ export const StatTab = ({ ocid, level }: StatTabProps) => {
   return (
     <div className="flex w-full flex-col gap-1 md:flex-row">
       {/* 기본 스탯 정보 영역 */}
-      <section className="bg-card w-full p-3">
+      <section className="bg-card w-full p-3 shadow-sm">
         <div className="mb-2 flex items-center justify-between">
           <h2 className="flex h-8 items-center font-bold">캐릭터 스탯</h2>
           <HelpPopover
@@ -89,7 +89,7 @@ export const StatTab = ({ ocid, level }: StatTabProps) => {
       </section>
 
       {/* 하이퍼 스탯 정보 영역 */}
-      <section className="bg-card w-full p-3">
+      <section className="bg-card w-full p-3 shadow-sm">
         <div className="mb-2 flex items-center justify-between">
           <div className="flex flex-row items-center gap-2">
             <h2 className="font-bold">하이퍼 스탯</h2>

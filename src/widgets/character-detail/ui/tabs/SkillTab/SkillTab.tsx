@@ -43,7 +43,7 @@ export const SkillTab = ({ ocid }: SkillTabProps) => {
 
   return (
     <div className="flex flex-col gap-2 md:flex-row md:items-stretch">
-      <div className="bg-card flex w-full flex-1 basis-0 min-w-0 flex-col p-3">
+      <div className="bg-card flex w-full min-w-0 flex-1 basis-0 flex-col p-4 shadow-sm">
         {layout.hasEquipment && (
           <>
             <SkillTabHeader
@@ -70,7 +70,7 @@ export const SkillTab = ({ ocid }: SkillTabProps) => {
           </>
         )}
       </div>
-      <div className="bg-card flex w-full flex-1 basis-0 min-w-0 flex-col p-3">
+      <div className="bg-card flex w-full min-w-0 flex-1 basis-0 flex-col p-4 shadow-sm">
         <SkillPreset presets={query.data.skill.preset} />
       </div>
     </div>

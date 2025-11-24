@@ -19,7 +19,12 @@ export const useLinkSkillTab = (ocid: string) => {
   }, [data]);
 
   const defaultPreset = data?.use_prest_no?.toString() || "1";
-  const activePreset = selectedPreset || defaultPreset;
+  const hasSelectedPreset =
+    !!selectedPreset &&
+    !!data?.link_skill.some(
+      (preset) => preset.preset_no.toString() === selectedPreset,
+    );
+  const activePreset = hasSelectedPreset ? selectedPreset : defaultPreset;
 
   const isEmpty = !data || data.link_skill.length === 0;
 

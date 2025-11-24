@@ -1,6 +1,5 @@
-import { ToggleGroup, ToggleGroupItem } from "@/shared/ui/toggle-group";
 import type { LinkSkillPreset } from "@/entities/skill/model";
-import { Badge } from "@/shared/ui/badge";
+import { PresetToggle } from "@/shared/ui/PresetToggle";
 
 interface LinkSkillHeaderProps {
   usePresetNo: number;
@@ -15,31 +14,22 @@ export const LinkSkillHeader = ({
   presets,
   onPresetChange,
 }: LinkSkillHeaderProps) => {
-  return (
-    <div className="flex items-center justify-between">
-      <div className="flex flex-row items-center gap-2">
-        <h2 className="font-bold">링크 스킬</h2>
-        <Badge className="text-xs">{usePresetNo}페이지 장착 중</Badge>
-      </div>
+  const presetNos = presets.map((preset) => preset.preset_no);
+  const selectedPreset = Number(activePreset);
 
-      <ToggleGroup
-        type="single"
-        variant="outline"
-        value={activePreset}
-        onValueChange={(val) => {
-          if (val) onPresetChange(val);
-        }}
-      >
-        {presets.map((preset) => (
-          <ToggleGroupItem
-            key={preset.preset_no}
-            value={preset.preset_no.toString()}
-            className="h-8 w-8 first:rounded-l-sm last:rounded-r-sm"
-          >
-            {preset.preset_no}
-          </ToggleGroupItem>
-        ))}
-      </ToggleGroup>
+  return (
+    <div className="flex items-center justify-between gap-2">
+      <h2 className="font-bold">링크 스킬</h2>
+
+      <PresetToggle
+        activePresetNo={usePresetNo}
+        presets={presetNos}
+        selectedPreset={
+          Number.isNaN(selectedPreset) ? undefined : selectedPreset
+        }
+        onSelectPreset={(preset) => onPresetChange(String(preset))}
+        ariaLabel="링크 스킬 프리셋 선택"
+      />
     </div>
   );
 };

@@ -48,7 +48,7 @@ export const LinkSkillTab = ({ ocid }: LinkSkillTabProps) => {
 
   return (
     <>
-      <div className="rounded-md border p-3">
+      <div className="bg-card p-3 shadow-sm">
         <LinkSkillHeader
           usePresetNo={mergedData.use_prest_no}
           activePreset={activePreset}

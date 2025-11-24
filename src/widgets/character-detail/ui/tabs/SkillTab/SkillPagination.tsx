@@ -45,7 +45,7 @@ export const SkillPagination = ({
         variant="outline"
         onClick={onToggle}
         aria-label={showBack ? "앞면으로 전환" : "뒷면으로 전환"}
-        className="h-10 w-10 rounded-full"
+        className="h-10 w-10 touch-manipulation rounded-full active:bg-black/10 dark:active:bg-white/15"
       >
         <RefreshCw className="size-5" />
       </Button>

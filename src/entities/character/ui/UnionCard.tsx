@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { CharacterUnion, UnionRanking } from "@/entities/character";
 import { InfoDescriptionRow } from "@/shared/ui/InfoRow";
+import { Separator } from "@/shared/ui/separator";
 
 interface UnionCardProps {
   data:
@@ -24,8 +25,10 @@ export const UnionCard = ({
   const { union_level, union_grade, union_grade_icon } = data;
 
   return (
-    <section className="bg-card w-full rounded-xs p-4">
-      <h2 className="mb-2 text-sm font-bold">{title}</h2>
+    <section className="bg-card w-full rounded-xs p-4 shadow-sm">
+      <h2 className="font-bold">{title}</h2>
+
+      <Separator className="my-2" />
 
       <div className="flex items-center justify-between gap-4">
         <dl className="flex flex-1 flex-col gap-1">

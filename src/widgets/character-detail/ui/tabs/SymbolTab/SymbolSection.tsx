@@ -24,7 +24,7 @@ export const SymbolSection = ({ title, items }: SymbolSectionProps) => {
     <section className="bg-card flex-1 p-3 shadow-sm">
       <h3 className="mb-2 flex items-center justify-between">
         <span className="font-bold">{title}</span>
-        <span className="text-sm font-semibold text-[#FF7E54]">
+        <span className="text-sm font-semibold text-orange-400">
           {title === "아케인 심볼"
             ? `아케인포스 ${totalForce.toLocaleString()}`
             : `어센틱포스 ${totalForce.toLocaleString()}`}

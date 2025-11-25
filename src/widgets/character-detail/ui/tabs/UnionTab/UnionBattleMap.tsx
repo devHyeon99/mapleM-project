@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react"; // 추가
+import { useMemo, useState } from "react";
 import { cn } from "@/shared/lib/utils";
-import { Badge } from "@/shared/ui/badge";
-import { ToggleGroup, ToggleGroupItem } from "@/shared/ui/toggle-group";
+import { PresetToggle } from "@/shared/ui/PresetToggle";
 import type { CharacterUnionRaider } from "@/entities/character";
+import { Separator } from "@/shared/ui/separator";
 
 interface UnionBattleMapProps {
   raiderData: CharacterUnionRaider | null | undefined;
@@ -21,16 +21,29 @@ const BLOCK_COLORS: Record<string, string> = {
 };
 
 export const UnionBattleMap = ({ raiderData }: UnionBattleMapProps) => {
-  // 현재 보고 있는 프리셋 상태 관리 (기본값은 실제 적용 중인 프리셋 번호)
-  const [activePreset, setActivePreset] = useState<string>(
-    String(raiderData?.use_preset_no || 1),
-  );
+  const [selectedPreset, setSelectedPreset] = useState<number | null>(null);
+
+  const sortedPresetNos = useMemo(() => {
+    if (!raiderData) return [];
+    return [...raiderData.battle_map]
+      .sort((a, b) => a.preset_no - b.preset_no)
+      .map((map) => map.preset_no);
+  }, [raiderData]);
 
   if (!raiderData) return null;
 
+  const defaultPreset =
+    sortedPresetNos.find((presetNo) => presetNo === raiderData.use_preset_no) ??
+    sortedPresetNos[0] ??
+    1;
+  const activePreset =
+    selectedPreset != null && sortedPresetNos.includes(selectedPreset)
+      ? selectedPreset
+      : defaultPreset;
+
   // 선택된 프리셋 데이터 찾기
   const currentPreset = raiderData.battle_map.find(
-    (map) => String(map.preset_no) === activePreset,
+    (map) => map.preset_no === activePreset,
   );
 
   if (!currentPreset) return null;
@@ -46,40 +59,28 @@ export const UnionBattleMap = ({ raiderData }: UnionBattleMapProps) => {
   });
 
   return (
-    <div className="flex w-full max-w-[400px] flex-col items-center overflow-hidden">
-      <div className="mb-2 flex w-full items-center justify-between">
-        <div className="flex flex-row items-center gap-2">
-          <span className="font-bold">유니온 배치도</span>
-          <Badge className="w-fit text-xs">
-            전투지도 {raiderData.use_preset_no} 적용 중
-          </Badge>
-        </div>
+    <section className="bg-card overflow-hidden p-4 shadow-sm">
+      <div className="flex w-full items-center justify-between">
+        <h2 className="text-base font-bold">유니온 배치도</h2>
 
-        {/* 프리셋 변경 */}
-        <ToggleGroup
-          type="single"
-          variant="outline"
-          value={activePreset}
-          onValueChange={(v) => v && setActivePreset(v)}
-        >
-          {[...raiderData.battle_map]
-            .sort((a, b) => a.preset_no - b.preset_no)
-            .map((map) => (
-              <ToggleGroupItem
-                key={map.preset_no}
-                value={String(map.preset_no)}
-                className="h-8 w-8 first:rounded-l-sm last:rounded-r-sm"
-                aria-label={`프리셋 ${map.preset_no}`}
-              >
-                {map.preset_no}
-              </ToggleGroupItem>
-            ))}
-        </ToggleGroup>
+        <PresetToggle
+          activePresetNo={raiderData.use_preset_no}
+          presets={sortedPresetNos}
+          selectedPreset={activePreset}
+          onSelectPreset={setSelectedPreset}
+          ariaLabel="유니온 배치도 프리셋 선택"
+        />
       </div>
+      <Separator className="my-2" />
 
       {/* 보드 컨테이너: 400px 안에서 22칸이 모두 보이도록 설정 */}
-      <div className="relative w-full border bg-[#3B424A] shadow-inner">
+      <div
+        role="img"
+        aria-label={`유니온 배치도. 현재 선택된 프리셋 ${activePreset}`}
+        className="relative mx-auto w-full max-w-[400px] border bg-[#3B424A] shadow-inner"
+      >
         <div
+          aria-hidden="true"
           className="grid"
           style={{
             gridTemplateColumns: `repeat(22, minmax(0, 1fr))`,
@@ -109,7 +110,7 @@ export const UnionBattleMap = ({ raiderData }: UnionBattleMapProps) => {
       </div>
 
       {/* 범례 */}
-      <div className="mt-2 flex flex-wrap items-center justify-center gap-x-3 text-xs opacity-80">
+      <ul className="mt-2 flex flex-wrap items-center justify-center gap-x-3 text-xs opacity-80">
         {Object.entries({
           전사: "1",
           마법사: "4",
@@ -117,12 +118,12 @@ export const UnionBattleMap = ({ raiderData }: UnionBattleMapProps) => {
           도적: "3",
           해적: "5",
         }).map(([name, type]) => (
-          <div key={type} className="flex items-center gap-1">
+          <li key={type} className="flex items-center gap-1">
             <div className={cn("h-2 w-2 rounded-xs", BLOCK_COLORS[type])} />
             {name}
-          </div>
+          </li>
         ))}
-      </div>
-    </div>
+      </ul>
+    </section>
   );
 };

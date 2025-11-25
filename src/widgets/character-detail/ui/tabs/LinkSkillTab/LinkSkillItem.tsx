@@ -27,10 +27,10 @@ export const LinkSkillItem = ({ skill }: LinkSkillItemProps) => {
             height={32}
           />
           <div className="flex min-w-0 flex-col">
-            <span className="truncate text-xs font-semibold">
+            <span className="truncate text-sm font-semibold">
               {skill.skill_name}
             </span>
-            <span className="text-xs font-medium text-[#FF7E54]">
+            <span className="text-xs font-medium text-orange-400">
               Lv.{skill.skill_level}
             </span>
           </div>
@@ -45,8 +45,8 @@ export const LinkSkillItem = ({ skill }: LinkSkillItemProps) => {
           height={32}
         />
         <div>
-          <h4 className="text-sm font-bold">{skill.skill_name}</h4>
-          <p className="text-xs font-medium text-[#FF7E54]">
+          <h4 className="text-sm font-semibold">{skill.skill_name}</h4>
+          <p className="text-xs font-medium text-orange-400">
             Lv.{skill.skill_level}
           </p>
         </div>
@@ -69,7 +69,7 @@ export const LinkSkillItem = ({ skill }: LinkSkillItemProps) => {
             <span className="font-medium text-gray-700 dark:text-gray-300">
               {opt.name}
             </span>
-            <span className="font-semibold text-[#FF7E54]">{opt.value}</span>
+            <span className="font-semibold text-orange-400">{opt.value}</span>
           </li>
         ))}
       </ul>

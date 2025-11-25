@@ -31,7 +31,7 @@ export const JewelDisplay = ({ jewel }: { jewel: JewelInfo }) => {
         />
       </div>
       <p className="mt-1 font-medium">{label}</p>
-      {value && <p className="ml-1.5 text-[#FF7E54]">{value}</p>}
+      {value && <p className="ml-1.5 text-orange-400">{value}</p>}
     </div>
   );
 };

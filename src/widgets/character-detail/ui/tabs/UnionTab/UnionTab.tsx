@@ -31,43 +31,42 @@ export const UnionTab = ({ ocid, data, ranking }: UnionTabProps) => {
   }
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-2">
       <UnionCard data={data} ranking={ranking} />
 
-      <section className="overflow-hidden rounded-md border p-3">
-        {isRaiderLoading ? (
-          <div className="text-muted-foreground flex h-98 items-center justify-center text-sm">
-            배치도 불러오는 중...
-          </div>
-        ) : (
-          <UnionBattleMap raiderData={raiderData} />
-        )}
-      </section>
-
-      <div className="flex w-full gap-2">
-        <div className="w-1/2">
-          <UnionEffect
-            title="레벨 총합 효과 누적"
-            options={data.union_level_total_option}
-            contentHeight="h-70" // 280px
-          />
+      {isRaiderLoading ? (
+        <div className="bg-card text-muted-foreground flex h-98 items-center justify-center text-sm shadow-sm">
+          배치도 불러오는 중...
         </div>
+      ) : (
+        <UnionBattleMap raiderData={raiderData} />
+      )}
 
-        <div className="flex w-1/2 flex-col gap-2">
+      <section
+        aria-label="유니온 효과 요약"
+        className="flex flex-col gap-2 md:grid md:grid-cols-1"
+      >
+        <UnionEffect
+          title="레벨 총합 효과 누적"
+          options={data.union_level_total_option}
+          className="h-full"
+        />
+
+        <div className="grid grid-cols-2 items-stretch gap-2 [&>*]:h-full">
           <UnionEffect
             title="점령 효과"
             options={raiderData?.use_union_occupied_option}
-            contentHeight="h-26" // 104px
+            className="h-full"
             isLoading={isRaiderLoading}
           />
           <UnionEffect
             title="공격대원 효과"
             options={raiderData?.use_union_raider_option}
-            contentHeight="h-26" // 104px
+            className="h-full"
             isLoading={isRaiderLoading}
           />
         </div>
-      </div>
+      </section>
     </div>
   );
 };

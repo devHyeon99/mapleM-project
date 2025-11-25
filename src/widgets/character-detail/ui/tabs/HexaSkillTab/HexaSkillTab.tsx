@@ -56,7 +56,7 @@ function HexaSkillSection({
                   <span className="truncate font-semibold">
                     {core.skill_name}
                   </span>
-                  <span className="shrink-0 text-xs font-bold text-[#FF7E54]">
+                  <span className="shrink-0 text-xs font-bold text-orange-400">
                     Lv.{formatLevel(core.slot_level)}
                   </span>
                 </div>

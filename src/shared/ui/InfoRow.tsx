@@ -67,7 +67,7 @@ export const InfoRow = ({
         className={cn(
           "shrink-0 font-medium",
           isNumeric && "tabular-nums",
-          isHighlight ? "text-[#FF7E54]" : "text-foreground",
+          isHighlight ? "text-orange-400" : "text-foreground",
           valueClassName,
         )}
       >

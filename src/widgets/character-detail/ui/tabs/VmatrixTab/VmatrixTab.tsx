@@ -70,13 +70,13 @@ export const VmatrixTab = ({ ocid, level }: VmatrixTabProps) => {
                 <span className="text-muted-foreground flex justify-between gap-3">
                   <span>
                     스킬레벨
-                    <span className="ml-1.5 font-semibold text-[#FF7E54]">
+                    <span className="ml-1.5 font-semibold text-orange-400">
                       {format2(core.vcore_level)}
                     </span>
                   </span>
                   <span>
                     슬롯레벨
-                    <span className="ml-1.5 font-semibold text-[#FF7E54]">
+                    <span className="ml-1.5 font-semibold text-orange-400">
                       {format2(core.slot_level)}
                     </span>
                   </span>
@@ -104,13 +104,13 @@ export const VmatrixTab = ({ ocid, level }: VmatrixTabProps) => {
                 <span className="text-muted-foreground flex gap-3">
                   <span>
                     스킬레벨
-                    <span className="ml-1.5 font-semibold text-[#FF7E54]">
+                    <span className="ml-1.5 font-semibold text-orange-400">
                       {format2(core.vcore_level)}
                     </span>
                   </span>
                   <span>
                     슬롯레벨
-                    <span className="ml-1.5 font-semibold text-[#FF7E54]">
+                    <span className="ml-1.5 font-semibold text-orange-400">
                       {format2(core.slot_level)}
                     </span>
                   </span>

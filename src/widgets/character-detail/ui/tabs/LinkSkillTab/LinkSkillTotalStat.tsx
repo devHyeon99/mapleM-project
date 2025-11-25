@@ -20,12 +20,10 @@ export const LinkSkillTotalStat = ({ skills }: LinkSkillTotalStatProps) => {
         {totalStats.map((stat) => (
           <div
             key={stat.name}
-            className="flex items-center justify-between text-xs"
+            className="flex items-center justify-between text-sm"
           >
-            <span className="text-muted-foreground font-medium">
-              {stat.name}
-            </span>
-            <span className="font-semibold text-[#FF7E54]">{stat.value}</span>
+            <span className="text-muted-foreground">{stat.name}</span>
+            <span className="font-medium text-orange-400">{stat.value}</span>
           </div>
         ))}
       </div>

@@ -50,14 +50,12 @@ export const StickyFooterDialog = ({
           contentClassName,
         )}
       >
-        <DialogHeader className="gap-1 px-4 pt-4 text-left">
-          <DialogTitle className={cn(hideHeaderText && "sr-only")}>
-            {title}
-          </DialogTitle>
+        <DialogHeader
+          className={cn("gap-1 px-4 pt-4 text-left", hideHeaderText && "sr-only")}
+        >
+          <DialogTitle>{title}</DialogTitle>
           {description && (
-            <DialogDescription className={cn(hideHeaderText && "sr-only")}>
-              {description}
-            </DialogDescription>
+            <DialogDescription>{description}</DialogDescription>
           )}
         </DialogHeader>
 

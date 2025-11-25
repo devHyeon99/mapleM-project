@@ -14,6 +14,7 @@ export const LinkSkillItem = ({ skill }: LinkSkillItemProps) => {
       title="링크 스킬 설명"
       description={`${skill.skill_name} 링크 스킬 상세 정보`}
       contentClassName="w-[22rem] max-w-[calc(100%-2rem)] border-2"
+      hideHeaderText
       bodyClassName="space-y-2"
       trigger={
         <button
@@ -23,8 +24,15 @@ export const LinkSkillItem = ({ skill }: LinkSkillItemProps) => {
           <Image
             src={skill.skill_icon}
             alt={skill.skill_name}
+            unoptimized
+            loading="lazy"
             width={32}
             height={32}
+            style={{
+              width: "auto",
+              height: "auto",
+              imageRendering: "pixelated",
+            }}
           />
           <div className="flex min-w-0 flex-col">
             <span className="truncate text-sm font-semibold">
@@ -41,8 +49,11 @@ export const LinkSkillItem = ({ skill }: LinkSkillItemProps) => {
         <Image
           src={skill.skill_icon}
           alt={skill.skill_name}
+          unoptimized
+          loading="lazy"
           width={32}
           height={32}
+          style={{ width: "auto", height: "auto", imageRendering: "pixelated" }}
         />
         <div>
           <h4 className="text-sm font-semibold">{skill.skill_name}</h4>

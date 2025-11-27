@@ -31,8 +31,9 @@ function HexaSkillSection({
   if (items.length === 0) return null;
 
   return (
-    <section>
-      <h2 className="pb-1 text-base font-semibold">{title}</h2>
+    <section className="bg-card p-4 shadow-sm">
+      <h2 className="font-semibold">{title}</h2>
+      <Separator className="my-2" />
       <ul className="space-y-2">
         {items.map((core) => (
           <Fragment
@@ -53,22 +54,21 @@ function HexaSkillSection({
 
               <div className="min-w-0 flex-1">
                 <div className="flex items-baseline justify-between gap-2">
-                  <span className="truncate font-semibold">
+                  <span className="truncate text-sm font-medium">
                     {core.skill_name}
                   </span>
-                  <span className="shrink-0 text-xs font-bold text-orange-400">
+                  <span className="shrink-0 text-xs font-medium text-orange-400">
                     Lv.{formatLevel(core.slot_level)}
                   </span>
                 </div>
 
                 {core.skill_description && (
-                  <p className="text-muted-foreground mt-1 text-xs font-bold whitespace-pre-line">
+                  <p className="text-muted-foreground mt-1 text-xs whitespace-pre-line">
                     {core.skill_description}
                   </p>
                 )}
               </div>
             </li>
-            <Separator />
           </Fragment>
         ))}
       </ul>
@@ -113,12 +113,14 @@ export const HexaSkillTab = ({ ocid, level }: HexaSkillTabProps) => {
   const skillCores = skills.filter((s) => s.skill_type === "스킬 코어");
   const masteryCores = skills.filter((s) => s.skill_type === "마스터리 코어");
   const enhancementCores = skills.filter((s) => s.skill_type === "강화 코어");
+  const publicCores = skills.filter((s) => s.skill_type === "공용 코어");
 
   return (
-    <div className="flex flex-col gap-3 rounded-md border p-3 text-sm">
+    <div className="flex flex-col gap-2">
       <HexaSkillSection title="스킬 코어" items={skillCores} />
       <HexaSkillSection title="마스터리 코어" items={masteryCores} />
       <HexaSkillSection title="강화 코어" items={enhancementCores} />
+      <HexaSkillSection title="공용 코어" items={publicCores} />
     </div>
   );
 };

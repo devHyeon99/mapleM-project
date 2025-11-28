@@ -55,7 +55,7 @@ export const VmatrixTab = ({ ocid, level }: VmatrixTabProps) => {
     groupCoresByType(cores);
 
   return (
-    <div className="space-y-2 text-sm">
+    <div className="space-y-2">
       <VmatrixSection title="스킬 코어">
         {skillCores.length > 0 ? (
           <CoreList

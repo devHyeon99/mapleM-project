@@ -16,7 +16,10 @@ export function EnhancementCoreItem({ core }: EnhancementCoreItemProps) {
         {core.vcore_name}
       </span>
 
-      <CoreLevelInfo vcoreLevel={core.vcore_level} slotLevel={core.slot_level} />
+      <CoreLevelInfo
+        vcoreLevel={core.vcore_level}
+        slotLevel={core.slot_level}
+      />
 
       <div className="text-muted-foreground space-y-0.5">
         {skillNames.map((skillName, index) => (

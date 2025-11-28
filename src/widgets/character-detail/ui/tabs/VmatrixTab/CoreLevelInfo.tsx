@@ -12,11 +12,11 @@ export function CoreLevelInfo({ vcoreLevel, slotLevel }: CoreLevelInfoProps) {
     <dl className="text-muted-foreground flex shrink-0 gap-3">
       <div>
         <dt className="inline">스킬레벨</dt>
-        <dd className="ml-1.5 inline font-semibold text-orange-400">{format2(vcoreLevel)}</dd>
+        <dd className="ml-1.5 inline text-orange-400">{format2(vcoreLevel)}</dd>
       </div>
       <div>
         <dt className="inline">슬롯레벨</dt>
-        <dd className="ml-1.5 inline font-semibold text-orange-400">{format2(slotLevel)}</dd>
+        <dd className="ml-1.5 inline text-orange-400">{format2(slotLevel)}</dd>
       </div>
     </dl>
   );

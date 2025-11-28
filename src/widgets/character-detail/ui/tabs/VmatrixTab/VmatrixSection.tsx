@@ -1,3 +1,5 @@
+import { Separator } from "@/shared/ui/separator";
+
 interface VmatrixSectionProps {
   title: string;
   children: React.ReactNode;
@@ -5,8 +7,9 @@ interface VmatrixSectionProps {
 
 export function VmatrixSection({ title, children }: VmatrixSectionProps) {
   return (
-    <section className="bg-card p-4">
-      <h2 className="mb-2 border-b pb-1 text-base font-semibold">{title}</h2>
+    <section className="bg-card p-4 shadow-sm">
+      <h2 className="font-semibold">{title}</h2>
+      <Separator className="my-2" />
       {children}
     </section>
   );

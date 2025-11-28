@@ -9,7 +9,7 @@ export interface HexaMatrixSkill {
   slot_level: number;
 
   /** 코어 유형 ('스킬 코어' | '마스터리 코어' | '강화 코어') */
-  skill_type: "스킬 코어" | "마스터리 코어" | "강화 코어";
+  skill_type: "스킬 코어" | "마스터리 코어" | "강화 코어" | "공용 코어";
 
   /** 스킬 이름 */
   skill_name: string;

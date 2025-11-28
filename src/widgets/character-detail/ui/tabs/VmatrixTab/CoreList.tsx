@@ -12,7 +12,9 @@ export function CoreList<T extends { slot_id: string | number }>({
   return (
     <ul className={className ?? "space-y-1"}>
       {items.map((item) => (
-        <li key={item.slot_id}>{renderItem(item)}</li>
+        <li className="text-sm font-medium" key={item.slot_id}>
+          {renderItem(item)}
+        </li>
       ))}
     </ul>
   );

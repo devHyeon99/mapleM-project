@@ -66,8 +66,9 @@ type CoreSectionProps = {
 
 const HexaStatCoreSection = ({ slot, statInfo }: CoreSectionProps) => {
   return (
-    <section className="space-y-3 rounded-md border p-3">
+    <section className="bg-card space-y-2 p-4">
       <h2 className="font-bold">스탯 코어 {slot}</h2>
+      <Separator className="my-2" />
       {statInfo.map((page) => (
         <HexaStatPageCard key={page.page_no} page={page} />
       ))}
@@ -85,16 +86,14 @@ const HexaStatPageCard = ({ page }: PageCardProps) => {
   return (
     <div
       className={cn(
-        "space-y-3 rounded-md border p-3 transition-colors",
-        isActive
-          ? "border-border bg-card/50"
-          : "border-border bg-muted/10 opacity-50",
+        "bg-card space-y-3 p-4",
+        isActive ? "bg-secondary" : "bg-secondary opacity-40",
       )}
     >
       {/* 헤더 */}
       <div className="flex items-center justify-between">
         <span className="text-sm font-bold">페이지 {page.page_no}</span>
-        {isActive && <Badge>현재 적용 중</Badge>}
+        {isActive && <Badge className="font-medium">현재 적용 중</Badge>}
       </div>
 
       <Separator />

@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Badge } from "@/shared/ui/badge";
 import { TableCell, TableRow } from "@/shared/ui/table";
 import { GuildMember } from "../model/types";
 import { WORLD_NAMES } from "@/shared/config/constants/worlds";

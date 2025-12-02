@@ -2,6 +2,9 @@ import { WORLD_NAMES } from "@/shared/config/constants/worlds";
 import { fetchOcid } from "@/shared/api/character/ocid.server";
 import type { CharacterOcidData } from "@/entities/character";
 import { normalizeCharacterName } from "@/shared/lib/character";
+import { unstable_cache } from "next/cache";
+
+const SEARCH_ALL_CACHE_SECONDS = 60 * 5;
 
 async function searchAllWorlds(name: string): Promise<CharacterOcidData[]> {
   const worlds = WORLD_NAMES.filter((w) => w !== "전체");
@@ -29,7 +32,13 @@ async function searchAllWorlds(name: string): Promise<CharacterOcidData[]> {
   return [];
 }
 
+const getCharacterSearchAllCached = unstable_cache(
+  async (normalizedName: string) => searchAllWorlds(normalizedName),
+  ["character-search-all-v1"],
+  { revalidate: SEARCH_ALL_CACHE_SECONDS },
+);
+
 export async function getCharacterSearchAll(name: string) {
   const normalized = normalizeCharacterName(name);
-  return searchAllWorlds(normalized);
+  return getCharacterSearchAllCached(normalized);
 }

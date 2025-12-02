@@ -22,19 +22,19 @@ export function NoticeGrid({ data }: NoticeGridProps) {
     {
       id: "notice",
       title: "공지사항",
-      moreHref: "https://maplestorym.nexon.com/notice",
+      moreHref: "https://maplestorym.nexon.com/1198/board/1211/list",
       items: formatItems(data.notice),
     },
     {
       id: "event",
       title: "이벤트",
-      moreHref: "https://maplestorym.nexon.com/event",
+      moreHref: "https://maplestorym.nexon.com/1198/board/1378/list",
       items: formatItems(data.event_notice),
     },
     {
       id: "patch",
       title: "패치노트",
-      moreHref: "https://maplestorym.nexon.com/patch",
+      moreHref: "https://maplestorym.nexon.com/1198/board/1215/list",
       items: formatItems(data.patch_notice),
     },
   ];

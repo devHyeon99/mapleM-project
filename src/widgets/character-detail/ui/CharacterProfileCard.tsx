@@ -16,13 +16,11 @@ const DATA_UPDATE_GUIDE_ITEMS = [
   },
   {
     title: "2. 랭킹 정보",
-    description:
-      "서버 전체 10,000등 이내의 캐릭터만 랭킹이 표기됩니다.",
+    description: "서버 전체 10,000등 이내의 캐릭터만 랭킹이 표기됩니다.",
   },
   {
     title: "3. 랭킹 업데이트",
-    description:
-      "랭킹은 매일 오전 6시경에 1일 1회 집계되어 제공됩니다.",
+    description: "랭킹은 매일 오전 6시경에 1일 1회 집계되어 제공됩니다.",
   },
 ] as const;
 
@@ -93,6 +91,7 @@ export const CharacterProfileCard = ({ data }: CharacterProfileCardProps) => {
               aria-hidden="true"
               width={14}
               height={14}
+              unoptimized
             />
             <span>{data.character_name}</span>
           </h2>

@@ -8,8 +8,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/shared/ui/select";
+import { HelpPopover } from "@/shared/ui/HelpPopover";
 import { WORLD_NAMES } from "@/shared/config/constants/worlds";
 import { getRankingDate } from "@/shared/lib/ranking-date";
+
+const RANKING_DATE_HELP_ITEMS = [
+  {
+    title: "랭킹 업데이트",
+    description: "랭킹은 매일 오전 6시경에 1일 1회 집계되어 제공됩니다.",
+  },
+] as const;
 
 export function RankingFilters() {
   const router = useRouter();
@@ -33,7 +41,7 @@ export function RankingFilters() {
   return (
     <section
       aria-label="랭킹 필터 및 업데이트 정보"
-      className="wide:px-0 space-y-3 px-4 pt-4 pb-2"
+      className="wide:px-0 flex w-full flex-col-reverse items-center justify-between gap-2 p-4 md:flex-row"
     >
       <div className="w-full md:w-auto">
         <label htmlFor="world-select" className="sr-only">
@@ -57,11 +65,16 @@ export function RankingFilters() {
         </Select>
       </div>
 
-      <div className="text-muted-foreground flex w-full shrink-0 flex-col items-center justify-center text-xs md:flex-row md:justify-between md:text-sm">
-        <p>
-          랭킹 업데이트 날짜 : <time dateTime={displayDate}>{displayDate}</time>
+      <div className="flex flex-row items-center gap-2 self-end">
+        <p className="text-muted-foreground text-sm">
+          랭킹 기준 : <time dateTime={displayDate}>{displayDate}</time>
         </p>
-        <p>매일 오전 06:00시에 랭킹 갱신이 진행됩니다.</p>
+        <HelpPopover
+          ariaLabel="랭킹 기준 안내"
+          items={RANKING_DATE_HELP_ITEMS}
+          iconClassName="size-4"
+          triggerClassName="shrink-0"
+        />
       </div>
     </section>
   );

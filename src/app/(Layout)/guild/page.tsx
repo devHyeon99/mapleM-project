@@ -39,11 +39,8 @@ export default async function GuildPage() {
     <div className="flex flex-col items-center gap-4">
       <div className="flex flex-col items-center gap-2">
         <h1 className="text-2xl font-bold md:text-4xl">길드 검색</h1>
-        <p
-          className="text-foreground max-w-3xl text-base text-balance sm:text-lg"
-          data-nosnippet
-        >
-          길드 데이터는 평균 15분 후 확인 가능합니다.
+        <p className="sr-only" data-nosnippet>
+          메이플스토리M 길드 검색
         </p>
       </div>
       <div className="sr-only">

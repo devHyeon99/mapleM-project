@@ -48,8 +48,6 @@ export const RankingTable = ({
     [worldName],
   );
 
-  const hasData = items.length > 0;
-
   return (
     // 논리적 섹션 구분과 제목 추가 (SEO/접근성)
     <div className={className}>
@@ -75,55 +73,35 @@ export const RankingTable = ({
           </TableHeader>
 
           <TableBody className="bg-card">
-            {hasData ? (
-              items.map((item, index) => {
-                // Key 생성 로직
-                const uniqueKey =
-                  ("character_name" in item
-                    ? `${item.world_name}-${item.character_name}`
-                    : "guild_name" in item
-                      ? `${item.world_name}-${item.guild_name}`
-                      : `${type}-${index}`) + `-${item.ranking}`;
+            {items.map((item, index) => {
+              // Key 생성 로직
+              const uniqueKey =
+                ("character_name" in item
+                  ? `${item.world_name}-${item.character_name}`
+                  : "guild_name" in item
+                    ? `${item.world_name}-${item.guild_name}`
+                    : `${type}-${index}`) + `-${item.ranking}`;
 
-                return (
-                  <TableRow
-                    key={uniqueKey}
-                    className="hover:bg-muted/50 h-12.5"
-                  >
-                    {columns.map((col, colIndex) => (
-                      <TableCell
-                        key={`${uniqueKey}-col-${colIndex}`}
-                        className={cn("text-center", col.className)}
-                      >
-                        {col.cell(item, context)}
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                );
-              })
-            ) : (
-              <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="text-muted-foreground h-24 text-center"
-                >
-                  데이터가 없습니다.
-                </TableCell>
-              </TableRow>
-            )}
+              return (
+                <TableRow key={uniqueKey} className="hover:bg-muted/50 h-12.5">
+                  {columns.map((col, colIndex) => (
+                    <TableCell
+                      key={`${uniqueKey}-col-${colIndex}`}
+                      className={cn("text-center", col.className)}
+                    >
+                      {col.cell(item, context)}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              );
+            })}
           </TableBody>
         </Table>
       </div>
 
       {/* 모바일 뷰 */}
       <div className="block md:hidden">
-        {hasData ? (
-          <MobileRankingList type={type} data={items} context={context} />
-        ) : (
-          <div className="bg-background text-muted-foreground flex h-24 items-center justify-center rounded-md border text-sm">
-            데이터가 없습니다.
-          </div>
-        )}
+        <MobileRankingList type={type} data={items} context={context} />
       </div>
     </div>
   );

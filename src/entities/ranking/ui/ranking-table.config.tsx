@@ -75,13 +75,21 @@ const getMainStatValue = (item: AnyRankingData): string => {
   return "-";
 };
 
+const encodeSegment = (value: string) => encodeURIComponent(value);
+
+const characterHref = (world: string, name: string) =>
+  `/character/${encodeSegment(world)}/${encodeSegment(name)}`;
+
+const guildHref = (world: string, guildName: string) =>
+  `/guild/${encodeSegment(world)}/${encodeSegment(guildName)}`;
+
 // 길드 정보 렌더링 로직 (SubInfo와 Guild 렌더러에서 공통 사용)
 const renderGuildInfo = (item: AnyRankingData) => {
   if ("guild_name" in item && item.guild_name) {
     const guildIcon = "guild_mark_icon" in item ? item.guild_mark_icon : null;
     return (
       <IconWithText iconSrc={guildIcon}>
-        <LinkText href={`/guild/${item.world_name}/${item.guild_name}`}>
+        <LinkText href={guildHref(item.world_name, item.guild_name)}>
           {item.guild_name}
         </LinkText>
       </IconWithText>
@@ -114,7 +122,7 @@ export const Renderers = {
     // 캐릭터
     if ("character_name" in item) {
       return (
-        <LinkText href={`/character/${item.world_name}/${item.character_name}`}>
+        <LinkText href={characterHref(item.world_name, item.character_name)}>
           {item.character_name}
         </LinkText>
       );
@@ -149,9 +157,7 @@ export const Renderers = {
     // 길드 랭킹 -> 길드 마스터
     if ("guild_master_name" in item) {
       return (
-        <LinkText
-          href={`/character/${item.world_name}/${item.guild_master_name}`}
-        >
+        <LinkText href={characterHref(item.world_name, item.guild_master_name)}>
           {item.guild_master_name}
         </LinkText>
       );

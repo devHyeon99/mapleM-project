@@ -8,6 +8,11 @@ import { RankingIcon } from "./RankingIcon";
 
 // 한글 월드명 인코딩
 const encodeWorldName = (name: string) => encodeURIComponent(name);
+const encodeSegment = (value: string) => encodeURIComponent(value);
+const characterHref = (world: string, name: string) =>
+  `/character/${encodeSegment(world)}/${encodeSegment(name)}`;
+const guildHref = (world: string, guildName: string) =>
+  `/guild/${encodeSegment(world)}/${encodeSegment(guildName)}`;
 
 // 리스트 아이템의 고유 Key 생성
 const getItemKey = (
@@ -165,7 +170,7 @@ const SharenianInfo = ({ item }: { item: AnyRankingData }) => {
         )}
         {item.guild_name && (
           <Link
-            href={`/guild/${item.world_name}/${item.guild_name}`}
+            href={guildHref(item.world_name, item.guild_name)}
             prefetch={false}
             className="truncate text-sm font-bold"
           >
@@ -198,7 +203,7 @@ const GeneralInfo = ({ item }: { item: AnyRankingData }) => {
           size={14}
         />
         <Link
-          href={`/character/${item.world_name}/${item.character_name}`}
+          href={characterHref(item.world_name, item.character_name)}
           prefetch={false}
           className="truncate text-sm font-bold"
         >
@@ -213,7 +218,7 @@ const GeneralInfo = ({ item }: { item: AnyRankingData }) => {
           <>
             <span className="bg-border h-2 w-[1px]" />
             <Link
-              href={`/guild/${item.world_name}/${guildName}`}
+              href={guildHref(item.world_name, guildName)}
               prefetch={false}
               className="flex max-w-[100px] items-center gap-1 truncate"
             >

@@ -1,6 +1,7 @@
 import { Badge } from "@/shared/ui/badge";
 import { Card, CardContent } from "@/shared/ui/card";
 import type { GuildSkill } from "../model/types";
+import Image from "next/image";
 
 interface GuildSkillCardProps {
   skill: GuildSkill;
@@ -11,10 +12,13 @@ export function GuildSkillCard({ skill }: GuildSkillCardProps) {
     <Card className="items-start rounded-xs border-none">
       <CardContent className="w-full px-4">
         <div className="flex gap-2 md:flex-row">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src={skill.skill_icon}
             alt={skill.skill_name}
+            width={32}
+            height={32}
+            unoptimized
+            loading="lazy"
             className="size-8 object-contain"
           />
 

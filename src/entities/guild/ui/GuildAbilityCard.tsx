@@ -1,6 +1,7 @@
 import { Badge } from "@/shared/ui/badge";
 import { Card, CardContent } from "@/shared/ui/card";
 import type { GuildAbility } from "../model/types";
+import Image from "next/image";
 
 interface GuildAbilityCardProps {
   ability: GuildAbility;
@@ -10,10 +11,13 @@ export function GuildAbilityCard({ ability }: GuildAbilityCardProps) {
   return (
     <Card className="rounded-xs border-none">
       <CardContent className="flex items-center gap-3 px-3 md:px-4">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <Image
           src={ability.ability_icon}
           alt={ability.ability_name}
+          width={32}
+          height={32}
+          unoptimized
+          loading="lazy"
           className="size-8 self-start object-contain"
         />
 

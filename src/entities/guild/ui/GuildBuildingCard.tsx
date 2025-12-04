@@ -1,6 +1,7 @@
 import { Badge } from "@/shared/ui/badge";
 import { Card, CardContent } from "@/shared/ui/card";
 import type { GuildBuilding } from "../model/types";
+import Image from "next/image";
 
 interface GuildBuildingCardProps {
   building: GuildBuilding;
@@ -24,10 +25,13 @@ export function GuildBuildingCard({ building }: GuildBuildingCardProps) {
     <Card className="rounded-xs border-none">
       <CardContent className="flex h-full items-center px-4">
         <div className="flex flex-1 flex-col gap-1 md:h-37.5 md:justify-end">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src={`/guild/building/${building.building_name}.png`}
             alt="도서관"
+            width={66}
+            height={66}
+            unoptimized
+            loading="lazy"
             className="h-auto w-16.5"
           />
           <div className="flex items-center justify-between">

@@ -15,7 +15,7 @@ export const TabMessageSection = ({
   return (
     <section
       className={cn(
-        "bg-card flex h-full min-h-91.5 flex-col items-center justify-center gap-2 p-6 text-center",
+        "bg-card flex h-full min-h-91.5 flex-col items-center justify-center gap-2 p-6 text-center shadow-sm",
         className,
       )}
     >

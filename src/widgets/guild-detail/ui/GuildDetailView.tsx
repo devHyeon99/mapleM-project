@@ -22,7 +22,7 @@ export function GuildDetailView({ guildData }: GuildDetailViewProps) {
       </div>
       <div className="mx-auto flex w-full flex-col gap-2">
         {/* 넥슨 API 오류로 인한 임시 공지. 추후 삭제 */}
-        <p className="text-muted-foreground mb-2 w-full text-center text-xs md:text-right md:text-sm">
+        <p className="text-muted-foreground w-full text-center text-xs md:text-right md:text-sm">
           현재 넥슨 API 제공이 잘못되고 있어 실제 데이터와 차이가 있을 수
           있습니다.
         </p>

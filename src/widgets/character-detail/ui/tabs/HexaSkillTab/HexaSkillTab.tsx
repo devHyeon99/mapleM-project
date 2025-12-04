@@ -104,7 +104,7 @@ export const HexaSkillTab = ({ ocid, level }: HexaSkillTabProps) => {
   if (skills.length === 0) {
     return (
       <TabMessageSection
-        message={`API 업데이트 이후 접속 기록이 없거나\n장착한 HexaMatrixSkill이 없습니다.`}
+        message={`API 업데이트 이후 접속 기록이 없거나\n장착한 HEXA스킬이 없습니다.`}
       />
     );
   }

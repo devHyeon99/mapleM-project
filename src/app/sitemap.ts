@@ -19,9 +19,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "daily",
       priority: 0.8,
     },
+    {
+      url: `${BASE_URL}/ranking`,
+      lastModified: now,
+      changeFrequency: "daily",
+      priority: 0.9,
+    },
   ];
 
-  const rankingRoutes: MetadataRoute.Sitemap = RANKING_TYPES.map((type) => ({
+  const rankingRoutes: MetadataRoute.Sitemap = RANKING_TYPES.filter(
+    (type) => type !== "level",
+  ).map((type) => ({
     url: `${BASE_URL}/ranking/${type}`,
     lastModified: now,
     changeFrequency: "daily",

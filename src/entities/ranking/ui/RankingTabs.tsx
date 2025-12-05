@@ -9,8 +9,11 @@ import { RANKING_LABELS } from "../model/constants";
 export function RankingTabs() {
   const pathname = usePathname();
 
-  // 현재 URL 경로에서 활성화된 타입 추출 (예: /ranking/level -> level)
-  const activeType = pathname.split("/").pop() || "level";
+  // /ranking 은 기본적으로 level 탭을 활성화한다.
+  const lastSegment = pathname.split("/").pop() || "";
+  const activeType = RANKING_TYPES.includes(lastSegment as (typeof RANKING_TYPES)[number])
+    ? (lastSegment as (typeof RANKING_TYPES)[number])
+    : "level";
 
   return (
     <Tabs value={activeType} className="w-full pt-2">
@@ -24,7 +27,7 @@ export function RankingTabs() {
           >
             <Link
               className="md:text-[15px]!"
-              href={`/ranking/${type}`}
+              href={type === "level" ? "/ranking" : `/ranking/${type}`}
               prefetch={false}
             >
               {RANKING_LABELS[type]}

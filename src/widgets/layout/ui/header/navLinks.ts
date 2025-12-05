@@ -1,6 +1,6 @@
 export const navLinks = [
   {
-    href: "/ranking/level",
+    href: "/ranking",
     label: "랭킹",
     activePath: "/ranking",
   },

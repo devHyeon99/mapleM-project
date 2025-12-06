@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
 
 import { Providers } from "@/app/providers/Providers";
 import { ThemeProvider } from "@/app/providers/theme-provider";
@@ -142,6 +143,8 @@ export default function RootLayout({
           src="https://openapi.nexon.com/js/analytics.js?app_id=241136"
           strategy="afterInteractive"
         />
+        {/* Vercel Web Analytics */}
+        <Analytics />
       </body>
     </html>
   );

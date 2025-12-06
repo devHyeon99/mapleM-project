@@ -9,4 +9,9 @@ export const navLinks = [
     label: "길드",
     activePath: "/guild",
   },
+  {
+    href: "https://open.kakao.com/me/maplestorymgg",
+    label: "문의하기",
+    activePath: "",
+  },
 ] as const;

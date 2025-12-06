@@ -11,6 +11,7 @@ export function HeaderNav() {
   return (
     <nav className="hidden items-center gap-8 font-medium md:flex">
       {navLinks.map((link) => {
+        const isExternal = link.href.startsWith("http");
         const isActive = pathname?.startsWith(
           (link.activePath as string) || link.href,
         );
@@ -20,6 +21,8 @@ export function HeaderNav() {
             key={link.href}
             href={link.href}
             prefetch={false}
+            target={isExternal ? "_blank" : undefined}
+            rel={isExternal ? "noopener noreferrer" : undefined}
             className={cn(
               "hover:text-foreground text-lg transition-colors",
               isActive

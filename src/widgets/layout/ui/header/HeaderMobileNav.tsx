@@ -45,6 +45,7 @@ export function HeaderMobileNav() {
 
         <nav className="flex flex-col gap-2">
           {navLinks.map((link) => {
+            const isExternal = link.href.startsWith("http");
             const isActive = pathname === link.href;
 
             return (
@@ -52,6 +53,8 @@ export function HeaderMobileNav() {
                 key={link.href}
                 href={link.href}
                 prefetch={false}
+                target={isExternal ? "_blank" : undefined}
+                rel={isExternal ? "noopener noreferrer" : undefined}
                 onClick={() => setOpen(false)}
                 className={cn(
                   "hover:text-accent-foreground flex items-center justify-center rounded-md px-3 py-3 text-base font-medium transition-colors",

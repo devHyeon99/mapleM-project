@@ -1,4 +1,12 @@
-export const navLinks = [
+export type NavLink = {
+  href: string;
+  label: string;
+  activePath?: `/${string}`;
+  openInNewTab?: boolean;
+  prefetch?: boolean;
+};
+
+export const navLinks: ReadonlyArray<NavLink> = [
   {
     href: "/ranking",
     label: "랭킹",
@@ -11,7 +19,7 @@ export const navLinks = [
   },
   {
     href: "https://open.kakao.com/me/maplestorymgg",
-    label: "문의하기",
-    activePath: "",
+    label: "문의",
+    openInNewTab: true,
   },
-] as const;
+];

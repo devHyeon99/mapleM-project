@@ -14,6 +14,12 @@ import {
   SheetDescription,
 } from "@/shared/ui/sheet";
 import { navLinks } from "./navLinks";
+import {
+  getNavLinkPrefetch,
+  getNavLinkAriaLabel,
+  isExternalNavLink,
+  isNavLinkActive,
+} from "./navLinkUtils";
 import { cn } from "@/shared/lib/utils";
 
 export function HeaderMobileNav() {
@@ -43,18 +49,20 @@ export function HeaderMobileNav() {
           </SheetDescription>
         </SheetHeader>
 
-        <nav className="flex flex-col gap-2">
+        <nav aria-label="모바일 메뉴" className="flex flex-col gap-2">
           {navLinks.map((link) => {
-            const isExternal = link.href.startsWith("http");
-            const isActive = pathname === link.href;
+            const isExternal = isExternalNavLink(link);
+            const isActive = isNavLinkActive(pathname, link);
 
             return (
               <Link
                 key={link.href}
                 href={link.href}
-                prefetch={false}
+                prefetch={getNavLinkPrefetch(link)}
                 target={isExternal ? "_blank" : undefined}
                 rel={isExternal ? "noopener noreferrer" : undefined}
+                aria-label={getNavLinkAriaLabel(link)}
+                aria-current={isActive ? "page" : undefined}
                 onClick={() => setOpen(false)}
                 className={cn(
                   "hover:text-accent-foreground flex items-center justify-center rounded-md px-3 py-3 text-base font-medium transition-colors",

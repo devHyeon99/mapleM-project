@@ -38,7 +38,7 @@ export default async function GuildPage() {
   return (
     <div className="flex flex-col items-center gap-4">
       <div className="flex flex-col items-center gap-2">
-        <h1 className="text-2xl font-bold md:text-4xl">길드 검색</h1>
+        <h1 className="text-2xl font-bold md:text-3xl">길드 검색</h1>
         <p className="sr-only" data-nosnippet>
           메이플스토리M 길드 검색
         </p>

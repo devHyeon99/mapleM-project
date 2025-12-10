@@ -43,3 +43,5 @@ next-env.d.ts
 .vscode
 notes.txt
 /study
+.agents/
+skills-lock.json

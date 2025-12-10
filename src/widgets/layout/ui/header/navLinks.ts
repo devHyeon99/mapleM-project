@@ -18,6 +18,11 @@ export const navLinks: ReadonlyArray<NavLink> = [
     activePath: "/guild",
   },
   {
+    href: "/tools",
+    label: "도구",
+    activePath: "/tools",
+  },
+  {
     href: "https://open.kakao.com/me/maplestorymgg",
     label: "문의",
     openInNewTab: true,

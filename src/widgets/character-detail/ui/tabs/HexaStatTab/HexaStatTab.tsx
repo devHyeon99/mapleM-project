@@ -47,7 +47,7 @@ export const HexaStatTab = ({ ocid, level }: HexaStatTabProps) => {
   }
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 shadow-sm">
       {statCores.map((core) => (
         <HexaStatCoreSection
           key={core.stat_core_slot}
@@ -87,7 +87,7 @@ const HexaStatPageCard = ({ page }: PageCardProps) => {
     <div
       className={cn(
         "bg-card space-y-3 p-4",
-        isActive ? "bg-secondary" : "bg-secondary opacity-40",
+        isActive ? "bg-secondary shadow-sm" : "bg-secondary opacity-40",
       )}
     >
       {/* 헤더 */}

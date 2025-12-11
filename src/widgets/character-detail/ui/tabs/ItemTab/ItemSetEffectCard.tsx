@@ -12,6 +12,7 @@ import {
   AccordionTrigger,
 } from "@/shared/ui/accordion";
 import { Separator } from "@/shared/ui/separator";
+import Link from "next/link";
 
 interface ItemSetEffectCardProps {
   items: SortedItemSlot[];
@@ -28,9 +29,16 @@ export const ItemSetEffectCard = ({ items }: ItemSetEffectCardProps) => {
 
   return (
     <section className="bg-card flex w-full flex-col rounded-xs p-4 pt-0">
-      <span className="text-foreground block pb-4 font-bold">
-        장비 세트 효과
-      </span>
+      <div className="flex items-center justify-between pb-2">
+        <span className="text-foreground font-bold">장비 세트 효과</span>
+        <Link
+          className="hover:bg-accent rounded-sm p-2 text-sm font-semibold transition-colors duration-150"
+          prefetch={false}
+          href="/tools"
+        >
+          세트 옵션 계산
+        </Link>
+      </div>
 
       <Accordion
         type="multiple"

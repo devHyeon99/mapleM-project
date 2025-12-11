@@ -18,7 +18,7 @@ export function SetEffectCalculator() {
 
   return (
     <section className="w-full space-y-4">
-      <div className="grid gap-2 md:grid-cols-2">
+      <div className="grid gap-4 md:grid-cols-2">
         <BuildEditorCard
           title="세팅 A"
           buildState={buildA}

@@ -38,10 +38,10 @@ function BuildEditorCardBase({
       <CardHeader className="flex flex-row items-center justify-between gap-2 px-4">
         <CardTitle>{title}</CardTitle>
         <div className="flex items-center gap-2">
-          <Button type="button" variant="ghost" size="sm" onClick={onAddRow}>
+          <Button type="button" size="sm" onClick={onAddRow}>
             장비 추가
           </Button>
-          <Button type="button" variant="ghost" size="sm" onClick={onReset}>
+          <Button type="button" variant="outline" size="sm" onClick={onReset}>
             초기화
           </Button>
         </div>

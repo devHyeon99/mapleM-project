@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { SITE_URL } from "@/shared/config/site";
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -17,6 +18,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/api/"],
       },
     ],
-    sitemap: "https://maplemgg.com/sitemap.xml",
+    sitemap: `${SITE_URL}/sitemap.xml`,
   };
 }

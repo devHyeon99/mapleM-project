@@ -8,6 +8,7 @@ import {
 } from "@/entities/ranking/model/types/ranking";
 import { RankingBoard } from "@/widgets/ranking-board/ui/RankingBoard";
 import { RANKING_LABELS } from "@/entities/ranking/model/constants";
+import { SITE_NAME, SITE_URL } from "@/shared/config/site";
 
 interface RankingPageProps {
   params: Promise<{ type: string }>;
@@ -45,13 +46,12 @@ export async function generateMetadata({
     : `메이플스토리M 전체 월드의 ${typeLabel} 랭킹 정보를 확인하세요. 캐릭터 정보와 랭킹 변화를 한눈에 제공합니다.`;
 
   // URL 및 이미지 경로 설정 (절대 경로 필수)
-  const baseUrl = "https://maplemgg.com";
   const canonicalPath = safeType === "level" ? "/ranking" : `/ranking/${safeType}`;
   const fullUrl = worldName
-    ? `${baseUrl}${canonicalPath}?world_name=${encodeURIComponent(worldName)}`
-    : `${baseUrl}${canonicalPath}`;
+    ? `${SITE_URL}${canonicalPath}?world_name=${encodeURIComponent(worldName)}`
+    : `${SITE_URL}${canonicalPath}`;
 
-  const ogImageUrl = `${baseUrl}/og-image.png`;
+  const ogImageUrl = `${SITE_URL}/og-image.png`;
 
   return {
     title,
@@ -64,7 +64,7 @@ export async function generateMetadata({
       description,
       type: "website",
       url: fullUrl,
-      siteName: "메엠지지",
+      siteName: SITE_NAME,
       locale: "ko_KR",
       images: [
         {

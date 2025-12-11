@@ -4,6 +4,7 @@ import Script from "next/script";
 import "./globals.css";
 import { Providers } from "@/app/providers/Providers";
 import { ThemeProvider } from "@/app/providers/theme-provider";
+import { SITE_METADATA_BASE, SITE_NAME } from "@/shared/config/site";
 import { cn } from "@/shared/lib/utils";
 
 const pretendard = localFont({
@@ -15,10 +16,10 @@ const pretendard = localFont({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://maplemgg.com"),
+  metadataBase: SITE_METADATA_BASE,
   title: {
-    default: "메엠지지 - 메이플스토리M 캐릭터 검색 & 종합 정보",
-    template: "%s | 메엠지지",
+    default: `${SITE_NAME} - 메이플스토리M 캐릭터 검색 & 종합 정보`,
+    template: `%s | ${SITE_NAME}`,
   },
   description:
     "메이플스토리M 캐릭터 검색은 메엠지지. 캐릭터 정보 조회, 장비, 스킬, 코디, 공략 등 게임 플레이에 유용한 모든 정보를 확인하세요.",
@@ -33,9 +34,9 @@ export const metadata: Metadata = {
     "장비 조회",
   ],
   openGraph: {
-    title: "메엠지지 - 메이플스토리M 캐릭터 검색",
+    title: `${SITE_NAME} - 메이플스토리M 캐릭터 검색`,
     description: "메이플스토리M 캐릭터 정보, 장비, 코디를 한눈에 확인하세요.",
-    siteName: "메엠지지",
+    siteName: SITE_NAME,
     images: [
       {
         url: "/og-image.png",
@@ -49,7 +50,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "메엠지지 - 메이플스토리M 캐릭터 검색",
+    title: `${SITE_NAME} - 메이플스토리M 캐릭터 검색`,
     description: "메이플스토리M 캐릭터 정보, 장비, 코디를 한눈에 확인하세요.",
     images: ["/og-image.png"],
   },

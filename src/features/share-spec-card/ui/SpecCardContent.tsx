@@ -6,6 +6,7 @@ import {
   useCharacterHexaMatrixStat,
   useCharacterSymbol,
 } from "@/entities/character";
+import { SITE_HOST } from "@/shared/config/site";
 import { getSortedSpecCardItems } from "../lib/getSortedSpecCardItems";
 import { MergedSpecData } from "../model/types";
 
@@ -73,7 +74,7 @@ export const SpecCardContent = ({
       <TotalStatSection data={mergedData} />
 
       <div className="text-muted-foreground mt-1 flex items-center justify-between text-[11px]">
-        <span className="font-medium">메엠지지 (maplemgg.com)</span>
+        <span className="font-medium">메엠지지 ({SITE_HOST})</span>
         <span>{new Date().toLocaleDateString()}</span>
       </div>
     </div>

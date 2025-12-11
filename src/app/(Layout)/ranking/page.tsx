@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import { getRankingPageData } from "@/entities/ranking/api/get-ranking-page-data";
 import { RankingBoard } from "@/widgets/ranking-board/ui/RankingBoard";
 import { RANKING_LABELS } from "@/entities/ranking/model/constants";
+import { SITE_NAME, SITE_URL } from "@/shared/config/site";
 
 interface RankingRootPageProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
@@ -27,12 +28,11 @@ export async function generateMetadata({
     ? `메이플스토리M ${worldName} 월드의 랭킹 정보를 확인하세요. 레벨, 무릉도장, 유니온, 전투력 등 주요 랭킹을 메엠지지에서 제공합니다.`
     : "메이플스토리M 전체 월드 랭킹 정보를 확인하세요. 레벨, 무릉도장, 유니온, 전투력 등 주요 랭킹을 메엠지지에서 제공합니다.";
 
-  const baseUrl = "https://maplemgg.com";
   const canonicalPath = "/ranking";
   const fullUrl = worldName
-    ? `${baseUrl}${canonicalPath}?world_name=${encodeURIComponent(worldName)}`
-    : `${baseUrl}${canonicalPath}`;
-  const ogImageUrl = `${baseUrl}/og-image.png`;
+    ? `${SITE_URL}${canonicalPath}?world_name=${encodeURIComponent(worldName)}`
+    : `${SITE_URL}${canonicalPath}`;
+  const ogImageUrl = `${SITE_URL}/og-image.png`;
 
   return {
     title,
@@ -45,7 +45,7 @@ export async function generateMetadata({
       description,
       type: "website",
       url: fullUrl,
-      siteName: "메엠지지",
+      siteName: SITE_NAME,
       locale: "ko_KR",
       images: [
         {

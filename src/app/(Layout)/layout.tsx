@@ -18,6 +18,7 @@ export default function LayoutGroup({
             className="absolute top-0 -left-[220px] hidden h-full w-[200px] 2xl:hidden"
             aria-label="좌측 광고 영역"
             aria-hidden="true"
+            data-nosnippet
           >
             <div className="bg-muted/30 text-muted-foreground sticky top-24 flex h-[600px] w-full items-center justify-center rounded-lg border">
               <span className="text-sm">Left Wing Ad</span>
@@ -32,6 +33,7 @@ export default function LayoutGroup({
             className="absolute top-0 -right-[220px] hidden h-full w-[200px] 2xl:hidden"
             aria-label="우측 광고 영역"
             aria-hidden="true"
+            data-nosnippet
           >
             <div className="bg-muted/30 text-muted-foreground sticky top-24 flex h-[600px] w-full items-center justify-center rounded-lg border">
               <span className="text-sm">Right Wing Ad</span>

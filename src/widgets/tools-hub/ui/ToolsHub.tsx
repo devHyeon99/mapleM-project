@@ -26,19 +26,7 @@ export function ToolsHub({ children }: ToolsHubProps) {
   const pathname = usePathname();
 
   return (
-    <section
-      aria-labelledby="tools-hub-title"
-      aria-describedby="tools-hub-description"
-      className="flex w-full flex-col"
-    >
-      <header className="sr-only">
-        <h1 id="tools-hub-title">도구</h1>
-        <p id="tools-hub-description">
-          메이플스토리M 장비 세트옵션 계산기와 각종 시뮬레이션을 사용할 수
-          있습니다.
-        </p>
-      </header>
-
+    <section className="flex w-full flex-col">
       <nav
         aria-label="도구 이동"
         className="border-border bg-card mt-2 mb-4 border-b shadow-sm"
@@ -53,7 +41,7 @@ export function ToolsHub({ children }: ToolsHubProps) {
                   href={link.href}
                   aria-current={active ? "page" : undefined}
                   className={cn(
-                    "text-muted-foreground flex h-11 items-center justify-center border-b-2 border-transparent px-3 py-6 text-sm font-medium outline-none transition-colors md:text-base",
+                    "text-muted-foreground flex h-11 items-center justify-center border-b-2 border-transparent px-3 py-6 text-sm font-medium transition-colors outline-none md:text-base",
                     "hover:border-orange-500 focus-visible:border-orange-500 focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2",
                     active &&
                       "text-foreground border-orange-500 hover:border-orange-500",

@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function PotentialPage() {
   return (
     <section className="space-y-3">
-      <h2 className="sr-only">추가옵션 시뮬레이션</h2>
+      <h1 className="sr-only">추가옵션 시뮬레이션</h1>
       <p className="sr-only">추가옵션 결과를 계산하는 화면입니다.</p>
       <ToolComingSoonCard
         title="추가옵션 시뮬레이션"

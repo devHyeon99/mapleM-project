@@ -1,0 +1,2392 @@
+{
+  "equipmentPotentials": {
+    "belt": {
+      "label": "벨트",
+      "levels": {
+        "200": {
+          "equipmentType": "belt",
+          "label": "벨트",
+          "level": 200,
+          "tiers": {
+            "rare": {
+              "first": [
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 3750,
+                  "valueType": "flat",
+                  "chance": 5
+                },
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 3563,
+                  "valueType": "flat",
+                  "chance": 5
+                },
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 3375,
+                  "valueType": "flat",
+                  "chance": 5
+                },
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 3187,
+                  "valueType": "flat",
+                  "chance": 5
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 1346,
+                  "valueType": "flat",
+                  "chance": 5
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 1278,
+                  "valueType": "flat",
+                  "chance": 5
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 1211,
+                  "valueType": "flat",
+                  "chance": 5
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 1144,
+                  "valueType": "flat",
+                  "chance": 5
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 62,
+                  "valueType": "flat",
+                  "chance": 4.5
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 59,
+                  "valueType": "flat",
+                  "chance": 4.5
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 57,
+                  "valueType": "flat",
+                  "chance": 4.5
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 55,
+                  "valueType": "flat",
+                  "chance": 4.5
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 23,
+                  "valueType": "flat",
+                  "chance": 4.5
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 22,
+                  "valueType": "flat",
+                  "chance": 4.5
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 21,
+                  "valueType": "flat",
+                  "chance": 4.5
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 20,
+                  "valueType": "flat",
+                  "chance": 4.5
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 5.5,
+                  "valueType": "percent",
+                  "chance": 3.5
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 5.2,
+                  "valueType": "percent",
+                  "chance": 3.5
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 4.9,
+                  "valueType": "percent",
+                  "chance": 3.5
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 4.6,
+                  "valueType": "percent",
+                  "chance": 3.5
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 3.9,
+                  "valueType": "percent",
+                  "chance": 2.5
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 3.7,
+                  "valueType": "percent",
+                  "chance": 2.5
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 3.5,
+                  "valueType": "percent",
+                  "chance": 2.5
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 3.3,
+                  "valueType": "percent",
+                  "chance": 2.5
+                }
+              ],
+              "secondary": [
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 3750,
+                  "valueType": "flat",
+                  "chance": 5
+                },
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 3563,
+                  "valueType": "flat",
+                  "chance": 5
+                },
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 3375,
+                  "valueType": "flat",
+                  "chance": 5
+                },
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 3187,
+                  "valueType": "flat",
+                  "chance": 5
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 1346,
+                  "valueType": "flat",
+                  "chance": 5
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 1278,
+                  "valueType": "flat",
+                  "chance": 5
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 1211,
+                  "valueType": "flat",
+                  "chance": 5
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 1144,
+                  "valueType": "flat",
+                  "chance": 5
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 62,
+                  "valueType": "flat",
+                  "chance": 4.5
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 59,
+                  "valueType": "flat",
+                  "chance": 4.5
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 57,
+                  "valueType": "flat",
+                  "chance": 4.5
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 55,
+                  "valueType": "flat",
+                  "chance": 4.5
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 23,
+                  "valueType": "flat",
+                  "chance": 4.5
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 22,
+                  "valueType": "flat",
+                  "chance": 4.5
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 21,
+                  "valueType": "flat",
+                  "chance": 4.5
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 20,
+                  "valueType": "flat",
+                  "chance": 4.5
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 5.5,
+                  "valueType": "percent",
+                  "chance": 3.5
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 5.2,
+                  "valueType": "percent",
+                  "chance": 3.5
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 4.9,
+                  "valueType": "percent",
+                  "chance": 3.5
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 4.6,
+                  "valueType": "percent",
+                  "chance": 3.5
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 3.9,
+                  "valueType": "percent",
+                  "chance": 2.5
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 3.7,
+                  "valueType": "percent",
+                  "chance": 2.5
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 3.5,
+                  "valueType": "percent",
+                  "chance": 2.5
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 3.3,
+                  "valueType": "percent",
+                  "chance": 2.5
+                }
+              ]
+            },
+            "epic": {
+              "first": [
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 5193,
+                  "valueType": "flat",
+                  "chance": 5
+                },
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 4934,
+                  "valueType": "flat",
+                  "chance": 5
+                },
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 4674,
+                  "valueType": "flat",
+                  "chance": 5
+                },
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 4414,
+                  "valueType": "flat",
+                  "chance": 5
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 1864,
+                  "valueType": "flat",
+                  "chance": 5
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 1770,
+                  "valueType": "flat",
+                  "chance": 5
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 1677,
+                  "valueType": "flat",
+                  "chance": 5
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 1584,
+                  "valueType": "flat",
+                  "chance": 5
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 70,
+                  "valueType": "flat",
+                  "chance": 4.5
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 67,
+                  "valueType": "flat",
+                  "chance": 4.5
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 65,
+                  "valueType": "flat",
+                  "chance": 4.5
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 63,
+                  "valueType": "flat",
+                  "chance": 4.5
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 35,
+                  "valueType": "flat",
+                  "chance": 4.5
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 34,
+                  "valueType": "flat",
+                  "chance": 4.5
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 33,
+                  "valueType": "flat",
+                  "chance": 4.5
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 32,
+                  "valueType": "flat",
+                  "chance": 4.5
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 7.8,
+                  "valueType": "percent",
+                  "chance": 3.5
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 7.4,
+                  "valueType": "percent",
+                  "chance": 3.5
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 7,
+                  "valueType": "percent",
+                  "chance": 3.5
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 6.6,
+                  "valueType": "percent",
+                  "chance": 3.5
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 5.6,
+                  "valueType": "percent",
+                  "chance": 2.5
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 5.3,
+                  "valueType": "percent",
+                  "chance": 2.5
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 5,
+                  "valueType": "percent",
+                  "chance": 2.5
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 4.7,
+                  "valueType": "percent",
+                  "chance": 2.5
+                }
+              ],
+              "secondary": [
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 5193,
+                  "valueType": "flat",
+                  "chance": 2.5
+                },
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 4934,
+                  "valueType": "flat",
+                  "chance": 2.5
+                },
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 4674,
+                  "valueType": "flat",
+                  "chance": 2.5
+                },
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 4414,
+                  "valueType": "flat",
+                  "chance": 2.5
+                },
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 3750,
+                  "valueType": "flat",
+                  "chance": 2.5
+                },
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 3563,
+                  "valueType": "flat",
+                  "chance": 2.5
+                },
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 3375,
+                  "valueType": "flat",
+                  "chance": 2.5
+                },
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 3187,
+                  "valueType": "flat",
+                  "chance": 2.5
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 1864,
+                  "valueType": "flat",
+                  "chance": 2.5
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 1770,
+                  "valueType": "flat",
+                  "chance": 2.5
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 1677,
+                  "valueType": "flat",
+                  "chance": 2.5
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 1584,
+                  "valueType": "flat",
+                  "chance": 2.5
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 1346,
+                  "valueType": "flat",
+                  "chance": 2.5
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 1278,
+                  "valueType": "flat",
+                  "chance": 2.5
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 1211,
+                  "valueType": "flat",
+                  "chance": 2.5
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 1144,
+                  "valueType": "flat",
+                  "chance": 2.5
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 70,
+                  "valueType": "flat",
+                  "chance": 2.25
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 67,
+                  "valueType": "flat",
+                  "chance": 2.25
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 65,
+                  "valueType": "flat",
+                  "chance": 2.25
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 63,
+                  "valueType": "flat",
+                  "chance": 2.25
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 62,
+                  "valueType": "flat",
+                  "chance": 2.25
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 59,
+                  "valueType": "flat",
+                  "chance": 2.25
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 57,
+                  "valueType": "flat",
+                  "chance": 2.25
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 55,
+                  "valueType": "flat",
+                  "chance": 2.25
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 35,
+                  "valueType": "flat",
+                  "chance": 2.25
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 34,
+                  "valueType": "flat",
+                  "chance": 2.25
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 33,
+                  "valueType": "flat",
+                  "chance": 2.25
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 32,
+                  "valueType": "flat",
+                  "chance": 2.25
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 23,
+                  "valueType": "flat",
+                  "chance": 2.25
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 22,
+                  "valueType": "flat",
+                  "chance": 2.25
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 21,
+                  "valueType": "flat",
+                  "chance": 2.25
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 20,
+                  "valueType": "flat",
+                  "chance": 2.25
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 7.8,
+                  "valueType": "percent",
+                  "chance": 1.75
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 7.4,
+                  "valueType": "percent",
+                  "chance": 1.75
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 7,
+                  "valueType": "percent",
+                  "chance": 1.75
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 6.6,
+                  "valueType": "percent",
+                  "chance": 1.75
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 5.5,
+                  "valueType": "percent",
+                  "chance": 1.75
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 5.2,
+                  "valueType": "percent",
+                  "chance": 1.75
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 4.9,
+                  "valueType": "percent",
+                  "chance": 1.75
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 4.6,
+                  "valueType": "percent",
+                  "chance": 1.75
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 5.6,
+                  "valueType": "percent",
+                  "chance": 1.25
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 5.3,
+                  "valueType": "percent",
+                  "chance": 1.25
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 5,
+                  "valueType": "percent",
+                  "chance": 1.25
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 4.7,
+                  "valueType": "percent",
+                  "chance": 1.25
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 3.9,
+                  "valueType": "percent",
+                  "chance": 1.25
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 3.7,
+                  "valueType": "percent",
+                  "chance": 1.25
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 3.5,
+                  "valueType": "percent",
+                  "chance": 1.25
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 3.3,
+                  "valueType": "percent",
+                  "chance": 1.25
+                }
+              ]
+            },
+            "unique": {
+              "first": [
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 7189,
+                  "valueType": "flat",
+                  "chance": 5
+                },
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 6830,
+                  "valueType": "flat",
+                  "chance": 5
+                },
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 6470,
+                  "valueType": "flat",
+                  "chance": 5
+                },
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 6110,
+                  "valueType": "flat",
+                  "chance": 5
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 2582,
+                  "valueType": "flat",
+                  "chance": 5
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 2452,
+                  "valueType": "flat",
+                  "chance": 5
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 2323,
+                  "valueType": "flat",
+                  "chance": 5
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 2194,
+                  "valueType": "flat",
+                  "chance": 5
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 79,
+                  "valueType": "flat",
+                  "chance": 4.5
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 77,
+                  "valueType": "flat",
+                  "chance": 4.5
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 74,
+                  "valueType": "flat",
+                  "chance": 4.5
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 71,
+                  "valueType": "flat",
+                  "chance": 4.5
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 47,
+                  "valueType": "flat",
+                  "chance": 4.5
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 46,
+                  "valueType": "flat",
+                  "chance": 4.5
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 45,
+                  "valueType": "flat",
+                  "chance": 4.5
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 44,
+                  "valueType": "flat",
+                  "chance": 4.5
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 11,
+                  "valueType": "percent",
+                  "chance": 3.5
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 10.5,
+                  "valueType": "percent",
+                  "chance": 3.5
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 9.9,
+                  "valueType": "percent",
+                  "chance": 3.5
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 9.3,
+                  "valueType": "percent",
+                  "chance": 3.5
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 7.9,
+                  "valueType": "percent",
+                  "chance": 2.5
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 7.5,
+                  "valueType": "percent",
+                  "chance": 2.5
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 7.1,
+                  "valueType": "percent",
+                  "chance": 2.5
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 6.7,
+                  "valueType": "percent",
+                  "chance": 2.5
+                }
+              ],
+              "secondary": [
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 7189,
+                  "valueType": "flat",
+                  "chance": 1.67
+                },
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 6830,
+                  "valueType": "flat",
+                  "chance": 1.67
+                },
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 6470,
+                  "valueType": "flat",
+                  "chance": 1.67
+                },
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 6110,
+                  "valueType": "flat",
+                  "chance": 1.67
+                },
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 5193,
+                  "valueType": "flat",
+                  "chance": 1.67
+                },
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 4934,
+                  "valueType": "flat",
+                  "chance": 1.67
+                },
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 4674,
+                  "valueType": "flat",
+                  "chance": 1.67
+                },
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 4414,
+                  "valueType": "flat",
+                  "chance": 1.67
+                },
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 3750,
+                  "valueType": "flat",
+                  "chance": 1.67
+                },
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 3563,
+                  "valueType": "flat",
+                  "chance": 1.67
+                },
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 3375,
+                  "valueType": "flat",
+                  "chance": 1.67
+                },
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 3187,
+                  "valueType": "flat",
+                  "chance": 1.67
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 2582,
+                  "valueType": "flat",
+                  "chance": 1.67
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 2452,
+                  "valueType": "flat",
+                  "chance": 1.67
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 2323,
+                  "valueType": "flat",
+                  "chance": 1.67
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 2194,
+                  "valueType": "flat",
+                  "chance": 1.67
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 1864,
+                  "valueType": "flat",
+                  "chance": 1.67
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 1770,
+                  "valueType": "flat",
+                  "chance": 1.67
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 1677,
+                  "valueType": "flat",
+                  "chance": 1.67
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 1584,
+                  "valueType": "flat",
+                  "chance": 1.67
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 1346,
+                  "valueType": "flat",
+                  "chance": 1.67
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 1278,
+                  "valueType": "flat",
+                  "chance": 1.67
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 1211,
+                  "valueType": "flat",
+                  "chance": 1.67
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 1144,
+                  "valueType": "flat",
+                  "chance": 1.67
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 79,
+                  "valueType": "flat",
+                  "chance": 1.5
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 77,
+                  "valueType": "flat",
+                  "chance": 1.5
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 74,
+                  "valueType": "flat",
+                  "chance": 1.5
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 71,
+                  "valueType": "flat",
+                  "chance": 1.5
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 70,
+                  "valueType": "flat",
+                  "chance": 1.5
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 67,
+                  "valueType": "flat",
+                  "chance": 1.5
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 65,
+                  "valueType": "flat",
+                  "chance": 1.5
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 63,
+                  "valueType": "flat",
+                  "chance": 1.5
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 62,
+                  "valueType": "flat",
+                  "chance": 1.5
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 59,
+                  "valueType": "flat",
+                  "chance": 1.5
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 57,
+                  "valueType": "flat",
+                  "chance": 1.5
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 55,
+                  "valueType": "flat",
+                  "chance": 1.5
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 47,
+                  "valueType": "flat",
+                  "chance": 1.5
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 46,
+                  "valueType": "flat",
+                  "chance": 1.5
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 45,
+                  "valueType": "flat",
+                  "chance": 1.5
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 44,
+                  "valueType": "flat",
+                  "chance": 1.5
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 35,
+                  "valueType": "flat",
+                  "chance": 1.5
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 34,
+                  "valueType": "flat",
+                  "chance": 1.5
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 33,
+                  "valueType": "flat",
+                  "chance": 1.5
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 32,
+                  "valueType": "flat",
+                  "chance": 1.5
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 23,
+                  "valueType": "flat",
+                  "chance": 1.5
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 22,
+                  "valueType": "flat",
+                  "chance": 1.5
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 21,
+                  "valueType": "flat",
+                  "chance": 1.5
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 20,
+                  "valueType": "flat",
+                  "chance": 1.5
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 11,
+                  "valueType": "percent",
+                  "chance": 1.17
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 10.5,
+                  "valueType": "percent",
+                  "chance": 1.17
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 9.9,
+                  "valueType": "percent",
+                  "chance": 1.17
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 9.3,
+                  "valueType": "percent",
+                  "chance": 1.17
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 7.8,
+                  "valueType": "percent",
+                  "chance": 1.17
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 7.4,
+                  "valueType": "percent",
+                  "chance": 1.17
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 7,
+                  "valueType": "percent",
+                  "chance": 1.17
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 6.6,
+                  "valueType": "percent",
+                  "chance": 1.17
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 5.5,
+                  "valueType": "percent",
+                  "chance": 1.17
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 5.2,
+                  "valueType": "percent",
+                  "chance": 1.17
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 4.9,
+                  "valueType": "percent",
+                  "chance": 1.17
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 4.6,
+                  "valueType": "percent",
+                  "chance": 1.17
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 7.9,
+                  "valueType": "percent",
+                  "chance": 0.83
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 7.5,
+                  "valueType": "percent",
+                  "chance": 0.83
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 7.1,
+                  "valueType": "percent",
+                  "chance": 0.83
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 6.7,
+                  "valueType": "percent",
+                  "chance": 0.83
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 5.6,
+                  "valueType": "percent",
+                  "chance": 0.83
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 5.3,
+                  "valueType": "percent",
+                  "chance": 0.83
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 5,
+                  "valueType": "percent",
+                  "chance": 0.83
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 4.7,
+                  "valueType": "percent",
+                  "chance": 0.83
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 3.9,
+                  "valueType": "percent",
+                  "chance": 0.83
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 3.7,
+                  "valueType": "percent",
+                  "chance": 0.83
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 3.5,
+                  "valueType": "percent",
+                  "chance": 0.83
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 3.3,
+                  "valueType": "percent",
+                  "chance": 0.83
+                }
+              ]
+            },
+            "legendary": {
+              "first": [
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 9951,
+                  "valueType": "flat",
+                  "chance": 5
+                },
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 9454,
+                  "valueType": "flat",
+                  "chance": 5
+                },
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 8956,
+                  "valueType": "flat",
+                  "chance": 5
+                },
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 8458,
+                  "valueType": "flat",
+                  "chance": 5
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 3575,
+                  "valueType": "flat",
+                  "chance": 5
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 3396,
+                  "valueType": "flat",
+                  "chance": 5
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 3217,
+                  "valueType": "flat",
+                  "chance": 5
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 3038,
+                  "valueType": "flat",
+                  "chance": 5
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 89,
+                  "valueType": "flat",
+                  "chance": 4.5
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 86,
+                  "valueType": "flat",
+                  "chance": 4.5
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 83,
+                  "valueType": "flat",
+                  "chance": 4.5
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 80,
+                  "valueType": "flat",
+                  "chance": 4.5
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 59,
+                  "valueType": "flat",
+                  "chance": 4.5
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 58,
+                  "valueType": "flat",
+                  "chance": 4.5
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 57,
+                  "valueType": "flat",
+                  "chance": 4.5
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 56,
+                  "valueType": "flat",
+                  "chance": 4.5
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 15.4,
+                  "valueType": "percent",
+                  "chance": 3.5
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 14.6,
+                  "valueType": "percent",
+                  "chance": 3.5
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 13.8,
+                  "valueType": "percent",
+                  "chance": 3.5
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 13,
+                  "valueType": "percent",
+                  "chance": 3.5
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 11.1,
+                  "valueType": "percent",
+                  "chance": 2.5
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 10.6,
+                  "valueType": "percent",
+                  "chance": 2.5
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 10,
+                  "valueType": "percent",
+                  "chance": 2.5
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 9.4,
+                  "valueType": "percent",
+                  "chance": 2.5
+                }
+              ],
+              "secondary": [
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 9951,
+                  "valueType": "flat",
+                  "chance": 1.25
+                },
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 9454,
+                  "valueType": "flat",
+                  "chance": 1.25
+                },
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 8956,
+                  "valueType": "flat",
+                  "chance": 1.25
+                },
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 8458,
+                  "valueType": "flat",
+                  "chance": 1.25
+                },
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 7189,
+                  "valueType": "flat",
+                  "chance": 1.25
+                },
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 6830,
+                  "valueType": "flat",
+                  "chance": 1.25
+                },
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 6470,
+                  "valueType": "flat",
+                  "chance": 1.25
+                },
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 6110,
+                  "valueType": "flat",
+                  "chance": 1.25
+                },
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 5193,
+                  "valueType": "flat",
+                  "chance": 1.25
+                },
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 4934,
+                  "valueType": "flat",
+                  "chance": 1.25
+                },
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 4674,
+                  "valueType": "flat",
+                  "chance": 1.25
+                },
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 4414,
+                  "valueType": "flat",
+                  "chance": 1.25
+                },
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 3750,
+                  "valueType": "flat",
+                  "chance": 1.25
+                },
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 3563,
+                  "valueType": "flat",
+                  "chance": 1.25
+                },
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 3375,
+                  "valueType": "flat",
+                  "chance": 1.25
+                },
+                {
+                  "key": "최대-hp",
+                  "label": "최대 HP",
+                  "value": 3187,
+                  "valueType": "flat",
+                  "chance": 1.25
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 3575,
+                  "valueType": "flat",
+                  "chance": 1.25
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 3396,
+                  "valueType": "flat",
+                  "chance": 1.25
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 3217,
+                  "valueType": "flat",
+                  "chance": 1.25
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 3038,
+                  "valueType": "flat",
+                  "chance": 1.25
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 2582,
+                  "valueType": "flat",
+                  "chance": 1.25
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 2452,
+                  "valueType": "flat",
+                  "chance": 1.25
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 2323,
+                  "valueType": "flat",
+                  "chance": 1.25
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 2194,
+                  "valueType": "flat",
+                  "chance": 1.25
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 1864,
+                  "valueType": "flat",
+                  "chance": 1.25
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 1770,
+                  "valueType": "flat",
+                  "chance": 1.25
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 1677,
+                  "valueType": "flat",
+                  "chance": 1.25
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 1584,
+                  "valueType": "flat",
+                  "chance": 1.25
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 1346,
+                  "valueType": "flat",
+                  "chance": 1.25
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 1278,
+                  "valueType": "flat",
+                  "chance": 1.25
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 1211,
+                  "valueType": "flat",
+                  "chance": 1.25
+                },
+                {
+                  "key": "최대-mp",
+                  "label": "최대 MP",
+                  "value": 1144,
+                  "valueType": "flat",
+                  "chance": 1.25
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 89,
+                  "valueType": "flat",
+                  "chance": 1.13
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 86,
+                  "valueType": "flat",
+                  "chance": 1.13
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 83,
+                  "valueType": "flat",
+                  "chance": 1.13
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 80,
+                  "valueType": "flat",
+                  "chance": 1.13
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 79,
+                  "valueType": "flat",
+                  "chance": 1.13
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 77,
+                  "valueType": "flat",
+                  "chance": 1.13
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 74,
+                  "valueType": "flat",
+                  "chance": 1.13
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 71,
+                  "valueType": "flat",
+                  "chance": 1.13
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 70,
+                  "valueType": "flat",
+                  "chance": 1.13
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 67,
+                  "valueType": "flat",
+                  "chance": 1.13
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 65,
+                  "valueType": "flat",
+                  "chance": 1.13
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 63,
+                  "valueType": "flat",
+                  "chance": 1.13
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 62,
+                  "valueType": "flat",
+                  "chance": 1.13
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 59,
+                  "valueType": "flat",
+                  "chance": 1.13
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 57,
+                  "valueType": "flat",
+                  "chance": 1.13
+                },
+                {
+                  "key": "hp-회복력",
+                  "label": "HP 회복력",
+                  "value": 55,
+                  "valueType": "flat",
+                  "chance": 1.13
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 59,
+                  "valueType": "flat",
+                  "chance": 1.13
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 58,
+                  "valueType": "flat",
+                  "chance": 1.13
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 57,
+                  "valueType": "flat",
+                  "chance": 1.13
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 56,
+                  "valueType": "flat",
+                  "chance": 1.13
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 47,
+                  "valueType": "flat",
+                  "chance": 1.13
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 46,
+                  "valueType": "flat",
+                  "chance": 1.13
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 45,
+                  "valueType": "flat",
+                  "chance": 1.13
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 44,
+                  "valueType": "flat",
+                  "chance": 1.13
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 35,
+                  "valueType": "flat",
+                  "chance": 1.13
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 34,
+                  "valueType": "flat",
+                  "chance": 1.13
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 33,
+                  "valueType": "flat",
+                  "chance": 1.13
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 32,
+                  "valueType": "flat",
+                  "chance": 1.13
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 23,
+                  "valueType": "flat",
+                  "chance": 1.13
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 22,
+                  "valueType": "flat",
+                  "chance": 1.13
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 21,
+                  "valueType": "flat",
+                  "chance": 1.13
+                },
+                {
+                  "key": "mp-회복력",
+                  "label": "MP 회복력",
+                  "value": 20,
+                  "valueType": "flat",
+                  "chance": 1.13
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 15.4,
+                  "valueType": "percent",
+                  "chance": 0.88
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 14.6,
+                  "valueType": "percent",
+                  "chance": 0.88
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 13.8,
+                  "valueType": "percent",
+                  "chance": 0.88
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 13,
+                  "valueType": "percent",
+                  "chance": 0.88
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 11,
+                  "valueType": "percent",
+                  "chance": 0.88
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 10.5,
+                  "valueType": "percent",
+                  "chance": 0.88
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 9.9,
+                  "valueType": "percent",
+                  "chance": 0.88
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 9.3,
+                  "valueType": "percent",
+                  "chance": 0.88
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 7.8,
+                  "valueType": "percent",
+                  "chance": 0.88
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 7.4,
+                  "valueType": "percent",
+                  "chance": 0.88
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 7,
+                  "valueType": "percent",
+                  "chance": 0.88
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 6.6,
+                  "valueType": "percent",
+                  "chance": 0.88
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 5.5,
+                  "valueType": "percent",
+                  "chance": 0.88
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 5.2,
+                  "valueType": "percent",
+                  "chance": 0.88
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 4.9,
+                  "valueType": "percent",
+                  "chance": 0.88
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 4.6,
+                  "valueType": "percent",
+                  "chance": 0.88
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 11.1,
+                  "valueType": "percent",
+                  "chance": 0.63
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 10.6,
+                  "valueType": "percent",
+                  "chance": 0.63
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 10,
+                  "valueType": "percent",
+                  "chance": 0.63
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 9.4,
+                  "valueType": "percent",
+                  "chance": 0.63
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 7.9,
+                  "valueType": "percent",
+                  "chance": 0.63
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 7.5,
+                  "valueType": "percent",
+                  "chance": 0.63
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 7.1,
+                  "valueType": "percent",
+                  "chance": 0.63
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 6.7,
+                  "valueType": "percent",
+                  "chance": 0.63
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 5.6,
+                  "valueType": "percent",
+                  "chance": 0.63
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 5.3,
+                  "valueType": "percent",
+                  "chance": 0.63
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 5,
+                  "valueType": "percent",
+                  "chance": 0.63
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 4.7,
+                  "valueType": "percent",
+                  "chance": 0.63
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 3.9,
+                  "valueType": "percent",
+                  "chance": 0.63
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 3.7,
+                  "valueType": "percent",
+                  "chance": 0.63
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 3.5,
+                  "valueType": "percent",
+                  "chance": 0.63
+                },
+                {
+                  "key": "보스-공격력",
+                  "label": "보스 공격력",
+                  "value": 3.3,
+                  "valueType": "percent",
+                  "chance": 0.63
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

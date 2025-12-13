@@ -1,6 +1,6 @@
 export const Footer = () => {
   return (
-    <footer className="flex items-center justify-center py-4 text-center">
+    <footer className="flex items-center justify-center py-4 text-center" data-nosnippet>
       <p className="text-xs antialiased">
         © 2025 <span className="font-semibold">메엠지지.</span>
         <br />

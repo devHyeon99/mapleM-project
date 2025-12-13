@@ -1,0 +1,2784 @@
+{
+  "equipmentPotentials": {
+    "secondaryWeapon": {
+      "label": "보조무기",
+      "levels": {
+        "180": {
+          "equipmentType": "secondaryWeapon",
+          "label": "보조무기",
+          "level": 180,
+          "tiers": {
+            "rare": {
+              "first": [
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 5.1,
+                  "valueType": "percent",
+                  "chance": 5
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 4.9,
+                  "valueType": "percent",
+                  "chance": 5
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 4.7,
+                  "valueType": "percent",
+                  "chance": 5
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 4.5,
+                  "valueType": "percent",
+                  "chance": 5
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 1.2,
+                  "valueType": "percent",
+                  "chance": 4.5
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 1.1,
+                  "valueType": "percent",
+                  "chance": 4.5
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 1,
+                  "valueType": "percent",
+                  "chance": 4.5
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 0.9,
+                  "valueType": "percent",
+                  "chance": 4.5
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 2.1,
+                  "valueType": "percent",
+                  "chance": 4.25
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 2,
+                  "valueType": "percent",
+                  "chance": 4.25
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 1.9,
+                  "valueType": "percent",
+                  "chance": 4.25
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 1.8,
+                  "valueType": "percent",
+                  "chance": 4.25
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 1.9,
+                  "valueType": "percent",
+                  "chance": 3.75
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 1.8,
+                  "valueType": "percent",
+                  "chance": 3.75
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 1.7,
+                  "valueType": "percent",
+                  "chance": 3.75
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 1.6,
+                  "valueType": "percent",
+                  "chance": 3.75
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 1.3,
+                  "valueType": "percent",
+                  "chance": 3
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 1.2,
+                  "valueType": "percent",
+                  "chance": 3
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 1.1,
+                  "valueType": "percent",
+                  "chance": 3
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 1,
+                  "valueType": "percent",
+                  "chance": 3
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 3.7,
+                  "valueType": "percent",
+                  "chance": 2.25
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 3.5,
+                  "valueType": "percent",
+                  "chance": 2.25
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 3.4,
+                  "valueType": "percent",
+                  "chance": 2.25
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 3.3,
+                  "valueType": "percent",
+                  "chance": 2.25
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 3.7,
+                  "valueType": "percent",
+                  "chance": 2.25
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 3.5,
+                  "valueType": "percent",
+                  "chance": 2.25
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 3.4,
+                  "valueType": "percent",
+                  "chance": 2.25
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 3.3,
+                  "valueType": "percent",
+                  "chance": 2.25
+                }
+              ],
+              "secondary": [
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 5.1,
+                  "valueType": "percent",
+                  "chance": 5
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 4.9,
+                  "valueType": "percent",
+                  "chance": 5
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 4.7,
+                  "valueType": "percent",
+                  "chance": 5
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 4.5,
+                  "valueType": "percent",
+                  "chance": 5
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 1.2,
+                  "valueType": "percent",
+                  "chance": 4.5
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 1.1,
+                  "valueType": "percent",
+                  "chance": 4.5
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 1,
+                  "valueType": "percent",
+                  "chance": 4.5
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 0.9,
+                  "valueType": "percent",
+                  "chance": 4.5
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 2.1,
+                  "valueType": "percent",
+                  "chance": 4.25
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 2,
+                  "valueType": "percent",
+                  "chance": 4.25
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 1.9,
+                  "valueType": "percent",
+                  "chance": 4.25
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 1.8,
+                  "valueType": "percent",
+                  "chance": 4.25
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 1.9,
+                  "valueType": "percent",
+                  "chance": 3.75
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 1.8,
+                  "valueType": "percent",
+                  "chance": 3.75
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 1.7,
+                  "valueType": "percent",
+                  "chance": 3.75
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 1.6,
+                  "valueType": "percent",
+                  "chance": 3.75
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 1.3,
+                  "valueType": "percent",
+                  "chance": 3
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 1.2,
+                  "valueType": "percent",
+                  "chance": 3
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 1.1,
+                  "valueType": "percent",
+                  "chance": 3
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 1,
+                  "valueType": "percent",
+                  "chance": 3
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 3.7,
+                  "valueType": "percent",
+                  "chance": 2.25
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 3.5,
+                  "valueType": "percent",
+                  "chance": 2.25
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 3.4,
+                  "valueType": "percent",
+                  "chance": 2.25
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 3.3,
+                  "valueType": "percent",
+                  "chance": 2.25
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 3.7,
+                  "valueType": "percent",
+                  "chance": 2.25
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 3.5,
+                  "valueType": "percent",
+                  "chance": 2.25
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 3.4,
+                  "valueType": "percent",
+                  "chance": 2.25
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 3.3,
+                  "valueType": "percent",
+                  "chance": 2.25
+                }
+              ]
+            },
+            "epic": {
+              "first": [
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 5.8,
+                  "valueType": "percent",
+                  "chance": 5
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 5.6,
+                  "valueType": "percent",
+                  "chance": 5
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 5.4,
+                  "valueType": "percent",
+                  "chance": 5
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 5.2,
+                  "valueType": "percent",
+                  "chance": 5
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 1.7,
+                  "valueType": "percent",
+                  "chance": 4.5
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 1.6,
+                  "valueType": "percent",
+                  "chance": 4.5
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 1.5,
+                  "valueType": "percent",
+                  "chance": 4.5
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 1.4,
+                  "valueType": "percent",
+                  "chance": 4.5
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 2.5,
+                  "valueType": "percent",
+                  "chance": 4.25
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 2.4,
+                  "valueType": "percent",
+                  "chance": 4.25
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 2.3,
+                  "valueType": "percent",
+                  "chance": 4.25
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 2.2,
+                  "valueType": "percent",
+                  "chance": 4.25
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 2.3,
+                  "valueType": "percent",
+                  "chance": 3.75
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 2.2,
+                  "valueType": "percent",
+                  "chance": 3.75
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 2.1,
+                  "valueType": "percent",
+                  "chance": 3.75
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 2,
+                  "valueType": "percent",
+                  "chance": 3.75
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 1.7,
+                  "valueType": "percent",
+                  "chance": 3
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 1.6,
+                  "valueType": "percent",
+                  "chance": 3
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 1.5,
+                  "valueType": "percent",
+                  "chance": 3
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 1.4,
+                  "valueType": "percent",
+                  "chance": 3
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 4.3,
+                  "valueType": "percent",
+                  "chance": 2.25
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 4.2,
+                  "valueType": "percent",
+                  "chance": 2.25
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 4,
+                  "valueType": "percent",
+                  "chance": 2.25
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 3.8,
+                  "valueType": "percent",
+                  "chance": 2.25
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 4.3,
+                  "valueType": "percent",
+                  "chance": 2.25
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 4.2,
+                  "valueType": "percent",
+                  "chance": 2.25
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 4,
+                  "valueType": "percent",
+                  "chance": 2.25
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 3.8,
+                  "valueType": "percent",
+                  "chance": 2.25
+                }
+              ],
+              "secondary": [
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 5.8,
+                  "valueType": "percent",
+                  "chance": 2.5
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 5.6,
+                  "valueType": "percent",
+                  "chance": 2.5
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 5.4,
+                  "valueType": "percent",
+                  "chance": 2.5
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 5.2,
+                  "valueType": "percent",
+                  "chance": 2.5
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 5.1,
+                  "valueType": "percent",
+                  "chance": 2.5
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 4.9,
+                  "valueType": "percent",
+                  "chance": 2.5
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 4.7,
+                  "valueType": "percent",
+                  "chance": 2.5
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 4.5,
+                  "valueType": "percent",
+                  "chance": 2.5
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 1.7,
+                  "valueType": "percent",
+                  "chance": 2.25
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 1.6,
+                  "valueType": "percent",
+                  "chance": 2.25
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 1.5,
+                  "valueType": "percent",
+                  "chance": 2.25
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 1.4,
+                  "valueType": "percent",
+                  "chance": 2.25
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 1.2,
+                  "valueType": "percent",
+                  "chance": 2.25
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 1.1,
+                  "valueType": "percent",
+                  "chance": 2.25
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 1,
+                  "valueType": "percent",
+                  "chance": 2.25
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 0.9,
+                  "valueType": "percent",
+                  "chance": 2.25
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 2.5,
+                  "valueType": "percent",
+                  "chance": 2.13
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 2.4,
+                  "valueType": "percent",
+                  "chance": 2.13
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 2.3,
+                  "valueType": "percent",
+                  "chance": 2.13
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 2.2,
+                  "valueType": "percent",
+                  "chance": 2.13
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 2.1,
+                  "valueType": "percent",
+                  "chance": 2.13
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 2,
+                  "valueType": "percent",
+                  "chance": 2.13
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 1.9,
+                  "valueType": "percent",
+                  "chance": 2.13
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 1.8,
+                  "valueType": "percent",
+                  "chance": 2.13
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 2.3,
+                  "valueType": "percent",
+                  "chance": 1.88
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 2.2,
+                  "valueType": "percent",
+                  "chance": 1.88
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 2.1,
+                  "valueType": "percent",
+                  "chance": 1.88
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 2,
+                  "valueType": "percent",
+                  "chance": 1.88
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 1.9,
+                  "valueType": "percent",
+                  "chance": 1.88
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 1.8,
+                  "valueType": "percent",
+                  "chance": 1.88
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 1.7,
+                  "valueType": "percent",
+                  "chance": 1.88
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 1.6,
+                  "valueType": "percent",
+                  "chance": 1.88
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 1.7,
+                  "valueType": "percent",
+                  "chance": 1.5
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 1.6,
+                  "valueType": "percent",
+                  "chance": 1.5
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 1.5,
+                  "valueType": "percent",
+                  "chance": 1.5
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 1.4,
+                  "valueType": "percent",
+                  "chance": 1.5
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 1.3,
+                  "valueType": "percent",
+                  "chance": 1.5
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 1.2,
+                  "valueType": "percent",
+                  "chance": 1.5
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 1.1,
+                  "valueType": "percent",
+                  "chance": 1.5
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 1,
+                  "valueType": "percent",
+                  "chance": 1.5
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 4.3,
+                  "valueType": "percent",
+                  "chance": 1.13
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 4.2,
+                  "valueType": "percent",
+                  "chance": 1.13
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 4,
+                  "valueType": "percent",
+                  "chance": 1.13
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 3.8,
+                  "valueType": "percent",
+                  "chance": 1.13
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 3.7,
+                  "valueType": "percent",
+                  "chance": 1.13
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 3.5,
+                  "valueType": "percent",
+                  "chance": 1.13
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 3.4,
+                  "valueType": "percent",
+                  "chance": 1.13
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 3.3,
+                  "valueType": "percent",
+                  "chance": 1.13
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 4.3,
+                  "valueType": "percent",
+                  "chance": 1.13
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 4.2,
+                  "valueType": "percent",
+                  "chance": 1.13
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 4,
+                  "valueType": "percent",
+                  "chance": 1.13
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 3.8,
+                  "valueType": "percent",
+                  "chance": 1.13
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 3.7,
+                  "valueType": "percent",
+                  "chance": 1.13
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 3.5,
+                  "valueType": "percent",
+                  "chance": 1.13
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 3.4,
+                  "valueType": "percent",
+                  "chance": 1.13
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 3.3,
+                  "valueType": "percent",
+                  "chance": 1.13
+                }
+              ]
+            },
+            "unique": {
+              "first": [
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 6.6,
+                  "valueType": "percent",
+                  "chance": 5
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 6.3,
+                  "valueType": "percent",
+                  "chance": 5
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 6.1,
+                  "valueType": "percent",
+                  "chance": 5
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 5.9,
+                  "valueType": "percent",
+                  "chance": 5
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 2.2,
+                  "valueType": "percent",
+                  "chance": 4.5
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 2.1,
+                  "valueType": "percent",
+                  "chance": 4.5
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 2,
+                  "valueType": "percent",
+                  "chance": 4.5
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 1.9,
+                  "valueType": "percent",
+                  "chance": 4.5
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 2.9,
+                  "valueType": "percent",
+                  "chance": 4.25
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 2.8,
+                  "valueType": "percent",
+                  "chance": 4.25
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 2.7,
+                  "valueType": "percent",
+                  "chance": 4.25
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 2.6,
+                  "valueType": "percent",
+                  "chance": 4.25
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 2.7,
+                  "valueType": "percent",
+                  "chance": 3.75
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 2.6,
+                  "valueType": "percent",
+                  "chance": 3.75
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 2.5,
+                  "valueType": "percent",
+                  "chance": 3.75
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 2.4,
+                  "valueType": "percent",
+                  "chance": 3.75
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 2.1,
+                  "valueType": "percent",
+                  "chance": 3
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 2,
+                  "valueType": "percent",
+                  "chance": 3
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 1.9,
+                  "valueType": "percent",
+                  "chance": 3
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 1.8,
+                  "valueType": "percent",
+                  "chance": 3
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 4.9,
+                  "valueType": "percent",
+                  "chance": 2.25
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 4.8,
+                  "valueType": "percent",
+                  "chance": 2.25
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 4.6,
+                  "valueType": "percent",
+                  "chance": 2.25
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 4.4,
+                  "valueType": "percent",
+                  "chance": 2.25
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 4.9,
+                  "valueType": "percent",
+                  "chance": 2.25
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 4.8,
+                  "valueType": "percent",
+                  "chance": 2.25
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 4.6,
+                  "valueType": "percent",
+                  "chance": 2.25
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 4.4,
+                  "valueType": "percent",
+                  "chance": 2.25
+                }
+              ],
+              "secondary": [
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 6.6,
+                  "valueType": "percent",
+                  "chance": 1.67
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 6.3,
+                  "valueType": "percent",
+                  "chance": 1.67
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 6.1,
+                  "valueType": "percent",
+                  "chance": 1.67
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 5.9,
+                  "valueType": "percent",
+                  "chance": 1.67
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 5.8,
+                  "valueType": "percent",
+                  "chance": 1.67
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 5.6,
+                  "valueType": "percent",
+                  "chance": 1.67
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 5.4,
+                  "valueType": "percent",
+                  "chance": 1.67
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 5.2,
+                  "valueType": "percent",
+                  "chance": 1.67
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 5.1,
+                  "valueType": "percent",
+                  "chance": 1.67
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 4.9,
+                  "valueType": "percent",
+                  "chance": 1.67
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 4.7,
+                  "valueType": "percent",
+                  "chance": 1.67
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 4.5,
+                  "valueType": "percent",
+                  "chance": 1.67
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 2.2,
+                  "valueType": "percent",
+                  "chance": 1.5
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 2.1,
+                  "valueType": "percent",
+                  "chance": 1.5
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 2,
+                  "valueType": "percent",
+                  "chance": 1.5
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 1.9,
+                  "valueType": "percent",
+                  "chance": 1.5
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 1.7,
+                  "valueType": "percent",
+                  "chance": 1.5
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 1.6,
+                  "valueType": "percent",
+                  "chance": 1.5
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 1.5,
+                  "valueType": "percent",
+                  "chance": 1.5
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 1.4,
+                  "valueType": "percent",
+                  "chance": 1.5
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 1.2,
+                  "valueType": "percent",
+                  "chance": 1.5
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 1.1,
+                  "valueType": "percent",
+                  "chance": 1.5
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 1,
+                  "valueType": "percent",
+                  "chance": 1.5
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 0.9,
+                  "valueType": "percent",
+                  "chance": 1.5
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 2.9,
+                  "valueType": "percent",
+                  "chance": 1.42
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 2.8,
+                  "valueType": "percent",
+                  "chance": 1.42
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 2.7,
+                  "valueType": "percent",
+                  "chance": 1.42
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 2.6,
+                  "valueType": "percent",
+                  "chance": 1.42
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 2.5,
+                  "valueType": "percent",
+                  "chance": 1.42
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 2.4,
+                  "valueType": "percent",
+                  "chance": 1.42
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 2.3,
+                  "valueType": "percent",
+                  "chance": 1.42
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 2.2,
+                  "valueType": "percent",
+                  "chance": 1.42
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 2.1,
+                  "valueType": "percent",
+                  "chance": 1.42
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 2,
+                  "valueType": "percent",
+                  "chance": 1.42
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 1.9,
+                  "valueType": "percent",
+                  "chance": 1.42
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 1.8,
+                  "valueType": "percent",
+                  "chance": 1.42
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 2.7,
+                  "valueType": "percent",
+                  "chance": 1.25
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 2.6,
+                  "valueType": "percent",
+                  "chance": 1.25
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 2.5,
+                  "valueType": "percent",
+                  "chance": 1.25
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 2.4,
+                  "valueType": "percent",
+                  "chance": 1.25
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 2.3,
+                  "valueType": "percent",
+                  "chance": 1.25
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 2.2,
+                  "valueType": "percent",
+                  "chance": 1.25
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 2.1,
+                  "valueType": "percent",
+                  "chance": 1.25
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 2,
+                  "valueType": "percent",
+                  "chance": 1.25
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 1.9,
+                  "valueType": "percent",
+                  "chance": 1.25
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 1.8,
+                  "valueType": "percent",
+                  "chance": 1.25
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 1.7,
+                  "valueType": "percent",
+                  "chance": 1.25
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 1.6,
+                  "valueType": "percent",
+                  "chance": 1.25
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 2.1,
+                  "valueType": "percent",
+                  "chance": 1
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 2,
+                  "valueType": "percent",
+                  "chance": 1
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 1.9,
+                  "valueType": "percent",
+                  "chance": 1
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 1.8,
+                  "valueType": "percent",
+                  "chance": 1
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 1.7,
+                  "valueType": "percent",
+                  "chance": 1
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 1.6,
+                  "valueType": "percent",
+                  "chance": 1
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 1.5,
+                  "valueType": "percent",
+                  "chance": 1
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 1.4,
+                  "valueType": "percent",
+                  "chance": 1
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 1.3,
+                  "valueType": "percent",
+                  "chance": 1
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 1.2,
+                  "valueType": "percent",
+                  "chance": 1
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 1.1,
+                  "valueType": "percent",
+                  "chance": 1
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 1,
+                  "valueType": "percent",
+                  "chance": 1
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 4.9,
+                  "valueType": "percent",
+                  "chance": 0.75
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 4.8,
+                  "valueType": "percent",
+                  "chance": 0.75
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 4.6,
+                  "valueType": "percent",
+                  "chance": 0.75
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 4.4,
+                  "valueType": "percent",
+                  "chance": 0.75
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 4.3,
+                  "valueType": "percent",
+                  "chance": 0.75
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 4.2,
+                  "valueType": "percent",
+                  "chance": 0.75
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 4,
+                  "valueType": "percent",
+                  "chance": 0.75
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 3.8,
+                  "valueType": "percent",
+                  "chance": 0.75
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 3.7,
+                  "valueType": "percent",
+                  "chance": 0.75
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 3.5,
+                  "valueType": "percent",
+                  "chance": 0.75
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 3.4,
+                  "valueType": "percent",
+                  "chance": 0.75
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 3.3,
+                  "valueType": "percent",
+                  "chance": 0.75
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 4.9,
+                  "valueType": "percent",
+                  "chance": 0.75
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 4.8,
+                  "valueType": "percent",
+                  "chance": 0.75
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 4.6,
+                  "valueType": "percent",
+                  "chance": 0.75
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 4.4,
+                  "valueType": "percent",
+                  "chance": 0.75
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 4.3,
+                  "valueType": "percent",
+                  "chance": 0.75
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 4.2,
+                  "valueType": "percent",
+                  "chance": 0.75
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 4,
+                  "valueType": "percent",
+                  "chance": 0.75
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 3.8,
+                  "valueType": "percent",
+                  "chance": 0.75
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 3.7,
+                  "valueType": "percent",
+                  "chance": 0.75
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 3.5,
+                  "valueType": "percent",
+                  "chance": 0.75
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 3.4,
+                  "valueType": "percent",
+                  "chance": 0.75
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 3.3,
+                  "valueType": "percent",
+                  "chance": 0.75
+                }
+              ]
+            },
+            "legendary": {
+              "first": [
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 8,
+                  "valueType": "percent",
+                  "chance": 5
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 7.5,
+                  "valueType": "percent",
+                  "chance": 5
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 7.1,
+                  "valueType": "percent",
+                  "chance": 5
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 6.7,
+                  "valueType": "percent",
+                  "chance": 5
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 2.6,
+                  "valueType": "percent",
+                  "chance": 4.5
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 2.5,
+                  "valueType": "percent",
+                  "chance": 4.5
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 2.4,
+                  "valueType": "percent",
+                  "chance": 4.5
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 2.3,
+                  "valueType": "percent",
+                  "chance": 4.5
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 3.6,
+                  "valueType": "percent",
+                  "chance": 4.25
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 3.4,
+                  "valueType": "percent",
+                  "chance": 4.25
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 3.2,
+                  "valueType": "percent",
+                  "chance": 4.25
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 3,
+                  "valueType": "percent",
+                  "chance": 4.25
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 3.3,
+                  "valueType": "percent",
+                  "chance": 3.75
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 3.2,
+                  "valueType": "percent",
+                  "chance": 3.75
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 3,
+                  "valueType": "percent",
+                  "chance": 3.75
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 2.8,
+                  "valueType": "percent",
+                  "chance": 3.75
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 2.6,
+                  "valueType": "percent",
+                  "chance": 3
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 2.5,
+                  "valueType": "percent",
+                  "chance": 3
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 2.3,
+                  "valueType": "percent",
+                  "chance": 3
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 2.2,
+                  "valueType": "percent",
+                  "chance": 3
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 5.7,
+                  "valueType": "percent",
+                  "chance": 2.25
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 5.4,
+                  "valueType": "percent",
+                  "chance": 2.25
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 5.2,
+                  "valueType": "percent",
+                  "chance": 2.25
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 5,
+                  "valueType": "percent",
+                  "chance": 2.25
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 5.7,
+                  "valueType": "percent",
+                  "chance": 2.25
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 5.4,
+                  "valueType": "percent",
+                  "chance": 2.25
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 5.2,
+                  "valueType": "percent",
+                  "chance": 2.25
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 5,
+                  "valueType": "percent",
+                  "chance": 2.25
+                }
+              ],
+              "secondary": [
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 8,
+                  "valueType": "percent",
+                  "chance": 1.25
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 7.5,
+                  "valueType": "percent",
+                  "chance": 1.25
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 7.1,
+                  "valueType": "percent",
+                  "chance": 1.25
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 6.7,
+                  "valueType": "percent",
+                  "chance": 1.25
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 6.6,
+                  "valueType": "percent",
+                  "chance": 1.25
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 6.3,
+                  "valueType": "percent",
+                  "chance": 1.25
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 6.1,
+                  "valueType": "percent",
+                  "chance": 1.25
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 5.9,
+                  "valueType": "percent",
+                  "chance": 1.25
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 5.8,
+                  "valueType": "percent",
+                  "chance": 1.25
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 5.6,
+                  "valueType": "percent",
+                  "chance": 1.25
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 5.4,
+                  "valueType": "percent",
+                  "chance": 1.25
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 5.2,
+                  "valueType": "percent",
+                  "chance": 1.25
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 5.1,
+                  "valueType": "percent",
+                  "chance": 1.25
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 4.9,
+                  "valueType": "percent",
+                  "chance": 1.25
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 4.7,
+                  "valueType": "percent",
+                  "chance": 1.25
+                },
+                {
+                  "key": "evasion",
+                  "label": "회피율",
+                  "value": 4.5,
+                  "valueType": "percent",
+                  "chance": 1.25
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 2.6,
+                  "valueType": "percent",
+                  "chance": 1.13
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 2.5,
+                  "valueType": "percent",
+                  "chance": 1.13
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 2.4,
+                  "valueType": "percent",
+                  "chance": 1.13
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 2.3,
+                  "valueType": "percent",
+                  "chance": 1.13
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 2.2,
+                  "valueType": "percent",
+                  "chance": 1.13
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 2.1,
+                  "valueType": "percent",
+                  "chance": 1.13
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 2,
+                  "valueType": "percent",
+                  "chance": 1.13
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 1.9,
+                  "valueType": "percent",
+                  "chance": 1.13
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 1.7,
+                  "valueType": "percent",
+                  "chance": 1.13
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 1.6,
+                  "valueType": "percent",
+                  "chance": 1.13
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 1.5,
+                  "valueType": "percent",
+                  "chance": 1.13
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 1.4,
+                  "valueType": "percent",
+                  "chance": 1.13
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 1.2,
+                  "valueType": "percent",
+                  "chance": 1.13
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 1.1,
+                  "valueType": "percent",
+                  "chance": 1.13
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 1,
+                  "valueType": "percent",
+                  "chance": 1.13
+                },
+                {
+                  "key": "accuracy",
+                  "label": "명중률",
+                  "value": 0.9,
+                  "valueType": "percent",
+                  "chance": 1.13
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 3.6,
+                  "valueType": "percent",
+                  "chance": 1.06
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 3.4,
+                  "valueType": "percent",
+                  "chance": 1.06
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 3.2,
+                  "valueType": "percent",
+                  "chance": 1.06
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 3,
+                  "valueType": "percent",
+                  "chance": 1.06
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 2.9,
+                  "valueType": "percent",
+                  "chance": 1.06
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 2.8,
+                  "valueType": "percent",
+                  "chance": 1.06
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 2.7,
+                  "valueType": "percent",
+                  "chance": 1.06
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 2.6,
+                  "valueType": "percent",
+                  "chance": 1.06
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 2.5,
+                  "valueType": "percent",
+                  "chance": 1.06
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 2.4,
+                  "valueType": "percent",
+                  "chance": 1.06
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 2.3,
+                  "valueType": "percent",
+                  "chance": 1.06
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 2.2,
+                  "valueType": "percent",
+                  "chance": 1.06
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 2.1,
+                  "valueType": "percent",
+                  "chance": 1.06
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 2,
+                  "valueType": "percent",
+                  "chance": 1.06
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 1.9,
+                  "valueType": "percent",
+                  "chance": 1.06
+                },
+                {
+                  "key": "보스-방어력",
+                  "label": "보스 방어력",
+                  "value": 1.8,
+                  "valueType": "percent",
+                  "chance": 1.06
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 3.3,
+                  "valueType": "percent",
+                  "chance": 0.94
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 3.2,
+                  "valueType": "percent",
+                  "chance": 0.94
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 3,
+                  "valueType": "percent",
+                  "chance": 0.94
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 2.8,
+                  "valueType": "percent",
+                  "chance": 0.94
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 2.7,
+                  "valueType": "percent",
+                  "chance": 0.94
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 2.6,
+                  "valueType": "percent",
+                  "chance": 0.94
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 2.5,
+                  "valueType": "percent",
+                  "chance": 0.94
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 2.4,
+                  "valueType": "percent",
+                  "chance": 0.94
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 2.3,
+                  "valueType": "percent",
+                  "chance": 0.94
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 2.2,
+                  "valueType": "percent",
+                  "chance": 0.94
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 2.1,
+                  "valueType": "percent",
+                  "chance": 0.94
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 2,
+                  "valueType": "percent",
+                  "chance": 0.94
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 1.9,
+                  "valueType": "percent",
+                  "chance": 0.94
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 1.8,
+                  "valueType": "percent",
+                  "chance": 0.94
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 1.7,
+                  "valueType": "percent",
+                  "chance": 0.94
+                },
+                {
+                  "key": "치명타-확률",
+                  "label": "치명타 확률",
+                  "value": 1.6,
+                  "valueType": "percent",
+                  "chance": 0.94
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 2.6,
+                  "valueType": "percent",
+                  "chance": 0.75
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 2.5,
+                  "valueType": "percent",
+                  "chance": 0.75
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 2.3,
+                  "valueType": "percent",
+                  "chance": 0.75
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 2.2,
+                  "valueType": "percent",
+                  "chance": 0.75
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 2.1,
+                  "valueType": "percent",
+                  "chance": 0.75
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 2,
+                  "valueType": "percent",
+                  "chance": 0.75
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 1.9,
+                  "valueType": "percent",
+                  "chance": 0.75
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 1.8,
+                  "valueType": "percent",
+                  "chance": 0.75
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 1.7,
+                  "valueType": "percent",
+                  "chance": 0.75
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 1.6,
+                  "valueType": "percent",
+                  "chance": 0.75
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 1.5,
+                  "valueType": "percent",
+                  "chance": 0.75
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 1.4,
+                  "valueType": "percent",
+                  "chance": 0.75
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 1.3,
+                  "valueType": "percent",
+                  "chance": 0.75
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 1.2,
+                  "valueType": "percent",
+                  "chance": 0.75
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 1.1,
+                  "valueType": "percent",
+                  "chance": 0.75
+                },
+                {
+                  "key": "치명타-저항",
+                  "label": "치명타 저항",
+                  "value": 1,
+                  "valueType": "percent",
+                  "chance": 0.75
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 5.7,
+                  "valueType": "percent",
+                  "chance": 0.56
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 5.4,
+                  "valueType": "percent",
+                  "chance": 0.56
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 5.2,
+                  "valueType": "percent",
+                  "chance": 0.56
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 5,
+                  "valueType": "percent",
+                  "chance": 0.56
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 4.9,
+                  "valueType": "percent",
+                  "chance": 0.56
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 4.8,
+                  "valueType": "percent",
+                  "chance": 0.56
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 4.6,
+                  "valueType": "percent",
+                  "chance": 0.56
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 4.4,
+                  "valueType": "percent",
+                  "chance": 0.56
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 4.3,
+                  "valueType": "percent",
+                  "chance": 0.56
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 4.2,
+                  "valueType": "percent",
+                  "chance": 0.56
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 4,
+                  "valueType": "percent",
+                  "chance": 0.56
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 3.8,
+                  "valueType": "percent",
+                  "chance": 0.56
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 3.7,
+                  "valueType": "percent",
+                  "chance": 0.56
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 3.5,
+                  "valueType": "percent",
+                  "chance": 0.56
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 3.4,
+                  "valueType": "percent",
+                  "chance": 0.56
+                },
+                {
+                  "key": "물리-대미지",
+                  "label": "물리 대미지",
+                  "value": 3.3,
+                  "valueType": "percent",
+                  "chance": 0.56
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 5.7,
+                  "valueType": "percent",
+                  "chance": 0.56
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 5.4,
+                  "valueType": "percent",
+                  "chance": 0.56
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 5.2,
+                  "valueType": "percent",
+                  "chance": 0.56
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 5,
+                  "valueType": "percent",
+                  "chance": 0.56
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 4.9,
+                  "valueType": "percent",
+                  "chance": 0.56
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 4.8,
+                  "valueType": "percent",
+                  "chance": 0.56
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 4.6,
+                  "valueType": "percent",
+                  "chance": 0.56
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 4.4,
+                  "valueType": "percent",
+                  "chance": 0.56
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 4.3,
+                  "valueType": "percent",
+                  "chance": 0.56
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 4.2,
+                  "valueType": "percent",
+                  "chance": 0.56
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 4,
+                  "valueType": "percent",
+                  "chance": 0.56
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 3.8,
+                  "valueType": "percent",
+                  "chance": 0.56
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 3.7,
+                  "valueType": "percent",
+                  "chance": 0.56
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 3.5,
+                  "valueType": "percent",
+                  "chance": 0.56
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 3.4,
+                  "valueType": "percent",
+                  "chance": 0.56
+                },
+                {
+                  "key": "마법-대미지",
+                  "label": "마법 대미지",
+                  "value": 3.3,
+                  "valueType": "percent",
+                  "chance": 0.56
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

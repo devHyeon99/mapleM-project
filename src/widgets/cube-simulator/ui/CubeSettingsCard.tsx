@@ -203,7 +203,7 @@ export function CubeSettingsCard({
           </div>
         </div>
 
-        <div className="bg-secondary/50 flex flex-1 p-4 shadow-sm">
+        <div className="bg-secondary flex flex-1 p-4 shadow-sm">
           {isDataLoading ? (
             <div className="flex flex-1 items-center justify-center">
               <p className="text-muted-foreground text-center text-sm">

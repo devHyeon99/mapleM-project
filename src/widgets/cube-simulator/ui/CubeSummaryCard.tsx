@@ -67,7 +67,7 @@ export function CubeSummaryCard({
         <CardTitle className="text-lg">큐브 결과</CardTitle>
       </CardHeader>
       <CardContent className="space-y-4 px-4">
-        <div className="bg-secondary/50 grid gap-2 rounded-xs p-4 text-sm shadow-sm">
+        <div className="bg-secondary grid gap-2 rounded-xs p-4 text-sm shadow-sm">
           <SummaryRow
             label="장비 종류"
             value={potentialData ? potentialData.label : "-"}

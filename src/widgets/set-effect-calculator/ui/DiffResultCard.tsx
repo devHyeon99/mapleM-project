@@ -29,7 +29,7 @@ function DiffResultCardBase({ diffEffects, description }: DiffResultCardProps) {
       <CardContent className="space-y-3 px-4">
         {diffEffects.length === 0 ? (
           <p className="text-muted-foreground bg-secondary/50 dark:bg-secondary p-4 text-sm shadow-sm">
-            비교 가능한 차이가 없습니다.
+            세팅 A와 세팅 B를 입력하면 장비 세트 효과 차이가 표시됩니다.
           </p>
         ) : (
           <dl className="bg-secondary/50 dark:bg-secondary space-y-1 p-4 shadow-sm">

@@ -15,4 +15,5 @@ export const MAGICAL_CLASSES = [
   "캡틴",
   "메카닉",
   "엔젤릭버스터",
+  "일리움",
 ];

@@ -92,7 +92,7 @@ export function PotentialSimulatorSettingsCard({
         <CardTitle className="text-lg">환생의 불꽃 설정</CardTitle>
         <div className="flex gap-2">
           <Button type="button" size="sm" onClick={onRoll}>
-            환생의 불꽃 사용
+            실행
           </Button>
           <Button type="button" size="sm" variant="outline" onClick={onReset}>
             초기화
@@ -137,7 +137,9 @@ export function PotentialSimulatorSettingsCard({
               label="기계심장 등급"
               value={String(heartGrade)}
               placeholder="기계심장 등급 선택"
-              onValueChange={(value) => onHeartGradeChange(Number(value) as HeartGrade)}
+              onValueChange={(value) =>
+                onHeartGradeChange(Number(value) as HeartGrade)
+              }
             >
               {HEART_GRADE_OPTIONS.map((option) => (
                 <SelectItem key={option.value} value={String(option.value)}>
@@ -148,7 +150,9 @@ export function PotentialSimulatorSettingsCard({
           ) : (
             <SelectField
               id="equipment-level"
-              label={isFixedLevelCategory ? "장비 레벨 (200 고정)" : "장비 레벨"}
+              label={
+                isFixedLevelCategory ? "장비 레벨 (200 고정)" : "장비 레벨"
+              }
               value={String(selectedLevel)}
               placeholder="장비 레벨 선택"
               disabled={isFixedLevelCategory}

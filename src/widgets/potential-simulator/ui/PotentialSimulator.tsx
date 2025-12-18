@@ -27,8 +27,8 @@ function getFlameLabel(flameType: FlameType) {
 
 function getEquipmentLabel(category: EquipmentCategory) {
   return (
-    EQUIPMENT_CATEGORY_OPTIONS.find((option) => option.type === category)?.label ??
-    "-"
+    EQUIPMENT_CATEGORY_OPTIONS.find((option) => option.type === category)
+      ?.label ?? "-"
   );
 }
 
@@ -38,7 +38,9 @@ export function PotentialSimulator() {
     useState<EquipmentCategory>("weapon");
   const [equipmentLevel, setEquipmentLevel] = useState<EquipmentLevel>(140);
   const [heartGrade, setHeartGrade] = useState<HeartGrade>(2);
-  const [latestResult, setLatestResult] = useState<SimulationResult | null>(null);
+  const [latestResult, setLatestResult] = useState<SimulationResult | null>(
+    null,
+  );
   const [totalRollCount, setTotalRollCount] = useState(0);
   const [isPowerfulTwoLineLocked, setIsPowerfulTwoLineLocked] = useState(false);
 
@@ -112,7 +114,6 @@ export function PotentialSimulator() {
           heartGrade={heartGrade}
           selectedLevel={selectedLevel}
           totalRollCount={totalRollCount}
-          isPowerfulTwoLineLocked={isPowerfulTwoLineLocked}
           latestResult={latestResult}
         />
       </div>

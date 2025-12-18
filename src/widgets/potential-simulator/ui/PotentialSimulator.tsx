@@ -18,6 +18,7 @@ import type {
 
 import { PotentialSimulatorResultCard } from "./PotentialSimulatorResultCard";
 import { PotentialSimulatorSettingsCard } from "./PotentialSimulatorSettingsCard";
+import PotentialSimulatorHelpCard from "./PotentialSimulatorHelpCard";
 
 function getFlameLabel(flameType: FlameType | null) {
   if (!flameType) return "-";
@@ -140,6 +141,7 @@ export function PotentialSimulator() {
           totalRollCount={totalRollCount}
           latestResult={latestResult}
         />
+        <PotentialSimulatorHelpCard />
       </div>
     </section>
   );

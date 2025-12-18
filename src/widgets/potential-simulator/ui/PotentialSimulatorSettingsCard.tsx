@@ -119,9 +119,9 @@ export function PotentialSimulatorSettingsCard({
 
           <SelectField
             id="equipment-category"
-            label="장비 분류"
+            label="장비 종류"
             value={equipmentCategory ?? ""}
-            placeholder="장비 선택"
+            placeholder="장비 종류 선택"
             onValueChange={(value) =>
               onEquipmentCategoryChange(value as EquipmentCategory)
             }

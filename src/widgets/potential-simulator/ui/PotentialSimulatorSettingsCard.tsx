@@ -56,13 +56,14 @@ function SelectField({
 }
 
 type Props = {
-  flameType: FlameType;
-  equipmentCategory: EquipmentCategory;
-  heartGrade: HeartGrade;
-  selectedLevel: EquipmentLevel;
+  flameType: FlameType | null;
+  equipmentCategory: EquipmentCategory | null;
+  heartGrade: HeartGrade | null;
+  selectedLevel: EquipmentLevel | null;
   availableLevels: EquipmentLevel[];
   isHeartCategory: boolean;
   isFixedLevelCategory: boolean;
+  canRoll: boolean;
   onFlameTypeChange: (value: FlameType) => void;
   onEquipmentCategoryChange: (value: EquipmentCategory) => void;
   onHeartGradeChange: (value: HeartGrade) => void;
@@ -79,6 +80,7 @@ export function PotentialSimulatorSettingsCard({
   availableLevels,
   isHeartCategory,
   isFixedLevelCategory,
+  canRoll,
   onFlameTypeChange,
   onEquipmentCategoryChange,
   onHeartGradeChange,
@@ -91,7 +93,7 @@ export function PotentialSimulatorSettingsCard({
       <CardHeader className="flex flex-row items-center justify-between px-4">
         <CardTitle className="text-lg">환생의 불꽃 설정</CardTitle>
         <div className="flex gap-2">
-          <Button type="button" size="sm" onClick={onRoll}>
+          <Button type="button" size="sm" onClick={onRoll} disabled={!canRoll}>
             실행
           </Button>
           <Button type="button" size="sm" variant="outline" onClick={onReset}>
@@ -104,8 +106,8 @@ export function PotentialSimulatorSettingsCard({
           <SelectField
             id="flame-type"
             label="환생의 불꽃 종류"
-            value={flameType}
-            placeholder="불꽃 종류 선택"
+            value={flameType ?? ""}
+            placeholder="환생의 불꽃 선택"
             onValueChange={(value) => onFlameTypeChange(value as FlameType)}
           >
             {FLAME_TYPE_OPTIONS.map((option) => (
@@ -118,8 +120,8 @@ export function PotentialSimulatorSettingsCard({
           <SelectField
             id="equipment-category"
             label="장비 분류"
-            value={equipmentCategory}
-            placeholder="장비 분류 선택"
+            value={equipmentCategory ?? ""}
+            placeholder="장비 선택"
             onValueChange={(value) =>
               onEquipmentCategoryChange(value as EquipmentCategory)
             }
@@ -135,8 +137,8 @@ export function PotentialSimulatorSettingsCard({
             <SelectField
               id="heart-grade"
               label="기계심장 등급"
-              value={String(heartGrade)}
-              placeholder="기계심장 등급 선택"
+              value={heartGrade ? String(heartGrade) : ""}
+              placeholder="등급 선택"
               onValueChange={(value) =>
                 onHeartGradeChange(Number(value) as HeartGrade)
               }
@@ -153,9 +155,15 @@ export function PotentialSimulatorSettingsCard({
               label={
                 isFixedLevelCategory ? "장비 레벨 (200 고정)" : "장비 레벨"
               }
-              value={String(selectedLevel)}
+              value={
+                isFixedLevelCategory
+                  ? "200"
+                  : selectedLevel
+                    ? String(selectedLevel)
+                    : ""
+              }
               placeholder="장비 레벨 선택"
-              disabled={isFixedLevelCategory}
+              disabled={isFixedLevelCategory || !equipmentCategory}
               onValueChange={(value) =>
                 onEquipmentLevelChange(Number(value) as EquipmentLevel)
               }
@@ -167,10 +175,6 @@ export function PotentialSimulatorSettingsCard({
               ))}
             </SelectField>
           )}
-        </div>
-
-        <div className="bg-secondary text-muted-foreground rounded-xs px-3 py-2 text-xs leading-5">
-          검은 환생의 불꽃은 영원한 환생의 불꽃과 동일한 옵션 풀을 사용합니다.
         </div>
       </CardContent>
     </Card>

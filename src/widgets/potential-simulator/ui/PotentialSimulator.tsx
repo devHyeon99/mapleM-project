@@ -19,13 +19,15 @@ import type {
 import { PotentialSimulatorResultCard } from "./PotentialSimulatorResultCard";
 import { PotentialSimulatorSettingsCard } from "./PotentialSimulatorSettingsCard";
 
-function getFlameLabel(flameType: FlameType) {
+function getFlameLabel(flameType: FlameType | null) {
+  if (!flameType) return "-";
   return (
     FLAME_TYPE_OPTIONS.find((option) => option.type === flameType)?.label ?? "-"
   );
 }
 
-function getEquipmentLabel(category: EquipmentCategory) {
+function getEquipmentLabel(category: EquipmentCategory | null) {
+  if (!category) return "-";
   return (
     EQUIPMENT_CATEGORY_OPTIONS.find((option) => option.type === category)
       ?.label ?? "-"
@@ -33,11 +35,13 @@ function getEquipmentLabel(category: EquipmentCategory) {
 }
 
 export function PotentialSimulator() {
-  const [flameType, setFlameType] = useState<FlameType>("powerful");
+  const [flameType, setFlameType] = useState<FlameType | null>(null);
   const [equipmentCategory, setEquipmentCategory] =
-    useState<EquipmentCategory>("weapon");
-  const [equipmentLevel, setEquipmentLevel] = useState<EquipmentLevel>(140);
-  const [heartGrade, setHeartGrade] = useState<HeartGrade>(2);
+    useState<EquipmentCategory | null>(null);
+  const [equipmentLevel, setEquipmentLevel] = useState<EquipmentLevel | null>(
+    null,
+  );
+  const [heartGrade, setHeartGrade] = useState<HeartGrade | null>(null);
   const [latestResult, setLatestResult] = useState<SimulationResult | null>(
     null,
   );
@@ -45,22 +49,41 @@ export function PotentialSimulator() {
   const [isPowerfulTwoLineLocked, setIsPowerfulTwoLineLocked] = useState(false);
 
   const availableLevels = useMemo(
-    () => getSupportedLevelsByCategory(equipmentCategory),
+    () =>
+      equipmentCategory ? getSupportedLevelsByCategory(equipmentCategory) : [],
     [equipmentCategory],
   );
 
   const isHeartCategory = equipmentCategory === "heart";
   const isFixedLevelCategory = equipmentCategory === "watch";
-  const selectedLevel = availableLevels.includes(equipmentLevel)
-    ? equipmentLevel
-    : (availableLevels[0] ?? 140);
+  const selectedLevel = isFixedLevelCategory ? 200 : equipmentLevel;
+  const isReadyToRoll =
+    flameType != null &&
+    equipmentCategory != null &&
+    (isHeartCategory ? heartGrade != null : selectedLevel != null);
+
+  const handleEquipmentCategoryChange = (value: EquipmentCategory) => {
+    setEquipmentCategory(value);
+
+    if (value === "heart") {
+      setEquipmentLevel(null);
+      return;
+    }
+
+    setHeartGrade(null);
+    setEquipmentLevel(value === "watch" ? 200 : null);
+  };
 
   const handleRoll = () => {
+    if (!isReadyToRoll || !flameType || !equipmentCategory) return;
+
     const result = simulateAdditionalOption({
       flameType,
       equipmentCategory,
-      equipmentLevel: isHeartCategory ? null : selectedLevel,
-      heartGrade,
+      equipmentLevel: isHeartCategory
+        ? null
+        : (selectedLevel as EquipmentLevel | null),
+      heartGrade: heartGrade ?? 2,
       forceTwoLines: flameType === "powerful" && isPowerfulTwoLineLocked,
     });
 
@@ -79,10 +102,10 @@ export function PotentialSimulator() {
   };
 
   const handleReset = () => {
-    setFlameType("powerful");
-    setEquipmentCategory("weapon");
-    setEquipmentLevel(140);
-    setHeartGrade(2);
+    setFlameType(null);
+    setEquipmentCategory(null);
+    setEquipmentLevel(null);
+    setHeartGrade(null);
     setLatestResult(null);
     setTotalRollCount(0);
     setIsPowerfulTwoLineLocked(false);
@@ -99,8 +122,9 @@ export function PotentialSimulator() {
           availableLevels={availableLevels}
           isHeartCategory={isHeartCategory}
           isFixedLevelCategory={isFixedLevelCategory}
+          canRoll={isReadyToRoll}
           onFlameTypeChange={setFlameType}
-          onEquipmentCategoryChange={setEquipmentCategory}
+          onEquipmentCategoryChange={handleEquipmentCategoryChange}
           onHeartGradeChange={setHeartGrade}
           onEquipmentLevelChange={setEquipmentLevel}
           onRoll={handleRoll}

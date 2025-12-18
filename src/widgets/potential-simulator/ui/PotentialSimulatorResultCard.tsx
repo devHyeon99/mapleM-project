@@ -45,8 +45,8 @@ type Props = {
   flameLabel: string;
   equipmentLabel: string;
   isHeartCategory: boolean;
-  heartGrade: HeartGrade;
-  selectedLevel: EquipmentLevel;
+  heartGrade: HeartGrade | null;
+  selectedLevel: EquipmentLevel | null;
   totalRollCount: number;
   latestResult: SimulationResult | null;
 };
@@ -71,7 +71,15 @@ export function PotentialSimulatorResultCard({
           <SummaryRow label="장비 분류" value={equipmentLabel} />
           <SummaryRow
             label={isHeartCategory ? "기계심장 등급" : "장비 레벨"}
-            value={isHeartCategory ? `${heartGrade}등급` : `${selectedLevel}`}
+            value={
+              isHeartCategory
+                ? heartGrade
+                  ? `${heartGrade}등급`
+                  : "-"
+                : selectedLevel
+                  ? `${selectedLevel}`
+                  : "-"
+            }
           />
           <SummaryRow label="총 시행" value={`${totalRollCount}회`} />
 

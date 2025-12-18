@@ -4,7 +4,7 @@ import { PotentialSimulator } from "@/widgets/potential-simulator";
 
 export const metadata: Metadata = {
   title: "메이플스토리M 추가옵션 시뮬레이션",
-  description: "추가옵션 결과를 비교하는 시뮬레이션입니다.",
+  description: "메이플스토리M 환생의 불꽃 추가옵션 시뮬레이션입니다.",
   alternates: {
     canonical: "/tools/potential",
   },

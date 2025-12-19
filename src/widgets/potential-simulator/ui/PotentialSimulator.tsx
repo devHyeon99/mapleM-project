@@ -62,9 +62,15 @@ export function PotentialSimulator() {
     flameType != null &&
     equipmentCategory != null &&
     (isHeartCategory ? heartGrade != null : selectedLevel != null);
+  const resetResultState = () => {
+    setLatestResult(null);
+    setTotalRollCount(0);
+    setIsPowerfulTwoLineLocked(false);
+  };
 
   const handleEquipmentCategoryChange = (value: EquipmentCategory) => {
     setEquipmentCategory(value);
+    resetResultState();
 
     if (value === "heart") {
       setEquipmentLevel(null);
@@ -73,6 +79,16 @@ export function PotentialSimulator() {
 
     setHeartGrade(null);
     setEquipmentLevel(value === "watch" ? 200 : null);
+  };
+
+  const handleEquipmentLevelChange = (value: EquipmentLevel) => {
+    setEquipmentLevel(value);
+    resetResultState();
+  };
+
+  const handleHeartGradeChange = (value: HeartGrade) => {
+    setHeartGrade(value);
+    resetResultState();
   };
 
   const handleRoll = () => {
@@ -126,8 +142,8 @@ export function PotentialSimulator() {
           canRoll={isReadyToRoll}
           onFlameTypeChange={setFlameType}
           onEquipmentCategoryChange={handleEquipmentCategoryChange}
-          onHeartGradeChange={setHeartGrade}
-          onEquipmentLevelChange={setEquipmentLevel}
+          onHeartGradeChange={handleHeartGradeChange}
+          onEquipmentLevelChange={handleEquipmentLevelChange}
           onRoll={handleRoll}
           onReset={handleReset}
         />

@@ -41,8 +41,8 @@ export function ToolsHub({ children }: ToolsHubProps) {
                   href={link.href}
                   aria-current={active ? "page" : undefined}
                   className={cn(
-                    "text-muted-foreground flex h-11 items-center justify-center border-b-2 border-transparent px-3 py-6 text-sm font-medium transition-colors outline-none md:text-base",
-                    "hover:border-orange-500 focus-visible:border-orange-500 focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2",
+                    "text-muted-foreground flex h-11 items-center justify-center border-b-2 border-transparent px-3 py-6 text-sm font-medium transition-colors outline-none md:text-[15px]",
+                    "hover:border-orange-500 focus-visible:border-orange-500 focus-visible:ring-2",
                     active &&
                       "text-foreground border-orange-500 hover:border-orange-500",
                   )}

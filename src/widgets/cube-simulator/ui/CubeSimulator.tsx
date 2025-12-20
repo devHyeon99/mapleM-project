@@ -2,6 +2,7 @@
 
 import { CubeSettingsCard } from "./CubeSettingsCard";
 import { CubeSummaryCard } from "./CubeSummaryCard";
+import { CubeSimulatorHelpCard } from "./CubeSimulatorHelpCard";
 
 import { useCubeSimulatorController } from "../model/controller/use-cube-simulator-controller";
 
@@ -41,6 +42,7 @@ export function CubeSimulator() {
           totalRollCount={state.totalRollCount}
           upgradeProgress={state.upgradeProgress}
         />
+        <CubeSimulatorHelpCard />
       </div>
     </section>
   );

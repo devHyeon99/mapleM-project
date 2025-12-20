@@ -108,7 +108,7 @@ export function CubeSettingsCard({
         <CardTitle className="text-lg">큐브 설정</CardTitle>
         <div className="flex flex-wrap gap-2">
           <Button type="button" size="sm" onClick={onRoll} disabled={!canRoll}>
-            큐브 사용
+            실행
           </Button>
           <Button type="button" size="sm" variant="outline" onClick={onReset}>
             초기화

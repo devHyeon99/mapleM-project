@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { CubeSimulatorClient } from "@/widgets/cube-simulator/ui/CubeSimulatorClient";
+import { CubeSimulator } from "@/widgets/cube-simulator";
 
 export const metadata: Metadata = {
   title: "메이플스토리M 큐브 시뮬레이터",
@@ -51,7 +51,7 @@ export default function CubePage() {
         </p>
       </header>
 
-      <CubeSimulatorClient />
+      <CubeSimulator />
     </section>
   );
 }

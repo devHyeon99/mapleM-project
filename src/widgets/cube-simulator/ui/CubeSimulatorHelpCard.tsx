@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export function CubeSimulatorHelpCard() {
   return (
-    <Card className="col-span-2 gap-4 rounded-xs border-none py-4">
+    <Card className="gap-4 rounded-xs border-none py-4 lg:col-span-2">
       <CardHeader className="flex justify-between px-4">
         <CardTitle className="text-lg">큐브 시뮬레이터 도움말</CardTitle>
         <Link

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { ToolComingSoonCard } from "@/widgets/tools-hub/ui/ToolComingSoonCard";
+import { StarforceSimulator } from "@/widgets/starforce-simulator";
 
 export const metadata: Metadata = {
   title: "메이플스토리M 스타포스 강화 시뮬레이션",
@@ -12,13 +12,13 @@ export const metadata: Metadata = {
 
 export default function StarforcePage() {
   return (
-    <section className="space-y-3">
-      <h1 className="sr-only">스타포스 강화 시뮬레이션</h1>
-      <p className="sr-only">스타포스 강화 결과를 계산하는 화면입니다.</p>
-      <ToolComingSoonCard
-        title="스타포스 강화 시뮬레이션"
-        description="강화 비용과 성공/파괴 결과를 시뮬레이션할 예정입니다."
-      />
+    <section className="space-y-4">
+      <header className="sr-only">
+        <h1>스타포스 강화 시뮬레이션</h1>
+        <p>스타포스 강화 확률을 기반으로 결과를 시뮬레이션할 수 있습니다.</p>
+      </header>
+
+      <StarforceSimulator />
     </section>
   );
 }

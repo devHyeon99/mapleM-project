@@ -1,10 +1,20 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/shared/ui/card";
+import Link from "next/link";
 
 export function StarforceSimulatorHelpCard() {
   return (
     <Card className="gap-4 rounded-xs border-none py-4 lg:col-span-2">
       <CardHeader className="flex justify-between px-4">
         <CardTitle className="text-lg">스타포스 확률표</CardTitle>
+        <Link
+          className="self-end text-sm font-medium"
+          prefetch={false}
+          href="https://m.nexon.com/probability/5782?language=ko&theme="
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          확률표 보기
+        </Link>
       </CardHeader>
       <CardContent className="space-y-4 px-4">
         <div className="bg-secondary grid gap-1 rounded-xs p-4 text-sm shadow-sm">

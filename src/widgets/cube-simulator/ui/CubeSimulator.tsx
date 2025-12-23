@@ -1,7 +1,7 @@
 "use client";
 
 import { CubeSettingsCard } from "./CubeSettingsCard";
-import { CubeSummaryCard } from "./CubeSummaryCard";
+import { CubeResultCard } from "./CubeResultCard";
 import { CubeSimulatorHelpCard } from "./CubeSimulatorHelpCard";
 
 import { useCubeSimulatorController } from "../model/controller/use-cube-simulator-controller";
@@ -23,7 +23,6 @@ export function CubeSimulator() {
           cubeTypeOptions={view.cubeTypeOptions}
           equipmentTypeOptions={view.equipmentTypeOptions}
           tierOptions={view.tierOptions}
-          latestRoll={state.latestRoll}
           isDataLoading={state.isDataLoading}
           canRoll={state.canRoll}
           onPotentialModeChange={actions.onPotentialModeChange}
@@ -35,11 +34,14 @@ export function CubeSimulator() {
           onReset={actions.onReset}
         />
 
-        <CubeSummaryCard
+        <CubeResultCard
+          potentialMode={state.potentialMode}
           cubeType={state.cubeType}
           tier={state.tier}
           potentialData={state.potentialData}
+          latestRoll={state.latestRoll}
           totalRollCount={state.totalRollCount}
+          cubeUsageCounts={state.cubeUsageCounts}
           upgradeProgress={state.upgradeProgress}
         />
         <CubeSimulatorHelpCard />

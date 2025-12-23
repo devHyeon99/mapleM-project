@@ -11,12 +11,9 @@ import {
   SelectValue,
 } from "@/shared/ui/select";
 
-import { POTENTIAL_TIER_LABELS } from "../model/domain/constants";
 import type { PotentialMode } from "../model/domain/types";
-import type { CubeRollResult, CubeType } from "../model/domain/types";
+import type { CubeType } from "../model/domain/types";
 import type { PotentialTier } from "../model/domain/potential-types";
-
-import { ResultLine } from "./CubeResultLine";
 
 type Option = {
   value: string;
@@ -34,7 +31,6 @@ type Props = {
   cubeTypeOptions: Option[];
   equipmentTypeOptions: Array<{ type: string; label: string }>;
   tierOptions: Option[];
-  latestRoll: CubeRollResult | null;
   isDataLoading: boolean;
   canRoll: boolean;
   onPotentialModeChange: (value: PotentialMode) => void;
@@ -89,7 +85,6 @@ export function CubeSettingsCard({
   cubeTypeOptions,
   equipmentTypeOptions,
   tierOptions,
-  latestRoll,
   isDataLoading,
   canRoll,
   onPotentialModeChange,
@@ -100,20 +95,10 @@ export function CubeSettingsCard({
   onRoll,
   onReset,
 }: Props) {
-  const currentTierLabel = tier ? POTENTIAL_TIER_LABELS[tier] : "-";
-
   return (
     <Card className="gap-4 rounded-xs border-none py-4">
       <CardHeader className="flex flex-row items-center justify-between px-4">
         <CardTitle className="text-lg">큐브 설정</CardTitle>
-        <div className="flex flex-wrap gap-2">
-          <Button type="button" size="sm" onClick={onRoll} disabled={!canRoll}>
-            실행
-          </Button>
-          <Button type="button" size="sm" variant="outline" onClick={onReset}>
-            초기화
-          </Button>
-        </div>
       </CardHeader>
       <CardContent className="flex flex-1 flex-col gap-4 px-4">
         <div className="grid grid-cols-2 gap-4">
@@ -195,35 +180,22 @@ export function CubeSettingsCard({
               </SelectItem>
             ))}
           </SelectField>
-
-          <div className="flex h-4 items-center justify-end gap-2 self-end text-sm">
-            <Label className="text-muted-foreground">현재 등급</Label>
-
-            <p>{currentTierLabel}</p>
+        </div>
+        <div className="flex justify-end gap-2">
+          <Button type="button" size="sm" onClick={onRoll} disabled={!canRoll}>
+            실행
+          </Button>
+          <Button type="button" size="sm" variant="outline" onClick={onReset}>
+            초기화
+          </Button>
+        </div>
+        {isDataLoading ? (
+          <div className="bg-secondary flex flex-1 items-center justify-center p-4 shadow-sm">
+            <p className="text-muted-foreground text-center text-sm">
+              장비 데이터를 불러오는 중입니다.
+            </p>
           </div>
-        </div>
-
-        <div className="bg-secondary flex flex-1 p-4 shadow-sm">
-          {isDataLoading ? (
-            <div className="flex flex-1 items-center justify-center">
-              <p className="text-muted-foreground text-center text-sm">
-                장비 데이터를 불러오는 중입니다.
-              </p>
-            </div>
-          ) : latestRoll ? (
-            <div className="grid flex-1 gap-4">
-              {latestRoll.lines.map((line) => (
-                <ResultLine key={line.slot} line={line} />
-              ))}
-            </div>
-          ) : (
-            <div className="flex flex-1 items-center justify-center">
-              <p className="text-muted-foreground text-center text-sm">
-                최근 큐브 사용 결과가 없습니다.
-              </p>
-            </div>
-          )}
-        </div>
+        ) : null}
       </CardContent>
     </Card>
   );

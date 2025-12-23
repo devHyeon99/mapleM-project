@@ -23,11 +23,25 @@ type UpgradeProgress = {
   unique: number | null;
 };
 
+type CubeUsageCounts = {
+  red: number;
+  black: number;
+  additional: number;
+  whiteAdditional: number;
+};
+
 // 등급업 몇번만에 되었는지 체크하는 기본값
 const EMPTY_UPGRADE_PROGRESS: UpgradeProgress = {
   rare: null,
   epic: null,
   unique: null,
+};
+
+const EMPTY_CUBE_USAGE_COUNTS: CubeUsageCounts = {
+  red: 0,
+  black: 0,
+  additional: 0,
+  whiteAdditional: 0,
 };
 
 // 큐브 시뮬레이션 상태값
@@ -49,6 +63,10 @@ export function useCubeSimulatorState() {
   const [attemptsSinceTierUp, setAttemptsSinceTierUp] = useState(0);
   // 총 큐브 시행 횟수 값
   const [totalRollCount, setTotalRollCount] = useState(0);
+  // 레드/블랙 큐브 사용 횟수
+  const [cubeUsageCounts, setCubeUsageCounts] = useState<CubeUsageCounts>(
+    EMPTY_CUBE_USAGE_COUNTS,
+  );
 
   // 장비 종류 목록 ( 예: 무기, 한벌옷, 상의... )
   // 본메 언더 컨트롤 하트가 나오기 전이라 에디셔널이 170레벨 이상부터 가능이라 적합한 하트가 아직 없어서 모드에 따라 장비 종류 목록이 바뀜
@@ -72,6 +90,7 @@ export function useCubeSimulatorState() {
     setTotalRollCount(0);
     setLatestRoll(null);
     setUpgradeProgress(EMPTY_UPGRADE_PROGRESS);
+    setCubeUsageCounts(EMPTY_CUBE_USAGE_COUNTS);
   }, []);
 
   // 로드된 잠재 데이터를 기준으로 실행 결과를 상태에 반영
@@ -89,6 +108,10 @@ export function useCubeSimulatorState() {
 
       setTier(roll.resolvedTier);
       setTotalRollCount((count) => count + 1);
+      setCubeUsageCounts((prev) => ({
+        ...prev,
+        [cubeType]: prev[cubeType] + 1,
+      }));
       // 등급업에 따른 등급업 시도 횟수 초기화
       setAttemptsSinceTierUp(
         roll.startingTier !== roll.resolvedTier ? 0 : nextAttempt,
@@ -176,6 +199,7 @@ export function useCubeSimulatorState() {
       latestRoll,
       upgradeProgress,
       totalRollCount,
+      cubeUsageCounts,
     },
     view: {
       equipmentTypeOptions,

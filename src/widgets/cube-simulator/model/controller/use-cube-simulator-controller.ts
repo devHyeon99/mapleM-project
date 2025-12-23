@@ -45,6 +45,7 @@ export function useCubeSimulatorController() {
       equipmentLevel: state.equipmentLevel,
       latestRoll: state.latestRoll,
       totalRollCount: state.totalRollCount,
+      cubeUsageCounts: state.cubeUsageCounts,
       upgradeProgress: state.upgradeProgress,
       potentialData,
       availableLevels,

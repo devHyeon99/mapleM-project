@@ -90,19 +90,11 @@ export function PotentialSimulatorSettingsCard({
 }: Props) {
   return (
     <Card className="gap-4 rounded-xs border-none py-4">
-      <CardHeader className="flex flex-row items-center justify-between px-4">
+      <CardHeader className="px-4">
         <CardTitle className="text-lg">환생의 불꽃 설정</CardTitle>
-        <div className="flex gap-2">
-          <Button type="button" size="sm" onClick={onRoll} disabled={!canRoll}>
-            실행
-          </Button>
-          <Button type="button" size="sm" variant="outline" onClick={onReset}>
-            초기화
-          </Button>
-        </div>
       </CardHeader>
       <CardContent className="grid gap-4 px-4">
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <div className="grid grid-cols-2 gap-4">
           <SelectField
             id="flame-type"
             label="환생의 불꽃 종류"
@@ -175,6 +167,14 @@ export function PotentialSimulatorSettingsCard({
               ))}
             </SelectField>
           )}
+        </div>
+        <div className="flex justify-end gap-2">
+          <Button type="button" size="sm" onClick={onRoll} disabled={!canRoll}>
+            실행
+          </Button>
+          <Button type="button" size="sm" variant="outline" onClick={onReset}>
+            초기화
+          </Button>
         </div>
       </CardContent>
     </Card>

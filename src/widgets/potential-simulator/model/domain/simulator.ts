@@ -51,14 +51,13 @@ function sampleValue(min: number, max: number, step: number) {
   return (minTick + offset * stepTick) / scale;
 }
 
-// 옵션 풀에서 중복 없이 count개를 무작위로 선택
-function pickDistinctOptions(options: OptionDefinition[], count: number) {
-  const pool = [...options];
+// 옵션 풀에서 count개를 무작위로 선택 (복원 추출)
+function pickOptions(options: OptionDefinition[], count: number) {
   const selected: OptionDefinition[] = [];
 
-  for (let idx = 0; idx < count && pool.length > 0; idx += 1) {
-    const randomIndex = getRandomIntInclusive(0, pool.length - 1);
-    const [picked] = pool.splice(randomIndex, 1);
+  for (let idx = 0; idx < count && options.length > 0; idx += 1) {
+    const randomIndex = getRandomIntInclusive(0, options.length - 1);
+    const picked = options[randomIndex];
     if (picked) {
       selected.push(picked);
     }
@@ -90,7 +89,7 @@ function resolvePool(input: SimulatorInput): OptionPool | null {
 /**
  * 환생의 불꽃 1회 사용을 시뮬레이션
  * - 1~2줄 결정
- * - 옵션 종류 무작위 선택(중복 없음)
+ * - 옵션 종류 줄별 독립 무작위 선택(중복 가능)
  * - 각 옵션 값을 MIN~MAX 범위에서 step 단위로 균등 샘플링
  */
 export function simulateAdditionalOption(
@@ -104,7 +103,7 @@ export function simulateAdditionalOption(
   const twoLineChance = TWO_LINE_PROBABILITY[input.flameType];
   const lineCount: 1 | 2 =
     input.forceTwoLines || Math.random() < twoLineChance ? 2 : 1;
-  const pickedOptions = pickDistinctOptions(optionPool.options, lineCount);
+  const pickedOptions = pickOptions(optionPool.options, lineCount);
 
   const rolledOptions: RolledOption[] = pickedOptions
     .map((option) => {

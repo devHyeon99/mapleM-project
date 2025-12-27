@@ -5,7 +5,7 @@ import { CubeSimulator } from "@/widgets/cube-simulator";
 export const metadata: Metadata = {
   title: "메이플스토리M 큐브 시뮬레이터",
   description:
-    "메이플스토리M 큐브 잠재옵션 확률표를 기준으로 큐브 시뮬레이션을 진행 할 수 있습니다.",
+    "메이플스토리M 큐브 잠재옵션 확률표를 기준으로 큐브 시뮬레이션을 진행할 수 있습니다.",
   alternates: {
     canonical: "/tools/cube",
   },
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "메이플스토리M 큐브 시뮬레이터",
     description:
-      "메이플스토리M 큐브 잠재옵션 확률표를 기준으로 큐브 시뮬레이션을 진행 할 수 있습니다.",
+      "메이플스토리M 큐브 잠재옵션 확률표를 기준으로 큐브 시뮬레이션을 진행할 수 있습니다.",
     url: "/tools/cube",
     images: [
       {
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "메이플스토리M 큐브 시뮬레이터",
     description:
-      "메이플스토리M 큐브 잠재옵션 확률표를 기준으로 큐브 시뮬레이션을 진행 할 수 있습니다",
+      "메이플스토리M 큐브 잠재옵션 확률표를 기준으로 큐브 시뮬레이션을 진행할 수 있습니다.",
     images: ["/og-image.png"],
   },
 };
@@ -46,8 +46,8 @@ export default function CubePage() {
       <header className="sr-only">
         <h1>메이플스토리M 큐브 시뮬레이터</h1>
         <p>
-          메이플스토리M 큐브 잠재옵션 확률표를 기준으로 큐브 시뮬레이션을 진행
-          할 수 있습니다.
+          메이플스토리M 큐브 잠재옵션 확률표를 기준으로 큐브 시뮬레이션을
+          진행할 수 있습니다.
         </p>
       </header>
 

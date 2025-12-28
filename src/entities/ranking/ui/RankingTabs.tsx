@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Tabs, TabsList, TabsTrigger } from "@/shared/ui/tabs";
+import { cn } from "@/shared/lib/utils";
 import { RANKING_TYPES } from "../model/types/ranking";
 import { RANKING_LABELS } from "../model/constants";
 
@@ -11,30 +11,36 @@ export function RankingTabs() {
 
   // /ranking 은 기본적으로 level 탭을 활성화한다.
   const lastSegment = pathname.split("/").pop() || "";
-  const activeType = RANKING_TYPES.includes(lastSegment as (typeof RANKING_TYPES)[number])
+  const activeType = RANKING_TYPES.includes(
+    lastSegment as (typeof RANKING_TYPES)[number],
+  )
     ? (lastSegment as (typeof RANKING_TYPES)[number])
     : "level";
 
   return (
-    <Tabs value={activeType} className="w-full pt-2">
-      <TabsList className="grid h-auto w-full grid-cols-3 gap-1 rounded-xs border-b bg-transparent px-0! py-0 md:grid-cols-9">
+    <nav
+      aria-label="랭킹 종류 이동"
+      className="border-border bg-card mt-2 w-full border-b shadow-sm"
+    >
+      <ul className="grid list-none grid-cols-3 gap-1 md:grid-cols-9">
         {RANKING_TYPES.map((type) => (
-          <TabsTrigger
-            className="hover:data-[state=inactive]:text-foreground h-10 rounded-none border-2 border-t-0 border-r-0 border-l-0 bg-transparent! transition-colors duration-150 data-[state=active]:border-b-orange-500! data-[state=active]:shadow-none data-[state=inactive]:text-black/60 hover:data-[state=inactive]:border-b-orange-500"
-            key={type}
-            value={type}
-            asChild
-          >
+          <li key={type}>
             <Link
-              className="md:text-[15px]!"
+              aria-current={activeType === type ? "page" : undefined}
+              className={cn(
+                "text-muted-foreground flex h-11 items-center justify-center border-b-2 border-transparent px-3 py-6 text-sm font-medium transition-colors outline-none md:text-[15px]",
+                "hover:border-orange-500 focus-visible:border-orange-500 focus-visible:ring-2",
+                activeType === type &&
+                  "text-foreground border-orange-500 hover:border-orange-500",
+              )}
               href={type === "level" ? "/ranking" : `/ranking/${type}`}
               prefetch={false}
             >
               {RANKING_LABELS[type]}
             </Link>
-          </TabsTrigger>
+          </li>
         ))}
-      </TabsList>
-    </Tabs>
+      </ul>
+    </nav>
   );
 }

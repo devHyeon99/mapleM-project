@@ -30,13 +30,21 @@ export function HeaderNav() {
             aria-label={getNavLinkAriaLabel(link)}
             aria-current={isActive ? "page" : undefined}
             className={cn(
-              "hover:text-foreground text-lg transition-colors",
+              "hover:text-foreground inline-flex items-start gap-1 text-lg transition-colors",
               isActive
                 ? "text-foreground font-semibold"
                 : "text-muted-foreground",
             )}
           >
-            {link.label}
+            <span>{link.label}</span>
+            {link.href === "/tools" ? (
+              <span
+                aria-hidden="true"
+                className="bg-orange-500 text-background rounded-full px-1 py-0.5 text-[10px] leading-none font-bold"
+              >
+                N
+              </span>
+            ) : null}
           </Link>
         );
       })}

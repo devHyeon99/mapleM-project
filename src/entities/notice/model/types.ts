@@ -10,3 +10,13 @@ export interface NoticeData {
   event_notice: NoticeItem[];
   patch_notice: NoticeItem[];
 }
+
+export interface SiteNoticeItem {
+  id: string;
+  title: string;
+  content: string;
+  importance: number;
+  created_at: string;
+  start_at: string | null;
+  end_at: string | null;
+}

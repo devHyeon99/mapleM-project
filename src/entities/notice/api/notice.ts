@@ -3,11 +3,11 @@ import { nexonFetch } from "@/shared/api/nexon/server";
 import { handleCommonNexonError } from "@/shared/api/nexon/handler";
 import { NoticeItem, NoticeData } from "../model/types";
 
-const NOTICE_REVALIDATE_SECONDS = 3600;
+const NOTICE_REVALIDATE_SECONDS = 600;
 
 /**
  * 공지사항, 이벤트, 패치노트를 병렬로 가져와 통합
- * 캐시 시간: 3600초 (1시간)
+ * 캐시 시간: 600초 (10분)
  */
 export async function getCombinedNotices(): Promise<NoticeData> {
   try {

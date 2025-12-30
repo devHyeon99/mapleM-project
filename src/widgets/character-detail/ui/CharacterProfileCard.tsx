@@ -61,13 +61,7 @@ export const CharacterProfileCard = ({ data }: CharacterProfileCardProps) => {
       className="bg-card relative w-full flex-col rounded-xs p-4 shadow-sm sm:p-6"
       aria-label={`${data.character_name} 캐릭터 상세정보`}
     >
-      {/* 랭킹 업데이트 날짜 */}
-      {data.level_ranking && (
-        <div className="text-muted-foreground absolute top-3 left-4 text-xs font-semibold sm:left-6">
-          랭킹 업데이트 - {data.level_ranking?.date.replace(/-/g, ".")}
-        </div>
-      )}
-      <div className="mt-4 flex w-full flex-col items-center gap-4 sm:flex-row sm:items-start">
+      <div className="flex w-full flex-col items-center gap-4 sm:flex-row sm:items-start">
         <div className="flex w-full shrink-0 flex-col items-center gap-2 sm:w-44">
           {/* 캐릭터 이미지 */}
           {data.character_image && (
@@ -151,6 +145,10 @@ export const CharacterProfileCard = ({ data }: CharacterProfileCardProps) => {
               label="마지막 로그아웃"
               date={data.character_date_last_logout}
               withTime
+            />
+            <InfoDateRow
+              label="랭킹 업데이트"
+              date={data.level_ranking?.date}
             />
           </div>
         </dl>

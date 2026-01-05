@@ -28,7 +28,7 @@ export function RankingTabs() {
             <Link
               aria-current={activeType === type ? "page" : undefined}
               className={cn(
-                "text-muted-foreground flex h-11 items-center justify-center border-b-2 border-transparent px-3 py-6 text-sm font-medium transition-colors outline-none md:text-[15px]",
+                "text-muted-foreground flex h-11 items-center justify-center border-b-2 border-transparent px-3 py-6 text-sm font-medium whitespace-nowrap transition-colors outline-none md:text-[15px]",
                 "hover:border-orange-500 focus-visible:border-orange-500 focus-visible:ring-2",
                 activeType === type &&
                   "text-foreground border-orange-500 hover:border-orange-500",

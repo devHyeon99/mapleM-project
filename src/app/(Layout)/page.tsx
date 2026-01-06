@@ -3,11 +3,19 @@ import { getCombinedNotices } from "@/entities/notice/api/notice";
 import { getSiteNotices } from "@/entities/notice/api/site-notice";
 import { SiteNoticeList } from "@/entities/notice/ui/SiteNoticeList";
 import { NoticeGrid } from "@/widgets/notice-grid/ui/NoticeGrid";
-import type { SiteNoticeItem } from "@/entities/notice/model/types";
+import type { NoticeData, SiteNoticeItem } from "@/entities/notice/model/types";
 
 export default async function Home() {
-  const [noticeData, siteNoticeResult] = await Promise.all([
-    getCombinedNotices(),
+  const [noticeResult, siteNoticeResult] = await Promise.all([
+    getCombinedNotices()
+      .then((data) => ({ data, error: null as string | null }))
+      .catch((error: unknown) => ({
+        data: null as NoticeData | null,
+        error:
+          error instanceof Error
+            ? error.message
+            : "넥슨 공지사항을 불러오지 못했습니다.",
+      })),
     getSiteNotices()
       .then((items) => ({ items, error: null as string | null }))
       .catch((error: unknown) => ({
@@ -62,7 +70,7 @@ export default async function Home() {
         <h2 id="notice-heading" className="sr-only">
           메이플스토리M 공지사항 및 주요 소식
         </h2>
-        <NoticeGrid data={noticeData} />
+        <NoticeGrid data={noticeResult.data} error={noticeResult.error} />
       </section>
     </div>
   );

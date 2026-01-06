@@ -2,12 +2,33 @@
 
 import { NoticeCard } from "@/entities/notice/ui/NoticeCard";
 import type { NoticeData } from "@/entities/notice/model/types";
+import { Card, CardContent, CardHeader, CardTitle } from "@/shared/ui/card";
 
 interface NoticeGridProps {
-  data: NoticeData;
+  data: NoticeData | null;
+  error: string | null;
 }
 
-export function NoticeGrid({ data }: NoticeGridProps) {
+export function NoticeGrid({ data, error }: NoticeGridProps) {
+  if (error || !data) {
+    return (
+      <section className="flex w-full justify-center">
+        <div className="w-full max-w-[1080px]">
+          <Card className="gap-2 rounded-xs border-none">
+            <CardHeader>
+              <CardTitle className="text-lg font-bold">공지사항</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground text-sm">
+                {error ?? "넥슨 공지사항을 불러오는 중 오류가 발생했습니다."}
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+    );
+  }
+
   // 넥슨 API 데이터를 NoticeCard가 요구하는 인터페이스로 변환하는 헬퍼
   const formatItems = (items: NoticeData[keyof NoticeData]) => {
     return items.map((item) => ({

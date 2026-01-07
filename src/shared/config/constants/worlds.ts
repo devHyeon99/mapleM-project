@@ -1,5 +1,7 @@
+export const ALL_WORLD_NAME = "전체" as const;
+
 export const WORLD_NAMES = [
-  "전체",
+  ALL_WORLD_NAME,
   "스카니아",
   "루나",
   "제니스",

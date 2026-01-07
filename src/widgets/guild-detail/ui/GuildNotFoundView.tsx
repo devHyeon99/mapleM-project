@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { useRecentSearch } from "@/shared/lib/hooks/useRecentSearch";
-import { GuildSearch } from "@/features/guild-search/ui/GuildSearch";
+import { GuildSearch } from "@/features/guild-search";
 import { AlertTriangle } from "lucide-react";
 
 export function GuildNotFoundView() {

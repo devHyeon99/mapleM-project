@@ -8,7 +8,7 @@ import { Card, CardContent } from "@/shared/ui/card";
 import { cn } from "@/shared/lib/utils";
 import { useRecentSearch } from "@/shared/lib/hooks/useRecentSearch";
 import { WORLD_NAMES } from "@/shared/config/constants/worlds";
-import type { CharacterOcidData } from "@/entities/character/model/types";
+import type { CharacterOcidData } from "@/entities/character";
 
 type WorldName = (typeof WORLD_NAMES)[number];
 

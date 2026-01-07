@@ -5,7 +5,7 @@ import { GuildCard } from "@/entities/guild/ui/GuildCard";
 import { GuildSkillCard } from "@/entities/guild/ui/GuildSkillCard";
 import { GuildBuildingCard } from "@/entities/guild/ui/GuildBuildingCard";
 import { GuildAbilityList } from "@/entities/guild/ui/GuildAbilityList";
-import { GuildSearch } from "@/features/guild-search/ui/GuildSearch";
+import { GuildSearch } from "@/features/guild-search";
 import type { Guild } from "@/entities/guild/model/types";
 
 interface GuildDetailViewProps {

@@ -1,13 +1,12 @@
-import { WORLD_NAMES } from "@/shared/config/constants/worlds";
+import { ALL_WORLD_NAME, WORLD_NAMES } from "@/shared/config/constants/worlds";
 import { fetchOcid } from "@/shared/api/character/ocid.server";
 import type { CharacterOcidData } from "@/entities/character";
-import { normalizeCharacterName } from "@/shared/lib/character";
 import { unstable_cache } from "next/cache";
 
 const SEARCH_ALL_CACHE_SECONDS = 60 * 5;
 
 async function searchAllWorlds(name: string): Promise<CharacterOcidData[]> {
-  const worlds = WORLD_NAMES.filter((w) => w !== "전체");
+  const worlds = WORLD_NAMES.filter((w) => w !== ALL_WORLD_NAME);
 
   const settled = await Promise.allSettled(
     worlds.map((world) => fetchOcid(world, name)),
@@ -21,15 +20,7 @@ async function searchAllWorlds(name: string): Promise<CharacterOcidData[]> {
     .map((r) => r.value)
     .filter((v): v is CharacterOcidData => v !== null);
 
-  if (characters.length > 0) return characters;
-
-  const rejected = settled.filter(
-    (r): r is PromiseRejectedResult => r.status === "rejected",
-  );
-
-  if (rejected.length > 0) throw rejected[0].reason;
-
-  return [];
+  return characters;
 }
 
 const getCharacterSearchAllCached = unstable_cache(
@@ -39,6 +30,7 @@ const getCharacterSearchAllCached = unstable_cache(
 );
 
 export async function getCharacterSearchAll(name: string) {
-  const normalized = normalizeCharacterName(name);
+  const normalized = name.trim();
+  if (!normalized) return [];
   return getCharacterSearchAllCached(normalized);
 }

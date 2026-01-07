@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { useRecentSearch } from "@/shared/lib/hooks/useRecentSearch";
-import { CharacterSearch } from "@/features/character-search/ui/CharacterSearch";
+import { CharacterSearch } from "@/features/character-search";
 import { AlertTriangle } from "lucide-react";
 
 export function CharacterNotFoundView() {

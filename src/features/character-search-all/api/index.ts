@@ -1,1 +1,1 @@
-export { getCharacterSearchAll } from "./api.server";
+export { getCharacterSearchAll } from "./getCharacterSearchAll";

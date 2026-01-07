@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { GuildSearch } from "@/features/guild-search/ui/GuildSearch";
+import { GuildSearch } from "@/features/guild-search";
 
 export const metadata: Metadata = {
   title: "메이플스토리M 길드 검색",

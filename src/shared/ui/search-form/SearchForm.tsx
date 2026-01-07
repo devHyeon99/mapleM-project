@@ -1,7 +1,7 @@
 "use client";
 
 import { useId } from "react";
-import { useSearchForm } from "../model/useSearchForm";
+import { useSearchForm } from "@/shared/lib/hooks/useSearchForm";
 import {
   SearchFormField,
   type SearchFormFieldSlotClassNames,

@@ -2,7 +2,8 @@
 
 import { useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { SearchForm } from "@/features/search-form";
+import { SearchForm } from "@/shared/ui/search-form";
+import { ALL_WORLD_NAME } from "@/shared/config/constants/worlds";
 
 const VALIDATION_REGEX = /^[a-zA-Z0-9가-힣]{2,8}$/;
 const VALIDATION_ERROR_MESSAGE =
@@ -22,10 +23,9 @@ export const CharacterSearch = () => {
     if (isPending) return;
 
     const normalized = normalizeName(name);
-    if (!VALIDATION_REGEX.test(normalized)) return;
 
     const path =
-      world === "전체"
+      world === ALL_WORLD_NAME
         ? `/characters/${encodeURIComponent(normalized)}`
         : `/character/${encodeURIComponent(world)}/${encodeURIComponent(normalized)}`;
 

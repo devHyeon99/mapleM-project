@@ -2,7 +2,7 @@
 
 import { useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { SearchForm } from "@/features/search-form";
+import { SearchForm } from "@/shared/ui/search-form";
 
 const VALIDATION_REGEX = /^[a-zA-Z0-9가-힣]{2,12}$/;
 const VALIDATION_ERROR_MESSAGE =

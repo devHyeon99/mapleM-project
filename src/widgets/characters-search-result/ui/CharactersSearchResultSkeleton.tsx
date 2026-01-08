@@ -1,10 +1,8 @@
-interface CharactersSearchResultSkeletonProps {
-  name: string;
-}
-
 export function CharactersSearchResultSkeleton({
-  name,
-}: CharactersSearchResultSkeletonProps) {
+  name = "검색어",
+}: {
+  name?: string;
+}) {
   return (
     <div className="flex w-full flex-col items-center">
       <div className="flex w-full flex-col items-center gap-1 py-10">

@@ -1,11 +1,8 @@
 "use client";
-
-import { useState, useTransition } from "react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRef } from "react";
+import Link, { useLinkStatus } from "next/link";
 import { AlertTriangle, ChevronRight, Loader2 } from "lucide-react";
 import { Card, CardContent } from "@/shared/ui/card";
-import { cn } from "@/shared/lib/utils";
 import { useRecentSearch } from "@/shared/lib/hooks/useRecentSearch";
 import { WORLD_NAMES } from "@/shared/config/constants/worlds";
 import type { CharacterOcidData } from "@/entities/character";
@@ -17,23 +14,26 @@ interface CharactersSearchResultProps {
   characters: CharacterOcidData[];
 }
 
-// 링크 기본 동작(새 탭/중클/수정키)을 보존하면서 "일반 좌클릭"만 가로챔
-function shouldIntercept(e: React.MouseEvent<HTMLAnchorElement>) {
-  if (e.defaultPrevented) return false;
-  if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return false;
-  if (e.button !== 0) return false;
-  return true;
+function LinkStatusIcon() {
+  const { pending } = useLinkStatus();
+
+  return (
+    <div className="text-muted-foreground flex items-center gap-1">
+      {pending ? (
+        <Loader2 className="size-5 animate-spin" />
+      ) : (
+        <ChevronRight className="size-5" aria-hidden="true" />
+      )}
+    </div>
+  );
 }
 
 export function CharactersSearchResult({
   name,
   characters,
 }: CharactersSearchResultProps) {
-  const router = useRouter();
   const { addHistory } = useRecentSearch("character-search-history");
-
-  const [isPending, startTransition] = useTransition();
-  const [pendingOcid, setPendingOcid] = useState<string | null>(null);
+  const isNavigatingRef = useRef(false);
 
   if (!characters || characters.length === 0) {
     return (
@@ -52,8 +52,6 @@ export function CharactersSearchResult({
     );
   }
 
-  const isAnyCardLoading = isPending && pendingOcid !== null;
-
   return (
     <div className="flex w-full flex-col items-center">
       <div className="flex w-full flex-col items-center gap-1 py-10">
@@ -71,42 +69,22 @@ export function CharactersSearchResult({
             char.world_name,
           )}/${encodeURIComponent(char.character_name)}`;
 
-          const isLoadingThisCard = isPending && pendingOcid === char.ocid;
-
           return (
             <Link
               key={char.ocid}
               href={href}
               prefetch={false}
-              onClick={(e) => {
-                // 새 탭/중클/수정키 클릭은 기본 링크 동작 유지
-                if (!shouldIntercept(e)) return;
+              onNavigate={(event) => {
+                if (isNavigatingRef.current) {
+                  event.preventDefault();
+                  return;
+                }
 
-                // 일반 좌클릭만 transition 네비로 가로챔
-                e.preventDefault();
-
-                // transition 중 중복 클릭 방지
-                if (isPending) return;
-
-                // 히스토리 저장
+                isNavigatingRef.current = true;
                 addHistory(char.character_name, char.world_name as WorldName);
-
-                // 어떤 카드가 pending인지 표시용
-                setPendingOcid(char.ocid);
-
-                startTransition(() => {
-                  router.push(href);
-                });
               }}
             >
-              <Card
-                className={cn(
-                  "cursor-pointer rounded-xs border-none py-4 shadow-none dark:hover:bg-white/10",
-                  isAnyCardLoading &&
-                    !isLoadingThisCard &&
-                    "cursor-not-allowed opacity-50 hover:bg-transparent",
-                )}
-              >
+              <Card className="cursor-pointer rounded-xs border-none py-4 shadow-none dark:hover:bg-white/10">
                 <CardContent className="flex items-center justify-between">
                   <div>
                     <p className="text-lg font-semibold">
@@ -116,12 +94,7 @@ export function CharactersSearchResult({
                       {char.world_name}
                     </p>
                   </div>
-                  <div className="text-muted-foreground flex items-center gap-1">
-                    {isLoadingThisCard && (
-                      <Loader2 className="size-5 animate-spin" />
-                    )}
-                    <ChevronRight className="size-5" aria-hidden="true" />
-                  </div>
+                  <LinkStatusIcon />
                 </CardContent>
               </Card>
             </Link>

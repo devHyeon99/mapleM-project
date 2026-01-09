@@ -23,7 +23,7 @@ export function GuildCard({ data }: GuildCardProps) {
 
   return (
     <Card className="w-full rounded-xs border-none">
-      <CardContent className="px-0">
+      <CardContent className="relative px-0">
         <div className="flex flex-col items-center gap-4 md:flex-row md:items-start">
           <GuildMark src={data.guild_mark_icon} name={data.guild_name} />
           <div className="w-full flex-1 space-y-4 text-center md:text-left">
@@ -74,6 +74,9 @@ export function GuildCard({ data }: GuildCardProps) {
             </dl>
           </div>
         </div>
+        <p className="text-muted-foreground absolute top-0 right-6 text-sm">
+          메이플스토리M의 길드 데이터는 평균 15분 후 확인 가능합니다.
+        </p>
       </CardContent>
     </Card>
   );

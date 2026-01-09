@@ -6,31 +6,34 @@ import { Button } from "@/shared/ui/button";
 import { cn } from "@/shared/lib/utils";
 import type { SearchHistoryItem } from "@/shared/lib/hooks/useRecentSearch";
 
-interface SearchHistoryProps {
+interface SearchFormHistoryProps {
   history: SearchHistoryItem[];
   onSelect: (item: SearchHistoryItem) => void;
   onClear: () => void;
   onRemove: (id: string) => void;
   onClose: () => void;
+  containerRef?: React.RefObject<HTMLDivElement | null>;
   listId: string;
   labelId: string;
   className?: string;
 }
 
-export const SearchHistory = ({
+export const SearchFormHistory = ({
   history,
   onSelect,
   onClear,
   onRemove,
   onClose,
+  containerRef,
   listId,
   labelId,
   className,
-}: SearchHistoryProps) => {
+}: SearchFormHistoryProps) => {
   const hasHistory = history.length > 0;
 
   return (
     <div
+      ref={containerRef}
       className={cn(
         "flex h-90 flex-col overflow-hidden rounded-md shadow-md outline-none",
         "text-popover-foreground bg-popover border dark:border-none",
@@ -46,7 +49,7 @@ export const SearchHistory = ({
             variant="ghost"
             size="sm"
             onClick={onClear}
-            className="hover:text-destructive h-auto px-1 py-0 text-sm underline-offset-4 hover:bg-transparent! hover:underline"
+            className="hover:text-destructive h-auto px-1 py-0 text-sm hover:bg-transparent!"
             aria-label="최근 검색 기록 전체 삭제"
           >
             전체삭제
@@ -139,7 +142,7 @@ const HistoryItemRow = ({
         size="icon"
         aria-label={`${item.world} ${item.name} 검색 기록 삭제`}
         className={cn(
-          "text-muted-foreground hover:text-destructive hover:bg-destructive/10 size-6",
+          "text-muted-foreground hover:text-destructive hover:bg-destructive/10 dark:hover:bg-card/50 size-6",
           "opacity-100",
         )}
         onClick={(e) => {

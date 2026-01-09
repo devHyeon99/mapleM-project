@@ -1,18 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import { Loader2, Search } from "lucide-react";
 import { clsx } from "clsx";
 import { Button } from "@/shared/ui/button";
 import { Input } from "@/shared/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/shared/ui/select";
-import { SearchHistory } from "./SearchHistory";
+import { SearchFormHistory } from "./SearchFormHistory";
+import { SearchFormWorldSelect } from "./SearchFormWorldSelect";
+import { useHistoryPanelController } from "./useHistoryPanelController";
 import type { SearchHistoryItem } from "@/shared/lib/hooks/useRecentSearch";
 
 export interface SearchFormFieldSlotClassNames {
@@ -59,28 +53,23 @@ export function SearchFormField({
   slots,
 }: SearchFormFieldProps) {
   const ui = slots ?? {};
-  const [isHistoryOpen, setIsHistoryOpen] = useState(false);
-  const containerRef = useRef<HTMLFormElement>(null);
+  const {
+    isHistoryOpen,
+    containerRef,
+    inputRef,
+    historyPanelRef,
+    openHistory,
+    closeHistory,
+    closeHistoryAndFocusInput,
+    handleInputFocus,
+    handleFormKeyDownCapture,
+  } = useHistoryPanelController();
   const historyListId = `${inputId}-history-list`;
   const historyLabelId = `${inputId}-history-label`;
 
-  useEffect(() => {
-    const handlePointerDown = (event: PointerEvent) => {
-      if (!containerRef.current) return;
-      if (!containerRef.current.contains(event.target as Node)) {
-        setIsHistoryOpen(false);
-      }
-    };
-
-    document.addEventListener("pointerdown", handlePointerDown);
-    return () => {
-      document.removeEventListener("pointerdown", handlePointerDown);
-    };
-  }, []);
-
   return (
     <div className={clsx("flex w-full items-center gap-0", ui.controls)}>
-      <WorldSelect
+      <SearchFormWorldSelect
         value={world}
         onValueChange={onWorldChange}
         options={options}
@@ -89,15 +78,17 @@ export function SearchFormField({
 
       <form
         ref={containerRef}
+        onKeyDownCapture={handleFormKeyDownCapture}
         onSubmit={(e) => {
           e.preventDefault();
           onSubmitSearch(world, inputValue);
-          setIsHistoryOpen(false);
+          closeHistory();
         }}
         className={clsx("relative flex-1", ui.form)}
       >
         <div className="relative w-full">
           <Input
+            ref={inputRef}
             id={inputId}
             value={inputValue}
             placeholder={placeholder}
@@ -106,15 +97,10 @@ export function SearchFormField({
             aria-invalid={isError}
             aria-describedby={isError ? errorId : undefined}
             aria-controls={historyListId}
-            onFocus={() => setIsHistoryOpen(true)}
+            onFocus={handleInputFocus}
             onChange={(e) => {
               onInputValueChange(e.target.value, { reason: "input-change" });
-              setIsHistoryOpen(true);
-            }}
-            onKeyDown={(e) => {
-              if (e.key === "Escape") {
-                setIsHistoryOpen(false);
-              }
+              openHistory();
             }}
             className={clsx(
               "focus-visible:border-border h-14 rounded-l-none rounded-r-3xl pr-12 pl-4 placeholder:text-sm! focus-visible:ring-0 dark:border-none",
@@ -142,15 +128,16 @@ export function SearchFormField({
         </div>
 
         {isHistoryOpen && (
-          <SearchHistory
+          <SearchFormHistory
             history={history}
             onSelect={(item) => {
               onSubmitSearch(item.world, item.name);
-              setIsHistoryOpen(false);
+              closeHistory();
             }}
             onClear={onHistoryClear}
             onRemove={onHistoryRemove}
-            onClose={() => setIsHistoryOpen(false)}
+            onClose={closeHistoryAndFocusInput}
+            containerRef={historyPanelRef}
             listId={historyListId}
             labelId={historyLabelId}
             className={clsx(
@@ -163,37 +150,3 @@ export function SearchFormField({
     </div>
   );
 }
-
-const WorldSelect = ({
-  value,
-  onValueChange,
-  options,
-  disabled,
-}: {
-  value: string;
-  onValueChange: (val: string) => void;
-  options: readonly string[];
-  disabled: boolean;
-}) => {
-  return (
-    <Select value={value} onValueChange={onValueChange}>
-      <SelectTrigger
-        disabled={disabled}
-        className="relative z-0 h-14! w-[130px] shrink-0 rounded-l-3xl rounded-r-none border-r-0! pl-7 focus-visible:z-10 dark:border-0 dark:[&_svg]:text-white! dark:[&_svg]:opacity-100"
-      >
-        <SelectValue placeholder="월드" />
-      </SelectTrigger>
-      <SelectContent
-        position="popper"
-        sideOffset={4}
-        className="-top-1.5 dark:border-none"
-      >
-        {options.map((w) => (
-          <SelectItem key={w} value={w}>
-            {w}
-          </SelectItem>
-        ))}
-      </SelectContent>
-    </Select>
-  );
-};

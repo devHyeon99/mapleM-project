@@ -1,3 +1,4 @@
+import "server-only";
 import { ALL_WORLD_NAME, WORLD_NAMES } from "@/shared/config/constants/worlds";
 import { fetchOcid } from "@/shared/api/character/ocid.server";
 import type { CharacterOcidData } from "@/entities/character";

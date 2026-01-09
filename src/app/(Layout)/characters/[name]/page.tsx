@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { CharacterSearch } from "@/features/character-search";
-import { getCharacterSearchAll } from "@/features/character-search-all";
+import { getCharacterSearchAll } from "@/features/character-search/server";
 import { CharactersSearchResult } from "@/widgets/characters-search-result";
 import { CharactersSearchResultSkeleton } from "@/widgets/characters-search-result";
 

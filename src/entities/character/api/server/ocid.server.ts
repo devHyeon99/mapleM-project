@@ -23,17 +23,16 @@ const fetchOcidCached = unstable_cache(
   { revalidate: OCID_CACHE_SECONDS },
 );
 
-const isOcidNotFoundCached = unstable_cache(
-  async (world: string, name: string): Promise<boolean> => {
+const fetchOcidResultCached = unstable_cache(
+  async (world: string, name: string): Promise<CharacterOcidData | null> => {
     try {
-      await nexonFetch<{ ocid: string }>(buildOcidEndpoint(world, name));
-      return false;
+      return await fetchOcidCached(world, name);
     } catch (e: unknown) {
-      if (isNexonNotFoundError(e)) return true;
+      if (isNexonNotFoundError(e)) return null;
       throw e;
     }
   },
-  ["character-ocid-not-found-v1"],
+  ["character-ocid-result-v1"],
   { revalidate: OCID_NOT_FOUND_CACHE_SECONDS },
 );
 
@@ -42,14 +41,5 @@ export async function fetchOcid(
   world: string,
   name: string,
 ): Promise<CharacterOcidData | null> {
-  if (await isOcidNotFoundCached(world, name)) {
-    return null;
-  }
-
-  try {
-    return await fetchOcidCached(world, name);
-  } catch (e: unknown) {
-    if (isNexonNotFoundError(e)) return null;
-    throw e;
-  }
+  return fetchOcidResultCached(world, name);
 }

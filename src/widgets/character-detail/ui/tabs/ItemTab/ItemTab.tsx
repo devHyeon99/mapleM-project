@@ -1,6 +1,6 @@
 "use client";
 
-import { CharacterDetailData } from "@/entities/character";
+import type { CharacterDetailData } from "@/entities/character/model/types";
 
 import { ItemGrid } from "./ItemGrid";
 import { ItemTabHeader } from "./ItemTabHeader";

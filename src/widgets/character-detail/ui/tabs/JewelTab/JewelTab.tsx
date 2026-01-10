@@ -1,6 +1,6 @@
 "use client";
 
-import { useCharacterJewel } from "@/entities/character";
+import { useCharacterJewel } from "@/entities/character/model/hooks";
 import { LoadingCard } from "@/shared/ui/LoadingCard";
 import { Separator } from "@/shared/ui/separator";
 import { TabMessageSection } from "@/shared/ui/TabMessageSection";

@@ -5,8 +5,8 @@ import { LoadingCard } from "@/shared/ui/LoadingCard";
 import { TabMessageSection } from "@/shared/ui/TabMessageSection";
 import { InfoDescriptionRow } from "@/shared/ui/InfoRow";
 import { cn } from "@/shared/lib/utils";
-import { useCharacterHexaMatrixStat } from "@/entities/character";
-import type { CharacterHexaMatrixStat } from "@/entities/character";
+import { useCharacterHexaMatrixStat } from "@/entities/character/model/hooks";
+import type { CharacterHexaMatrixStat } from "@/entities/character/model/types";
 import { Badge } from "@/shared/ui/badge";
 
 interface HexaStatTabProps {

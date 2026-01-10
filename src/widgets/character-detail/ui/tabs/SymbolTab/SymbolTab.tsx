@@ -1,6 +1,6 @@
 "use client";
 
-import { useCharacterSymbol } from "@/entities/character";
+import { useCharacterSymbol } from "@/entities/character/model/hooks";
 import { LoadingCard } from "@/shared/ui/LoadingCard";
 import { TabMessageSection } from "@/shared/ui/TabMessageSection";
 import { SymbolSection } from "./SymbolSection";

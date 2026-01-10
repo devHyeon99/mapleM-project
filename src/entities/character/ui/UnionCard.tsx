@@ -1,5 +1,5 @@
 import Image from "next/image";
-import type { CharacterUnion, UnionRanking } from "@/entities/character";
+import type { CharacterUnion, UnionRanking } from "@/entities/character/model/types";
 import { InfoDescriptionRow } from "@/shared/ui/InfoRow";
 import { Separator } from "@/shared/ui/separator";
 

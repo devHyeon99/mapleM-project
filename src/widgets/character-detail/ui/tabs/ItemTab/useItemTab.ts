@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import { CharacterDetailData } from "@/entities/character";
+import type { CharacterDetailData } from "@/entities/character/model/types";
 import { sortItems, sortItemsForList } from "@/entities/item/lib";
 
 export const useItemTab = (data: CharacterDetailData) => {

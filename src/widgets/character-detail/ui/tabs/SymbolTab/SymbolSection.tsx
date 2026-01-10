@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import type { SymbolItem as CharacterSymbolItem } from "@/entities/character";
+import type { SymbolItem as CharacterSymbolItem } from "@/entities/character/model/types";
 import { SymbolItem } from "./SymbolItem";
 import { sumSymbolForce } from "@/shared/lib/symbol-force";
 import { Separator } from "@/shared/ui/separator";

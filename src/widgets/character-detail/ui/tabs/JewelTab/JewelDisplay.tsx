@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { JewelInfo } from "@/entities/character";
+import type { JewelInfo } from "@/entities/character/model/types";
 
 const splitJewelOption = (option: string) => {
   const trimmedOption = option.trim();

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { CharacterDetailData } from "@/entities/character";
+import type { CharacterDetailData } from "@/entities/character/model/types";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/ui/tabs";
 import { cn } from "@/shared/lib/utils";
 import { ChevronRight, ChevronLeft } from "lucide-react";

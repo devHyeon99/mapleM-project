@@ -5,7 +5,7 @@ import { AlertTriangle, ChevronRight, Loader2 } from "lucide-react";
 import { Card, CardContent } from "@/shared/ui/card";
 import { useRecentSearch } from "@/shared/lib/hooks/useRecentSearch";
 import { WORLD_NAMES } from "@/shared/config/constants/worlds";
-import type { CharacterOcidData } from "@/entities/character";
+import type { CharacterOcidData } from "@/entities/character/model/types";
 
 type WorldName = (typeof WORLD_NAMES)[number];
 

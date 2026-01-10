@@ -2,13 +2,13 @@
 
 import { Loader2 } from "lucide-react";
 import {
-  CharacterDetailData,
   useCharacterHexaMatrixStat,
   useCharacterSymbol,
-} from "@/entities/character";
+} from "@/entities/character/model/hooks";
+import type { CharacterDetailData } from "@/entities/character/model/types";
 import { SITE_HOST } from "@/shared/config/site";
 import { getSortedSpecCardItems } from "../lib/getSortedSpecCardItems";
-import { MergedSpecData } from "../model/types";
+import type { MergedSpecData } from "../model/types";
 
 import { EquipmentGrid } from "./EquipmentGrid";
 import { RightStatColumn } from "./RightStatColumn";

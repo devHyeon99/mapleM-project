@@ -1,7 +1,7 @@
 import "server-only";
 import { nexonFetch } from "@/shared/api/nexon/server";
 import { isNexonNotFoundError } from "@/shared/api/nexon/handler";
-import type { CharacterOcidData } from "@/entities/character";
+import type { CharacterOcidData } from "../../model/types/ocid";
 import { unstable_cache } from "next/cache";
 
 const OCID_CACHE_SECONDS = 60 * 60 * 24;

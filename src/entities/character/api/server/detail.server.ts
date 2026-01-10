@@ -13,7 +13,7 @@ import type {
   CharacterUnionResponse,
   CharacterLevelRankingResponse,
   CharacterUnionRankingResponse,
-} from "@/entities/character";
+} from "../../model/types";
 
 export async function fetchCharacterDetail(ocid: string): Promise<CharacterDetailData> {
   const trimmedOcid = ocid.trim();

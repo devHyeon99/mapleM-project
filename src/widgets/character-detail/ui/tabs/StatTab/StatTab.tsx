@@ -2,7 +2,7 @@
 
 import { Fragment } from "react";
 
-import { useCharacterStat } from "@/entities/character";
+import { useCharacterStat } from "@/entities/character/model/hooks";
 import { Separator } from "@/shared/ui/separator";
 import { LoadingCard } from "@/shared/ui/LoadingCard";
 import { InfoDescriptionRow } from "@/shared/ui/InfoRow";

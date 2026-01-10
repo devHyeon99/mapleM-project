@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import { cn } from "@/shared/lib/utils";
 import { PresetToggle } from "@/shared/ui/PresetToggle";
-import type { CharacterUnionRaider } from "@/entities/character";
+import type { CharacterUnionRaider } from "@/entities/character/model/types";
 import { Separator } from "@/shared/ui/separator";
 
 interface UnionBattleMapProps {

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { InfoDescriptionRow } from "@/shared/ui/InfoRow";
 import { InfoDateRow } from "@/shared/ui/InfoDateRow";
 import { HelpPopover } from "@/shared/ui/HelpPopover";
-import { CharacterDetailData } from "@/entities/character";
+import type { CharacterDetailData } from "@/entities/character/model/types";
 
 const NUMBER_FORMATTER = new Intl.NumberFormat("ko-KR");
 const DATA_UPDATE_GUIDE_ITEMS = [

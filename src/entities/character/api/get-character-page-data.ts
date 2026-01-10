@@ -1,6 +1,6 @@
 import type { CharacterDetailData } from "../model/types";
-import { fetchOcid } from "@/shared/api/character/ocid.server";
-import { fetchCharacterDetail } from "@/shared/api/character/detail.server";
+import { fetchOcid } from "./server/ocid.server";
+import { fetchCharacterDetail } from "./server/detail.server";
 
 interface CharacterPageData {
   ocid: string;

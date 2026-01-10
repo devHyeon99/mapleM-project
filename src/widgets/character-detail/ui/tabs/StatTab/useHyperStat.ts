@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { CharacterHyperStat } from "@/entities/character";
+import type { CharacterHyperStat } from "@/entities/character/model/types";
 
 export const useHyperStat = (hyperStatData: CharacterHyperStat | undefined) => {
   const [selectedPreset, setSelectedPreset] = useState<number | null>(null);

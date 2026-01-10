@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 
-import type { CharacterDetailData } from "@/entities/character/model/types";
 import { sortItems, sortItemsForList } from "@/entities/item/lib";
+import type { CharacterItemTabData } from "./ItemTab";
 
-export const useItemTab = (data: CharacterDetailData) => {
+export const useItemTab = (data: CharacterItemTabData) => {
   const [selectedPreset, setSelectedPreset] = useState<number | null>(null);
   const [selectedAndroidPreset, setSelectedAndroidPreset] = useState<number | null>(
     null,

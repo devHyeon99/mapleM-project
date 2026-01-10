@@ -1,6 +1,12 @@
 "use client";
 
-import type { CharacterDetailData } from "@/entities/character/model/types";
+import type {
+  AndroidEquipment,
+  AndroidHeartEquipmentPreset,
+  CharacterItemEquipment,
+  EquipmentPreset,
+  HeartEquipment,
+} from "@/entities/item";
 
 import { ItemGrid } from "./ItemGrid";
 import { ItemTabHeader } from "./ItemTabHeader";
@@ -9,8 +15,19 @@ import { ItemTabFooter } from "./ItemTabFooter";
 import { useItemTab } from "./useItemTab";
 import { TabMessageSection } from "@/shared/ui/TabMessageSection";
 
+export interface CharacterItemTabData {
+  character_class: string;
+  item_equipment: CharacterItemEquipment[];
+  equipment_preset?: EquipmentPreset[];
+  use_preset_no?: number | null;
+  android_use_preset_no?: number;
+  android_equipment?: AndroidEquipment | null;
+  heart_equipment?: HeartEquipment | null;
+  android_preset?: AndroidHeartEquipmentPreset[];
+}
+
 interface ItemTabProps {
-  data: CharacterDetailData;
+  data: CharacterItemTabData;
 }
 
 export const ItemTab = ({ data }: ItemTabProps) => {

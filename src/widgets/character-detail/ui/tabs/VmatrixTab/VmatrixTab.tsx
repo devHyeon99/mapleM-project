@@ -3,6 +3,7 @@
 import { useCharacterVmatrix } from "@/entities/skill";
 import { LoadingCard } from "@/shared/ui/LoadingCard";
 import { TabMessageSection } from "@/shared/ui/TabMessageSection";
+import { CHARACTER_TAB_LOADING_MESSAGE } from "../loading";
 
 import { CoreList } from "./CoreList";
 import { EnhancementCoreItem } from "./EnhancementCoreItem";
@@ -28,7 +29,7 @@ export const VmatrixTab = ({ ocid, level }: VmatrixTabProps) => {
     );
   }
 
-  if (isLoading) return <LoadingCard message="V매트릭스 불러오는중..." />;
+  if (isLoading) return <LoadingCard message={CHARACTER_TAB_LOADING_MESSAGE} />;
 
   if (isError) {
     return (

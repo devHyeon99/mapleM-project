@@ -9,6 +9,7 @@ import { InfoDescriptionRow } from "@/shared/ui/InfoRow";
 import { HyperStatPresetToggle } from "./HyperStatToggle";
 import { useHyperStat } from "./useHyperStat";
 import { HelpPopover } from "@/shared/ui/HelpPopover";
+import { CHARACTER_TAB_LOADING_MESSAGE } from "../loading";
 
 interface StatTabProps {
   ocid: string;
@@ -37,7 +38,7 @@ export const StatTab = ({ ocid, level }: StatTabProps) => {
     data?.hyperStat ?? undefined,
   );
 
-  if (isLoading) return <LoadingCard message="스탯 정보 불러오는중..." />;
+  if (isLoading) return <LoadingCard message={CHARACTER_TAB_LOADING_MESSAGE} />;
 
   if (isError) {
     return (

@@ -7,6 +7,7 @@ import { TabMessageSection } from "@/shared/ui/TabMessageSection";
 import { useJewelTab } from "./useJewelTab";
 import { JewelHeader } from "./JewelHeader";
 import { JewelPentagon } from "./JewelPentagon";
+import { CHARACTER_TAB_LOADING_MESSAGE } from "../loading";
 
 interface JewelTabProps {
   ocid: string;
@@ -25,7 +26,7 @@ export const JewelTab = ({ ocid, level }: JewelTabProps) => {
     );
   }
 
-  if (isLoading) return <LoadingCard message="쥬얼 정보 불러오는중..." />;
+  if (isLoading) return <LoadingCard message={CHARACTER_TAB_LOADING_MESSAGE} />;
 
   if (isError) {
     return (

@@ -7,6 +7,7 @@ import { useSkillTab } from "./useSkillTab";
 import { SkillTabHeader } from "./SkillTabHeader";
 import { SkillPreset } from "./SkillPreset";
 import { SkillGridDisplay } from "./SkillGridDisplay";
+import { CHARACTER_TAB_LOADING_MESSAGE } from "../loading";
 
 interface SkillTabProps {
   ocid: string;
@@ -15,7 +16,8 @@ interface SkillTabProps {
 export const SkillTab = ({ ocid }: SkillTabProps) => {
   const { query, ui, layout } = useSkillTab(ocid);
 
-  if (query.isLoading) return <LoadingCard message="스킬 정보 불러오는중..." />;
+  if (query.isLoading)
+    return <LoadingCard message={CHARACTER_TAB_LOADING_MESSAGE} />;
 
   if (query.isError) {
     return (

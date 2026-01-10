@@ -17,6 +17,7 @@ import { CashItemGrid } from "./CashItemGrid";
 import { CashItemList } from "./CashItemList";
 import { CashItemTabHeader } from "./CashItemTabHeader";
 import { TabMessageSection } from "@/shared/ui/TabMessageSection";
+import { CHARACTER_TAB_LOADING_MESSAGE } from "../loading";
 
 interface CashItemTabProps {
   ocid: string;
@@ -63,7 +64,7 @@ export const CashItemTab = ({ ocid }: CashItemTabProps) => {
   }, [currentPresetItems, beautyItems]);
 
   if (isLoading) {
-    return <LoadingCard message="외형 정보 불러오는 중..." />;
+    return <LoadingCard message={CHARACTER_TAB_LOADING_MESSAGE} />;
   }
 
   if (isError) {

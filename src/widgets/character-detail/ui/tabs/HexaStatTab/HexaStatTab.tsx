@@ -8,6 +8,7 @@ import { cn } from "@/shared/lib/utils";
 import { useCharacterHexaMatrixStat } from "@/entities/character/model/hooks";
 import type { CharacterHexaMatrixStat } from "@/entities/character/model/types";
 import { Badge } from "@/shared/ui/badge";
+import { CHARACTER_TAB_LOADING_MESSAGE } from "../loading";
 
 interface HexaStatTabProps {
   ocid: string;
@@ -26,7 +27,7 @@ export const HexaStatTab = ({ ocid, level }: HexaStatTabProps) => {
     );
   }
 
-  if (isLoading) return <LoadingCard message="HEXA스탯 불러오는중..." />;
+  if (isLoading) return <LoadingCard message={CHARACTER_TAB_LOADING_MESSAGE} />;
 
   if (isError) {
     return (

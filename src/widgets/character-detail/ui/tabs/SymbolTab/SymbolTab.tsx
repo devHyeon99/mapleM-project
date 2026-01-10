@@ -4,6 +4,7 @@ import { useCharacterSymbol } from "@/entities/character/model/hooks";
 import { LoadingCard } from "@/shared/ui/LoadingCard";
 import { TabMessageSection } from "@/shared/ui/TabMessageSection";
 import { SymbolSection } from "./SymbolSection";
+import { CHARACTER_TAB_LOADING_MESSAGE } from "../loading";
 
 interface SymbolTabProps {
   ocid: string;
@@ -30,7 +31,7 @@ export const SymbolTab = ({ ocid, level }: SymbolTabProps) => {
   }
 
   // 로딩 상태
-  if (isLoading) return <LoadingCard message="심볼 정보 불러오는중..." />;
+  if (isLoading) return <LoadingCard message={CHARACTER_TAB_LOADING_MESSAGE} />;
 
   // 에러 상태
   if (isError) {

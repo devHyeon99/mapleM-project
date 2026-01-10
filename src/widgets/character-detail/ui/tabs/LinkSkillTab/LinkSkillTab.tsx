@@ -7,6 +7,7 @@ import { useLinkSkillTab } from "./useLinkSkillTab";
 import { LinkSkillHeader } from "./LinkSkillHeader";
 import { LinkSkillList } from "./LinkSkillList";
 import { LinkSkillTotalStat } from "./LinkSkillTotalStat";
+import { CHARACTER_TAB_LOADING_MESSAGE } from "../loading";
 
 interface LinkSkillTabProps {
   ocid: string;
@@ -23,7 +24,7 @@ export const LinkSkillTab = ({ ocid }: LinkSkillTabProps) => {
     setSelectedPreset,
   } = useLinkSkillTab(ocid);
 
-  if (isLoading) return <LoadingCard message="링크 스킬 정보 불러오는중..." />;
+  if (isLoading) return <LoadingCard message={CHARACTER_TAB_LOADING_MESSAGE} />;
 
   if (isError) {
     return (

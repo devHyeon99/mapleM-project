@@ -1,33 +1,71 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import type { CharacterDetailData } from "@/entities/character/model/types";
+import type { CharacterUnion, UnionRanking } from "@/entities/character/model/types";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/ui/tabs";
 import { cn } from "@/shared/lib/utils";
 import { ChevronRight, ChevronLeft } from "lucide-react";
 import { ALL_TABS, TabKey } from "./config";
-import {
-  CashItemTab,
-  HexaSkillTab,
-  HexaStatTab,
-  ItemTab,
-  JewelTab,
-  LinkSkillTab,
-  SkillTab,
-  StatTab,
-  SymbolTab,
-  UnionTab,
-  VmatrixTab,
-} from "./tabs";
+import { ItemTab, type CharacterItemTabData } from "./tabs/ItemTab/ItemTab";
+
+const DynamicTabLoading = () => <div className="min-h-40" aria-hidden="true" />;
+
+const CashItemTab = dynamic(
+  () => import("./tabs/CashItemTab/CashItemTab").then((mod) => mod.CashItemTab),
+  { loading: DynamicTabLoading },
+);
+const StatTab = dynamic(
+  () => import("./tabs/StatTab/StatTab").then((mod) => mod.StatTab),
+  { loading: DynamicTabLoading },
+);
+const JewelTab = dynamic(
+  () => import("./tabs/JewelTab/JewelTab").then((mod) => mod.JewelTab),
+  { loading: DynamicTabLoading },
+);
+const SymbolTab = dynamic(
+  () => import("./tabs/SymbolTab/SymbolTab").then((mod) => mod.SymbolTab),
+  { loading: DynamicTabLoading },
+);
+const LinkSkillTab = dynamic(
+  () => import("./tabs/LinkSkillTab/LinkSkillTab").then((mod) => mod.LinkSkillTab),
+  { loading: DynamicTabLoading },
+);
+const SkillTab = dynamic(
+  () => import("./tabs/SkillTab/SkillTab").then((mod) => mod.SkillTab),
+  { loading: DynamicTabLoading },
+);
+const VmatrixTab = dynamic(
+  () => import("./tabs/VmatrixTab/VmatrixTab").then((mod) => mod.VmatrixTab),
+  { loading: DynamicTabLoading },
+);
+const HexaSkillTab = dynamic(
+  () => import("./tabs/HexaSkillTab/HexaSkillTab").then((mod) => mod.HexaSkillTab),
+  { loading: DynamicTabLoading },
+);
+const HexaStatTab = dynamic(
+  () => import("./tabs/HexaStatTab/HexaStatTab").then((mod) => mod.HexaStatTab),
+  { loading: DynamicTabLoading },
+);
+const UnionTab = dynamic(
+  () => import("./tabs/UnionTab/UnionTab").then((mod) => mod.UnionTab),
+  { loading: DynamicTabLoading },
+);
 
 interface CharacterDetailTabsProps {
   ocid: string;
-  characterData: CharacterDetailData;
+  level: number;
+  itemData: CharacterItemTabData;
+  unionData: CharacterUnion | null;
+  unionRanking: UnionRanking | null;
 }
 
 export const CharacterDetailTabs = ({
   ocid,
-  characterData,
+  level,
+  itemData,
+  unionData,
+  unionRanking,
 }: CharacterDetailTabsProps) => {
   const [activeTab, setActiveTab] = React.useState<TabKey>("Item");
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -89,23 +127,21 @@ export const CharacterDetailTabs = ({
   };
 
   const tabContentByKey: Record<TabKey, React.ReactNode> = {
-    Item: <ItemTab data={characterData} />,
+    Item: <ItemTab data={itemData} />,
     CashItem: <CashItemTab ocid={ocid} />,
-    Stat: <StatTab ocid={ocid} level={characterData.character_level} />,
-    Jewel: <JewelTab ocid={ocid} level={characterData.character_level} />,
-    Symbol: <SymbolTab ocid={ocid} level={characterData.character_level} />,
+    Stat: <StatTab ocid={ocid} level={level} />,
+    Jewel: <JewelTab ocid={ocid} level={level} />,
+    Symbol: <SymbolTab ocid={ocid} level={level} />,
     LinkSkill: <LinkSkillTab ocid={ocid} />,
     Skill: <SkillTab ocid={ocid} />,
-    Vmatrix: <VmatrixTab ocid={ocid} level={characterData.character_level} />,
-    HexaSkill: (
-      <HexaSkillTab ocid={ocid} level={characterData.character_level} />
-    ),
-    HexaStat: <HexaStatTab ocid={ocid} level={characterData.character_level} />,
+    Vmatrix: <VmatrixTab ocid={ocid} level={level} />,
+    HexaSkill: <HexaSkillTab ocid={ocid} level={level} />,
+    HexaStat: <HexaStatTab ocid={ocid} level={level} />,
     Union: (
       <UnionTab
         ocid={ocid}
-        data={characterData.union_data ?? null}
-        ranking={characterData.union_ranking ?? null}
+        data={unionData}
+        ranking={unionRanking}
       />
     ),
   };

@@ -5,6 +5,7 @@ import Image from "next/image";
 import { LoadingCard } from "@/shared/ui/LoadingCard";
 import { TabMessageSection } from "@/shared/ui/TabMessageSection";
 import { Separator } from "@/shared/ui/separator";
+import { CHARACTER_TAB_LOADING_MESSAGE } from "../loading";
 import {
   useCharacterHexaMatrixSkill,
   type CharacterHexaMatrixSkill,
@@ -90,7 +91,7 @@ export const HexaSkillTab = ({ ocid, level }: HexaSkillTabProps) => {
     );
   }
 
-  if (isLoading) return <LoadingCard message="HEXA 스킬 불러오는중..." />;
+  if (isLoading) return <LoadingCard message={CHARACTER_TAB_LOADING_MESSAGE} />;
 
   if (isError) {
     return (

@@ -1,4 +1,4 @@
-import React from "react";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CharacterSearch } from "@/features/character-search";
 import { CharacterDetail } from "@/widgets/character-detail";
@@ -8,37 +8,32 @@ interface CharacterPageProps {
   params: Promise<{ world: string; name: string }>;
 }
 
-// 동적 메타데이터 생성
-export async function generateMetadata({ params }: CharacterPageProps) {
+export async function generateMetadata({
+  params,
+}: CharacterPageProps): Promise<Metadata> {
   const { world, name } = await params;
   const decodedWorld = decodeURIComponent(world);
   const decodedName = decodeURIComponent(name);
-  const url = `/character/${world}/${name}`;
+  const title = `${decodedName} (${decodedWorld}) - 캐릭터 정보`;
+  const description = `${decodedWorld} 서버 ${decodedName} 캐릭터의 상세 정보를 확인하세요.`;
 
   return {
-    title: {
-      absolute: `${decodedName} (${decodedWorld}) - 캐릭터 정보 - 메이플스토리M`,
-    },
-    description: `${decodedWorld} 서버 ${decodedName} 캐릭터의 상세 정보를 확인하세요.`,
-    alternates: {
-      canonical: url,
-    },
+    title,
+    description,
     openGraph: {
-      title: `${decodedWorld} ${decodedName} 캐릭터 정보`,
-      description: `${decodedName}님의 레벨, 직업, 장비 조회`,
-      url: url,
-      images: [
-        {
-          url: "/og-image.png",
-          width: 1200,
-          height: 630,
-          alt: "메엠지지 캐릭터 검색",
-        },
-      ],
+      title,
+      description,
+      images: ["/og-image.png"],
     },
     twitter: {
       card: "summary_large_image",
+      title,
+      description,
       images: ["/og-image.png"],
+    },
+    robots: {
+      index: false,
+      follow: true,
     },
   };
 }

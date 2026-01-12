@@ -1,7 +1,5 @@
 "use client";
 
-import dynamic from "next/dynamic";
-
 import type {
   CharacterUnion,
   UnionRanking,
@@ -9,51 +7,16 @@ import type {
 
 import type { TabKey } from "./config";
 import { ItemTab, type CharacterItemTabData } from "./tabs/ItemTab/ItemTab";
-
-const DynamicTabLoading = () => <div className="min-h-40" aria-hidden="true" />;
-
-const CashItemTab = dynamic(
-  () => import("./tabs/CashItemTab/CashItemTab").then((mod) => mod.CashItemTab),
-  { loading: DynamicTabLoading },
-);
-const StatTab = dynamic(
-  () => import("./tabs/StatTab/StatTab").then((mod) => mod.StatTab),
-  { loading: DynamicTabLoading },
-);
-const JewelTab = dynamic(
-  () => import("./tabs/JewelTab/JewelTab").then((mod) => mod.JewelTab),
-  { loading: DynamicTabLoading },
-);
-const SymbolTab = dynamic(
-  () => import("./tabs/SymbolTab/SymbolTab").then((mod) => mod.SymbolTab),
-  { loading: DynamicTabLoading },
-);
-const LinkSkillTab = dynamic(
-  () =>
-    import("./tabs/LinkSkillTab/LinkSkillTab").then((mod) => mod.LinkSkillTab),
-  { loading: DynamicTabLoading },
-);
-const SkillTab = dynamic(
-  () => import("./tabs/SkillTab/SkillTab").then((mod) => mod.SkillTab),
-  { loading: DynamicTabLoading },
-);
-const VmatrixTab = dynamic(
-  () => import("./tabs/VmatrixTab/VmatrixTab").then((mod) => mod.VmatrixTab),
-  { loading: DynamicTabLoading },
-);
-const HexaSkillTab = dynamic(
-  () =>
-    import("./tabs/HexaSkillTab/HexaSkillTab").then((mod) => mod.HexaSkillTab),
-  { loading: DynamicTabLoading },
-);
-const HexaStatTab = dynamic(
-  () => import("./tabs/HexaStatTab/HexaStatTab").then((mod) => mod.HexaStatTab),
-  { loading: DynamicTabLoading },
-);
-const UnionTab = dynamic(
-  () => import("./tabs/UnionTab/UnionTab").then((mod) => mod.UnionTab),
-  { loading: DynamicTabLoading },
-);
+import { CashItemTab } from "./tabs/CashItemTab/CashItemTab";
+import { HexaSkillTab } from "./tabs/HexaSkillTab/HexaSkillTab";
+import { HexaStatTab } from "./tabs/HexaStatTab/HexaStatTab";
+import { JewelTab } from "./tabs/JewelTab/JewelTab";
+import { LinkSkillTab } from "./tabs/LinkSkillTab/LinkSkillTab";
+import { SkillTab } from "./tabs/SkillTab/SkillTab";
+import { StatTab } from "./tabs/StatTab/StatTab";
+import { SymbolTab } from "./tabs/SymbolTab/SymbolTab";
+import { UnionTab } from "./tabs/UnionTab/UnionTab";
+import { VmatrixTab } from "./tabs/VmatrixTab/VmatrixTab";
 
 interface CharacterDetailTabPanelResolverProps {
   tabKey: TabKey;

@@ -1,6 +1,9 @@
 "use client";
 
-import type { CharacterUnion, UnionRanking } from "@/entities/character/model/types";
+import type {
+  CharacterUnion,
+  UnionRanking,
+} from "@/entities/character/model/types";
 import { useState } from "react";
 
 import { Tabs, TabsContent } from "@/shared/ui/tabs";
@@ -40,7 +43,6 @@ export const CharacterDetailTabs = ({
           <TabsContent
             key={tab.value}
             value={tab.value}
-            aria-label={tab.description}
             className="rounded-xs focus-visible:outline-none"
           >
             <CharacterDetailTabPanelResolver

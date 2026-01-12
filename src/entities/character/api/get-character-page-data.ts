@@ -16,7 +16,7 @@ export async function getCharacterPageData(
   const decodedWorld = decodeURIComponent(world);
   const decodedName = decodeURIComponent(name);
 
-  const ocidData = await fetchOcid(decodedWorld, decodedName).catch(() => null);
+  const ocidData = await fetchOcid(decodedWorld, decodedName);
 
   if (!ocidData?.ocid) return null;
 

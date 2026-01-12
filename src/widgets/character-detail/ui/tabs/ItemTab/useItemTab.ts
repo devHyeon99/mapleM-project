@@ -1,8 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
-import { sortItems, sortItemsForList } from "@/entities/item/lib";
+import {
+  sortItems,
+  sortItemsForList,
+} from "@/entities/item/lib/slots/sortItemSlots";
 import type { CharacterItemTabData } from "./ItemTab";
 
 export const useItemTab = (data: CharacterItemTabData) => {
@@ -21,9 +24,14 @@ export const useItemTab = (data: CharacterItemTabData) => {
     android_use_preset_no: activeAndroidPresetNo,
   } = data;
 
-  const availablePresetNos = presetList?.map((preset) => preset.preset_no) ?? [];
-  const availableAndroidPresetNos =
-    androidPresetList?.map((preset) => preset.preset_no) ?? [];
+  const availablePresetNos = useMemo(
+    () => presetList?.map((preset) => preset.preset_no) ?? [],
+    [presetList],
+  );
+  const availableAndroidPresetNos = useMemo(
+    () => androidPresetList?.map((preset) => preset.preset_no) ?? [],
+    [androidPresetList],
+  );
 
   const effectiveSelectedPreset =
     selectedPreset !== null && availablePresetNos.includes(selectedPreset)
@@ -36,14 +44,24 @@ export const useItemTab = (data: CharacterItemTabData) => {
       ? selectedAndroidPreset
       : (activeAndroidPresetNo ?? availableAndroidPresetNos[0] ?? null);
 
-  const currentPresetItems =
-    presetList?.find((preset) => preset.preset_no === effectiveSelectedPreset)
-      ?.item_equipment ??
-    (effectiveSelectedPreset === activePresetNo ? data.item_equipment : []);
+  const currentPresetItems = useMemo(() => {
+    return (
+      presetList?.find((preset) => preset.preset_no === effectiveSelectedPreset)
+        ?.item_equipment ??
+      (effectiveSelectedPreset === activePresetNo ? data.item_equipment : [])
+    );
+  }, [
+    activePresetNo,
+    data.item_equipment,
+    effectiveSelectedPreset,
+    presetList,
+  ]);
 
-  const currentAndroidPreset = androidPresetList?.find(
-    (preset) => preset.preset_no === effectiveSelectedAndroidPreset,
-  );
+  const currentAndroidPreset = useMemo(() => {
+    return androidPresetList?.find(
+      (preset) => preset.preset_no === effectiveSelectedAndroidPreset,
+    );
+  }, [androidPresetList, effectiveSelectedAndroidPreset]);
 
   const currentAndroid =
     currentAndroidPreset?.android_equipment ??
@@ -53,14 +71,15 @@ export const useItemTab = (data: CharacterItemTabData) => {
     currentAndroidPreset?.heart_equipment ??
     (effectiveSelectedAndroidPreset === activeAndroidPresetNo ? heart : null);
 
-  const sortedItems =
-    viewMode === "grid"
+  const sortedItems = useMemo(() => {
+    return viewMode === "grid"
       ? sortItems(currentPresetItems, currentAndroid ?? null, currentHeart ?? null)
       : sortItemsForList(
           currentPresetItems,
           currentAndroid ?? null,
           currentHeart ?? null,
         );
+  }, [currentAndroid, currentHeart, currentPresetItems, viewMode]);
 
   return {
     activeAndroidPresetNo,

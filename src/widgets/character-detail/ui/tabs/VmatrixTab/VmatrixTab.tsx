@@ -1,6 +1,6 @@
 "use client";
 
-import { useCharacterVmatrix } from "@/entities/skill";
+import { useCharacterVmatrix } from "@/entities/skill/model/hooks/useCharacterVmatrix";
 import { LoadingCard } from "@/shared/ui/LoadingCard";
 import { TabMessageSection } from "@/shared/ui/TabMessageSection";
 import { CHARACTER_TAB_LOADING_MESSAGE } from "../loading";

@@ -1,4 +1,4 @@
-import type { VCoreEquipment } from "@/entities/skill";
+import type { VCoreEquipment } from "@/entities/skill/model/types/vmatrix";
 
 import { CoreLevelInfo } from "./CoreLevelInfo";
 import { getEnhancementSkillNames } from "./vmatrix-tab.utils";

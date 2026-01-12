@@ -1,8 +1,6 @@
 import { useMemo, useState } from "react";
-import {
-  useCharacterSkillEquipment,
-  type CharacterEquipmentSkill,
-} from "@/entities/skill";
+import { useCharacterSkillEquipment } from "@/entities/skill/model/hooks/useCharacterSkillEquipment";
+import type { CharacterEquipmentSkill } from "@/entities/skill/model/types/skill-equipment";
 
 // 헬퍼 함수
 const groupSkillsBySet = (skills: CharacterEquipmentSkill[]) => {

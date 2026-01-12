@@ -1,4 +1,4 @@
-import type { VCoreEquipment } from "@/entities/skill";
+import type { VCoreEquipment } from "@/entities/skill/model/types/vmatrix";
 
 export function format2(n: number) {
   return String(n).padStart(2, "0");

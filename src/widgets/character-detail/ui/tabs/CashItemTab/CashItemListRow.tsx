@@ -1,4 +1,4 @@
-import { CashItemEquipment } from "@/entities/cash-item";
+import type { CashItemEquipment } from "@/entities/cash-item/model/types/cashItem";
 import { ItemCashDialog } from "@/features/item-popover";
 
 interface CashItemListRowProps {

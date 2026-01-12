@@ -1,12 +1,14 @@
 "use client";
 
 import type {
-  AndroidEquipment,
-  AndroidHeartEquipmentPreset,
   CharacterItemEquipment,
   EquipmentPreset,
+} from "@/entities/item/model/types/domain/item-equipment";
+import type {
+  AndroidEquipment,
+  AndroidHeartEquipmentPreset,
   HeartEquipment,
-} from "@/entities/item";
+} from "@/entities/item/model/types/domain/android-equipment";
 
 import { ItemGrid } from "./ItemGrid";
 import { ItemTabHeader } from "./ItemTabHeader";

@@ -6,10 +6,8 @@ import { LoadingCard } from "@/shared/ui/LoadingCard";
 import { TabMessageSection } from "@/shared/ui/TabMessageSection";
 import { Separator } from "@/shared/ui/separator";
 import { CHARACTER_TAB_LOADING_MESSAGE } from "../loading";
-import {
-  useCharacterHexaMatrixSkill,
-  type CharacterHexaMatrixSkill,
-} from "@/entities/skill";
+import { useCharacterHexaMatrixSkill } from "@/entities/skill/model/hooks/useCharacterHexaMatrixSkill";
+import type { CharacterHexaMatrixSkill } from "@/entities/skill/model/types/hexamatrix-skill";
 
 interface HexaSkillTabProps {
   ocid: string;

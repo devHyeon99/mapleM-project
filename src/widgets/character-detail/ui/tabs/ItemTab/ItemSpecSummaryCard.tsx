@@ -1,5 +1,6 @@
-import { SortedItemSlot } from "@/entities/item";
-import { getItemSpec } from "@/entities/item/lib";
+import { useMemo } from "react";
+import type { SortedItemSlot } from "@/entities/item/lib/slots/sortItemSlots";
+import { getItemSpec } from "@/entities/item/lib/specs/summarizeItemSpecs";
 import { InfoRow } from "@/shared/ui/InfoRow";
 import {
   Accordion,
@@ -20,11 +21,11 @@ export const ItemSpecSummaryCard = ({
   presetNo,
   characterClass,
 }: ItemSpecSummaryCardProps) => {
-  const itemList = items.map((slot) => slot.item);
+  const itemList = useMemo(() => items.map((slot) => slot.item), [items]);
 
-  const { labelDamage, labelAtk, potential, additional, chuop } = getItemSpec(
-    itemList,
-    characterClass,
+  const { labelDamage, labelAtk, potential, additional, chuop } = useMemo(
+    () => getItemSpec(itemList, characterClass),
+    [characterClass, itemList],
   );
 
   return (

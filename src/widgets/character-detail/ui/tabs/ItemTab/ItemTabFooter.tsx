@@ -1,4 +1,4 @@
-import { SortedItemSlot } from "@/entities/item";
+import type { SortedItemSlot } from "@/entities/item/lib/slots/sortItemSlots";
 
 import { ItemSetEffectCard } from "./ItemSetEffectCard";
 import { ItemSpecSummaryCard } from "./ItemSpecSummaryCard";

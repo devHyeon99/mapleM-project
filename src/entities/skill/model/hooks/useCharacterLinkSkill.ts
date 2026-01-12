@@ -1,8 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import {
-  getCharacterLinkSkill,
-  type LinkSkillResponse,
-} from "@/entities/skill";
+import { getCharacterLinkSkill } from "../../api/get-link-skill";
+import type { LinkSkillResponse } from "../types/link-skill";
 
 export const useCharacterLinkSkill = (ocid: string | null) => {
   return useQuery<LinkSkillResponse, Error>({

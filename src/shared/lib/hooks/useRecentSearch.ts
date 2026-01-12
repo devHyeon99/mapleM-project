@@ -11,23 +11,27 @@ export interface SearchHistoryItem {
 
 const MAX_HISTORY_LIMIT = 6;
 
+const readSearchHistory = (storageKey: string): SearchHistoryItem[] => {
+  const saved = localStorage.getItem(storageKey);
+  if (!saved) {
+    return [];
+  }
+
+  try {
+    return JSON.parse(saved) as SearchHistoryItem[];
+  } catch {
+    localStorage.removeItem(storageKey);
+    return [];
+  }
+};
+
 export const useRecentSearch = (storageKey: string) => {
   const [history, setHistory] = useState<SearchHistoryItem[]>(() => {
     if (typeof window === "undefined") {
       return [];
     }
 
-    const saved = localStorage.getItem(storageKey);
-    if (!saved) {
-      return [];
-    }
-
-    try {
-      return JSON.parse(saved) as SearchHistoryItem[];
-    } catch {
-      localStorage.removeItem(storageKey);
-      return [];
-    }
+    return readSearchHistory(storageKey);
   });
 
   const addHistory = useCallback(
@@ -66,10 +70,7 @@ export const useRecentSearch = (storageKey: string) => {
 
   const removeHistoryByParams = useCallback(
     (name: string, world: string) => {
-      const saved = localStorage.getItem(storageKey);
-      const currentHistory: SearchHistoryItem[] = saved
-        ? JSON.parse(saved)
-        : [];
+      const currentHistory = readSearchHistory(storageKey);
 
       const next = currentHistory.filter(
         (item) => !(item.name === name && item.world === world),

@@ -1,10 +1,9 @@
 "use client";
 
-import { SortedItemSlot } from "@/entities/item";
-import {
-  formatEffectValue,
-  getActiveEquipmentSets,
-} from "@/entities/set-effect";
+import { useMemo } from "react";
+import type { SortedItemSlot } from "@/entities/item/lib/slots/sortItemSlots";
+import { formatEffectValue } from "@/entities/set-effect/lib/formatEffectValue";
+import { getActiveEquipmentSets } from "@/entities/set-effect/lib/getActiveEquipmentSets";
 import {
   Accordion,
   AccordionContent,
@@ -19,9 +18,11 @@ interface ItemSetEffectCardProps {
 }
 
 export const ItemSetEffectCard = ({ items }: ItemSetEffectCardProps) => {
-  const activeSets = getActiveEquipmentSets(
-    items.map((slot) => slot.item),
-  ).filter((set) => set.combinedEffects.length > 0);
+  const activeSets = useMemo(() => {
+    return getActiveEquipmentSets(items.map((slot) => slot.item)).filter(
+      (set) => set.combinedEffects.length > 0,
+    );
+  }, [items]);
 
   if (activeSets.length === 0) {
     return null;

@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { getCharacterVmatrix, type CharacterVMatrix } from "@/entities/skill";
+import { getCharacterVmatrix } from "../../api/get-vmatrix";
+import type { CharacterVMatrix } from "../types/vmatrix";
 
 export const useCharacterVmatrix = (ocid: string | null, level: number) => {
   return useQuery<CharacterVMatrix, Error>({

@@ -6,11 +6,9 @@ import { useMemo, useState } from "react";
 import { LoadingCard } from "@/shared/ui/LoadingCard";
 
 // Entities
-import {
-  useCharacterCashEquipment,
-  sortCashItems,
-  convertBeautyToCashItem,
-} from "@/entities/cash-item";
+import { useCharacterCashEquipment } from "@/entities/cash-item/model/hooks/useCharacterCashEquipment";
+import { sortCashItems } from "@/entities/cash-item/lib/sortCashItems";
+import { convertBeautyToCashItem } from "@/entities/cash-item/lib/convertBeautyToCashItem";
 
 // Local Components
 import { CashItemGrid } from "./CashItemGrid";

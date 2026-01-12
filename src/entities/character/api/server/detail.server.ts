@@ -15,6 +15,30 @@ import type {
   CharacterUnionRankingResponse,
 } from "../../model/types";
 
+function getRequiredResult<T>(
+  result: PromiseSettledResult<T>,
+  label: string,
+): T {
+  if (result.status === "fulfilled") return result.value;
+
+  throw result.reason instanceof Error
+    ? result.reason
+    : new Error(`${label} 정보를 불러오지 못했습니다.`);
+}
+
+function getOptionalResult<T>(
+  result: PromiseSettledResult<T>,
+  label: string,
+): T | null {
+  if (result.status === "fulfilled") return result.value;
+
+  console.warn(`[캐릭터 상세] 선택 데이터 요청 실패: ${label}`, {
+    reason: result.reason,
+  });
+
+  return null;
+}
+
 export async function fetchCharacterDetail(ocid: string): Promise<CharacterDetailData> {
   const trimmedOcid = ocid.trim();
   if (!trimmedOcid) throw new Error("ocid가 필요합니다.");
@@ -26,63 +50,52 @@ export async function fetchCharacterDetail(ocid: string): Promise<CharacterDetai
     ocid: trimmedOcid,
   }).toString();
 
-  const essentialRequests = {
-    basic: nexonFetch<CharacterBasicResponse>(`/character/basic?ocid=${ocidQ}`, {
+  const [
+    basicResult,
+    equipResult,
+    guildResult,
+    androidResult,
+    unionResult,
+    levelRankingResult,
+    unionRankingResult,
+  ] = await Promise.allSettled([
+    nexonFetch<CharacterBasicResponse>(`/character/basic?ocid=${ocidQ}`, {
       cache: "no-store",
     }),
-    guild: nexonFetch<CharacterGuildResponse>(`/character/guild?ocid=${ocidQ}`, {
-      cache: "no-store",
-    }),
-    equip: nexonFetch<CharacterItemEquipmentResponse>(
+    nexonFetch<CharacterItemEquipmentResponse>(
       `/character/item-equipment?ocid=${ocidQ}`,
       { cache: "no-store" },
     ),
-    android: nexonFetch<CharacterAndroidResponse>(
+    nexonFetch<CharacterGuildResponse>(`/character/guild?ocid=${ocidQ}`, {
+      cache: "no-store",
+    }),
+    nexonFetch<CharacterAndroidResponse>(
       `/character/android-equipment?ocid=${ocidQ}`,
       { cache: "no-store" },
     ),
-    union: nexonFetch<CharacterUnionResponse>(`/user/union?ocid=${ocidQ}`, {
+    nexonFetch<CharacterUnionResponse>(`/user/union?ocid=${ocidQ}`, {
       cache: "no-store",
     }),
-  };
-
-  const rankingPromises = {
-    levelRanking: nexonFetch<CharacterLevelRankingResponse>(
-      `/ranking/level?${rankingQuery}`,
-      {
-        next: { revalidate: 86400 },
-      },
-    ),
-    unionRanking: nexonFetch<CharacterUnionRankingResponse>(
-      `/ranking/union?${rankingQuery}`,
-      {
-        next: { revalidate: 86400 },
-      },
-    ),
-  };
-
-  const [
-    basicData,
-    guildData,
-    equipData,
-    androidData,
-    unionData,
-    levelRankingData,
-    unionRankingData,
-  ] = await Promise.all([
-    essentialRequests.basic,
-    essentialRequests.guild,
-    essentialRequests.equip,
-    essentialRequests.android,
-    essentialRequests.union,
-    rankingPromises.levelRanking,
-    rankingPromises.unionRanking,
+    nexonFetch<CharacterLevelRankingResponse>(`/ranking/level?${rankingQuery}`, {
+      next: { revalidate: 86400 },
+    }),
+    nexonFetch<CharacterUnionRankingResponse>(`/ranking/union?${rankingQuery}`, {
+      next: { revalidate: 86400 },
+    }),
   ]);
+
+  const basicData = getRequiredResult(basicResult, "캐릭터 기본");
+  const equipData = getRequiredResult(equipResult, "장비");
+  const guildData = getOptionalResult(guildResult, "guild");
+  const androidData = getOptionalResult(androidResult, "android");
+  const unionData = getOptionalResult(unionResult, "union");
+  const levelRankingData = getOptionalResult(levelRankingResult, "level-ranking");
+  const unionRankingData = getOptionalResult(unionRankingResult, "union-ranking");
 
   return {
     ocid: trimmedOcid,
     ...basicData,
-    guild_name: guildData.guild_name ?? null,
+    guild_name: guildData?.guild_name ?? null,
     union_data: unionData ?? null,
     level_ranking: levelRankingData?.ranking?.[0] ?? null,
     union_ranking: unionRankingData?.ranking?.[0] ?? null,

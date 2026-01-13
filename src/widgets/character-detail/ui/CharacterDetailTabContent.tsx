@@ -18,7 +18,7 @@ import { SymbolTab } from "./tabs/SymbolTab/SymbolTab";
 import { UnionTab } from "./tabs/UnionTab/UnionTab";
 import { VmatrixTab } from "./tabs/VmatrixTab/VmatrixTab";
 
-interface CharacterDetailTabPanelResolverProps {
+interface CharacterDetailTabContentProps {
   tabKey: TabKey;
   ocid: string;
   level: number;
@@ -27,14 +27,14 @@ interface CharacterDetailTabPanelResolverProps {
   unionRanking: UnionRanking | null;
 }
 
-export function CharacterDetailTabPanelResolver({
+export function CharacterDetailTabContent({
   tabKey,
   ocid,
   level,
   itemData,
   unionData,
   unionRanking,
-}: CharacterDetailTabPanelResolverProps) {
+}: CharacterDetailTabContentProps) {
   switch (tabKey) {
     case "Item":
       return <ItemTab data={itemData} />;

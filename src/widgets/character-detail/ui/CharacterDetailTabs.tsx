@@ -10,8 +10,8 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Tabs, TabsContent } from "@/shared/ui/tabs";
 
 import { ALL_TABS, type TabKey } from "./config";
+import { CharacterDetailTabContent } from "./CharacterDetailTabContent";
 import { CharacterDetailTabNav } from "./CharacterDetailTabNav";
-import { CharacterDetailTabPanelResolver } from "./CharacterDetailTabPanelResolver";
 import type { CharacterItemTabData } from "./tabs/ItemTab/ItemTab";
 
 const DEFAULT_TAB: TabKey = "Item";
@@ -54,7 +54,7 @@ const CharacterDetailTabsContent = ({
             value={tab.value}
             className="rounded-xs focus-visible:outline-none"
           >
-            <CharacterDetailTabPanelResolver
+            <CharacterDetailTabContent
               tabKey={tab.value}
               ocid={ocid}
               level={level}

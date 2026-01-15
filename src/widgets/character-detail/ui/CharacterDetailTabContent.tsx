@@ -4,6 +4,7 @@ import type {
   CharacterUnion,
   UnionRanking,
 } from "@/entities/character/model/types";
+import type { ReactNode } from "react";
 
 import type { TabKey } from "./config";
 import { ItemTab, type CharacterItemTabData } from "./tabs/ItemTab/ItemTab";
@@ -27,6 +28,26 @@ interface CharacterDetailTabContentProps {
   unionRanking: UnionRanking | null;
 }
 
+type TabContentRenderer = (
+  props: Omit<CharacterDetailTabContentProps, "tabKey">,
+) => ReactNode;
+
+const TAB_CONTENT_RENDERERS = {
+  Item: ({ itemData }) => <ItemTab data={itemData} />,
+  CashItem: ({ ocid }) => <CashItemTab ocid={ocid} />,
+  Stat: ({ ocid, level }) => <StatTab ocid={ocid} level={level} />,
+  Jewel: ({ ocid, level }) => <JewelTab ocid={ocid} level={level} />,
+  Symbol: ({ ocid, level }) => <SymbolTab ocid={ocid} level={level} />,
+  LinkSkill: ({ ocid }) => <LinkSkillTab ocid={ocid} />,
+  Skill: ({ ocid }) => <SkillTab ocid={ocid} />,
+  Vmatrix: ({ ocid, level }) => <VmatrixTab ocid={ocid} level={level} />,
+  HexaSkill: ({ ocid, level }) => <HexaSkillTab ocid={ocid} level={level} />,
+  HexaStat: ({ ocid, level }) => <HexaStatTab ocid={ocid} level={level} />,
+  Union: ({ ocid, unionData, unionRanking }) => (
+    <UnionTab ocid={ocid} data={unionData} ranking={unionRanking} />
+  ),
+} satisfies Record<TabKey, TabContentRenderer>;
+
 export function CharacterDetailTabContent({
   tabKey,
   ocid,
@@ -35,28 +56,13 @@ export function CharacterDetailTabContent({
   unionData,
   unionRanking,
 }: CharacterDetailTabContentProps) {
-  switch (tabKey) {
-    case "Item":
-      return <ItemTab data={itemData} />;
-    case "CashItem":
-      return <CashItemTab ocid={ocid} />;
-    case "Stat":
-      return <StatTab ocid={ocid} level={level} />;
-    case "Jewel":
-      return <JewelTab ocid={ocid} level={level} />;
-    case "Symbol":
-      return <SymbolTab ocid={ocid} level={level} />;
-    case "LinkSkill":
-      return <LinkSkillTab ocid={ocid} />;
-    case "Skill":
-      return <SkillTab ocid={ocid} />;
-    case "Vmatrix":
-      return <VmatrixTab ocid={ocid} level={level} />;
-    case "HexaSkill":
-      return <HexaSkillTab ocid={ocid} level={level} />;
-    case "HexaStat":
-      return <HexaStatTab ocid={ocid} level={level} />;
-    case "Union":
-      return <UnionTab ocid={ocid} data={unionData} ranking={unionRanking} />;
-  }
+  const renderTabContent = TAB_CONTENT_RENDERERS[tabKey];
+
+  return renderTabContent({
+    ocid,
+    level,
+    itemData,
+    unionData,
+    unionRanking,
+  });
 }

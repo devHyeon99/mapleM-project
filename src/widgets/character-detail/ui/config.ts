@@ -1,24 +1,11 @@
-export interface TabDefinition {
-  value: TabKey;
+export interface TabDefinition<Value extends string = string> {
+  value: Value;
   label: string;
   mobileLabel: string;
   description: string;
 }
 
-export type TabKey =
-  | "Item"
-  | "CashItem"
-  | "Stat"
-  | "Jewel"
-  | "Symbol"
-  | "LinkSkill"
-  | "Skill"
-  | "Vmatrix"
-  | "HexaSkill"
-  | "HexaStat"
-  | "Union";
-
-export const MAIN_TABS: TabDefinition[] = [
+export const MAIN_TABS = [
   {
     value: "Item",
     label: "장비",
@@ -61,9 +48,9 @@ export const MAIN_TABS: TabDefinition[] = [
     mobileLabel: "링크",
     description: "보유 중인 링크 스킬과 총합 효과를 정리합니다.",
   },
-];
+] as const satisfies readonly TabDefinition[];
 
-export const SUB_TABS: TabDefinition[] = [
+export const SUB_TABS = [
   {
     value: "Union",
     label: "유니온",
@@ -88,6 +75,8 @@ export const SUB_TABS: TabDefinition[] = [
     mobileLabel: "HEXA스탯",
     description: "HEXA 스탯 배분과 강화 상태를 확인합니다.",
   },
-];
+] as const satisfies readonly TabDefinition[];
 
-export const ALL_TABS = [...MAIN_TABS, ...SUB_TABS];
+export const ALL_TABS = [...MAIN_TABS, ...SUB_TABS] as const;
+
+export type TabKey = (typeof ALL_TABS)[number]["value"];

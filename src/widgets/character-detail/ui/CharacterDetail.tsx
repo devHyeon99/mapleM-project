@@ -38,6 +38,7 @@ export const CharacterDetail = ({
         </div>
         <div className="flex w-full flex-col">
           <CharacterDetailTabs
+            key={ocid}
             ocid={ocid}
             level={characterData.character_level}
             itemData={itemData}

@@ -3,6 +3,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
+import { useHoverDevice } from "@/shared/lib/hooks/useHoverDevice";
 import { cn } from "@/shared/lib/utils";
 import { TabsList, TabsTrigger } from "@/shared/ui/tabs";
 
@@ -38,7 +39,7 @@ export function CharacterDetailTabNav() {
   const tabListRef = useRef<HTMLDivElement>(null);
   const [isAtStart, setIsAtStart] = useState(true);
   const [isAtEnd, setIsAtEnd] = useState(false);
-  const [canUseHoverControls, setCanUseHoverControls] = useState(false);
+  const canUseHoverControls = useHoverDevice();
 
   const handleScroll = useCallback(() => {
     const element = tabListRef.current;
@@ -53,18 +54,6 @@ export function CharacterDetailTabNav() {
         Math.ceil(scrollLeft + clientWidth) >=
           scrollWidth - SCROLL_EDGE_THRESHOLD,
     );
-  }, []);
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
-    const updatePointerMode = () => setCanUseHoverControls(mediaQuery.matches);
-
-    updatePointerMode();
-    mediaQuery.addEventListener("change", updatePointerMode);
-
-    return () => {
-      mediaQuery.removeEventListener("change", updatePointerMode);
-    };
   }, []);
 
   useEffect(() => {

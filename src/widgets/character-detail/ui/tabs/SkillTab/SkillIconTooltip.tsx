@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useHoverDevice } from "@/shared/lib/hooks/useHoverDevice";
 import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui/popover";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/shared/ui/tooltip";
 
@@ -18,19 +18,7 @@ export const SkillIconTooltip = ({
   tooltip,
   iconClassName = "h-8 w-8 object-contain",
 }: SkillIconTooltipProps) => {
-  const [isHoverDevice, setIsHoverDevice] = useState(true);
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
-    const updatePointerMode = () => setIsHoverDevice(mediaQuery.matches);
-
-    updatePointerMode();
-    mediaQuery.addEventListener("change", updatePointerMode);
-
-    return () => {
-      mediaQuery.removeEventListener("change", updatePointerMode);
-    };
-  }, []);
+  const isHoverDevice = useHoverDevice();
 
   const iconTrigger = (
     <button type="button" className="inline-flex h-8 w-8">
@@ -41,6 +29,7 @@ export const SkillIconTooltip = ({
         height={32}
         unoptimized
         className={iconClassName}
+        style={{ width: "auto", height: "auto", imageRendering: "pixelated" }}
       />
     </button>
   );

@@ -2,7 +2,7 @@ import { CharacterProfileCard } from "./CharacterProfileCard";
 import { CharacterDetailTabs } from "./CharacterDetailTabs";
 import type { CharacterDetailData } from "@/entities/character/model/types";
 
-interface CharacterBasicInfoProps {
+interface CharacterDetailProps {
   ocid: string;
   characterData: CharacterDetailData;
 }
@@ -10,7 +10,7 @@ interface CharacterBasicInfoProps {
 export const CharacterDetail = ({
   ocid,
   characterData,
-}: CharacterBasicInfoProps) => {
+}: CharacterDetailProps) => {
   const titleText = `${characterData.world_name} ${characterData.character_name} 캐릭터 정보`;
   const itemData = {
     character_class: characterData.character_class,

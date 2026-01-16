@@ -6,32 +6,40 @@ import { useRecentSearch } from "@/shared/lib/hooks/useRecentSearch";
 import { CharacterSearch } from "@/features/character-search";
 import { AlertTriangle } from "lucide-react";
 
+interface CharacterPathParams {
+  name: string;
+  world: string;
+}
+
+const parseCharacterPathname = (
+  pathname: string | null,
+): CharacterPathParams | null => {
+  const segments = pathname?.split("/") ?? [];
+  if (segments[1] !== "character" || segments.length < 4) return null;
+
+  return {
+    world: decodeURIComponent(segments[2]),
+    name: decodeURIComponent(segments[3]),
+  };
+};
+
 export function CharacterNotFoundView() {
   const pathname = usePathname();
   const { removeHistoryByParams } = useRecentSearch("character-search-history");
-  const segments = useMemo(() => pathname?.split("/") ?? [], [pathname]);
-  const targetWorld =
-    segments[1] === "character" && segments.length >= 4
-      ? decodeURIComponent(segments[2])
-      : null;
-  const targetName =
-    segments[1] === "character" && segments.length >= 4
-      ? decodeURIComponent(segments[3])
-      : null;
+  const targetCharacter = useMemo(
+    () => parseCharacterPathname(pathname),
+    [pathname],
+  );
 
   const processedRef = useRef(false);
 
   useEffect(() => {
     if (processedRef.current) return;
+    if (!targetCharacter) return;
 
-    if (segments[1] === "character" && segments.length >= 4) {
-      removeHistoryByParams(
-        decodeURIComponent(segments[3]),
-        decodeURIComponent(segments[2]),
-      );
-      processedRef.current = true;
-    }
-  }, [segments, removeHistoryByParams]);
+    removeHistoryByParams(targetCharacter.name, targetCharacter.world);
+    processedRef.current = true;
+  }, [targetCharacter, removeHistoryByParams]);
 
   return (
     <div className="flex flex-col items-center justify-center text-center">
@@ -39,11 +47,9 @@ export function CharacterNotFoundView() {
         <CharacterSearch />
       </div>
       <AlertTriangle className="text-destructive mb-2 size-12" />
-      {(targetWorld || targetName) && (
+      {targetCharacter && (
         <p className="mb-1 text-xl font-medium">
-          {targetWorld ? `${targetWorld}` : ""}
-          {targetWorld && targetName ? " " : ""}
-          {targetName ? `${targetName}` : ""}
+          {targetCharacter.world} {targetCharacter.name}
         </p>
       )}
       <h2 className="mb-2 text-xl font-medium tracking-tight">

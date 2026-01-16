@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export interface SearchHistoryItem {
   id: string;
@@ -10,6 +10,7 @@ export interface SearchHistoryItem {
 }
 
 const MAX_HISTORY_LIMIT = 6;
+const SEARCH_HISTORY_UPDATED_EVENT = "search-history-updated";
 
 const readSearchHistory = (storageKey: string): SearchHistoryItem[] => {
   const saved = localStorage.getItem(storageKey);
@@ -25,6 +26,33 @@ const readSearchHistory = (storageKey: string): SearchHistoryItem[] => {
   }
 };
 
+const emitSearchHistoryUpdate = (storageKey: string) => {
+  window.dispatchEvent(
+    new CustomEvent(SEARCH_HISTORY_UPDATED_EVENT, {
+      detail: { storageKey },
+    }),
+  );
+};
+
+const writeSearchHistory = (
+  storageKey: string,
+  history: SearchHistoryItem[],
+) => {
+  localStorage.setItem(storageKey, JSON.stringify(history));
+  emitSearchHistoryUpdate(storageKey);
+};
+
+const updateSearchHistory = (
+  storageKey: string,
+  updater: (history: SearchHistoryItem[]) => SearchHistoryItem[],
+) => {
+  const currentHistory = readSearchHistory(storageKey);
+  const next = updater(currentHistory);
+  if (next === currentHistory) return;
+
+  writeSearchHistory(storageKey, next);
+};
+
 export const useRecentSearch = (storageKey: string) => {
   const [history, setHistory] = useState<SearchHistoryItem[]>(() => {
     if (typeof window === "undefined") {
@@ -34,13 +62,31 @@ export const useRecentSearch = (storageKey: string) => {
     return readSearchHistory(storageKey);
   });
 
+  useEffect(() => {
+    const handleHistoryUpdate = (event: Event) => {
+      const { detail } = event as CustomEvent<{ storageKey?: string }>;
+      if (detail?.storageKey !== storageKey) return;
+
+      setHistory(readSearchHistory(storageKey));
+    };
+
+    window.addEventListener(SEARCH_HISTORY_UPDATED_EVENT, handleHistoryUpdate);
+
+    return () => {
+      window.removeEventListener(
+        SEARCH_HISTORY_UPDATED_EVENT,
+        handleHistoryUpdate,
+      );
+    };
+  }, [storageKey]);
+
   const addHistory = useCallback(
     (name: string, world: string) => {
       const trimmedName = name.trim();
       if (!trimmedName || world === "전체") return;
 
-      setHistory((prev) => {
-        const filtered = prev.filter(
+      updateSearchHistory(storageKey, (currentHistory) => {
+        const filtered = currentHistory.filter(
           (item) => !(item.name === trimmedName && item.world === world),
         );
         const newItem = {
@@ -49,9 +95,8 @@ export const useRecentSearch = (storageKey: string) => {
           world,
           date: Date.now(),
         };
-        const next = [newItem, ...filtered].slice(0, MAX_HISTORY_LIMIT);
-        localStorage.setItem(storageKey, JSON.stringify(next));
-        return next;
+
+        return [newItem, ...filtered].slice(0, MAX_HISTORY_LIMIT);
       });
     },
     [storageKey],
@@ -59,34 +104,31 @@ export const useRecentSearch = (storageKey: string) => {
 
   const removeHistory = useCallback(
     (id: string) => {
-      setHistory((prev) => {
-        const next = prev.filter((item) => item.id !== id);
-        localStorage.setItem(storageKey, JSON.stringify(next));
-        return next;
-      });
+      updateSearchHistory(storageKey, (currentHistory) =>
+        currentHistory.some((item) => item.id === id)
+          ? currentHistory.filter((item) => item.id !== id)
+          : currentHistory,
+      );
     },
     [storageKey],
   );
 
   const removeHistoryByParams = useCallback(
     (name: string, world: string) => {
-      const currentHistory = readSearchHistory(storageKey);
+      updateSearchHistory(storageKey, (currentHistory) => {
+        const next = currentHistory.filter(
+          (item) => !(item.name === name && item.world === world),
+        );
 
-      const next = currentHistory.filter(
-        (item) => !(item.name === name && item.world === world),
-      );
-
-      if (currentHistory.length !== next.length) {
-        localStorage.setItem(storageKey, JSON.stringify(next));
-        setHistory(next);
-      }
+        return next.length === currentHistory.length ? currentHistory : next;
+      });
     },
     [storageKey],
   );
 
   const clearHistory = useCallback(() => {
-    setHistory([]);
     localStorage.removeItem(storageKey);
+    emitSearchHistoryUpdate(storageKey);
   }, [storageKey]);
 
   return {

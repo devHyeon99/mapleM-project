@@ -14,6 +14,16 @@ const SCROLL_STEP_RATIO = 0.8;
 
 type ScrollDirection = "left" | "right";
 
+interface ScrollState {
+  isAtStart: boolean;
+  isAtEnd: boolean;
+}
+
+const INITIAL_SCROLL_STATE: ScrollState = {
+  isAtStart: true,
+  isAtEnd: false,
+};
+
 interface ScrollButtonProps {
   direction: ScrollDirection;
   label: string;
@@ -37,8 +47,8 @@ const ScrollButton = ({ direction, label, onClick }: ScrollButtonProps) => {
 
 export function CharacterDetailTabNav() {
   const tabListRef = useRef<HTMLDivElement>(null);
-  const [isAtStart, setIsAtStart] = useState(true);
-  const [isAtEnd, setIsAtEnd] = useState(false);
+  const [{ isAtStart, isAtEnd }, setScrollState] =
+    useState<ScrollState>(INITIAL_SCROLL_STATE);
   const canUseHoverControls = useHoverDevice();
 
   const handleScroll = useCallback(() => {
@@ -48,11 +58,19 @@ export function CharacterDetailTabNav() {
     const { scrollLeft, scrollWidth, clientWidth } = element;
     const hasOverflow = scrollWidth - clientWidth > SCROLL_EDGE_THRESHOLD;
 
-    setIsAtStart(!hasOverflow || scrollLeft <= SCROLL_EDGE_THRESHOLD);
-    setIsAtEnd(
-      !hasOverflow ||
+    const nextState = {
+      isAtStart: !hasOverflow || scrollLeft <= SCROLL_EDGE_THRESHOLD,
+      isAtEnd:
+        !hasOverflow ||
         Math.ceil(scrollLeft + clientWidth) >=
           scrollWidth - SCROLL_EDGE_THRESHOLD,
+    };
+
+    setScrollState((prevState) =>
+      prevState.isAtStart === nextState.isAtStart &&
+      prevState.isAtEnd === nextState.isAtEnd
+        ? prevState
+        : nextState,
     );
   }, []);
 
@@ -64,12 +82,10 @@ export function CharacterDetailTabNav() {
     const resizeObserver = new ResizeObserver(handleScroll);
 
     resizeObserver.observe(element);
-    window.addEventListener("resize", handleScroll);
 
     return () => {
       window.cancelAnimationFrame(frameId);
       resizeObserver.disconnect();
-      window.removeEventListener("resize", handleScroll);
     };
   }, [handleScroll]);
 

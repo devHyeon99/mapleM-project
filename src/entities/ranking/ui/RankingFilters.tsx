@@ -17,6 +17,10 @@ const RANKING_DATE_HELP_ITEMS = [
     title: "랭킹 업데이트",
     description: "랭킹은 매일 오전 6시경에 1일 1회 집계되어 제공됩니다.",
   },
+  {
+    title: "랭킹 집계기준",
+    description: "전체 랭킹 10,000등 내의 캐릭터만 집계되어 제공됩니다.",
+  },
 ] as const;
 
 export function RankingFilters() {
@@ -67,7 +71,8 @@ export function RankingFilters() {
 
       <div className="flex flex-row items-center gap-2 self-end">
         <p className="text-muted-foreground text-sm">
-          랭킹 기준 : <time dateTime={displayDate}>{displayDate}</time>
+          랭킹 기준 :{" "}
+          <time dateTime={displayDate}>{displayDate + " 06:00"}</time>
         </p>
         <HelpPopover
           ariaLabel="랭킹 기준 안내"

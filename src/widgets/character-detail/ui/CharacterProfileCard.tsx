@@ -40,7 +40,7 @@ const CharacterProfileIdentity = ({ data }: CharacterProfileIdentityProps) => {
       {data.character_image && (
         <Image
           src={data.character_image}
-          alt="캐릭터 외형"
+          alt=""
           aria-hidden="true"
           width={96}
           height={96}

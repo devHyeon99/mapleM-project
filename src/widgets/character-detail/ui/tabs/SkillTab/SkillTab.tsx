@@ -7,6 +7,7 @@ import { useSkillTab } from "./useSkillTab";
 import { SkillTabHeader } from "./SkillTabHeader";
 import { SkillPreset } from "./SkillPreset";
 import { SkillGridDisplay } from "./SkillGridDisplay";
+import { StealSkillCard } from "./StealSkillCard";
 import { CHARACTER_TAB_LOADING_MESSAGE } from "../loading";
 
 interface SkillTabProps {
@@ -35,7 +36,9 @@ export const SkillTab = ({ ocid }: SkillTabProps) => {
     );
   }
 
-  if (!layout.hasEquipment && !layout.hasPreset) {
+  const stealSkills = query.data.skill.steal_skill ?? [];
+
+  if (!layout.hasEquipment && !layout.hasPreset && stealSkills.length === 0) {
     return (
       <TabMessageSection
         message={`API 업데이트 이후 접속 기록이 없거나\n장착한 스킬 정보가 없습니다.`}
@@ -44,37 +47,41 @@ export const SkillTab = ({ ocid }: SkillTabProps) => {
   }
 
   return (
-    <div className="flex flex-col gap-2 md:flex-row md:items-stretch">
-      <div className="bg-card flex w-full min-w-0 flex-1 basis-0 flex-col p-4 shadow-sm">
-        {layout.hasEquipment && (
-          <>
-            <SkillTabHeader
-              selectedMode={ui.mode}
-              onModeChange={ui.setMode}
-              selectedSet={ui.setNo}
-              onSetChange={ui.setSetNo}
-              skillSetKeys={layout.skillSetKeys}
-            />
+    <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 md:flex-row md:items-stretch">
+        <div className="bg-card flex w-full min-w-0 flex-1 basis-0 flex-col p-4 shadow-sm">
+          {layout.hasEquipment && (
+            <>
+              <SkillTabHeader
+                selectedMode={ui.mode}
+                onModeChange={ui.setMode}
+                selectedSet={ui.setNo}
+                onSetChange={ui.setSetNo}
+                skillSetKeys={layout.skillSetKeys}
+              />
 
-            {layout.hasSetData ? (
-              <SkillGridDisplay
-                key={`${ui.mode}-${ui.setNo}`}
-                setNo={Number(ui.setNo)}
-                mode={layout.modeNumber}
-                skills={layout.currentSetSkills}
-              />
-            ) : (
-              <TabMessageSection
-                message={`${ui.mode}타입에 대한 스킬 세팅이 없습니다.`}
-                className="min-h-none mt-2"
-              />
-            )}
-          </>
-        )}
+              {layout.hasSetData ? (
+                <SkillGridDisplay
+                  key={`${ui.mode}-${ui.setNo}`}
+                  setNo={Number(ui.setNo)}
+                  mode={layout.modeNumber}
+                  skills={layout.currentSetSkills}
+                />
+              ) : (
+                <TabMessageSection
+                  message={`${ui.mode}타입에 대한 스킬 세팅이 없습니다.`}
+                  className="min-h-none mt-2"
+                />
+              )}
+            </>
+          )}
+        </div>
+        <div className="bg-card flex w-full min-w-0 flex-1 basis-0 flex-col p-4 shadow-sm">
+          <SkillPreset presets={query.data.skill.preset} />
+        </div>
       </div>
-      <div className="bg-card flex w-full min-w-0 flex-1 basis-0 flex-col p-4 shadow-sm">
-        <SkillPreset presets={query.data.skill.preset} />
-      </div>
+
+      <StealSkillCard skills={stealSkills} />
     </div>
   );
 };

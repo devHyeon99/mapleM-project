@@ -8,6 +8,7 @@ import { SkillTabHeader } from "./SkillTabHeader";
 import { SkillPreset } from "./SkillPreset";
 import { SkillGridDisplay } from "./SkillGridDisplay";
 import { StealSkillCard } from "./StealSkillCard";
+import { StellaMemorizeCard } from "./StellaMemorizeCard";
 import { CHARACTER_TAB_LOADING_MESSAGE } from "../loading";
 
 interface SkillTabProps {
@@ -37,8 +38,14 @@ export const SkillTab = ({ ocid }: SkillTabProps) => {
   }
 
   const stealSkills = query.data.skill.steal_skill ?? [];
+  const stellaMemorizeSkills = query.data.skill.stella_memorize ?? [];
 
-  if (!layout.hasEquipment && !layout.hasPreset && stealSkills.length === 0) {
+  if (
+    !layout.hasEquipment &&
+    !layout.hasPreset &&
+    stealSkills.length === 0 &&
+    stellaMemorizeSkills.length === 0
+  ) {
     return (
       <TabMessageSection
         message={`API 업데이트 이후 접속 기록이 없거나\n장착한 스킬 정보가 없습니다.`}
@@ -82,6 +89,7 @@ export const SkillTab = ({ ocid }: SkillTabProps) => {
       </div>
 
       <StealSkillCard skills={stealSkills} />
+      <StellaMemorizeCard skills={stellaMemorizeSkills} />
     </div>
   );
 };

@@ -10,6 +10,7 @@ import {
   TableRow,
 } from "@/shared/ui/table";
 import { cn } from "@/shared/lib/utils";
+import { useRecentSearch } from "@/shared/lib/hooks/useRecentSearch";
 import { RANKING_COLUMNS, RankingTableContext } from "./ranking-table.config";
 import type { RankingType, AnyRankingData } from "../model/types/ranking";
 import { MobileRankingList } from "./MobileRankingList";
@@ -29,6 +30,8 @@ export const RankingTable = ({
   worldName,
   className,
 }: RankingTableProps) => {
+  const { addHistory } = useRecentSearch("character-search-history");
+
   const items = useMemo(() => {
     if (!data || data.length === 0) return [];
     const relativePageIndex = (currentPage - 1) % 10;
@@ -44,8 +47,11 @@ export const RankingTable = ({
   }, [type]);
 
   const context = useMemo<RankingTableContext>(
-    () => ({ isWorldRankingView: !!worldName }),
-    [worldName],
+    () => ({
+      addCharacterHistory: addHistory,
+      isWorldRankingView: !!worldName,
+    }),
+    [addHistory, worldName],
   );
 
   return (

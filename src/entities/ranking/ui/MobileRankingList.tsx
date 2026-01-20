@@ -138,7 +138,7 @@ const RankingRow = memo(
             {isSharenian ? (
               <SharenianInfo item={item} />
             ) : (
-              <GeneralInfo item={item} />
+              <GeneralInfo item={item} context={context} />
             )}
           </div>
         </div>
@@ -187,7 +187,13 @@ const SharenianInfo = ({ item }: { item: AnyRankingData }) => {
 };
 
 // 일반 랭킹 정보
-const GeneralInfo = ({ item }: { item: AnyRankingData }) => {
+const GeneralInfo = ({
+  item,
+  context,
+}: {
+  item: AnyRankingData;
+  context: RankingTableContext;
+}) => {
   if (!("character_name" in item)) return null;
 
   const jobName = "character_class" in item ? item.character_class : null;
@@ -205,6 +211,9 @@ const GeneralInfo = ({ item }: { item: AnyRankingData }) => {
         <Link
           href={characterHref(item.world_name, item.character_name)}
           prefetch={false}
+          onNavigate={() =>
+            context.addCharacterHistory(item.character_name, item.world_name)
+          }
           className="truncate text-sm font-bold"
         >
           {item.character_name}

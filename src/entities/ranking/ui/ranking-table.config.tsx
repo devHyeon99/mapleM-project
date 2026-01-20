@@ -8,6 +8,7 @@ import { RankingIcon } from "./RankingIcon";
 // ----------------------------------------------------------------------
 
 export interface RankingTableContext {
+  addCharacterHistory: (name: string, world: string) => void;
   isWorldRankingView: boolean;
 }
 
@@ -23,14 +24,17 @@ export interface ColumnDef {
 
 const LinkText = ({
   href,
+  onNavigate,
   children,
 }: {
   href: string;
+  onNavigate?: () => void;
   children: React.ReactNode;
 }) => (
   <Link
     href={href}
     prefetch={false}
+    onNavigate={onNavigate}
     className="text-sm font-medium underline-offset-4 hover:text-orange-500 hover:underline"
   >
     {children}
@@ -118,11 +122,16 @@ export const Renderers = {
   ),
 
   // 캐릭터/길드 식별자
-  Identity: (item: AnyRankingData) => {
+  Identity: (item: AnyRankingData, ctx: RankingTableContext) => {
     // 캐릭터
     if ("character_name" in item) {
       return (
-        <LinkText href={characterHref(item.world_name, item.character_name)}>
+        <LinkText
+          href={characterHref(item.world_name, item.character_name)}
+          onNavigate={() =>
+            ctx.addCharacterHistory(item.character_name, item.world_name)
+          }
+        >
           {item.character_name}
         </LinkText>
       );
@@ -153,11 +162,16 @@ export const Renderers = {
   Guild: (item: AnyRankingData) => renderGuildInfo(item),
 
   // 서브 정보 (상황에 따라 우선순위 다름)
-  SubInfo: (item: AnyRankingData) => {
+  SubInfo: (item: AnyRankingData, ctx: RankingTableContext) => {
     // 길드 랭킹 -> 길드 마스터
     if ("guild_master_name" in item) {
       return (
-        <LinkText href={characterHref(item.world_name, item.guild_master_name)}>
+        <LinkText
+          href={characterHref(item.world_name, item.guild_master_name)}
+          onNavigate={() =>
+            ctx.addCharacterHistory(item.guild_master_name, item.world_name)
+          }
+        >
           {item.guild_master_name}
         </LinkText>
       );

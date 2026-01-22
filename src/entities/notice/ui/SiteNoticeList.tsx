@@ -12,16 +12,17 @@ const ROTATE_MS = 10000;
 
 export function SiteNoticeList({ items }: SiteNoticeListProps) {
   const [index, setIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
-    if (items.length <= 1) return;
+    if (items.length <= 1 || isPaused) return;
 
     const timer = window.setInterval(() => {
       setIndex((prev) => (prev + 1) % items.length);
     }, ROTATE_MS);
 
     return () => window.clearInterval(timer);
-  }, [items.length]);
+  }, [items.length, isPaused]);
 
   if (items.length === 0) {
     return (
@@ -39,10 +40,20 @@ export function SiteNoticeList({ items }: SiteNoticeListProps) {
   const current = items[index % items.length];
 
   return (
-    <section className="bg-card text-card-foreground w-full rounded-xs px-6 py-4 shadow-sm">
+    <section
+      className="bg-card text-card-foreground w-full rounded-xs px-6 py-4 shadow-sm"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      onFocus={() => setIsPaused(true)}
+      onBlur={() => setIsPaused(false)}
+    >
       <div className="flex flex-col gap-2">
         <h2 className="sr-only">사이트 공지</h2>
-        <div className="min-w-0 flex-1">
+        <div
+          className="min-w-0 flex-1"
+          aria-live="polite"
+          aria-atomic="true"
+        >
           <div className="flex flex-col gap-2 text-sm font-medium md:flex-row md:items-center md:text-base">
             <Badge>{current.title}</Badge>
             <p className="text-primary text-wrap">{current.content}</p>

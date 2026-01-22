@@ -1,3 +1,4 @@
+import { connection } from "next/server";
 import { CharacterSearch } from "@/features/character-search";
 import { getCombinedNotices } from "@/entities/notice/api/notice";
 import { getSiteNotices } from "@/entities/notice/api/site-notice";
@@ -26,6 +27,13 @@ export default async function Home() {
             : "사이트 공지사항을 불러오지 못했습니다.",
       })),
   ]);
+
+  // 공지 로딩이 일시적으로 실패한 경우, 에러 화면 HTML이 ISR 풀 라우트
+  // 캐시에 최대 revalidate 기간(10분) 동안 고정되어 복구 후에도 노출되는
+  // 문제를 막는다. 이 렌더만 동적으로 처리해 다음 요청에서 재시도되게 한다.
+  if (noticeResult.error || siteNoticeResult.error) {
+    await connection();
+  }
 
   return (
     <div className="flex flex-col items-center">

@@ -9,8 +9,8 @@ interface ItemTabHeaderProps {
   activeAndroidPresetNo?: number;
   selectedPreset: number;
   selectedAndroidPreset: number | null;
-  equipmentPresets?: number[];
-  androidPresets?: number[];
+  equipmentPresets: number[];
+  androidPresets: number[];
   viewMode: "grid" | "list";
   onSelectPreset: (preset: number) => void;
   onSelectAndroidPreset: (preset: number) => void;
@@ -23,8 +23,8 @@ export const ItemTabHeader = ({
   activeAndroidPresetNo,
   selectedPreset,
   selectedAndroidPreset,
-  equipmentPresets = [1, 2, 3],
-  androidPresets = [],
+  equipmentPresets,
+  androidPresets,
   viewMode,
   onSelectPreset,
   onSelectAndroidPreset,

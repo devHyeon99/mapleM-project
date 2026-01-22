@@ -7,7 +7,7 @@ import type {
 import type { ReactNode } from "react";
 
 import type { TabKey } from "./config";
-import { ItemTab, type CharacterItemTabData } from "./tabs/ItemTab/ItemTab";
+import { ItemTab, type CharacterItemTabData } from "./tabs/ItemTab";
 import { CashItemTab } from "./tabs/CashItemTab/CashItemTab";
 import { HexaSkillTab } from "./tabs/HexaSkillTab/HexaSkillTab";
 import { HexaStatTab } from "./tabs/HexaStatTab/HexaStatTab";

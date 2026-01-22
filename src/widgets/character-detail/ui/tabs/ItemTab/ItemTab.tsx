@@ -1,32 +1,12 @@
 "use client";
 
-import type {
-  CharacterItemEquipment,
-  EquipmentPreset,
-} from "@/entities/item/model/types/domain/item-equipment";
-import type {
-  AndroidEquipment,
-  AndroidHeartEquipmentPreset,
-  HeartEquipment,
-} from "@/entities/item/model/types/domain/android-equipment";
-
 import { ItemGrid } from "./ItemGrid";
 import { ItemTabHeader } from "./ItemTabHeader";
 import { ItemList } from "./ItemList";
 import { ItemTabFooter } from "./ItemTabFooter";
 import { useItemTab } from "./useItemTab";
+import type { CharacterItemTabData } from "./types";
 import { TabMessageSection } from "@/shared/ui/TabMessageSection";
-
-export interface CharacterItemTabData {
-  character_class: string;
-  item_equipment: CharacterItemEquipment[];
-  equipment_preset?: EquipmentPreset[];
-  use_preset_no?: number | null;
-  android_use_preset_no?: number;
-  android_equipment?: AndroidEquipment | null;
-  heart_equipment?: HeartEquipment | null;
-  android_preset?: AndroidHeartEquipmentPreset[];
-}
 
 interface ItemTabProps {
   data: CharacterItemTabData;
@@ -34,15 +14,8 @@ interface ItemTabProps {
 
 export const ItemTab = ({ data }: ItemTabProps) => {
   const {
-    activeAndroidPresetNo,
-    activePresetNo,
-    availableAndroidPresetNos,
-    availablePresetNos,
-    effectiveSelectedAndroidPreset,
     effectiveSelectedPreset,
-    setSelectedAndroidPreset,
-    setSelectedPreset,
-    setViewMode,
+    headerProps,
     sortedItems,
     viewMode,
   } = useItemTab(data);
@@ -60,35 +33,12 @@ export const ItemTab = ({ data }: ItemTabProps) => {
       <div className="bg-card relative flex flex-col gap-4 rounded-xs shadow-sm">
         {viewMode === "grid" ? (
           <div className="mx-auto flex w-full flex-col items-center gap-4 py-4">
-            <ItemTabHeader
-              activePresetNo={activePresetNo}
-              activeAndroidPresetNo={activeAndroidPresetNo}
-              selectedPreset={effectiveSelectedPreset}
-              selectedAndroidPreset={effectiveSelectedAndroidPreset}
-              equipmentPresets={availablePresetNos}
-              androidPresets={availableAndroidPresetNos}
-              viewMode={viewMode}
-              onSelectPreset={setSelectedPreset}
-              onSelectAndroidPreset={setSelectedAndroidPreset}
-              onChangeViewMode={setViewMode}
-            />
+            <ItemTabHeader {...headerProps} />
             <ItemGrid items={sortedItems} presetNo={effectiveSelectedPreset} />
           </div>
         ) : (
           <div className="pt-4">
-            <ItemTabHeader
-              activePresetNo={activePresetNo}
-              activeAndroidPresetNo={activeAndroidPresetNo}
-              selectedPreset={effectiveSelectedPreset}
-              selectedAndroidPreset={effectiveSelectedAndroidPreset}
-              equipmentPresets={availablePresetNos}
-              androidPresets={availableAndroidPresetNos}
-              viewMode={viewMode}
-              onSelectPreset={setSelectedPreset}
-              onSelectAndroidPreset={setSelectedAndroidPreset}
-              onChangeViewMode={setViewMode}
-              className="w-full px-4"
-            />
+            <ItemTabHeader {...headerProps} className="w-full px-4" />
             <ItemList
               items={sortedItems}
               presetNo={effectiveSelectedPreset}

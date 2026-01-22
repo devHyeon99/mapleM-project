@@ -12,7 +12,7 @@ import { Tabs, TabsContent } from "@/shared/ui/tabs";
 import { ALL_TABS, type TabKey } from "./config";
 import { CharacterDetailTabContent } from "./CharacterDetailTabContent";
 import { CharacterDetailTabNav } from "./CharacterDetailTabNav";
-import type { CharacterItemTabData } from "./tabs/ItemTab/ItemTab";
+import type { CharacterItemTabData } from "./tabs/ItemTab";
 
 const DEFAULT_TAB: TabKey = "Item";
 const TAB_QUERY_KEY = "tab";

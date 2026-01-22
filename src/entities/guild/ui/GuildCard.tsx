@@ -24,7 +24,7 @@ export function GuildCard({ data }: GuildCardProps) {
   return (
     <Card className="w-full rounded-xs border-none">
       <CardContent className="relative px-0">
-        <div className="flex flex-col items-center gap-4 md:flex-row md:items-start">
+        <div className="mt-10 flex flex-col items-center gap-4 md:mt-0 md:flex-row md:items-start">
           <GuildMark src={data.guild_mark_icon} name={data.guild_name} />
           <div className="w-full flex-1 space-y-4 text-center md:text-left">
             <div className="space-y-1">

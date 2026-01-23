@@ -1,6 +1,7 @@
 import "server-only";
 
 import { nexonFetch } from "@/shared/api/nexon/server";
+import { isNexonNotFoundError } from "@/shared/api/nexon/handler";
 import { getRankingDate } from "@/shared/lib/ranking-date";
 import type {
   CharacterItemEquipmentResponse,
@@ -39,7 +40,9 @@ function getOptionalResult<T>(
   return null;
 }
 
-export async function fetchCharacterDetail(ocid: string): Promise<CharacterDetailData> {
+export async function fetchCharacterDetail(
+  ocid: string,
+): Promise<CharacterDetailData | null> {
   const trimmedOcid = ocid.trim();
   if (!trimmedOcid) throw new Error("ocid가 필요합니다.");
 
@@ -83,6 +86,15 @@ export async function fetchCharacterDetail(ocid: string): Promise<CharacterDetai
       next: { revalidate: 86400 },
     }),
   ]);
+
+  // ocid 캐시(24h)에 남아있지만 삭제/개명된 캐릭터는 기본 정보 조회가
+  // 데이터 없음으로 실패한다. 에러 페이지 대신 not-found로 보내기 위해 null 반환.
+  if (
+    basicResult.status === "rejected" &&
+    isNexonNotFoundError(basicResult.reason)
+  ) {
+    return null;
+  }
 
   const basicData = getRequiredResult(basicResult, "캐릭터 기본");
   const equipData = getRequiredResult(equipResult, "장비");

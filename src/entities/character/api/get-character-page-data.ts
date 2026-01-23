@@ -23,6 +23,7 @@ export async function getCharacterPageData(
 
   const ocid = ocidData.ocid;
   const characterData = await fetchCharacterDetail(ocid);
+  if (!characterData) return null;
 
   return {
     ocid,

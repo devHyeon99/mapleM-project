@@ -26,7 +26,7 @@ export default function CharacterError({
         캐릭터 정보를 불러오지 못했습니다
       </h2>
       <p className="text-muted-foreground mb-8 text-sm">
-        {error.message || "일시적인 오류가 발생했습니다."}
+        일시적인 오류가 발생했거나 게임/API 점검 중일 수 있습니다.
         <br />
         잠시 후 다시 시도해주세요.
       </p>

@@ -15,6 +15,11 @@ const ALLOWED_BOTS = [
   'naverbot',
   'yeti',
   'applebot',
+  'discordbot',
+  'slackbot',
+  'telegrambot',
+  'whatsapp',
+  'line-poker',
 ]
 
 const BLOCKED_BOT_PATTERNS = [

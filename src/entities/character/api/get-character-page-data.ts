@@ -1,4 +1,5 @@
 import type { CharacterDetailData } from "../model/types";
+import { safeDecode } from "@/shared/lib/url";
 import { fetchOcid } from "./server/ocid.server";
 import { fetchCharacterDetail } from "./server/detail.server";
 
@@ -13,8 +14,8 @@ export async function getCharacterPageData(
   world: string,
   name: string,
 ): Promise<CharacterPageData | null> {
-  const decodedWorld = decodeURIComponent(world);
-  const decodedName = decodeURIComponent(name);
+  const decodedWorld = safeDecode(world);
+  const decodedName = safeDecode(name);
 
   const ocidData = await fetchOcid(decodedWorld, decodedName);
 

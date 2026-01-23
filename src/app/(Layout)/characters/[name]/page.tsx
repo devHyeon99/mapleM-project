@@ -4,14 +4,7 @@ import { CharacterSearch } from "@/features/character-search";
 import { getCharacterSearchAll } from "@/features/character-search/server";
 import { CharactersSearchResult } from "@/widgets/characters-search-result";
 import { CharactersSearchResultSkeleton } from "@/widgets/characters-search-result";
-
-function safeDecode(value: string) {
-  try {
-    return decodeURIComponent(value);
-  } catch {
-    return value;
-  }
-}
+import { safeDecode } from "@/shared/lib/url";
 
 export async function generateMetadata({
   params,

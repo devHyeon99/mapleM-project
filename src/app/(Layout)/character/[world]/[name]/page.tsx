@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { CharacterSearch } from "@/features/character-search";
 import { CharacterDetail } from "@/widgets/character-detail";
 import { getCharacterPageData } from "@/entities/character/api/get-character-page-data";
+import { safeDecode } from "@/shared/lib/url";
 
 interface CharacterPageProps {
   params: Promise<{ world: string; name: string }>;
@@ -12,8 +13,8 @@ export async function generateMetadata({
   params,
 }: CharacterPageProps): Promise<Metadata> {
   const { world, name } = await params;
-  const decodedWorld = decodeURIComponent(world);
-  const decodedName = decodeURIComponent(name);
+  const decodedWorld = safeDecode(world);
+  const decodedName = safeDecode(name);
   const title = `${decodedName} (${decodedWorld}) - 캐릭터 정보`;
   const description = `${decodedWorld} 서버 ${decodedName} 캐릭터의 상세 정보를 확인하세요.`;
 
@@ -40,11 +41,13 @@ export async function generateMetadata({
 
 export default async function CharacterPage({ params }: CharacterPageProps) {
   const { world, name } = await params;
+  const decodedWorld = safeDecode(world);
+  const decodedName = safeDecode(name);
 
   const pageData = await getCharacterPageData(world, name);
   if (!pageData) notFound();
 
-  const { ocid, decodedName, decodedWorld, characterData } = pageData;
+  const { ocid, characterData } = pageData;
 
   return (
     <div className="flex w-full flex-1 flex-col items-center justify-center pt-2 pb-6">

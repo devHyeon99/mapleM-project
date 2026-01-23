@@ -46,3 +46,4 @@ notes.txt
 .agents/
 skills-lock.json
 global.d.ts
+next-env.d.ts

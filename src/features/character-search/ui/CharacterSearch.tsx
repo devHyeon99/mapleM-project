@@ -1,6 +1,5 @@
 "use client";
 
-import { useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { SearchForm } from "@/shared/ui/search-form";
 import { ALL_WORLD_NAME } from "@/shared/config/constants/worlds";
@@ -11,7 +10,6 @@ const VALIDATION_ERROR_MESSAGE =
 
 export const CharacterSearch = () => {
   const router = useRouter();
-  const [isPending, startTransition] = useTransition();
 
   const normalizeName = (name: string) => name.trim();
 
@@ -20,8 +18,6 @@ export const CharacterSearch = () => {
   };
 
   const handleSearch = (world: string, name: string) => {
-    if (isPending) return;
-
     const normalized = normalizeName(name);
 
     const path =
@@ -29,7 +25,9 @@ export const CharacterSearch = () => {
         ? `/characters/${encodeURIComponent(normalized)}`
         : `/character/${encodeURIComponent(world)}/${encodeURIComponent(normalized)}`;
 
-    startTransition(() => router.push(path));
+    // startTransition으로 감싸면 React가 loading.tsx fallback을 억제하므로
+    // 일반 router.push로 이동시켜 도착 페이지의 스켈레톤이 바로 노출되게 한다.
+    router.push(path);
   };
 
   return (
@@ -41,7 +39,6 @@ export const CharacterSearch = () => {
       errorMessage={VALIDATION_ERROR_MESSAGE}
       onSubmit={handleSearch}
       includeAllWorld={true}
-      isPending={isPending}
     />
   );
 };

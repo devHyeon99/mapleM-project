@@ -13,12 +13,8 @@ interface ItemTabProps {
 }
 
 export const ItemTab = ({ data }: ItemTabProps) => {
-  const {
-    effectiveSelectedPreset,
-    headerProps,
-    sortedItems,
-    viewMode,
-  } = useItemTab(data);
+  const { effectiveSelectedPreset, headerProps, sortedItems, viewMode } =
+    useItemTab(data);
 
   if (data.use_preset_no === null) {
     return (
@@ -50,7 +46,6 @@ export const ItemTab = ({ data }: ItemTabProps) => {
       <div className="mx-auto w-full">
         <ItemTabFooter
           items={sortedItems}
-          presetNo={effectiveSelectedPreset}
           characterClass={data.character_class}
         />
       </div>

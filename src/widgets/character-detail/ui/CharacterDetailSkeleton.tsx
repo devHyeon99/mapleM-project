@@ -2,7 +2,7 @@ import { Skeleton } from "@/shared/ui/skeleton";
 
 function ProfileCardSkeleton() {
   return (
-    <article className="bg-card w-full rounded-xs p-4 shadow-sm sm:p-6">
+    <article className="bg-card min-h-[488px] w-full rounded-xs p-4 shadow-sm sm:min-h-[356px] sm:p-6">
       <div className="flex w-full flex-col items-center gap-4 sm:flex-row sm:items-start">
         {/* 캐릭터 이미지 + 이름 */}
         <div className="flex w-full shrink-0 flex-col items-center gap-2 sm:w-44">
@@ -67,7 +67,15 @@ function TabNavSkeleton() {
 
 function TabContentSkeleton() {
   return (
-    <div className="bg-card flex min-h-[650px] w-full items-center justify-center rounded-xs p-4">
+    <div className="bg-card flex min-h-[408px] w-full items-center justify-center rounded-xs p-4 sm:min-h-[474px]">
+      <p className="text-muted-foreground text-sm">데이터 불러오는 중...</p>
+    </div>
+  );
+}
+
+function TabSubContentSkeleton() {
+  return (
+    <div className="bg-card flex min-h-[560px] w-full items-center justify-center rounded-xs p-4 sm:min-h-[520px]">
       <p className="text-muted-foreground text-sm">데이터 불러오는 중...</p>
     </div>
   );
@@ -85,6 +93,7 @@ export function CharacterDetailSkeleton() {
         <div className="flex w-full flex-col gap-2">
           <TabNavSkeleton />
           <TabContentSkeleton />
+          <TabSubContentSkeleton />
         </div>
       </div>
     </section>

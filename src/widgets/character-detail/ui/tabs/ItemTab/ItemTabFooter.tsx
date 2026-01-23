@@ -5,13 +5,11 @@ import { ItemSpecSummaryCard } from "./ItemSpecSummaryCard";
 
 interface ItemTabFooterProps {
   items: SortedItemSlot[];
-  presetNo: number;
   characterClass: string;
 }
 
 export const ItemTabFooter = ({
   items,
-  presetNo,
   characterClass,
 }: ItemTabFooterProps) => {
   const hasNoEquipItems = items.every((slot) => {
@@ -27,11 +25,7 @@ export const ItemTabFooter = ({
 
   return (
     <div className="grid w-full shadow-sm">
-      <ItemSpecSummaryCard
-        items={items}
-        presetNo={presetNo}
-        characterClass={characterClass}
-      />
+      <ItemSpecSummaryCard items={items} characterClass={characterClass} />
       <ItemSetEffectCard items={items} />
     </div>
   );

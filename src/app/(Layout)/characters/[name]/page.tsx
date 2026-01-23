@@ -14,9 +14,22 @@ export async function generateMetadata({
   const { name } = await params;
   const decodedName = safeDecode(name);
   const title = `${decodedName} - 캐릭터 검색 결과`;
+  const description = `${decodedName} 캐릭터 검색 결과를 확인하세요.`;
 
   return {
     title,
+    description,
+    openGraph: {
+      title,
+      description,
+      images: ["/og-image.png"],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: ["/og-image.png"],
+    },
     robots: {
       index: false,
       follow: true,

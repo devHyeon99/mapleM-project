@@ -5,7 +5,7 @@ import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { Providers } from "@/app/providers/Providers";
 import { ThemeProvider } from "@/app/providers/theme-provider";
-import { SITE_METADATA_BASE, SITE_NAME } from "@/shared/config/site";
+import { SITE_METADATA_BASE, SITE_NAME, SITE_URL } from "@/shared/config/site";
 import { cn } from "@/shared/lib/utils";
 
 const pretendard = localFont({
@@ -13,7 +13,7 @@ const pretendard = localFont({
   variable: "--font-pretendard",
   display: "swap",
   weight: "100 900",
-  adjustFontFallback: "Arial",
+  adjustFontFallback: false,
 });
 
 export const metadata: Metadata = {
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${SITE_NAME} - 메이플스토리M 캐릭터 검색`,
     description: "메이플스토리M 캐릭터 정보, 장비, 코디를 한눈에 확인하세요.",
-    images: ["/og-image.png"],
+    images: [`${SITE_URL}/og-image.png`],
   },
   icons: {
     icon: "/favicon.ico",
@@ -71,7 +71,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: "/",
+    canonical: SITE_URL,
   },
   verification: {
     google: "ixxZ7vNFuRu8LRZzoPtmWz-Q3btL9xUbaWyLFUceJ6Q",

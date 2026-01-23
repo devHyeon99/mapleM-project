@@ -67,12 +67,8 @@ function TabNavSkeleton() {
 
 function TabContentSkeleton() {
   return (
-    <div className="bg-card w-full rounded-xs p-4">
-      <div className="grid grid-cols-4 gap-2 sm:grid-cols-6 md:grid-cols-8">
-        {Array.from({ length: 16 }, (_, i) => (
-          <Skeleton key={i} className="aspect-square w-full rounded-sm" />
-        ))}
-      </div>
+    <div className="bg-card flex min-h-[650px] w-full items-center justify-center rounded-xs p-4">
+      <p className="text-muted-foreground text-sm">데이터 불러오는 중...</p>
     </div>
   );
 }

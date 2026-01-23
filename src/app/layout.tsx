@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { Providers } from "@/app/providers/Providers";
 import { ThemeProvider } from "@/app/providers/theme-provider";
@@ -111,6 +112,7 @@ export default function RootLayout({
             strategy="afterInteractive"
           />
         )}
+        <Analytics />
       </body>
     </html>
   );

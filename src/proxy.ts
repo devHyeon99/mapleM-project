@@ -45,7 +45,7 @@ const BLOCKED_BOT_PATTERNS = [
   /sqlmap/i,
 ]
 
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
   const ua = req.headers.get('user-agent') ?? ''
 
   if (!ua) {

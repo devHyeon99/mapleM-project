@@ -5,7 +5,6 @@ const ALLOWED_BOTS = [
   'bingbot',
   'slurp',
   'duckduckbot',
-  'baiduspider',
   'yandexbot',
   'sogou',
   'facebookexternalhit',
@@ -23,6 +22,10 @@ const ALLOWED_BOTS = [
 ]
 
 const BLOCKED_BOT_PATTERNS = [
+  /baiduspider/i,
+  /bingsapphire/i,
+  /serankingbacklinksbot/i,
+  /Chrome\/[1-9][0-9]\./, // Chrome 99 이하 차단
   /scrapy/i,
   /python-requests/i,
   /python-urllib/i,

@@ -7,6 +7,10 @@ import { CharacterProfileHelpPopover } from "./CharacterProfileHelpPopover";
 
 const NUMBER_FORMATTER = new Intl.NumberFormat("ko-KR");
 
+interface CharacterProfileCardProps {
+  data: CharacterDetailData;
+}
+
 interface RankingInfoRowsProps {
   overallRanking?: number | null;
   worldRanking?: number | null;
@@ -30,11 +34,7 @@ const RankingInfoRows = ({
   );
 };
 
-interface CharacterProfileIdentityProps {
-  data: CharacterDetailData;
-}
-
-const CharacterProfileIdentity = ({ data }: CharacterProfileIdentityProps) => {
+const CharacterProfileIdentity = ({ data }: CharacterProfileCardProps) => {
   return (
     <div className="flex w-full shrink-0 flex-col items-center gap-2 sm:w-44">
       {data.character_image && (
@@ -51,9 +51,9 @@ const CharacterProfileIdentity = ({ data }: CharacterProfileIdentityProps) => {
         />
       )}
 
-      <h2 className="flex items-center justify-center gap-1 font-semibold">
+      <h3 className="flex items-center justify-center gap-1 font-semibold">
         <Image
-          src={`/worlds/${data.world_name}.png`}
+          src={`/worlds/${encodeURIComponent(data.world_name)}.png`}
           alt=""
           aria-hidden="true"
           width={14}
@@ -62,22 +62,18 @@ const CharacterProfileIdentity = ({ data }: CharacterProfileIdentityProps) => {
           unoptimized
         />
         <span>{data.character_name}</span>
-      </h2>
+      </h3>
     </div>
   );
 };
 
-interface CharacterProfileInfoListProps {
-  data: CharacterDetailData;
-}
-
-const CharacterProfileInfoList = ({ data }: CharacterProfileInfoListProps) => {
+const CharacterProfileInfoList = ({ data }: CharacterProfileCardProps) => {
   const expRate = data.character_exp_rate ?? "0";
   const guildName = data.guild_name ?? "-";
   const hasGuild = Boolean(data.guild_name);
-  const rawUnionLevel = data.union_data?.union_level ?? 0;
-  const unionDisplay =
-    rawUnionLevel > 0 ? NUMBER_FORMATTER.format(rawUnionLevel) : "0";
+  const unionDisplay = NUMBER_FORMATTER.format(
+    data.union_data?.union_level ?? 0,
+  );
 
   return (
     <dl className="flex w-full flex-col gap-3 text-sm">
@@ -135,14 +131,10 @@ const CharacterProfileInfoList = ({ data }: CharacterProfileInfoListProps) => {
   );
 };
 
-interface CharacterProfileCardProps {
-  data: CharacterDetailData;
-}
-
 export const CharacterProfileCard = ({ data }: CharacterProfileCardProps) => {
   return (
     <article
-      className="bg-card relative w-full flex-col rounded-xs p-4 shadow-sm sm:p-6"
+      className="bg-card relative w-full rounded-xs p-4 shadow-sm sm:p-6"
       aria-label={`${data.character_name} 캐릭터 상세정보`}
     >
       <div className="flex w-full flex-col items-center gap-4 sm:flex-row sm:items-start">

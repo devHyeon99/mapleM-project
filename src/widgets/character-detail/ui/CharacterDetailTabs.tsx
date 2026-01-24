@@ -12,7 +12,7 @@ import { Tabs, TabsContent } from "@/shared/ui/tabs";
 import { ALL_TABS, type TabKey } from "./config";
 import { CharacterDetailTabContent } from "./CharacterDetailTabContent";
 import { CharacterDetailTabNav } from "./CharacterDetailTabNav";
-import type { CharacterItemTabData } from "./tabs/ItemTab";
+import type { CharacterItemTabData } from "./types";
 
 const DEFAULT_TAB: TabKey = "Item";
 const TAB_QUERY_KEY = "tab";
@@ -29,12 +29,12 @@ interface CharacterDetailTabsProps {
   unionRanking: UnionRanking | null;
 }
 
-interface CharacterDetailTabsContentProps extends CharacterDetailTabsProps {
+interface CharacterDetailTabsViewProps extends CharacterDetailTabsProps {
   activeTab: TabKey;
   onTabChange: (value: string) => void;
 }
 
-const CharacterDetailTabsContent = ({
+const CharacterDetailTabsView = ({
   ocid,
   level,
   itemData,
@@ -42,7 +42,7 @@ const CharacterDetailTabsContent = ({
   unionRanking,
   activeTab,
   onTabChange,
-}: CharacterDetailTabsContentProps) => {
+}: CharacterDetailTabsViewProps) => {
   return (
     <Tabs value={activeTab} onValueChange={onTabChange} className="w-full">
       <div className="flex flex-col gap-2">
@@ -80,6 +80,7 @@ const CharacterDetailTabsWithUrl = (props: CharacterDetailTabsProps) => {
   const tabFromUrl = isTabKey(tabQuery) ? tabQuery : DEFAULT_TAB;
   const [activeTab, setActiveTab] = useState<TabKey>(tabFromUrl);
 
+  // 뒤로가기·앞으로가기 등 외부 URL 변경 시 activeTab을 URL과 동기화
   useEffect(() => {
     setActiveTab(tabFromUrl);
   }, [tabFromUrl]);
@@ -105,7 +106,7 @@ const CharacterDetailTabsWithUrl = (props: CharacterDetailTabsProps) => {
   };
 
   return (
-    <CharacterDetailTabsContent
+    <CharacterDetailTabsView
       {...props}
       activeTab={activeTab}
       onTabChange={handleTabChange}
@@ -117,11 +118,13 @@ export const CharacterDetailTabs = (props: CharacterDetailTabsProps) => {
   return (
     <Suspense
       fallback={
-        <CharacterDetailTabsContent
-          {...props}
-          activeTab={DEFAULT_TAB}
-          onTabChange={() => {}}
-        />
+        <div className="pointer-events-none select-none opacity-60">
+          <CharacterDetailTabsView
+            {...props}
+            activeTab={DEFAULT_TAB}
+            onTabChange={() => {}}
+          />
+        </div>
       }
     >
       <CharacterDetailTabsWithUrl {...props} />

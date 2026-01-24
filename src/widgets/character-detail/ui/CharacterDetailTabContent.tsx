@@ -1,5 +1,3 @@
-"use client";
-
 import type {
   CharacterUnion,
   UnionRanking,
@@ -7,17 +5,20 @@ import type {
 import type { ReactNode } from "react";
 
 import type { TabKey } from "./config";
-import { ItemTab, type CharacterItemTabData } from "./tabs/ItemTab";
-import { CashItemTab } from "./tabs/CashItemTab/CashItemTab";
-import { HexaSkillTab } from "./tabs/HexaSkillTab/HexaSkillTab";
-import { HexaStatTab } from "./tabs/HexaStatTab/HexaStatTab";
-import { JewelTab } from "./tabs/JewelTab/JewelTab";
-import { LinkSkillTab } from "./tabs/LinkSkillTab/LinkSkillTab";
-import { SkillTab } from "./tabs/SkillTab/SkillTab";
-import { StatTab } from "./tabs/StatTab/StatTab";
-import { SymbolTab } from "./tabs/SymbolTab/SymbolTab";
-import { UnionTab } from "./tabs/UnionTab/UnionTab";
-import { VmatrixTab } from "./tabs/VmatrixTab/VmatrixTab";
+import type { CharacterItemTabData } from "./types";
+import {
+  ItemTab,
+  CashItemTab,
+  HexaSkillTab,
+  HexaStatTab,
+  JewelTab,
+  LinkSkillTab,
+  SkillTab,
+  StatTab,
+  SymbolTab,
+  UnionTab,
+  VmatrixTab,
+} from "./tabs";
 
 interface CharacterDetailTabContentProps {
   tabKey: TabKey;
@@ -48,14 +49,14 @@ const TAB_CONTENT_RENDERERS = {
   ),
 } satisfies Record<TabKey, TabContentRenderer>;
 
-export function CharacterDetailTabContent({
+export const CharacterDetailTabContent = ({
   tabKey,
   ocid,
   level,
   itemData,
   unionData,
   unionRanking,
-}: CharacterDetailTabContentProps) {
+}: CharacterDetailTabContentProps) => {
   const renderTabContent = TAB_CONTENT_RENDERERS[tabKey];
 
   return renderTabContent({
@@ -65,4 +66,4 @@ export function CharacterDetailTabContent({
     unionData,
     unionRanking,
   });
-}
+};

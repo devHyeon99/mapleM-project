@@ -5,7 +5,7 @@ import { ItemTabHeader } from "./ItemTabHeader";
 import { ItemList } from "./ItemList";
 import { ItemTabFooter } from "./ItemTabFooter";
 import { useItemTab } from "./useItemTab";
-import type { CharacterItemTabData } from "./types";
+import type { CharacterItemTabData } from "../../types";
 import { TabMessageSection } from "@/shared/ui/TabMessageSection";
 
 interface ItemTabProps {

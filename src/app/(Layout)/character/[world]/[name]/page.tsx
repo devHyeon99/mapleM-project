@@ -2,11 +2,22 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CharacterSearch } from "@/features/character-search";
 import { CharacterDetail } from "@/widgets/character-detail";
-import { getCharacterPageData } from "@/entities/character/api/get-character-page-data";
+import { fetchOcid } from "@/entities/character/api/server/ocid.server";
+import { fetchCharacterDetail } from "@/entities/character/api/server/detail.server";
 import { safeDecode } from "@/shared/lib/url";
 
 interface CharacterPageProps {
   params: Promise<{ world: string; name: string }>;
+}
+
+async function getPageData(world: string, name: string) {
+  const ocidData = await fetchOcid(world, name);
+  if (!ocidData?.ocid) return null;
+
+  const characterData = await fetchCharacterDetail(ocidData.ocid);
+  if (!characterData) return null;
+
+  return { ocid: ocidData.ocid, characterData };
 }
 
 export async function generateMetadata({
@@ -44,7 +55,7 @@ export default async function CharacterPage({ params }: CharacterPageProps) {
   const decodedWorld = safeDecode(world);
   const decodedName = safeDecode(name);
 
-  const pageData = await getCharacterPageData(world, name);
+  const pageData = await getPageData(decodedWorld, decodedName);
   if (!pageData) notFound();
 
   const { ocid, characterData } = pageData;

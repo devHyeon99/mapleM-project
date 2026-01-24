@@ -25,8 +25,6 @@ export const CharacterSearch = () => {
         ? `/characters/${encodeURIComponent(normalized)}`
         : `/character/${encodeURIComponent(world)}/${encodeURIComponent(normalized)}`;
 
-    // startTransition으로 감싸면 React가 loading.tsx fallback을 억제하므로
-    // 일반 router.push로 이동시켜 도착 페이지의 스켈레톤이 바로 노출되게 한다.
     router.push(path);
   };
 

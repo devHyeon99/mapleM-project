@@ -53,11 +53,8 @@ function TabNavSkeleton() {
     <div className="bg-card w-full">
       <div className="flex h-12 items-center gap-0 overflow-hidden px-1">
         {TAB_LABELS.map((label) => (
-          <div
-            key={label}
-            className="flex h-12 shrink-0 items-center px-5 md:px-10"
-          >
-            <Skeleton className="h-4 w-10" />
+          <div key={label} className="flex h-12 shrink-0 items-center px-5">
+            <Skeleton className="h-4 w-14" />
           </div>
         ))}
       </div>

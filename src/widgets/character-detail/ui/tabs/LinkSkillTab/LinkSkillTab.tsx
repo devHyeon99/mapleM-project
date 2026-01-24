@@ -1,13 +1,12 @@
 "use client";
 
-import { LoadingCard } from "@/shared/ui/LoadingCard";
 import { TabMessageSection } from "@/shared/ui/TabMessageSection";
 import { Separator } from "@/shared/ui/separator";
 import { useLinkSkillTab } from "./useLinkSkillTab";
 import { LinkSkillHeader } from "./LinkSkillHeader";
 import { LinkSkillList } from "./LinkSkillList";
 import { LinkSkillTotalStat } from "./LinkSkillTotalStat";
-import { CHARACTER_TAB_LOADING_MESSAGE } from "../loading";
+import { TabLoadingBox } from "../../TabLoadingBox";
 
 interface LinkSkillTabProps {
   ocid: string;
@@ -24,7 +23,7 @@ export const LinkSkillTab = ({ ocid }: LinkSkillTabProps) => {
     setSelectedPreset,
   } = useLinkSkillTab(ocid);
 
-  if (isLoading) return <LoadingCard message={CHARACTER_TAB_LOADING_MESSAGE} />;
+  if (isLoading) return <TabLoadingBox className="min-h-[750px] md:min-h-[646px]" />;
 
   if (isError) {
     return (

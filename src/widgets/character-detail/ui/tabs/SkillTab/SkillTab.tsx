@@ -1,6 +1,5 @@
 "use client";
 
-import { LoadingCard } from "@/shared/ui/LoadingCard";
 import { TabMessageSection } from "@/shared/ui/TabMessageSection";
 
 import { useSkillTab } from "./useSkillTab";
@@ -9,7 +8,7 @@ import { SkillPreset } from "./SkillPreset";
 import { SkillGridDisplay } from "./SkillGridDisplay";
 import { StealSkillCard } from "./StealSkillCard";
 import { StellaMemorizeCard } from "./StellaMemorizeCard";
-import { CHARACTER_TAB_LOADING_MESSAGE } from "../loading";
+import { TabLoadingBox } from "../../TabLoadingBox";
 
 interface SkillTabProps {
   ocid: string;
@@ -18,8 +17,7 @@ interface SkillTabProps {
 export const SkillTab = ({ ocid }: SkillTabProps) => {
   const { query, ui, layout } = useSkillTab(ocid);
 
-  if (query.isLoading)
-    return <LoadingCard message={CHARACTER_TAB_LOADING_MESSAGE} />;
+  if (query.isLoading) return <TabLoadingBox className="min-h-[790px] md:min-h-[309px]" />;
 
   if (query.isError) {
     return (

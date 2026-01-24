@@ -1,10 +1,9 @@
 "use client";
 
 import { useCharacterSymbol } from "@/entities/character/model/hooks";
-import { LoadingCard } from "@/shared/ui/LoadingCard";
 import { TabMessageSection } from "@/shared/ui/TabMessageSection";
 import { SymbolSection } from "./SymbolSection";
-import { CHARACTER_TAB_LOADING_MESSAGE } from "../loading";
+import { TabLoadingBox } from "../../TabLoadingBox";
 
 interface SymbolTabProps {
   ocid: string;
@@ -31,7 +30,7 @@ export const SymbolTab = ({ ocid, level }: SymbolTabProps) => {
   }
 
   // 로딩 상태
-  if (isLoading) return <LoadingCard message={CHARACTER_TAB_LOADING_MESSAGE} />;
+  if (isLoading) return <TabLoadingBox className="min-h-[854px] md:min-h-[497px]" />;
 
   // 에러 상태
   if (isError) {

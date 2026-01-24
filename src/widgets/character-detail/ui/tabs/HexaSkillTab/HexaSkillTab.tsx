@@ -2,10 +2,9 @@
 
 import { Fragment } from "react";
 import Image from "next/image";
-import { LoadingCard } from "@/shared/ui/LoadingCard";
 import { TabMessageSection } from "@/shared/ui/TabMessageSection";
 import { Separator } from "@/shared/ui/separator";
-import { CHARACTER_TAB_LOADING_MESSAGE } from "../loading";
+import { TabLoadingBox } from "../../TabLoadingBox";
 import { useCharacterHexaMatrixSkill } from "@/entities/skill/model/hooks/useCharacterHexaMatrixSkill";
 import type { CharacterHexaMatrixSkill } from "@/entities/skill/model/types/hexamatrix-skill";
 
@@ -89,7 +88,8 @@ export const HexaSkillTab = ({ ocid, level }: HexaSkillTabProps) => {
     );
   }
 
-  if (isLoading) return <LoadingCard message={CHARACTER_TAB_LOADING_MESSAGE} />;
+  if (isLoading)
+    return <TabLoadingBox className="min-h-[668px] md:min-h-[668px]" />;
 
   if (isError) {
     return (

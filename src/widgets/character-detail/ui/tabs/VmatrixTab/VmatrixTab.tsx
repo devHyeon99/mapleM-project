@@ -1,9 +1,8 @@
 "use client";
 
 import { useCharacterVmatrix } from "@/entities/skill/model/hooks/useCharacterVmatrix";
-import { LoadingCard } from "@/shared/ui/LoadingCard";
 import { TabMessageSection } from "@/shared/ui/TabMessageSection";
-import { CHARACTER_TAB_LOADING_MESSAGE } from "../loading";
+import { TabLoadingBox } from "../../TabLoadingBox";
 
 import { CoreList } from "./CoreList";
 import { EnhancementCoreItem } from "./EnhancementCoreItem";
@@ -29,7 +28,8 @@ export const VmatrixTab = ({ ocid, level }: VmatrixTabProps) => {
     );
   }
 
-  if (isLoading) return <LoadingCard message={CHARACTER_TAB_LOADING_MESSAGE} />;
+  if (isLoading)
+    return <TabLoadingBox className="min-h-[1467px] md:min-h-[1467px]" />;
 
   if (isError) {
     return (

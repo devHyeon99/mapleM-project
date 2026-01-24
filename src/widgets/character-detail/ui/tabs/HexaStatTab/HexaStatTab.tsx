@@ -1,14 +1,13 @@
 "use client";
 
 import { Separator } from "@/shared/ui/separator";
-import { LoadingCard } from "@/shared/ui/LoadingCard";
 import { TabMessageSection } from "@/shared/ui/TabMessageSection";
+import { TabLoadingBox } from "../../TabLoadingBox";
 import { InfoDescriptionRow } from "@/shared/ui/InfoRow";
 import { cn } from "@/shared/lib/utils";
 import { useCharacterHexaMatrixStat } from "@/entities/character/model/hooks";
 import type { CharacterHexaMatrixStat } from "@/entities/character/model/types";
 import { Badge } from "@/shared/ui/badge";
-import { CHARACTER_TAB_LOADING_MESSAGE } from "../loading";
 
 interface HexaStatTabProps {
   ocid: string;
@@ -27,7 +26,8 @@ export const HexaStatTab = ({ ocid, level }: HexaStatTabProps) => {
     );
   }
 
-  if (isLoading) return <LoadingCard message={CHARACTER_TAB_LOADING_MESSAGE} />;
+  if (isLoading)
+    return <TabLoadingBox className="min-h-[485px] md:min-h-[485px]" />;
 
   if (isError) {
     return (

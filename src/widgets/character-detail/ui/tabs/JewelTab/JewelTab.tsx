@@ -1,13 +1,12 @@
 "use client";
 
 import { useCharacterJewel } from "@/entities/character/model/hooks";
-import { LoadingCard } from "@/shared/ui/LoadingCard";
 import { Separator } from "@/shared/ui/separator";
 import { TabMessageSection } from "@/shared/ui/TabMessageSection";
 import { useJewelTab } from "./useJewelTab";
 import { JewelHeader } from "./JewelHeader";
 import { JewelPentagon } from "./JewelPentagon";
-import { CHARACTER_TAB_LOADING_MESSAGE } from "../loading";
+import { TabLoadingBox } from "../../TabLoadingBox";
 
 interface JewelTabProps {
   ocid: string;
@@ -26,7 +25,7 @@ export const JewelTab = ({ ocid, level }: JewelTabProps) => {
     );
   }
 
-  if (isLoading) return <LoadingCard message={CHARACTER_TAB_LOADING_MESSAGE} />;
+  if (isLoading) return <TabLoadingBox className="min-h-[421px] md:min-h-[421px]" />;
 
   if (isError) {
     return (

@@ -4,12 +4,11 @@ import { Fragment } from "react";
 
 import { useCharacterStat } from "@/entities/character/model/hooks";
 import { Separator } from "@/shared/ui/separator";
-import { LoadingCard } from "@/shared/ui/LoadingCard";
 import { InfoDescriptionRow } from "@/shared/ui/InfoRow";
 import { HyperStatPresetToggle } from "./HyperStatToggle";
 import { useHyperStat } from "./useHyperStat";
 import { HelpPopover } from "@/shared/ui/HelpPopover";
-import { CHARACTER_TAB_LOADING_MESSAGE } from "../loading";
+import { TabLoadingBox } from "../../TabLoadingBox";
 
 interface StatTabProps {
   ocid: string;
@@ -38,7 +37,8 @@ export const StatTab = ({ ocid, level }: StatTabProps) => {
     data?.hyperStat ?? undefined,
   );
 
-  if (isLoading) return <LoadingCard message={CHARACTER_TAB_LOADING_MESSAGE} />;
+  if (isLoading)
+    return <TabLoadingBox className="min-h-[598px] md:min-h-[405px]" />;
 
   if (isError) {
     return (

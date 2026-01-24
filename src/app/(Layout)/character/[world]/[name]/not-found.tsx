@@ -1,4 +1,4 @@
-import { CharacterNotFoundView } from "@/widgets/character-detail/ui/CharacterNotFoundView";
+import { CharacterNotFoundView } from "./_components/CharacterNotFoundView";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

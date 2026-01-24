@@ -24,28 +24,21 @@ export const CharacterDetail = ({
   };
 
   return (
-    <section
-      aria-labelledby="character-info-title"
-      className="flex w-full justify-center"
-    >
+    <section aria-labelledby="character-info-title" className="flex w-full">
       <h2 className="sr-only" id="character-info-title">
         {titleText}
       </h2>
 
       <div className="flex w-full flex-col gap-2">
-        <div className="flex w-full flex-col">
-          <CharacterProfileCard data={characterData} />
-        </div>
-        <div className="flex w-full flex-col">
-          <CharacterDetailTabs
-            key={ocid}
-            ocid={ocid}
-            level={characterData.character_level}
-            itemData={itemData}
-            unionData={characterData.union_data ?? null}
-            unionRanking={characterData.union_ranking ?? null}
-          />
-        </div>
+        <CharacterProfileCard data={characterData} />
+        <CharacterDetailTabs
+          key={ocid}
+          ocid={ocid}
+          level={characterData.character_level}
+          itemData={itemData}
+          unionData={characterData.union_data ?? null}
+          unionRanking={characterData.union_ranking ?? null}
+        />
       </div>
     </section>
   );

@@ -10,31 +10,30 @@ import { ALL_TABS } from "./config";
 
 const SCROLL_STEP_RATIO = 0.8;
 
-type ScrollDirection = "left" | "right";
-
 interface ScrollButtonProps {
-  direction: ScrollDirection;
+  direction: "left" | "right";
   label: string;
+  visible: boolean;
   onClick: () => void;
 }
 
-const ScrollButton = ({ direction, label, onClick }: ScrollButtonProps) => {
+const ScrollButton = ({ direction, label, visible, onClick }: ScrollButtonProps) => {
+  if (!visible) return null;
+
   const Icon = direction === "left" ? ChevronLeft : ChevronRight;
-  const position = direction === "left" ? "left-2" : "right-2";
 
   return (
     <div
       className={cn(
         "pointer-events-none absolute top-1/2 z-10 -translate-y-1/2 opacity-0 transition-opacity duration-200",
         "group-hover:pointer-events-auto group-hover:opacity-100",
-        "group-focus-within:pointer-events-auto group-focus-within:opacity-100",
-        position,
+        direction === "left" ? "left-2" : "right-2",
       )}
     >
       <button
         type="button"
         onClick={onClick}
-        className="bg-background hover:bg-muted flex h-8 w-8 items-center justify-center rounded-full border shadow-md transition-colors"
+        className="bg-background/60 hover:bg-background/90 flex h-8 w-8 items-center justify-center rounded-full border shadow-md transition-colors backdrop-blur-sm"
         aria-label={label}
       >
         <Icon className="text-muted-foreground h-5 w-5" />
@@ -45,49 +44,58 @@ const ScrollButton = ({ direction, label, onClick }: ScrollButtonProps) => {
 
 export function CharacterDetailTabNav() {
   const tabListRef = useRef<HTMLDivElement>(null);
-  const [hasOverflow, setHasOverflow] = useState(false);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+
+  const updateScrollState = useCallback(() => {
+    const el = tabListRef.current;
+    if (!el) return;
+    setCanScrollLeft(el.scrollLeft > 1);
+    setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 1);
+  }, []);
 
   useEffect(() => {
     const el = tabListRef.current;
     if (!el) return;
 
-    const observer = new ResizeObserver(() => {
-      setHasOverflow(el.scrollWidth > el.clientWidth + 1);
-    });
-
+    const observer = new ResizeObserver(updateScrollState);
     observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
+    el.addEventListener("scroll", updateScrollState, { passive: true });
+    updateScrollState();
 
-  const scroll = useCallback((direction: ScrollDirection) => {
-    const el = tabListRef.current;
-    if (!el) return;
+    return () => {
+      observer.disconnect();
+      el.removeEventListener("scroll", updateScrollState);
+    };
+  }, [updateScrollState]);
 
-    el.scrollBy({
-      left:
-        direction === "left"
-          ? -el.clientWidth * SCROLL_STEP_RATIO
-          : el.clientWidth * SCROLL_STEP_RATIO,
-      behavior: "smooth",
-    });
-  }, []);
+  const scroll = useCallback(
+    (direction: "left" | "right") => {
+      const el = tabListRef.current;
+      if (!el) return;
+
+      el.scrollBy({
+        left: (direction === "left" ? -1 : 1) * el.clientWidth * SCROLL_STEP_RATIO,
+        behavior: "smooth",
+      });
+
+      let lastScrollLeft = el.scrollLeft;
+      const poll = () => {
+        updateScrollState();
+        if (el.scrollLeft !== lastScrollLeft) {
+          lastScrollLeft = el.scrollLeft;
+          requestAnimationFrame(poll);
+        }
+      };
+      requestAnimationFrame(poll);
+    },
+    [updateScrollState],
+  );
 
   return (
     <div className="group bg-card relative w-full border-b">
-      {hasOverflow && (
-        <>
-          <ScrollButton
-            direction="left"
-            label="이전 탭 보기"
-            onClick={() => scroll("left")}
-          />
-          <ScrollButton
-            direction="right"
-            label="다음 탭 보기"
-            onClick={() => scroll("right")}
-          />
-        </>
-      )}
+      <ScrollButton direction="left" label="이전 탭 보기" visible={canScrollLeft} onClick={() => scroll("left")} />
+      <ScrollButton direction="right" label="다음 탭 보기" visible={canScrollRight} onClick={() => scroll("right")} />
 
       <TabsList
         ref={tabListRef}
@@ -95,7 +103,6 @@ export function CharacterDetailTabNav() {
           "flex h-12 w-full items-center justify-start rounded-none bg-transparent p-0 shadow-sm",
           "overflow-x-auto overflow-y-hidden scroll-smooth whitespace-nowrap",
           "[-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
-          "[mask-image:linear-gradient(to_right,transparent,black_2rem,black_calc(100%-2rem),transparent)]",
         )}
       >
         {ALL_TABS.map((tab) => (

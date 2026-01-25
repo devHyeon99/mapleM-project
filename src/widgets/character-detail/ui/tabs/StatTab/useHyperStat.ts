@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { CharacterHyperStat } from "@/entities/character/model/types";
 
-export const useHyperStat = (hyperStatData: CharacterHyperStat | undefined) => {
+export const useHyperStat = (hyperStatData: CharacterHyperStat | null | undefined) => {
   const [selectedPreset, setSelectedPreset] = useState<number | null>(null);
 
   const activePresetNo = hyperStatData?.use_preset_no ?? 1;
@@ -11,15 +11,7 @@ export const useHyperStat = (hyperStatData: CharacterHyperStat | undefined) => {
       ? selectedPreset
       : activePresetNo;
 
-  if (!hyperStatData) {
-    return {
-      selectedPreset: activePresetNo,
-      onSelectPreset: setSelectedPreset,
-      currentHyperStatInfo: [],
-    };
-  }
-
-  const presetData = hyperStatData.hyper_stat.find(
+  const presetData = hyperStatData?.hyper_stat.find(
     (preset) => preset.preset_no === effectiveSelectedPreset,
   );
 

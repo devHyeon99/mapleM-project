@@ -3,9 +3,9 @@
 import { ToggleGroup, ToggleGroupItem } from "@/shared/ui/toggle-group";
 
 interface HyperStatPresetToggleProps {
-  count: number; // preset_count
-  active: number; // use_preset_no (현재 적용중인 프리셋)
-  selected: number; // 현재 선택된 프리셋 번호
+  count: number;
+  active: number;
+  selected: number;
   onSelect: (presetNo: number) => void;
 }
 
@@ -15,7 +15,7 @@ export const HyperStatPresetToggle = ({
   selected,
   onSelect,
 }: HyperStatPresetToggleProps) => {
-  const value = String(selected ?? active ?? 1);
+  const value = String(selected);
 
   return (
     <ToggleGroup

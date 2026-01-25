@@ -9,6 +9,7 @@ import { HyperStatPresetToggle } from "./HyperStatToggle";
 import { useHyperStat } from "./useHyperStat";
 import { HelpPopover } from "@/shared/ui/HelpPopover";
 import { TabLoadingBox } from "../../TabLoadingBox";
+import { TabMessageSection } from "@/shared/ui/TabMessageSection";
 
 interface StatTabProps {
   ocid: string;
@@ -34,7 +35,7 @@ export const StatTab = ({ ocid, level }: StatTabProps) => {
   const { data, isLoading, isError, error } = useCharacterStat(ocid, level);
 
   const { selectedPreset, onSelectPreset, currentHyperStatInfo } = useHyperStat(
-    data?.hyperStat ?? undefined,
+    data?.hyperStat,
   );
 
   if (isLoading)
@@ -42,19 +43,15 @@ export const StatTab = ({ ocid, level }: StatTabProps) => {
 
   if (isError) {
     return (
-      <div className="rounded-md border p-3 text-sm text-red-500">
-        오류: {(error as Error).message}
+      <div className="text-destructive flex h-40 items-center justify-center p-4 text-sm font-medium">
+        오류 발생: {(error as Error).message}
       </div>
     );
   }
 
   if (!data) {
     return (
-      <section className="rounded-md border p-3">
-        <p className="text-muted-foreground text-sm whitespace-pre-line">
-          2025.09.18 API 업데이트 이후 접속 하지 않아 정보가 표기 되지 않습니다.
-        </p>
-      </section>
+      <TabMessageSection message="2025.09.18 API 업데이트 이후 접속하지 않아 정보가 표기되지 않습니다." />
     );
   }
 

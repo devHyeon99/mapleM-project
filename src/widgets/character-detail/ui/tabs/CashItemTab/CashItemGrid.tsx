@@ -7,8 +7,9 @@ interface CashItemGridProps {
   presetNo?: number | null;
 }
 
+const slotSizeClass = "w-[clamp(3rem,7vw,3.6875rem)]";
+
 export const CashItemGrid = ({ items, presetNo }: CashItemGridProps) => {
-  const slotSizeClass = "w-[clamp(3rem,7vw,3.6875rem)]";
 
   const hasNoEquipItems = items.every((slot) => slot.item === null);
 

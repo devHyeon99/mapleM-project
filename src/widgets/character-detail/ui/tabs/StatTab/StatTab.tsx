@@ -126,7 +126,7 @@ export const StatTab = ({ ocid, level }: StatTabProps) => {
             ))}
           </dl>
         ) : (
-          <div className="text-muted-foreground flex items-center justify-center pt-2 text-sm">
+          <div className="text-muted-foreground flex min-h-43 items-center justify-center text-sm">
             투자한 하이퍼 스탯이 없습니다.
           </div>
         )}

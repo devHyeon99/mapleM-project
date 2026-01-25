@@ -12,7 +12,7 @@ interface CashItemTabHeaderProps {
   canUseDressUpMode?: boolean;
   lookMode: CashItemLookMode;
   selectedPreset?: number | null;
-  presets?: number[];
+  presets: number[];
   viewMode: "grid" | "list";
   onChangeLookMode: (mode: CashItemLookMode) => void;
   onSelectPreset: (preset: number) => void;
@@ -25,7 +25,7 @@ export const CashItemTabHeader = ({
   canUseDressUpMode = false,
   lookMode,
   selectedPreset,
-  presets = [1, 2, 3],
+  presets,
   viewMode,
   onChangeLookMode,
   onSelectPreset,

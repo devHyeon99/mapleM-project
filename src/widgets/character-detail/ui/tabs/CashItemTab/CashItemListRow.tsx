@@ -1,18 +1,21 @@
 import type { CashItemEquipment } from "@/entities/cash-item/model/types/cashItem";
 import { ItemCashDialog } from "@/features/item-popover";
+import { cn } from "@/shared/lib/utils";
 
 interface CashItemListRowProps {
   item: CashItemEquipment;
   isLast?: boolean;
 }
 
-const getCashLabelStyle = (label: string | null) => {
-  if (label === "마스터") return "text-indigo-600 dark:text-indigo-400";
-  if (label === "스페셜") return "text-amber-600 dark:text-amber-400";
-  if (label === "레드") return "text-red-600 dark:text-red-400";
-  if (label === "블랙") return "text-zinc-700 dark:text-zinc-300";
-  return "text-muted-foreground";
+const CASH_LABEL_STYLE: Record<string, string> = {
+  마스터: "text-indigo-600 dark:text-indigo-400",
+  스페셜: "text-amber-600 dark:text-amber-400",
+  레드: "text-red-600 dark:text-red-400",
+  블랙: "text-zinc-700 dark:text-zinc-300",
 };
+
+const getCashLabelStyle = (label: string | null) =>
+  (label && CASH_LABEL_STYLE[label]) || "text-muted-foreground";
 
 export const CashItemListRow = ({
   item,
@@ -25,10 +28,10 @@ export const CashItemListRow = ({
 
   return (
     <div
-      className={[
+      className={cn(
         "bg-card hover:bg-accent/50 flex w-full items-center gap-3 p-4 transition-colors",
-        isLast ? "" : "border-b",
-      ].join(" ")}
+        !isLast && "border-b",
+      )}
     >
       <div className="h-12.5 w-12.5 shrink-0 self-start">
         <ItemCashDialog item={item} />
@@ -39,7 +42,7 @@ export const CashItemListRow = ({
           <span className="text-base font-semibold">{displayName}</span>
           {item.cash_item_label && (
             <span
-              className={`shrink-0 text-xs font-semibold ${getCashLabelStyle(item.cash_item_label)}`}
+              className={cn("shrink-0 text-xs font-semibold", getCashLabelStyle(item.cash_item_label))}
             >
               {item.cash_item_label} 라벨
             </span>

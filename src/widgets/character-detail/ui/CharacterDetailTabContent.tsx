@@ -1,7 +1,4 @@
-import type {
-  CharacterUnion,
-  UnionRanking,
-} from "@/entities/character/model/types";
+import type { CharacterUnion, UnionRanking } from "@/entities/character";
 import type { ReactNode } from "react";
 
 import type { TabKey } from "./config";

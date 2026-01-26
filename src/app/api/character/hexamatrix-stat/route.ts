@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { nexonFetch } from "@/shared/api/nexon/server";
 import { handleCommonNexonError } from "@/shared/api/nexon/handler";
 import type { ApiResponse } from "@/shared/model/types/ApiResponse";
-import type { CharacterHexaMatrixStat } from "@/entities/character/model/types";
+import type { CharacterHexaMatrixStat } from "@/entities/character";
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);

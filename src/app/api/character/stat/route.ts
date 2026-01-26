@@ -2,8 +2,10 @@ import { NextResponse } from "next/server";
 import { nexonFetch } from "@/shared/api/nexon/server";
 import { handleCommonNexonError } from "@/shared/api/nexon/handler";
 import type { ApiResponse } from "@/shared/model/types/ApiResponse";
-import type { CharacterStatContainer } from "@/entities/character/model/types/stat";
-import type { CharacterHyperStat } from "@/entities/character/model/types/hyper-stat";
+import type {
+  CharacterStatContainer,
+  CharacterHyperStat,
+} from "@/entities/character";
 
 export interface CharacterStatData {
   stat: CharacterStatContainer;

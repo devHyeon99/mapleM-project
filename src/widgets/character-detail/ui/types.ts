@@ -1,4 +1,4 @@
-import type { CharacterDetailData } from "@/entities/character/model/types";
+import type { CharacterDetailData } from "@/entities/character";
 
 export type CharacterItemTabData = Pick<
   CharacterDetailData,

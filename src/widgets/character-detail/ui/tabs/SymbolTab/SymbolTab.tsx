@@ -1,6 +1,6 @@
 "use client";
 
-import { useCharacterSymbol } from "@/entities/character/model/hooks";
+import { useCharacterSymbol } from "@/entities/character";
 import { TabMessageSection } from "@/shared/ui/TabMessageSection";
 import { SymbolSection } from "./SymbolSection";
 import { TabLoadingBox } from "../../TabLoadingBox";
@@ -30,7 +30,8 @@ export const SymbolTab = ({ ocid, level }: SymbolTabProps) => {
   }
 
   // 로딩 상태
-  if (isLoading) return <TabLoadingBox className="min-h-[854px] md:min-h-[497px]" />;
+  if (isLoading)
+    return <TabLoadingBox className="min-h-[854px] md:min-h-[497px]" />;
 
   // 에러 상태
   if (isError) {

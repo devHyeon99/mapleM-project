@@ -13,7 +13,7 @@ import {
   DialogFooter,
 } from "@/shared/ui/dialog";
 import { Download, Loader2 } from "lucide-react";
-import type { CharacterDetailData } from "@/entities/character/model/types";
+import type { CharacterDetailData } from "@/entities/character";
 import { SpecCardHeader } from "./SpecCardHeader";
 import { SpecCardContent } from "./SpecCardContent";
 

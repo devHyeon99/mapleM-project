@@ -1,6 +1,6 @@
 import { CharacterProfileCard } from "./CharacterProfileCard";
 import { CharacterDetailTabs } from "./CharacterDetailTabs";
-import type { CharacterDetailData } from "@/entities/character/model/types";
+import type { CharacterDetailData } from "@/entities/character";
 
 interface CharacterDetailProps {
   ocid: string;

@@ -1,6 +1,6 @@
 "use client";
 
-import type { CharacterDetailData } from "@/entities/character/model/types";
+import type { CharacterDetailData } from "@/entities/character";
 import { InfoRow } from "@/shared/ui/InfoRow";
 
 interface SpecCardHeaderProps {

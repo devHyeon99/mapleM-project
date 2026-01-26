@@ -1,5 +1,5 @@
 import { cn } from "@/shared/lib/utils";
-import type { JewelPage } from "@/entities/character/model/types";
+import type { JewelPage } from "@/entities/character";
 import { JewelDisplay } from "./JewelDisplay";
 
 const JEWEL_POSITIONS = [

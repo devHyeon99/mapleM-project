@@ -1,12 +1,8 @@
 "use client";
 
 import { TabMessageSection } from "@/shared/ui/TabMessageSection";
-import { useUnionRaider } from "@/entities/character/model/hooks";
-import type {
-  CharacterUnion,
-  UnionRanking,
-} from "@/entities/character/model/types";
-import { UnionCard } from "@/entities/character/ui";
+import { useUnionRaider, UnionCard } from "@/entities/character";
+import type { CharacterUnion, UnionRanking } from "@/entities/character";
 import { UnionEffect } from "./UnionEffect";
 import { UnionBattleMap } from "./UnionBattleMap";
 

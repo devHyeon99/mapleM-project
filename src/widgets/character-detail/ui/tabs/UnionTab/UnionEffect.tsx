@@ -3,7 +3,7 @@
 import { useId } from "react";
 import { Separator } from "@/shared/ui/separator";
 import { cn } from "@/shared/lib/utils";
-import type { UnionOption } from "@/entities/character/model/types";
+import type { UnionOption } from "@/entities/character";
 
 interface UnionEffectProps {
   title: string;

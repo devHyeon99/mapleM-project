@@ -1,4 +1,4 @@
-import type { CharacterJewelEquipment } from "@/entities/character/model/types";
+import type { CharacterJewelEquipment } from "@/entities/character";
 import { PresetToggle } from "@/shared/ui/PresetToggle";
 
 interface JewelHeaderProps {

@@ -2,7 +2,7 @@
 
 import { Fragment } from "react";
 
-import { useCharacterStat } from "@/entities/character/model/hooks";
+import { useCharacterStat } from "@/entities/character";
 import { Separator } from "@/shared/ui/separator";
 import { InfoDescriptionRow } from "@/shared/ui/InfoRow";
 import { HyperStatPresetToggle } from "./HyperStatToggle";

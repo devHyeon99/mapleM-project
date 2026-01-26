@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { InfoDescriptionRow } from "@/shared/ui/InfoRow";
 import { InfoDateRow } from "@/shared/ui/InfoDateRow";
-import type { CharacterDetailData } from "@/entities/character/model/types";
+import type { CharacterDetailData } from "@/entities/character";
 import { CharacterProfileHelpPopover } from "./CharacterProfileHelpPopover";
 
 const NUMBER_FORMATTER = new Intl.NumberFormat("ko-KR");

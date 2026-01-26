@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { nexonFetch } from "@/shared/api/nexon/server";
 import { handleCommonNexonError } from "@/shared/api/nexon/handler";
 import type { ApiResponse } from "@/shared/model/types/ApiResponse";
-import type { CharacterUnionRaider } from "@/entities/character/model/types/union";
+import type { CharacterUnionRaider } from "@/entities/character";
 
 /**
  * 메이플스토리M 유니온 공격대 정보 조회 API

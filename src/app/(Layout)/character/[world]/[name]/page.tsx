@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CharacterSearch } from "@/features/character-search";
 import { CharacterDetail } from "@/widgets/character-detail";
-import { fetchOcid } from "@/entities/character/api/server/ocid.server";
-import { fetchCharacterDetail } from "@/entities/character/api/server/detail.server";
+import { fetchOcid, fetchCharacterDetail } from "@/entities/character/server";
 import { safeDecode } from "@/shared/lib/url";
 
 interface CharacterPageProps {

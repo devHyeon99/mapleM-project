@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { CharacterJewelEquipment } from "@/entities/character/model/types";
+import type { CharacterJewelEquipment } from "@/entities/character";
 
 export const useJewelTab = (data?: CharacterJewelEquipment) => {
   const [selectedPage, setSelectedPage] = useState<string>();

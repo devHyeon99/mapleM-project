@@ -1,6 +1,6 @@
 "use client";
 
-import { useCharacterJewel } from "@/entities/character/model/hooks";
+import { useCharacterJewel } from "@/entities/character";
 import { Separator } from "@/shared/ui/separator";
 import { TabMessageSection } from "@/shared/ui/TabMessageSection";
 import { useJewelTab } from "./useJewelTab";
@@ -25,7 +25,8 @@ export const JewelTab = ({ ocid, level }: JewelTabProps) => {
     );
   }
 
-  if (isLoading) return <TabLoadingBox className="min-h-[421px] md:min-h-[421px]" />;
+  if (isLoading)
+    return <TabLoadingBox className="min-h-[421px] md:min-h-[421px]" />;
 
   if (isError) {
     return (

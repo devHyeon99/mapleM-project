@@ -1,9 +1,6 @@
 "use client";
 
-import type {
-  CharacterUnion,
-  UnionRanking,
-} from "@/entities/character/model/types";
+import type { CharacterUnion, UnionRanking } from "@/entities/character";
 import { Suspense, useEffect, useState, useTransition } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
@@ -118,7 +115,7 @@ export const CharacterDetailTabs = (props: CharacterDetailTabsProps) => {
   return (
     <Suspense
       fallback={
-        <div className="pointer-events-none select-none opacity-60">
+        <div className="pointer-events-none opacity-60 select-none">
           <CharacterDetailTabsView
             {...props}
             activeTab={DEFAULT_TAB}

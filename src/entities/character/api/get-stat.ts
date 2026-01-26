@@ -1,4 +1,4 @@
-import type { ApiResponse } from "@/shared/model/types/ApiResponse";
+import { internalFetch } from "@/shared/api/internal";
 import type { CharacterStatContainer } from "../model/types/stat";
 import type { CharacterHyperStat } from "../model/types/hyper-stat";
 
@@ -16,19 +16,7 @@ export async function getCharacterStat(
 
   const safeLevel = Number.isFinite(level) ? level : 0;
 
-  const res = await fetch(
+  return internalFetch<CharacterStatData>(
     `/api/character/stat?ocid=${encodeURIComponent(q)}&level=${encodeURIComponent(String(safeLevel))}`,
-    { cache: "no-store" },
   );
-
-  const json = (await res
-    .json()
-    .catch(() => ({}))) as ApiResponse<CharacterStatData>;
-
-  if (!res.ok)
-    throw new Error(json?.error?.message ?? `API 요청 실패: ${res.status}`);
-  if (json.error) throw new Error(json.error.message);
-  if (!json.data) throw new Error("데이터가 없습니다.");
-
-  return json.data;
 }

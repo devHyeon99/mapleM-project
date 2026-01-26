@@ -22,6 +22,23 @@ export default defineConfig([
       ],
     },
   },
+  {
+    files: ["src/entities/character/**/*.{ts,tsx}"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            {
+              group: ["@/entities/character", "@/entities/character/**"],
+              message:
+                "Use relative imports inside the character entity to avoid barrel re-entry.",
+            },
+          ],
+        },
+      ],
+    },
+  },
 
   globalIgnores([
     ".next/**",

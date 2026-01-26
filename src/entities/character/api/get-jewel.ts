@@ -1,5 +1,5 @@
 import type { ApiResponse } from "@/shared/model/types/ApiResponse";
-import type { CharacterJewelEquipment } from "@/entities/character/model/types/jewel";
+import type { CharacterJewelEquipment } from "../model/types/jewel";
 
 export async function getCharacterJewel(
   ocid: string,

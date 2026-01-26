@@ -1,6 +1,6 @@
 import type { ApiResponse } from "@/shared/model/types/ApiResponse";
-import type { CharacterStatContainer } from "@/entities/character/model/types/stat";
-import type { CharacterHyperStat } from "@/entities/character/model/types/hyper-stat";
+import type { CharacterStatContainer } from "../model/types/stat";
+import type { CharacterHyperStat } from "../model/types/hyper-stat";
 
 export interface CharacterStatData {
   stat: CharacterStatContainer;

@@ -1,7 +1,7 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { getCharacterJewel } from "@/entities/character/api/get-jewel";
+import { getCharacterJewel } from "../../api/get-jewel";
 
 export const useCharacterJewel = (ocid: string | null, level: number) => {
   return useQuery({

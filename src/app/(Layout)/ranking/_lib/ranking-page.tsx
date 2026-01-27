@@ -1,17 +1,13 @@
 import type { Metadata } from "next";
 import type { RankingType } from "@/entities/ranking/model/types/ranking";
 import { getRankingPageData } from "@/entities/ranking/api/get-ranking-page-data";
+import { normalizeRankingWorldName } from "@/entities/ranking/lib/ranking-query";
 import { RANKING_LABELS } from "@/entities/ranking/model/constants";
 import { RankingBoard } from "@/widgets/ranking-board/ui/RankingBoard";
 import { SITE_NAME, SITE_URL } from "@/shared/config/site";
 
 export type RankingSearchParams = {
   [key: string]: string | string[] | undefined;
-};
-
-const getStringParam = (param: string | string[] | undefined): string => {
-  if (Array.isArray(param)) return param[0];
-  return param || "";
 };
 
 export const buildQueryString = (params: RankingSearchParams): string => {
@@ -36,7 +32,7 @@ export function buildRankingMetadata(
   type: RankingType,
   searchParams: RankingSearchParams,
 ): Metadata {
-  const worldName = getStringParam(searchParams.world_name);
+  const worldName = normalizeRankingWorldName(searchParams.world_name);
   const typeLabel = RANKING_LABELS[type];
 
   const title =

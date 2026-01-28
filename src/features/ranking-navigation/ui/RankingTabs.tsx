@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/shared/lib/utils";
-import { RANKING_TYPES } from "../model/types/ranking";
-import { RANKING_LABELS } from "../model/constants";
+import { RANKING_TYPES } from "@/entities/ranking/model/types/ranking";
+import { RANKING_LABELS } from "@/entities/ranking/model/constants";
 
 export function RankingTabs() {
   const pathname = usePathname();

@@ -1,7 +1,9 @@
-import { RankingTabs } from "@/entities/ranking/ui/RankingTabs";
-import { RankingFilters } from "@/entities/ranking/ui/RankingFilters";
+import {
+  RankingTabs,
+  RankingFilters,
+  RankingPagination,
+} from "@/features/ranking-navigation";
 import { RankingTable } from "@/entities/ranking/ui/RankingTable";
-import { RankingPagination } from "@/entities/ranking/ui/RankingPagination";
 import type {
   AnyRankingData,
   RankingType,

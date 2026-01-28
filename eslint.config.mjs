@@ -39,6 +39,23 @@ export default defineConfig([
       ],
     },
   },
+  {
+    files: ["src/entities/ranking/**/*.{ts,tsx}"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            {
+              group: ["@/entities/ranking", "@/entities/ranking/**"],
+              message:
+                "Use relative imports inside the ranking entity to avoid barrel re-entry.",
+            },
+          ],
+        },
+      ],
+    },
+  },
 
   globalIgnores([
     ".next/**",

@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import type { RankingType, AnyRankingData } from "../model/types/ranking";
-import { Renderers, RankingTableContext } from "./ranking-table.config";
+import { Renderers } from "./ranking-table.renderers";
+import type { RankingTableContext } from "./ranking-table.renderers";
 import { memo } from "react";
 import { RankingIcon } from "./RankingIcon";
 

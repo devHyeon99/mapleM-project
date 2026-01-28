@@ -11,7 +11,8 @@ import {
 } from "@/shared/ui/table";
 import { cn } from "@/shared/lib/utils";
 import { useRecentSearch } from "@/shared/lib/hooks/useRecentSearch";
-import { RANKING_COLUMNS, RankingTableContext } from "./ranking-table.config";
+import { RANKING_COLUMNS } from "./ranking-table.columns";
+import type { RankingTableContext } from "./ranking-table.renderers";
 import type { RankingType, AnyRankingData } from "../model/types/ranking";
 import { MobileRankingList } from "./MobileRankingList";
 

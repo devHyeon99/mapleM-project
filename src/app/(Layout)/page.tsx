@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { connection } from "next/server";
 import { CharacterSearch } from "@/features/character-search";
 import { getCombinedNotices } from "@/entities/notice/api/notice";
@@ -5,6 +6,12 @@ import { getSiteNotices } from "@/entities/notice/api/site-notice";
 import { SiteNoticeList } from "@/entities/notice/ui/SiteNoticeList";
 import { NoticeGrid } from "@/widgets/notice-grid/ui/NoticeGrid";
 import type { NoticeData, SiteNoticeItem } from "@/entities/notice/model/types";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+};
 
 export default async function Home() {
   const [noticeResult, siteNoticeResult] = await Promise.all([

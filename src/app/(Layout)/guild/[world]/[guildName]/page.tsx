@@ -36,6 +36,9 @@ export async function generateMetadata({
     return {
       title,
       description,
+      alternates: {
+        canonical: `/guild/${encodeURIComponent(worldName)}/${encodeURIComponent(guildName)}`,
+      },
       openGraph: {
         title,
         description,

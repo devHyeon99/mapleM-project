@@ -6,7 +6,6 @@ import "./globals.css";
 import { Providers } from "@/app/providers/Providers";
 import { ThemeProvider } from "@/app/providers/theme-provider";
 import { SITE_METADATA_BASE, SITE_NAME, SITE_URL } from "@/shared/config/site";
-import { cn } from "@/shared/lib/utils";
 
 const pretendard = localFont({
   src: "../shared/assets/fonts/PretendardStdVariable.woff2",
@@ -87,12 +86,7 @@ export default function RootLayout({
 
   return (
     <html lang="ko" className={pretendard.variable} suppressHydrationWarning>
-      <body
-        className={cn(
-          pretendard.className,
-          "relative flex min-h-screen flex-col font-sans",
-        )}
-      >
+      <body className="relative flex min-h-screen flex-col font-sans">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

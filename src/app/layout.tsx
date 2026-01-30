@@ -5,7 +5,7 @@ import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { Providers } from "@/app/providers/Providers";
 import { ThemeProvider } from "@/app/providers/theme-provider";
-import { SITE_METADATA_BASE, SITE_NAME, SITE_URL } from "@/shared/config/site";
+import { SITE_METADATA_BASE, SITE_NAME } from "@/shared/config/site";
 
 const pretendard = localFont({
   src: "../shared/assets/fonts/PretendardStdVariable.woff2",
@@ -15,34 +15,41 @@ const pretendard = localFont({
   adjustFontFallback: false,
 });
 
+const SHARE_TITLE = `${SITE_NAME} - 메이플스토리M 캐릭터 검색 & 종합 정보`;
+const SHARE_DESCRIPTION =
+  "메이플스토리M 캐릭터 정보, 랭킹, 게임 정보를 한눈에 확인하세요.";
+const OG_IMAGE = "/og-image.png";
+
 export const metadata: Metadata = {
   metadataBase: SITE_METADATA_BASE,
   title: {
-    default: `${SITE_NAME} - 메이플스토리M 캐릭터 검색 & 종합 정보`,
-    template: `%s | ${SITE_NAME}`,
+    default: SHARE_TITLE,
+    template: `%s - ${SITE_NAME}`,
   },
   description:
-    "메이플스토리M 캐릭터 검색은 메엠지지. 캐릭터 정보 조회, 장비, 스킬, 코디, 공략 등 게임 플레이에 유용한 모든 정보를 확인하세요.",
+    "메이플스토리M 캐릭터 검색은 메엠지지. 캐릭터 정보 조회, 장비, 스킬, 코디, 랭킹, 공략 등 게임 플레이에 유용한 모든 정보를 확인하세요.",
   keywords: [
     "메이플스토리M",
     "메이플M",
     "메엠",
     "메엠지지",
     "MMGG",
-    "캐릭터 검색",
-    "전적 검색",
-    "장비 조회",
+    "메엠 캐릭터 검색",
+    "메엠 가이드",
+    "메이플M 가이드",
+    "모바일 메이플",
   ],
+  // og:url 은 두지 않는다. 루트 메타데이터는 자식 세그먼트로 상속되므로, 모든 페이지가 홈 URL 을 og:url 로 내보내게 됨.
   openGraph: {
-    title: `${SITE_NAME} - 메이플스토리M 캐릭터 검색`,
-    description: "메이플스토리M 캐릭터 정보, 장비, 코디를 한눈에 확인하세요.",
+    title: SHARE_TITLE,
+    description: SHARE_DESCRIPTION,
     siteName: SITE_NAME,
     images: [
       {
-        url: "/og-image.png",
+        url: OG_IMAGE,
         width: 1200,
         height: 630,
-        alt: "메엠지지 미리보기",
+        alt: `${SITE_NAME} 미리보기`,
       },
     ],
     locale: "ko_KR",
@@ -50,13 +57,12 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE_NAME} - 메이플스토리M 캐릭터 검색`,
-    description: "메이플스토리M 캐릭터 정보, 장비, 코디를 한눈에 확인하세요.",
-    images: [`${SITE_URL}/og-image.png`],
+    title: SHARE_TITLE,
+    description: SHARE_DESCRIPTION,
+    images: [OG_IMAGE],
   },
   icons: {
     icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
     apple: "/apple-touch-icon.png",
   },
   robots: {
@@ -71,9 +77,9 @@ export const metadata: Metadata = {
   },
   verification: {
     google: "ixxZ7vNFuRu8LRZzoPtmWz-Q3btL9xUbaWyLFUceJ6Q",
-  },
-  other: {
-    "naver-site-verification": "b8d1d850b61897bbc8e4e15f20d056b0d838be1f",
+    other: {
+      "naver-site-verification": "b8d1d850b61897bbc8e4e15f20d056b0d838be1f",
+    },
   },
 };
 

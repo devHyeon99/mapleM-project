@@ -1,20 +1,23 @@
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/shared/config/site";
 
+const DISALLOWED_CRAWLERS = [
+  "Baiduspider",
+  "Sogou web spider",
+  "Sogou inst spider",
+  "Sogou Pic Spider",
+  "Sogou head spider",
+  "Sogou Orion spider",
+];
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
-        userAgent: "ClaudeBot",
+        userAgent: DISALLOWED_CRAWLERS,
         disallow: ["/"],
       },
       {
-        userAgent: "Amazonbot",
-        disallow: ["/"],
-      },
-      {
-        // /character/**, /characters/** 는 각 페이지가 noindex 메타를 내보낸다.
-        // 여기서 disallow 하면 크롤러가 그 메타를 읽지 못해 색인이 남는다.
         userAgent: "*",
         allow: ["/"],
         disallow: ["/api/"],

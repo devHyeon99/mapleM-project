@@ -4,7 +4,6 @@ import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { Providers } from "@/app/providers/Providers";
-import { ThemeProvider } from "@/app/providers/theme-provider";
 import { SITE_METADATA_BASE, SITE_NAME } from "@/shared/config/site";
 
 const pretendard = localFont({
@@ -93,14 +92,7 @@ export default function RootLayout({
   return (
     <html lang="ko" className={pretendard.variable} suppressHydrationWarning>
       <body className="relative flex min-h-screen flex-col font-sans">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <Providers>{children}</Providers>
-        </ThemeProvider>
+        <Providers>{children}</Providers>
 
         {/* 넥슨 애널리틱스 (프로덕션만) */}
         {isProd && (

@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { CharacterSearch } from "@/features/character-search";
 import { getCharacterSearchAll } from "@/features/character-search/server";
-import { CharactersSearchResult } from "@/widgets/characters-search-result";
-import { CharactersSearchResultSkeleton } from "@/widgets/characters-search-result";
+import {
+  CharactersSearchResult,
+  CharactersSearchResultSkeleton,
+} from "@/widgets/characters-search-result";
 import { safeDecode } from "@/shared/lib/url";
 
 export async function generateMetadata({
@@ -47,9 +49,13 @@ export default async function CharactersPage({
 
   return (
     <div className="flex w-full flex-col items-center">
-      <search className="w-full max-w-3xl px-4 pt-2">
+      <search className="w-full max-w-3xl px-4 pt-2" aria-label="캐릭터 재검색">
         <CharacterSearch />
       </search>
+
+      <h1 className="sr-only">
+        전체 월드 내 &quot;{decodedName}&quot; 검색 결과
+      </h1>
 
       <Suspense
         fallback={<CharactersSearchResultSkeleton name={decodedName} />}

@@ -55,9 +55,9 @@ export function CharactersSearchResult({
   return (
     <div className="flex w-full flex-col items-center">
       <div className="flex w-full flex-col items-center gap-1 py-10">
-        <h1 className="text-lg font-bold md:text-2xl">
+        <h2 className="text-lg font-bold md:text-2xl">
           전체 월드 내 <strong>&quot;{name}&quot;</strong> 검색 결과
-        </h1>
+        </h2>
         <p className="text-muted-foreground text-sm md:text-base">
           총 {characters.length}개의 검색 결과가 있습니다.
         </p>

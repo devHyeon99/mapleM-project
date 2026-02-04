@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
-import type { RankingType } from "@/entities/ranking/model/types/ranking";
-import { getRankingPageData } from "@/entities/ranking/api/get-ranking-page-data";
-import { normalizeRankingWorldName } from "@/entities/ranking/lib/ranking-query";
-import { RANKING_LABELS } from "@/entities/ranking/model/constants";
-import { RankingBoard } from "@/widgets/ranking-board/ui/RankingBoard";
+import { RANKING_LABELS, type RankingType } from "@/entities/ranking";
+import { RankingBoard } from "@/widgets/ranking-board";
 import { SITE_NAME, SITE_URL } from "@/shared/config/site";
+import { getRankingPageData } from "./get-ranking-page-data";
+import { normalizeRankingWorldName } from "./ranking-query";
 
 export type RankingSearchParams = {
   [key: string]: string | string[] | undefined;

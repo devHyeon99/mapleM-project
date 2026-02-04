@@ -1,5 +1,5 @@
 import { RankingTabs } from "@/features/ranking-navigation";
-import { RankingBoardSkeleton } from "@/widgets/ranking-board/ui/RankingBoardSkeleton";
+import { RankingBoardSkeleton } from "@/widgets/ranking-board";
 
 export default function RankingLoading() {
   return (

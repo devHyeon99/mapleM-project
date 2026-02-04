@@ -1,9 +1,6 @@
 import { Metadata } from "next";
 import { notFound, permanentRedirect } from "next/navigation";
-import {
-  RANKING_TYPES,
-  type RankingType,
-} from "@/entities/ranking/model/types/ranking";
+import { RANKING_TYPES, type RankingType } from "@/entities/ranking";
 import {
   buildQueryString,
   buildRankingMetadata,

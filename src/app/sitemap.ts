@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { RANKING_TYPES } from "@/entities/ranking/model/types/ranking";
+import { RANKING_TYPES } from "@/entities/ranking";
 import { SITE_URL } from "@/shared/config/site";
 
 // lastModified/changeFrequency/priority 는 두지 않음.

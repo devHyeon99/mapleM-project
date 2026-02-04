@@ -1,13 +1,17 @@
-import type { RankingType } from "../model/types/ranking";
+import {
+  RANKING_UI_PAGES_PER_API_PAGE,
+  type RankingType,
+} from "@/entities/ranking";
+import {
+  fetchRankingCached,
+  getRankingTotalPages,
+} from "@/entities/ranking/server";
 import { getRankingDate } from "@/shared/lib/ranking-date";
 import { handleCommonNexonError } from "@/shared/api/nexon";
-import { getRankingTotalPages } from "./get-ranking-total-pages";
-import { RANKING_UI_PAGES_PER_API_PAGE } from "../model/constants";
 import {
   normalizeRankingPage,
   normalizeRankingWorldName,
-} from "../lib/ranking-query";
-import { fetchRankingCached } from "./fetch-ranking";
+} from "./ranking-query";
 
 export async function getRankingPageData(
   type: RankingType,

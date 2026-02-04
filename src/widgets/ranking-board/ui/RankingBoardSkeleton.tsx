@@ -8,7 +8,7 @@ import {
 } from "@/shared/ui/table";
 import { Skeleton } from "@/shared/ui/skeleton";
 import { cn } from "@/shared/lib/utils";
-import { RANKING_UI_ITEMS_PER_PAGE } from "@/entities/ranking/model/constants";
+import { RANKING_UI_ITEMS_PER_PAGE } from "@/entities/ranking";
 
 const COLUMN_WIDTHS = [
   "w-[60px]",

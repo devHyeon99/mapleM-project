@@ -3,12 +3,12 @@ import {
   RankingFilters,
   RankingPagination,
 } from "@/features/ranking-navigation";
-import { RankingTable } from "@/entities/ranking/ui/RankingTable";
-import type {
-  AnyRankingData,
-  RankingType,
-} from "@/entities/ranking/model/types/ranking";
-import { RANKING_LABELS } from "@/entities/ranking/model/constants";
+import {
+  RANKING_LABELS,
+  RankingTable,
+  type AnyRankingData,
+  type RankingType,
+} from "@/entities/ranking";
 import { TabMessageSection } from "@/shared/ui/TabMessageSection";
 
 interface RankingBoardProps {

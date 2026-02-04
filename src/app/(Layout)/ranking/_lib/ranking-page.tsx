@@ -103,20 +103,14 @@ export async function renderRankingPage(
   );
 
   return (
-    <div className="flex w-full items-center justify-center pb-4">
-      <section className="wide:px-0 w-full">
-        <h1 className="sr-only">
-          {fetchParams.worldName || "전체"} 월드 {RANKING_LABELS[type]} 랭킹
-        </h1>
-        <p className="sr-only">
-          메이플스토리M {RANKING_LABELS[type]} 랭킹 정보를 확인해보세요.
-        </p>
-        <RankingBoard
-          type={type}
-          initialData={data}
-          fetchParams={fetchParams}
-        />
-      </section>
-    </div>
+    <>
+      <h1 className="sr-only">
+        {fetchParams.worldName || "전체"} 월드 {RANKING_LABELS[type]} 랭킹
+      </h1>
+      <p className="sr-only">
+        메이플스토리M {RANKING_LABELS[type]} 랭킹 정보를 확인해보세요.
+      </p>
+      <RankingBoard type={type} initialData={data} fetchParams={fetchParams} />
+    </>
   );
 }

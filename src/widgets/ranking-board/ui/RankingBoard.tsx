@@ -12,7 +12,7 @@ interface RankingBoardProps {
   initialData: { ranking: AnyRankingData[] };
   fetchParams: {
     worldName?: string;
-    date?: string;
+    date: string;
     page: number;
     totalPages: number;
   };
@@ -34,7 +34,7 @@ export function RankingBoard({
         </TabMessageSection>
       )}
 
-      {hasRankingData && <RankingFilters />}
+      {hasRankingData && <RankingFilters date={fetchParams.date} />}
 
       {hasRankingData && (
         <section aria-labelledby="ranking-table-title">

@@ -10,7 +10,6 @@ import {
 } from "@/shared/ui/select";
 import { HelpPopover } from "@/shared/ui/HelpPopover";
 import { WORLD_NAMES } from "@/shared/config/constants/worlds";
-import { getRankingDate } from "@/shared/lib/ranking-date";
 
 const RANKING_DATE_HELP_ITEMS = [
   {
@@ -23,13 +22,17 @@ const RANKING_DATE_HELP_ITEMS = [
   },
 ] as const;
 
-export function RankingFilters() {
+interface RankingFiltersProps {
+  /** 서버에서 랭킹 조회에 사용한 기준 일자(yyyy-MM-dd). 표시 일자와 데이터 일자를 일치시킨다. */
+  date: string;
+}
+
+export function RankingFilters({ date }: RankingFiltersProps) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
   const currentWorld = searchParams.get("world_name") || "all";
-  const displayDate = getRankingDate();
 
   const handleWorldChange = (value: string) => {
     const params = new URLSearchParams(searchParams.toString());
@@ -72,7 +75,7 @@ export function RankingFilters() {
       <div className="flex flex-row items-center gap-2 self-end">
         <p className="text-muted-foreground text-sm">
           랭킹 기준 :{" "}
-          <time dateTime={displayDate}>{displayDate + " 06:00"}</time>
+          <time dateTime={date}>{date + " 06:00"}</time>
         </p>
         <HelpPopover
           ariaLabel="랭킹 기준 안내"

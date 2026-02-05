@@ -25,6 +25,17 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      // 페이지 내부의 permanentRedirect 는 loading.tsx 스트리밍이 시작된 뒤 실행되어
+      // 308 대신 200 + meta refresh 로 응답한다. 라우팅 단계에서 처리해야 진짜 308이 나간다.
+      {
+        source: "/ranking/level",
+        destination: "/ranking",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {

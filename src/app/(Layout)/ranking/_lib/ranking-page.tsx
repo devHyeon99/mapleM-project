@@ -1,6 +1,7 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { RANKING_LABELS, type RankingType } from "@/entities/ranking";
-import { RankingBoard } from "@/widgets/ranking-board";
+import { RankingBoard, RankingBoardSkeleton } from "@/widgets/ranking-board";
 import { SITE_NAME, SITE_URL } from "@/shared/config/site";
 import { getRankingPageData } from "./get-ranking-page-data";
 import { normalizeRankingWorldName } from "./ranking-query";
@@ -93,24 +94,43 @@ export function buildRankingMetadata(
   };
 }
 
-export async function renderRankingPage(
-  type: RankingType,
-  searchParams: RankingSearchParams,
-) {
+async function RankingBoardLoader({
+  type,
+  searchParams,
+}: {
+  type: RankingType;
+  searchParams: RankingSearchParams;
+}) {
   const { data, params: fetchParams } = await getRankingPageData(
     type,
     searchParams,
   );
 
   return (
+    <RankingBoard type={type} initialData={data} fetchParams={fetchParams} />
+  );
+}
+
+// 데이터 페치를 loading.tsx 대신 페이지 내부 Suspense 로 스트리밍한다.
+// 세그먼트에 loading.tsx 가 있으면 셸이 200으로 먼저 흘러나가
+// notFound()/permanentRedirect() 가 진짜 404/308 상태코드를 내지 못한다.
+export function renderRankingPage(
+  type: RankingType,
+  searchParams: RankingSearchParams,
+) {
+  const worldName = normalizeRankingWorldName(searchParams.world_name);
+
+  return (
     <>
       <h1 className="sr-only">
-        {fetchParams.worldName || "전체"} 월드 {RANKING_LABELS[type]} 랭킹
+        {worldName || "전체"} 월드 {RANKING_LABELS[type]} 랭킹
       </h1>
       <p className="sr-only">
         메이플스토리M {RANKING_LABELS[type]} 랭킹 정보를 확인해보세요.
       </p>
-      <RankingBoard type={type} initialData={data} fetchParams={fetchParams} />
+      <Suspense fallback={<RankingBoardSkeleton />}>
+        <RankingBoardLoader type={type} searchParams={searchParams} />
+      </Suspense>
     </>
   );
 }

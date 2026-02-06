@@ -1,8 +1,10 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { cache } from "react";
+import { isNexonNotFoundError } from "@/shared/api/nexon/handler";
 import { getGuildFullData } from "@/entities/guild/api/get-guild.server";
 import { GuildDetailView } from "@/widgets/guild-detail/ui/GuildDetailView";
+import { safeDecode } from "@/shared/lib/url";
 import { NotFoundMetadata } from "./not-found";
 
 interface PageProps {
@@ -12,8 +14,8 @@ interface PageProps {
 async function parseParams(params: PageProps["params"]) {
   const { world, guildName } = await params;
   return {
-    worldName: decodeURIComponent(world),
-    guildName: decodeURIComponent(guildName),
+    worldName: safeDecode(world),
+    guildName: safeDecode(guildName),
   };
 }
 
@@ -36,8 +38,9 @@ export async function generateMetadata({
     return {
       title,
       description,
-      alternates: {
-        canonical: `/guild/${encodeURIComponent(worldName)}/${encodeURIComponent(guildName)}`,
+      robots: {
+        index: false,
+        follow: true,
       },
       openGraph: {
         title,
@@ -63,8 +66,12 @@ export default async function GuildDetailPage({ params }: PageProps) {
 
   try {
     guildData = await getCachedGuildFullData(worldName, guildName);
-  } catch {
-    return notFound();
+  } catch (error) {
+    // 진짜 없는 길드(OPENAPI00004)만 404 로 응답한다. 점검·일시 오류·레이트리밋은
+    // error 바운더리로 넘겨 500 을 유지한다. 모든 실패를 404 로 뭉개면 실존 길드가
+    // 넥슨 장애 때 삭제된 것처럼 보인다.
+    if (isNexonNotFoundError(error)) notFound();
+    throw error;
   }
 
   return <GuildDetailView guildData={guildData} />;

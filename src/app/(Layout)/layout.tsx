@@ -7,10 +7,7 @@ export default function LayoutGroup({
 }) {
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="bg-background sticky top-0 z-50 w-full">
-        <Header />
-      </header>
-
+      <Header />
       <main className="flex flex-1 flex-col">
         <div className="relative mx-auto flex w-full max-w-[1080px] flex-1 flex-col">
           {/* 왼쪽 광고  */}

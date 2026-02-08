@@ -26,6 +26,8 @@
   --color-destructive: var(--destructive);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent: var(--accent);
+  --color-accent-2-foreground: var(--accent-2-foreground);
+  --color-accent-2: var(--accent-2);
   --color-muted-foreground: var(--muted-foreground);
   --color-muted: var(--muted);
   --color-secondary-foreground: var(--secondary-foreground);
@@ -48,12 +50,12 @@
 :root {
   --radius: 0.625rem;
 
-  --background: oklch(0.985 0.002 260);
+  --background: #F4F5F8;
   --foreground: oklch(0.145 0.005 260);
 
-  --card: oklch(1 0 0);
+  --card: #FBFCFD;
   --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
+  --popover: #FBFCFD;
   --popover-foreground: oklch(0.145 0 0);
 
   --primary: oklch(0.205 0 0);
@@ -108,7 +110,7 @@
   --secondary-foreground: oklch(0.985 0 0);
 
   /* hover/selected (surface-2.5) */
-  --accent: oklch(0.319 0 0);
+  --accent: oklch(0.350 0.008 286.35);
   --accent-foreground: oklch(0.985 0 0);
 
   /* surface-3 (subtle highlight) */
@@ -135,7 +137,7 @@
   /* Sidebar: 레이어 계층에 맞게 고정값 적용 */
   --sidebar: oklch(0.255 0 0);
   --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.319ㄴ 0 0);
+  --sidebar-accent: oklch(0.319 0 0);
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   /* --border와 통일 */
@@ -158,125 +160,6 @@
 @utility container {
   margin-inline: auto;
   padding-inline: 1rem;
-}
-
-@layer components {
-  .gsi-material-button {
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    -webkit-appearance: none;
-    background-color: #ffffff;
-    /* 라이트 모드 기본: 흰색 */
-    background-image: none;
-    border: 1px solid #747775;
-    border-radius: 4px;
-    box-sizing: border-box;
-    color: #1F1F1F;
-    cursor: pointer;
-    font-family: 'Roboto', arial, sans-serif;
-    font-size: 14px;
-    height: 40px;
-    letter-spacing: 0.25px;
-    outline: none;
-    overflow: hidden;
-    padding: 0 12px;
-    position: relative;
-    text-align: center;
-    transition: background-color .218s, border-color .218s, box-shadow .218s;
-    vertical-align: middle;
-    white-space: nowrap;
-    width: auto;
-    max-width: 400px;
-    min-width: min-content;
-  }
-
-  .gsi-material-button .gsi-material-button-icon {
-    height: 20px;
-    margin-right: 12px;
-    min-width: 20px;
-    width: 20px;
-  }
-
-  .gsi-material-button .gsi-material-button-content-wrapper {
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    height: 100%;
-    justify-content: center;
-    position: relative;
-    width: 100%;
-  }
-
-  .gsi-material-button .gsi-material-button-contents {
-    flex-grow: 0;
-    font-family: 'Roboto', arial, sans-serif;
-    font-weight: 500;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    vertical-align: top;
-  }
-
-  .gsi-material-button .gsi-material-button-state {
-    transition: opacity .218s;
-    bottom: 0;
-    left: 0;
-    opacity: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
-
-  .gsi-material-button:disabled {
-    cursor: default;
-    background-color: #f1f3f4;
-    border-color: #dadce0;
-  }
-
-  .gsi-material-button:disabled .gsi-material-button-contents,
-  .gsi-material-button:disabled .gsi-material-button-icon {
-    opacity: 0.38;
-  }
-
-  .gsi-material-button:not(:disabled):active .gsi-material-button-state,
-  .gsi-material-button:not(:disabled):focus .gsi-material-button-state {
-    background-color: black;
-    opacity: 0.12;
-  }
-
-  .gsi-material-button:not(:disabled):hover {
-    box-shadow: 0 1px 2px 0 rgba(60, 64, 67, .30),
-      0 1px 3px 1px rgba(60, 64, 67, .15);
-  }
-
-  .gsi-material-button:not(:disabled):hover .gsi-material-button-state {
-    background-color: black;
-    opacity: 0.08;
-  }
-
-  /* ✅ 다크 모드 스타일 */
-  .dark .gsi-material-button {
-    background-color: #131314;
-    border: 1px solid #8E918F;
-    color: #e3e3e3;
-  }
-
-  .dark .gsi-material-button:disabled {
-    background-color: #13131461;
-    border-color: #8e918f1f;
-  }
-
-  .dark .gsi-material-button:not(:disabled):active .gsi-material-button-state,
-  .dark .gsi-material-button:not(:disabled):focus .gsi-material-button-state {
-    background-color: white;
-    opacity: 0.12;
-  }
-
-  .dark .gsi-material-button:not(:disabled):hover .gsi-material-button-state {
-    background-color: white;
-    opacity: 0.08;
-  }
 }
 
 /* 모바일일 때만 아이템 상세정보 중앙 고정 */

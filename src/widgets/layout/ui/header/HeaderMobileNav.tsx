@@ -1,8 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";
 import { Button } from "@/shared/ui/button";
 import {
@@ -14,17 +12,10 @@ import {
   SheetDescription,
 } from "@/shared/ui/sheet";
 import { navLinks } from "./navLinks";
-import {
-  getNavLinkPrefetch,
-  getNavLinkAriaLabel,
-  isExternalNavLink,
-  isNavLinkActive,
-} from "./navLinkUtils";
-import { cn } from "@/shared/lib/utils";
+import { HeaderNavLink } from "./HeaderNavLink";
 
 export function HeaderMobileNav() {
   const [open, setOpen] = useState(false);
-  const pathname = usePathname();
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -50,29 +41,14 @@ export function HeaderMobileNav() {
         </SheetHeader>
 
         <nav aria-label="모바일 메뉴" className="flex flex-col gap-2">
-          {navLinks.map((link) => {
-            const isExternal = isExternalNavLink(link);
-            const isActive = isNavLinkActive(pathname, link);
-
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                prefetch={getNavLinkPrefetch(link)}
-                target={isExternal ? "_blank" : undefined}
-                rel={isExternal ? "noopener noreferrer" : undefined}
-                aria-label={getNavLinkAriaLabel(link)}
-                aria-current={isActive ? "page" : undefined}
-                onClick={() => setOpen(false)}
-                className={cn(
-                  "hover:text-accent-foreground flex items-center justify-center rounded-md px-3 py-3 text-base font-medium transition-colors",
-                  isActive ? "text-accent-foreground" : "text-muted-foreground",
-                )}
-              >
-                {link.label}
-              </Link>
-            );
-          })}
+          {navLinks.map((link) => (
+            <HeaderNavLink
+              key={link.href}
+              link={link}
+              onClick={() => setOpen(false)}
+              className="text-muted-foreground hover:text-accent-foreground data-[active]:text-accent-foreground flex items-center justify-center gap-1 rounded-md px-3 py-3 text-base font-medium transition-colors"
+            />
+          ))}
         </nav>
       </SheetContent>
     </Sheet>

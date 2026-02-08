@@ -8,7 +8,11 @@ export default function LayoutGroup({
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
-      <main className="flex flex-1 flex-col">
+      <main
+        id="main"
+        tabIndex={-1}
+        className="flex flex-1 scroll-mt-16 flex-col focus:outline-none md:scroll-mt-20"
+      >
         <div className="relative mx-auto flex w-full max-w-[1080px] flex-1 flex-col">
           {/* 왼쪽 광고  */}
           <aside

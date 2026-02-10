@@ -142,7 +142,7 @@ const HistoryItemRow = ({
         size="icon"
         aria-label={`${item.world} ${item.name} 검색 기록 삭제`}
         className={cn(
-          "text-muted-foreground hover:text-destructive hover:bg-destructive/10 dark:hover:bg-card/50 size-6",
+          "text-muted-foreground hover:text-destructive hover:bg-destructive/10 size-6",
           "opacity-100",
         )}
         onClick={(e) => {

@@ -103,7 +103,7 @@ export function SearchFormField({
               openHistory();
             }}
             className={clsx(
-              "focus-visible:border-border h-14 rounded-l-none rounded-r-3xl pr-12 pl-4 placeholder:text-sm! focus-visible:ring-0 dark:border-none",
+              "bg-card dark:bg-card border-border relative h-14 rounded-l-none rounded-r-3xl pr-12 pl-4 placeholder:text-sm! dark:border-none",
               ui.input,
             )}
           />

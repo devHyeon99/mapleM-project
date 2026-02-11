@@ -63,7 +63,7 @@ export function RankingPagination({
 
   return (
     // nav 태그 역할을 하는 Pagination 컴포넌트에 한글 레이블 추가
-    <Pagination className="pt-4" aria-label="랭킹 페이지네이션">
+    <Pagination aria-label="랭킹 페이지네이션">
       <PaginationContent>
         {/* 이전 그룹 이동 (<<) */}
         <PaginationItem>
@@ -106,7 +106,7 @@ export function RankingPagination({
                 href={createPageUrl(page)}
                 isActive={isCurrent}
                 aria-current={isCurrent ? "page" : undefined}
-                className={isCurrent ? "bg-card" : ""}
+                className={isCurrent ? "bg-card" : "hover:bg-accent"}
               >
                 {page}
               </PaginationLink>

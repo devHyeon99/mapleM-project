@@ -65,7 +65,7 @@ export const RankingTable = ({
           <caption className="sr-only">
             {worldName || "전체"} 월드 {type} 랭킹 정보 테이블
           </caption>
-          <TableHeader className="bg-muted">
+          <TableHeader className="bg-muted/80 dark:bg-accent">
             <TableRow>
               {columns.map((col, idx) => (
                 <TableHead
@@ -90,7 +90,10 @@ export const RankingTable = ({
                     : `${type}-${index}`) + `-${item.ranking}`;
 
               return (
-                <TableRow key={uniqueKey} className="hover:bg-muted/50 h-12.5">
+                <TableRow
+                  key={uniqueKey}
+                  className="hover:bg-accent/30 dark:hover:bg-accent/50 h-12.5"
+                >
                   {columns.map((col, colIndex) => (
                     <TableCell
                       key={`${uniqueKey}-col-${colIndex}`}

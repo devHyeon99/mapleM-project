@@ -1,4 +1,7 @@
-import { RankingFilters, RankingPagination } from "@/features/ranking-navigation";
+import {
+  RankingFilters,
+  RankingPagination,
+} from "@/features/ranking-navigation";
 import {
   RANKING_LABELS,
   RankingTable,
@@ -27,7 +30,7 @@ export function RankingBoard({
   const isSharenianRanking = type.includes("sharenian");
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col gap-4">
       {!hasRankingData && isSharenianRanking && (
         <TabMessageSection className="text-muted-foreground mt-4 min-h-40! text-sm">
           샤레니안 전장이 시작 전이기 때문에 데이터가 존재하지 않습니다.

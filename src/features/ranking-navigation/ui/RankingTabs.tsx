@@ -17,28 +17,27 @@ export function RankingTabs() {
     : "level";
 
   return (
-    <nav
-      aria-label="랭킹 종류 이동"
-      className="border-border bg-card mt-2 w-full border-b shadow-sm"
-    >
-      <ul className="grid list-none grid-cols-3 gap-1 md:grid-cols-9">
-        {RANKING_TYPES.map((type) => (
-          <li key={type}>
-            <Link
-              aria-current={activeType === type ? "page" : undefined}
-              className={cn(
-                "text-muted-foreground flex h-11 items-center justify-center border-b-2 border-transparent px-3 py-6 text-sm font-medium whitespace-nowrap transition-colors outline-none md:text-[15px]",
-                "hover:border-orange-500 focus-visible:border-orange-500 focus-visible:ring-2",
-                activeType === type &&
-                  "text-foreground border-orange-500 hover:border-orange-500",
-              )}
-              href={type === "level" ? "/ranking" : `/ranking/${type}`}
-              prefetch={false}
-            >
-              {RANKING_LABELS[type]}
-            </Link>
-          </li>
-        ))}
+    <nav aria-label="랭킹 종류 이동" className="w-full">
+      <ul className="bg-muted grid list-none grid-cols-3 gap-1 rounded-lg p-1 shadow-sm md:grid-cols-9">
+        {RANKING_TYPES.map((type) => {
+          const isActive = activeType === type;
+
+          return (
+            <li key={type}>
+              <Link
+                aria-current={isActive ? "page" : undefined}
+                className={cn(
+                  "text-muted-foreground hover:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 inline-flex h-9 w-full items-center justify-center rounded-md border border-transparent px-2 py-1 text-sm font-medium whitespace-nowrap transition-colors outline-none focus-visible:ring-[3px]",
+                  isActive && "bg-card text-foreground shadow-sm",
+                )}
+                href={type === "level" ? "/ranking" : `/ranking/${type}`}
+                prefetch={false}
+              >
+                {RANKING_LABELS[type]}
+              </Link>
+            </li>
+          );
+        })}
       </ul>
     </nav>
   );

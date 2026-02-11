@@ -9,11 +9,9 @@ export default function RankingLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex w-full items-center justify-center pb-4">
-      <section className="wide:px-0 w-full">
-        <RankingTabs />
-        {children}
-      </section>
-    </div>
+    <section className="wide:px-0 flex w-full flex-col gap-5 px-3.5 py-5">
+      <RankingTabs />
+      <div className="bg-card rounded-xl p-4 shadow-sm">{children}</div>
+    </section>
   );
 }

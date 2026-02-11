@@ -48,7 +48,7 @@ export function RankingFilters({ date }: RankingFiltersProps) {
   return (
     <section
       aria-label="랭킹 필터 및 업데이트 정보"
-      className="wide:px-0 flex w-full flex-col-reverse items-center justify-between gap-2 p-4 md:flex-row"
+      className="flex w-full flex-col-reverse items-center justify-between gap-2 md:flex-row"
     >
       <div className="w-full md:w-auto">
         <label htmlFor="world-select" className="sr-only">
@@ -58,7 +58,7 @@ export function RankingFilters({ date }: RankingFiltersProps) {
         <Select value={currentWorld} onValueChange={handleWorldChange}>
           <SelectTrigger
             id="world-select"
-            className="h-10 w-full text-sm md:w-[195px] [&_svg]:!opacity-100"
+            className="bg-muted hover:bg-accent h-10 w-full border-none text-sm shadow-sm md:w-[195px] [&_svg]:!opacity-100"
           >
             <SelectValue placeholder="전체 월드" />
           </SelectTrigger>
@@ -74,8 +74,7 @@ export function RankingFilters({ date }: RankingFiltersProps) {
 
       <div className="flex flex-row items-center gap-2 self-end">
         <p className="text-muted-foreground text-sm">
-          랭킹 기준 :{" "}
-          <time dateTime={date}>{date + " 06:00"}</time>
+          랭킹 기준 : <time dateTime={date}>{date + " 06:00"}</time>
         </p>
         <HelpPopover
           ariaLabel="랭킹 기준 안내"

@@ -21,7 +21,7 @@ const COLUMN_WIDTHS = [
 
 function RankingFiltersSkeleton() {
   return (
-    <div className="flex w-full flex-col-reverse items-center justify-between gap-2 px-4 py-4 md:flex-row md:px-0">
+    <div className="flex w-full flex-col-reverse items-center justify-between gap-2 md:flex-row">
       <Skeleton className="h-10 w-full md:w-[195px]" />
       <Skeleton className="h-5 w-44 self-end" />
     </div>
@@ -34,7 +34,7 @@ function DesktopTableSkeleton() {
   return (
     <div className="hidden border-b md:block">
       <Table>
-        <TableHeader className="bg-muted">
+        <TableHeader className="bg-muted/80 dark:bg-accent">
           <TableRow>
             {COLUMN_WIDTHS.map((width, index) => (
               <TableHead key={index} className={cn("text-center", width)}>
@@ -92,7 +92,7 @@ function MobileListSkeleton() {
 
 function RankingPaginationSkeleton() {
   return (
-    <div className="flex items-center justify-center gap-1 pt-4">
+    <div className="flex items-center justify-center gap-1">
       {Array.from({ length: 9 }).map((_, index) => (
         <Skeleton key={index} className="h-9 w-9 rounded-md" />
       ))}
@@ -105,7 +105,7 @@ export function RankingBoardSkeleton() {
     <div
       aria-busy="true"
       aria-label="랭킹 정보를 불러오는 중"
-      className="flex w-full flex-col"
+      className="flex w-full flex-col gap-4"
     >
       <RankingFiltersSkeleton />
       <DesktopTableSkeleton />

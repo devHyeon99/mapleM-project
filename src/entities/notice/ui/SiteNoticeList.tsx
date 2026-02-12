@@ -49,11 +49,7 @@ export function SiteNoticeList({ items }: SiteNoticeListProps) {
     >
       <div className="flex flex-col gap-2">
         <h2 className="sr-only">사이트 공지</h2>
-        <div
-          className="min-w-0 flex-1"
-          aria-live="polite"
-          aria-atomic="true"
-        >
+        <div className="min-w-0 flex-1" aria-live="polite" aria-atomic="true">
           <div className="flex flex-col gap-2 text-sm font-medium md:flex-row md:items-center md:text-base">
             <Badge>{current.title}</Badge>
             <p className="text-primary text-wrap">{current.content}</p>

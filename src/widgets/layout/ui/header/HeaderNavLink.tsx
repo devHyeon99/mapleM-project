@@ -29,7 +29,7 @@ export function HeaderNavLink({
   return (
     <Link
       href={link.href}
-      prefetch={isExternal ? undefined : (link.prefetch ?? false)}
+      prefetch={link.prefetch}
       target={isExternal ? "_blank" : undefined}
       rel={isExternal ? "noopener noreferrer" : undefined}
       aria-label={isExternal ? `${link.label} (새 창에서 열림)` : undefined}

@@ -11,7 +11,7 @@ export function HeaderNav() {
         <HeaderNavLink
           key={link.href}
           link={link}
-          className="text-muted-foreground hover:text-foreground hover:bg-accent data-[active]:text-foreground inline-flex items-start gap-1 rounded-md px-4 py-1 text-lg transition-colors"
+          className="text-muted-foreground hover:text-foreground data-[active]:text-foreground inline-flex items-start gap-1 rounded-md px-4 py-1 text-lg transition-colors"
         />
       ))}
     </nav>

@@ -55,11 +55,18 @@ export function GuildMemberTable({
   };
 
   return (
-    <>
-      <div className="absolute top-5.5 right-6 flex justify-end">
+    <div className="flex flex-col gap-2">
+      <div className="flex items-center justify-between">
+        <h3 className="text-lg font-semibold">
+          길드원 목록 ({members.length}명)
+        </h3>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" size="sm" className="h-8 gap-1">
+            <Button
+              variant="outline"
+              size="sm"
+              className="bg-card h-8 gap-1 shadow-sm"
+            >
               <ArrowUpDown className="size-3" />
               <span className="text-xs">{sortLabels[sortBy]}</span>
             </Button>
@@ -107,6 +114,6 @@ export function GuildMemberTable({
           </TableBody>
         </Table>
       </div>
-    </>
+    </div>
   );
 }

@@ -36,7 +36,7 @@ export const metadata: Metadata = {
 
 export default async function GuildPage() {
   return (
-    <div className="flex flex-col items-center gap-4">
+    <div className="mt-4 flex flex-col items-center gap-4">
       <div className="flex flex-col items-center gap-2">
         <h1 className="text-2xl font-bold md:text-3xl">길드 검색</h1>
         <p className="sr-only" data-nosnippet>

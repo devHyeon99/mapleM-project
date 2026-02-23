@@ -35,7 +35,11 @@ export function SearchFormWorldSelect({
         className="-top-1.5 dark:border-none"
       >
         {options.map((world) => (
-          <SelectItem key={world} value={world}>
+          <SelectItem
+            className="focus:bg-accent/50 dark:focus:bg-input/40"
+            key={world}
+            value={world}
+          >
             {world}
           </SelectItem>
         ))}

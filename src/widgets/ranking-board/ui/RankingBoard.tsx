@@ -32,7 +32,7 @@ export function RankingBoard({
   return (
     <div className="flex flex-col gap-4">
       {!hasRankingData && isSharenianRanking && (
-        <TabMessageSection className="text-muted-foreground mt-4 min-h-40! text-sm">
+        <TabMessageSection className="text-muted-foreground mt-4 min-h-40! text-sm shadow-none">
           샤레니안 전장이 시작 전이기 때문에 데이터가 존재하지 않습니다.
         </TabMessageSection>
       )}

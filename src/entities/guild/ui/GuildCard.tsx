@@ -22,7 +22,7 @@ export function GuildCard({ data }: GuildCardProps) {
   ].join("-");
 
   return (
-    <Card className="w-full rounded-xs border-none">
+    <Card className="w-full border-none">
       <CardContent className="relative px-0">
         <div className="mt-10 flex flex-col items-center gap-4 md:mt-0 md:flex-row md:items-start">
           <GuildMark src={data.guild_mark_icon} name={data.guild_name} />

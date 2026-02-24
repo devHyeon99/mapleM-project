@@ -12,7 +12,7 @@ export const SpecCardHeader = ({ data }: SpecCardHeaderProps) => {
     <>
       <div className="bg-muted/50 flex flex-col items-center gap-4 rounded-lg border p-3 sm:flex-row">
         {/* 캐릭터 이미지 */}
-        <div className="dark:border-border h-25 w-25 self-start overflow-hidden rounded-full border-2 border-gray-300 bg-[#EAEEF3] dark:bg-[#323232]">
+        <div className="border-border h-25 w-25 self-start overflow-hidden rounded-full border-2 bg-[#EAEEF3] dark:bg-[#323232]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={data.character_image}

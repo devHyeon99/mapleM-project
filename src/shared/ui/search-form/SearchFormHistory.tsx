@@ -83,7 +83,7 @@ export const SearchFormHistory = ({
         type="button"
         variant="secondary"
         onClick={onClose}
-        className="text-muted-foreground focus-visible:ring-ring/60 hover:text-destructive h-10 w-full rounded-none focus-visible:ring-2 focus-visible:ring-inset"
+        className="dark:hover:bg-input/50 text-muted-foreground focus-visible:ring-ring/60 hover:text-destructive h-10 w-full rounded-none focus-visible:ring-2 focus-visible:ring-inset"
         aria-label="최근 검색 패널 닫기"
       >
         닫기
@@ -130,7 +130,7 @@ const HistoryItemRow = ({
         <span className="truncate font-medium">{item.name}</span>
         <Badge
           variant="secondary"
-          className="text-muted-foreground px-1.5 py-0.5 text-xs font-bold"
+          className="bg-input/30! text-muted-foreground px-1.5 py-0.5 text-xs font-bold"
         >
           {item.world}
         </Badge>
@@ -142,7 +142,7 @@ const HistoryItemRow = ({
         size="icon"
         aria-label={`${item.world} ${item.name} 검색 기록 삭제`}
         className={cn(
-          "text-muted-foreground hover:text-destructive hover:bg-destructive/10 size-6",
+          "text-muted-foreground hover:text-destructive size-6",
           "opacity-100",
         )}
         onClick={(e) => {

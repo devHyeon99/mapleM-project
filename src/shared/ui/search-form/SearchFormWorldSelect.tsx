@@ -25,7 +25,7 @@ export function SearchFormWorldSelect({
     <Select value={value} onValueChange={onValueChange}>
       <SelectTrigger
         disabled={disabled}
-        className="border-border bg-card hover:bg-accent/5 dark:bg-card dark:hover:bg-accent/50 relative z-0 h-14! w-[130px] shrink-0 rounded-l-3xl rounded-r-none border-r-0! pl-7 focus-visible:z-10 dark:border-0"
+        className="border-border bg-card hover:bg-accent/5 dark:bg-card dark:hover:bg-input/50 relative z-0 h-14! w-[130px] shrink-0 rounded-l-3xl rounded-r-none border-r-0! pl-7 focus-visible:z-10 dark:border-0"
       >
         <SelectValue placeholder="월드" />
       </SelectTrigger>

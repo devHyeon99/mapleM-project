@@ -5,7 +5,7 @@ import { HeaderMobileNav } from "./HeaderMobileNav";
 
 export function Header() {
   return (
-    <header className="bg-background sticky top-0 z-50 w-full">
+    <header className="bg-page sticky top-0 z-50 w-full">
       {/* 키보드 사용자가 헤더 내비게이션을 건너뛰고 본문으로 이동 (WCAG 2.4.1) */}
       <a
         href="#main"

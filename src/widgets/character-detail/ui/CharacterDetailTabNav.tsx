@@ -100,7 +100,7 @@ export function CharacterDetailTabNav() {
       <TabsList
         ref={tabListRef}
         className={cn(
-          "flex h-12 w-full items-center justify-start rounded-none bg-transparent p-0 shadow-sm",
+          "group-data-horizontal/tabs:h-12 flex w-full items-center justify-start rounded-none bg-transparent p-0 shadow-sm",
           "overflow-x-auto overflow-y-hidden scroll-smooth whitespace-nowrap",
           "[-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
         )}

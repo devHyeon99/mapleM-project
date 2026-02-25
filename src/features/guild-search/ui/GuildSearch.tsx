@@ -1,6 +1,5 @@
 "use client";
 
-import { useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { SearchForm } from "@/shared/ui/search-form";
 
@@ -10,18 +9,15 @@ const VALIDATION_ERROR_MESSAGE =
 
 export function GuildSearch() {
   const router = useRouter();
-  const [isPending, startTransition] = useTransition();
 
   const handleValidate = (world: string, name: string): boolean => {
     return VALIDATION_REGEX.test(name);
   };
 
   const handleSearch = (world: string, name: string) => {
-    startTransition(() => {
-      router.push(
-        `/guild/${encodeURIComponent(world)}/${encodeURIComponent(name)}`,
-      );
-    });
+    router.push(
+      `/guild/${encodeURIComponent(world)}/${encodeURIComponent(name)}`,
+    );
   };
 
   return (
@@ -30,7 +26,6 @@ export function GuildSearch() {
       lastWorldKey="guild-last-world"
       placeholder="길드명을 입력하세요"
       onSubmit={handleSearch}
-      isPending={isPending}
       onValidate={handleValidate}
       errorMessage={VALIDATION_ERROR_MESSAGE}
     />

@@ -12,21 +12,16 @@ interface SearchFormWorldSelectProps {
   value: string;
   onValueChange: (value: string) => void;
   options: readonly string[];
-  disabled: boolean;
 }
 
 export function SearchFormWorldSelect({
   value,
   onValueChange,
   options,
-  disabled,
 }: SearchFormWorldSelectProps) {
   return (
     <Select value={value} onValueChange={onValueChange}>
-      <SelectTrigger
-        disabled={disabled}
-        className="border-border bg-card hover:bg-accent/5 dark:bg-card dark:hover:bg-input/50 relative z-0 h-14! w-[130px] shrink-0 rounded-l-3xl rounded-r-none border-r-0! pl-7 focus-visible:z-10 dark:border-0"
-      >
+      <SelectTrigger className="bg-background relative z-0 h-14! w-[130px] shrink-0 rounded-l-3xl rounded-r-none border-r-0! pl-7 shadow-sm focus-visible:z-10 dark:border-0">
         <SelectValue placeholder="월드" />
       </SelectTrigger>
       <SelectContent

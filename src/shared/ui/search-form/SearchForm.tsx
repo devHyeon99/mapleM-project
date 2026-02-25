@@ -19,7 +19,6 @@ interface SearchFormProps {
   lastWorldKey: string;
   placeholder: string;
   includeAllWorld?: boolean;
-  isPending?: boolean;
   onSubmit: (world: string, name: string) => void;
   onValidate?: (world: string, name: string) => boolean;
   errorMessage?: string;
@@ -30,7 +29,6 @@ export function SearchForm({
   lastWorldKey,
   placeholder,
   includeAllWorld = false,
-  isPending = false,
   onSubmit,
   onValidate,
   errorMessage = "입력값을 확인해주세요.",
@@ -66,7 +64,6 @@ export function SearchForm({
         options={worldOptions}
         inputValue={inputValue}
         placeholder={placeholder}
-        isPending={isPending}
         isError={isError}
         history={history}
         onWorldChange={setWorld}

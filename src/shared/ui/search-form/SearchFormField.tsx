@@ -1,6 +1,6 @@
 "use client";
 
-import { Loader2, Search } from "lucide-react";
+import { Search } from "lucide-react";
 import { clsx } from "clsx";
 import { Button } from "@/shared/ui/button";
 import { Input } from "@/shared/ui/input";
@@ -22,7 +22,6 @@ interface SearchFormFieldProps {
   options: readonly string[];
   inputValue: string;
   placeholder: string;
-  isPending: boolean;
   isError: boolean;
   history: SearchHistoryItem[];
   onWorldChange: (world: string) => void;
@@ -40,7 +39,6 @@ export function SearchFormField({
   options,
   inputValue,
   placeholder,
-  isPending,
   isError,
   history,
   onWorldChange,
@@ -73,7 +71,6 @@ export function SearchFormField({
         value={world}
         onValueChange={onWorldChange}
         options={options}
-        disabled={isPending}
       />
 
       <form
@@ -93,7 +90,6 @@ export function SearchFormField({
             value={inputValue}
             placeholder={placeholder}
             autoComplete="off"
-            disabled={isPending}
             aria-invalid={isError}
             aria-describedby={isError ? errorId : undefined}
             aria-controls={historyListId}
@@ -103,13 +99,12 @@ export function SearchFormField({
               openHistory();
             }}
             className={clsx(
-              "bg-card dark:bg-card border-border relative h-14 rounded-l-none rounded-r-3xl pr-12 pl-4 placeholder:text-sm! dark:border-none",
+              "bg-background relative h-14 rounded-l-none rounded-r-3xl pr-12 pl-4 shadow-sm placeholder:text-sm! dark:border-none",
               ui.input,
             )}
           />
           <Button
             type="submit"
-            disabled={isPending}
             variant="ghost"
             size="icon"
             className={clsx(
@@ -118,11 +113,7 @@ export function SearchFormField({
               ui.submitButton,
             )}
           >
-            {isPending ? (
-              <Loader2 className="size-5 animate-spin" />
-            ) : (
-              <Search className="size-5" />
-            )}
+            <Search className="size-5" />
             <span className="sr-only">검색</span>
           </Button>
         </div>

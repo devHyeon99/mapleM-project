@@ -2,7 +2,6 @@
 
 import { useEffect } from "react";
 import { AlertTriangle } from "lucide-react";
-import { GuildSearch } from "@/features/guild-search";
 import { Button } from "@/shared/ui/button";
 
 export default function GuildError({
@@ -17,10 +16,7 @@ export default function GuildError({
   }, [error]);
 
   return (
-    <div className="flex flex-col items-center justify-center text-center">
-      <div className="mb-6.5 w-full max-w-3xl px-4 pt-2">
-        <GuildSearch />
-      </div>
+    <div className="flex flex-col items-center justify-center pt-8 text-center">
       <AlertTriangle className="text-destructive mb-2 size-12" />
       <h2 className="mb-2 text-xl font-medium tracking-tight">
         길드 정보를 불러오지 못했습니다

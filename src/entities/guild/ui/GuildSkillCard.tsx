@@ -9,12 +9,12 @@ interface GuildSkillCardProps {
 
 export function GuildSkillCard({ skill }: GuildSkillCardProps) {
   return (
-    <Card className="items-start rounded-xs border-none">
-      <CardContent className="w-full px-4">
-        <div className="flex gap-2 md:flex-row">
+    <Card className="rounded-none shadow-none ring-0">
+      <CardContent>
+        <div className="flex gap-2">
           <Image
             src={skill.skill_icon}
-            alt={skill.skill_name}
+            alt=""
             width={32}
             height={32}
             unoptimized

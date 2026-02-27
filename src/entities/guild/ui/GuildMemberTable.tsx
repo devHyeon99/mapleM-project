@@ -57,18 +57,14 @@ export function GuildMemberTable({
   return (
     <div className="flex flex-col gap-2">
       <div className="flex items-center justify-between">
-        <h3 className="text-lg font-semibold">
+        <h2 className="text-lg font-semibold">
           길드원 목록 ({members.length}명)
-        </h3>
+        </h2>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button
-              variant="outline"
-              size="sm"
-              className="bg-card h-8 gap-1 shadow-sm"
-            >
+            <Button variant="outline" size="sm" className="h-8 gap-1 shadow-sm">
               <ArrowUpDown className="size-3" />
-              <span className="text-xs">{sortLabels[sortBy]}</span>
+              <span className="text-13">{sortLabels[sortBy]}</span>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
@@ -78,13 +74,13 @@ export function GuildMemberTable({
                 value={sortBy}
                 onValueChange={(v) => setSortBy(v as SortType)}
               >
-                <DropdownMenuRadioItem value="activity">
+                <DropdownMenuRadioItem className="text-13" value="activity">
                   기여도순
                 </DropdownMenuRadioItem>
-                <DropdownMenuRadioItem value="level">
+                <DropdownMenuRadioItem className="text-13" value="level">
                   레벨순
                 </DropdownMenuRadioItem>
-                <DropdownMenuRadioItem value="name">
+                <DropdownMenuRadioItem className="text-13" value="name">
                   이름순
                 </DropdownMenuRadioItem>
               </DropdownMenuRadioGroup>
@@ -93,7 +89,7 @@ export function GuildMemberTable({
         </DropdownMenu>
       </div>
 
-      <div className="overflow-hidden rounded-md">
+      <div className="overflow-hidden">
         <Table className="table-fixed">
           <TableHeader>
             <TableRow>

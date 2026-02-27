@@ -1,5 +1,3 @@
-"use client";
-
 import { ReactNode } from "react";
 import { CircleAlert, CircleHelp } from "lucide-react";
 import { cn } from "@/shared/lib/utils";
@@ -51,7 +49,7 @@ export const HelpPopover = ({
       <PopoverContent
         side={side}
         align={align}
-        className={cn("w-80 rounded-xs p-3", contentClassName)}
+        className={cn("w-80 p-3", contentClassName)}
       >
         <div className="flex flex-col gap-2 text-xs leading-relaxed">
           {items.map((item, index) => (

@@ -1,8 +1,9 @@
 import { ShieldCheck, Users, Calendar } from "lucide-react";
 import { Card, CardContent } from "@/shared/ui/card";
 import { Badge } from "@/shared/ui/badge";
-import { GuildMark } from "@/entities/guild/ui/GuildMark";
-import type { Guild } from "@/entities/guild/model/types";
+import { HelpPopover } from "@/shared/ui/HelpPopover";
+import { GuildMark } from "./GuildMark";
+import type { Guild } from "../model/types";
 
 interface GuildCardProps {
   data: Guild;
@@ -24,7 +25,7 @@ export function GuildCard({ data }: GuildCardProps) {
   return (
     <Card className="w-full border-none">
       <CardContent className="relative px-0">
-        <div className="mt-10 flex flex-col items-center gap-4 md:mt-0 md:flex-row md:items-start">
+        <div className="flex flex-col items-center gap-4 md:flex-row md:items-start">
           <GuildMark src={data.guild_mark_icon} name={data.guild_name} />
           <div className="w-full flex-1 space-y-4 text-center md:text-left">
             <div className="space-y-1">
@@ -47,7 +48,7 @@ export function GuildCard({ data }: GuildCardProps) {
                   <ShieldCheck
                     aria-hidden="true"
                     className="text-primary size-4"
-                  />{" "}
+                  />
                   길드마스터
                 </dt>
                 <dd className="font-bold">{data.guild_master_name}</dd>
@@ -74,9 +75,18 @@ export function GuildCard({ data }: GuildCardProps) {
             </dl>
           </div>
         </div>
-        <p className="text-muted-foreground absolute top-0 right-6 text-sm">
-          메이플스토리M의 길드 데이터는 평균 15분 후 확인 가능합니다.
-        </p>
+        <HelpPopover
+          ariaLabel="길드 데이터 갱신 안내"
+          iconType="exclamation"
+          items={[
+            {
+              title: "길드 데이터 갱신 주기",
+              description:
+                "메이플스토리M의 길드 데이터는 평균 15분 후 확인 가능합니다. 간혹, API 문제로 인해 최신 데이터가 갱신 되지 않을 수 있습니다.",
+            },
+          ]}
+          triggerClassName="absolute top-0 right-4"
+        />
       </CardContent>
     </Card>
   );

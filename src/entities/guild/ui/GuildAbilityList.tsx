@@ -29,9 +29,9 @@ export function GuildAbilityList({ abilities }: GuildAbilityListProps) {
 
         return (
           <section key={groupIndex} className="flex flex-col">
-            <h2 className="bg-stone-200 py-1.5 text-center text-sm font-bold md:text-base dark:bg-stone-700">
+            <h3 className="bg-foreground/[0.08] py-1.5 text-center text-sm font-bold md:text-base">
               {GROUP_TITLES[groupIndex]}
-            </h2>
+            </h3>
 
             <div
               className={`mx-auto grid w-full grid-cols-1 ${GROUP_GRID[sizeIndex] ?? "md:grid-cols-3"}`}

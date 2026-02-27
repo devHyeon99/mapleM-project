@@ -42,14 +42,17 @@ export function GuildDetailView({ guildData }: GuildDetailViewProps) {
           </TabsContent>
 
           <TabsContent value="skills">
+            <h2 className="sr-only">길드 스킬</h2>
             <GuildSkillList skills={guildData.guild_skill} />
           </TabsContent>
 
           <TabsContent value="buildings">
+            <h2 className="sr-only">길드 시설물</h2>
             <GuildBuildingList buildings={guildData.guild_building} />
           </TabsContent>
 
           <TabsContent value="ability">
+            <h2 className="sr-only">길드 어빌리티</h2>
             <GuildAbilityList abilities={guildData.guild_ability} />
           </TabsContent>
         </div>

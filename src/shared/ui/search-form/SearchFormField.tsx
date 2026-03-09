@@ -18,6 +18,7 @@ export interface SearchFormFieldSlotClassNames {
 }
 
 interface SearchFormFieldProps {
+  label: string;
   world: string;
   options: readonly string[];
   inputValue: string;
@@ -35,6 +36,7 @@ interface SearchFormFieldProps {
 }
 
 export function SearchFormField({
+  label,
   world,
   options,
   inputValue,
@@ -62,11 +64,14 @@ export function SearchFormField({
     handleInputFocus,
     handleFormKeyDownCapture,
   } = useHistoryPanelController();
-  const historyListId = `${inputId}-history-list`;
   const historyLabelId = `${inputId}-history-label`;
 
   return (
-    <div className={clsx("flex w-full items-center gap-0", ui.controls)}>
+    <div
+      role="search"
+      aria-label={label}
+      className={clsx("flex w-full items-center gap-0", ui.controls)}
+    >
       <SearchFormWorldSelect
         value={world}
         onValueChange={onWorldChange}
@@ -89,10 +94,10 @@ export function SearchFormField({
             id={inputId}
             value={inputValue}
             placeholder={placeholder}
+            aria-label={placeholder}
             autoComplete="off"
             aria-invalid={isError}
             aria-describedby={isError ? errorId : undefined}
-            aria-controls={historyListId}
             onFocus={handleInputFocus}
             onChange={(e) => {
               onInputValueChange(e.target.value, { reason: "input-change" });
@@ -129,7 +134,6 @@ export function SearchFormField({
             onRemove={onHistoryRemove}
             onClose={closeHistoryAndFocusInput}
             containerRef={historyPanelRef}
-            listId={historyListId}
             labelId={historyLabelId}
             className={clsx(
               "absolute top-[calc(100%+2px)] left-[-128px] z-[1000] w-[calc(100%+128px)] md:left-0 md:w-full",

@@ -13,7 +13,6 @@ interface SearchFormHistoryProps {
   onRemove: (id: string) => void;
   onClose: () => void;
   containerRef?: React.RefObject<HTMLDivElement | null>;
-  listId: string;
   labelId: string;
   className?: string;
 }
@@ -25,7 +24,6 @@ export const SearchFormHistory = ({
   onRemove,
   onClose,
   containerRef,
-  listId,
   labelId,
   className,
 }: SearchFormHistoryProps) => {
@@ -35,7 +33,7 @@ export const SearchFormHistory = ({
     <div
       ref={containerRef}
       className={cn(
-        "flex h-90 flex-col overflow-hidden rounded-md shadow-md outline-none",
+        "flex max-h-90 flex-col overflow-hidden rounded-md shadow-md outline-none",
         "text-popover-foreground bg-popover border dark:border-none",
         "focus:ring-ring",
         className,
@@ -59,10 +57,9 @@ export const SearchFormHistory = ({
       </div>
 
       <ul
-        id={listId}
         aria-labelledby={labelId}
         role="list"
-        className="flex-1 overflow-y-auto"
+        className="min-h-0 flex-1 overflow-y-auto"
       >
         {!hasHistory && (
           <li className="text-muted-foreground py-6 text-center text-sm">
@@ -103,25 +100,14 @@ const HistoryItemRow = ({
   onRemove: (id: string) => void;
 }) => {
   return (
-    <li
-      role="button"
-      tabIndex={0}
-      onClick={() => onSelect(item)}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          onSelect(item);
-        }
-      }}
-      className={cn(
-        "group hover:bg-accent dark:hover:bg-input/50 relative flex cursor-pointer items-center justify-between px-4 py-2 text-sm transition-colors outline-none",
-      )}
-      aria-label={`${item.world} ${item.name} 검색`}
-    >
-      <div
+    <li className="hover:bg-accent dark:hover:bg-input/50 flex items-center pr-2 text-sm transition-colors">
+      <button
+        type="button"
+        onClick={() => onSelect(item)}
+        aria-label={`${item.world} ${item.name} 검색`}
         className={cn(
-          "flex min-w-0 flex-1 items-center gap-2 rounded-sm py-1",
-          "group-focus-visible:ring-ring/60 group-focus-visible:ring-[3px]",
+          "flex min-w-0 flex-1 cursor-pointer items-center gap-2 py-3 pl-4 text-left outline-none",
+          "focus-visible:ring-ring/60 focus-visible:ring-[3px] focus-visible:ring-inset",
         )}
       >
         <Clock
@@ -135,21 +121,15 @@ const HistoryItemRow = ({
         >
           {item.world}
         </Badge>
-      </div>
+      </button>
 
       <Button
         type="button"
         variant="ghost"
         size="icon"
         aria-label={`${item.world} ${item.name} 검색 기록 삭제`}
-        className={cn(
-          "text-muted-foreground hover:text-destructive size-6",
-          "opacity-100",
-        )}
-        onClick={(e) => {
-          e.stopPropagation();
-          onRemove(item.id);
-        }}
+        className="text-muted-foreground hover:text-destructive size-8 shrink-0"
+        onClick={() => onRemove(item.id)}
       >
         <X className="size-4" aria-hidden="true" />
       </Button>

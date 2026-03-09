@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useMemo, useSyncExternalStore } from "react";
 
 export interface SearchHistoryItem {
   id: string;
@@ -12,19 +12,20 @@ export interface SearchHistoryItem {
 const MAX_HISTORY_LIMIT = 6;
 const SEARCH_HISTORY_UPDATED_EVENT = "search-history-updated";
 
-const readSearchHistory = (storageKey: string): SearchHistoryItem[] => {
-  const saved = localStorage.getItem(storageKey);
-  if (!saved) {
-    return [];
-  }
+const EMPTY_HISTORY: SearchHistoryItem[] = [];
+
+const parseSearchHistory = (saved: string | null): SearchHistoryItem[] => {
+  if (!saved) return EMPTY_HISTORY;
 
   try {
     return JSON.parse(saved) as SearchHistoryItem[];
   } catch {
-    localStorage.removeItem(storageKey);
-    return [];
+    return EMPTY_HISTORY;
   }
 };
+
+const readSearchHistory = (storageKey: string): SearchHistoryItem[] =>
+  parseSearchHistory(localStorage.getItem(storageKey));
 
 const emitSearchHistoryUpdate = (storageKey: string) => {
   window.dispatchEvent(
@@ -54,31 +55,38 @@ const updateSearchHistory = (
 };
 
 export const useRecentSearch = (storageKey: string) => {
-  const [history, setHistory] = useState<SearchHistoryItem[]>(() => {
-    if (typeof window === "undefined") {
-      return [];
-    }
+  const subscribe = useCallback(
+    (onStoreChange: () => void) => {
+      const handleHistoryUpdate = (event: Event) => {
+        const { detail } = event as CustomEvent<{ storageKey?: string }>;
+        if (detail?.storageKey !== storageKey) return;
 
-    return readSearchHistory(storageKey);
-  });
+        onStoreChange();
+      };
 
-  useEffect(() => {
-    const handleHistoryUpdate = (event: Event) => {
-      const { detail } = event as CustomEvent<{ storageKey?: string }>;
-      if (detail?.storageKey !== storageKey) return;
-
-      setHistory(readSearchHistory(storageKey));
-    };
-
-    window.addEventListener(SEARCH_HISTORY_UPDATED_EVENT, handleHistoryUpdate);
-
-    return () => {
-      window.removeEventListener(
+      window.addEventListener(
         SEARCH_HISTORY_UPDATED_EVENT,
         handleHistoryUpdate,
       );
-    };
-  }, [storageKey]);
+
+      return () => {
+        window.removeEventListener(
+          SEARCH_HISTORY_UPDATED_EVENT,
+          handleHistoryUpdate,
+        );
+      };
+    },
+    [storageKey],
+  );
+
+  // localStorage를 단일 출처로 두어 서버 렌더(빈 목록)와 하이드레이션 결과를 일치시킨다.
+  // 스냅샷은 파싱 전 문자열이라 참조가 안정적이고, 파싱은 값이 바뀔 때만 수행한다.
+  const rawHistory = useSyncExternalStore(
+    subscribe,
+    () => localStorage.getItem(storageKey),
+    () => null,
+  );
+  const history = useMemo(() => parseSearchHistory(rawHistory), [rawHistory]);
 
   const addHistory = useCallback(
     (name: string, world: string) => {

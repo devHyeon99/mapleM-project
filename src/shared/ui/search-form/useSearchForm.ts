@@ -1,5 +1,22 @@
-import { useState, useCallback } from "react";
-import { WORLD_NAMES } from "@/shared/config/constants/worlds";
+import { useState, useCallback, useSyncExternalStore } from "react";
+import {
+  ALL_WORLD_NAME,
+  WORLD_NAMES,
+} from "@/shared/config/constants/worlds";
+
+const WORLD_OPTIONS_WITH_ALL: readonly string[] = WORLD_NAMES;
+const WORLD_OPTIONS_WITHOUT_ALL: readonly string[] = WORLD_NAMES.filter(
+  (w) => w !== ALL_WORLD_NAME,
+);
+
+const LAST_WORLD_UPDATED_EVENT = "search-last-world-updated";
+
+const subscribeLastWorld = (onStoreChange: () => void) => {
+  window.addEventListener(LAST_WORLD_UPDATED_EVENT, onStoreChange);
+  return () => {
+    window.removeEventListener(LAST_WORLD_UPDATED_EVENT, onStoreChange);
+  };
+};
 
 interface UseSearchFormLogicProps {
   lastWorldKey: string;
@@ -14,31 +31,31 @@ export function useSearchForm({
   onSubmit,
   onValidate,
 }: UseSearchFormLogicProps) {
-  const defaultWorld = includeAllWorld ? "전체" : "스카니아";
+  const defaultWorld = includeAllWorld ? ALL_WORLD_NAME : "스카니아";
   const worldOptions = includeAllWorld
-    ? WORLD_NAMES
-    : WORLD_NAMES.filter((w) => w !== "전체");
+    ? WORLD_OPTIONS_WITH_ALL
+    : WORLD_OPTIONS_WITHOUT_ALL;
 
-  const [world, setWorld] = useState(() => {
-    if (typeof window === "undefined") return defaultWorld;
-    const savedWorld = sessionStorage.getItem(lastWorldKey);
-    if (
-      savedWorld &&
-      (worldOptions as readonly string[]).includes(savedWorld)
-    ) {
-      return savedWorld;
-    }
-    return defaultWorld;
-  });
   const [inputValue, setInputValue] = useState("");
   const [isError, setIsError] = useState(false);
 
+  // sessionStorage를 단일 출처로 두어 서버 렌더(기본 월드)와 하이드레이션 결과를 일치시킨다.
+  const world = useSyncExternalStore(
+    subscribeLastWorld,
+    () => {
+      const savedWorld = sessionStorage.getItem(lastWorldKey);
+      return savedWorld && worldOptions.includes(savedWorld)
+        ? savedWorld
+        : defaultWorld;
+    },
+    () => defaultWorld,
+  );
+
   const handleWorldChange = useCallback(
     (nextWorld: string) => {
-      if (!(worldOptions as readonly string[]).includes(nextWorld)) return;
-      const safeWorld = nextWorld as (typeof worldOptions)[number];
-      setWorld(safeWorld);
-      sessionStorage.setItem(lastWorldKey, safeWorld);
+      if (!worldOptions.includes(nextWorld)) return;
+      sessionStorage.setItem(lastWorldKey, nextWorld);
+      window.dispatchEvent(new Event(LAST_WORLD_UPDATED_EVENT));
     },
     [lastWorldKey, worldOptions],
   );
@@ -59,11 +76,12 @@ export function useSearchForm({
 
       setIsError(false);
       setInputValue("");
-      sessionStorage.setItem(lastWorldKey, targetWorld);
+      // 최근 검색 선택 시 targetWorld가 현재 선택과 다를 수 있어 상태·스토리지를 함께 맞춘다.
+      handleWorldChange(targetWorld);
 
       onSubmit(targetWorld, trimmed);
     },
-    [lastWorldKey, onSubmit, onValidate],
+    [handleWorldChange, onSubmit, onValidate],
   );
 
   const handleInputChange = (val: string, details?: { reason: string }) => {

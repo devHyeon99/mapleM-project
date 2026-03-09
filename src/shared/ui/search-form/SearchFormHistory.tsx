@@ -46,6 +46,7 @@ export const SearchFormHistory = ({
 
         {hasHistory && (
           <Button
+            type="button"
             variant="ghost"
             size="sm"
             onClick={onClear}
@@ -113,7 +114,7 @@ const HistoryItemRow = ({
         }
       }}
       className={cn(
-        "group hover:bg-accent/35 dark:hover:bg-input/50 relative flex cursor-pointer items-center justify-between px-4 py-2 text-sm transition-colors outline-none",
+        "group hover:bg-accent dark:hover:bg-input/50 relative flex cursor-pointer items-center justify-between px-4 py-2 text-sm transition-colors outline-none",
       )}
       aria-label={`${item.world} ${item.name} 검색`}
     >

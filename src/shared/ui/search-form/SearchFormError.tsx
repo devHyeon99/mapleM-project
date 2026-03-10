@@ -1,7 +1,7 @@
 "use client";
 
 import { AlertCircle } from "lucide-react";
-import { clsx } from "clsx";
+import { cn } from "@/shared/lib/utils";
 
 interface SearchFormErrorProps {
   id: string;
@@ -17,7 +17,7 @@ export function SearchFormError({
   return (
     <div
       id={id}
-      className={clsx(
+      className={cn(
         "animate-in slide-in-from-top-1 fade-in-0 flex items-center justify-end gap-1.5 px-1 text-xs font-bold md:text-sm",
         className,
       )}

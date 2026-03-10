@@ -2,17 +2,9 @@
 
 import { useId } from "react";
 import { useSearchForm } from "./useSearchForm";
-import {
-  SearchFormField,
-  type SearchFormFieldSlotClassNames,
-} from "./SearchFormField";
+import { SearchFormField } from "./SearchFormField";
 import { SearchFormError } from "./SearchFormError";
 import { useRecentSearch } from "@/shared/lib/hooks/useRecentSearch";
-
-export interface SearchFormSlotClassNames
-  extends SearchFormFieldSlotClassNames {
-  error?: string;
-}
 
 interface SearchFormProps {
   /** 검색 영역 랜드마크 이름. 예: "캐릭터 검색" */

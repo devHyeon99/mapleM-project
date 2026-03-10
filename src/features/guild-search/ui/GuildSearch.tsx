@@ -10,7 +10,7 @@ const VALIDATION_ERROR_MESSAGE =
 export function GuildSearch() {
   const router = useRouter();
 
-  const handleValidate = (world: string, name: string): boolean => {
+  const handleValidate = (_world: string, name: string): boolean => {
     return VALIDATION_REGEX.test(name);
   };
 

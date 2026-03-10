@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useMemo, useSyncExternalStore } from "react";
+import { ALL_WORLD_NAME } from "@/shared/config/constants/worlds";
 
 export interface SearchHistoryItem {
   id: string;
@@ -91,7 +92,7 @@ export const useRecentSearch = (storageKey: string) => {
   const addHistory = useCallback(
     (name: string, world: string) => {
       const trimmedName = name.trim();
-      if (!trimmedName || world === "전체") return;
+      if (!trimmedName || world === ALL_WORLD_NAME) return;
 
       updateSearchHistory(storageKey, (currentHistory) => {
         const filtered = currentHistory.filter(

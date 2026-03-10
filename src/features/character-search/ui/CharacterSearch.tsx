@@ -11,19 +11,15 @@ const VALIDATION_ERROR_MESSAGE =
 export const CharacterSearch = () => {
   const router = useRouter();
 
-  const normalizeName = (name: string) => name.trim();
-
   const handleValidate = (_world: string, name: string) => {
-    return VALIDATION_REGEX.test(normalizeName(name));
+    return VALIDATION_REGEX.test(name);
   };
 
   const handleSearch = (world: string, name: string) => {
-    const normalized = normalizeName(name);
-
     const path =
       world === ALL_WORLD_NAME
-        ? `/characters/${encodeURIComponent(normalized)}`
-        : `/character/${encodeURIComponent(world)}/${encodeURIComponent(normalized)}`;
+        ? `/characters/${encodeURIComponent(name)}`
+        : `/character/${encodeURIComponent(world)}/${encodeURIComponent(name)}`;
 
     router.push(path);
   };

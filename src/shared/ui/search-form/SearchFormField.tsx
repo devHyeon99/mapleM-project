@@ -1,21 +1,12 @@
 "use client";
 
 import { Search } from "lucide-react";
-import { clsx } from "clsx";
 import { Button } from "@/shared/ui/button";
 import { Input } from "@/shared/ui/input";
 import { SearchFormHistory } from "./SearchFormHistory";
 import { SearchFormWorldSelect } from "./SearchFormWorldSelect";
 import { useHistoryPanelController } from "./useHistoryPanelController";
 import type { SearchHistoryItem } from "@/shared/lib/hooks/useRecentSearch";
-
-export interface SearchFormFieldSlotClassNames {
-  controls?: string;
-  form?: string;
-  input?: string;
-  submitButton?: string;
-  history?: string;
-}
 
 interface SearchFormFieldProps {
   label: string;
@@ -26,13 +17,12 @@ interface SearchFormFieldProps {
   isError: boolean;
   history: SearchHistoryItem[];
   onWorldChange: (world: string) => void;
-  onInputValueChange: (value: string, details?: { reason: string }) => void;
+  onInputValueChange: (value: string) => void;
   onSubmitSearch: (world: string, name: string) => void;
   onHistoryRemove: (id: string) => void;
   onHistoryClear: () => void;
   inputId: string;
   errorId: string;
-  slots?: SearchFormFieldSlotClassNames;
 }
 
 export function SearchFormField({
@@ -50,9 +40,7 @@ export function SearchFormField({
   onHistoryClear,
   inputId,
   errorId,
-  slots,
 }: SearchFormFieldProps) {
-  const ui = slots ?? {};
   const {
     isHistoryOpen,
     containerRef,
@@ -67,11 +55,7 @@ export function SearchFormField({
   const historyLabelId = `${inputId}-history-label`;
 
   return (
-    <div
-      role="search"
-      aria-label={label}
-      className={clsx("flex w-full items-center gap-0", ui.controls)}
-    >
+    <div role="search" aria-label={label} className="flex w-full items-center">
       <SearchFormWorldSelect
         value={world}
         onValueChange={onWorldChange}
@@ -86,7 +70,7 @@ export function SearchFormField({
           onSubmitSearch(world, inputValue);
           closeHistory();
         }}
-        className={clsx("relative flex-1", ui.form)}
+        className="relative flex-1"
       >
         <div className="relative w-full">
           <Input
@@ -100,23 +84,16 @@ export function SearchFormField({
             aria-describedby={isError ? errorId : undefined}
             onFocus={handleInputFocus}
             onChange={(e) => {
-              onInputValueChange(e.target.value, { reason: "input-change" });
+              onInputValueChange(e.target.value);
               openHistory();
             }}
-            className={clsx(
-              "bg-background relative h-14 rounded-l-none rounded-r-3xl pr-12 pl-4 shadow-sm placeholder:text-sm! dark:border-none",
-              ui.input,
-            )}
+            className="bg-background relative h-14 rounded-l-none rounded-r-3xl pr-12 pl-4 shadow-sm placeholder:text-sm! dark:border-none"
           />
           <Button
             type="submit"
             variant="ghost"
             size="icon"
-            className={clsx(
-              "text-muted-foreground hover:text-foreground absolute top-1/2 right-3 size-8 -translate-y-1/2",
-              "focus-visible:ring-ring/60 focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-offset-transparent",
-              ui.submitButton,
-            )}
+            className="text-muted-foreground hover:text-foreground focus-visible:ring-ring/60 absolute top-1/2 right-3 size-8 -translate-y-1/2 focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-offset-transparent"
           >
             <Search className="size-5" />
             <span className="sr-only">검색</span>
@@ -135,10 +112,7 @@ export function SearchFormField({
             onClose={closeHistoryAndFocusInput}
             containerRef={historyPanelRef}
             labelId={historyLabelId}
-            className={clsx(
-              "absolute top-[calc(100%+2px)] left-[-128px] z-[1000] w-[calc(100%+128px)] md:left-0 md:w-full",
-              ui.history,
-            )}
+            className="absolute top-[calc(100%+2px)] left-[-128px] z-[1000] w-[calc(100%+128px)] md:left-0 md:w-full"
           />
         )}
       </form>

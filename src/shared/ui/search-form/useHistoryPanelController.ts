@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export function useHistoryPanelController() {
   const [isHistoryOpen, setIsHistoryOpen] = useState(false);
@@ -9,49 +9,48 @@ export function useHistoryPanelController() {
   const historyPanelRef = useRef<HTMLDivElement>(null);
   const skipOpenOnNextInputFocusRef = useRef(false);
 
-  const openHistory = useCallback(() => {
+  const openHistory = () => {
     setIsHistoryOpen(true);
-  }, []);
+  };
 
-  const closeHistory = useCallback(() => {
+  const closeHistory = () => {
     setIsHistoryOpen(false);
-  }, []);
+  };
 
-  const closeHistoryAndFocusInput = useCallback(() => {
+  const closeHistoryAndFocusInput = () => {
     setIsHistoryOpen(false);
     skipOpenOnNextInputFocusRef.current = true;
     requestAnimationFrame(() => {
       inputRef.current?.focus();
     });
-  }, []);
+  };
 
-  const handleInputFocus = useCallback(() => {
+  const handleInputFocus = () => {
     if (skipOpenOnNextInputFocusRef.current) {
       skipOpenOnNextInputFocusRef.current = false;
       return;
     }
     setIsHistoryOpen(true);
-  }, []);
+  };
 
-  const handleFormKeyDownCapture = useCallback(
-    (event: React.KeyboardEvent<HTMLFormElement>) => {
-      if (event.key !== "Escape" || !isHistoryOpen) return;
+  const handleFormKeyDownCapture = (
+    event: React.KeyboardEvent<HTMLFormElement>,
+  ) => {
+    if (event.key !== "Escape" || !isHistoryOpen) return;
 
-      const activeElement = document.activeElement;
-      const isFocusInsideHistory =
-        !!activeElement && historyPanelRef.current?.contains(activeElement);
+    const activeElement = document.activeElement;
+    const isFocusInsideHistory =
+      !!activeElement && historyPanelRef.current?.contains(activeElement);
 
-      if (isFocusInsideHistory) {
-        event.preventDefault();
-        event.stopPropagation();
-        closeHistoryAndFocusInput();
-        return;
-      }
+    if (isFocusInsideHistory) {
+      event.preventDefault();
+      event.stopPropagation();
+      closeHistoryAndFocusInput();
+      return;
+    }
 
-      setIsHistoryOpen(false);
-    },
-    [closeHistoryAndFocusInput, isHistoryOpen],
-  );
+    setIsHistoryOpen(false);
+  };
 
   useEffect(() => {
     const handlePointerDown = (event: PointerEvent) => {

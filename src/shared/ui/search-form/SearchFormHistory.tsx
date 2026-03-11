@@ -33,8 +33,8 @@ export const SearchFormHistory = ({
     <div
       ref={containerRef}
       className={cn(
-        "flex max-h-90 flex-col overflow-hidden rounded-md shadow-md outline-none",
-        "text-popover-foreground bg-popover border dark:border-none",
+        "flex max-h-90 flex-col overflow-hidden rounded-xl shadow-md outline-none",
+        "text-popover-foreground bg-popover border",
         "focus:ring-ring",
         className,
       )}
@@ -100,7 +100,7 @@ const HistoryItemRow = ({
   onRemove: (id: string) => void;
 }) => {
   return (
-    <li className="hover:bg-accent dark:hover:bg-input/50 flex items-center pr-2 text-sm transition-colors">
+    <li className="hover:bg-accent flex items-center pr-2 text-sm transition-colors">
       <button
         type="button"
         onClick={() => onSelect(item)}

@@ -87,7 +87,7 @@ export function SearchFormField({
               onInputValueChange(e.target.value);
               openHistory();
             }}
-            className="bg-background relative h-14 rounded-l-none rounded-r-3xl pr-12 pl-4 shadow-sm placeholder:text-sm! dark:border-none"
+            className="border-border bg-card dark:bg-input/50 relative h-14 rounded-l-none pr-12 pl-4 shadow-sm placeholder:text-sm focus-visible:ring-2"
           />
           <Button
             type="submit"
@@ -112,7 +112,7 @@ export function SearchFormField({
             onClose={closeHistoryAndFocusInput}
             containerRef={historyPanelRef}
             labelId={historyLabelId}
-            className="absolute top-[calc(100%+2px)] left-[-128px] z-[1000] w-[calc(100%+128px)] md:left-0 md:w-full"
+            className="absolute top-[calc(100%+4px)] left-[-130px] z-[1000] w-[calc(100%+130px)] md:left-0 md:w-full"
           />
         )}
       </form>

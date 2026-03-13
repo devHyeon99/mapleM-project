@@ -4,6 +4,8 @@ import { InfoDescriptionRow } from "@/shared/ui/InfoRow";
 import { InfoDateRow } from "@/shared/ui/InfoDateRow";
 import type { CharacterDetailData } from "@/entities/character";
 import { CharacterProfileHelpPopover } from "./CharacterProfileHelpPopover";
+import { worldIconSrc } from "@/shared/config/constants/worlds";
+import { guildHref } from "@/shared/lib/url";
 
 const NUMBER_FORMATTER = new Intl.NumberFormat("ko-KR");
 
@@ -35,6 +37,8 @@ const RankingInfoRows = ({
 };
 
 const CharacterProfileIdentity = ({ data }: CharacterProfileCardProps) => {
+  const worldIcon = worldIconSrc(data.world_name);
+
   return (
     <div className="flex w-full shrink-0 flex-col items-center gap-2 sm:w-44">
       {data.character_image && (
@@ -52,15 +56,17 @@ const CharacterProfileIdentity = ({ data }: CharacterProfileCardProps) => {
       )}
 
       <h3 className="flex items-center justify-center gap-1 font-semibold">
-        <Image
-          src={`/worlds/${encodeURIComponent(data.world_name)}.png`}
-          alt=""
-          aria-hidden="true"
-          width={14}
-          height={14}
-          style={{ imageRendering: "pixelated" }}
-          unoptimized
-        />
+        {worldIcon && (
+          <Image
+            src={worldIcon}
+            alt=""
+            aria-hidden="true"
+            width={14}
+            height={14}
+            style={{ imageRendering: "pixelated" }}
+            unoptimized
+          />
+        )}
         <span>{data.character_name}</span>
       </h3>
     </div>
@@ -95,7 +101,7 @@ const CharacterProfileInfoList = ({ data }: CharacterProfileCardProps) => {
       <InfoDescriptionRow label="길드">
         {hasGuild ? (
           <Link
-            href={`/guild/${encodeURIComponent(data.world_name)}/${encodeURIComponent(guildName)}`}
+            href={guildHref(data.world_name, guildName)}
             prefetch={false}
             className="hover:text-orange-400"
           >

@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { SearchForm } from "@/shared/ui/search-form";
 import { ALL_WORLD_NAME } from "@/shared/config/constants/worlds";
+import { characterHref } from "@/shared/lib/url";
 
 const VALIDATION_REGEX = /^[a-zA-Z0-9가-힣]{2,8}$/;
 const VALIDATION_ERROR_MESSAGE =
@@ -19,7 +20,7 @@ export const CharacterSearch = () => {
     const path =
       world === ALL_WORLD_NAME
         ? `/characters/${encodeURIComponent(name)}`
-        : `/character/${encodeURIComponent(world)}/${encodeURIComponent(name)}`;
+        : characterHref(world, name);
 
     router.push(path);
   };

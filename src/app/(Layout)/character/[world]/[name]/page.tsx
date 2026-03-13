@@ -5,6 +5,7 @@ import { CharacterSearch } from "@/features/character-search";
 import { CharacterDetail } from "@/widgets/character-detail";
 import { fetchOcid, fetchCharacterDetail } from "@/entities/character/server";
 import { safeDecode } from "@/shared/lib/url";
+import { worldFromSlug } from "@/shared/config/constants/worlds";
 import { NotFoundMetadata } from "./not-found";
 
 interface CharacterPageProps {
@@ -27,7 +28,7 @@ export async function generateMetadata({
   params,
 }: CharacterPageProps): Promise<Metadata> {
   const { world, name } = await params;
-  const decodedWorld = safeDecode(world);
+  const decodedWorld = worldFromSlug(safeDecode(world));
   const decodedName = safeDecode(name);
 
   // 존재하지 않는 캐릭터에도 그럴듯한 제목이 붙으면, 죽은 링크를 공유했을 때
@@ -62,7 +63,7 @@ export async function generateMetadata({
 
 export default async function CharacterPage({ params }: CharacterPageProps) {
   const { world, name } = await params;
-  const decodedWorld = safeDecode(world);
+  const decodedWorld = worldFromSlug(safeDecode(world));
   const decodedName = safeDecode(name);
 
   const pageData = await getPageData(decodedWorld, decodedName);

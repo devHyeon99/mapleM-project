@@ -6,6 +6,7 @@ import { TableCell, TableRow } from "@/shared/ui/table";
 import { GuildMember } from "../model/types";
 import { WORLD_NAMES } from "@/shared/config/constants/worlds";
 import { useRecentSearch } from "@/shared/lib/hooks/useRecentSearch";
+import { characterHref } from "@/shared/lib/url";
 import { ShieldCheck } from "lucide-react";
 
 type WorldName = (typeof WORLD_NAMES)[number];
@@ -27,7 +28,7 @@ export function GuildMemberRow({
   // 행 클릭 핸들러 (모바일/편의성)
   const handleRowClick = () => {
     addHistory(member.character_name, worldName as WorldName);
-    const href = `/character/${encodeURIComponent(worldName)}/${encodeURIComponent(member.character_name)}`;
+    const href = characterHref(worldName, member.character_name);
     router.push(href);
   };
 
@@ -39,7 +40,7 @@ export function GuildMemberRow({
       <TableCell className="py-3 font-medium">
         {/* 접근성용 Link */}
         <Link
-          href={`/character/${encodeURIComponent(worldName)}/${encodeURIComponent(member.character_name)}`}
+          href={characterHref(worldName, member.character_name)}
           prefetch={false}
           onClick={(e) => {
             e.stopPropagation(); // 부모 Row 클릭 방지

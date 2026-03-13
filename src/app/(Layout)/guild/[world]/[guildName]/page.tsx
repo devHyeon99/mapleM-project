@@ -5,6 +5,7 @@ import { isNexonNotFoundError } from "@/shared/api/nexon/handler";
 import { getGuildFullData } from "@/entities/guild/api/get-guild.server";
 import { GuildDetailView } from "@/widgets/guild-detail/ui/GuildDetailView";
 import { safeDecode } from "@/shared/lib/url";
+import { worldFromSlug } from "@/shared/config/constants/worlds";
 import { NotFoundMetadata } from "./not-found";
 
 interface PageProps {
@@ -14,7 +15,7 @@ interface PageProps {
 async function parseParams(params: PageProps["params"]) {
   const { world, guildName } = await params;
   return {
-    worldName: safeDecode(world),
+    worldName: worldFromSlug(safeDecode(world)),
     guildName: safeDecode(guildName),
   };
 }

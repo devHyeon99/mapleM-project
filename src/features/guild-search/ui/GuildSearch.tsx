@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { SearchForm } from "@/shared/ui/search-form";
+import { guildHref } from "@/shared/lib/url";
 
 const VALIDATION_REGEX = /^[a-zA-Z0-9가-힣]{2,12}$/;
 const VALIDATION_ERROR_MESSAGE =
@@ -15,9 +16,7 @@ export function GuildSearch() {
   };
 
   const handleSearch = (world: string, name: string) => {
-    router.push(
-      `/guild/${encodeURIComponent(world)}/${encodeURIComponent(name)}`,
-    );
+    router.push(guildHref(world, name));
   };
 
   return (

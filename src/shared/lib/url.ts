@@ -1,7 +1,15 @@
+import { worldSlug } from "@/shared/config/constants/worlds";
+
+/** 월드는 슬러그로, 캐릭터·길드명은 한글 그대로 퍼센트 인코딩 */
+export const characterHref = (world: string, name: string) =>
+  `/character/${encodeURIComponent(worldSlug(world))}/${encodeURIComponent(name)}`;
+
+export const guildHref = (world: string, guildName: string) =>
+  `/guild/${encodeURIComponent(worldSlug(world))}/${encodeURIComponent(guildName)}`;
+
 /**
  * decodeURIComponent를 안전하게 감싼다.
- * 잘못된 퍼센트 인코딩(예: 단독 "%", "%ZZ")이 들어와도 URIError를 던지지 않고
- * 원본 문자열을 그대로 반환한다.
+ * 잘못된 퍼센트 인코딩(예: 단독 "%", "%ZZ")이 들어와도 URIError를 던지지 않고 원본 문자열을 그대로 반환한다.
  */
 export function safeDecode(value: string): string {
   try {

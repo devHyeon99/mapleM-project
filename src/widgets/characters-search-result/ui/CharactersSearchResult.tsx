@@ -5,6 +5,7 @@ import { AlertTriangle, ChevronRight, Loader2 } from "lucide-react";
 import { Card, CardContent } from "@/shared/ui/card";
 import { useRecentSearch } from "@/shared/lib/hooks/useRecentSearch";
 import { WORLD_NAMES } from "@/shared/config/constants/worlds";
+import { characterHref } from "@/shared/lib/url";
 import type { CharacterOcidData } from "@/entities/character";
 
 type WorldName = (typeof WORLD_NAMES)[number];
@@ -65,9 +66,7 @@ export function CharactersSearchResult({
 
       <div className="flex w-full flex-col gap-0.5 pb-10">
         {characters.map((char) => {
-          const href = `/character/${encodeURIComponent(
-            char.world_name,
-          )}/${encodeURIComponent(char.character_name)}`;
+          const href = characterHref(char.world_name, char.character_name);
 
           return (
             <Link

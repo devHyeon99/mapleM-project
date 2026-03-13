@@ -6,14 +6,8 @@ import { Renderers } from "./ranking-table.renderers";
 import type { RankingTableContext } from "./ranking-table.renderers";
 import { memo } from "react";
 import { RankingIcon } from "./RankingIcon";
-
-// 한글 월드명 인코딩
-const encodeWorldName = (name: string) => encodeURIComponent(name);
-const encodeSegment = (value: string) => encodeURIComponent(value);
-const characterHref = (world: string, name: string) =>
-  `/character/${encodeSegment(world)}/${encodeSegment(name)}`;
-const guildHref = (world: string, guildName: string) =>
-  `/guild/${encodeSegment(world)}/${encodeSegment(guildName)}`;
+import { worldIconSrc } from "@/shared/config/constants/worlds";
+import { characterHref, guildHref } from "@/shared/lib/url";
 
 // 리스트 아이템의 고유 Key 생성
 const getItemKey = (
@@ -204,7 +198,7 @@ const GeneralInfo = ({
     <>
       <div className="flex items-center gap-1.5">
         <RankingIcon
-          src={`/worlds/${encodeWorldName(item.world_name)}.png`}
+          src={worldIconSrc(item.world_name)}
           alt={item.world_name}
           className="h-3.5 w-3.5"
           size={14}

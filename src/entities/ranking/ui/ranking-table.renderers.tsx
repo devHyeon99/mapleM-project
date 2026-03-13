@@ -1,10 +1,7 @@
 import type { AnyRankingData } from "../model/types/ranking";
 import { RankingIcon } from "./RankingIcon";
-import {
-  LinkText,
-  characterHref,
-  renderGuildInfo,
-} from "./ranking-table.links";
+import { LinkText, renderGuildInfo } from "./ranking-table.links";
+import { characterHref } from "@/shared/lib/url";
 
 export interface RankingTableContext {
   addCharacterHistory: (name: string, world: string) => void;

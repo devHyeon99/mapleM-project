@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import type { AnyRankingData } from "../model/types/ranking";
 import { RankingIcon } from "./RankingIcon";
+import { guildHref } from "@/shared/lib/url";
 
 export const LinkText = ({
   href,
@@ -41,14 +42,6 @@ export const IconWithText = ({
     {children}
   </div>
 );
-
-const encodeSegment = (value: string) => encodeURIComponent(value);
-
-export const characterHref = (world: string, name: string) =>
-  `/character/${encodeSegment(world)}/${encodeSegment(name)}`;
-
-export const guildHref = (world: string, guildName: string) =>
-  `/guild/${encodeSegment(world)}/${encodeSegment(guildName)}`;
 
 // 길드 정보 렌더링 로직 (SubInfo와 Guild 렌더러에서 공통 사용)
 export const renderGuildInfo = (item: AnyRankingData) => {

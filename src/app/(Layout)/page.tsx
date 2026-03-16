@@ -5,7 +5,6 @@ import { getCombinedNotices } from "@/entities/notice/api/notice";
 import { getSiteNotices } from "@/entities/notice/api/site-notice";
 import { SiteNoticeList } from "@/entities/notice/ui/SiteNoticeList";
 import { NoticeGrid } from "@/widgets/notice-grid/ui/NoticeGrid";
-import type { NoticeData, SiteNoticeItem } from "@/entities/notice/model/types";
 
 export const metadata: Metadata = {
   alternates: {
@@ -13,32 +12,36 @@ export const metadata: Metadata = {
   },
 };
 
+// 던져진 메시지는 화면에 그대로 렌더된다. 원문 노출은 entities/notice/api 쪽에서
+// 이미 막았으므로, 여기서는 Error 가 아닌 값이 올라온 경우만 문구로 대체한다.
+const errorMessage = (
+  result: PromiseSettledResult<unknown>,
+  fallback: string,
+): string | null => {
+  if (result.status === "fulfilled") return null;
+  return result.reason instanceof Error ? result.reason.message : fallback;
+};
+
 export default async function Home() {
-  const [noticeResult, siteNoticeResult] = await Promise.all([
-    getCombinedNotices()
-      .then((data) => ({ data, error: null as string | null }))
-      .catch((error: unknown) => ({
-        data: null as NoticeData | null,
-        error:
-          error instanceof Error
-            ? error.message
-            : "넥슨 공지사항을 불러오지 못했습니다.",
-      })),
-    getSiteNotices()
-      .then((items) => ({ items, error: null as string | null }))
-      .catch((error: unknown) => ({
-        items: [] as SiteNoticeItem[],
-        error:
-          error instanceof Error
-            ? error.message
-            : "사이트 공지사항을 불러오지 못했습니다.",
-      })),
+  // 한쪽이 실패해도 나머지 섹션은 살린다.
+  const [noticeResult, siteNoticeResult] = await Promise.allSettled([
+    getCombinedNotices(),
+    getSiteNotices(),
   ]);
+
+  const noticeError = errorMessage(
+    noticeResult,
+    "넥슨 공지사항을 불러오지 못했습니다.",
+  );
+  const siteNoticeError = errorMessage(
+    siteNoticeResult,
+    "사이트 공지사항을 불러오지 못했습니다.",
+  );
 
   // 공지 로딩이 일시적으로 실패한 경우, 에러 화면 HTML이 ISR 풀 라우트
   // 캐시에 최대 revalidate 기간(10분) 동안 고정되어 복구 후에도 노출되는
   // 문제를 막는다. 이 렌더만 동적으로 처리해 다음 요청에서 재시도되게 한다.
-  if (noticeResult.error || siteNoticeResult.error) {
+  if (noticeError || siteNoticeError) {
     await connection();
   }
 
@@ -68,13 +71,12 @@ export default async function Home() {
         <h2 id="site-notice-heading" className="sr-only">
           사이트 공지사항
         </h2>
-        {siteNoticeResult.error ? (
-          <p className="text-muted-foreground text-sm">
-            사이트 공지사항을 불러오는 중 오류가 발생했습니다.
-          </p>
-        ) : (
-          <SiteNoticeList items={siteNoticeResult.items} />
-        )}
+        <SiteNoticeList
+          items={
+            siteNoticeResult.status === "fulfilled" ? siteNoticeResult.value : []
+          }
+          error={siteNoticeError}
+        />
       </section>
 
       {/* 공지사항 섹션 */}
@@ -85,7 +87,10 @@ export default async function Home() {
         <h2 id="notice-heading" className="sr-only">
           메이플스토리M 공지사항 및 주요 소식
         </h2>
-        <NoticeGrid data={noticeResult.data} error={noticeResult.error} />
+        <NoticeGrid
+          data={noticeResult.status === "fulfilled" ? noticeResult.value : null}
+          error={noticeError}
+        />
       </section>
     </div>
   );

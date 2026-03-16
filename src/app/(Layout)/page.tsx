@@ -46,7 +46,7 @@ export default async function Home() {
   }
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="wide:px-0 flex flex-col items-center px-4">
       {/* 컨텐츠 영역 */}
       <div className="flex h-65 w-full flex-col items-center justify-center gap-2">
         <div className="flex flex-col items-center gap-2">
@@ -59,39 +59,39 @@ export default async function Home() {
         </div>
 
         {/* 검색 */}
-        <search className="w-full max-w-3xl px-4">
+        <search className="w-full max-w-3xl">
           <CharacterSearch />
         </search>
       </div>
 
-      <section
-        className="wide:px-0 w-full max-w-[1080px] pb-2"
-        aria-labelledby="site-notice-heading"
-      >
-        <h2 id="site-notice-heading" className="sr-only">
-          사이트 공지사항
-        </h2>
-        <SiteNoticeList
-          items={
-            siteNoticeResult.status === "fulfilled" ? siteNoticeResult.value : []
-          }
-          error={siteNoticeError}
-        />
-      </section>
+      <div className="bg-card w-full overflow-hidden rounded-3xl border shadow-sm">
+        <section aria-labelledby="site-notice-heading">
+          <h2 id="site-notice-heading" className="sr-only">
+            사이트 공지사항
+          </h2>
+          <SiteNoticeList
+            items={
+              siteNoticeResult.status === "fulfilled"
+                ? siteNoticeResult.value
+                : []
+            }
+            error={siteNoticeError}
+          />
+        </section>
 
-      {/* 공지사항 섹션 */}
-      <section
-        className="wide:px-0 w-full max-w-[1080px] pb-6"
-        aria-labelledby="notice-heading"
-      >
-        <h2 id="notice-heading" className="sr-only">
-          메이플스토리M 공지사항 및 주요 소식
-        </h2>
-        <NoticeGrid
-          data={noticeResult.status === "fulfilled" ? noticeResult.value : null}
-          error={noticeError}
-        />
-      </section>
+        {/* 공지사항 섹션 */}
+        <section aria-labelledby="notice-heading">
+          <h2 id="notice-heading" className="sr-only">
+            메이플스토리M 공지사항 및 주요 소식
+          </h2>
+          <NoticeGrid
+            data={
+              noticeResult.status === "fulfilled" ? noticeResult.value : null
+            }
+            error={noticeError}
+          />
+        </section>
+      </div>
     </div>
   );
 }

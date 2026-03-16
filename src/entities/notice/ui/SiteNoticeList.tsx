@@ -40,7 +40,7 @@ export function SiteNoticeList({ items, error = null }: SiteNoticeListProps) {
 
   return (
     <div
-      className="bg-card text-card-foreground w-full rounded-xs px-6 py-4 shadow-sm"
+      className="bg-card text-card-foreground w-full rounded-xs border-b px-5 py-4 pt-4"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onFocus={() => setIsPaused(true)}

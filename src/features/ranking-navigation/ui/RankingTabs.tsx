@@ -18,7 +18,7 @@ export function RankingTabs() {
 
   return (
     <nav aria-label="랭킹 종류 이동" className="w-full">
-      <ul className="bg-muted grid list-none grid-cols-3 gap-1 rounded-lg p-1 shadow-sm md:grid-cols-9">
+      <ul className="bg-muted grid list-none grid-cols-3 gap-1 rounded-3xl p-1 shadow-sm md:grid-cols-9">
         {RANKING_TYPES.map((type) => {
           const isActive = activeType === type;
 
@@ -27,8 +27,8 @@ export function RankingTabs() {
               <Link
                 aria-current={isActive ? "page" : undefined}
                 className={cn(
-                  "text-muted-foreground hover:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 inline-flex h-9 w-full items-center justify-center rounded-md border border-transparent px-2 py-1 text-sm font-medium whitespace-nowrap transition-colors outline-none focus-visible:ring-[3px]",
-                  isActive && "bg-card text-foreground shadow-sm",
+                  "text-muted-foreground hover:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 inline-flex h-9 w-full items-center justify-center rounded-2xl border border-transparent px-2 py-1 text-sm font-medium whitespace-nowrap transition-colors outline-none focus-visible:ring-[3px]",
+                  isActive && "bg-card/80 text-foreground shadow-sm",
                 )}
                 href={type === "level" ? "/ranking" : `/ranking/${type}`}
                 prefetch={false}

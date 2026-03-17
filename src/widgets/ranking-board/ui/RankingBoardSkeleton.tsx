@@ -22,7 +22,7 @@ const COLUMN_WIDTHS = [
 function RankingFiltersSkeleton() {
   return (
     <div className="flex w-full flex-col-reverse items-center justify-between gap-2 md:flex-row">
-      <Skeleton className="h-10 w-full md:w-[195px]" />
+      <Skeleton className="h-8 w-full md:w-[195px]" />
       <Skeleton className="h-5 w-44 self-end" />
     </div>
   );

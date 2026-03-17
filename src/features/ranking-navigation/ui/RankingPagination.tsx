@@ -6,10 +6,13 @@ import {
   PaginationContent,
   PaginationItem,
   PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
 } from "@/shared/ui/pagination";
-import { ChevronsLeft, ChevronsRight } from "lucide-react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  ChevronsLeft,
+  ChevronsRight,
+} from "lucide-react";
 import { cn } from "@/shared/lib/utils";
 
 const PAGES_PER_GROUP_DESKTOP = 10;
@@ -80,13 +83,17 @@ export function RankingPagination({
 
         {/* 이전 페이지 (<) */}
         <PaginationItem>
-          <PaginationPrevious
+          <PaginationLink
             href={createPageUrl(safeCurrentPage - 1)}
             aria-label="이전 페이지로 이동"
+            size="icon"
             className={cn(
               safeCurrentPage <= 1 && "pointer-events-none opacity-50",
             )}
-          />
+            tabIndex={safeCurrentPage <= 1 ? -1 : 0}
+          >
+            <ChevronLeft className="h-4 w-4" />
+          </PaginationLink>
         </PaginationItem>
 
         {/* 페이지 번호 렌더링 */}
@@ -116,13 +123,17 @@ export function RankingPagination({
 
         {/* 다음 페이지 (>) */}
         <PaginationItem>
-          <PaginationNext
+          <PaginationLink
             href={createPageUrl(safeCurrentPage + 1)}
             aria-label="다음 페이지로 이동"
+            size="icon"
             className={cn(
               safeCurrentPage >= totalPages && "pointer-events-none opacity-50",
             )}
-          />
+            tabIndex={safeCurrentPage >= totalPages ? -1 : 0}
+          >
+            <ChevronRight className="h-4 w-4" />
+          </PaginationLink>
         </PaginationItem>
 
         {/* 다음 그룹 이동 (>>) */}

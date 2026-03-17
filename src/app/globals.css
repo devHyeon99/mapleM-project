@@ -70,12 +70,16 @@
   --radius-3xl: calc(var(--radius) * 2.2);
 
   --radius-4xl: calc(var(--radius) * 2.6);
+
+  --shadow-sm:
+    0 0 4px 0 oklch(0 0 0 / 0.045), 0 1px 3px 0 oklch(0 0 0 / 0.08),
+    0 1px 2px -1px oklch(0 0 0 / 0.06);
 }
 
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0.147 0.004 49.25);
-  --page: #fbfcfd;
+  --page: #f6f8fa;
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.147 0.004 49.25);
   --popover: oklch(1 0 0);

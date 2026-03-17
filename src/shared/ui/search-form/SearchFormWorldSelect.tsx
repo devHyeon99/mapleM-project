@@ -23,7 +23,7 @@ export function SearchFormWorldSelect({
     <Select value={value} onValueChange={onValueChange}>
       <SelectTrigger
         aria-label="월드 선택"
-        className="border-border bg-card dark:bg-input/50 relative z-0 h-14! w-[130px] rounded-r-none border-r-0 pl-7 shadow-sm focus-visible:z-10 focus-visible:ring-2"
+        className="bg-card dark:bg-input/50 relative z-0 h-14! w-[130px] rounded-r-none pl-7 shadow-sm focus-visible:z-10 focus-visible:ring-2"
       >
         <SelectValue placeholder="월드" />
       </SelectTrigger>

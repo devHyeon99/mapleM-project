@@ -87,7 +87,7 @@ export function SearchFormField({
               onInputValueChange(e.target.value);
               openHistory();
             }}
-            className="border-border bg-card dark:bg-input/50 relative h-14 rounded-l-none pr-12 pl-4 shadow-sm placeholder:text-sm focus-visible:ring-2"
+            className="bg-card dark:bg-input/50 relative h-14 rounded-l-none pr-12 pl-4 shadow-sm placeholder:text-sm focus-visible:ring-2"
           />
           <Button
             type="submit"

@@ -64,34 +64,36 @@ export default async function Home() {
         </search>
       </div>
 
-      <div className="bg-card w-full overflow-hidden rounded-3xl border shadow-sm">
-        <section aria-labelledby="site-notice-heading">
-          <h2 id="site-notice-heading" className="sr-only">
-            사이트 공지사항
-          </h2>
-          <SiteNoticeList
-            items={
-              siteNoticeResult.status === "fulfilled"
-                ? siteNoticeResult.value
-                : []
-            }
-            error={siteNoticeError}
-          />
-        </section>
+      <section
+        className="bg-card mb-2 w-full overflow-hidden rounded-3xl shadow-sm"
+        aria-labelledby="site-notice-heading"
+      >
+        <h2 id="site-notice-heading" className="sr-only">
+          사이트 공지사항
+        </h2>
+        <SiteNoticeList
+          items={
+            siteNoticeResult.status === "fulfilled"
+              ? siteNoticeResult.value
+              : []
+          }
+          error={siteNoticeError}
+        />
+      </section>
 
-        {/* 공지사항 섹션 */}
-        <section aria-labelledby="notice-heading">
-          <h2 id="notice-heading" className="sr-only">
-            메이플스토리M 공지사항 및 주요 소식
-          </h2>
-          <NoticeGrid
-            data={
-              noticeResult.status === "fulfilled" ? noticeResult.value : null
-            }
-            error={noticeError}
-          />
-        </section>
-      </div>
+      {/* 공지사항 섹션 */}
+      <section
+        className="bg-card w-full overflow-hidden rounded-3xl shadow-sm"
+        aria-labelledby="notice-heading"
+      >
+        <h2 id="notice-heading" className="sr-only">
+          메이플스토리M 공지사항 및 주요 소식
+        </h2>
+        <NoticeGrid
+          data={noticeResult.status === "fulfilled" ? noticeResult.value : null}
+          error={noticeError}
+        />
+      </section>
     </div>
   );
 }

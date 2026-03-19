@@ -34,6 +34,11 @@ const nextConfig: NextConfig = {
         destination: "/ranking",
         permanent: true,
       },
+      {
+        source: "/set-effect",
+        destination: "/tools",
+        permanent: true,
+      },
     ];
   },
   async headers() {

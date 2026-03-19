@@ -4,7 +4,10 @@ import { RANKING_LABELS, type RankingType } from "@/entities/ranking";
 import { RankingBoard, RankingBoardSkeleton } from "@/widgets/ranking-board";
 import { SITE_NAME, SITE_URL } from "@/shared/config/site";
 import { getRankingPageData } from "./get-ranking-page-data";
-import { normalizeRankingWorldName } from "./ranking-query";
+import {
+  normalizeRankingPage,
+  normalizeRankingWorldName,
+} from "./ranking-query";
 
 export type RankingSearchParams = {
   [key: string]: string | string[] | undefined;
@@ -34,6 +37,8 @@ export function buildRankingMetadata(
 ): Metadata {
   const worldName = normalizeRankingWorldName(searchParams.world_name);
   const typeLabel = RANKING_LABELS[type];
+
+  const isPaginated = normalizeRankingPage(searchParams.page, Infinity) > 1;
 
   const title =
     type === "level"
@@ -88,7 +93,7 @@ export function buildRankingMetadata(
       images: [ogImageUrl],
     },
     robots: {
-      index: true,
+      index: !isPaginated,
       follow: true,
     },
   };

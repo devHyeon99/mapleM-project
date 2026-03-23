@@ -16,11 +16,8 @@ export function ToolsTabs() {
   const pathname = usePathname();
 
   return (
-    <nav
-      aria-label="도구 이동"
-      className="border-border bg-card mt-2 mb-4 border-b shadow-sm"
-    >
-      <ul className="grid list-none grid-cols-2 gap-1 md:grid-cols-4">
+    <nav aria-label="도구 이동" className="mt-4 mb-2 w-full">
+      <ul className="bg-muted grid list-none grid-cols-2 gap-1 rounded-3xl p-1 shadow-sm md:grid-cols-4">
         {TOOL_LINKS.map((link) => {
           const isActive = pathname === link.href;
 
@@ -31,10 +28,8 @@ export function ToolsTabs() {
                 prefetch={false}
                 aria-current={isActive ? "page" : undefined}
                 className={cn(
-                  "text-muted-foreground flex h-11 items-center justify-center border-b-2 border-transparent px-3 text-sm font-medium transition-colors outline-none md:text-[15px]",
-                  "hover:border-orange-500 focus-visible:border-orange-500 focus-visible:ring-2",
-                  isActive &&
-                    "text-foreground border-orange-500 hover:border-orange-500",
+                  "text-muted-foreground hover:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 inline-flex h-9 w-full items-center justify-center rounded-2xl border border-transparent px-2 py-1 text-sm font-medium whitespace-nowrap transition-colors outline-none focus-visible:ring-[3px]",
+                  isActive && "bg-card/80 text-foreground shadow-sm",
                 )}
               >
                 {link.label}

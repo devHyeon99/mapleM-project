@@ -1,5 +1,4 @@
 import { Button } from "@/shared/ui/button";
-import { Accordion } from "@/shared/ui/accordion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/shared/ui/card";
 import { memo } from "react";
 
@@ -34,7 +33,7 @@ function BuildEditorCardBase({
   const canRemoveRow = buildState.length > 1;
 
   return (
-    <Card className="h-full min-h-94.25 gap-4 rounded-none border-0 py-4">
+    <Card className="h-full gap-4">
       <CardHeader className="flex flex-row items-center justify-between gap-2 px-4">
         <CardTitle>{title}</CardTitle>
         <div className="flex items-center gap-2">
@@ -47,7 +46,7 @@ function BuildEditorCardBase({
         </div>
       </CardHeader>
 
-      <CardContent className="space-y-4 px-4">
+      <CardContent className="flex flex-1 flex-col gap-4 px-4">
         <BuildEditorRowsPanel
           buildState={buildState}
           canRemoveRow={canRemoveRow}
@@ -57,14 +56,9 @@ function BuildEditorCardBase({
           onRemoveRow={onRemoveRow}
         />
 
-        <Accordion type="single" collapsible defaultValue={`${title}-summary`}>
-          <BuildSummarySection
-            title="선택된 장비 효과"
-            sectionId={`${title}-summary`}
-          >
-            <BuildSummaryPanel result={result} />
-          </BuildSummarySection>
-        </Accordion>
+        <BuildSummarySection title="선택된 장비 효과">
+          <BuildSummaryPanel result={result} />
+        </BuildSummarySection>
       </CardContent>
     </Card>
   );

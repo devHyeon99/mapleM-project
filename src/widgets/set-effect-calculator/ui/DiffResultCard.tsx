@@ -17,22 +17,20 @@ interface DiffResultCardProps {
 
 function DiffResultCardBase({ diffEffects, description }: DiffResultCardProps) {
   return (
-    <Card className="gap-4 rounded-none border-0 py-4">
-      <CardHeader className="gap-0 px-4">
-        <CardTitle className="flex h-8 items-center">
-          비교 결과 (B - A)
-        </CardTitle>
+    <Card className="gap-4">
+      <CardHeader>
+        <CardTitle>비교 결과 (B - A)</CardTitle>
         <CardDescription className="leading-5 whitespace-pre-line">
           {description}
         </CardDescription>
       </CardHeader>
-      <CardContent className="space-y-3 px-4">
+      <CardContent className="space-y-3">
         {diffEffects.length === 0 ? (
-          <p className="text-muted-foreground bg-secondary/50 dark:bg-secondary p-4 text-sm shadow-sm">
+          <p className="text-muted-foreground bg-secondary ring-border rounded-3xl p-4 text-sm shadow-sm ring">
             세팅 A와 세팅 B를 입력하면 장비 세트 효과 차이가 표시됩니다.
           </p>
         ) : (
-          <dl className="bg-secondary/50 dark:bg-secondary space-y-1 p-4 shadow-sm">
+          <dl className="bg-secondary ring-border space-y-1 rounded-3xl p-4 shadow-sm ring">
             {diffEffects.map((effect) => (
               <div
                 key={effect.key}

@@ -87,7 +87,7 @@ function useBuildActions(setState: Dispatch<SetStateAction<BuildState>>) {
 
   const onReset = useCallback(() => {
     // 기본 상태로 초기화
-    setState(createInitialBuildState);
+    setState(createInitialBuildState());
   }, [setState]);
 
   const onRemoveRow = useCallback(

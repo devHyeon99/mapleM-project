@@ -10,12 +10,11 @@ import {
 import {
   buildDiffEffects,
   buildResultFromState,
-  createBuildRow,
-  createInitialBuildState,
   getClampedCount,
   getClampedStarForce,
-  type BuildState,
-} from ".";
+} from "./calculator";
+import { createBuildRow, createInitialBuildState } from "./constants";
+import type { BuildState } from "./types";
 
 function formatBuildSummary(
   label: string,

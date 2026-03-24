@@ -1,6 +1,5 @@
 import { Button } from "@/shared/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/shared/ui/card";
-import { memo } from "react";
 
 import type { BuildResult, BuildState } from "../model";
 import { BuildEditorRowsPanel } from "./BuildEditorRowsPanel";
@@ -19,7 +18,7 @@ interface BuildEditorCardProps {
   onRemoveRow: (rowId: string) => void;
 }
 
-function BuildEditorCardBase({
+export function BuildEditorCard({
   title,
   buildState,
   result,
@@ -63,5 +62,3 @@ function BuildEditorCardBase({
     </Card>
   );
 }
-
-export const BuildEditorCard = memo(BuildEditorCardBase);

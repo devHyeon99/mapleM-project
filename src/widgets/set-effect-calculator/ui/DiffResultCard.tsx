@@ -6,7 +6,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/shared/ui/card";
-import { memo } from "react";
 
 import type { DiffEffectRow } from "../model";
 
@@ -15,7 +14,10 @@ interface DiffResultCardProps {
   description: string;
 }
 
-function DiffResultCardBase({ diffEffects, description }: DiffResultCardProps) {
+export function DiffResultCard({
+  diffEffects,
+  description,
+}: DiffResultCardProps) {
   return (
     <Card className="gap-4">
       <CardHeader>
@@ -55,5 +57,3 @@ function DiffResultCardBase({ diffEffects, description }: DiffResultCardProps) {
     </Card>
   );
 }
-
-export const DiffResultCard = memo(DiffResultCardBase);

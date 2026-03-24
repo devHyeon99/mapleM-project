@@ -72,8 +72,10 @@ export const buildResultFromState = (rows: BuildState): BuildResult => {
     const totalStarForce = Math.max(0, selected.totalStarForce);
 
     const setEffects = resolveSetEffects(definition, count);
-    const { appliedThreshold, effects: starForceEffects } =
-      resolveStarForceEffects(definition, totalStarForce);
+    const { effects: starForceEffects } = resolveStarForceEffects(
+      definition,
+      totalStarForce,
+    );
     const combinedEffects = combineEffects(setEffects, starForceEffects);
 
     return {
@@ -81,7 +83,6 @@ export const buildResultFromState = (rows: BuildState): BuildResult => {
       displayName: definition.displayName,
       count,
       totalStarForce,
-      appliedThreshold,
       combinedEffects,
     };
   }).filter((set) => set.count > 0);
@@ -118,7 +119,6 @@ export const buildResultFromState = (rows: BuildState): BuildResult => {
       displayName: set.displayName,
       count: set.count,
       totalStarForce: set.totalStarForce,
-      appliedThreshold: set.appliedThreshold,
     })),
     totalEffects,
   };

@@ -22,7 +22,6 @@ export type BuildResult = {
     displayName: string;
     count: number;
     totalStarForce: number;
-    appliedThreshold: number | null;
   }>;
   totalEffects: TotalEffectRow[];
 };

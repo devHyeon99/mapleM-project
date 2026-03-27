@@ -5,6 +5,7 @@ import {
 } from "@/entities/set-effect";
 
 import {
+  NONE_SET_ID,
   SELECTABLE_SET_DEFINITIONS,
   SET_BY_ID,
   STAR_FORCE_THRESHOLDS_BY_SET_ID,
@@ -19,7 +20,7 @@ export const getStarForceThresholds = (setId: string): number[] => {
 export const getClampedCount = (setId: string, count: number) => {
   // 세트 수량을 유효 범위로 보정
   const parsed = Number.isFinite(count) ? Math.max(0, Math.floor(count)) : 0;
-  if (setId === "none") return 0;
+  if (setId === NONE_SET_ID) return 0;
 
   const definition = SET_BY_ID.get(setId);
   if (!definition) return 0;
@@ -44,7 +45,7 @@ export const buildResultFromState = (rows: BuildState): BuildResult => {
 
   rows.forEach((row) => {
     // 선택 안 함은 계산 대상 제외
-    if (row.setId === "none") return;
+    if (row.setId === NONE_SET_ID) return;
 
     // row 값을 먼저 보정한 뒤 집계
     const count = getClampedCount(row.setId, row.count);

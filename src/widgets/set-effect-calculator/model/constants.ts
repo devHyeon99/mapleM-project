@@ -33,6 +33,9 @@ export const SET_BY_ID = new Map(
   SELECTABLE_SET_DEFINITIONS.map((definition) => [definition.id, definition]),
 );
 
+// 세트를 고르지 않은 상태를 나타내는 sentinel id
+export const NONE_SET_ID = "none";
+
 export const SET_LABEL_BY_ID = new Map(
   SELECTABLE_SET_DEFINITIONS.map((definition) => [
     definition.id,
@@ -41,7 +44,7 @@ export const SET_LABEL_BY_ID = new Map(
 );
 
 export const SET_OPTIONS = [
-  { id: "none", label: "선택 안 함" },
+  { id: NONE_SET_ID, label: "선택 안 함" },
   ...SELECTABLE_SET_DEFINITIONS.map((definition) => ({
     id: definition.id,
     label: definition.displayName,
@@ -63,16 +66,14 @@ export const STAR_FORCE_THRESHOLDS_BY_SET_ID = new Map(
   ]),
 );
 
-export const DEFAULT_SET_ID = "none";
-
 export const createInitialBuildState = (): BuildState => [
-  { id: "row-1", setId: DEFAULT_SET_ID, count: 0, starForce: 0 },
-  { id: "row-2", setId: DEFAULT_SET_ID, count: 0, starForce: 0 },
+  { id: "row-1", setId: NONE_SET_ID, count: 0, starForce: 0 },
+  { id: "row-2", setId: NONE_SET_ID, count: 0, starForce: 0 },
 ];
 
 export const createBuildRow = (): BuildRow => ({
   id: `row-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
-  setId: DEFAULT_SET_ID,
+  setId: NONE_SET_ID,
   count: 0,
   starForce: 0,
 });

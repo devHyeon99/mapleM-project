@@ -10,9 +10,14 @@ import {
 } from "@/shared/ui/select";
 import { memo } from "react";
 
-import { SET_BY_ID, SET_LABEL_BY_ID, SET_OPTIONS } from "../model";
-import { getStarForceThresholds } from "../model";
-import type { BuildState } from "../model";
+import {
+  getStarForceThresholds,
+  NONE_SET_ID,
+  SET_BY_ID,
+  SET_LABEL_BY_ID,
+  SET_OPTIONS,
+  type BuildState,
+} from "../model";
 
 export interface BuildEditorRowProps {
   row: BuildState[number];
@@ -67,7 +72,7 @@ function BuildEditorRowBase({
         <Select
           value={String(row.count)}
           onValueChange={(value) => onCountChange(row.id, Number(value))}
-          disabled={row.setId === "none"}
+          disabled={row.setId === NONE_SET_ID}
         >
           <SelectTrigger className="w-full" aria-label="세트 수">
             <SelectValue placeholder="0">{String(row.count)}</SelectValue>

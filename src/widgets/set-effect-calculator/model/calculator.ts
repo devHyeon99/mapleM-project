@@ -69,8 +69,9 @@ export const buildResultFromState = (rows: BuildState): BuildResult => {
       count: 0,
       totalStarForce: 0,
     };
-    const count = Math.max(0, Math.min(selected.count, definition.maxSetCount));
-    const totalStarForce = Math.max(0, selected.totalStarForce);
+    // 같은 세트를 여러 행에 나눠 담으면 합계가 상한을 넘을 수 있어 여기서 한 번 더 자른다
+    const count = Math.min(selected.count, definition.maxSetCount);
+    const { totalStarForce } = selected;
 
     const setEffects = resolveSetEffects(definition, count);
     const { effects: starForceEffects } = resolveStarForceEffects(

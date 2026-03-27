@@ -14,7 +14,6 @@ import {
   getStarForceThresholds,
   NONE_SET_ID,
   SET_BY_ID,
-  SET_LABEL_BY_ID,
   SET_OPTIONS,
   type BuildState,
 } from "../model";
@@ -46,7 +45,6 @@ function BuildEditorRowBase({
     { length: maxCount + 1 },
     (_, count) => count,
   );
-  const selectedSetLabel = SET_LABEL_BY_ID.get(row.setId) ?? "선택 안 함";
 
   return (
     <li>
@@ -56,9 +54,7 @@ function BuildEditorRowBase({
           onValueChange={(value) => onSetChange(row.id, value)}
         >
           <SelectTrigger className="w-full" aria-label="장비 종류 선택">
-            <SelectValue placeholder="선택 안 함">
-              {selectedSetLabel}
-            </SelectValue>
+            <SelectValue placeholder="선택 안 함" />
           </SelectTrigger>
           <SelectContent>
             {SET_OPTIONS.map((option) => (
@@ -75,7 +71,7 @@ function BuildEditorRowBase({
           disabled={row.setId === NONE_SET_ID}
         >
           <SelectTrigger className="w-full" aria-label="세트 수">
-            <SelectValue placeholder="0">{String(row.count)}</SelectValue>
+            <SelectValue placeholder="0" />
           </SelectTrigger>
           <SelectContent>
             {countOptions.map((count) => (
@@ -83,7 +79,7 @@ function BuildEditorRowBase({
                 key={`${row.id}-count-${count}`}
                 value={String(count)}
               >
-                {count}
+                {String(count)}
               </SelectItem>
             ))}
           </SelectContent>
@@ -97,9 +93,7 @@ function BuildEditorRowBase({
           <SelectTrigger className="w-full" aria-label="스타포스">
             <SelectValue
               placeholder={hasStarForceOptions ? "스타포스" : "효과 없음"}
-            >
-              {hasStarForceOptions ? String(row.starForce) : "0"}
-            </SelectValue>
+            />
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="0">0</SelectItem>
@@ -108,7 +102,7 @@ function BuildEditorRowBase({
                 key={`${row.id}-sf-${threshold}`}
                 value={String(threshold)}
               >
-                {threshold}
+                {String(threshold)}
               </SelectItem>
             ))}
           </SelectContent>

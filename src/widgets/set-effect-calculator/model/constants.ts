@@ -36,13 +36,6 @@ export const SET_BY_ID = new Map(
 // 세트를 고르지 않은 상태를 나타내는 sentinel id
 export const NONE_SET_ID = "none";
 
-export const SET_LABEL_BY_ID = new Map(
-  SELECTABLE_SET_DEFINITIONS.map((definition) => [
-    definition.id,
-    definition.displayName,
-  ]),
-);
-
 export const SET_OPTIONS = [
   { id: NONE_SET_ID, label: "선택 안 함" },
   ...SELECTABLE_SET_DEFINITIONS.map((definition) => ({

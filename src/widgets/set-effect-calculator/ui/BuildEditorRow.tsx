@@ -47,78 +47,73 @@ function BuildEditorRowBase({
   );
 
   return (
-    <li>
-      <div className="grid grid-cols-[minmax(0,1.2fr)_minmax(0,0.55fr)_minmax(0,0.7fr)_auto] items-end gap-2">
-        <Select
-          value={row.setId}
-          onValueChange={(value) => onSetChange(row.id, value)}
-        >
-          <SelectTrigger className="w-full" aria-label="장비 종류 선택">
-            <SelectValue placeholder="선택 안 함" />
-          </SelectTrigger>
-          <SelectContent>
-            {SET_OPTIONS.map((option) => (
-              <SelectItem key={option.id} value={option.id}>
-                {option.label}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+    <li className="grid grid-cols-[minmax(0,1.2fr)_minmax(0,0.55fr)_minmax(0,0.7fr)_auto] items-end gap-2">
+      <Select
+        value={row.setId}
+        onValueChange={(value) => onSetChange(row.id, value)}
+      >
+        <SelectTrigger className="w-full" aria-label="장비 종류 선택">
+          <SelectValue placeholder="선택 안 함" />
+        </SelectTrigger>
+        <SelectContent>
+          {SET_OPTIONS.map((option) => (
+            <SelectItem key={option.id} value={option.id}>
+              {option.label}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
 
-        <Select
-          value={String(row.count)}
-          onValueChange={(value) => onCountChange(row.id, Number(value))}
-          disabled={row.setId === NONE_SET_ID}
-        >
-          <SelectTrigger className="w-full" aria-label="세트 수">
-            <SelectValue placeholder="0" />
-          </SelectTrigger>
-          <SelectContent>
-            {countOptions.map((count) => (
-              <SelectItem
-                key={`${row.id}-count-${count}`}
-                value={String(count)}
-              >
-                {String(count)}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+      <Select
+        value={String(row.count)}
+        onValueChange={(value) => onCountChange(row.id, Number(value))}
+        disabled={row.setId === NONE_SET_ID}
+      >
+        <SelectTrigger className="w-full" aria-label="세트 수">
+          <SelectValue placeholder="0" />
+        </SelectTrigger>
+        <SelectContent>
+          {countOptions.map((count) => (
+            <SelectItem key={`${row.id}-count-${count}`} value={String(count)}>
+              {String(count)}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
 
-        <Select
-          value={String(row.starForce)}
-          onValueChange={(value) => onStarForceChange(row.id, Number(value))}
-          disabled={!hasStarForceOptions}
-        >
-          <SelectTrigger className="w-full" aria-label="스타포스">
-            <SelectValue
-              placeholder={hasStarForceOptions ? "스타포스" : "효과 없음"}
-            />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="0">0</SelectItem>
-            {starForceThresholds.map((threshold) => (
-              <SelectItem
-                key={`${row.id}-sf-${threshold}`}
-                value={String(threshold)}
-              >
-                {String(threshold)}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+      <Select
+        value={String(row.starForce)}
+        onValueChange={(value) => onStarForceChange(row.id, Number(value))}
+        disabled={!hasStarForceOptions}
+      >
+        <SelectTrigger className="w-full" aria-label="스타포스">
+          <SelectValue
+            placeholder={hasStarForceOptions ? "스타포스" : "효과 없음"}
+          />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="0">0</SelectItem>
+          {starForceThresholds.map((threshold) => (
+            <SelectItem
+              key={`${row.id}-sf-${threshold}`}
+              value={String(threshold)}
+            >
+              {String(threshold)}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
 
-        <Button
-          type="button"
-          variant="outline"
-          size="icon"
-          disabled={!canRemoveRow}
-          aria-label={`장비 ${index + 1} 삭제`}
-          onClick={() => onRemoveRow(row.id)}
-        >
-          <Trash2Icon className="size-4 text-red-500" />
-        </Button>
-      </div>
+      <Button
+        type="button"
+        variant="outline"
+        size="icon"
+        disabled={!canRemoveRow}
+        aria-label={`장비 ${index + 1} 삭제`}
+        onClick={() => onRemoveRow(row.id)}
+      >
+        <Trash2Icon className="size-4 text-red-500" />
+      </Button>
     </li>
   );
 }

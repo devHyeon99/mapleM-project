@@ -11,7 +11,7 @@ export function BuildSummaryPanel({ result }: BuildSummaryPanelProps) {
   return (
     <div className="space-y-4">
       <div className="space-y-2">
-        <h3 className="text-sm font-semibold">활성 세트</h3>
+        <p className="text-sm font-semibold">활성 세트</p>
         {result.activeSets.length === 0 ? (
           <p className="text-muted-foreground text-sm">
             세트가 선택되지 않았습니다.
@@ -28,7 +28,7 @@ export function BuildSummaryPanel({ result }: BuildSummaryPanelProps) {
       </div>
 
       <div className="space-y-2 border-t pt-4">
-        <h3 className="text-sm font-semibold">총합 효과</h3>
+        <p className="text-sm font-semibold">총합 효과</p>
         {result.totalEffects.length === 0 ? (
           <p className="text-muted-foreground text-sm">
             적용 가능한 효과가 없습니다.

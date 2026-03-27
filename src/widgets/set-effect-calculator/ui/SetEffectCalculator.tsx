@@ -17,7 +17,7 @@ export function SetEffectCalculator() {
   } = useCalculator();
 
   return (
-    <section className="w-full space-y-4">
+    <div className="w-full space-y-4">
       <div className="grid gap-4 md:grid-cols-2">
         <BuildEditorCard
           title="세팅 A"
@@ -45,6 +45,6 @@ export function SetEffectCalculator() {
       </div>
 
       <DiffResultCard diffEffects={diffEffects} description={diffDescription} />
-    </section>
+    </div>
   );
 }

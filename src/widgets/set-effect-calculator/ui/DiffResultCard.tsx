@@ -8,6 +8,7 @@ import {
 } from "@/shared/ui/card";
 
 import type { DiffEffectRow } from "../model";
+import { EffectRow } from "./EffectRow";
 
 interface DiffResultCardProps {
   diffEffects: DiffEffectRow[];
@@ -34,22 +35,18 @@ export function DiffResultCard({
         ) : (
           <dl className="bg-secondary ring-border space-y-1 rounded-3xl p-4 shadow-sm ring">
             {diffEffects.map((effect) => (
-              <div
+              <EffectRow
                 key={effect.key}
-                className="flex items-center justify-between gap-4 text-sm"
+                label={effect.label}
+                valueClassName={
+                  effect.delta > 0
+                    ? "font-semibold text-blue-500"
+                    : "font-semibold text-red-500"
+                }
               >
-                <dt className="text-muted-foreground">{effect.label}</dt>
-                <dd
-                  className={
-                    effect.delta > 0
-                      ? "font-semibold text-blue-500"
-                      : "font-semibold text-red-500"
-                  }
-                >
-                  {effect.delta > 0 ? "+" : ""}
-                  {formatEffectValue(effect.delta, effect.unit)}
-                </dd>
-              </div>
+                {effect.delta > 0 ? "+" : ""}
+                {formatEffectValue(effect.delta, effect.unit)}
+              </EffectRow>
             ))}
           </dl>
         )}

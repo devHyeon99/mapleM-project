@@ -1,6 +1,7 @@
 import { formatEffectValue } from "@/entities/set-effect";
 
 import type { BuildResult } from "../model";
+import { EffectRow } from "./EffectRow";
 
 interface BuildSummaryPanelProps {
   result: BuildResult;
@@ -18,15 +19,9 @@ export function BuildSummaryPanel({ result }: BuildSummaryPanelProps) {
         ) : (
           <dl className="space-y-1">
             {result.activeSets.map((set) => (
-              <div
-                key={set.id}
-                className="flex items-center justify-between gap-4 text-sm"
-              >
-                <dt>{set.displayName}</dt>
-                <dd className="font-medium text-orange-500">
-                  {set.count}세트 | {set.totalStarForce} 스타포스
-                </dd>
-              </div>
+              <EffectRow key={set.id} label={set.displayName}>
+                {set.count}세트 | {set.totalStarForce} 스타포스
+              </EffectRow>
             ))}
           </dl>
         )}
@@ -41,15 +36,9 @@ export function BuildSummaryPanel({ result }: BuildSummaryPanelProps) {
         ) : (
           <dl className="space-y-1">
             {result.totalEffects.map((effect) => (
-              <div
-                key={effect.key}
-                className="flex items-center justify-between gap-4 text-sm"
-              >
-                <dt className="text-muted-foreground">{effect.label}</dt>
-                <dd className="font-medium text-orange-500">
-                  {formatEffectValue(effect.value, effect.unit)}
-                </dd>
-              </div>
+              <EffectRow key={effect.key} label={effect.label}>
+                {formatEffectValue(effect.value, effect.unit)}
+              </EffectRow>
             ))}
           </dl>
         )}

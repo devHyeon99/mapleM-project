@@ -27,7 +27,8 @@ export function DiffResultCard({
           {description}
         </CardDescription>
       </CardHeader>
-      <CardContent className="space-y-3">
+      {/* 세팅을 바꿀 때마다 즉시 갱신되는 최종 산출물이라 변경을 읽어준다 */}
+      <CardContent className="space-y-3" aria-live="polite">
         {diffEffects.length === 0 ? (
           <p className="text-muted-foreground bg-secondary ring-border rounded-3xl p-4 text-sm shadow-sm ring">
             세팅 A와 세팅 B를 입력하면 장비 세트 효과 차이가 표시됩니다.

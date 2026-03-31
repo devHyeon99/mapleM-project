@@ -63,12 +63,11 @@ export const buildResultFromState = (rows: BuildState): BuildResult => {
     prev.totalStarForce += starForce;
   });
 
-  // 세트 정의 기준으로 효과를 전부 계산
-  const activeSets = SELECTABLE_SET_DEFINITIONS.map((definition) => {
-    const selected = countMap.get(definition.id) ?? {
-      count: 0,
-      totalStarForce: 0,
-    };
+  // 선택된 세트만 정의 순서대로 계산
+  const activeSets = SELECTABLE_SET_DEFINITIONS.filter((definition) =>
+    countMap.has(definition.id),
+  ).map((definition) => {
+    const selected = countMap.get(definition.id)!;
     // 같은 세트를 여러 행에 나눠 담으면 합계가 상한을 넘을 수 있어 여기서 한 번 더 자른다
     const count = Math.min(selected.count, definition.maxSetCount);
     const { totalStarForce } = selected;
@@ -87,7 +86,7 @@ export const buildResultFromState = (rows: BuildState): BuildResult => {
       totalStarForce,
       combinedEffects,
     };
-  }).filter((set) => set.count > 0);
+  });
 
   // 같은 effect key끼리 합산
   const totalMap = new Map<string, BuildResult["totalEffects"][number]>();

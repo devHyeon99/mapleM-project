@@ -16,21 +16,6 @@ import {
 import { createBuildRow, createInitialBuildState } from "./constants";
 import type { BuildState } from "./types";
 
-function formatBuildSummary(
-  label: string,
-  result: ReturnType<typeof buildResultFromState>,
-) {
-  // 선택 세트 요약을 한 줄 문자열로 구성
-  if (result.activeSets.length === 0) return `${label}: 없음`;
-
-  return `${label}: ${result.activeSets
-    .map(
-      (set) =>
-        `${set.displayName} ${set.count}세트 | ${set.totalStarForce} 스타포스`,
-    )
-    .join(", ")}`;
-}
-
 function useBuildActions(setState: Dispatch<SetStateAction<BuildState>>) {
   // 특정 row를 찾아 부분 업데이트
   const updateRow = useCallback(
@@ -125,19 +110,12 @@ export function useCalculator() {
     resultA.totalEffects,
     resultB.totalEffects,
   );
-  // 비교 카드용 요약 문구 생성
-  const diffDescription = [
-    formatBuildSummary("세팅 A", resultA),
-    formatBuildSummary("세팅 B", resultB),
-  ].join("\n");
-
   return {
     buildA,
     buildB,
     resultA,
     resultB,
     diffEffects,
-    diffDescription,
     buildAHandlers,
     buildBHandlers,
   };

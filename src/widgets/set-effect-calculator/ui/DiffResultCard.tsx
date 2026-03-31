@@ -7,24 +7,33 @@ import {
   CardTitle,
 } from "@/shared/ui/card";
 
-import type { DiffEffectRow } from "../model";
+import type { BuildResult, DiffEffectRow } from "../model";
 import { EffectRow } from "./EffectRow";
 
 interface DiffResultCardProps {
   diffEffects: DiffEffectRow[];
-  description: string;
+  builds: { label: string; result: BuildResult }[];
 }
 
-export function DiffResultCard({
-  diffEffects,
-  description,
-}: DiffResultCardProps) {
+export function DiffResultCard({ diffEffects, builds }: DiffResultCardProps) {
   return (
     <Card className="gap-4">
       <CardHeader>
         <CardTitle>비교 결과 (B - A)</CardTitle>
-        <CardDescription className="leading-5 whitespace-pre-line">
-          {description}
+        <CardDescription className="leading-5">
+          {builds.map(({ label, result }) => (
+            <span key={label} className="block">
+              {label}:{" "}
+              {result.activeSets.length === 0
+                ? "없음"
+                : result.activeSets
+                    .map(
+                      (set) =>
+                        `${set.displayName} ${set.count}세트 | ${set.totalStarForce} 스타포스`,
+                    )
+                    .join(", ")}
+            </span>
+          ))}
         </CardDescription>
       </CardHeader>
       {/* 세팅을 바꿀 때마다 즉시 갱신되는 최종 산출물이라 변경을 읽어준다 */}

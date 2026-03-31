@@ -8,7 +8,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/shared/ui/select";
-import { memo } from "react";
 
 import {
   getStarForceThresholds,
@@ -21,6 +20,8 @@ import {
 export interface BuildEditorRowProps {
   row: BuildState[number];
   index: number;
+  /** 다른 행에서 이미 고른 세트를 중복 선택하지 못하게 막는 데 쓴다 */
+  usedSetIds: string[];
   canRemoveRow: boolean;
   onSetChange: (rowId: string, setId: string) => void;
   onCountChange: (rowId: string, count: number) => void;
@@ -28,9 +29,10 @@ export interface BuildEditorRowProps {
   onRemoveRow: (rowId: string) => void;
 }
 
-function BuildEditorRowBase({
+export function BuildEditorRow({
   row,
   index,
+  usedSetIds,
   canRemoveRow,
   onSetChange,
   onCountChange,
@@ -57,7 +59,13 @@ function BuildEditorRowBase({
         </SelectTrigger>
         <SelectContent>
           {SET_OPTIONS.map((option) => (
-            <SelectItem key={option.id} value={option.id}>
+            <SelectItem
+              key={option.id}
+              value={option.id}
+              disabled={
+                option.id !== row.setId && usedSetIds.includes(option.id)
+              }
+            >
               {option.label}
             </SelectItem>
           ))}
@@ -117,5 +125,3 @@ function BuildEditorRowBase({
     </li>
   );
 }
-
-export const BuildEditorRow = memo(BuildEditorRowBase);

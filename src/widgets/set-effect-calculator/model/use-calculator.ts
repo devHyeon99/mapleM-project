@@ -13,7 +13,11 @@ import {
   getClampedCount,
   getClampedStarForce,
 } from "./calculator";
-import { createBuildRow, createInitialBuildState } from "./constants";
+import {
+  createBuildRow,
+  createInitialBuildState,
+  MAX_BUILD_ROWS,
+} from "./constants";
 import type { BuildState } from "./types";
 
 function useBuildActions(setState: Dispatch<SetStateAction<BuildState>>) {
@@ -66,8 +70,10 @@ function useBuildActions(setState: Dispatch<SetStateAction<BuildState>>) {
   );
 
   const onAddRow = useCallback(() => {
-    // 장비 입력 행 추가
-    setState((prev) => [...prev, createBuildRow()]);
+    // 상한까지만 장비 입력 행 추가
+    setState((prev) =>
+      prev.length >= MAX_BUILD_ROWS ? prev : [...prev, createBuildRow()],
+    );
   }, [setState]);
 
   const onReset = useCallback(() => {

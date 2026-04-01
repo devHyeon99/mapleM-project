@@ -59,6 +59,9 @@ export const STAR_FORCE_THRESHOLDS_BY_SET_ID = new Map(
   ]),
 );
 
+// 한 세팅에 넣을 수 있는 장비 입력 행 상한
+export const MAX_BUILD_ROWS = 10;
+
 export const createInitialBuildState = (): BuildState => [
   { id: "row-1", setId: NONE_SET_ID, count: 0, starForce: 0 },
   { id: "row-2", setId: NONE_SET_ID, count: 0, starForce: 0 },

@@ -14,6 +14,7 @@ export const metadata = buildToolMetadata({
     "강화 시뮬레이터",
     "메이플M 스타포스",
   ],
+  noIndex: true,
 });
 
 export default function StarforcePage() {

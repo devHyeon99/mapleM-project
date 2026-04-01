@@ -14,6 +14,7 @@ export const metadata = buildToolMetadata({
     "에디셔널 잠재옵션",
     "메이플M 큐브 확률",
   ],
+  noIndex: true,
 });
 
 export default function CubePage() {

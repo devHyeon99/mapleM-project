@@ -14,6 +14,7 @@ export const metadata = buildToolMetadata({
     "추옵 시뮬레이션",
     "메이플M 환생의 불꽃",
   ],
+  noIndex: true,
 });
 
 export default function PotentialPage() {

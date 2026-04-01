@@ -8,6 +8,8 @@ type ToolMetadataInput = {
   description: string;
   path: string;
   keywords: string[];
+  /** 색인 제외. 검색에는 /tools 만 노출한다. */
+  noIndex?: boolean;
 };
 
 export function buildToolMetadata({
@@ -15,11 +17,13 @@ export function buildToolMetadata({
   description,
   path,
   keywords,
+  noIndex,
 }: ToolMetadataInput): Metadata {
   return {
     title,
     description,
     keywords,
+    robots: noIndex ? { index: false, follow: true } : undefined,
     alternates: {
       canonical: path,
     },

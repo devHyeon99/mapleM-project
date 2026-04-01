@@ -35,18 +35,18 @@ export function BuildEditorCard({
   return (
     <Card className="h-full gap-4">
       <CardHeader className="flex flex-row items-center justify-between gap-2 px-4">
-        <CardTitle>{title}</CardTitle>
+        <div className="flex items-baseline gap-2">
+          <CardTitle>{title}</CardTitle>
+          <span className="text-muted-foreground text-xs">
+            {buildState.length} / {MAX_BUILD_ROWS}
+          </span>
+        </div>
         <div className="flex items-center gap-2">
           <Button
             type="button"
             size="sm"
             onClick={onAddRow}
             disabled={!canAddRow}
-            title={
-              canAddRow
-                ? undefined
-                : `장비는 최대 ${MAX_BUILD_ROWS}개까지 추가할 수 있습니다.`
-            }
           >
             장비 추가
           </Button>

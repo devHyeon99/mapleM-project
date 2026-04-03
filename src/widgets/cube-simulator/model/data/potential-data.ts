@@ -1,6 +1,6 @@
 import type {
   EquipmentLevelOption,
-  EquipmentPotentialData,
+  EquipmentPotentialFamily,
   PotentialDataset,
 } from "../domain/potential-types";
 import type { PotentialMode } from "../domain/types";
@@ -9,9 +9,6 @@ type EquipmentTypeOption = {
   type: string;
   label: string;
 };
-
-// 장비별 JSON 파일을 필요 시점에 동적 로드하기 위한 로더 타입
-type DatasetLoader = () => Promise<PotentialDataset>;
 
 // 일반 잠재 모드에서 노출할 장비 타입 옵션
 const POTENTIAL_EQUIPMENT_TYPE_OPTIONS: EquipmentTypeOption[] = [
@@ -31,147 +28,10 @@ const POTENTIAL_EQUIPMENT_TYPE_OPTIONS: EquipmentTypeOption[] = [
   { type: "watch", label: "감시자의 눈(반지)" },
 ];
 
-// 에디셔널 잠재 모드에서 노출할 장비 타입 옵션
-const ADDITIONAL_EQUIPMENT_TYPE_OPTIONS: EquipmentTypeOption[] = [
-  { type: "weapon", label: "무기" },
-  { type: "secondaryWeapon", label: "보조무기" },
-  { type: "top", label: "상의" },
-  { type: "bottom", label: "하의" },
-  { type: "overall", label: "한벌옷" },
-  { type: "hat", label: "모자" },
-  { type: "cape", label: "망토" },
-  { type: "shoes", label: "신발" },
-  { type: "gloves", label: "장갑" },
-  { type: "shoulder", label: "어깨" },
-  { type: "belt", label: "벨트" },
-  { type: "emblem", label: "엠블렘" },
-  { type: "watch", label: "감시자의 눈(반지)" },
-];
-
-// 일반 잠재 JSON 로더 맵 (장비 타입 -> dynamic import 함수)
-const POTENTIAL_DATASET_LOADERS: Record<string, DatasetLoader> = {
-  weapon: () =>
-    import("./generated/potential/weapon.json").then(
-      (mod) => mod.default as PotentialDataset,
-    ),
-  secondaryWeapon: () =>
-    import("./generated/potential/secondaryWeapon.json").then(
-      (mod) => mod.default as PotentialDataset,
-    ),
-  top: () =>
-    import("./generated/potential/top.json").then(
-      (mod) => mod.default as PotentialDataset,
-    ),
-  bottom: () =>
-    import("./generated/potential/bottom.json").then(
-      (mod) => mod.default as PotentialDataset,
-    ),
-  overall: () =>
-    import("./generated/potential/overall.json").then(
-      (mod) => mod.default as PotentialDataset,
-    ),
-  hat: () =>
-    import("./generated/potential/hat.json").then(
-      (mod) => mod.default as PotentialDataset,
-    ),
-  cape: () =>
-    import("./generated/potential/cape.json").then(
-      (mod) => mod.default as PotentialDataset,
-    ),
-  shoes: () =>
-    import("./generated/potential/shoes.json").then(
-      (mod) => mod.default as PotentialDataset,
-    ),
-  gloves: () =>
-    import("./generated/potential/gloves.json").then(
-      (mod) => mod.default as PotentialDataset,
-    ),
-  shoulder: () =>
-    import("./generated/potential/shoulder.json").then(
-      (mod) => mod.default as PotentialDataset,
-    ),
-  belt: () =>
-    import("./generated/potential/belt.json").then(
-      (mod) => mod.default as PotentialDataset,
-    ),
-  heart: () =>
-    import("./generated/potential/heart.json").then(
-      (mod) => mod.default as PotentialDataset,
-    ),
-  emblem: () =>
-    import("./generated/potential/emblem.json").then(
-      (mod) => mod.default as PotentialDataset,
-    ),
-  watch: () =>
-    import("./generated/potential/watch.json").then(
-      (mod) => mod.default as PotentialDataset,
-    ),
-};
-
-// 에디셔널 잠재 JSON 로더 맵 (장비 타입 -> dynamic import 함수)
-const ADDITIONAL_DATASET_LOADERS: Record<string, DatasetLoader> = {
-  weapon: () =>
-    import("./generated/additional/weapon.json").then(
-      (mod) => mod.default as PotentialDataset,
-    ),
-  secondaryWeapon: () =>
-    import("./generated/additional/secondaryWeapon.json").then(
-      (mod) => mod.default as PotentialDataset,
-    ),
-  top: () =>
-    import("./generated/additional/top.json").then(
-      (mod) => mod.default as PotentialDataset,
-    ),
-  bottom: () =>
-    import("./generated/additional/bottom.json").then(
-      (mod) => mod.default as PotentialDataset,
-    ),
-  overall: () =>
-    import("./generated/additional/overall.json").then(
-      (mod) => mod.default as PotentialDataset,
-    ),
-  hat: () =>
-    import("./generated/additional/hat.json").then(
-      (mod) => mod.default as PotentialDataset,
-    ),
-  cape: () =>
-    import("./generated/additional/cape.json").then(
-      (mod) => mod.default as PotentialDataset,
-    ),
-  shoes: () =>
-    import("./generated/additional/shoes.json").then(
-      (mod) => mod.default as PotentialDataset,
-    ),
-  gloves: () =>
-    import("./generated/additional/gloves.json").then(
-      (mod) => mod.default as PotentialDataset,
-    ),
-  shoulder: () =>
-    import("./generated/additional/shoulder.json").then(
-      (mod) => mod.default as PotentialDataset,
-    ),
-  belt: () =>
-    import("./generated/additional/belt.json").then(
-      (mod) => mod.default as PotentialDataset,
-    ),
-  emblem: () =>
-    import("./generated/additional/emblem.json").then(
-      (mod) => mod.default as PotentialDataset,
-    ),
-  watch: () =>
-    import("./generated/additional/watch.json").then(
-      (mod) => mod.default as PotentialDataset,
-    ),
-};
-
-// 모드별 로더 묶음
-const DATASET_LOADERS_BY_MODE: Record<
-  PotentialMode,
-  Record<string, DatasetLoader>
-> = {
-  potential: POTENTIAL_DATASET_LOADERS,
-  additional: ADDITIONAL_DATASET_LOADERS,
-};
+// 에디셔널은 170레벨 이상부터 가능한데 아직 적합한 기계심장(언더 컨트롤 하트)이
+// 없어서 제외한다. 해당 하트가 나오면 목록을 하나로 합치면 됨.
+const ADDITIONAL_EQUIPMENT_TYPE_OPTIONS =
+  POTENTIAL_EQUIPMENT_TYPE_OPTIONS.filter((option) => option.type !== "heart");
 
 // 잠재능력별 장비 타입 옵션 묶음
 const TYPE_OPTIONS_BY_MODE: Record<PotentialMode, EquipmentTypeOption[]> = {
@@ -181,42 +41,36 @@ const TYPE_OPTIONS_BY_MODE: Record<PotentialMode, EquipmentTypeOption[]> = {
 
 // 동일 dataset 중복 로딩 방지 캐시
 const datasetPromiseCache = new Map<string, Promise<PotentialDataset>>();
-// 장비 레벨 옵션 계산 결과 캐시
-const levelOptionsCache = new Map<string, EquipmentLevelOption[]>();
 
 // 모드 + 장비 타입 조합을 캐시 키로 변환
 const createDatasetCacheKey = (mode: PotentialMode, equipmentType: string) =>
   `${mode}:${equipmentType}`;
+
+const isKnownEquipmentType = (mode: PotentialMode, equipmentType: string) =>
+  TYPE_OPTIONS_BY_MODE[mode].some((option) => option.type === equipmentType);
 
 // 캐시 우선으로 dataset을 로드한다. (없으면 dynamic import 실행)
 async function loadDataset(
   mode: PotentialMode,
   equipmentType: string,
 ): Promise<PotentialDataset | null> {
+  if (!isKnownEquipmentType(mode, equipmentType)) return null;
+
   const cacheKey = createDatasetCacheKey(mode, equipmentType);
   const cachedPromise = datasetPromiseCache.get(cacheKey);
   if (cachedPromise) return cachedPromise;
 
-  const loader = DATASET_LOADERS_BY_MODE[mode][equipmentType];
-  if (!loader) return null;
-
+  // 장비별 JSON을 필요 시점에 개별 청크로 불러온다.
   // 실패한 요청이 캐시에 남으면 새로고침 전까지 재시도가 막히므로 캐시에서 제거
-  const promise = loader().catch((error: unknown) => {
-    datasetPromiseCache.delete(cacheKey);
-    throw error;
-  });
+  const promise = import(`./generated/${mode}/${equipmentType}.json`)
+    .then((module) => module.default as PotentialDataset)
+    .catch((error: unknown) => {
+      datasetPromiseCache.delete(cacheKey);
+      throw error;
+    });
+
   datasetPromiseCache.set(cacheKey, promise);
   return promise;
-}
-
-// dataset에서 Select용 레벨 옵션을 생성한다. (내림차순)
-function createLevelOptions(dataset: PotentialDataset, equipmentType: string) {
-  const family = dataset.equipmentPotentials[equipmentType];
-  if (!family) return [];
-
-  return Object.values(family.levels)
-    .map((entry) => ({ level: entry.level, label: `${entry.level}` }))
-    .sort((left, right) => right.level - left.level);
 }
 
 // 잠재 종류(윗잠, 아랫잠)에 따른 장비 타입 옵션 목록 반환
@@ -224,31 +78,23 @@ export function getEquipmentTypeOptions(mode: PotentialMode) {
   return TYPE_OPTIONS_BY_MODE[mode];
 }
 
-// 특정 장비 타입의 선택 가능한 레벨 목록 반환 (캐시 사용)
-export async function getAvailableEquipmentLevels(
+// 장비 타입 하나의 전체 레벨별 잠재 데이터 반환
+// 레벨 목록과 개별 레벨 데이터가 모두 이 하나에서 파생된다.
+export async function loadEquipmentPotentials(
   mode: PotentialMode,
   equipmentType: string,
-) {
-  const cacheKey = createDatasetCacheKey(mode, equipmentType);
-  const cachedLevelOptions = levelOptionsCache.get(cacheKey);
-  if (cachedLevelOptions) return cachedLevelOptions;
-
+): Promise<EquipmentPotentialFamily | null> {
   const dataset = await loadDataset(mode, equipmentType);
-  if (!dataset) return [];
-
-  const levelOptions = createLevelOptions(dataset, equipmentType);
-  levelOptionsCache.set(cacheKey, levelOptions);
-  return levelOptions;
+  return dataset?.equipmentPotentials[equipmentType] ?? null;
 }
 
-// 모드/장비 타입/레벨 조합의 잠재 데이터 반환
-export async function getEquipmentPotentialData(
-  mode: PotentialMode,
-  equipmentType: string,
-  level: number,
-): Promise<EquipmentPotentialData | null> {
-  const dataset = await loadDataset(mode, equipmentType);
-  if (!dataset) return null;
+// Select용 레벨 옵션 목록 (내림차순)
+export function toLevelOptions(
+  family: EquipmentPotentialFamily | null,
+): EquipmentLevelOption[] {
+  if (!family) return [];
 
-  return dataset.equipmentPotentials[equipmentType]?.levels[level] ?? null;
+  return Object.values(family.levels)
+    .map((entry) => ({ level: entry.level, label: `${entry.level}` }))
+    .sort((left, right) => right.level - left.level);
 }

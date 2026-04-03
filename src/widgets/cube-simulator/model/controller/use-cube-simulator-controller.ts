@@ -10,7 +10,7 @@ export function useCubeSimulatorController() {
   // 순수 상태 전이(입력값/롤 결과/옵션 파생값) 담당
   const { state, view, actions } = useCubeSimulatorState();
 
-  // 잠재 데이터 비동기 로딩 + 레벨 정합성 보정 담당
+  // 잠재 데이터 비동기 로딩 담당
   const { availableLevels, potentialData, isDataLoading } = useCubeDataLoader({
     potentialMode: state.potentialMode,
     equipmentType: state.equipmentType,

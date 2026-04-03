@@ -5,11 +5,13 @@ import { fileURLToPath } from "node:url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, "..");
-const sourceDir = path.join(rootDir, "./source/additional");
-const outputDir = path.join(
-  rootDir,
-  "src/widgets/cube-simulator/model/generated/additional",
-);
+
+// 잠재 모드별 원본 -> 정규화 결과 경로
+// 인자 없이 실행하면 두 모드를 모두 생성한다. (예: node scripts/normalize-cube-data.mjs potential)
+const MODES = ["potential", "additional"];
+const sourceDirOf = (mode) => path.join(__dirname, "source", mode);
+const outputDirOf = (mode) =>
+  path.join(rootDir, "src/widgets/cube-simulator/model/data/generated", mode);
 
 const tierMap = new Map([
   ["레어", "rare"],
@@ -323,20 +325,32 @@ function normalizeFile(filePath) {
   return buildPotentialDataset(raw);
 }
 
-const sourceFiles = readdirSync(sourceDir).filter((fileName) =>
-  fileName.endsWith(".json"),
-);
+// 번들에 그대로 실리는 데이터라 들여쓰기 없이 저장한다. (약 7.4MB -> 3.0MB)
+const PRETTY = process.argv.includes("--pretty");
 
-if (sourceFiles.length === 0) {
-  process.exit(0);
-}
+const requestedModes = process.argv
+  .slice(2)
+  .filter((arg) => MODES.includes(arg));
 
-mkdirSync(outputDir, { recursive: true });
+for (const mode of requestedModes.length ? requestedModes : MODES) {
+  const sourceDir = sourceDirOf(mode);
+  const outputDir = outputDirOf(mode);
 
-for (const fileName of sourceFiles) {
-  const sourcePath = path.join(sourceDir, fileName);
-  const outputPath = path.join(outputDir, fileName);
-  const normalized = normalizeFile(sourcePath);
-  if (!normalized) continue;
-  writeFileSync(outputPath, `${JSON.stringify(normalized, null, 2)}\n`);
+  const sourceFiles = readdirSync(sourceDir).filter((fileName) =>
+    fileName.endsWith(".json"),
+  );
+  if (sourceFiles.length === 0) continue;
+
+  mkdirSync(outputDir, { recursive: true });
+
+  for (const fileName of sourceFiles) {
+    const normalized = normalizeFile(path.join(sourceDir, fileName));
+    if (!normalized) continue;
+    const json = PRETTY
+      ? `${JSON.stringify(normalized, null, 2)}\n`
+      : JSON.stringify(normalized);
+    writeFileSync(path.join(outputDir, fileName), json);
+  }
+
+  console.log(`${mode}: ${sourceFiles.length} files -> ${outputDir}`);
 }

@@ -1,0 +1,3 @@
+# 스크립트로 생성되는 확률표 데이터. 번들 크기 때문에 minify 상태로 보관한다.
+src/widgets/cube-simulator/model/data/generated/
+scripts/source/

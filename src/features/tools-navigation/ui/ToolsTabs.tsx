@@ -16,7 +16,7 @@ export function ToolsTabs() {
   const pathname = usePathname();
 
   return (
-    <nav aria-label="도구 이동" className="mt-4 mb-2 w-full">
+    <nav aria-label="도구 이동" className="mb-2 w-full">
       <ul className="bg-muted grid list-none grid-cols-2 gap-1 rounded-3xl p-1 shadow-sm md:grid-cols-4">
         {TOOL_LINKS.map((link) => {
           const isActive = pathname === link.href;

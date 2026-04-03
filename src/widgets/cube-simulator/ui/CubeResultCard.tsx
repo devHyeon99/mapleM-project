@@ -15,6 +15,10 @@ import type {
   EquipmentPotentialData,
   PotentialTier,
 } from "../model/domain/potential-types";
+import type {
+  CubeUsageCounts,
+  UpgradeProgress,
+} from "../model/state/use-cube-simulator-state";
 import { ResultLine } from "./CubeResultLine";
 
 type Props = {
@@ -24,28 +28,28 @@ type Props = {
   potentialData: EquipmentPotentialData | null;
   latestRoll: CubeRollResult | null;
   totalRollCount: number;
-  cubeUsageCounts: {
-    red: number;
-    black: number;
-    additional: number;
-    whiteAdditional: number;
-  };
-  upgradeProgress: {
-    rare: number | null;
-    epic: number | null;
-    unique: number | null;
-  };
+  cubeUsageCounts: CubeUsageCounts;
+  upgradeProgress: UpgradeProgress;
 };
 
+// 등급업 구간 (from 등급이 upgradeProgress의 키)
 const PROGRESS_ROWS: Array<{
-  key: "rare" | "epic" | "unique";
-  from: "rare" | "epic" | "unique";
-  to: "epic" | "unique" | "legendary";
+  from: keyof UpgradeProgress;
+  to: PotentialTier;
 }> = [
-  { key: "rare", from: "rare", to: "epic" },
-  { key: "epic", from: "epic", to: "unique" },
-  { key: "unique", from: "unique", to: "legendary" },
+  { from: "rare", to: "epic" },
+  { from: "epic", to: "unique" },
+  { from: "unique", to: "legendary" },
 ];
+
+const TIER_BADGE_CLASS: Record<PotentialTier, string> = {
+  rare: "border-blue-500/30 bg-blue-500/15 text-blue-700 dark:text-blue-300",
+  epic: "border-purple-500/30 bg-purple-500/15 text-purple-700 dark:text-purple-300",
+  unique:
+    "border-amber-500/30 bg-amber-500/15 text-amber-700 dark:text-amber-300",
+  legendary:
+    "border-emerald-500/30 bg-emerald-500/15 text-emerald-700 dark:text-emerald-300",
+};
 
 function SummaryRow({
   label,
@@ -66,22 +70,6 @@ function SummaryRow({
 
 function formatUpgradeLabel(from: PotentialTier, to: PotentialTier) {
   return `${POTENTIAL_TIER_LABELS[from]} -> ${POTENTIAL_TIER_LABELS[to]}`;
-}
-
-function getTierBadgeClass(tier: PotentialTier | null) {
-  if (tier === "rare") {
-    return "border-blue-500/30 bg-blue-500/15 text-blue-700 dark:text-blue-300";
-  }
-  if (tier === "epic") {
-    return "border-purple-500/30 bg-purple-500/15 text-purple-700 dark:text-purple-300";
-  }
-  if (tier === "unique") {
-    return "border-amber-500/30 bg-amber-500/15 text-amber-700 dark:text-amber-300";
-  }
-  if (tier === "legendary") {
-    return "border-emerald-500/30 bg-emerald-500/15 text-emerald-700 dark:text-emerald-300";
-  }
-  return "";
 }
 
 export function CubeResultCard({
@@ -148,11 +136,11 @@ export function CubeResultCard({
           <div className="grid gap-2">
             {PROGRESS_ROWS.map((row) => (
               <SummaryRow
-                key={row.key}
+                key={row.from}
                 label={formatUpgradeLabel(row.from, row.to)}
                 value={
-                  upgradeProgress[row.key] != null
-                    ? `${upgradeProgress[row.key]}개`
+                  upgradeProgress[row.from] != null
+                    ? `${upgradeProgress[row.from]}개`
                     : "-"
                 }
                 valueClassName="font-medium text-orange-500"
@@ -164,7 +152,7 @@ export function CubeResultCard({
             <div className="flex items-center justify-between gap-3">
               <span className="font-medium">현재 등급</span>
               {tier ? (
-                <Badge variant="outline" className={getTierBadgeClass(tier)}>
+                <Badge variant="outline" className={TIER_BADGE_CLASS[tier]}>
                   {POTENTIAL_TIER_LABELS[tier]}
                 </Badge>
               ) : (

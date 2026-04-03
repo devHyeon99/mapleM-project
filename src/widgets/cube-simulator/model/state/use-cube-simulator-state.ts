@@ -17,18 +17,9 @@ import type {
 type UpgradeTier = Exclude<PotentialTier, "legendary">;
 
 // 등급업이 몇번만에 되었는지 체크하기 위한 데이터 타입 정의
-type UpgradeProgress = {
-  rare: number | null;
-  epic: number | null;
-  unique: number | null;
-};
+export type UpgradeProgress = Record<UpgradeTier, number | null>;
 
-type CubeUsageCounts = {
-  red: number;
-  black: number;
-  additional: number;
-  whiteAdditional: number;
-};
+export type CubeUsageCounts = Record<CubeType, number>;
 
 // 등급업 몇번만에 되었는지 체크하는 기본값
 const EMPTY_UPGRADE_PROGRESS: UpgradeProgress = {
@@ -61,11 +52,15 @@ export function useCubeSimulatorState() {
   );
   // 마지막 등급업 이후 현재까지 누적된 큐브 시도 횟수 값
   const [attemptsSinceTierUp, setAttemptsSinceTierUp] = useState(0);
-  // 총 큐브 시행 횟수 값
-  const [totalRollCount, setTotalRollCount] = useState(0);
-  // 레드/블랙 큐브 사용 횟수
+  // 큐브 종류별 사용 횟수
   const [cubeUsageCounts, setCubeUsageCounts] = useState<CubeUsageCounts>(
     EMPTY_CUBE_USAGE_COUNTS,
+  );
+
+  // 총 큐브 시행 횟수는 종류별 사용 횟수의 합
+  const totalRollCount = Object.values(cubeUsageCounts).reduce(
+    (sum, count) => sum + count,
+    0,
   );
 
   // 장비 종류 목록 ( 예: 무기, 한벌옷, 상의... )
@@ -87,7 +82,6 @@ export function useCubeSimulatorState() {
   // 큐브 설정 초기화 함수
   const resetRollState = useCallback(() => {
     setAttemptsSinceTierUp(0);
-    setTotalRollCount(0);
     setLatestRoll(null);
     setUpgradeProgress(EMPTY_UPGRADE_PROGRESS);
     setCubeUsageCounts(EMPTY_CUBE_USAGE_COUNTS);
@@ -107,7 +101,6 @@ export function useCubeSimulatorState() {
       if (!roll) return;
 
       setTier(roll.resolvedTier);
-      setTotalRollCount((count) => count + 1);
       setCubeUsageCounts((prev) => ({
         ...prev,
         [cubeType]: prev[cubeType] + 1,

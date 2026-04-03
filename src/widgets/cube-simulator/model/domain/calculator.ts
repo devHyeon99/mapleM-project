@@ -9,30 +9,6 @@ import type { CubeRollResult, CubeType, RolledPotentialLine } from "./types";
 // 한국어 표기 숫자 포맷터(예: 1,234)
 const KO_NUMBER_FORMATTER = new Intl.NumberFormat("ko-KR");
 
-// 동일 옵션 배열에 대한 누적 가중치 계산 결과를 캐시해서 반복 연산을 줄임
-const optionWeightCache = new WeakMap<
-  PotentialOption[],
-  { totalChance: number; cumulative: number[] }
->();
-
-// 옵션 배열의 누적 확률 테이블을 생성/캐시
-const getOptionWeights = (options: PotentialOption[]) => {
-  const cached = optionWeightCache.get(options);
-  if (cached) return cached;
-
-  const cumulative: number[] = [];
-  let totalChance = 0;
-
-  for (const option of options) {
-    totalChance += option.chance;
-    cumulative.push(totalChance);
-  }
-
-  const weights = { totalChance, cumulative };
-  optionWeightCache.set(options, weights);
-  return weights;
-};
-
 // 공개된 확률표 기반으로 옵션 1개를 선택
 const pickWeightedOption = (
   options: PotentialOption[],
@@ -40,15 +16,14 @@ const pickWeightedOption = (
 ) => {
   if (options.length === 0) return null;
 
-  const { totalChance, cumulative } = getOptionWeights(options);
+  const totalChance = options.reduce((sum, option) => sum + option.chance, 0);
   if (totalChance <= 0) return options[0] ?? null;
 
-  const threshold = rng() * totalChance;
+  let threshold = rng() * totalChance;
 
-  for (let index = 0; index < options.length; index += 1) {
-    if (threshold <= cumulative[index]) {
-      return options[index] ?? null;
-    }
+  for (const option of options) {
+    threshold -= option.chance;
+    if (threshold <= 0) return option;
   }
 
   return options[options.length - 1] ?? null;

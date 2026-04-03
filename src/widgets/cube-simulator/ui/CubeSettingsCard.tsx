@@ -1,15 +1,7 @@
-import type { ReactNode } from "react";
-
 import { Button } from "@/shared/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/shared/ui/card";
-import { Label } from "@/shared/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/shared/ui/select";
+import { SelectField } from "@/shared/ui/SelectField";
+import { SelectItem } from "@/shared/ui/select";
 
 import type { PotentialMode } from "../model/domain/types";
 import type { CubeType } from "../model/domain/types";
@@ -41,38 +33,6 @@ type Props = {
   onRoll: () => void;
   onReset: () => void;
 };
-
-function SelectField({
-  id,
-  label,
-  value,
-  placeholder,
-  disabled = false,
-  onValueChange,
-  children,
-}: {
-  id: string;
-  label: string;
-  value: string;
-  placeholder: string;
-  disabled?: boolean;
-  onValueChange: (value: string) => void;
-  children: ReactNode;
-}) {
-  return (
-    <div className="grid gap-2">
-      <Label htmlFor={id} className="text-muted-foreground">
-        {label}
-      </Label>
-      <Select value={value} onValueChange={onValueChange} disabled={disabled}>
-        <SelectTrigger id={id} className="w-full">
-          <SelectValue placeholder={placeholder} />
-        </SelectTrigger>
-        <SelectContent>{children}</SelectContent>
-      </Select>
-    </div>
-  );
-}
 
 export function CubeSettingsCard({
   potentialMode,

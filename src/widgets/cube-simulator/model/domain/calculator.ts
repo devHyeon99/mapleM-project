@@ -72,15 +72,32 @@ const getNextTier = (tier: PotentialTier) => {
   return TIER_ORDER[Math.min(index + 1, TIER_ORDER.length - 1)];
 };
 
+// 확률표에 옵션이 존재하는 등급인지 확인
+// 기계심장, 보조무기 100/140처럼 유니크가 상한인 장비는 상위 등급 표가 비어 있음
+const hasTierOptions = (
+  potentialData: EquipmentPotentialData,
+  tier: PotentialTier,
+) => {
+  const tierData = potentialData.tiers[tier];
+  return Boolean(tierData?.first.length && tierData.secondary.length);
+};
+
+// 해당 장비에서 실제로 부여 가능한 등급 목록
+export const getAvailableTiers = (potentialData: EquipmentPotentialData) =>
+  TIER_ORDER.filter((tier) => hasTierOptions(potentialData, tier));
+
 // 잠재 등급업 결정 함수 (큐브 종류에 따른 확률을 기준으로 등급업 수행)
 const resolveTierUpgrade = (
+  potentialData: EquipmentPotentialData,
   tier: PotentialTier,
   cubeType: CubeType,
   rng: () => number = Math.random,
 ) => {
-  // 최고 등급인 레전더리일 경우 그대로 기존 tier 반환
-  if (tier === "legendary") return tier;
-  return rng() < TIER_UP_CHANCE_BY_CUBE[cubeType] ? getNextTier(tier) : tier;
+  const nextTier = getNextTier(tier);
+  // 최고 등급이거나, 장비의 등급 상한에 도달한 경우 기존 tier 유지
+  if (nextTier === tier || !hasTierOptions(potentialData, nextTier))
+    return tier;
+  return rng() < TIER_UP_CHANCE_BY_CUBE[cubeType] ? nextTier : tier;
 };
 
 // 큐브 실행 함수 (큐브 1회 실행 후 결과값 반환)
@@ -91,7 +108,7 @@ export const rollPotentialCube = (
   rng: () => number = Math.random,
 ): CubeRollResult | null => {
   // 등급업 확률을 반영한 최종 등급
-  const resolvedTier = resolveTierUpgrade(tier, cubeType, rng);
+  const resolvedTier = resolveTierUpgrade(potentialData, tier, cubeType, rng);
   // 등급업 함수를 거친뒤 해당 등급업의 잠재능력 데이터 가져옴
   const tierData = potentialData.tiers[resolvedTier];
   if (!tierData) return null;

@@ -1,6 +1,7 @@
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 
 import { POTENTIAL_MODE_OPTIONS } from "../domain/constants";
+import { getAvailableTiers } from "../domain/calculator";
 import type { PotentialMode } from "../domain/types";
 import { useCubeDataLoader } from "../data/use-cube-data-loader";
 import { useCubeSimulatorState } from "../state/use-cube-simulator-state";
@@ -26,6 +27,15 @@ export function useCubeSimulatorController() {
   const handleRoll = useCallback(() => {
     actions.applyRollWithData(potentialData);
   }, [actions, potentialData]);
+
+  // 장비가 실제로 부여받을 수 있는 등급만 선택지로 노출
+  const tierOptions = useMemo(() => {
+    if (!potentialData) return view.tierOptions;
+    const availableTiers = new Set<string>(getAvailableTiers(potentialData));
+    return view.tierOptions.filter((option) =>
+      availableTiers.has(option.value),
+    );
+  }, [potentialData, view.tierOptions]);
 
   const canRoll =
     !isDataLoading &&
@@ -56,7 +66,7 @@ export function useCubeSimulatorController() {
       equipmentTypeOptions: view.equipmentTypeOptions,
       cubeTypeOptions: view.cubeTypeOptions,
       potentialModeOptions: POTENTIAL_MODE_OPTIONS,
-      tierOptions: view.tierOptions,
+      tierOptions,
     },
     actions: {
       onCubeTypeChange: actions.handleCubeTypeChange,

@@ -200,7 +200,11 @@ async function loadDataset(
   const loader = DATASET_LOADERS_BY_MODE[mode][equipmentType];
   if (!loader) return null;
 
-  const promise = loader();
+  // 실패한 요청이 캐시에 남으면 새로고침 전까지 재시도가 막히므로 캐시에서 제거
+  const promise = loader().catch((error: unknown) => {
+    datasetPromiseCache.delete(cacheKey);
+    throw error;
+  });
   datasetPromiseCache.set(cacheKey, promise);
   return promise;
 }

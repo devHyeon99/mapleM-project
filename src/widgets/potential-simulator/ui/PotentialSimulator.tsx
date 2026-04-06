@@ -21,7 +21,7 @@ export function PotentialSimulator() {
           isHeartCategory={state.isHeartCategory}
           isFixedLevelCategory={state.isFixedLevelCategory}
           canRoll={state.canRoll}
-          onFlameTypeChange={actions.setFlameType}
+          onFlameTypeChange={actions.handleFlameTypeChange}
           onEquipmentCategoryChange={actions.handleEquipmentCategoryChange}
           onHeartGradeChange={actions.handleHeartGradeChange}
           onEquipmentLevelChange={actions.handleEquipmentLevelChange}

@@ -83,6 +83,12 @@ export function usePotentialSimulator() {
     setIsPowerfulTwoLineLocked(false);
   };
 
+  // 환생의 불꽃 종류 변경 핸들러
+  const handleFlameTypeChange = (value: FlameType) => {
+    setFlameType(value);
+    resetResultState();
+  };
+
   // 장비 분류 변경 핸들러: 분류에 맞게 레벨/등급 상태를 정리
   const handleEquipmentCategoryChange = (value: EquipmentCategory) => {
     setEquipmentCategory(value);
@@ -120,7 +126,7 @@ export function usePotentialSimulator() {
         ? null
         : (selectedLevel as EquipmentLevel | null),
       heartGrade: heartGrade ?? 2,
-      forceTwoLines: flameType === "powerful" && isPowerfulTwoLineLocked,
+      forceTwoLines: isPowerfulTwoLineLocked,
     });
 
     if (!result) return;
@@ -143,9 +149,7 @@ export function usePotentialSimulator() {
     setEquipmentCategory(null);
     setEquipmentLevel(null);
     setHeartGrade(null);
-    setLatestResult(null);
-    setTotalRollCount(0);
-    setIsPowerfulTwoLineLocked(false);
+    resetResultState();
   };
 
   return {
@@ -164,7 +168,7 @@ export function usePotentialSimulator() {
       latestResult,
     },
     actions: {
-      setFlameType,
+      handleFlameTypeChange,
       handleEquipmentCategoryChange,
       handleHeartGradeChange,
       handleEquipmentLevelChange,

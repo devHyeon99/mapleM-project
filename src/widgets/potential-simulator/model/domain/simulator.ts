@@ -18,7 +18,7 @@ type SimulatorInput = {
   flameType: FlameType;
   equipmentCategory: EquipmentCategory;
   equipmentLevel: EquipmentLevel | null;
-  heartGrade: HeartGrade;
+  heartGrade: HeartGrade | null;
   // 강력한 환생의 불꽃 2줄 고정 상태를 강제로 반영할 때 사용
   forceTwoLines?: boolean;
 };
@@ -69,6 +69,10 @@ function pickOptions(options: OptionDefinition[], count: number) {
 // 장비 종류(기계심장/그 외)에 따라 조회할 옵션 풀을 결정
 function resolvePool(input: SimulatorInput): OptionPool | null {
   if (input.equipmentCategory === "heart") {
+    if (input.heartGrade == null) {
+      return null;
+    }
+
     return getHeartOptionPool({
       flameType: input.flameType,
       grade: input.heartGrade,

@@ -216,12 +216,11 @@ const ETERNAL_HEART_OPTIONS: OptionDefinition[] = [
   PERCENT_OPTIONS.finalDamage,
 ];
 
-// 레벨 범위 설정 (100, 120도 있는데 무의미 해서 140부터)
-type WeaponFamilyLevel = 140 | 160 | 180 | 200;
-type StandardLevel = 140 | 160 | 180 | 200;
+// 포켓 장비는 200 레벨 데이터가 없음
+type PocketLevel = Exclude<EquipmentLevel, 200>;
 
 // 무기 강환불 옵션 값 범위
-const WEAPON_POWERFUL_DATA: Record<WeaponFamilyLevel, OptionPool> = {
+const WEAPON_POWERFUL_DATA: Record<EquipmentLevel, OptionPool> = {
   140: {
     options: POWERFUL_WEAPON_OPTIONS,
     ranges: {
@@ -293,7 +292,7 @@ const WEAPON_POWERFUL_DATA: Record<WeaponFamilyLevel, OptionPool> = {
 };
 
 // 무기 영환불 옵션 값 범위
-const WEAPON_ETERNAL_DATA: Record<WeaponFamilyLevel, OptionPool> = {
+const WEAPON_ETERNAL_DATA: Record<EquipmentLevel, OptionPool> = {
   140: {
     options: ETERNAL_WEAPON_OPTIONS,
     ranges: {
@@ -373,7 +372,7 @@ const WEAPON_ETERNAL_DATA: Record<WeaponFamilyLevel, OptionPool> = {
 };
 
 // 방어구 강환불 옵션값 범위
-const ARMOR_POWERFUL_DATA: Record<StandardLevel, OptionPool> = {
+const ARMOR_POWERFUL_DATA: Record<EquipmentLevel, OptionPool> = {
   140: {
     options: POWERFUL_ARMOR_OPTIONS,
     ranges: {
@@ -437,7 +436,7 @@ const ARMOR_POWERFUL_DATA: Record<StandardLevel, OptionPool> = {
 };
 
 // 방어구 영환불 옵션값 범위
-const ARMOR_ETERNAL_DATA: Record<StandardLevel, OptionPool> = {
+const ARMOR_ETERNAL_DATA: Record<EquipmentLevel, OptionPool> = {
   140: {
     options: ETERNAL_ARMOR_OPTIONS,
     ranges: {
@@ -505,7 +504,7 @@ const ARMOR_ETERNAL_DATA: Record<StandardLevel, OptionPool> = {
 };
 
 // 포켓 강환불 옵션값 범위
-const POCKET_POWERFUL_DATA: Record<140 | 160 | 180, OptionPool> = {
+const POCKET_POWERFUL_DATA: Record<PocketLevel, OptionPool> = {
   140: {
     options: POWERFUL_POCKET_OPTIONS,
     ranges: {
@@ -554,7 +553,7 @@ const POCKET_POWERFUL_DATA: Record<140 | 160 | 180, OptionPool> = {
 };
 
 // 포켓 영환불 옵션값 범위
-const POCKET_ETERNAL_DATA: Record<140 | 160 | 180, OptionPool> = {
+const POCKET_ETERNAL_DATA: Record<PocketLevel, OptionPool> = {
   140: {
     options: ETERNAL_POCKET_OPTIONS,
     ranges: {
@@ -830,21 +829,24 @@ export function getOptionPoolByLevel(params: {
     params.equipmentCategory === "watch"
   ) {
     return flameType === "powerful"
-      ? WEAPON_POWERFUL_DATA[params.level as WeaponFamilyLevel]
-      : WEAPON_ETERNAL_DATA[params.level as WeaponFamilyLevel];
+      ? WEAPON_POWERFUL_DATA[params.level]
+      : WEAPON_ETERNAL_DATA[params.level];
   }
 
   if (params.equipmentCategory === "armor") {
     return flameType === "powerful"
-      ? ARMOR_POWERFUL_DATA[params.level as StandardLevel]
-      : ARMOR_ETERNAL_DATA[params.level as StandardLevel];
+      ? ARMOR_POWERFUL_DATA[params.level]
+      : ARMOR_ETERNAL_DATA[params.level];
   }
 
   if (params.equipmentCategory === "pocket") {
-    const pocketLevel = params.level as 140 | 160 | 180;
+    if (params.level === 200) {
+      return null;
+    }
+
     return flameType === "powerful"
-      ? POCKET_POWERFUL_DATA[pocketLevel]
-      : POCKET_ETERNAL_DATA[pocketLevel];
+      ? POCKET_POWERFUL_DATA[params.level]
+      : POCKET_ETERNAL_DATA[params.level];
   }
 
   return null;

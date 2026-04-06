@@ -122,10 +122,8 @@ export function usePotentialSimulator() {
     const result = simulateAdditionalOption({
       flameType,
       equipmentCategory,
-      equipmentLevel: isHeartCategory
-        ? null
-        : (selectedLevel as EquipmentLevel | null),
-      heartGrade: heartGrade ?? 2,
+      equipmentLevel: isHeartCategory ? null : selectedLevel,
+      heartGrade,
       forceTwoLines: isPowerfulTwoLineLocked,
     });
 

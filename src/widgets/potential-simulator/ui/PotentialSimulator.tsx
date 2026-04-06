@@ -32,9 +32,8 @@ export function PotentialSimulator() {
         <PotentialSimulatorResultCard
           flameLabel={state.flameLabel}
           equipmentLabel={state.equipmentLabel}
-          isHeartCategory={state.isHeartCategory}
-          heartGrade={state.heartGrade}
-          selectedLevel={state.selectedLevel}
+          levelRowLabel={state.levelRowLabel}
+          levelRowValue={state.levelRowValue}
           totalRollCount={state.totalRollCount}
           latestResult={state.latestResult}
         />

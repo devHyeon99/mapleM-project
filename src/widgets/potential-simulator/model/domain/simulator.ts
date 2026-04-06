@@ -133,12 +133,20 @@ export function simulateAdditionalOption(
   };
 }
 
-// UI 출력용 포맷 함수 (step 기준 소수 자릿수 + percent 단위 처리)
+// UI 출력용 포맷 함수 (step 기준 소수 자릿수 + 단위별 표기)
 export function formatRolledValue(
   value: number,
   unit: RolledOption["unit"],
   step: number,
 ) {
-  const formatted = value.toFixed(getStepDecimals(step));
-  return unit === "percent" ? `${formatted}%` : formatted;
+  const decimals = getStepDecimals(step);
+
+  if (unit === "percent") {
+    return `${value.toFixed(decimals)}%`;
+  }
+
+  return value.toLocaleString("ko-KR", {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals,
+  });
 }

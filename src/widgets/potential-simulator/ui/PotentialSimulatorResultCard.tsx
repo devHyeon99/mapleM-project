@@ -2,11 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/shared/ui/card";
 import { Separator } from "@/shared/ui/separator";
 
 import { formatRolledValue } from "../model/domain/simulator";
-import type {
-  EquipmentLevel,
-  HeartGrade,
-  SimulationResult,
-} from "../model/domain/types";
+import type { SimulationResult } from "../model/domain/types";
 
 function SummaryRow({
   label,
@@ -33,9 +29,7 @@ function SummaryRow({
           isOptionVariant ? "font-medium text-orange-500" : "font-medium"
         }
       >
-        {value.includes("%") || Number.isNaN(Number(value))
-          ? value
-          : Number(value).toLocaleString("ko-KR")}
+        {value}
       </span>
     </div>
   );
@@ -44,9 +38,8 @@ function SummaryRow({
 type Props = {
   flameLabel: string;
   equipmentLabel: string;
-  isHeartCategory: boolean;
-  heartGrade: HeartGrade | null;
-  selectedLevel: EquipmentLevel | null;
+  levelRowLabel: string;
+  levelRowValue: string;
   totalRollCount: number;
   latestResult: SimulationResult | null;
 };
@@ -54,9 +47,8 @@ type Props = {
 export function PotentialSimulatorResultCard({
   flameLabel,
   equipmentLabel,
-  isHeartCategory,
-  heartGrade,
-  selectedLevel,
+  levelRowLabel,
+  levelRowValue,
   totalRollCount,
   latestResult,
 }: Props) {
@@ -69,18 +61,7 @@ export function PotentialSimulatorResultCard({
         <div className="bg-secondary grid gap-2 rounded-xs p-4 shadow-sm">
           <SummaryRow label="환생의 불꽃 종류" value={flameLabel} />
           <SummaryRow label="장비 분류" value={equipmentLabel} />
-          <SummaryRow
-            label={isHeartCategory ? "기계심장 등급" : "장비 레벨"}
-            value={
-              isHeartCategory
-                ? heartGrade
-                  ? `${heartGrade}등급`
-                  : "-"
-                : selectedLevel
-                  ? `${selectedLevel}`
-                  : "-"
-            }
-          />
+          <SummaryRow label={levelRowLabel} value={levelRowValue} />
           <SummaryRow label="총 시행" value={`${totalRollCount}회`} />
 
           <Separator className="my-2" />
@@ -91,7 +72,7 @@ export function PotentialSimulatorResultCard({
               {latestResult.options.map((option, index) => (
                 <SummaryRow
                   key={`${option.key}-${index}`}
-                  label={`${option.label}`}
+                  label={option.label}
                   variant="option"
                   value={formatRolledValue(
                     option.value,

@@ -76,6 +76,12 @@ export function usePotentialSimulator() {
   // 결과 카드 표시용 장비 라벨
   const equipmentLabel = getEquipmentLabel(equipmentCategory);
 
+  // 결과 카드의 레벨 행은 기계심장 분류에서만 등급을 대신 보여줌
+  const heartGradeLabel = heartGrade == null ? "-" : `${heartGrade}등급`;
+  const equipmentLevelLabel = selectedLevel == null ? "-" : `${selectedLevel}`;
+  const levelRowLabel = isHeartCategory ? "기계심장 등급" : "장비 레벨";
+  const levelRowValue = isHeartCategory ? heartGradeLabel : equipmentLevelLabel;
+
   // 결과 영역 상태(결과/횟수/2줄 고정)를 공통 초기화
   const resetResultState = () => {
     setLatestResult(null);
@@ -159,6 +165,8 @@ export function usePotentialSimulator() {
       canRoll: isReadyToRoll,
       flameLabel,
       equipmentLabel,
+      levelRowLabel,
+      levelRowValue,
       totalRollCount,
       latestResult,
     },

@@ -732,14 +732,6 @@ export const EQUIPMENT_CATEGORY_OPTIONS: Array<{
   { type: "heart", label: "기계심장" },
 ];
 
-// 레벨 종류 정의
-export const LEVEL_OPTIONS: Array<{ value: EquipmentLevel; label: string }> = [
-  { value: 140, label: "140" },
-  { value: 160, label: "160" },
-  { value: 180, label: "180" },
-  { value: 200, label: "200" },
-];
-
 // 기계심장은 레벨 단위가 아닌 등급 단위 정의
 export const HEART_GRADE_OPTIONS: Array<{ value: HeartGrade; label: string }> =
   [

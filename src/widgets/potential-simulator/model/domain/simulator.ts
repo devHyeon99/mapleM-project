@@ -28,16 +28,16 @@ function getRandomIntInclusive(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-// step(예: 0.1, 0.001)을 정수 연산으로 다루기 위한 스케일 값을 계산
-function getScaleByStep(step: number) {
-  if (Number.isInteger(step)) return 1;
-  const decimalPart = step.toString().split(".")[1] ?? "";
-  return Math.pow(10, decimalPart.length);
+// step의 소수 자릿수를 계산 (예: 1 -> 0, 0.1 -> 1, 0.001 -> 3)
+function getStepDecimals(step: number) {
+  if (Number.isInteger(step)) return 0;
+  return (step.toString().split(".")[1] ?? "").length;
 }
 
 // 옵션 값 MIN~MAX 사이를 step 간격으로 균등 샘플링
 function sampleValue(min: number, max: number, step: number) {
-  const scale = getScaleByStep(step);
+  // step(예: 0.1, 0.001)을 정수 연산으로 다루기 위한 스케일 값
+  const scale = Math.pow(10, getStepDecimals(step));
   const minTick = Math.round(min * scale);
   const maxTick = Math.round(max * scale);
   const stepTick = Math.round(step * scale);
@@ -139,10 +139,6 @@ export function formatRolledValue(
   unit: RolledOption["unit"],
   step: number,
 ) {
-  const decimals = Number.isInteger(step)
-    ? 0
-    : (step.toString().split(".")[1] ?? "").length;
-
-  const formatted = value.toFixed(decimals);
+  const formatted = value.toFixed(getStepDecimals(step));
   return unit === "percent" ? `${formatted}%` : formatted;
 }

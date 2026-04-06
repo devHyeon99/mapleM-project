@@ -92,15 +92,12 @@ export function usePotentialSimulator() {
   // 장비 분류 변경 핸들러: 분류에 맞게 레벨/등급 상태를 정리
   const handleEquipmentCategoryChange = (value: EquipmentCategory) => {
     setEquipmentCategory(value);
+    setEquipmentLevel(null);
     resetResultState();
 
-    if (value === "heart") {
-      setEquipmentLevel(null);
-      return;
+    if (value !== "heart") {
+      setHeartGrade(null);
     }
-
-    setHeartGrade(null);
-    setEquipmentLevel(value === "watch" ? 200 : null);
   };
 
   // 장비 레벨 변경 핸들러

@@ -107,13 +107,7 @@ export function PotentialSimulatorSettingsCard({
               label={
                 isFixedLevelCategory ? "장비 레벨 (200 고정)" : "장비 레벨"
               }
-              value={
-                isFixedLevelCategory
-                  ? "200"
-                  : selectedLevel
-                    ? String(selectedLevel)
-                    : ""
-              }
+              value={selectedLevel ? String(selectedLevel) : ""}
               placeholder="장비 레벨 선택"
               disabled={isFixedLevelCategory || !equipmentCategory}
               onValueChange={(value) =>

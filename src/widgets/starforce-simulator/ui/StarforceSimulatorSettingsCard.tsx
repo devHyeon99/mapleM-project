@@ -52,11 +52,11 @@ export function StarforceSimulatorSettingsCard({
   onReset,
 }: Props) {
   return (
-    <Card className="gap-4 rounded-xs border-none py-4">
-      <CardHeader className="px-4">
-        <CardTitle className="text-lg">스타포스 강화 설정</CardTitle>
+    <Card>
+      <CardHeader>
+        <CardTitle>스타포스 강화 설정</CardTitle>
       </CardHeader>
-      <CardContent className="space-y-4 px-4">
+      <CardContent className="space-y-4">
         <div className="grid grid-cols-2 gap-4">
           <SelectField
             id="starforce-equipment-category"

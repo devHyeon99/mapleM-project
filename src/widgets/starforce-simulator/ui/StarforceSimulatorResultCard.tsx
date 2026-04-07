@@ -92,12 +92,12 @@ export function StarforceSimulatorResultCard({
   const isAtMaxStarforce = maxStarforce != null && currentStar >= maxStarforce;
 
   return (
-    <Card className="gap-4 rounded-xs border-none py-4">
-      <CardHeader className="px-4">
-        <CardTitle className="text-lg">스타포스 강화 결과</CardTitle>
+    <Card>
+      <CardHeader>
+        <CardTitle>스타포스 강화 결과</CardTitle>
       </CardHeader>
-      <CardContent className="space-y-4 px-4">
-        <div className="bg-secondary grid gap-2 rounded-xs p-4 shadow-sm">
+      <CardContent className="space-y-4">
+        <div className="bg-secondary ring-border grid gap-2 rounded-2xl p-4 shadow-sm ring">
           <div className="grid grid-cols-2 gap-x-4 gap-y-2">
             <SummaryRow label="장비 종류" value={equipmentCategoryLabel} />
             <SummaryRow label="총 시행" value={`${totalAttemptCount}회`} />

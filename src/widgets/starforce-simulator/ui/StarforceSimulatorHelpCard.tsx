@@ -3,8 +3,8 @@ import Link from "next/link";
 
 export function StarforceSimulatorHelpCard() {
   return (
-    <Card className="gap-4 rounded-xs border-none py-4 lg:col-span-2">
-      <CardHeader className="flex justify-between px-4">
+    <Card className="gap-4 lg:col-span-2">
+      <CardHeader className="flex justify-between">
         <CardTitle className="text-lg">스타포스 확률표</CardTitle>
         <Link
           className="self-end text-sm font-medium"
@@ -16,8 +16,8 @@ export function StarforceSimulatorHelpCard() {
           확률표 보기
         </Link>
       </CardHeader>
-      <CardContent className="space-y-4 px-4">
-        <div className="bg-secondary grid gap-1 rounded-xs p-4 text-sm shadow-sm">
+      <CardContent className="space-y-4">
+        <div className="bg-secondary ring-border grid gap-1 rounded-2xl p-4 text-sm shadow-sm ring">
           <p className="font-medium">시뮬레이터 안내</p>
           <p className="text-muted-foreground">
             - 옵션 효과: 스타캐치(성공 +5%), 럭키데이(선택 수치만큼 성공 증가),

@@ -53,12 +53,12 @@ export function PotentialSimulatorResultCard({
   latestResult,
 }: Props) {
   return (
-    <Card className="gap-4 rounded-xs border-none py-4">
-      <CardHeader className="px-4">
-        <CardTitle className="text-lg">추가옵션 결과</CardTitle>
+    <Card>
+      <CardHeader>
+        <CardTitle>추가옵션 결과</CardTitle>
       </CardHeader>
-      <CardContent className="space-y-4 px-4">
-        <div className="bg-secondary grid gap-2 rounded-xs p-4 shadow-sm">
+      <CardContent className="space-y-4">
+        <div className="bg-secondary ring-border grid gap-2 rounded-2xl p-4 shadow-sm ring">
           <SummaryRow label="환생의 불꽃 종류" value={flameLabel} />
           <SummaryRow label="장비 분류" value={equipmentLabel} />
           <SummaryRow label={levelRowLabel} value={levelRowValue} />

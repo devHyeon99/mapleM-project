@@ -39,11 +39,11 @@ export function DiffResultCard({ diffEffects, builds }: DiffResultCardProps) {
       {/* 세팅을 바꿀 때마다 즉시 갱신되는 최종 산출물이라 변경을 읽어준다 */}
       <CardContent className="space-y-3" aria-live="polite">
         {diffEffects.length === 0 ? (
-          <p className="text-muted-foreground bg-secondary ring-border rounded-3xl p-4 text-sm shadow-sm ring">
+          <p className="text-muted-foreground bg-secondary ring-border rounded-2xl p-4 text-sm shadow-sm ring">
             세팅 A와 세팅 B를 입력하면 장비 세트 효과 차이가 표시됩니다.
           </p>
         ) : (
-          <dl className="bg-secondary ring-border space-y-1 rounded-3xl p-4 shadow-sm ring">
+          <dl className="bg-secondary ring-border space-y-1 rounded-2xl p-4 shadow-sm ring">
             {diffEffects.map((effect) => (
               <EffectRow
                 key={effect.key}

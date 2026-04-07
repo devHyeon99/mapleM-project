@@ -49,11 +49,11 @@ export function PotentialSimulatorSettingsCard({
   onReset,
 }: Props) {
   return (
-    <Card className="gap-4 rounded-xs border-none py-4">
-      <CardHeader className="px-4">
-        <CardTitle className="text-lg">환생의 불꽃 설정</CardTitle>
+    <Card>
+      <CardHeader>
+        <CardTitle>환생의 불꽃 설정</CardTitle>
       </CardHeader>
-      <CardContent className="grid gap-4 px-4">
+      <CardContent className="grid gap-4">
         <div className="grid grid-cols-2 gap-4">
           <SelectField
             id="flame-type"

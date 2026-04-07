@@ -90,7 +90,7 @@ export function CubeResultCard({
       <CardHeader>
         <CardTitle>큐브 결과</CardTitle>
       </CardHeader>
-      <CardContent className="space-y-4 px-4">
+      <CardContent className="space-y-4">
         <div className="bg-secondary ring-border grid gap-2 rounded-2xl p-4 text-sm shadow-sm ring">
           <div className="grid grid-cols-2 gap-x-4 gap-y-2">
             <SummaryRow

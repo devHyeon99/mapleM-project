@@ -3,8 +3,8 @@ import Link from "next/link";
 
 export function CubeSimulatorHelpCard() {
   return (
-    <Card className="gap-4 py-4 lg:col-span-2">
-      <CardHeader className="flex justify-between px-4">
+    <Card className="gap-4 lg:col-span-2">
+      <CardHeader className="flex justify-between">
         <CardTitle className="text-lg">큐브 시뮬레이터 도움말</CardTitle>
         <Link
           className="self-end text-sm font-medium"
@@ -16,7 +16,7 @@ export function CubeSimulatorHelpCard() {
           확률표 보기
         </Link>
       </CardHeader>
-      <CardContent className="space-y-4 px-4">
+      <CardContent className="space-y-4">
         <div className="bg-secondary ring-border grid gap-3 rounded-2xl p-4 text-sm shadow-sm ring">
           <div className="grid gap-1">
             <p className="font-medium">옵션 부여 안내</p>

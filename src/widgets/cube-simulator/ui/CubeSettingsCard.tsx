@@ -60,7 +60,7 @@ export function CubeSettingsCard({
       <CardHeader>
         <CardTitle>큐브 설정</CardTitle>
       </CardHeader>
-      <CardContent className="flex flex-1 flex-col gap-4 px-4">
+      <CardContent className="flex flex-1 flex-col gap-4">
         <div className="grid grid-cols-2 gap-4">
           <SelectField
             id="potential-mode"

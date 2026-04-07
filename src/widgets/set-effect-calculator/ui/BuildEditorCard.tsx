@@ -34,7 +34,7 @@ export function BuildEditorCard({
 
   return (
     <Card className="h-full gap-4">
-      <CardHeader className="flex flex-row items-center justify-between gap-2 px-4">
+      <CardHeader className="flex flex-row items-center justify-between gap-2">
         <div className="flex items-baseline gap-2">
           <CardTitle>{title}</CardTitle>
           <span className="text-muted-foreground text-xs">
@@ -56,7 +56,7 @@ export function BuildEditorCard({
         </div>
       </CardHeader>
 
-      <CardContent className="flex flex-1 flex-col gap-4 px-4">
+      <CardContent className="flex flex-1 flex-col gap-4">
         <BuildEditorRowsPanel
           buildState={buildState}
           canRemoveRow={canRemoveRow}

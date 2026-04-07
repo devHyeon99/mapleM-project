@@ -52,5 +52,3 @@ export function PotentialSimulatorHelpCard() {
     </Card>
   );
 }
-
-export default PotentialSimulatorHelpCard;

@@ -4,7 +4,7 @@ import { usePotentialSimulator } from "../model/usePotentialSimulator";
 
 import { PotentialSimulatorResultCard } from "./PotentialSimulatorResultCard";
 import { PotentialSimulatorSettingsCard } from "./PotentialSimulatorSettingsCard";
-import PotentialSimulatorHelpCard from "./PotentialSimulatorHelpCard";
+import { PotentialSimulatorHelpCard } from "./PotentialSimulatorHelpCard";
 
 export function PotentialSimulator() {
   const { state, actions } = usePotentialSimulator();

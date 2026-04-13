@@ -32,6 +32,35 @@ type Props = {
   onReset: () => void;
 };
 
+// 사용/사용 안함 두 값만 갖는 설정용 Select.
+function ToggleSelectField({
+  id,
+  label,
+  checked,
+  disabled,
+  onCheckedChange,
+}: {
+  id: string;
+  label: string;
+  checked: boolean;
+  disabled?: boolean;
+  onCheckedChange: (checked: boolean) => void;
+}) {
+  return (
+    <SelectField
+      id={id}
+      label={label}
+      value={checked ? "enabled" : "disabled"}
+      placeholder={`${label} 설정`}
+      disabled={disabled}
+      onValueChange={(value) => onCheckedChange(value === "enabled")}
+    >
+      <SelectItem value="enabled">사용</SelectItem>
+      <SelectItem value="disabled">사용 안함</SelectItem>
+    </SelectField>
+  );
+}
+
 export function StarforceSimulatorSettingsCard({
   equipmentCategory,
   options,
@@ -91,16 +120,12 @@ export function StarforceSimulatorSettingsCard({
         </div>
 
         <div className="grid grid-cols-2 gap-4">
-          <SelectField
+          <ToggleSelectField
             id="starforce-star-catch"
             label="스타캐치 활성화"
-            value={options.starCatchSuccess ? "enabled" : "disabled"}
-            placeholder="스타캐치 설정"
-            onValueChange={(value) => onStarCatchChange(value === "enabled")}
-          >
-            <SelectItem value="enabled">사용</SelectItem>
-            <SelectItem value="disabled">사용 안함</SelectItem>
-          </SelectField>
+            checked={options.starCatchSuccess}
+            onCheckedChange={onStarCatchChange}
+          />
           <SelectField
             id="starforce-lucky-day-rate"
             label="럭키데이 주문서"
@@ -117,30 +142,20 @@ export function StarforceSimulatorSettingsCard({
               </SelectItem>
             ))}
           </SelectField>
-          <SelectField
+          <ToggleSelectField
             id="starforce-protect-shield"
             label="프로텍트 쉴드 주문서"
-            value={options.protectShield ? "enabled" : "disabled"}
-            placeholder="프로텍트 쉴드 설정"
+            checked={options.protectShield}
             disabled={!canUseProtectShield}
-            onValueChange={(value) =>
-              onProtectShieldChange(value === "enabled")
-            }
-          >
-            <SelectItem value="enabled">사용</SelectItem>
-            <SelectItem value="disabled">사용 안함</SelectItem>
-          </SelectField>
-          <SelectField
+            onCheckedChange={onProtectShieldChange}
+          />
+          <ToggleSelectField
             id="starforce-safety-shield"
             label="세이프티 쉴드 주문서"
-            value={options.safetyShield ? "enabled" : "disabled"}
-            placeholder="세이프티 쉴드 설정"
+            checked={options.safetyShield}
             disabled={!canUseSafetyShield}
-            onValueChange={(value) => onSafetyShieldChange(value === "enabled")}
-          >
-            <SelectItem value="enabled">사용</SelectItem>
-            <SelectItem value="disabled">사용 안함</SelectItem>
-          </SelectField>
+            onCheckedChange={onSafetyShieldChange}
+          />
         </div>
         <div className="flex justify-end gap-2">
           <Button

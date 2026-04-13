@@ -33,17 +33,18 @@ export type StarforceSimulationContext = {
   options: StarforceModifierOptions;
 };
 
-export type StarforceSimulationInput = StarforceSimulationContext;
-
 export type StarforceSimulationResult = {
   targetStar: number;
   resolvedRate: StarforceRate;
   outcome: StarforceOutcome;
   nextStar: number;
-  isDestroyed: boolean;
 };
 
 export type StarforceRateModifier = (
   rate: StarforceRate,
   context: StarforceSimulationContext,
 ) => StarforceRate;
+
+export type StarforceOutcomeCounts = Record<StarforceOutcome, number>;
+
+export type LuckyDayUsageCounts = Record<LuckyDayRate, number>;

@@ -36,10 +36,7 @@ export function StarforceSimulator() {
           equipmentCategory={state.equipmentCategory}
           currentStar={state.currentStar}
           totalAttemptCount={state.totalAttemptCount}
-          successCount={state.successCount}
-          keepCount={state.keepCount}
-          decreaseCount={state.decreaseCount}
-          destroyCount={state.destroyCount}
+          outcomeCounts={state.outcomeCounts}
           safetyShieldUsageCount={state.safetyShieldUsageCount}
           protectShieldUsageCount={state.protectShieldUsageCount}
           luckyDayUsageCounts={state.luckyDayUsageCounts}

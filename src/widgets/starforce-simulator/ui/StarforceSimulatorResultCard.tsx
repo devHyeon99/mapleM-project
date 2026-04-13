@@ -4,7 +4,9 @@ import { Separator } from "@/shared/ui/separator";
 
 import { STARFORCE_EQUIPMENT_CATEGORY_OPTIONS } from "../model/domain/data";
 import type {
+  LuckyDayUsageCounts,
   StarforceEquipmentCategory,
+  StarforceOutcomeCounts,
   StarforceRate,
   StarforceSimulationResult,
 } from "../model/domain/types";
@@ -51,18 +53,10 @@ type Props = {
   equipmentCategory: StarforceEquipmentCategory | null;
   currentStar: number;
   totalAttemptCount: number;
-  successCount: number;
-  keepCount: number;
-  decreaseCount: number;
-  destroyCount: number;
+  outcomeCounts: StarforceOutcomeCounts;
   safetyShieldUsageCount: number;
   protectShieldUsageCount: number;
-  luckyDayUsageCounts: {
-    3: number;
-    5: number;
-    7: number;
-    10: number;
-  };
+  luckyDayUsageCounts: LuckyDayUsageCounts;
   expectedRate: StarforceRate | null;
   latestResult: StarforceSimulationResult | null;
   maxStarforce: number | null;
@@ -73,10 +67,7 @@ export function StarforceSimulatorResultCard({
   equipmentCategory,
   currentStar,
   totalAttemptCount,
-  successCount,
-  keepCount,
-  decreaseCount,
-  destroyCount,
+  outcomeCounts,
   safetyShieldUsageCount,
   protectShieldUsageCount,
   luckyDayUsageCounts,
@@ -101,10 +92,19 @@ export function StarforceSimulatorResultCard({
           <div className="grid grid-cols-2 gap-x-4 gap-y-2">
             <SummaryRow label="장비 종류" value={equipmentCategoryLabel} />
             <SummaryRow label="총 시행" value={`${totalAttemptCount}회`} />
-            <SummaryRow label="성공 횟수" value={`${successCount}회`} />
-            <SummaryRow label="유지 횟수" value={`${keepCount}회`} />
-            <SummaryRow label="하락 횟수" value={`${decreaseCount}회`} />
-            <SummaryRow label="파괴 횟수" value={`${destroyCount}회`} />
+            <SummaryRow
+              label="성공 횟수"
+              value={`${outcomeCounts.success}회`}
+            />
+            <SummaryRow label="유지 횟수" value={`${outcomeCounts.keep}회`} />
+            <SummaryRow
+              label="하락 횟수"
+              value={`${outcomeCounts.decrease}회`}
+            />
+            <SummaryRow
+              label="파괴 횟수"
+              value={`${outcomeCounts.destroy}회`}
+            />
           </div>
 
           <Separator className="my-2" />

@@ -1,13 +1,9 @@
-import {
-  DEFAULT_STARFORCE_OPTIONS,
-  getBaseRateByTargetStar,
-  getMaxStarforceByCategory,
-} from "./data";
+import { getBaseRateByTargetStar, getMaxStarforceByCategory } from "./data";
 import {
   type StarforceOutcome,
   type StarforceRate,
   type StarforceRateModifier,
-  type StarforceSimulationInput,
+  type StarforceSimulationContext,
   type StarforceSimulationResult,
 } from "./types";
 
@@ -18,7 +14,10 @@ const EMPTY_RATE: StarforceRate = {
   destroy: 0,
 };
 
-function increaseSuccessRate(rate: StarforceRate, amount: number): StarforceRate {
+function increaseSuccessRate(
+  rate: StarforceRate,
+  amount: number,
+): StarforceRate {
   if (amount <= 0) return rate;
 
   let remaining = amount;
@@ -121,35 +120,34 @@ const starforceRateModifiers: StarforceRateModifier[] = [
   },
 ];
 
-export function resolveStarforceRate(input: StarforceSimulationInput) {
-  const maxStarforce = getMaxStarforceByCategory(input.equipmentCategory);
-  const targetStar = Math.min(input.currentStar + 1, maxStarforce);
-  const baseRate = getBaseRateByTargetStar(targetStar);
+export function getTargetStar(context: StarforceSimulationContext) {
+  return Math.min(
+    context.currentStar + 1,
+    getMaxStarforceByCategory(context.equipmentCategory),
+  );
+}
+
+export function resolveStarforceRate(context: StarforceSimulationContext) {
+  const baseRate = getBaseRateByTargetStar(getTargetStar(context));
 
   return normalizeRate(
     starforceRateModifiers.reduce((currentRate, modifier) => {
-      return modifier(currentRate, {
-        ...input,
-        options: input.options ?? DEFAULT_STARFORCE_OPTIONS,
-      });
+      return modifier(currentRate, context);
     }, baseRate),
   );
 }
 
 export function simulateStarforce(
-  input: StarforceSimulationInput,
+  context: StarforceSimulationContext,
 ): StarforceSimulationResult {
-  const maxStarforce = getMaxStarforceByCategory(input.equipmentCategory);
-  const targetStar = Math.min(input.currentStar + 1, maxStarforce);
-  const resolvedRate = resolveStarforceRate(input);
+  const maxStarforce = getMaxStarforceByCategory(context.equipmentCategory);
+  const resolvedRate = resolveStarforceRate(context);
   const outcome = resolveOutcomeByRate(resolvedRate);
-  const isDestroyed = outcome === "destroy";
 
   return {
-    targetStar,
+    targetStar: getTargetStar(context),
     resolvedRate,
     outcome,
-    nextStar: Math.min(toNextStar(input.currentStar, outcome), maxStarforce),
-    isDestroyed,
+    nextStar: Math.min(toNextStar(context.currentStar, outcome), maxStarforce),
   };
 }

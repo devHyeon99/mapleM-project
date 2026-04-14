@@ -75,8 +75,6 @@
 ```
 src/
 ├── app/        # Next.js App Router (라우팅, 레이아웃, API Route, Provider)
-│   ├── (Layout)    # 공통 레이아웃이 적용되는 라우트 그룹
-│   ├── (NoLayout)  # 레이아웃이 없는 라우트 그룹
 │   └── api/        # 서버 API Route (character, revalidate)
 ├── widgets/    # 독립적인 UI 블록 (character-detail, guild-detail,
 │               #   ranking-board, cube-simulator, starforce-simulator 등)
@@ -89,7 +87,7 @@ src/
 
 ### 주요 설계 포인트
 
-- **App Router 기반 라우트 그룹** `(Layout)` / `(NoLayout)`으로 공통 레이아웃 적용 범위를 분리
+- **루트 레이아웃에 공통 셸(Header/Footer)** 을 두고, 세그먼트 `layout`으로 하위 공통 UI 를 추가
 - **Nexon Open API 데이터 가공 레이어**를 entities에 두어, 원시 API 응답을 UI에 적합한 도메인 모델로 변환
 - **이미지 최적화**: AVIF/WebP 우선 포맷, 넥슨 이미지 서버에 대한 장기 캐시(TTL 1년) 적용으로 외부 요청 최소화
 - **보안 헤더 설정**: `X-Powered-By` 헤더 제거 등 기본 보안 강화

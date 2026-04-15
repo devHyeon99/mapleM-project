@@ -2,6 +2,7 @@ import { ShieldCheck, Users, Calendar } from "lucide-react";
 import { Card, CardContent } from "@/shared/ui/card";
 import { Badge } from "@/shared/ui/badge";
 import { HelpPopover } from "@/shared/ui/HelpPopover";
+import { formatDateKST, parseValidDate } from "@/shared/lib/date";
 import { GuildMark } from "./GuildMark";
 import type { Guild } from "../model/types";
 
@@ -10,17 +11,7 @@ interface GuildCardProps {
 }
 
 export function GuildCard({ data }: GuildCardProps) {
-  const createdDate = new Date(data.guild_create_date);
-  const createdAt = createdDate.toLocaleDateString("ko-KR", {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-  });
-  const createdAtDateTime = [
-    createdDate.getFullYear(),
-    String(createdDate.getMonth() + 1).padStart(2, "0"),
-    String(createdDate.getDate()).padStart(2, "0"),
-  ].join("-");
+  const createdDate = parseValidDate(data.guild_create_date);
 
   return (
     <Card className="w-full border-none">
@@ -69,7 +60,13 @@ export function GuildCard({ data }: GuildCardProps) {
                   창설일
                 </dt>
                 <dd className="font-bold">
-                  <time dateTime={createdAtDateTime}>{createdAt}</time>
+                  {createdDate ? (
+                    <time dateTime={createdDate.toISOString()}>
+                      {formatDateKST(createdDate)}
+                    </time>
+                  ) : (
+                    "-"
+                  )}
                 </dd>
               </div>
             </dl>

@@ -4,33 +4,49 @@ import {
   getDetailedTimeAgo,
   parseValidDate,
 } from "@/shared/lib/date";
+import { InfoDescriptionRow } from "./InfoRow";
 
 interface InfoDateRowProps {
   label: string;
   date?: string;
+  /**
+   * 시:분:초까지 표시 여부
+   * @default false
+   */
   withTime?: boolean;
+  /**
+   * 날짜 뒤에 경과 시간("N년 N개월 N일 전") 표시 여부
+   * @default false
+   */
+  withTimeAgo?: boolean;
 }
 
-export const InfoDateRow = ({ label, date, withTime }: InfoDateRowProps) => {
+export const InfoDateRow = ({
+  label,
+  date,
+  withTime,
+  withTimeAgo,
+}: InfoDateRowProps) => {
   if (!date) return null;
 
   const parsedDate = parseValidDate(date);
   if (!parsedDate) return null;
 
   return (
-    <div className="flex gap-2">
-      <dt className="text-muted-foreground font-medium">{label}</dt>
-      <dd>
-        <time dateTime={parsedDate.toISOString()}>
-          {withTime ? formatDateTimeKST(parsedDate) : formatDateKST(parsedDate)}
+    <InfoDescriptionRow
+      label={label}
+      labelClassName="font-medium"
+      valueClassName="font-normal"
+    >
+      <time dateTime={parsedDate.toISOString()}>
+        {withTime ? formatDateTimeKST(parsedDate) : formatDateKST(parsedDate)}
+      </time>
 
-          {label === "생성일" && (
-            <span className="text-muted-foreground font-base ml-2 text-sm">
-              ({getDetailedTimeAgo(date)})
-            </span>
-          )}
-        </time>
-      </dd>
-    </div>
+      {withTimeAgo && (
+        <span className="text-muted-foreground ml-2">
+          ({getDetailedTimeAgo(parsedDate)})
+        </span>
+      )}
+    </InfoDescriptionRow>
   );
 };

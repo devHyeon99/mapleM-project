@@ -120,7 +120,11 @@ const CharacterProfileInfoList = ({ data }: CharacterProfileCardProps) => {
       </div>
 
       <div className="flex flex-col gap-3">
-        <InfoDateRow label="생성일" date={data.character_date_create} />
+        <InfoDateRow
+          label="생성일"
+          date={data.character_date_create}
+          withTimeAgo
+        />
         <InfoDateRow
           label="마지막 접속"
           date={data.character_date_last_login}

@@ -1,3 +1,7 @@
+/** 프로필 카드 셸 스타일 (본체/스켈레톤 공용) */
+export const PROFILE_CARD_SHELL_CLASS =
+  "bg-card w-full rounded-2xl p-6 shadow-sm";
+
 export interface TabDefinition<Value extends string = string> {
   value: Value;
   label: string;

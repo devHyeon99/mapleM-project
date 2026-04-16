@@ -6,8 +6,13 @@ import type { CharacterDetailData } from "@/entities/character";
 import { CharacterProfileHelpPopover } from "./CharacterProfileHelpPopover";
 import { worldIconSrc } from "@/shared/config/constants/worlds";
 import { guildHref } from "@/shared/lib/url";
+import { cn } from "@/shared/lib/utils";
+import { PROFILE_CARD_SHELL_CLASS } from "./config";
 
 const NUMBER_FORMATTER = new Intl.NumberFormat("ko-KR");
+
+// 프로필 카드는 페이지당 하나라 고정 id 로 충분하다.
+const PROFILE_NAME_ID = "character-profile-name";
 
 interface CharacterProfileCardProps {
   data: CharacterDetailData;
@@ -55,7 +60,10 @@ const CharacterProfileIdentity = ({ data }: CharacterProfileCardProps) => {
         />
       )}
 
-      <h3 className="flex items-center justify-center gap-1 font-semibold">
+      <h3
+        id={PROFILE_NAME_ID}
+        className="flex items-center justify-center gap-1 font-semibold"
+      >
         {worldIcon && (
           <Image
             src={worldIcon}
@@ -143,9 +151,9 @@ const CharacterProfileInfoList = ({ data }: CharacterProfileCardProps) => {
 
 export const CharacterProfileCard = ({ data }: CharacterProfileCardProps) => {
   return (
-    <article
-      className="bg-card relative w-full rounded-xs p-4 shadow-sm sm:p-6"
-      aria-label={`${data.character_name} 캐릭터 상세정보`}
+    <section
+      className={cn(PROFILE_CARD_SHELL_CLASS, "relative")}
+      aria-labelledby={PROFILE_NAME_ID}
     >
       <div className="flex w-full flex-col items-center gap-4 sm:flex-row sm:items-start">
         <CharacterProfileIdentity data={data} />
@@ -153,6 +161,6 @@ export const CharacterProfileCard = ({ data }: CharacterProfileCardProps) => {
       </div>
 
       <CharacterProfileHelpPopover />
-    </article>
+    </section>
   );
 };

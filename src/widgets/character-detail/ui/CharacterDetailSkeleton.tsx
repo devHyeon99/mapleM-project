@@ -1,8 +1,13 @@
 import { Skeleton } from "@/shared/ui/skeleton";
+import { cn } from "@/shared/lib/utils";
+import { PROFILE_CARD_SHELL_CLASS } from "./config";
 
 function ProfileCardSkeleton() {
+  // 자리표시용이라 section/dl 같은 시맨틱은 쓰지 않는다.
   return (
-    <article className="bg-card min-h-[488px] w-full rounded-xs p-4 shadow-sm sm:min-h-[356px] sm:p-6">
+    <div
+      className={cn(PROFILE_CARD_SHELL_CLASS, "min-h-[488px] sm:min-h-[356px]")}
+    >
       <div className="flex w-full flex-col items-center gap-4 sm:flex-row sm:items-start">
         {/* 캐릭터 이미지 + 이름 */}
         <div className="flex w-full shrink-0 flex-col items-center gap-2 sm:w-44">
@@ -11,7 +16,7 @@ function ProfileCardSkeleton() {
         </div>
 
         {/* 정보 목록 */}
-        <dl className="flex w-full flex-col gap-4">
+        <div className="flex w-full flex-col gap-4">
           <div className="flex flex-wrap gap-3">
             <Skeleton className="h-4 w-20" />
           </div>
@@ -28,9 +33,9 @@ function ProfileCardSkeleton() {
             <Skeleton className="h-4 w-40" />
             <Skeleton className="h-4 w-32" />
           </div>
-        </dl>
+        </div>
       </div>
-    </article>
+    </div>
   );
 }
 
@@ -83,7 +88,7 @@ export function CharacterDetailSkeleton() {
     <section
       aria-busy="true"
       aria-label="캐릭터 정보를 불러오는 중"
-      className="flex w-full justify-center"
+      className="wide:px-0 flex w-full justify-center px-4"
     >
       <div className="flex w-full flex-col gap-2">
         <ProfileCardSkeleton />

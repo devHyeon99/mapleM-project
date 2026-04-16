@@ -27,7 +27,6 @@ export const CharacterSearch = () => {
 
   return (
     <SearchForm
-      label="캐릭터 검색"
       historyKey="character-search-history"
       lastWorldKey="character-last-world"
       placeholder="캐릭터 이름을 입력하세요"

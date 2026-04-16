@@ -21,7 +21,6 @@ export function GuildSearch() {
 
   return (
     <SearchForm
-      label="길드 검색"
       historyKey="guild-search-history"
       lastWorldKey="guild-last-world"
       placeholder="길드명을 입력하세요"

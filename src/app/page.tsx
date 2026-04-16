@@ -59,7 +59,7 @@ export default async function Home() {
         </div>
 
         {/* 검색 */}
-        <search className="w-full max-w-3xl">
+        <search className="w-full max-w-3xl" aria-label="캐릭터 검색">
           <CharacterSearch />
         </search>
       </div>

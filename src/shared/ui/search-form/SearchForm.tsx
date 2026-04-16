@@ -7,8 +7,6 @@ import { SearchFormError } from "./SearchFormError";
 import { useRecentSearch } from "@/shared/lib/hooks/useRecentSearch";
 
 interface SearchFormProps {
-  /** 검색 영역 랜드마크 이름. 예: "캐릭터 검색" */
-  label: string;
   historyKey: string;
   lastWorldKey: string;
   placeholder: string;
@@ -19,7 +17,6 @@ interface SearchFormProps {
 }
 
 export function SearchForm({
-  label,
   historyKey,
   lastWorldKey,
   placeholder,
@@ -55,7 +52,6 @@ export function SearchForm({
   return (
     <div className="flex w-full flex-col gap-2">
       <SearchFormField
-        label={label}
         world={world}
         options={worldOptions}
         inputValue={inputValue}

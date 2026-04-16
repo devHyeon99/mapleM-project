@@ -9,7 +9,6 @@ import { useHistoryPanelController } from "./useHistoryPanelController";
 import type { SearchHistoryItem } from "@/shared/lib/hooks/useRecentSearch";
 
 interface SearchFormFieldProps {
-  label: string;
   world: string;
   options: readonly string[];
   inputValue: string;
@@ -26,7 +25,6 @@ interface SearchFormFieldProps {
 }
 
 export function SearchFormField({
-  label,
   world,
   options,
   inputValue,
@@ -54,8 +52,9 @@ export function SearchFormField({
   } = useHistoryPanelController();
   const historyLabelId = `${inputId}-history-label`;
 
+  // 검색 랜드마크(role=search)는 이 폼을 감싸는 페이지의 <search> 요소가 담당한다.
   return (
-    <div role="search" aria-label={label} className="flex w-full items-center">
+    <div className="flex w-full items-center">
       <SearchFormWorldSelect
         value={world}
         onValueChange={onWorldChange}

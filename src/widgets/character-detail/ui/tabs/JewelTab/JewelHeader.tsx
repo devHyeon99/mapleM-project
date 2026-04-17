@@ -19,7 +19,7 @@ export const JewelHeader = ({
 
   return (
     <div className="flex w-full items-center justify-between gap-2">
-      <h2 className="font-bold">쥬얼 페이지</h2>
+      <h3 className="font-bold">쥬얼 페이지</h3>
 
       <PresetToggle
         activePresetNo={useJewelPageNo}

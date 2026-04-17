@@ -62,7 +62,7 @@ export const StatTab = ({ ocid, level }: StatTabProps) => {
       {/* 기본 스탯 정보 영역 */}
       <section className="bg-card w-full p-3 shadow-sm">
         <div className="mb-2 flex items-center justify-between">
-          <h2 className="flex h-8 items-center font-bold">캐릭터 스탯</h2>
+          <h3 className="flex h-8 items-center font-bold">캐릭터 스탯</h3>
           <HelpPopover
             ariaLabel="캐릭터 스탯 도움말"
             items={STAT_HELP_ITEMS}
@@ -90,7 +90,7 @@ export const StatTab = ({ ocid, level }: StatTabProps) => {
       <section className="bg-card w-full p-3 shadow-sm">
         <div className="mb-2 flex items-center justify-between">
           <div className="flex flex-row items-center gap-2">
-            <h2 className="font-bold">하이퍼 스탯</h2>
+            <h3 className="font-bold">하이퍼 스탯</h3>
           </div>
 
           {hyperStat && (

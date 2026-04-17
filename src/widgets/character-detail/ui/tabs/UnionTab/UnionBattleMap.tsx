@@ -61,7 +61,7 @@ export const UnionBattleMap = ({ raiderData }: UnionBattleMapProps) => {
   return (
     <section className="bg-card overflow-hidden p-4 shadow-sm">
       <div className="flex w-full items-center justify-between">
-        <h2 className="text-base font-bold">유니온 배치도</h2>
+        <h3 className="text-base font-bold">유니온 배치도</h3>
 
         <PresetToggle
           activePresetNo={raiderData.use_preset_no}

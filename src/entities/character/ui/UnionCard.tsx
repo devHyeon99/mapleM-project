@@ -26,7 +26,7 @@ export const UnionCard = ({
 
   return (
     <section className="bg-card w-full rounded-xs p-4 shadow-sm">
-      <h2 className="font-bold">{title}</h2>
+      <h3 className="font-bold">{title}</h3>
 
       <Separator className="my-2" />
 

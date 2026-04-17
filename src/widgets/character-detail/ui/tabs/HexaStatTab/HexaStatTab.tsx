@@ -68,7 +68,7 @@ type CoreSectionProps = {
 const HexaStatCoreSection = ({ slot, statInfo }: CoreSectionProps) => {
   return (
     <section className="bg-card space-y-2 p-4">
-      <h2 className="font-bold">스탯 코어 {slot}</h2>
+      <h3 className="font-bold">스탯 코어 {slot}</h3>
       <Separator className="my-2" />
       {statInfo.map((page) => (
         <HexaStatPageCard key={page.page_no} page={page} />

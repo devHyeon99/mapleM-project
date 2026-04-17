@@ -19,7 +19,7 @@ export const LinkSkillHeader = ({
 
   return (
     <div className="flex items-center justify-between gap-2">
-      <h2 className="font-bold">링크 스킬</h2>
+      <h3 className="font-bold">링크 스킬</h3>
 
       <PresetToggle
         activePresetNo={usePresetNo}

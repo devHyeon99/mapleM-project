@@ -73,12 +73,13 @@ export default async function CharacterPage({ params }: CharacterPageProps) {
 
   return (
     <div className="flex w-full flex-1 flex-col items-center pt-2 pb-6">
-      <search className="mb-4 w-full max-w-3xl px-4" aria-label="캐릭터 재검색">
-        <CharacterSearch />
-      </search>
       <h1 className="sr-only">
         {decodedName} ({decodedWorld}) 캐릭터 검색 결과
       </h1>
+
+      <search className="mb-4 w-full max-w-3xl px-4" aria-label="캐릭터 재검색">
+        <CharacterSearch />
+      </search>
 
       <CharacterDetail ocid={ocid} characterData={characterData} />
     </div>

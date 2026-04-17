@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import { cn } from "@/shared/lib/utils";
@@ -17,7 +17,12 @@ interface ScrollButtonProps {
   onClick: () => void;
 }
 
-const ScrollButton = ({ direction, label, visible, onClick }: ScrollButtonProps) => {
+const ScrollButton = ({
+  direction,
+  label,
+  visible,
+  onClick,
+}: ScrollButtonProps) => {
   if (!visible) return null;
 
   const Icon = direction === "left" ? ChevronLeft : ChevronRight;
@@ -33,7 +38,7 @@ const ScrollButton = ({ direction, label, visible, onClick }: ScrollButtonProps)
       <button
         type="button"
         onClick={onClick}
-        className="bg-background/60 hover:bg-background/90 flex h-8 w-8 items-center justify-center rounded-full border shadow-md transition-colors backdrop-blur-sm"
+        className="bg-background/60 hover:bg-background/90 flex h-8 w-8 items-center justify-center rounded-full border shadow-md backdrop-blur-sm transition-colors"
         aria-label={label}
       >
         <Icon className="text-muted-foreground h-5 w-5" />
@@ -75,7 +80,8 @@ export function CharacterDetailTabNav() {
       if (!el) return;
 
       el.scrollBy({
-        left: (direction === "left" ? -1 : 1) * el.clientWidth * SCROLL_STEP_RATIO,
+        left:
+          (direction === "left" ? -1 : 1) * el.clientWidth * SCROLL_STEP_RATIO,
         behavior: "smooth",
       });
 
@@ -94,34 +100,51 @@ export function CharacterDetailTabNav() {
 
   return (
     <div className="group bg-card relative w-full border-b">
-      <ScrollButton direction="left" label="이전 탭 보기" visible={canScrollLeft} onClick={() => scroll("left")} />
-      <ScrollButton direction="right" label="다음 탭 보기" visible={canScrollRight} onClick={() => scroll("right")} />
+      <ScrollButton
+        direction="left"
+        label="이전 탭 보기"
+        visible={canScrollLeft}
+        onClick={() => scroll("left")}
+      />
+      <ScrollButton
+        direction="right"
+        label="다음 탭 보기"
+        visible={canScrollRight}
+        onClick={() => scroll("right")}
+      />
+
+      {/* role="tablist" 는 tab 이외의 자식을 소유할 수 없으므로 설명문은 TabsList 바깥에 둔다. */}
+      {ALL_TABS.map((tab) => (
+        <span
+          key={tab.value}
+          id={`${tab.value}-tab-description`}
+          className="sr-only"
+        >
+          {tab.description}
+        </span>
+      ))}
 
       <TabsList
         ref={tabListRef}
         className={cn(
-          "group-data-horizontal/tabs:h-12 flex w-full items-center justify-start rounded-none bg-transparent p-0 shadow-sm",
+          "flex w-full items-center justify-start rounded-none bg-transparent p-0 shadow-sm group-data-horizontal/tabs:h-12",
           "overflow-x-auto overflow-y-hidden scroll-smooth whitespace-nowrap",
           "[-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
         )}
       >
         {ALL_TABS.map((tab) => (
-          <React.Fragment key={tab.value}>
-            <span id={`${tab.value}-tab-description`} className="sr-only">
-              {tab.description}
-            </span>
-            <TabsTrigger
-              value={tab.value}
-              aria-describedby={`${tab.value}-tab-description`}
-              className={cn(
-                "text-muted-foreground relative h-12 shrink-0 rounded-none border-0 border-b-2 px-5 text-sm font-semibold shadow-none!",
-                "hover:text-foreground! hover:cursor-pointer",
-                "data-[state=active]:text-foreground data-[state=active]:border-orange-500 data-[state=active]:bg-transparent! dark:data-[state=active]:border-b-orange-500",
-              )}
-            >
-              {tab.label}
-            </TabsTrigger>
-          </React.Fragment>
+          <TabsTrigger
+            key={tab.value}
+            value={tab.value}
+            aria-describedby={`${tab.value}-tab-description`}
+            className={cn(
+              "text-muted-foreground relative h-12 shrink-0 rounded-none border-0 border-b-2 px-5 text-sm font-semibold shadow-none!",
+              "hover:text-foreground! hover:cursor-pointer",
+              "data-[state=active]:text-foreground data-[state=active]:border-orange-500 data-[state=active]:bg-transparent! dark:data-[state=active]:border-b-orange-500",
+            )}
+          >
+            {tab.label}
+          </TabsTrigger>
         ))}
       </TabsList>
     </div>

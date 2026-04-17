@@ -109,7 +109,6 @@ export default function RootLayout({
             {/* 왼쪽 광고  */}
             <aside
               className="absolute top-0 -left-[220px] hidden h-full w-[200px] 2xl:hidden"
-              aria-label="좌측 광고 영역"
               aria-hidden="true"
               data-nosnippet
             >
@@ -124,7 +123,6 @@ export default function RootLayout({
             {/* 오른쪽 광고 */}
             <aside
               className="absolute top-0 -right-[220px] hidden h-full w-[200px] 2xl:hidden"
-              aria-label="우측 광고 영역"
               aria-hidden="true"
               data-nosnippet
             >

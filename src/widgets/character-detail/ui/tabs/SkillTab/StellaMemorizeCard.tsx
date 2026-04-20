@@ -10,7 +10,7 @@ export const StellaMemorizeCard = ({ skills }: StellaMemorizeCardProps) => {
   if (skills.length === 0) return null;
 
   return (
-    <section className="bg-card flex w-full flex-col p-4 shadow-sm">
+    <section className="bg-card flex w-full flex-col rounded-2xl p-4 shadow-sm">
       <h3 className="font-bold">스텔라 메모라이즈</h3>
       <Separator className="my-2" />
 

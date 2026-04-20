@@ -26,7 +26,7 @@ export const ItemTab = ({ data }: ItemTabProps) => {
 
   return (
     <div className="flex flex-col gap-2">
-      <div className="bg-card relative flex flex-col gap-4 rounded-xs shadow-sm">
+      <div className="bg-card relative flex flex-col gap-4 rounded-2xl shadow-sm">
         {viewMode === "grid" ? (
           <div className="mx-auto flex w-full flex-col items-center gap-4 py-4">
             <ItemTabHeader {...headerProps} />

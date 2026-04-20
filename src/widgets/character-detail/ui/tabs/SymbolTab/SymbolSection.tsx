@@ -21,7 +21,7 @@ export const SymbolSection = ({ title, items }: SymbolSectionProps) => {
   if (safeItems.length === 0) return null;
 
   return (
-    <section className="bg-card flex-1 p-3 shadow-sm">
+    <section className="bg-card flex-1 rounded-2xl p-3 shadow-sm">
       <h3 className="mb-2 flex items-center justify-between">
         <span className="font-bold">{title}</span>
         <span className="text-sm font-semibold text-orange-400">

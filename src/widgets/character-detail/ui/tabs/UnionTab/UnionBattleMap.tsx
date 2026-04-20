@@ -59,7 +59,7 @@ export const UnionBattleMap = ({ raiderData }: UnionBattleMapProps) => {
   });
 
   return (
-    <section className="bg-card overflow-hidden p-4 shadow-sm">
+    <section className="bg-card overflow-hidden rounded-2xl p-4 shadow-sm">
       <div className="flex w-full items-center justify-between">
         <h3 className="text-base font-bold">유니온 배치도</h3>
 

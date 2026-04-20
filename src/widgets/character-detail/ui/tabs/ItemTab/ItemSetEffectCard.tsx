@@ -28,7 +28,7 @@ export const ItemSetEffectCard = ({ items }: ItemSetEffectCardProps) => {
   }
 
   return (
-    <section className="bg-card flex w-full flex-col rounded-xs p-4 pt-0">
+    <section className="bg-card flex w-full flex-col rounded-2xl p-4">
       <div className="mb-2 flex items-center justify-between">
         <span className="text-foreground font-bold">장비 세트 효과</span>
       </div>

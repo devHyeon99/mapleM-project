@@ -23,7 +23,8 @@ export const LinkSkillTab = ({ ocid }: LinkSkillTabProps) => {
     setSelectedPreset,
   } = useLinkSkillTab(ocid);
 
-  if (isLoading) return <TabLoadingBox className="min-h-[750px] md:min-h-[646px]" />;
+  if (isLoading)
+    return <TabLoadingBox className="min-h-[750px] md:min-h-[646px]" />;
 
   if (isError) {
     return (
@@ -48,7 +49,7 @@ export const LinkSkillTab = ({ ocid }: LinkSkillTabProps) => {
 
   return (
     <>
-      <div className="bg-card p-3 shadow-sm">
+      <div className="bg-card rounded-2xl p-3 shadow-sm">
         <LinkSkillHeader
           usePresetNo={mergedData.use_prest_no}
           activePreset={activePreset}

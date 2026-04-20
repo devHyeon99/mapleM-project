@@ -31,7 +31,7 @@ export const UnionTab = ({ ocid, data, ranking }: UnionTabProps) => {
       <UnionCard data={data} ranking={ranking} />
 
       {isRaiderLoading ? (
-        <div className="bg-card text-muted-foreground flex h-98 items-center justify-center text-sm shadow-sm">
+        <div className="bg-card text-muted-foreground flex h-98 items-center justify-center rounded-2xl text-sm shadow-sm">
           배치도 불러오는 중...
         </div>
       ) : (

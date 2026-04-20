@@ -17,7 +17,8 @@ interface SkillTabProps {
 export const SkillTab = ({ ocid }: SkillTabProps) => {
   const { query, ui, layout } = useSkillTab(ocid);
 
-  if (query.isLoading) return <TabLoadingBox className="min-h-[790px] md:min-h-[309px]" />;
+  if (query.isLoading)
+    return <TabLoadingBox className="min-h-[790px] md:min-h-[309px]" />;
 
   if (query.isError) {
     return (
@@ -54,7 +55,7 @@ export const SkillTab = ({ ocid }: SkillTabProps) => {
   return (
     <div className="flex flex-col gap-2">
       <div className="flex flex-col gap-2 md:flex-row md:items-stretch">
-        <div className="bg-card flex w-full min-w-0 flex-1 basis-0 flex-col p-4 shadow-sm">
+        <div className="bg-card flex w-full min-w-0 flex-1 basis-0 flex-col rounded-2xl p-4 shadow-sm">
           {layout.hasEquipment && (
             <>
               <SkillTabHeader
@@ -81,7 +82,7 @@ export const SkillTab = ({ ocid }: SkillTabProps) => {
             </>
           )}
         </div>
-        <div className="bg-card flex w-full min-w-0 flex-1 basis-0 flex-col p-4 shadow-sm">
+        <div className="bg-card flex w-full min-w-0 flex-1 basis-0 flex-col rounded-2xl p-4 shadow-sm">
           <SkillPreset presets={query.data.skill.preset} />
         </div>
       </div>

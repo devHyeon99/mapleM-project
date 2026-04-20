@@ -29,7 +29,7 @@ function HexaSkillSection({
   if (items.length === 0) return null;
 
   return (
-    <section className="bg-card p-4 shadow-sm">
+    <section className="bg-card rounded-2xl p-4 shadow-sm">
       <h3 className="font-semibold">{title}</h3>
       <Separator className="my-2" />
       <ul className="space-y-2">

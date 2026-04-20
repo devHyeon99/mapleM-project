@@ -44,7 +44,10 @@ export const UnionEffect = ({
   return (
     <section
       aria-labelledby={titleId}
-      className={cn("bg-card flex w-full flex-col p-4 shadow-sm", className)}
+      className={cn(
+        "bg-card flex w-full flex-col rounded-2xl p-4 shadow-sm",
+        className,
+      )}
     >
       <h3 id={titleId} className="text-base font-bold">
         {title}

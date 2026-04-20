@@ -24,7 +24,7 @@ export const ItemTabFooter = ({
   }
 
   return (
-    <div className="grid w-full shadow-sm">
+    <div className="grid w-full gap-2 shadow-sm">
       <ItemSpecSummaryCard items={items} characterClass={characterClass} />
       <ItemSetEffectCard items={items} />
     </div>

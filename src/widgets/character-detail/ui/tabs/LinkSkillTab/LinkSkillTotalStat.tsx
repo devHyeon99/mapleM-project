@@ -13,7 +13,7 @@ export const LinkSkillTotalStat = ({ skills }: LinkSkillTotalStatProps) => {
   if (totalStats.length === 0) return null;
 
   return (
-    <div className="bg-card mt-2 p-3 shadow-sm">
+    <div className="bg-card mt-2 rounded-2xl p-3 shadow-sm">
       <h3 className="font-bold">링크 스킬 능력치 총합</h3>
       <Separator className="my-3" />
       <div className="grid grid-cols-2 gap-x-4 gap-y-2">

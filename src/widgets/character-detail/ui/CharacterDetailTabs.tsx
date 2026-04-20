@@ -1,14 +1,15 @@
 "use client";
 
 import type { CharacterUnion, UnionRanking } from "@/entities/character";
-import { Suspense, useEffect, useState, useTransition } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { Suspense, useEffect, useState } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
 
 import { Tabs, TabsContent } from "@/shared/ui/tabs";
 
 import { ALL_TABS, type TabKey } from "./config";
 import { CharacterDetailTabContent } from "./CharacterDetailTabContent";
 import { CharacterDetailTabNav } from "./CharacterDetailTabNav";
+import { TabLoadingBox } from "./TabLoadingBox";
 import type { CharacterItemTabData } from "./types";
 
 const DEFAULT_TAB: TabKey = "Item";
@@ -49,7 +50,7 @@ const CharacterDetailTabsView = ({
           <TabsContent
             key={tab.value}
             value={tab.value}
-            className="rounded-xs focus-visible:outline-none"
+            className="rounded-2xl"
           >
             <CharacterDetailTabContent
               tabKey={tab.value}
@@ -68,10 +69,8 @@ const CharacterDetailTabsView = ({
 
 // URL query와 탭 상태를 동기화하는 컨트롤러 컴포넌트
 const CharacterDetailTabsWithUrl = (props: CharacterDetailTabsProps) => {
-  const router = useRouter(); // URL 변경용
   const pathname = usePathname(); // 현재 경로
   const searchParams = useSearchParams(); // 현재 query
-  const [, startTransition] = useTransition();
 
   const tabQuery = searchParams.get(TAB_QUERY_KEY);
   const tabFromUrl = isTabKey(tabQuery) ? tabQuery : DEFAULT_TAB;
@@ -97,9 +96,9 @@ const CharacterDetailTabsWithUrl = (props: CharacterDetailTabsProps) => {
     const query = params.toString();
     const href = query ? `${pathname}?${query}` : pathname;
 
-    startTransition(() => {
-      router.replace(href, { scroll: false });
-    });
+    // router.replace 는 RSC 재요청을 일으켜 페이지의 no-store 넥슨 호출까지 다시 나간다.
+    // 탭은 서버 렌더 결과를 바꾸지 않으므로 URL 만 갈아끼운다.
+    window.history.replaceState(null, "", href);
   };
 
   return (
@@ -111,19 +110,22 @@ const CharacterDetailTabsWithUrl = (props: CharacterDetailTabsProps) => {
   );
 };
 
+// useSearchParams 는 가장 가까운 Suspense 경계까지를 클라이언트 렌더로 떨어뜨린다.
+// 경계가 없으면 그 범위가 라우트 전체가 되므로 탭 영역만 감싼다.
+const CharacterDetailTabsFallback = () => {
+  return (
+    <Tabs value={DEFAULT_TAB} className="w-full">
+      <div className="flex flex-col gap-2">
+        <CharacterDetailTabNav />
+        <TabLoadingBox className="min-h-[408px] sm:min-h-[474px]" />
+      </div>
+    </Tabs>
+  );
+};
+
 export const CharacterDetailTabs = (props: CharacterDetailTabsProps) => {
   return (
-    <Suspense
-      fallback={
-        <div className="pointer-events-none opacity-60 select-none">
-          <CharacterDetailTabsView
-            {...props}
-            activeTab={DEFAULT_TAB}
-            onTabChange={() => {}}
-          />
-        </div>
-      }
-    >
+    <Suspense fallback={<CharacterDetailTabsFallback />}>
       <CharacterDetailTabsWithUrl {...props} />
     </Suspense>
   );

@@ -6,9 +6,8 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/shared/lib/utils";
 import { TabsList, TabsTrigger } from "@/shared/ui/tabs";
 
+import { getTabScrollTarget } from "../lib/tabScroll";
 import { ALL_TABS } from "./config";
-
-const SCROLL_STEP_RATIO = 0.8;
 
 interface ScrollButtonProps {
   direction: "left" | "right";
@@ -16,6 +15,26 @@ interface ScrollButtonProps {
   visible: boolean;
   onClick: () => void;
 }
+
+/** 스크롤 여지를 알리는 그라데이션. 호버가 없는 모바일에서도 항상 보이기 위함. */
+const ScrollFade = ({
+  direction,
+  visible,
+}: Pick<ScrollButtonProps, "direction" | "visible">) => {
+  if (!visible) return null;
+
+  return (
+    <div
+      aria-hidden="true"
+      className={cn(
+        "from-card pointer-events-none absolute inset-y-0 z-10 w-10 to-transparent",
+        direction === "left"
+          ? "left-0 bg-linear-to-r"
+          : "right-0 bg-linear-to-l",
+      )}
+    />
+  );
+};
 
 const ScrollButton = ({
   direction,
@@ -30,7 +49,8 @@ const ScrollButton = ({
   return (
     <div
       className={cn(
-        "pointer-events-none absolute top-1/2 z-10 -translate-y-1/2 opacity-0 transition-opacity duration-200",
+        // 포인터가 있는 환경에서만 노출한다. 모바일은 ScrollFade 로 안내함.
+        "pointer-events-none absolute top-1/2 z-20 hidden -translate-y-1/2 opacity-0 transition-opacity duration-200 pointer-fine:block",
         "group-hover:pointer-events-auto group-hover:opacity-100",
         direction === "left" ? "left-2" : "right-2",
       )}
@@ -38,7 +58,7 @@ const ScrollButton = ({
       <button
         type="button"
         onClick={onClick}
-        className="bg-background/60 hover:bg-background/90 flex h-8 w-8 items-center justify-center rounded-full border shadow-md backdrop-blur-sm transition-colors"
+        className="bg-background/60 hover:bg-background/90 flex h-8 w-8 items-center justify-center rounded-full shadow-md backdrop-blur-sm transition-colors"
         aria-label={label}
       >
         <Icon className="text-muted-foreground h-5 w-5" />
@@ -74,32 +94,29 @@ export function CharacterDetailTabNav() {
     };
   }, [updateScrollState]);
 
-  const scroll = useCallback(
-    (direction: "left" | "right") => {
-      const el = tabListRef.current;
-      if (!el) return;
+  // 활성 탭이 스크롤 밖에 있으면 보이는 위치로 끌어온다. (?tab= 로 바로 진입한 경우)
+  useEffect(() => {
+    const activeTrigger = tabListRef.current?.querySelector(
+      '[data-slot="tabs-trigger"][data-state="active"]',
+    );
+    activeTrigger?.scrollIntoView({ inline: "center", block: "nearest" });
+  }, []);
 
-      el.scrollBy({
-        left:
-          (direction === "left" ? -1 : 1) * el.clientWidth * SCROLL_STEP_RATIO,
-        behavior: "smooth",
-      });
+  const scroll = useCallback((direction: "left" | "right") => {
+    const el = tabListRef.current;
+    if (!el) return;
 
-      let lastScrollLeft = el.scrollLeft;
-      const poll = () => {
-        updateScrollState();
-        if (el.scrollLeft !== lastScrollLeft) {
-          lastScrollLeft = el.scrollLeft;
-          requestAnimationFrame(poll);
-        }
-      };
-      requestAnimationFrame(poll);
-    },
-    [updateScrollState],
-  );
+    const left = getTabScrollTarget(el, direction);
+
+    // 스크롤 중 상태 갱신은 scroll 이벤트 리스너가 처리한다.
+    el.scrollTo({ left, behavior: "smooth" });
+  }, []);
 
   return (
-    <div className="group bg-card relative w-full border-b">
+    <div className="group bg-card relative w-full overflow-hidden rounded-2xl shadow-sm">
+      <ScrollFade direction="left" visible={canScrollLeft} />
+      <ScrollFade direction="right" visible={canScrollRight} />
+
       <ScrollButton
         direction="left"
         label="이전 탭 보기"
@@ -138,9 +155,8 @@ export function CharacterDetailTabNav() {
             value={tab.value}
             aria-describedby={`${tab.value}-tab-description`}
             className={cn(
-              "text-muted-foreground relative h-12 shrink-0 rounded-none border-0 border-b-2 px-5 text-sm font-semibold shadow-none!",
-              "hover:text-foreground! hover:cursor-pointer",
-              "data-[state=active]:text-foreground data-[state=active]:border-orange-500 data-[state=active]:bg-transparent! dark:data-[state=active]:border-b-orange-500",
+              "text-muted-foreground relative h-12 shrink-0 rounded-none border-0 px-5 text-sm font-semibold",
+              "data-[state=active]:bg-transparent!",
             )}
           >
             {tab.label}

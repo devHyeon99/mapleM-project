@@ -12,8 +12,6 @@ interface CharacterPageProps {
   params: Promise<{ world: string; name: string }>;
 }
 
-// generateMetadata 와 페이지 렌더가 같은 요청에서 각각 호출하므로 cache 로 묶는다.
-// 감싸지 않으면 넥슨 API 를 두 번씩 부른다.
 const getPageData = cache(async (world: string, name: string) => {
   const ocidData = await fetchOcid(world, name);
   if (!ocidData?.ocid) return null;
@@ -31,9 +29,6 @@ export async function generateMetadata({
   const decodedWorld = worldFromSlug(safeDecode(world));
   const decodedName = safeDecode(name);
 
-  // 존재하지 않는 캐릭터에도 그럴듯한 제목이 붙으면, 죽은 링크를 공유했을 때
-  // 실존하는 캐릭터처럼 미리보기가 뜬다. noindex 라 검색에는 영향이 없지만
-  // 카카오톡·디스코드 공유에는 그대로 노출된다.
   const pageData = await getPageData(decodedWorld, decodedName);
   if (!pageData) return NotFoundMetadata;
 
@@ -72,12 +67,12 @@ export default async function CharacterPage({ params }: CharacterPageProps) {
   const { ocid, characterData } = pageData;
 
   return (
-    <div className="flex w-full flex-1 flex-col items-center pt-2 pb-6">
+    <div className="wide:px-0 flex w-full flex-1 flex-col items-center px-4 py-6">
       <h1 className="sr-only">
         {decodedName} ({decodedWorld}) 캐릭터 검색 결과
       </h1>
 
-      <search className="mb-4 w-full max-w-3xl px-4" aria-label="캐릭터 재검색">
+      <search className="mb-2 w-full max-w-3xl" aria-label="캐릭터 재검색">
         <CharacterSearch />
       </search>
 

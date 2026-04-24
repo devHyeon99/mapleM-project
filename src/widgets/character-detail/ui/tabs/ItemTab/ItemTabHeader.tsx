@@ -1,5 +1,7 @@
 "use client";
 
+import { memo } from "react";
+
 import { SegmentedToggle } from "@/shared/ui/SegmentedToggle";
 import { ViewModeToggle } from "@/shared/ui/ViewModeToggle";
 
@@ -16,7 +18,7 @@ interface ItemTabHeaderProps {
   onChangeViewMode: (mode: "grid" | "list") => void;
 }
 
-export const ItemTabHeader = ({
+export const ItemTabHeader = memo(function ItemTabHeader({
   activePresetNo,
   activeAndroidPresetNo,
   selectedPreset,
@@ -27,7 +29,7 @@ export const ItemTabHeader = ({
   onSelectPreset,
   onSelectAndroidPreset,
   onChangeViewMode,
-}: ItemTabHeaderProps) => {
+}: ItemTabHeaderProps) {
   return (
     <section
       aria-label="장비 탭 헤더 컨트롤"
@@ -61,4 +63,4 @@ export const ItemTabHeader = ({
       />
     </section>
   );
-};
+});

@@ -14,9 +14,9 @@ const DEFAULT_PRESET_NO = 1;
 export const useItemTab = (data: CharacterItemTabData) => {
   // 사용자가 직접 선택한 장비/안드로이드 프리셋과 보기 방식
   const [selectedPreset, setSelectedPreset] = useState<number | null>(null);
-  const [selectedAndroidPreset, setSelectedAndroidPreset] = useState<number | null>(
-    null,
-  );
+  const [selectedAndroidPreset, setSelectedAndroidPreset] = useState<
+    number | null
+  >(null);
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
 
   // API 응답의 현재 적용 프리셋과 기본 장착 장비 데이터
@@ -31,12 +31,19 @@ export const useItemTab = (data: CharacterItemTabData) => {
   } = data;
 
   // 선택 가능한 장비/안드로이드 프리셋 번호 목록
-  const availablePresetNos = presetList?.map((preset) => preset.preset_no) ?? [];
-  const availableAndroidPresetNos =
-    androidPresetList?.map((preset) => preset.preset_no) ?? [];
+  // ItemTabHeader(memo)가 프리셋만 그대로일 때 리렌더를 건너뛰도록 참조를 고정한다
+  const availablePresetNos = useMemo(
+    () => presetList?.map((preset) => preset.preset_no) ?? [],
+    [presetList],
+  );
+  const availableAndroidPresetNos = useMemo(
+    () => androidPresetList?.map((preset) => preset.preset_no) ?? [],
+    [androidPresetList],
+  );
 
   // 사용자가 아직 선택하지 않았거나 선택값이 유효하지 않을 때 사용할 프리셋 번호
-  const fallbackPresetNo = activePresetNo ?? DEFAULT_PRESET_NO;
+  const fallbackPresetNo =
+    activePresetNo ?? availablePresetNos[0] ?? DEFAULT_PRESET_NO;
   const fallbackAndroidPresetNo =
     activeAndroidPresetNo ?? availableAndroidPresetNos[0] ?? null;
 
@@ -54,13 +61,10 @@ export const useItemTab = (data: CharacterItemTabData) => {
       : fallbackAndroidPresetNo;
 
   // 현재 선택된 장비 프리셋의 장비 목록
-  const currentPresetItems = useMemo(() => {
-    return (
-      presetList?.find((preset) => preset.preset_no === effectiveSelectedPreset)
-        ?.item_equipment ??
-      (effectiveSelectedPreset === activePresetNo ? equippedItems : [])
-    );
-  }, [activePresetNo, effectiveSelectedPreset, equippedItems, presetList]);
+  const currentPresetItems =
+    presetList?.find((preset) => preset.preset_no === effectiveSelectedPreset)
+      ?.item_equipment ??
+    (effectiveSelectedPreset === activePresetNo ? equippedItems : []);
 
   // 현재 선택된 안드로이드 프리셋 데이터
   const currentAndroidPreset = androidPresetList?.find(
@@ -78,15 +82,12 @@ export const useItemTab = (data: CharacterItemTabData) => {
     (effectiveSelectedAndroidPreset === activeAndroidPresetNo ? heart : null);
 
   // 현재 보기 방식에 맞게 장비 슬롯 순서를 정렬
-  const sortedItems = useMemo(() => {
-    return viewMode === "grid"
-      ? sortItems(currentPresetItems, currentAndroid ?? null, currentHeart ?? null)
-      : sortItemsForList(
-          currentPresetItems,
-          currentAndroid ?? null,
-          currentHeart ?? null,
-        );
-  }, [currentAndroid, currentHeart, currentPresetItems, viewMode]);
+  const sort = viewMode === "grid" ? sortItems : sortItemsForList;
+  const sortedItems = sort(
+    currentPresetItems,
+    currentAndroid ?? null,
+    currentHeart ?? null,
+  );
 
   // ItemTabHeader에 전달할 프리셋/보기 방식 제어 props
   const headerProps = {

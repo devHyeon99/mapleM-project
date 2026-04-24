@@ -1,8 +1,10 @@
 "use client";
 
 import { HelpPopover } from "@/shared/ui/HelpPopover";
+import { SegmentedToggle } from "@/shared/ui/SegmentedToggle";
 import { Separator } from "@/shared/ui/separator";
-import { ToggleGroup, ToggleGroupItem } from "@/shared/ui/toggle-group";
+
+const SKILL_MODE_OPTIONS = [{ value: "A" as const }, { value: "B" as const }];
 
 interface SkillTabHeaderProps {
   selectedMode: "A" | "B";
@@ -43,48 +45,21 @@ export const SkillTabHeader = ({
 
       <div className="flex items-center justify-between">
         {/* 왼쪽: A/B 모드 선택 */}
-        <ToggleGroup
-          type="single"
-          variant="outline"
+        <SegmentedToggle
+          ariaLabel="장착 스킬 모드 선택"
           value={selectedMode}
-          onValueChange={(value) => {
-            if (value) onModeChange(value as "A" | "B");
-          }}
-        >
-          <ToggleGroupItem
-            value="A"
-            className="h-8 w-8 first:rounded-l-sm last:rounded-r-sm"
-          >
-            A
-          </ToggleGroupItem>
-          <ToggleGroupItem
-            value="B"
-            className="h-8 w-8 first:rounded-l-sm last:rounded-r-sm"
-          >
-            B
-          </ToggleGroupItem>
-        </ToggleGroup>
+          onChange={onModeChange}
+          options={SKILL_MODE_OPTIONS}
+        />
 
         {/* 오른쪽: 프리셋 선택 */}
         {hasData && (
-          <ToggleGroup
-            type="single"
-            variant="outline"
+          <SegmentedToggle
+            ariaLabel="장착 스킬 프리셋 선택"
             value={selectedSet}
-            onValueChange={(value) => {
-              if (value) onSetChange(value);
-            }}
-          >
-            {skillSetKeys.map((setNo) => (
-              <ToggleGroupItem
-                key={setNo}
-                value={setNo}
-                className="h-8 w-8 first:rounded-l-sm last:rounded-r-sm"
-              >
-                {setNo}
-              </ToggleGroupItem>
-            ))}
-          </ToggleGroup>
+            onChange={onSetChange}
+            options={skillSetKeys.map((setNo) => ({ value: setNo }))}
+          />
         )}
       </div>
     </>

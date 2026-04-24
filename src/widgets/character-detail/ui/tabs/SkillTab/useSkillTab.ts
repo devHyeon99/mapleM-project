@@ -39,7 +39,9 @@ export const useSkillTab = (ocid: string) => {
 
     const keys = Object.keys(grouped).sort((a, b) => Number(a) - Number(b));
 
-    const currentSetNo = keys.includes(setNoState) ? setNoState : (keys[0] ?? "1");
+    const currentSetNo = keys.includes(setNoState)
+      ? setNoState
+      : (keys[0] ?? "1");
 
     return {
       skillSetKeys: keys,

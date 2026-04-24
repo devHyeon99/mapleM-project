@@ -1,5 +1,5 @@
 import type { LinkSkillPreset } from "@/entities/skill/model";
-import { PresetToggle } from "@/shared/ui/PresetToggle";
+import { SegmentedToggle } from "@/shared/ui/SegmentedToggle";
 
 interface LinkSkillHeaderProps {
   usePresetNo: number;
@@ -14,21 +14,18 @@ export const LinkSkillHeader = ({
   presets,
   onPresetChange,
 }: LinkSkillHeaderProps) => {
-  const presetNos = presets.map((preset) => preset.preset_no);
-  const selectedPreset = Number(activePreset);
-
   return (
     <div className="flex items-center justify-between gap-2">
       <h3 className="font-bold">링크 스킬</h3>
 
-      <PresetToggle
-        activePresetNo={usePresetNo}
-        presets={presetNos}
-        selectedPreset={
-          Number.isNaN(selectedPreset) ? undefined : selectedPreset
-        }
-        onSelectPreset={(preset) => onPresetChange(String(preset))}
+      <SegmentedToggle
         ariaLabel="링크 스킬 프리셋 선택"
+        value={Number(activePreset)}
+        onChange={(preset) => onPresetChange(String(preset))}
+        options={presets.map(({ preset_no }) => ({
+          value: preset_no,
+          marked: preset_no === usePresetNo,
+        }))}
       />
     </div>
   );

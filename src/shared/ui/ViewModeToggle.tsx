@@ -2,55 +2,40 @@
 
 import { LayoutGrid, List } from "lucide-react";
 
-import { ToggleGroup, ToggleGroupItem } from "@/shared/ui/toggle-group";
+import { SegmentedToggle } from "@/shared/ui/SegmentedToggle";
 
 interface ViewModeToggleProps {
   viewMode: "grid" | "list";
   onChangeViewMode: (mode: "grid" | "list") => void;
+  label?: string;
+  className?: string;
 }
 
 const VIEW_MODE_OPTIONS = [
   {
-    value: "grid",
-    label: "그리드 보기",
-    icon: LayoutGrid,
+    value: "grid" as const,
+    content: <LayoutGrid className="size-4" />,
+    ariaLabel: "그리드 보기",
   },
   {
-    value: "list",
-    label: "리스트 보기",
-    icon: List,
+    value: "list" as const,
+    content: <List className="size-4" />,
+    ariaLabel: "리스트 보기",
   },
-] as const;
+];
 
 export const ViewModeToggle = ({
   viewMode,
   onChangeViewMode,
-}: ViewModeToggleProps) => {
-  return (
-    <ToggleGroup
-      type="single"
-      size="sm"
-      value={viewMode}
-      onValueChange={(value) => {
-        if (value !== "grid" && value !== "list") return;
-        onChangeViewMode(value);
-      }}
-      variant="outline"
-      aria-label="보기 방식 선택"
-    >
-      {VIEW_MODE_OPTIONS.map((option) => {
-        const Icon = option.icon;
-
-        return (
-          <ToggleGroupItem
-            key={option.value}
-            value={option.value}
-            aria-label={option.label}
-          >
-            <Icon className="size-4" />
-          </ToggleGroupItem>
-        );
-      })}
-    </ToggleGroup>
-  );
-};
+  label,
+  className,
+}: ViewModeToggleProps) => (
+  <SegmentedToggle
+    className={className}
+    label={label}
+    ariaLabel="보기 방식 선택"
+    value={viewMode}
+    onChange={onChangeViewMode}
+    options={VIEW_MODE_OPTIONS}
+  />
+);

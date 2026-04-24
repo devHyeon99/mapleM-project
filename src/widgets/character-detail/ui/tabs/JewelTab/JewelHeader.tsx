@@ -1,5 +1,5 @@
 import type { CharacterJewelEquipment } from "@/entities/character";
-import { PresetToggle } from "@/shared/ui/PresetToggle";
+import { SegmentedToggle } from "@/shared/ui/SegmentedToggle";
 
 interface JewelHeaderProps {
   useJewelPageNo: number;
@@ -14,21 +14,18 @@ export const JewelHeader = ({
   jewelEquipment,
   onPageChange,
 }: JewelHeaderProps) => {
-  const presets = jewelEquipment.map((page) => page.jewel_page_no);
-  const selectedPreset = Number(activePageNo);
-
   return (
     <div className="flex w-full items-center justify-between gap-2">
       <h3 className="font-bold">쥬얼 페이지</h3>
 
-      <PresetToggle
-        activePresetNo={useJewelPageNo}
-        presets={presets}
-        selectedPreset={
-          Number.isNaN(selectedPreset) ? undefined : selectedPreset
-        }
-        onSelectPreset={(preset) => onPageChange(String(preset))}
+      <SegmentedToggle
         ariaLabel="쥬얼 페이지 선택"
+        value={Number(activePageNo)}
+        onChange={(page) => onPageChange(String(page))}
+        options={jewelEquipment.map(({ jewel_page_no }) => ({
+          value: jewel_page_no,
+          marked: jewel_page_no === useJewelPageNo,
+        }))}
       />
     </div>
   );

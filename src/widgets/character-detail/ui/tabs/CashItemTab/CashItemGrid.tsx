@@ -10,12 +10,14 @@ interface CashItemGridProps {
 const slotSizeClass = "w-[clamp(3rem,7vw,3.6875rem)]";
 
 export const CashItemGrid = ({ items, presetNo }: CashItemGridProps) => {
-
   const hasNoEquipItems = items.every((slot) => slot.item === null);
 
   return (
     <div className="relative mx-auto w-fit">
-      <div className="grid w-fit grid-cols-7 gap-1" aria-hidden={hasNoEquipItems}>
+      <div
+        className="grid w-fit grid-cols-7 gap-1"
+        aria-hidden={hasNoEquipItems}
+      >
         {items.map((slot, idx) => {
           if (!slot.slotName) {
             return (

@@ -5,7 +5,7 @@ import { Fragment } from "react";
 import { useCharacterStat } from "@/entities/character";
 import { Separator } from "@/shared/ui/separator";
 import { InfoDescriptionRow } from "@/shared/ui/InfoRow";
-import { HyperStatPresetToggle } from "./HyperStatToggle";
+import { SegmentedToggle } from "@/shared/ui/SegmentedToggle";
 import { useHyperStat } from "./useHyperStat";
 import { HelpPopover } from "@/shared/ui/HelpPopover";
 import { TabLoadingBox } from "../../TabLoadingBox";
@@ -94,11 +94,17 @@ export const StatTab = ({ ocid, level }: StatTabProps) => {
           </div>
 
           {hyperStat && (
-            <HyperStatPresetToggle
-              count={hyperStat.preset_count}
-              active={Number(hyperStat.use_preset_no)}
-              selected={selectedPreset}
-              onSelect={onSelectPreset}
+            <SegmentedToggle
+              ariaLabel="하이퍼 스탯 프리셋 선택"
+              value={selectedPreset}
+              onChange={onSelectPreset}
+              options={Array.from(
+                { length: Math.max(0, hyperStat.preset_count) },
+                (_, i) => ({
+                  value: i + 1,
+                  marked: i + 1 === Number(hyperStat.use_preset_no),
+                }),
+              )}
             />
           )}
         </div>

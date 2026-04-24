@@ -42,7 +42,10 @@ export const CashItemListRow = ({
           <span className="text-base font-semibold">{displayName}</span>
           {item.cash_item_label && (
             <span
-              className={cn("shrink-0 text-xs font-semibold", getCashLabelStyle(item.cash_item_label))}
+              className={cn(
+                "shrink-0 text-xs font-semibold",
+                getCashLabelStyle(item.cash_item_label),
+              )}
             >
               {item.cash_item_label} 라벨
             </span>

@@ -77,7 +77,7 @@ export const LinkSkillItem = ({ skill }: LinkSkillItemProps) => {
             key={`${opt.name}-${opt.value}-${i}`}
             className="flex justify-between"
           >
-            <span className="font-medium text-muted-foreground">
+            <span className="text-muted-foreground font-medium">
               {opt.name}
             </span>
             <span className="font-semibold text-orange-400">{opt.value}</span>

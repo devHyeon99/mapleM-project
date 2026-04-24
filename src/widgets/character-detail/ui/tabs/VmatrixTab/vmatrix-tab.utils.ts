@@ -8,7 +8,8 @@ export function groupCoresByType(cores: VCoreEquipment[]) {
   return cores.reduce(
     (acc, core) => {
       if (core.vcore_type === "Skill") acc.skillCores.push(core);
-      else if (core.vcore_type === "Enhancement") acc.enhancementCores.push(core);
+      else if (core.vcore_type === "Enhancement")
+        acc.enhancementCores.push(core);
       else acc.unknownCores.push(core);
       return acc;
     },
@@ -21,5 +22,9 @@ export function groupCoresByType(cores: VCoreEquipment[]) {
 }
 
 export function getEnhancementSkillNames(core: VCoreEquipment) {
-  return [core.vcore_skill_name1, core.vcore_skill_name2, core.vcore_skill_name3].filter(Boolean);
+  return [
+    core.vcore_skill_name1,
+    core.vcore_skill_name2,
+    core.vcore_skill_name3,
+  ].filter(Boolean);
 }

@@ -22,7 +22,12 @@ export const CashItemList = ({
 
   if (hasNoEquipItems) {
     return (
-      <section className={cn("grid min-h-78 place-content-center text-center", className)}>
+      <section
+        className={cn(
+          "grid min-h-78 place-content-center text-center",
+          className,
+        )}
+      >
         <p className="text-muted-foreground text-sm">
           {presetNo}번 프리셋 정보가 없습니다.
         </p>

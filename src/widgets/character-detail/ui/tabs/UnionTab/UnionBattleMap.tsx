@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { cn } from "@/shared/lib/utils";
-import { PresetToggle } from "@/shared/ui/PresetToggle";
+import { SegmentedToggle } from "@/shared/ui/SegmentedToggle";
 import type { CharacterUnionRaider } from "@/entities/character";
 import { Separator } from "@/shared/ui/separator";
 
@@ -63,12 +63,14 @@ export const UnionBattleMap = ({ raiderData }: UnionBattleMapProps) => {
       <div className="flex w-full items-center justify-between">
         <h3 className="text-base font-bold">유니온 배치도</h3>
 
-        <PresetToggle
-          activePresetNo={raiderData.use_preset_no}
-          presets={sortedPresetNos}
-          selectedPreset={activePreset}
-          onSelectPreset={setSelectedPreset}
+        <SegmentedToggle
           ariaLabel="유니온 배치도 프리셋 선택"
+          value={activePreset}
+          onChange={setSelectedPreset}
+          options={sortedPresetNos.map((preset) => ({
+            value: preset,
+            marked: preset === raiderData.use_preset_no,
+          }))}
         />
       </div>
       <Separator className="my-2" />

@@ -16,13 +16,14 @@ const normalizeDressUpCashItems = (
 ): CashItemEquipment[] => {
   return items.map((item) => ({
     ...item,
-    cash_item_equipment_slot_name:
-      item.cash_item_equipment_slot_name.endsWith(DRESS_UP_SLOT_SUFFIX)
-        ? item.cash_item_equipment_slot_name.slice(
-            0,
-            -DRESS_UP_SLOT_SUFFIX.length,
-          )
-        : item.cash_item_equipment_slot_name,
+    cash_item_equipment_slot_name: item.cash_item_equipment_slot_name.endsWith(
+      DRESS_UP_SLOT_SUFFIX,
+    )
+      ? item.cash_item_equipment_slot_name.slice(
+          0,
+          -DRESS_UP_SLOT_SUFFIX.length,
+        )
+      : item.cash_item_equipment_slot_name,
   }));
 };
 

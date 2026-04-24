@@ -33,7 +33,7 @@ export const ItemTabHeader = memo(function ItemTabHeader({
   return (
     <section
       aria-label="장비 탭 헤더 컨트롤"
-      className="bg-card flex w-full flex-wrap items-end justify-between gap-x-4 gap-y-3 rounded-t-2xl border-b px-4 py-3"
+      className="bg-card flex w-full items-end justify-between gap-x-4 gap-y-3 rounded-t-2xl border-b px-3 py-3"
     >
       <div className="flex gap-6">
         <SegmentedToggle

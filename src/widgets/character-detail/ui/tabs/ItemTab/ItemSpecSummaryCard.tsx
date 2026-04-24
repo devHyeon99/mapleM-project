@@ -26,7 +26,7 @@ export const ItemSpecSummaryCard = ({
         <h3 className="text-foreground font-bold">장비 스펙 요약</h3>
       </div>
 
-      <div className="bg-background dark:bg-secondary w-full rounded-xs border p-3">
+      <div className="bg-muted/50 dark:bg-secondary w-full rounded-xl border p-3">
         <div className="relative">
           <Separator
             orientation="vertical"

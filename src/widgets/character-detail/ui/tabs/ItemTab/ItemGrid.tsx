@@ -8,7 +8,8 @@ interface ItemGridProps {
 }
 
 export const ItemGrid = ({ items, presetNo }: ItemGridProps) => {
-  const slotSizeClass = "w-[clamp(3rem,7vw,3.6875rem)]";
+  // 뷰포트가 아닌 컨테이너 폭을 7등분해서 좁은 화면에서도 남는 가로 공간을 모두 사용
+  const slotSizeClass = "w-full";
 
   // 안드로이드와 하트를 제외한 순수 장비 아이템만 필터링해서 체크
   const hasNoEquipItems = items.every((slot) => {
@@ -21,9 +22,9 @@ export const ItemGrid = ({ items, presetNo }: ItemGridProps) => {
   });
 
   return (
-    <div className="relative mx-auto w-fit">
+    <div className="relative mx-auto w-full max-w-[28rem] px-1">
       <div
-        className="grid w-fit grid-cols-7 gap-1"
+        className="grid w-full grid-cols-7 gap-1"
         aria-hidden={hasNoEquipItems}
       >
         {items.map((slot, idx) => {

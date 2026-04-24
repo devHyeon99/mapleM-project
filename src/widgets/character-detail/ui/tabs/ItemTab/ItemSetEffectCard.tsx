@@ -35,14 +35,10 @@ export const ItemSetEffectCard = ({ items }: ItemSetEffectCardProps) => {
 
       <Accordion
         type="multiple"
-        className="bg-background dark:bg-secondary w-full rounded-xs border"
+        className="bg-background dark:bg-secondary w-full"
       >
         {activeSets.map((set) => (
-          <AccordionItem
-            key={set.id}
-            value={set.id}
-            className="rounded-none border-0 px-3"
-          >
+          <AccordionItem key={set.id} value={set.id}>
             <AccordionTrigger className="rounded-none py-3 hover:cursor-pointer hover:text-orange-500 hover:no-underline">
               <div className="space-y-1">
                 <p className="font-semibold">{set.displayName} 세트 효과</p>

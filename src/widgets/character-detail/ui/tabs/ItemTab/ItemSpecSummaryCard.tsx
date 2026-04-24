@@ -21,7 +21,7 @@ export const ItemSpecSummaryCard = ({
   );
 
   return (
-    <section className="bg-card flex w-full flex-col rounded-2xl p-4">
+    <section className="bg-card flex w-full flex-col rounded-2xl p-4 shadow-sm">
       <div className="mb-2 flex items-baseline gap-2">
         <h3 className="text-foreground font-bold">장비 스펙 요약</h3>
       </div>

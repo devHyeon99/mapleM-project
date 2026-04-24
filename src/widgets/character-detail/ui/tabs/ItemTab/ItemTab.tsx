@@ -26,29 +26,30 @@ export const ItemTab = ({ data }: ItemTabProps) => {
 
   return (
     <div className="flex flex-col gap-2">
-      <div className="bg-card relative flex flex-col gap-4 rounded-2xl shadow-sm">
-        {viewMode === "grid" ? (
-          <div className="mx-auto flex w-full flex-col items-center gap-4 py-4">
-            <ItemTabHeader {...headerProps} />
-            <ItemGrid items={sortedItems} presetNo={effectiveSelectedPreset} />
-          </div>
-        ) : (
-          <div className="pt-4">
-            <ItemTabHeader {...headerProps} className="w-full px-4" />
+      <div className="relative flex flex-col rounded-2xl shadow-sm">
+        <ItemTabHeader {...headerProps} />
+
+        <div className="bg-card rounded-b-2xl">
+          {viewMode === "grid" ? (
+            <div className="flex w-full flex-col items-center py-4">
+              <ItemGrid
+                items={sortedItems}
+                presetNo={effectiveSelectedPreset}
+              />
+            </div>
+          ) : (
             <ItemList
               items={sortedItems}
               presetNo={effectiveSelectedPreset}
               characterClass={data.character_class}
             />
-          </div>
-        )}
+          )}
+        </div>
       </div>
-      <div className="mx-auto w-full">
-        <ItemTabFooter
-          items={sortedItems}
-          characterClass={data.character_class}
-        />
-      </div>
+      <ItemTabFooter
+        items={sortedItems}
+        characterClass={data.character_class}
+      />
     </div>
   );
 };

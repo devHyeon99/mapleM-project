@@ -10,6 +10,7 @@ import type { CharacterOcidData } from "@/entities/character";
 interface CharactersSearchResultProps {
   name: string;
   characters: CharacterOcidData[];
+  failedWorlds?: number;
 }
 
 function LinkStatusIcon() {
@@ -29,11 +30,21 @@ function LinkStatusIcon() {
 export function CharactersSearchResult({
   name,
   characters,
+  failedWorlds = 0,
 }: CharactersSearchResultProps) {
   const { addHistory } = useRecentSearch("character-search-history");
 
   if (characters.length === 0) {
-    return (
+    return failedWorlds > 0 ? (
+      <NotFoundMessage
+        className="mt-6.5 mb-8"
+        title="검색 결과를 불러오지 못했습니다"
+        subject={name}
+        description={
+          "일부 월드에서 응답을 받지 못했습니다.\n잠시 후 다시 시도해주세요."
+        }
+      />
+    ) : (
       <NotFoundMessage
         className="mt-6.5 mb-8"
         title="캐릭터를 찾을 수 없습니다"
@@ -54,6 +65,11 @@ export function CharactersSearchResult({
         <p className="text-muted-foreground text-sm md:text-base">
           총 {characters.length}개의 검색 결과가 있습니다.
         </p>
+        {failedWorlds > 0 && (
+          <p className="text-destructive text-xs md:text-sm">
+            {failedWorlds}개 월드는 조회에 실패해 결과에서 빠졌을 수 있습니다.
+          </p>
+        )}
       </div>
 
       <ul className="flex w-full flex-col gap-2">

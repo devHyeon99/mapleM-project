@@ -48,8 +48,8 @@ export default async function CharactersPage({
   const decodedName = safeDecode(name);
 
   return (
-    <div className="flex w-full flex-col items-center">
-      <search className="w-full max-w-3xl px-4 pt-2" aria-label="캐릭터 재검색">
+    <div className="wide:px-0 flex w-full flex-col items-center px-4 py-6">
+      <search className="w-full max-w-3xl" aria-label="캐릭터 재검색">
         <CharacterSearch />
       </search>
 
@@ -67,7 +67,13 @@ export default async function CharactersPage({
 }
 
 async function CharactersResultSection({ name }: { name: string }) {
-  const characters = await getCharacterSearchAll(name);
+  const { characters, failedWorlds } = await getCharacterSearchAll(name);
 
-  return <CharactersSearchResult name={name} characters={characters} />;
+  return (
+    <CharactersSearchResult
+      name={name}
+      characters={characters}
+      failedWorlds={failedWorlds}
+    />
+  );
 }

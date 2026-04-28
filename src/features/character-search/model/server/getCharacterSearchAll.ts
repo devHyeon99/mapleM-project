@@ -6,7 +6,14 @@ import { unstable_cache } from "next/cache";
 
 const SEARCH_ALL_CACHE_SECONDS = 60 * 5;
 
-async function searchAllWorlds(name: string): Promise<CharacterOcidData[]> {
+export interface CharacterSearchAllResult {
+  characters: CharacterOcidData[];
+  failedWorlds: number;
+}
+
+async function searchAllWorlds(
+  name: string,
+): Promise<CharacterSearchAllResult> {
   const worlds = WORLD_NAMES.filter((w) => w !== ALL_WORLD_NAME);
 
   const settled = await Promise.allSettled(
@@ -21,7 +28,10 @@ async function searchAllWorlds(name: string): Promise<CharacterOcidData[]> {
     .map((r) => r.value)
     .filter((v): v is CharacterOcidData => v !== null);
 
-  return characters;
+  return {
+    characters,
+    failedWorlds: settled.filter((r) => r.status === "rejected").length,
+  };
 }
 
 const getCharacterSearchAllCached = unstable_cache(
@@ -30,8 +40,16 @@ const getCharacterSearchAllCached = unstable_cache(
   { revalidate: SEARCH_ALL_CACHE_SECONDS },
 );
 
-export async function getCharacterSearchAll(name: string) {
+export async function getCharacterSearchAll(
+  name: string,
+): Promise<CharacterSearchAllResult> {
   const normalized = name.trim();
-  if (!normalized) return [];
-  return getCharacterSearchAllCached(normalized);
+  if (!normalized) return { characters: [], failedWorlds: 0 };
+
+  const cached = await getCharacterSearchAllCached(normalized);
+  if (cached.failedWorlds === 0) return cached;
+
+  // 일부 월드가 실패한 반쪽짜리 결과가 5분간 캐시에 고정되면 실제로 존재하는 캐릭터가
+  // 계속 "없음"으로 보인다. 실패가 섞였으면 캐시를 무시하고 다시 조회한다
+  return searchAllWorlds(normalized);
 }

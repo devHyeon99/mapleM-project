@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useRecentSearch } from "@/shared/lib/hooks/useRecentSearch";
 import { CharacterSearch } from "@/features/character-search";
 import { AlertTriangle } from "lucide-react";
+import { worldFromSlug } from "@/shared/config/constants/worlds";
 
 interface CharacterPathParams {
   name: string;
@@ -18,7 +19,8 @@ const parseCharacterPathname = (
   if (segments[1] !== "character" || segments.length < 4) return null;
 
   return {
-    world: decodeURIComponent(segments[2]),
+    // URL 세그먼트는 영문 슬러그라 화면 표기·검색 기록 대조용 한글 월드명으로 되돌린다
+    world: worldFromSlug(decodeURIComponent(segments[2])),
     name: decodeURIComponent(segments[3]),
   };
 };

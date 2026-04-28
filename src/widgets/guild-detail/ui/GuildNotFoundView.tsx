@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { useRecentSearch } from "@/shared/lib/hooks/useRecentSearch";
 import { AlertTriangle } from "lucide-react";
+import { worldFromSlug } from "@/shared/config/constants/worlds";
 
 export function GuildNotFoundView() {
   const pathname = usePathname();
@@ -17,7 +18,8 @@ export function GuildNotFoundView() {
     const segments = pathname?.split("/") ?? [];
 
     if (segments.length >= 4) {
-      const world = decodeURIComponent(segments[2]);
+      // 검색 기록은 한글 월드명으로 저장되므로 URL 슬러그를 되돌려야 일치한다
+      const world = worldFromSlug(decodeURIComponent(segments[2]));
       const guildName = decodeURIComponent(segments[3]);
 
       removeHistoryByParams(guildName, world);

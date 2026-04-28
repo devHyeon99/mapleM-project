@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { useRecentSearch } from "@/shared/lib/hooks/useRecentSearch";
-import { AlertTriangle } from "lucide-react";
+import { NotFoundMessage } from "@/shared/ui/NotFoundMessage";
 import { worldFromSlug } from "@/shared/config/constants/worlds";
 
 export function GuildNotFoundView() {
@@ -18,7 +18,6 @@ export function GuildNotFoundView() {
     const segments = pathname?.split("/") ?? [];
 
     if (segments.length >= 4) {
-      // 검색 기록은 한글 월드명으로 저장되므로 URL 슬러그를 되돌려야 일치한다
       const world = worldFromSlug(decodeURIComponent(segments[2]));
       const guildName = decodeURIComponent(segments[3]);
 
@@ -29,16 +28,12 @@ export function GuildNotFoundView() {
   }, [pathname, removeHistoryByParams]);
 
   return (
-    <div className="flex flex-col items-center justify-center pt-8 text-center">
-      <AlertTriangle className="text-destructive mb-2 size-12" />
-      <h2 className="mb-2 text-xl font-medium tracking-tight">
-        길드 정보를 찾을 수 없습니다
-      </h2>
-      <p className="text-muted-foreground mb-8 text-sm md:text-base">
-        입력하신 월드와 길드명을 다시 확인해주세요.
-        <br />
-        삭제되었거나 존재하지 않는 길드일 수 있습니다.
-      </p>
-    </div>
+    <NotFoundMessage
+      className="pt-8 pb-8"
+      title="길드 정보를 찾을 수 없습니다"
+      description={
+        "입력하신 월드와 길드명을 다시 확인해주세요.\n삭제되었거나 존재하지 않는 길드일 수 있습니다."
+      }
+    />
   );
 }

@@ -1,15 +1,11 @@
 "use client";
-import { useRef } from "react";
 import Link, { useLinkStatus } from "next/link";
 import { ChevronRight, Loader2 } from "lucide-react";
 import { Card, CardContent } from "@/shared/ui/card";
 import { NotFoundMessage } from "@/shared/ui/NotFoundMessage";
 import { useRecentSearch } from "@/shared/lib/hooks/useRecentSearch";
-import { WORLD_NAMES } from "@/shared/config/constants/worlds";
 import { characterHref } from "@/shared/lib/url";
 import type { CharacterOcidData } from "@/entities/character";
-
-type WorldName = (typeof WORLD_NAMES)[number];
 
 interface CharactersSearchResultProps {
   name: string;
@@ -35,9 +31,8 @@ export function CharactersSearchResult({
   characters,
 }: CharactersSearchResultProps) {
   const { addHistory } = useRecentSearch("character-search-history");
-  const isNavigatingRef = useRef(false);
 
-  if (!characters || characters.length === 0) {
+  if (characters.length === 0) {
     return (
       <NotFoundMessage
         className="mt-6.5 mb-8"
@@ -53,34 +48,25 @@ export function CharactersSearchResult({
   return (
     <div className="flex w-full flex-col items-center">
       <div className="flex w-full flex-col items-center gap-1 py-10">
-        <h2 className="text-lg font-bold md:text-2xl">
+        <p className="text-lg font-bold md:text-2xl">
           전체 월드 내 <strong>&quot;{name}&quot;</strong> 검색 결과
-        </h2>
+        </p>
         <p className="text-muted-foreground text-sm md:text-base">
           총 {characters.length}개의 검색 결과가 있습니다.
         </p>
       </div>
 
-      <div className="flex w-full flex-col gap-0.5 pb-10">
-        {characters.map((char) => {
-          const href = characterHref(char.world_name, char.character_name);
-
-          return (
+      <ul className="flex w-full flex-col gap-2">
+        {characters.map((char) => (
+          <li key={char.ocid}>
             <Link
-              key={char.ocid}
-              href={href}
+              href={characterHref(char.world_name, char.character_name)}
               prefetch={false}
-              onNavigate={(event) => {
-                if (isNavigatingRef.current) {
-                  event.preventDefault();
-                  return;
-                }
-
-                isNavigatingRef.current = true;
-                addHistory(char.character_name, char.world_name as WorldName);
+              onNavigate={() => {
+                addHistory(char.character_name, char.world_name);
               }}
             >
-              <Card className="cursor-pointer rounded-xs border-none py-4 shadow-none dark:hover:bg-white/10">
+              <Card className="hover:bg-accent cursor-pointer border-none py-4">
                 <CardContent className="flex items-center justify-between">
                   <div>
                     <p className="text-lg font-semibold">
@@ -94,9 +80,9 @@ export function CharactersSearchResult({
                 </CardContent>
               </Card>
             </Link>
-          );
-        })}
-      </div>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

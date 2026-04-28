@@ -52,9 +52,8 @@ export function SearchFormField({
   } = useHistoryPanelController();
   const historyLabelId = `${inputId}-history-label`;
 
-  // 검색 랜드마크(role=search)는 이 폼을 감싸는 페이지의 <search> 요소가 담당한다.
   return (
-    <div className="flex w-full items-center">
+    <div className="flex w-full items-center rounded-2xl shadow-sm">
       <SearchFormWorldSelect
         value={world}
         onValueChange={onWorldChange}
@@ -86,7 +85,7 @@ export function SearchFormField({
               onInputValueChange(e.target.value);
               openHistory();
             }}
-            className="bg-card dark:bg-input/50 relative h-14 rounded-l-none pr-12 pl-4 shadow-sm placeholder:text-sm focus-visible:ring-2"
+            className="bg-card dark:bg-input/50 relative h-14 rounded-l-none pr-12 pl-4 placeholder:text-sm focus-visible:ring-2"
           />
           <Button
             type="submit"

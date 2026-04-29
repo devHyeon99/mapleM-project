@@ -95,7 +95,7 @@ export const ItemListRow = ({
         isLast ? "" : "border-b",
       ].join(" ")}
     >
-      <div className="h-12.5 w-12.5 shrink-0 self-start">
+      <div className="h-14 w-14 shrink-0 self-start">
         <ItemDialog item={item} className="h-full w-full cursor-pointer" />
       </div>
 

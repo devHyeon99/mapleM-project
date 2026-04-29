@@ -75,7 +75,6 @@ export const ItemIconBase = React.forwardRef<HTMLDivElement, ItemIconBaseProps>(
           backgroundRepeat: "no-repeat",
         }}
         className={cn(
-          "@container",
           "relative flex aspect-square h-full w-full cursor-pointer items-center justify-center rounded-xs border-2",
           !emblem_info && "bg-white",
           borderColor,

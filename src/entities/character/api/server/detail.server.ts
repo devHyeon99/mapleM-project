@@ -5,7 +5,7 @@ import { isNexonNotFoundError } from "@/shared/api/nexon/handler";
 import { getRankingDate } from "@/shared/lib/ranking-date";
 import type {
   CharacterItemEquipmentResponse,
-  CharacterAndroidResponse,
+  CharacterAndroidEquipment,
 } from "@/entities/item";
 import type {
   CharacterDetailData,
@@ -72,7 +72,7 @@ export async function fetchCharacterDetail(
     nexonFetch<CharacterGuildResponse>(`/character/guild?ocid=${ocidQ}`, {
       cache: "no-store",
     }),
-    nexonFetch<CharacterAndroidResponse>(
+    nexonFetch<CharacterAndroidEquipment>(
       `/character/android-equipment?ocid=${ocidQ}`,
       { cache: "no-store" },
     ),

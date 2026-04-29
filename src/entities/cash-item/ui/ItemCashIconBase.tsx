@@ -39,7 +39,6 @@ export const ItemCashIconBase = React.forwardRef<
       ref={ref}
       {...props}
       className={cn(
-        "@container",
         "relative flex aspect-square h-full w-full cursor-pointer items-center justify-center rounded-xs border-2",
         "border-[#9E9E9E] bg-white",
         className,

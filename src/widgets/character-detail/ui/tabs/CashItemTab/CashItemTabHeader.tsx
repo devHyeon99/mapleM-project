@@ -1,6 +1,7 @@
 "use client";
 
-import { cn } from "@/shared/lib/utils";
+import { memo } from "react";
+
 import { SegmentedToggle } from "@/shared/ui/SegmentedToggle";
 import { ViewModeToggle } from "@/shared/ui/ViewModeToggle";
 
@@ -21,10 +22,9 @@ interface CashItemTabHeaderProps {
   onChangeLookMode: (mode: CashItemLookMode) => void;
   onSelectPreset: (preset: number) => void;
   onChangeViewMode: (mode: "grid" | "list") => void;
-  className?: string;
 }
 
-export const CashItemTabHeader = ({
+export const CashItemTabHeader = memo(function CashItemTabHeader({
   activePresetNo,
   canUseDressUpMode = false,
   lookMode,
@@ -34,15 +34,11 @@ export const CashItemTabHeader = ({
   onChangeLookMode,
   onSelectPreset,
   onChangeViewMode,
-  className,
-}: CashItemTabHeaderProps) => {
+}: CashItemTabHeaderProps) {
   return (
     <section
       aria-label="캐시 탭 헤더 컨트롤"
-      className={cn(
-        "bg-muted/40 flex w-[360px] flex-wrap items-end justify-between gap-x-4 gap-y-3 rounded-xl border px-3 py-2.5 sm:w-full",
-        className,
-      )}
+      className="bg-card wide:px-6 wide:py-4 flex w-full items-end justify-between gap-x-4 gap-y-3 rounded-t-2xl border-b px-4 py-2"
     >
       <SegmentedToggle
         label="캐시 프리셋"
@@ -72,4 +68,4 @@ export const CashItemTabHeader = ({
       </div>
     </section>
   );
-};
+});

@@ -44,24 +44,24 @@ export const CashItemTab = ({ ocid }: CashItemTabProps) => {
   }
 
   return (
-    <div className="bg-card relative flex flex-col gap-4 rounded-2xl shadow-sm">
-      {viewMode === "grid" ? (
-        <div className="mx-auto flex w-full flex-col items-center gap-4 py-4">
-          <CashItemTabHeader {...headerProps} />
-          <CashItemGrid
-            items={sortedItems}
-            presetNo={effectiveSelectedPreset}
-          />
-        </div>
-      ) : (
-        <div className="pt-4">
-          <CashItemTabHeader {...headerProps} className="w-full px-4" />
+    <div className="relative flex flex-col rounded-2xl shadow-sm">
+      <CashItemTabHeader {...headerProps} />
+
+      <div className="bg-card rounded-b-2xl">
+        {viewMode === "grid" ? (
+          <div className="flex w-full flex-col items-center py-4">
+            <CashItemGrid
+              items={sortedItems}
+              presetNo={effectiveSelectedPreset}
+            />
+          </div>
+        ) : (
           <CashItemList
             items={sortedItems}
             presetNo={effectiveSelectedPreset}
           />
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };

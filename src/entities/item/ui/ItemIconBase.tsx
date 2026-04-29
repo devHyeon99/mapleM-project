@@ -84,12 +84,12 @@ export const ItemIconBase = React.forwardRef<HTMLDivElement, ItemIconBaseProps>(
       >
         {/* 좌상단 라벨 (잠재능력) */}
         {(potential || additional) && (
-          <div className="absolute top-0 left-0 flex -translate-x-0.5 -translate-y-0.5 gap-0">
+          <div className="absolute -top-0.5 -left-0.5 flex gap-0">
             {potential && (
               <span
                 className={cn(
-                  "flex items-center justify-center rounded-tl-xs font-bold text-white antialiased",
-                  "h-3 w-3 text-[9px]",
+                  "flex items-center justify-center rounded-tl-xs font-bold text-white subpixel-antialiased",
+                  "wide:h-3.5 wide:w-3.5 wide:text-[10px] h-3 w-3 text-[9px] leading-none",
                   potential.bgColor,
                   !additional && "rounded-br-xs",
                 )}
@@ -100,8 +100,8 @@ export const ItemIconBase = React.forwardRef<HTMLDivElement, ItemIconBaseProps>(
             {additional && (
               <span
                 className={cn(
-                  "flex items-center justify-center rounded-br-xs font-semibold text-white antialiased",
-                  "h-3 w-3 text-[9px]",
+                  "flex items-center justify-center rounded-br-xs font-bold text-white subpixel-antialiased",
+                  "wide:h-3.5 wide:w-3.5 wide:text-[10px] h-3 w-3 text-[9px] leading-none",
                   additional.bgColor,
                 )}
               >
@@ -115,8 +115,8 @@ export const ItemIconBase = React.forwardRef<HTMLDivElement, ItemIconBaseProps>(
         {showStar && (
           <span
             className={cn(
-              "absolute -top-0.5 -right-0.5 z-1 flex items-center justify-center rounded-tr-xs rounded-bl-xs bg-[#FFC300] font-semibold text-black antialiased",
-              "h-3 w-3 text-[9px]",
+              "absolute -top-0.5 -right-0.5 z-1 flex items-center justify-center rounded-tr-xs rounded-bl-xs bg-[#FFC300] font-semibold text-black subpixel-antialiased",
+              "wide:h-3.5 wide:w-3.5 wide:text-[10px] h-3 w-3 text-[9px] leading-none tabular-nums",
             )}
           >
             {star}

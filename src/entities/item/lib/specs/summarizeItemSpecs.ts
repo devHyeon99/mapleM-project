@@ -47,7 +47,7 @@ export const getItemSpec = (
         parsed.normalizedName === targetDamage ||
         parsed.normalizedName === OPTION_KEYS.BOSS_DAMAGE
       ) {
-        summary.potential += parsed.numericValue ?? 0;
+        summary.potential += parsed.numericValue;
       }
     });
 
@@ -58,7 +58,7 @@ export const getItemSpec = (
         parsed.normalizedName === targetDamage ||
         parsed.normalizedName === OPTION_KEYS.BOSS_DAMAGE
       ) {
-        summary.additional += parsed.numericValue ?? 0;
+        summary.additional += parsed.numericValue;
       }
     });
 
@@ -66,11 +66,11 @@ export const getItemSpec = (
     item.item_additional_option?.forEach((opt) => {
       const parsed = parseItemOption(opt.option_name, opt.option_value);
       if (parsed.normalizedName === OPTION_KEYS.FINAL_DAMAGE) {
-        summary.chuop.finalDamage += parsed.numericValue ?? 0;
+        summary.chuop.finalDamage += parsed.numericValue;
       } else if (parsed.normalizedName === OPTION_KEYS.IGNORE_DEFENSE) {
-        summary.chuop.ignoreDef += parsed.numericValue ?? 0;
+        summary.chuop.ignoreDef += parsed.numericValue;
       } else if (parsed.normalizedName === targetAtk) {
-        summary.chuop.atk += parsed.numericValue ?? 0;
+        summary.chuop.atk += parsed.numericValue;
       }
     });
   });

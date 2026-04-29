@@ -29,14 +29,16 @@ export const ItemInfo = ({ item }: Props) => {
         </div>
 
         {/* 카르마 가위 */}
-        <div className="grid grid-cols-[max-content_1fr] gap-x-2">
-          <dt className="whitespace-nowrap text-[#a1a1a1]">
-            남은 카르마 가위 횟수
-          </dt>
-          <dd className="text-right text-orange-400 tabular-nums">
-            {item.cuttable_count}
-          </dd>
-        </div>
+        {item.cuttable_count != null && (
+          <div className="grid grid-cols-[max-content_1fr] gap-x-2">
+            <dt className="whitespace-nowrap text-[#a1a1a1]">
+              남은 카르마 가위 횟수
+            </dt>
+            <dd className="text-right text-orange-400 tabular-nums">
+              {item.cuttable_count}
+            </dd>
+          </div>
+        )}
       </dl>
     </div>
   );

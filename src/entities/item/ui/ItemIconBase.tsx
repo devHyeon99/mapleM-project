@@ -2,7 +2,6 @@ import * as React from "react";
 import Image from "next/image";
 import { CharacterItemEquipment } from "../model/types";
 import { getGradeInfo } from "../lib";
-import { POTENTIAL_GRADE_MAP } from "../lib/grade/gradeConstants";
 import { cn } from "@/shared/lib/utils";
 
 interface ItemIconBaseProps {
@@ -33,18 +32,10 @@ export const ItemIconBase = React.forwardRef<HTMLDivElement, ItemIconBaseProps>(
       emblem_info,
     } = item;
 
-    // 등급 정보
+    // 등급 정보 (getGradeInfo가 숫자 잠재등급과 한글 등급명을 모두 처리)
     const main = getGradeInfo(item_grade);
-    const potential = getGradeInfo(
-      item_potential_option_grade
-        ? POTENTIAL_GRADE_MAP[item_potential_option_grade]
-        : null,
-    );
-    const additional = getGradeInfo(
-      item_additional_potential_option_grade
-        ? POTENTIAL_GRADE_MAP[item_additional_potential_option_grade]
-        : null,
-    );
+    const potential = getGradeInfo(item_potential_option_grade);
+    const additional = getGradeInfo(item_additional_potential_option_grade);
 
     // 스타포스
     const star = Number.parseInt(starforce_upgrade ?? "", 10);

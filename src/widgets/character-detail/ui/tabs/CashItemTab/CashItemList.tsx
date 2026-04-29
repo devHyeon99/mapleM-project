@@ -36,7 +36,7 @@ export const CashItemList = ({
   }
 
   return (
-    <div className={cn("flex w-full flex-col pt-2", className)}>
+    <div className={cn("flex w-full flex-col", className)}>
       {items.map((slot, index) => {
         if (slot.item) {
           return (

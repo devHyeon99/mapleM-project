@@ -9,9 +9,10 @@ import { ItemDialogFrame } from "./ItemDialogFrame";
 
 interface ItemCashDialogProps {
   item: CashItemEquipment;
+  className?: string;
 }
 
-export const ItemCashDialog = ({ item }: ItemCashDialogProps) => {
+export const ItemCashDialog = ({ item, className }: ItemCashDialogProps) => {
   const displayName =
     item.miracle_anvil_item_name && item.miracle_anvil_item_name.trim() !== ""
       ? item.miracle_anvil_item_name
@@ -19,7 +20,7 @@ export const ItemCashDialog = ({ item }: ItemCashDialogProps) => {
 
   return (
     <ItemDialogFrame
-      trigger={<ItemCashIconBase item={item} />}
+      trigger={<ItemCashIconBase item={item} className={className} />}
       title={`${displayName} 상세 정보`}
     >
       <ItemCashHeader item={item} />

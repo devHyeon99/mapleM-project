@@ -1,4 +1,4 @@
-import { CharacterItemEquipment } from "@/entities/item";
+import type { CharacterItemEquipment } from "@/entities/item";
 import {
   ABSOLABS_SET,
   ARCANE_SHADE_SET,

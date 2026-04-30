@@ -1,4 +1,4 @@
-import { CharacterItemEquipment } from "@/entities/item";
+import type { CharacterItemEquipment } from "@/entities/item";
 import {
   EquipmentSetDefinition,
   EquipmentSetItemMatcher,

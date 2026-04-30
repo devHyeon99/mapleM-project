@@ -1,6 +1,5 @@
 import { Fragment } from "react";
-import { CharacterItemEquipment } from "@/entities/item";
-import { ItemIconBase } from "@/entities/item/ui/ItemIconBase";
+import { ItemIconBase, type CharacterItemEquipment } from "@/entities/item";
 import { SpecCardItem } from "../lib/getSortedSpecCardItems";
 
 const isRealItem = (item: SpecCardItem): item is CharacterItemEquipment =>

@@ -1,5 +1,5 @@
-import type { CharacterItemEquipment } from "@/entities/item/model/types/domain/item-equipment";
-import type { ItemOption } from "@/entities/item/model/types/domain/item-option";
+import type { CharacterItemEquipment } from "@/entities/item";
+import type { ItemOption } from "@/entities/item";
 import { ItemDialog } from "@/features/item-popover";
 import { Star } from "lucide-react";
 

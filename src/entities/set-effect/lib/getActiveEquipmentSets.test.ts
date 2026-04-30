@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { CharacterItemEquipment } from "@/entities/item";
+import type { CharacterItemEquipment } from "@/entities/item";
 import { getActiveEquipmentSets } from "./getActiveEquipmentSets";
 
 function createItem(

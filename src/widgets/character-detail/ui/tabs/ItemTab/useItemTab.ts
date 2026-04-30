@@ -5,7 +5,7 @@ import { useMemo, useState } from "react";
 import {
   sortItems,
   sortItemsForList,
-} from "@/entities/item/lib/slots/sortItemSlots";
+} from "@/entities/item";
 import type { CharacterItemTabData } from "../../types";
 
 // API가 현재 장비 프리셋 번호를 내려주지 않을 때 사용할 기본 프리셋 번호

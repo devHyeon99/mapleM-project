@@ -1,6 +1,6 @@
 import { useMemo } from "react";
-import type { SortedItemSlot } from "@/entities/item/lib/slots/sortItemSlots";
-import { getItemSpec } from "@/entities/item/lib/specs/summarizeItemSpecs";
+import type { SortedItemSlot } from "@/entities/item";
+import { getItemSpec } from "@/entities/item";
 import { InfoRow } from "@/shared/ui/InfoRow";
 import { Separator } from "@/shared/ui/separator";
 

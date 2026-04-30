@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
-import type { SortedItemSlot } from "@/entities/item/lib/slots/sortItemSlots";
+import type { SortedItemSlot } from "@/entities/item";
 import { formatEffectValue } from "@/entities/set-effect/lib/formatEffectValue";
 import { getActiveEquipmentSets } from "@/entities/set-effect/lib/getActiveEquipmentSets";
 import {

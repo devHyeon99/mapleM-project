@@ -1,4 +1,4 @@
-import { CharacterItemEquipment } from "@/entities/item";
+import type { CharacterItemEquipment } from "@/entities/item";
 import { EquipmentSetDefinition, ResolvedSetEffectRow } from "../model";
 
 // 세트 스타포스 계산용으로 장비 한 개의 스타포스를 숫자로 변환

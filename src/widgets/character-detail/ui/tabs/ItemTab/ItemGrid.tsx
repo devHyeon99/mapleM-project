@@ -1,4 +1,4 @@
-import type { SortedItemSlot } from "@/entities/item/lib/slots/sortItemSlots";
+import type { SortedItemSlot } from "@/entities/item";
 import { ItemDialog } from "@/features/item-popover";
 import { ItemEmptySlot } from "@/shared/ui/ItemEmptySlot";
 

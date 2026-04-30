@@ -1,7 +1,7 @@
 import * as React from "react";
-import Image from "next/image";
 import { CharacterItemEquipment } from "../model/types";
 import { getGradeInfo } from "../lib";
+import { ItemIconFrame } from "@/shared/ui/ItemIconFrame";
 import { cn } from "@/shared/lib/utils";
 
 interface ItemIconBaseProps {
@@ -19,6 +19,10 @@ const getEmblemImgNumber = (level: number) => {
   if (level === 10) return 6;
   return null; // 범위 밖이거나 0일 때
 };
+
+const BADGE_SIZE = "wide:h-3.5 wide:w-3.5 wide:text-[10px] h-3 w-3 text-[9px]";
+const BADGE_BASE =
+  "flex items-center justify-center subpixel-antialiased leading-none";
 
 export const ItemIconBase = React.forwardRef<HTMLDivElement, ItemIconBaseProps>(
   ({ item, className, ...props }, ref) => {
@@ -56,30 +60,19 @@ export const ItemIconBase = React.forwardRef<HTMLDivElement, ItemIconBaseProps>(
       ? "border-amber-300"
       : (main?.borderColor ?? "border-[#9E9E9E]");
 
-    // 아이템 (Unknown) 으로 나올경우 이미지 깨짐 방지 처리
-    const safeIcon =
-      item_icon && item_icon.trim() !== "" && item_icon !== "(Unknown)"
-        ? item_icon
-        : "/images/item-placeholder.png";
-    const safeName =
-      item_name && item_name !== "(Unknown)" ? item_name : "아이템";
-
     return (
-      <div
+      <ItemIconFrame
         ref={ref}
         {...props}
+        icon={item_icon}
+        name={item_name}
         style={{
           backgroundImage: backgroundImage,
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
         }}
-        className={cn(
-          "relative flex aspect-square h-full w-full cursor-pointer items-center justify-center rounded-xs border-2",
-          !emblem_info && "bg-white",
-          borderColor,
-          className,
-        )}
+        className={cn(!emblem_info && "bg-white", borderColor, className)}
       >
         {/* 좌상단 라벨 (잠재능력) */}
         {(potential || additional) && (
@@ -87,8 +80,9 @@ export const ItemIconBase = React.forwardRef<HTMLDivElement, ItemIconBaseProps>(
             {potential && (
               <span
                 className={cn(
-                  "flex items-center justify-center rounded-tl-xs font-bold text-white subpixel-antialiased",
-                  "wide:h-3.5 wide:w-3.5 wide:text-[10px] h-3 w-3 text-[9px] leading-none",
+                  BADGE_BASE,
+                  BADGE_SIZE,
+                  "rounded-tl-xs font-bold text-white",
                   potential.bgColor,
                   !additional && "rounded-br-xs",
                 )}
@@ -99,8 +93,9 @@ export const ItemIconBase = React.forwardRef<HTMLDivElement, ItemIconBaseProps>(
             {additional && (
               <span
                 className={cn(
-                  "flex items-center justify-center rounded-br-xs font-bold text-white subpixel-antialiased",
-                  "wide:h-3.5 wide:w-3.5 wide:text-[10px] h-3 w-3 text-[9px] leading-none",
+                  BADGE_BASE,
+                  BADGE_SIZE,
+                  "rounded-br-xs font-bold text-white",
                   additional.bgColor,
                 )}
               >
@@ -114,26 +109,15 @@ export const ItemIconBase = React.forwardRef<HTMLDivElement, ItemIconBaseProps>(
         {showStar && (
           <span
             className={cn(
-              "absolute -top-0.5 -right-0.5 z-1 flex items-center justify-center rounded-tr-xs rounded-bl-xs bg-[#FFC300] font-semibold text-black subpixel-antialiased",
-              "wide:h-3.5 wide:w-3.5 wide:text-[10px] h-3 w-3 text-[9px] leading-none tabular-nums",
+              BADGE_BASE,
+              BADGE_SIZE,
+              "absolute -top-0.5 -right-0.5 z-1 rounded-tr-xs rounded-bl-xs bg-[#FFC300] font-semibold text-black tabular-nums",
             )}
           >
             {star}
           </span>
         )}
-
-        {/* 아이템 이미지 */}
-        <Image
-          src={safeIcon}
-          alt={safeName}
-          width={1}
-          height={1}
-          loading="lazy"
-          unoptimized
-          className="max-h-full max-w-full object-contain"
-          style={{ width: "auto", height: "auto", imageRendering: "pixelated" }}
-        />
-      </div>
+      </ItemIconFrame>
     );
   },
 );

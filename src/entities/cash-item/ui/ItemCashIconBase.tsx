@@ -1,7 +1,7 @@
 import * as React from "react";
-import Image from "next/image";
 import { cn } from "@/shared/lib/utils";
 import { CashItemEquipment } from "@/entities/cash-item";
+import { ItemIconFrame } from "@/shared/ui/ItemIconFrame";
 
 interface ItemCashIconBaseProps {
   item: Pick<
@@ -18,6 +18,7 @@ export const ItemCashIconBase = React.forwardRef<
   HTMLDivElement,
   ItemCashIconBaseProps
 >(({ item, className, ...props }, ref) => {
+  // 신비의 모루로 외형이 합성된 경우 합성된 아이템으로 표시
   const displayIcon =
     item.miracle_anvil_item_icon && item.miracle_anvil_item_icon.trim() !== ""
       ? item.miracle_anvil_item_icon
@@ -27,34 +28,14 @@ export const ItemCashIconBase = React.forwardRef<
       ? item.miracle_anvil_item_name
       : item.cash_item_name;
 
-  const safeIcon =
-    displayIcon && displayIcon.trim() !== "" && displayIcon !== "(Unknown)"
-      ? displayIcon
-      : "/images/item-placeholder.png";
-
-  const safeName = displayName && displayName !== "(Unknown)" ? displayName : "아이템";
-
   return (
-    <div
+    <ItemIconFrame
       ref={ref}
       {...props}
-      className={cn(
-        "relative flex aspect-square h-full w-full cursor-pointer items-center justify-center rounded-xs border-2",
-        "border-[#9E9E9E] bg-white",
-        className,
-      )}
-    >
-      <Image
-        src={safeIcon}
-        alt={safeName}
-        width={1}
-        height={1}
-        loading="lazy"
-        unoptimized
-        className="max-h-full max-w-full object-contain"
-        style={{ width: "auto", height: "auto", imageRendering: "pixelated" }}
-      />
-    </div>
+      icon={displayIcon}
+      name={displayName}
+      className={cn("border-[#9E9E9E] bg-white", className)}
+    />
   );
 });
 

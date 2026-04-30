@@ -1,5 +1,9 @@
 import { CashItemEquipment } from "@/entities/cash-item";
 import { formatDateKST, parseValidDate } from "@/shared/lib/date";
+import { ItemOptionRow } from "@/shared/ui/ItemOptionRow";
+
+const MUTED_LABEL = "text-[#a1a1a1]";
+const HIGHLIGHT_VALUE = "text-orange-400";
 
 interface Props {
   options: CashItemEquipment["cash_item_option"];
@@ -48,26 +52,22 @@ export const ItemCashOptions = ({
       <dl>
         {hasOptions &&
           options.map((opt, idx) => (
-            <div
+            <ItemOptionRow
               key={`${opt.option_name}-${idx}`}
-              className="grid grid-cols-[max-content_1fr] gap-x-2"
-            >
-              <dt className="whitespace-nowrap text-[#a1a1a1]">
-                {opt.option_name}
-              </dt>
-              <dd
-                className="text-right text-orange-400"
-                aria-label={`${opt.option_name} ${opt.option_value}`}
-              >
-                {opt.option_value ?? "-"}
-              </dd>
-            </div>
+              label={opt.option_name}
+              value={opt.option_value ?? "-"}
+              labelClassName={MUTED_LABEL}
+              valueClassName={HIGHLIGHT_VALUE}
+              valueAriaLabel={`${opt.option_name} ${opt.option_value}`}
+            />
           ))}
         {hasOptions && (
-          <div className="grid grid-cols-[max-content_1fr] gap-x-2">
-            <dt className="whitespace-nowrap text-[#a1a1a1]">유효기간</dt>
-            <dd className="text-right text-orange-400">{optionExpireText}</dd>
-          </div>
+          <ItemOptionRow
+            label="유효기간"
+            value={optionExpireText}
+            labelClassName={MUTED_LABEL}
+            valueClassName={HIGHLIGHT_VALUE}
+          />
         )}
         {hasMiracleAnvil && (
           <div className="text-left">

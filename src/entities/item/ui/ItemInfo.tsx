@@ -1,8 +1,12 @@
 import { CharacterItemEquipment } from "../model/types";
+import { ItemOptionRow } from "@/shared/ui/ItemOptionRow";
 
 interface Props {
   item: CharacterItemEquipment;
 }
+
+const MUTED_LABEL = "text-[#a1a1a1]";
+const HIGHLIGHT_VALUE = "text-orange-400";
 
 export const ItemInfo = ({ item }: Props) => {
   if (!item.equipment_level) return null;
@@ -12,32 +16,25 @@ export const ItemInfo = ({ item }: Props) => {
       <p className="font-medium">아이템 정보</p>
 
       <dl className="flex flex-col">
-        {/* 착용레벨 */}
-        <div className="grid grid-cols-[max-content_1fr] gap-x-2">
-          <dt className="whitespace-nowrap text-[#a1a1a1]">착용레벨</dt>
-          <dd className="text-right text-orange-400 tabular-nums">
-            {item.equipment_level}
-          </dd>
-        </div>
-
-        {/* 분류 */}
-        <div className="grid grid-cols-[max-content_1fr] gap-x-2">
-          <dt className="whitespace-nowrap text-[#a1a1a1]">분류</dt>
-          <dd className="text-right text-orange-400">
-            {item.item_equipment_page_name}
-          </dd>
-        </div>
-
-        {/* 카르마 가위 */}
+        <ItemOptionRow
+          label="착용레벨"
+          value={item.equipment_level}
+          labelClassName={MUTED_LABEL}
+          valueClassName={HIGHLIGHT_VALUE}
+        />
+        <ItemOptionRow
+          label="분류"
+          value={item.item_equipment_page_name}
+          labelClassName={MUTED_LABEL}
+          valueClassName={HIGHLIGHT_VALUE}
+        />
         {item.cuttable_count != null && (
-          <div className="grid grid-cols-[max-content_1fr] gap-x-2">
-            <dt className="whitespace-nowrap text-[#a1a1a1]">
-              남은 카르마 가위 횟수
-            </dt>
-            <dd className="text-right text-orange-400 tabular-nums">
-              {item.cuttable_count}
-            </dd>
-          </div>
+          <ItemOptionRow
+            label="남은 카르마 가위 횟수"
+            value={item.cuttable_count}
+            labelClassName={MUTED_LABEL}
+            valueClassName={HIGHLIGHT_VALUE}
+          />
         )}
       </dl>
     </div>

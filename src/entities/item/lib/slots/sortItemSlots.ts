@@ -53,24 +53,36 @@ function createItemMap(
 // 정렬 함수들
 // ============================================================================
 
+// 한벌옷 착용 여부에 따라 슬롯 순서를 고르고 그 순서대로 배치
+function sortBySlotOrder(
+  items: CharacterItemEquipment[],
+  android: AndroidEquipment | null,
+  heart: HeartEquipment | null,
+  onepieceOrder: string[],
+  topBottomOrder: string[],
+): SortedItemSlot[] {
+  const map = createItemMap(items, android, heart);
+  const order = map["한벌옷"] ? onepieceOrder : topBottomOrder;
+
+  return order.map((slotName) => ({
+    slotName: slotName,
+    item: map[slotName] ?? null,
+  }));
+}
+
 // 그리드용 정렬 (빈 칸 포함)
 export function sortItems(
   items: CharacterItemEquipment[],
   android: AndroidEquipment | null,
   heart: HeartEquipment | null,
 ): SortedItemSlot[] {
-  const map = createItemMap(items, android, heart);
-  const hasOnepiece = !!map["한벌옷"];
-
-  // 그리드용 순서 사용
-  const order = hasOnepiece
-    ? EQUIP_SLOT_ORDER_GRID_ONEPIECE
-    : EQUIP_SLOT_ORDER_GRID_TOPBOTTOM;
-
-  return order.map((slotName) => ({
-    slotName: slotName,
-    item: map[slotName] ?? null,
-  }));
+  return sortBySlotOrder(
+    items,
+    android,
+    heart,
+    EQUIP_SLOT_ORDER_GRID_ONEPIECE,
+    EQUIP_SLOT_ORDER_GRID_TOPBOTTOM,
+  );
 }
 
 // 리스트용 정렬 (빈 칸 없음, 순서 재배치)
@@ -79,16 +91,11 @@ export function sortItemsForList(
   android: AndroidEquipment | null,
   heart: HeartEquipment | null,
 ): SortedItemSlot[] {
-  const map = createItemMap(items, android, heart);
-  const hasOnepiece = !!map["한벌옷"];
-
-  // 리스트용 순서 사용
-  const order = hasOnepiece
-    ? EQUIP_SLOT_ORDER_LIST_ONEPIECE
-    : EQUIP_SLOT_ORDER_LIST_TOPBOTTOM;
-
-  return order.map((slotName) => ({
-    slotName: slotName,
-    item: map[slotName] ?? null,
-  }));
+  return sortBySlotOrder(
+    items,
+    android,
+    heart,
+    EQUIP_SLOT_ORDER_LIST_ONEPIECE,
+    EQUIP_SLOT_ORDER_LIST_TOPBOTTOM,
+  );
 }

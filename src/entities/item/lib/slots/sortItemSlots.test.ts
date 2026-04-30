@@ -37,7 +37,6 @@ const android: AndroidEquipment = {
   android_gender: "F",
   android_non_humanoid_flag: "0",
   android_warehouse_usable_flag: "1",
-  android_cash_item_equipment: [],
 };
 
 const heart: HeartEquipment = {

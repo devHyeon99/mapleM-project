@@ -31,12 +31,7 @@ export const ItemTab = ({ data }: ItemTabProps) => {
 
         <div className="bg-card rounded-b-2xl">
           {viewMode === "grid" ? (
-            <div className="flex w-full flex-col items-center py-4">
-              <ItemGrid
-                items={sortedItems}
-                presetNo={effectiveSelectedPreset}
-              />
-            </div>
+            <ItemGrid items={sortedItems} presetNo={effectiveSelectedPreset} />
           ) : (
             <ItemList
               items={sortedItems}

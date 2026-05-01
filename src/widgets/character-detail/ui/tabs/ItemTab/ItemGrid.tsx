@@ -22,7 +22,7 @@ export const ItemGrid = ({ items, presetNo }: ItemGridProps) => {
   });
 
   return (
-    <div className="relative mx-auto w-full max-w-[28rem] px-1">
+    <div className="relative mx-auto flex w-full max-w-[28rem] flex-col items-center px-1 py-4">
       <div
         className="grid w-full grid-cols-7 gap-1"
         aria-hidden={hasNoEquipItems}

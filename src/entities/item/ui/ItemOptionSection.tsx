@@ -30,7 +30,7 @@ export const ItemOptionSection = ({
   const gradeInfo = getGradeInfo(grade);
 
   return (
-    <div className="border-divider border-b py-1 text-sm">
+    <div className="border-game-line border-b py-1 text-sm">
       {withGradeBadge ? (
         <div className="flex items-center gap-1">
           <span

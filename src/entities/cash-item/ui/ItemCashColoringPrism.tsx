@@ -20,11 +20,11 @@ export const ItemCashColoringPrism = ({ coloringPrism }: Props) => {
   const colorRangeLabel = color_range ? COLOR_RANGE_LABEL[color_range] : "";
 
   return (
-    <div className="border-divider border-b py-1 text-sm">
+    <div className="border-game-line border-b py-1 text-sm">
       <p>컬러링 프리즘</p>
       <dl>
         <div className="grid grid-cols-[max-content_1fr] gap-x-2">
-          <dt className="whitespace-nowrap text-[#a1a1a1]">적용 범위</dt>
+          <dt className="whitespace-nowrap text-game-muted">적용 범위</dt>
           <dd
             className="text-right text-orange-400"
             aria-label={`적용 범위: ${colorRangeLabel}`}
@@ -33,7 +33,7 @@ export const ItemCashColoringPrism = ({ coloringPrism }: Props) => {
           </dd>
         </div>
         <div className="grid grid-cols-[max-content_1fr] gap-x-2">
-          <dt className="whitespace-nowrap text-[#a1a1a1]">색조</dt>
+          <dt className="whitespace-nowrap text-game-muted">색조</dt>
           <dd
             className="text-right text-orange-400 tabular-nums"
             aria-label={`색조 값: ${hue ?? 0}`}
@@ -42,7 +42,7 @@ export const ItemCashColoringPrism = ({ coloringPrism }: Props) => {
           </dd>
         </div>
         <div className="grid grid-cols-[max-content_1fr] gap-x-2">
-          <dt className="whitespace-nowrap text-[#a1a1a1]">채도</dt>
+          <dt className="whitespace-nowrap text-game-muted">채도</dt>
           <dd
             className="text-right text-orange-400 tabular-nums"
             aria-label={`채도 값: ${saturation ?? 0}`}
@@ -51,7 +51,7 @@ export const ItemCashColoringPrism = ({ coloringPrism }: Props) => {
           </dd>
         </div>
         <div className="grid grid-cols-[max-content_1fr] gap-x-2">
-          <dt className="whitespace-nowrap text-[#a1a1a1]">명도</dt>
+          <dt className="whitespace-nowrap text-game-muted">명도</dt>
           <dd
             className="text-right text-orange-400 tabular-nums"
             aria-label={`명도 값: ${value ?? 0}`}

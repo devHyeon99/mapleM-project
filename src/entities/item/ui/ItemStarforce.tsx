@@ -11,7 +11,7 @@ export const ItemStarforce = ({ item }: Props) => {
   if (starRows.length === 0) return null;
 
   return (
-    <div className="border-divider border-b py-1 text-sm">
+    <div className="border-game-line border-b py-1 text-sm">
       <div className="flex items-center justify-between">
         <p className="font-medium">스타포스</p>
         <span className="text-xs text-orange-400">

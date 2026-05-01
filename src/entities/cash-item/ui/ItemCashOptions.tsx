@@ -2,7 +2,7 @@ import { CashItemEquipment } from "@/entities/cash-item";
 import { formatDateKST, parseValidDate } from "@/shared/lib/date";
 import { ItemOptionRow } from "@/shared/ui/ItemOptionRow";
 
-const MUTED_LABEL = "text-[#a1a1a1]";
+const MUTED_LABEL = "text-game-muted";
 const HIGHLIGHT_VALUE = "text-orange-400";
 
 interface Props {
@@ -47,7 +47,7 @@ export const ItemCashOptions = ({
           : date;
 
   return (
-    <div className="border-divider border-b py-1 text-sm">
+    <div className="border-game-line border-b py-1 text-sm">
       <span>아이템 옵션</span>
       <dl>
         {hasOptions &&

@@ -5,12 +5,12 @@ interface Props {
   item: CashItemEquipment;
 }
 
-const MUTED_LABEL = "text-[#a1a1a1]";
+const MUTED_LABEL = "text-game-muted";
 const HIGHLIGHT_VALUE = "text-orange-400";
 
 export const ItemCashInfo = ({ item }: Props) => {
   return (
-    <div className="border-divider border-b py-1 text-sm">
+    <div className="border-game-line border-b py-1 text-sm">
       <p className="font-medium">아이템 정보</p>
       <dl className="flex flex-col">
         <ItemOptionRow

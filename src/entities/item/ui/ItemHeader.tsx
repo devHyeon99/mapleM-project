@@ -10,7 +10,7 @@ export const ItemHeader = ({ item }: Props) => {
   const grade = getGradeInfo(item.item_grade);
 
   return (
-    <div className="border-divider flex items-center gap-2 border-b pb-2">
+    <div className="border-game-line flex items-center gap-2 border-b pb-2">
       <ItemIconBase
         item={item}
         className="pointer-events-none h-12.5 w-12.5 select-none"

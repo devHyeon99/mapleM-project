@@ -1,4 +1,5 @@
 export { ItemIconBase } from "./ItemIconBase";
+export { ItemDetails } from "./ItemDetails";
 export { ItemHeader } from "./ItemHeader";
 export { ItemStarforce } from "./ItemStarforce";
 export { ItemInfo } from "./ItemInfo";

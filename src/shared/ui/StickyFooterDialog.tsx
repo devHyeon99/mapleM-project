@@ -117,7 +117,10 @@ export const StickyFooterDialog = ({
         <div
           ref={scrollAreaRef}
           onScroll={showScrollAffordance ? syncCanScrollDown : undefined}
-          className={cn("min-h-0 flex-1 overflow-y-auto px-4 py-4", bodyClassName)}
+          className={cn(
+            "min-h-0 flex-1 overflow-y-auto px-4 py-4",
+            bodyClassName,
+          )}
         >
           {showScrollAffordance ? (
             <div ref={bodyContentRef}>{children}</div>
@@ -128,7 +131,7 @@ export const StickyFooterDialog = ({
 
         <DialogFooter
           className={cn(
-            "bg-secondary relative m-0 flex-row items-stretch justify-center border-t p-0 sm:justify-center",
+            "bg-secondary relative m-0 flex-row items-stretch justify-center p-0 sm:justify-center",
             footerClassName,
           )}
         >

@@ -31,6 +31,16 @@
   --radius-xl: calc(var(--radius) + 4px);
   --color-divider: var(--divider);
 
+  /*
+   * 아이템 상세 다이얼로그 전용 팔레트.
+   * 게임 툴팁 톤을 그대로 쓰기 때문에 라이트/다크 모드와 무관하게 같은 값을 유지한다.
+   */
+  --color-game-surface: #232323;
+  --color-game-surface-strong: #323232;
+  --color-game-line: #3e3e3e;
+  --color-game-text: #ededed;
+  --color-game-muted: #a1a1a1;
+
   --breakpoint-wide: 1080px;
 
   /* text-xs(12px) 와 text-sm(14px) 사이. `text-13` 으로 쓴다. */

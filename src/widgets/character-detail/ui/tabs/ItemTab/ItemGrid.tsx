@@ -1,5 +1,5 @@
 import type { SortedItemSlot } from "@/entities/item";
-import { ItemDialog } from "@/features/item-popover";
+import { ItemDialog } from "@/features/item-dialog";
 import { ItemEmptySlot } from "@/shared/ui/ItemEmptySlot";
 
 interface ItemGridProps {

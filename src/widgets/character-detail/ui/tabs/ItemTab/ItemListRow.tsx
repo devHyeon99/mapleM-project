@@ -1,6 +1,6 @@
 import type { CharacterItemEquipment } from "@/entities/item";
 import type { ItemOption } from "@/entities/item";
-import { ItemDialog } from "@/features/item-popover";
+import { ItemDialog } from "@/features/item-dialog";
 import { Star } from "lucide-react";
 
 interface ItemListRowProps {

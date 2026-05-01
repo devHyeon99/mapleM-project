@@ -39,7 +39,10 @@ function DialogOverlay({
     <DialogPrimitive.Overlay
       data-slot="dialog-overlay"
       className={cn(
-        "fixed inset-0 isolate z-50 bg-black/30 duration-100 supports-backdrop-filter:backdrop-blur-sm data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0",
+        // 모바일에서 주소창·하단바가 접히면 시각 뷰포트가 커지므로,
+        // inset-0(레이아웃 뷰포트)만으로는 위아래에 덮이지 않는 띠가 생긴다.
+        // 툴바가 모두 접힌 높이(lvh)까지 늘려서 어느 상태에서도 화면을 덮게 한다.
+        "fixed inset-0 h-[100lvh] isolate z-50 bg-black/30 duration-100 supports-backdrop-filter:backdrop-blur-sm data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0",
         className
       )}
       {...props}

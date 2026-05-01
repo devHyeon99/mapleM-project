@@ -14,7 +14,6 @@ export const LinkSkillItem = ({ skill }: LinkSkillItemProps) => {
       title="링크 스킬 설명"
       description={`${skill.skill_name} 링크 스킬 상세 정보`}
       contentClassName="w-[22rem] max-w-[calc(100%-2rem)] border-2"
-      hideHeaderText
       bodyClassName="space-y-2"
       trigger={
         <button

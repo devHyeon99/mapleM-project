@@ -1,18 +1,10 @@
 import {
   CharacterItemEquipment,
-  ItemAdditionalOption,
-  ItemAdditionalPotential,
-  ItemBaseOption,
-  ItemDescription,
-  ItemEmblem,
-  ItemHeader,
+  ItemDetails,
   ItemIconBase,
-  ItemInfo,
-  ItemPotential,
-  ItemSoul,
-  ItemStarforce,
 } from "@/entities/item";
-import { ItemDialogFrame } from "./ItemDialogFrame";
+import { ITEM_DIALOG_SKIN } from "./itemDialogSkin";
+import { StickyFooterDialog } from "@/shared/ui/StickyFooterDialog";
 
 interface ItemDialogProps {
   item: CharacterItemEquipment;
@@ -21,20 +13,14 @@ interface ItemDialogProps {
 
 export const ItemDialog = ({ item, className }: ItemDialogProps) => {
   return (
-    <ItemDialogFrame
+    <StickyFooterDialog
       trigger={<ItemIconBase item={item} className={className} />}
       title={`${item.item_name} 상세 정보`}
+      description={`${item.item_name} 아이템 상세 정보입니다.`}
+      showScrollAffordance
+      {...ITEM_DIALOG_SKIN}
     >
-      <ItemHeader item={item} />
-      <ItemStarforce item={item} />
-      <ItemInfo item={item} />
-      <ItemBaseOption item={item} />
-      <ItemAdditionalOption item={item} />
-      <ItemPotential item={item} />
-      <ItemAdditionalPotential item={item} />
-      <ItemSoul item={item} />
-      <ItemEmblem item={item} />
-      <ItemDescription item={item} />
-    </ItemDialogFrame>
+      <ItemDetails item={item} />
+    </StickyFooterDialog>
   );
 };

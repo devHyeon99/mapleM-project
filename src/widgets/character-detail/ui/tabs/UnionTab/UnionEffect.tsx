@@ -1,13 +1,16 @@
 "use client";
 
 import { TabCard } from "@/shared/ui/TabCard";
-import { cn } from "@/shared/lib/utils";
+import { InfoRow } from "@/shared/ui/InfoRow";
+import {
+  parseUnionOptions,
+  splitUnionOptionValue,
+} from "@/widgets/character-detail/lib/parseUnionOptions";
 import type { UnionOption } from "@/entities/character";
 
 interface UnionEffectProps {
   title: string;
   options: string | UnionOption[] | null | undefined;
-  contentHeight?: string;
   isLoading?: boolean;
   className?: string;
 }
@@ -15,64 +18,38 @@ interface UnionEffectProps {
 export const UnionEffect = ({
   title,
   options,
-  contentHeight = "h-48",
   isLoading,
   className,
 }: UnionEffectProps) => {
-  // 데이터 타입에 따른 파싱 로직 (콤마 보호 정규식 유지)
-  const getParsedList = () => {
-    if (!options) return [];
-    if (Array.isArray(options)) {
-      return options.map((opt) => `${opt.option_name} ${opt.option_value}`);
-    }
-    return options.split(/,(?!\d)/).map((opt) => opt.trim());
-  };
-
-  const parsedList = getParsedList();
-  const splitOptionValue = (option: string) => {
-    const trimmed = option.trim();
-    const match = trimmed.match(/^(.*\S)\s+([-+]?\d[\d,]*(?:\.\d+)?%?)$/);
-    if (!match) {
-      return { label: trimmed, value: null as string | null };
-    }
-    return { label: match[1], value: match[2] };
-  };
+  const parsedList = parseUnionOptions(options);
 
   return (
     <TabCard title={title} className={className}>
       {isLoading ? (
-        <div
-          className={cn(
-            "text-muted-foreground flex items-center justify-center text-xs",
-            contentHeight,
-          )}
-        >
+        <div className="text-muted-foreground flex h-48 items-center justify-center text-xs">
           로딩 중...
         </div>
       ) : parsedList.length > 0 ? (
         <ul className="flex flex-col gap-1">
           {parsedList.map((option, idx) => {
-            const { label, value } = splitOptionValue(option);
+            const { label, value } = splitUnionOptionValue(option);
             return (
-              <li
+              <InfoRow
                 key={`${option}-${idx}`}
-                className="flex items-start justify-between gap-2 text-sm leading-relaxed"
+                as="li"
+                variant="between"
+                isHighlight
+                label={label}
+                className="items-start leading-relaxed"
+                labelClassName="shrink"
               >
-                <span className="text-muted-foreground">{label}</span>
-                {value ? (
-                  <span className="font-medium text-orange-400">{value}</span>
-                ) : null}
-              </li>
+                {value}
+              </InfoRow>
             );
           })}
         </ul>
       ) : (
-        <div
-          className={cn(
-            "text-muted-foreground flex items-center justify-center text-sm",
-            contentHeight,
-          )}
-        >
+        <div className="text-muted-foreground flex h-48 items-center justify-center text-sm">
           활성화된 효과가 없습니다.
         </div>
       )}

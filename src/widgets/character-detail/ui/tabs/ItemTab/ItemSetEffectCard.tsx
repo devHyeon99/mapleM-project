@@ -11,6 +11,7 @@ import {
   AccordionTrigger,
 } from "@/shared/ui/accordion";
 import { Separator } from "@/shared/ui/separator";
+import { TabCard } from "@/shared/ui/TabCard";
 
 interface ItemSetEffectCardProps {
   items: SortedItemSlot[];
@@ -28,11 +29,7 @@ export const ItemSetEffectCard = ({ items }: ItemSetEffectCardProps) => {
   }
 
   return (
-    <section className="bg-card flex w-full flex-col rounded-2xl p-4 shadow-sm">
-      <div className="mb-2 flex items-center justify-between">
-        <span className="text-foreground font-bold">장비 세트 효과</span>
-      </div>
-
+    <TabCard title="장비 세트 효과" hideSeparator>
       <Accordion
         type="multiple"
         className="bg-background dark:bg-secondary w-full"
@@ -78,6 +75,6 @@ export const ItemSetEffectCard = ({ items }: ItemSetEffectCardProps) => {
           </AccordionItem>
         ))}
       </Accordion>
-    </section>
+    </TabCard>
   );
 };

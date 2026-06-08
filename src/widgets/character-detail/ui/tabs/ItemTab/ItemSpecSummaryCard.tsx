@@ -3,6 +3,7 @@ import type { SortedItemSlot } from "@/entities/item";
 import { getItemSpec } from "@/entities/item";
 import { InfoRow } from "@/shared/ui/InfoRow";
 import { Separator } from "@/shared/ui/separator";
+import { TabCard } from "@/shared/ui/TabCard";
 
 interface ItemSpecSummaryCardProps {
   items: SortedItemSlot[];
@@ -21,11 +22,7 @@ export const ItemSpecSummaryCard = ({
   );
 
   return (
-    <section className="bg-card flex w-full flex-col rounded-2xl p-4 shadow-sm">
-      <div className="mb-2 flex items-baseline gap-2">
-        <h3 className="text-foreground font-bold">장비 스펙 요약</h3>
-      </div>
-
+    <TabCard title="장비 스펙 요약" hideSeparator>
       <div className="bg-muted/50 dark:bg-secondary w-full rounded-xl border p-3">
         <div className="relative">
           <Separator
@@ -80,6 +77,6 @@ export const ItemSpecSummaryCard = ({
           </dl>
         </div>
       </div>
-    </section>
+    </TabCard>
   );
 };

@@ -1,7 +1,6 @@
 "use client";
 
-import { useId } from "react";
-import { Separator } from "@/shared/ui/separator";
+import { TabCard } from "@/shared/ui/TabCard";
 import { cn } from "@/shared/lib/utils";
 import type { UnionOption } from "@/entities/character";
 
@@ -20,8 +19,6 @@ export const UnionEffect = ({
   isLoading,
   className,
 }: UnionEffectProps) => {
-  const titleId = useId();
-
   // 데이터 타입에 따른 파싱 로직 (콤마 보호 정규식 유지)
   const getParsedList = () => {
     if (!options) return [];
@@ -42,18 +39,7 @@ export const UnionEffect = ({
   };
 
   return (
-    <section
-      aria-labelledby={titleId}
-      className={cn(
-        "bg-card flex w-full flex-col rounded-2xl p-4 shadow-sm",
-        className,
-      )}
-    >
-      <h3 id={titleId} className="text-base font-bold">
-        {title}
-      </h3>
-      <Separator className="my-2" />
-
+    <TabCard title={title} className={className}>
       {isLoading ? (
         <div
           className={cn(
@@ -90,6 +76,6 @@ export const UnionEffect = ({
           활성화된 효과가 없습니다.
         </div>
       )}
-    </section>
+    </TabCard>
   );
 };

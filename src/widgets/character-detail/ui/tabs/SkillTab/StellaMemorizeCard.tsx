@@ -1,6 +1,6 @@
 import type { CharacterStellaMemorize } from "@/entities/skill/model";
 import Image from "next/image";
-import { Separator } from "@/shared/ui/separator";
+import { TabCard } from "@/shared/ui/TabCard";
 
 interface StellaMemorizeCardProps {
   skills: CharacterStellaMemorize[];
@@ -10,10 +10,7 @@ export const StellaMemorizeCard = ({ skills }: StellaMemorizeCardProps) => {
   if (skills.length === 0) return null;
 
   return (
-    <section className="bg-card flex w-full flex-col rounded-2xl p-4 shadow-sm">
-      <h3 className="font-bold">스텔라 메모라이즈</h3>
-      <Separator className="my-2" />
-
+    <TabCard title="스텔라 메모라이즈">
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-5">
         {skills.map((skill) => (
           <div
@@ -41,6 +38,6 @@ export const StellaMemorizeCard = ({ skills }: StellaMemorizeCardProps) => {
           </div>
         ))}
       </div>
-    </section>
+    </TabCard>
   );
 };

@@ -1,10 +1,10 @@
 "use client";
 
 import { useCharacterJewel } from "@/entities/character";
-import { Separator } from "@/shared/ui/separator";
+import { SegmentedToggle } from "@/shared/ui/SegmentedToggle";
+import { TabCard } from "@/shared/ui/TabCard";
 import { TabMessageSection } from "@/shared/ui/TabMessageSection";
 import { useJewelTab } from "./useJewelTab";
-import { JewelHeader } from "./JewelHeader";
 import { JewelPentagon } from "./JewelPentagon";
 import { TabLoadingBox } from "../../TabLoadingBox";
 
@@ -45,19 +45,21 @@ export const JewelTab = ({ ocid, level }: JewelTabProps) => {
   }
 
   return (
-    <div className="bg-card rounded-2xl p-3 shadow-sm">
-      <div className="flex h-full flex-col items-center">
-        {/* 헤더 컴포넌트 */}
-        <JewelHeader
-          useJewelPageNo={data.use_jewel_page_no}
-          activePageNo={selectedPage}
-          jewelEquipment={data.jewel_equipment}
-          onPageChange={setSelectedPage}
+    <TabCard
+      title="쥬얼 페이지"
+      action={
+        <SegmentedToggle
+          ariaLabel="쥬얼 페이지 선택"
+          value={Number(selectedPage)}
+          onChange={(page) => setSelectedPage(String(page))}
+          options={data.jewel_equipment.map(({ jewel_page_no }) => ({
+            value: jewel_page_no,
+            marked: jewel_page_no === data.use_jewel_page_no,
+          }))}
         />
-
-        <Separator className="my-2" />
-
-        {/* 컨텐츠 컴포넌트 */}
+      }
+    >
+      <div className="flex h-full flex-col items-center">
         {activePageData && (
           <JewelPentagon
             activePageData={activePageData}
@@ -66,6 +68,6 @@ export const JewelTab = ({ ocid, level }: JewelTabProps) => {
           />
         )}
       </div>
-    </div>
+    </TabCard>
   );
 };

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import type { CharacterUnion, UnionRanking } from "../model/types";
 import { InfoDescriptionRow } from "@/shared/ui/InfoRow";
-import { Separator } from "@/shared/ui/separator";
+import { TabCard } from "@/shared/ui/TabCard";
 
 interface UnionCardProps {
   data:
@@ -25,11 +25,7 @@ export const UnionCard = ({
   const { union_level, union_grade, union_grade_icon } = data;
 
   return (
-    <section className="bg-card w-full rounded-xs p-4 shadow-sm">
-      <h3 className="font-bold">{title}</h3>
-
-      <Separator className="my-2" />
-
+    <TabCard title={title}>
       <div className="flex items-center justify-between gap-4">
         <dl className="flex flex-1 flex-col gap-1">
           <InfoDescriptionRow as="div" label="유니온 등급" className="gap-2">
@@ -61,6 +57,6 @@ export const UnionCard = ({
           />
         )}
       </div>
-    </section>
+    </TabCard>
   );
 };

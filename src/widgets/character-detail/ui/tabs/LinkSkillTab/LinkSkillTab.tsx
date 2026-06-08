@@ -1,9 +1,9 @@
 "use client";
 
 import { TabMessageSection } from "@/shared/ui/TabMessageSection";
-import { Separator } from "@/shared/ui/separator";
+import { SegmentedToggle } from "@/shared/ui/SegmentedToggle";
+import { TabCard } from "@/shared/ui/TabCard";
 import { useLinkSkillTab } from "./useLinkSkillTab";
-import { LinkSkillHeader } from "./LinkSkillHeader";
 import { LinkSkillList } from "./LinkSkillList";
 import { LinkSkillTotalStat } from "./LinkSkillTotalStat";
 import { TabLoadingBox } from "../../TabLoadingBox";
@@ -49,18 +49,22 @@ export const LinkSkillTab = ({ ocid }: LinkSkillTabProps) => {
 
   return (
     <>
-      <div className="bg-card rounded-2xl p-3 shadow-sm">
-        <LinkSkillHeader
-          usePresetNo={mergedData.use_prest_no}
-          activePreset={activePreset}
-          presets={mergedData.link_skill}
-          onPresetChange={setSelectedPreset}
-        />
-
-        <Separator className="my-2" />
-
+      <TabCard
+        title="링크 스킬"
+        action={
+          <SegmentedToggle
+            ariaLabel="링크 스킬 프리셋 선택"
+            value={Number(activePreset)}
+            onChange={(preset) => setSelectedPreset(String(preset))}
+            options={mergedData.link_skill.map(({ preset_no }) => ({
+              value: preset_no,
+              marked: preset_no === mergedData.use_prest_no,
+            }))}
+          />
+        }
+      >
         <LinkSkillList activePresetData={activePresetData} />
-      </div>
+      </TabCard>
       {activePresetData && (
         <LinkSkillTotalStat skills={activePresetData.link_skill_info} />
       )}

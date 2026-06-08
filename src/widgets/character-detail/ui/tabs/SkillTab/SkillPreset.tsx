@@ -1,6 +1,6 @@
 import type { CharacterSkillPreset } from "@/entities/skill/model";
 import { HelpPopover } from "@/shared/ui/HelpPopover";
-import { Separator } from "@/shared/ui/separator";
+import { TabCard } from "@/shared/ui/TabCard";
 import { TabMessageSection } from "@/shared/ui/TabMessageSection";
 import { TooltipProvider } from "@/shared/ui/tooltip";
 import { SkillIconTooltip } from "./SkillIconTooltip";
@@ -18,21 +18,18 @@ const PRESET_HELP_ITEMS = [
 ] as const;
 
 export const SkillPreset = ({ presets }: SkillPresetProps) => {
-  const header = (
-    <div className="flex items-center justify-between gap-2">
-      <h4 className="font-bold">스킬 프리셋</h4>
-      <HelpPopover
-        ariaLabel="스킬 프리셋 도움말"
-        items={PRESET_HELP_ITEMS}
-        iconType="exclamation"
-      />
-    </div>
-  );
-
   return (
-    <div className="flex h-full w-full flex-1 flex-col">
-      {header}
-      <Separator className="my-2" />
+    <TabCard
+      title="스킬 프리셋"
+      className="min-w-0 flex-1 basis-0"
+      action={
+        <HelpPopover
+          ariaLabel="스킬 프리셋 도움말"
+          items={PRESET_HELP_ITEMS}
+          iconType="exclamation"
+        />
+      }
+    >
       {!presets || presets.length === 0 ? (
         <TabMessageSection
           message="사용중인 프리셋 데이터가 없습니다."
@@ -78,6 +75,6 @@ export const SkillPreset = ({ presets }: SkillPresetProps) => {
           </div>
         </TooltipProvider>
       )}
-    </div>
+    </TabCard>
   );
 };

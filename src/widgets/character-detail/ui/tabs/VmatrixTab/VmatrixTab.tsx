@@ -7,7 +7,7 @@ import { TabLoadingBox } from "../../TabLoadingBox";
 import { CoreList } from "./CoreList";
 import { EnhancementCoreItem } from "./EnhancementCoreItem";
 import { SkillCoreItem } from "./SkillCoreItem";
-import { VmatrixSection } from "./VmatrixSection";
+import { TabCard } from "@/shared/ui/TabCard";
 import { groupCoresByType } from "./vmatrix-tab.utils";
 
 interface VmatrixTabProps {
@@ -57,7 +57,7 @@ export const VmatrixTab = ({ ocid, level }: VmatrixTabProps) => {
 
   return (
     <div className="space-y-2">
-      <VmatrixSection title="스킬 코어">
+      <TabCard title="스킬 코어">
         {skillCores.length > 0 ? (
           <CoreList
             items={skillCores}
@@ -69,9 +69,9 @@ export const VmatrixTab = ({ ocid, level }: VmatrixTabProps) => {
             message="장착된 스킬 코어가 없습니다."
           />
         )}
-      </VmatrixSection>
+      </TabCard>
 
-      <VmatrixSection title="강화 코어">
+      <TabCard title="강화 코어">
         {enhancementCores.length > 0 ? (
           <CoreList
             items={enhancementCores}
@@ -84,15 +84,15 @@ export const VmatrixTab = ({ ocid, level }: VmatrixTabProps) => {
             message="장착된 강화 코어가 없습니다."
           />
         )}
-      </VmatrixSection>
+      </TabCard>
 
       {unknownCores.length > 0 ? (
-        <VmatrixSection title="기타 코어">
+        <TabCard title="기타 코어">
           <CoreList
             items={unknownCores}
             renderItem={(core) => <SkillCoreItem core={core} />}
           />
-        </VmatrixSection>
+        </TabCard>
       ) : null}
     </div>
   );

@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import type { SymbolItem as CharacterSymbolItem } from "@/entities/character";
 import { SymbolItem } from "./SymbolItem";
 import { sumSymbolForce } from "@/shared/lib/symbol-force";
-import { Separator } from "@/shared/ui/separator";
+import { TabCard } from "@/shared/ui/TabCard";
 
 interface SymbolSectionProps {
   title: string;
@@ -21,16 +21,17 @@ export const SymbolSection = ({ title, items }: SymbolSectionProps) => {
   if (safeItems.length === 0) return null;
 
   return (
-    <section className="bg-card flex-1 rounded-2xl p-3 shadow-sm">
-      <h3 className="mb-2 flex items-center justify-between">
-        <span className="font-bold">{title}</span>
+    <TabCard
+      title={title}
+      className="flex-1"
+      action={
         <span className="text-sm font-semibold text-orange-400">
           {title === "아케인 심볼"
             ? `아케인포스 ${totalForce.toLocaleString()}`
             : `어센틱포스 ${totalForce.toLocaleString()}`}
         </span>
-      </h3>
-      <Separator className="my-2" />
+      }
+    >
       <ul className="flex flex-col gap-3">
         {safeItems.map((s) => (
           <SymbolItem
@@ -42,6 +43,6 @@ export const SymbolSection = ({ title, items }: SymbolSectionProps) => {
           />
         ))}
       </ul>
-    </section>
+    </TabCard>
   );
 };

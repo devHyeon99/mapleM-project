@@ -1,8 +1,6 @@
 "use client";
 
-import { HelpPopover } from "@/shared/ui/HelpPopover";
 import { SegmentedToggle } from "@/shared/ui/SegmentedToggle";
-import { Separator } from "@/shared/ui/separator";
 
 const SKILL_MODE_OPTIONS = [{ value: "A" as const }, { value: "B" as const }];
 
@@ -14,7 +12,7 @@ interface SkillTabHeaderProps {
   skillSetKeys: string[];
 }
 
-const EQUIPPED_SKILL_HELP_ITEMS = [
+export const EQUIPPED_SKILL_HELP_ITEMS = [
   {
     title: "장착 스킬",
     description:
@@ -32,36 +30,24 @@ export const SkillTabHeader = ({
   const hasData = skillSetKeys.length > 0;
 
   return (
-    <>
-      <div className="flex items-center justify-between gap-2">
-        <h3 className="font-bold">장착 스킬</h3>
-        <HelpPopover
-          ariaLabel="장착 스킬 도움말"
-          items={EQUIPPED_SKILL_HELP_ITEMS}
-          iconType="exclamation"
-        />
-      </div>
-      <Separator className="my-2" />
+    <div className="flex items-center justify-between">
+      {/* 왼쪽: A/B 모드 선택 */}
+      <SegmentedToggle
+        ariaLabel="장착 스킬 모드 선택"
+        value={selectedMode}
+        onChange={onModeChange}
+        options={SKILL_MODE_OPTIONS}
+      />
 
-      <div className="flex items-center justify-between">
-        {/* 왼쪽: A/B 모드 선택 */}
+      {/* 오른쪽: 프리셋 선택 */}
+      {hasData && (
         <SegmentedToggle
-          ariaLabel="장착 스킬 모드 선택"
-          value={selectedMode}
-          onChange={onModeChange}
-          options={SKILL_MODE_OPTIONS}
+          ariaLabel="장착 스킬 프리셋 선택"
+          value={selectedSet}
+          onChange={onSetChange}
+          options={skillSetKeys.map((setNo) => ({ value: setNo }))}
         />
-
-        {/* 오른쪽: 프리셋 선택 */}
-        {hasData && (
-          <SegmentedToggle
-            ariaLabel="장착 스킬 프리셋 선택"
-            value={selectedSet}
-            onChange={onSetChange}
-            options={skillSetKeys.map((setNo) => ({ value: setNo }))}
-          />
-        )}
-      </div>
-    </>
+      )}
+    </div>
   );
 };

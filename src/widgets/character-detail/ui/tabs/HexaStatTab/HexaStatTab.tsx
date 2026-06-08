@@ -4,6 +4,7 @@ import { Separator } from "@/shared/ui/separator";
 import { TabMessageSection } from "@/shared/ui/TabMessageSection";
 import { TabLoadingBox } from "../../TabLoadingBox";
 import { InfoDescriptionRow } from "@/shared/ui/InfoRow";
+import { TabCard } from "@/shared/ui/TabCard";
 import { cn } from "@/shared/lib/utils";
 import { useCharacterHexaMatrixStat } from "@/entities/character";
 import type { CharacterHexaMatrixStat } from "@/entities/character";
@@ -48,7 +49,7 @@ export const HexaStatTab = ({ ocid, level }: HexaStatTabProps) => {
   }
 
   return (
-    <div className="flex flex-col gap-4 shadow-sm">
+    <div className="flex flex-col gap-4">
       {statCores.map((core) => (
         <HexaStatCoreSection
           key={core.stat_core_slot}
@@ -67,13 +68,13 @@ type CoreSectionProps = {
 
 const HexaStatCoreSection = ({ slot, statInfo }: CoreSectionProps) => {
   return (
-    <section className="bg-card space-y-2 rounded-2xl p-4">
-      <h3 className="font-bold">스탯 코어 {slot}</h3>
-      <Separator className="my-2" />
-      {statInfo.map((page) => (
-        <HexaStatPageCard key={page.page_no} page={page} />
-      ))}
-    </section>
+    <TabCard title={`스탯 코어 ${slot}`}>
+      <div className="space-y-2">
+        {statInfo.map((page) => (
+          <HexaStatPageCard key={page.page_no} page={page} />
+        ))}
+      </div>
+    </TabCard>
   );
 };
 
@@ -87,7 +88,7 @@ const HexaStatPageCard = ({ page }: PageCardProps) => {
   return (
     <div
       className={cn(
-        "bg-card space-y-3 p-4",
+        "bg-card space-y-3 rounded-2xl p-4",
         isActive ? "bg-secondary shadow-sm" : "bg-secondary opacity-40",
       )}
     >

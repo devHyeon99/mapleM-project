@@ -1,6 +1,6 @@
 import type { CharacterStealSkill } from "@/entities/skill/model";
 import Image from "next/image";
-import { Separator } from "@/shared/ui/separator";
+import { TabCard } from "@/shared/ui/TabCard";
 
 interface StealSkillCardProps {
   skills: CharacterStealSkill[];
@@ -18,10 +18,7 @@ export const StealSkillCard = ({ skills }: StealSkillCardProps) => {
   if (skills.length === 0) return null;
 
   return (
-    <section className="bg-card flex w-full flex-col rounded-2xl p-4 shadow-sm">
-      <h3 className="font-bold">스틸 스킬</h3>
-      <Separator className="my-2" />
-
+    <TabCard title="스틸 스킬">
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-5">
         {skills.map((skill) => (
           <div
@@ -49,6 +46,6 @@ export const StealSkillCard = ({ skills }: StealSkillCardProps) => {
           </div>
         ))}
       </div>
-    </section>
+    </TabCard>
   );
 };

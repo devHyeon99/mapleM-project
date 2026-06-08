@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import { cn } from "@/shared/lib/utils";
 import { SegmentedToggle } from "@/shared/ui/SegmentedToggle";
 import type { CharacterUnionRaider } from "@/entities/character";
-import { Separator } from "@/shared/ui/separator";
+import { TabCard } from "@/shared/ui/TabCard";
 
 interface UnionBattleMapProps {
   raiderData: CharacterUnionRaider | null | undefined;
@@ -59,10 +59,10 @@ export const UnionBattleMap = ({ raiderData }: UnionBattleMapProps) => {
   });
 
   return (
-    <section className="bg-card overflow-hidden rounded-2xl p-4 shadow-sm">
-      <div className="flex w-full items-center justify-between">
-        <h3 className="text-base font-bold">유니온 배치도</h3>
-
+    <TabCard
+      title="유니온 배치도"
+      className="overflow-hidden"
+      action={
         <SegmentedToggle
           ariaLabel="유니온 배치도 프리셋 선택"
           value={activePreset}
@@ -72,9 +72,8 @@ export const UnionBattleMap = ({ raiderData }: UnionBattleMapProps) => {
             marked: preset === raiderData.use_preset_no,
           }))}
         />
-      </div>
-      <Separator className="my-2" />
-
+      }
+    >
       {/* 보드 컨테이너: 400px 안에서 22칸이 모두 보이도록 설정 */}
       <div
         role="img"
@@ -126,6 +125,6 @@ export const UnionBattleMap = ({ raiderData }: UnionBattleMapProps) => {
           </li>
         ))}
       </ul>
-    </section>
+    </TabCard>
   );
 };

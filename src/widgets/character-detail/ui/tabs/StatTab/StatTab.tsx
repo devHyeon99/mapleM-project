@@ -3,7 +3,7 @@
 import { Fragment } from "react";
 
 import { useCharacterStat } from "@/entities/character";
-import { Separator } from "@/shared/ui/separator";
+import { TabCard } from "@/shared/ui/TabCard";
 import { InfoDescriptionRow } from "@/shared/ui/InfoRow";
 import { SegmentedToggle } from "@/shared/ui/SegmentedToggle";
 import { useHyperStat } from "./useHyperStat";
@@ -60,16 +60,16 @@ export const StatTab = ({ ocid, level }: StatTabProps) => {
   return (
     <div className="flex w-full flex-col gap-1 md:flex-row">
       {/* 기본 스탯 정보 영역 */}
-      <section className="bg-card w-full rounded-2xl p-3 shadow-sm">
-        <div className="mb-2 flex items-center justify-between">
-          <h3 className="flex h-8 items-center font-bold">캐릭터 스탯</h3>
+      <TabCard
+        title="캐릭터 스탯"
+        action={
           <HelpPopover
             ariaLabel="캐릭터 스탯 도움말"
             items={STAT_HELP_ITEMS}
             iconClassName="size-5"
           />
-        </div>
-        <Separator className="mb-2" />
+        }
+      >
         {/* dl 태그로 시맨틱 보강 */}
         <dl className="flex flex-col gap-1">
           {stat.stat.map((s) => (
@@ -84,16 +84,13 @@ export const StatTab = ({ ocid, level }: StatTabProps) => {
             </InfoDescriptionRow>
           ))}
         </dl>
-      </section>
+      </TabCard>
 
       {/* 하이퍼 스탯 정보 영역 */}
-      <section className="bg-card w-full rounded-2xl p-3 shadow-sm">
-        <div className="mb-2 flex items-center justify-between">
-          <div className="flex flex-row items-center gap-2">
-            <h3 className="font-bold">하이퍼 스탯</h3>
-          </div>
-
-          {hyperStat && (
+      <TabCard
+        title="하이퍼 스탯"
+        action={
+          hyperStat && (
             <SegmentedToggle
               ariaLabel="하이퍼 스탯 프리셋 선택"
               value={selectedPreset}
@@ -106,10 +103,9 @@ export const StatTab = ({ ocid, level }: StatTabProps) => {
                 }),
               )}
             />
-          )}
-        </div>
-        <Separator className="mb-2" />
-
+          )
+        }
+      >
         {currentHyperStatInfo.length > 0 ? (
           <dl className="flex flex-col gap-1">
             {currentHyperStatInfo.map((info) => (
@@ -133,7 +129,7 @@ export const StatTab = ({ ocid, level }: StatTabProps) => {
             투자한 하이퍼 스탯이 없습니다.
           </div>
         )}
-      </section>
+      </TabCard>
     </div>
   );
 };

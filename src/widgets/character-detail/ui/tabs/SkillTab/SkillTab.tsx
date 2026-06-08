@@ -1,9 +1,11 @@
 "use client";
 
 import { TabMessageSection } from "@/shared/ui/TabMessageSection";
+import { TabCard } from "@/shared/ui/TabCard";
 
 import { useSkillTab } from "./useSkillTab";
-import { SkillTabHeader } from "./SkillTabHeader";
+import { EQUIPPED_SKILL_HELP_ITEMS, SkillTabHeader } from "./SkillTabHeader";
+import { HelpPopover } from "@/shared/ui/HelpPopover";
 import { SkillPreset } from "./SkillPreset";
 import { SkillGridDisplay } from "./SkillGridDisplay";
 import { StealSkillCard } from "./StealSkillCard";
@@ -55,7 +57,17 @@ export const SkillTab = ({ ocid }: SkillTabProps) => {
   return (
     <div className="flex flex-col gap-2">
       <div className="flex flex-col gap-2 md:flex-row md:items-stretch">
-        <div className="bg-card flex w-full min-w-0 flex-1 basis-0 flex-col rounded-2xl p-4 shadow-sm">
+        <TabCard
+          title="장착 스킬"
+          className="min-w-0 flex-1 basis-0"
+          action={
+            <HelpPopover
+              ariaLabel="장착 스킬 도움말"
+              items={EQUIPPED_SKILL_HELP_ITEMS}
+              iconType="exclamation"
+            />
+          }
+        >
           {layout.hasEquipment && (
             <>
               <SkillTabHeader
@@ -81,10 +93,8 @@ export const SkillTab = ({ ocid }: SkillTabProps) => {
               )}
             </>
           )}
-        </div>
-        <div className="bg-card flex w-full min-w-0 flex-1 basis-0 flex-col rounded-2xl p-4 shadow-sm">
-          <SkillPreset presets={query.data.skill.preset} />
-        </div>
+        </TabCard>
+        <SkillPreset presets={query.data.skill.preset} />
       </div>
 
       <StealSkillCard skills={stealSkills} />

@@ -1,10 +1,15 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { connection } from "next/server";
 import { CharacterSearch } from "@/features/character-search";
 import { getCombinedNotices } from "@/entities/notice/api/notice";
 import { getSiteNotices } from "@/entities/notice/api/site-notice";
 import { SiteNoticeList } from "@/entities/notice/ui/SiteNoticeList";
 import { NoticeGrid } from "@/widgets/notice-grid/ui/NoticeGrid";
+import {
+  WorldCharacterCount,
+  WorldCharacterCountSkeleton,
+} from "@/widgets/world-character-count";
 
 export const metadata: Metadata = {
   alternates: {
@@ -83,7 +88,7 @@ export default async function Home() {
 
       {/* 공지사항 섹션 */}
       <section
-        className="bg-card w-full overflow-hidden rounded-3xl shadow-sm"
+        className="bg-card mb-2 w-full overflow-hidden rounded-3xl shadow-sm"
         aria-labelledby="notice-heading"
       >
         <h2 id="notice-heading" className="sr-only">
@@ -93,6 +98,19 @@ export default async function Home() {
           data={noticeResult.status === "fulfilled" ? noticeResult.value : null}
           error={noticeError}
         />
+      </section>
+
+      {/* 월드별 캐릭터 수. 캐시 미스일 때 랭킹 50페이지 수집이 메인 렌더를 막지 않도록 스트리밍한다. */}
+      <section
+        className="bg-card w-full overflow-hidden rounded-3xl shadow-sm"
+        aria-labelledby="world-character-count-heading"
+      >
+        <h2 id="world-character-count-heading" className="sr-only">
+          월드별 캐릭터 수
+        </h2>
+        <Suspense fallback={<WorldCharacterCountSkeleton />}>
+          <WorldCharacterCount />
+        </Suspense>
       </section>
     </div>
   );

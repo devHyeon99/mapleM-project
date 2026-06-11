@@ -3,3 +3,4 @@
 // 클라이언트 배럴(index.ts)과 분리한다. 클라이언트에서 import하면 빌드가 실패한다.
 export { fetchRankingCached } from "./api/fetch-ranking";
 export { getRankingTotalPages } from "./api/get-ranking-total-pages";
+export { getLevelWorldCharacterCounts } from "./api/get-world-character-counts";

@@ -23,7 +23,6 @@ export function CharacterProfileHelpPopover() {
     <HelpPopover
       ariaLabel="데이터 갱신 주기 안내"
       items={DATA_UPDATE_GUIDE_ITEMS}
-      triggerClassName="absolute top-3 right-3"
     />
   );
 }

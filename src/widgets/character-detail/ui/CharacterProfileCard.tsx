@@ -4,6 +4,7 @@ import { InfoDescriptionRow } from "@/shared/ui/InfoRow";
 import { InfoDateRow } from "@/shared/ui/InfoDateRow";
 import type { CharacterDetailData } from "@/entities/character";
 import { CharacterProfileHelpPopover } from "./CharacterProfileHelpPopover";
+import { PhotoCardDialog } from "@/features/photo-card";
 import { worldIconSrc } from "@/shared/config/constants/worlds";
 import { guildHref } from "@/shared/lib/url";
 import { cn } from "@/shared/lib/utils";
@@ -77,6 +78,8 @@ const CharacterProfileIdentity = ({ data }: CharacterProfileCardProps) => {
         )}
         <span>{data.character_name}</span>
       </h3>
+
+      <PhotoCardDialog data={data} />
     </div>
   );
 };
@@ -160,7 +163,9 @@ export const CharacterProfileCard = ({ data }: CharacterProfileCardProps) => {
         <CharacterProfileInfoList data={data} />
       </div>
 
-      <CharacterProfileHelpPopover />
+      <div className="absolute top-3 right-3">
+        <CharacterProfileHelpPopover />
+      </div>
     </section>
   );
 };

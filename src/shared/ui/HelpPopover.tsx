@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import { CircleAlert, CircleHelp } from "lucide-react";
 import { cn } from "@/shared/lib/utils";
+import { Button } from "@/shared/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui/popover";
 
 interface HelpPopoverItem {
@@ -34,16 +35,18 @@ export const HelpPopover = ({
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <button
+        <Button
           type="button"
+          variant="ghost"
+          size="icon"
           aria-label={ariaLabel}
           className={cn(
-            "text-muted-foreground hover:text-foreground transition-colors",
+            "text-muted-foreground hover:text-foreground",
             triggerClassName,
           )}
         >
           <Icon className={cn("size-5", iconClassName)} />
-        </button>
+        </Button>
       </PopoverTrigger>
 
       <PopoverContent

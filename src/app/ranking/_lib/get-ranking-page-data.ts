@@ -5,8 +5,8 @@ import {
 import {
   fetchRankingCached,
   getRankingTotalPages,
+  resolveRankingDate,
 } from "@/entities/ranking/server";
-import { getRankingDate } from "@/shared/lib/ranking-date";
 import { handleCommonNexonError } from "@/shared/api/nexon";
 import {
   normalizeRankingPage,
@@ -18,7 +18,7 @@ export async function getRankingPageData(
   searchParams: { [key: string]: string | string[] | undefined },
 ) {
   const worldName = normalizeRankingWorldName(searchParams.world_name);
-  const date = getRankingDate();
+  const date = await resolveRankingDate();
 
   try {
     const totalPages = await getRankingTotalPages({

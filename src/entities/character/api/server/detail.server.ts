@@ -2,7 +2,7 @@ import "server-only";
 
 import { nexonFetch } from "@/shared/api/nexon/server";
 import { isNexonNotFoundError } from "@/shared/api/nexon/handler";
-import { getRankingDate } from "@/shared/lib/ranking-date";
+import { resolveRankingDate } from "@/entities/ranking/server";
 import type {
   CharacterItemEquipmentResponse,
   CharacterAndroidEquipment,
@@ -47,7 +47,7 @@ export async function fetchCharacterDetail(
   if (!trimmedOcid) throw new Error("ocid가 필요합니다.");
 
   const ocidQ = encodeURIComponent(trimmedOcid);
-  const rankingDate = getRankingDate();
+  const rankingDate = await resolveRankingDate();
   const rankingQuery = new URLSearchParams({
     date: rankingDate,
     ocid: trimmedOcid,

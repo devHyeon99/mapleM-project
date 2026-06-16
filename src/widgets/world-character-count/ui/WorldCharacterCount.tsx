@@ -1,8 +1,10 @@
 import Link from "next/link";
-import { getLevelWorldCharacterCounts } from "@/entities/ranking/server";
+import {
+  getLevelWorldCharacterCounts,
+  resolveRankingDate,
+} from "@/entities/ranking/server";
 import { RankingIcon } from "@/entities/ranking/ui/RankingIcon";
 import { worldIconSrc } from "@/shared/config/constants/worlds";
-import { getRankingDate } from "@/shared/lib/ranking-date";
 import { Skeleton } from "@/shared/ui/skeleton";
 
 function Frame({
@@ -15,9 +17,9 @@ function Frame({
   return (
     <div className="flex flex-col gap-3 p-4 md:p-6">
       <div className="flex flex-wrap items-baseline justify-between gap-x-2 px-2">
-        <h3 className="text-base font-bold">레벨 랭킹 월드별 캐릭터 수</h3>
+        <h3 className="text-base font-bold">월드별 캐릭터 수 집계</h3>
         <p className="text-muted-foreground text-xs">
-          전체 10,000위 기준
+          전체 레벨 랭킹 10,000위 기준
           {date ? ` · ${date}` : ""}
         </p>
       </div>
@@ -27,7 +29,7 @@ function Frame({
 }
 
 export async function WorldCharacterCount() {
-  const date = getRankingDate();
+  const date = await resolveRankingDate();
 
   // 랭킹 집계가 실패해도 메인 페이지의 나머지는 살린다.
   const counts = await getLevelWorldCharacterCounts(date).catch(() => null);

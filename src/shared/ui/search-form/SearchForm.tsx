@@ -2,7 +2,7 @@
 
 import { useId } from "react";
 import { useSearchForm } from "./useSearchForm";
-import { SearchFormField } from "./SearchFormField";
+import { SearchFormField, type SearchFormSize } from "./SearchFormField";
 import { SearchFormError } from "./SearchFormError";
 import { useRecentSearch } from "@/shared/lib/hooks/useRecentSearch";
 
@@ -11,6 +11,8 @@ interface SearchFormProps {
   lastWorldKey: string;
   placeholder: string;
   includeAllWorld?: boolean;
+  /** lg: 검색이 화면의 주인공일 때 / sm: 카드·표 안의 보조 컨트롤일 때 */
+  size?: SearchFormSize;
   onSubmit: (world: string, name: string) => void;
   onValidate?: (world: string, name: string) => boolean;
   errorMessage?: string;
@@ -21,6 +23,7 @@ export function SearchForm({
   lastWorldKey,
   placeholder,
   includeAllWorld = false,
+  size = "lg",
   onSubmit,
   onValidate,
   errorMessage = "입력값을 확인해주세요.",
@@ -65,6 +68,7 @@ export function SearchForm({
         onHistoryClear={clearHistory}
         inputId={inputId}
         errorId={errorId}
+        size={size}
       />
 
       {isError && (

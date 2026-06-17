@@ -7,6 +7,40 @@ import { SearchFormHistory } from "./SearchFormHistory";
 import { SearchFormWorldSelect } from "./SearchFormWorldSelect";
 import { useHistoryPanelController } from "./useHistoryPanelController";
 import type { SearchHistoryItem } from "@/shared/lib/hooks/useRecentSearch";
+import { cn } from "@/shared/lib/utils";
+
+/**
+ * 필드 높이·월드 셀렉트 폭·최근검색 패널 오프셋은 서로 물려 있다.
+ * (패널은 셀렉트 폭만큼 왼쪽으로 빠져 검색바 전체를 덮는다)
+ * 바깥에서 개별로 덮으면 어긋나므로 한 곳에서 묶어 관리한다.
+ */
+const FIELD_SIZES = {
+  /** 홈 히어로처럼 검색이 화면의 주인공일 때 */
+  lg: {
+    world: "h-14! w-[130px] pl-7",
+    input: "h-14 pr-12 pl-4",
+    submit: "right-3 size-8",
+    icon: "size-5",
+    // md 부터는 인풋만으로도 충분히 넓어 패널을 인풋에 맞춘다.
+    history: "left-[-130px] w-[calc(100%+130px)] md:left-0 md:w-full",
+  },
+  /**
+   * 표·카드 안의 보조 컨트롤로 들어갈 때 (같은 카드의 h-10 컨트롤과 맞춘다).
+   * 라이트 모드에선 바탕 카드와 필드가 둘 다 흰색이라 그림자만으로는 경계가 안 보인다.
+   * 테두리를 입히되, 자리를 차지하던 border-transparent 를 덮는 거라 높이는 그대로다.
+   */
+  sm: {
+    world: "h-10! w-[100px] pl-4 border-muted-foreground/30 dark:border-transparent",
+    input:
+      "h-10 pr-10 pl-3 border-muted-foreground/30 border-l-transparent dark:border-transparent",
+    submit: "right-2 size-7",
+    icon: "size-4",
+    // 바 자체가 좁아 인풋에만 맞추면 닉네임이 잘린다. 모든 폭에서 검색바 전체를 덮는다.
+    history: "left-[-100px] w-[calc(100%+100px)]",
+  },
+} as const;
+
+export type SearchFormSize = keyof typeof FIELD_SIZES;
 
 interface SearchFormFieldProps {
   world: string;
@@ -22,6 +56,7 @@ interface SearchFormFieldProps {
   onHistoryClear: () => void;
   inputId: string;
   errorId: string;
+  size: SearchFormSize;
 }
 
 export function SearchFormField({
@@ -38,7 +73,9 @@ export function SearchFormField({
   onHistoryClear,
   inputId,
   errorId,
+  size,
 }: SearchFormFieldProps) {
+  const sizing = FIELD_SIZES[size];
   const {
     isHistoryOpen,
     containerRef,
@@ -58,6 +95,7 @@ export function SearchFormField({
         value={world}
         onValueChange={onWorldChange}
         options={options}
+        className={sizing.world}
       />
 
       <form
@@ -85,15 +123,21 @@ export function SearchFormField({
               onInputValueChange(e.target.value);
               openHistory();
             }}
-            className="bg-card dark:bg-input/50 relative h-14 rounded-l-none pr-12 pl-4 placeholder:text-sm focus-visible:ring-2"
+            className={cn(
+              "bg-card dark:bg-input/50 relative rounded-l-none placeholder:text-sm focus-visible:ring-2",
+              sizing.input,
+            )}
           />
           <Button
             type="submit"
             variant="ghost"
             size="icon"
-            className="text-muted-foreground hover:text-foreground focus-visible:ring-ring/60 absolute top-1/2 right-3 size-8 -translate-y-1/2 focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-offset-transparent"
+            className={cn(
+              "text-muted-foreground hover:text-foreground focus-visible:ring-ring/60 absolute top-1/2 -translate-y-1/2 focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-offset-transparent",
+              sizing.submit,
+            )}
           >
-            <Search className="size-5" />
+            <Search className={sizing.icon} />
             <span className="sr-only">검색</span>
           </Button>
         </div>
@@ -110,7 +154,10 @@ export function SearchFormField({
             onClose={closeHistoryAndFocusInput}
             containerRef={historyPanelRef}
             labelId={historyLabelId}
-            className="absolute top-[calc(100%+4px)] left-[-130px] z-[1000] w-[calc(100%+130px)] md:left-0 md:w-full"
+            className={cn(
+              "absolute top-[calc(100%+4px)] z-[1000]",
+              sizing.history,
+            )}
           />
         )}
       </form>

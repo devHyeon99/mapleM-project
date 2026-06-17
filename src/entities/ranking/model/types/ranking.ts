@@ -131,6 +131,12 @@ export interface RankingResponse<T> {
   ranking: T[];
 }
 
+/** 검색으로 찾은 캐릭터를 목록에서 강조하기 위한 식별자 */
+export interface RankingHighlight {
+  worldName: string;
+  characterName: string;
+}
+
 export type AnyRankingData =
   | LevelRanking
   | DojangRanking

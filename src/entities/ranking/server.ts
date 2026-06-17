@@ -5,3 +5,4 @@ export { fetchRankingCached } from "./api/fetch-ranking";
 export { resolveRankingDate } from "./api/resolve-ranking-date";
 export { getRankingTotalPages } from "./api/get-ranking-total-pages";
 export { getLevelWorldCharacterCounts } from "./api/get-world-character-counts";
+export { findLevelRankingByOcid } from "./api/find-level-ranking";

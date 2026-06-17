@@ -6,6 +6,7 @@ import {
   RANKING_LABELS,
   RankingTable,
   type AnyRankingData,
+  type RankingHighlight,
   type RankingType,
 } from "@/entities/ranking";
 import { TabMessageSection } from "@/shared/ui/TabMessageSection";
@@ -19,12 +20,14 @@ interface RankingBoardProps {
     page: number;
     totalPages: number;
   };
+  highlight?: RankingHighlight | null;
 }
 
 export function RankingBoard({
   type,
   initialData,
   fetchParams,
+  highlight,
 }: RankingBoardProps) {
   const hasRankingData = initialData.ranking.length > 0;
   const isSharenianRanking = type.includes("sharenian");
@@ -50,6 +53,7 @@ export function RankingBoard({
             data={initialData.ranking}
             currentPage={fetchParams.page}
             worldName={fetchParams.worldName}
+            highlight={highlight}
           />
         </section>
       )}

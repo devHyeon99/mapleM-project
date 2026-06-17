@@ -1,8 +1,12 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
-import { RANKING_LABELS, type RankingType } from "@/entities/ranking";
+import {
+  RANKING_LABELS,
+  type RankingHighlight,
+  type RankingType,
+} from "@/entities/ranking";
 import { RankingBoard, RankingBoardSkeleton } from "@/widgets/ranking-board";
-import { RankingSearch } from "@/features/ranking-search";
+import { RankingSearch, readRankingHighlight } from "@/features/ranking-search";
 import { SITE_NAME, SITE_URL } from "@/shared/config/site";
 import { getRankingPageData } from "./get-ranking-page-data";
 import {
@@ -103,9 +107,11 @@ export function buildRankingMetadata(
 async function RankingBoardLoader({
   type,
   searchParams,
+  highlight,
 }: {
   type: RankingType;
   searchParams: RankingSearchParams;
+  highlight?: RankingHighlight | null;
 }) {
   const { data, params: fetchParams } = await getRankingPageData(
     type,
@@ -113,7 +119,12 @@ async function RankingBoardLoader({
   );
 
   return (
-    <RankingBoard type={type} initialData={data} fetchParams={fetchParams} />
+    <RankingBoard
+      type={type}
+      initialData={data}
+      fetchParams={fetchParams}
+      highlight={highlight}
+    />
   );
 }
 
@@ -125,6 +136,8 @@ export function renderRankingPage(
   searchParams: RankingSearchParams,
 ) {
   const worldName = normalizeRankingWorldName(searchParams.world_name);
+  const highlight =
+    type === "level" ? readRankingHighlight(searchParams) : null;
 
   return (
     <>
@@ -139,7 +152,11 @@ export function renderRankingPage(
       {type === "level" && <RankingSearch searchParams={searchParams} />}
 
       <Suspense fallback={<RankingBoardSkeleton />}>
-        <RankingBoardLoader type={type} searchParams={searchParams} />
+        <RankingBoardLoader
+          type={type}
+          searchParams={searchParams}
+          highlight={highlight}
+        />
       </Suspense>
     </>
   );

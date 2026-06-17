@@ -12,8 +12,16 @@ import {
 import { cn } from "@/shared/lib/utils";
 import { useRecentSearch } from "@/shared/lib/hooks/useRecentSearch";
 import { RANKING_COLUMNS } from "./ranking-table.columns";
-import type { RankingTableContext } from "./ranking-table.renderers";
-import type { RankingType, AnyRankingData } from "../model/types/ranking";
+import {
+  HIGHLIGHT_ROW_CLASS,
+  isHighlightedRow,
+  type RankingTableContext,
+} from "./ranking-table.renderers";
+import type {
+  RankingType,
+  AnyRankingData,
+  RankingHighlight,
+} from "../model/types/ranking";
 import { MobileRankingList } from "./MobileRankingList";
 
 interface RankingTableProps {
@@ -21,6 +29,7 @@ interface RankingTableProps {
   data: AnyRankingData[];
   currentPage: number;
   worldName?: string;
+  highlight?: RankingHighlight | null;
   className?: string;
 }
 
@@ -29,6 +38,7 @@ export const RankingTable = ({
   data,
   currentPage,
   worldName,
+  highlight,
   className,
 }: RankingTableProps) => {
   const { addHistory } = useRecentSearch("character-search-history");
@@ -51,8 +61,9 @@ export const RankingTable = ({
     () => ({
       addCharacterHistory: addHistory,
       isWorldRankingView: !!worldName,
+      highlight,
     }),
-    [addHistory, worldName],
+    [addHistory, worldName, highlight],
   );
 
   return (
@@ -92,7 +103,10 @@ export const RankingTable = ({
               return (
                 <TableRow
                   key={uniqueKey}
-                  className="hover:bg-accent/30 dark:hover:bg-accent/50 h-12.5"
+                  className={cn(
+                    "hover:bg-accent/30 dark:hover:bg-accent/50 h-12.5",
+                    isHighlightedRow(item, context) && HIGHLIGHT_ROW_CLASS,
+                  )}
                 >
                   {columns.map((col, colIndex) => (
                     <TableCell

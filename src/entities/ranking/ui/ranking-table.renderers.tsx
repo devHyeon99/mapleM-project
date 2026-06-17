@@ -1,4 +1,4 @@
-import type { AnyRankingData } from "../model/types/ranking";
+import type { AnyRankingData, RankingHighlight } from "../model/types/ranking";
 import { RankingIcon } from "./RankingIcon";
 import { LinkText, renderGuildInfo } from "./ranking-table.links";
 import { characterHref } from "@/shared/lib/url";
@@ -6,7 +6,21 @@ import { characterHref } from "@/shared/lib/url";
 export interface RankingTableContext {
   addCharacterHistory: (name: string, world: string) => void;
   isWorldRankingView: boolean;
+  highlight?: RankingHighlight | null;
 }
+
+/** 검색으로 찾은 행 강조. 다크/라이트 양쪽에서 통하는 톤으로 배경만 얹는다. */
+export const HIGHLIGHT_ROW_CLASS = "bg-orange-500/15 hover:bg-orange-500/20!";
+
+/** 검색으로 찾은 캐릭터의 행인지 판단한다. 캐릭터가 없는 랭킹(샤레니안)은 항상 false. */
+export const isHighlightedRow = (
+  item: AnyRankingData,
+  ctx: RankingTableContext,
+): boolean =>
+  !!ctx.highlight &&
+  "character_name" in item &&
+  item.world_name === ctx.highlight.worldName &&
+  item.character_name === ctx.highlight.characterName;
 
 const getMainStatValue = (item: AnyRankingData): string => {
   if ("character_combat_power" in item)

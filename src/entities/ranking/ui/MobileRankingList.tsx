@@ -2,12 +2,17 @@
 
 import Link from "next/link";
 import type { RankingType, AnyRankingData } from "../model/types/ranking";
-import { Renderers } from "./ranking-table.renderers";
+import {
+  HIGHLIGHT_ROW_CLASS,
+  isHighlightedRow,
+  Renderers,
+} from "./ranking-table.renderers";
 import type { RankingTableContext } from "./ranking-table.renderers";
 import { memo } from "react";
 import { RankingIcon } from "./RankingIcon";
 import { worldIconSrc } from "@/shared/config/constants/worlds";
 import { characterHref, guildHref } from "@/shared/lib/url";
+import { cn } from "@/shared/lib/utils";
 
 // 리스트 아이템의 고유 Key 생성
 const getItemKey = (
@@ -117,7 +122,12 @@ const RankingRow = memo(
 
     return (
       // 개별 행을 li로 변경
-      <li className="bg-card flex items-center justify-between p-3">
+      <li
+        className={cn(
+          "bg-card flex items-center justify-between p-3",
+          isHighlightedRow(item, context) && HIGHLIGHT_ROW_CLASS,
+        )}
+      >
         <div className="flex min-w-0 items-center gap-4">
           <div className="flex w-8 shrink-0 flex-col items-center justify-center">
             {/* 순위 정보에 대한 접근성 레이블 추가 */}

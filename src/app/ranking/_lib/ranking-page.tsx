@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import type { Metadata } from "next";
 import {
   RANKING_LABELS,
+  rankingHref,
   type RankingHighlight,
   type RankingType,
 } from "@/entities/ranking";
@@ -9,41 +10,17 @@ import { RankingBoard, RankingBoardSkeleton } from "@/widgets/ranking-board";
 import { RankingSearch, readRankingHighlight } from "@/features/ranking-search";
 import { SITE_NAME, SITE_URL } from "@/shared/config/site";
 import { getRankingPageData } from "./get-ranking-page-data";
-import {
-  normalizeRankingPage,
-  normalizeRankingWorldName,
-} from "./ranking-query";
+import type { RankingFilters } from "./ranking-query";
 
 export type RankingSearchParams = {
   [key: string]: string | string[] | undefined;
 };
 
-export const buildQueryString = (params: RankingSearchParams): string => {
-  const query = new URLSearchParams();
-
-  for (const [key, value] of Object.entries(params)) {
-    if (typeof value === "undefined") continue;
-    if (Array.isArray(value)) {
-      for (const item of value) {
-        query.append(key, item);
-      }
-      continue;
-    }
-    query.set(key, value);
-  }
-
-  const qs = query.toString();
-  return qs ? `?${qs}` : "";
-};
-
 export function buildRankingMetadata(
   type: RankingType,
-  searchParams: RankingSearchParams,
+  { worldName, page }: RankingFilters,
 ): Metadata {
-  const worldName = normalizeRankingWorldName(searchParams.world_name);
   const typeLabel = RANKING_LABELS[type];
-
-  const isPaginated = normalizeRankingPage(searchParams.page, Infinity) > 1;
 
   const title =
     type === "level"
@@ -63,10 +40,8 @@ export function buildRankingMetadata(
         ? `메이플스토리M ${worldName} 월드의 ${typeLabel} 랭킹을 확인하세요. 캐릭터 정보와 랭킹 변화를 한눈에 제공합니다.`
         : `메이플스토리M 전체 월드의 ${typeLabel} 랭킹 정보를 확인하세요. 캐릭터 정보와 랭킹 변화를 한눈에 제공합니다.`;
 
-  const canonicalPath = type === "level" ? "/ranking" : `/ranking/${type}`;
-  const fullUrl = worldName
-    ? `${SITE_URL}${canonicalPath}?world_name=${encodeURIComponent(worldName)}`
-    : `${SITE_URL}${canonicalPath}`;
+  // 2페이지 이후는 1페이지 URL 을 대표로 삼는다.
+  const fullUrl = `${SITE_URL}${rankingHref(type, { worldName })}`;
   const ogImageUrl = `${SITE_URL}/og-image.png`;
 
   return {
@@ -98,7 +73,7 @@ export function buildRankingMetadata(
       images: [ogImageUrl],
     },
     robots: {
-      index: !isPaginated,
+      index: page <= 1,
       follow: true,
     },
   };
@@ -106,17 +81,14 @@ export function buildRankingMetadata(
 
 async function RankingBoardLoader({
   type,
-  searchParams,
+  filters,
   highlight,
 }: {
   type: RankingType;
-  searchParams: RankingSearchParams;
+  filters: RankingFilters;
   highlight?: RankingHighlight | null;
 }) {
-  const { data, params: fetchParams } = await getRankingPageData(
-    type,
-    searchParams,
-  );
+  const { data, params: fetchParams } = await getRankingPageData(type, filters);
 
   return (
     <RankingBoard
@@ -133,16 +105,16 @@ async function RankingBoardLoader({
 // notFound()/permanentRedirect() 가 진짜 404/308 상태코드를 내지 못한다.
 export function renderRankingPage(
   type: RankingType,
+  filters: RankingFilters,
   searchParams: RankingSearchParams,
 ) {
-  const worldName = normalizeRankingWorldName(searchParams.world_name);
   const highlight =
     type === "level" ? readRankingHighlight(searchParams) : null;
 
   return (
     <>
       <h1 className="sr-only">
-        {worldName || "전체"} 월드 {RANKING_LABELS[type]} 랭킹
+        {filters.worldName || "전체"} 월드 {RANKING_LABELS[type]} 랭킹
       </h1>
       <p className="sr-only">
         메이플스토리M {RANKING_LABELS[type]} 랭킹 정보를 확인해보세요.
@@ -154,7 +126,7 @@ export function renderRankingPage(
       <Suspense fallback={<RankingBoardSkeleton />}>
         <RankingBoardLoader
           type={type}
-          searchParams={searchParams}
+          filters={filters}
           highlight={highlight}
         />
       </Suspense>

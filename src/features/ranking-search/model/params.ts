@@ -1,5 +1,5 @@
-import type { RankingHighlight } from "@/entities/ranking";
-import { ALL_WORLD_NAME, WORLD_NAMES } from "@/shared/config/constants/worlds";
+import { rankingHref, type RankingHighlight } from "@/entities/ranking";
+import { isRealWorldName } from "@/shared/config/constants/worlds";
 
 // 랭킹 필터(world_name/page)와 섞이지 않도록 검색 조건은 별도 파라미터로 둔다.
 export const FIND_WORLD_PARAM = "find_world";
@@ -8,11 +8,6 @@ export const FIND_NAME_PARAM = "find_name";
 export const RANKING_SEARCH_NAME_REGEX = /^[a-zA-Z0-9가-힣]{2,8}$/;
 export const RANKING_SEARCH_NAME_ERROR =
   "캐릭터명은 2~8자의 한글, 영어, 숫자만 가능합니다.";
-
-// ocid 조회는 월드가 특정돼야 하므로 "전체" 는 검색 대상이 아니다.
-const SEARCHABLE_WORLDS: ReadonlySet<string> = new Set(
-  WORLD_NAMES.filter((w) => w !== ALL_WORLD_NAME),
-);
 
 export interface RankingSearchQuery {
   world: string;
@@ -33,7 +28,8 @@ export function readRankingSearchQuery(searchParams: {
   const name = getSingleParam(searchParams[FIND_NAME_PARAM])?.trim();
 
   if (!world || !name) return null;
-  if (!SEARCHABLE_WORLDS.has(world)) return null;
+  // ocid 조회는 월드가 특정돼야 하므로 "전체" 는 검색 대상이 아니다.
+  if (!isRealWorldName(world)) return null;
   if (!RANKING_SEARCH_NAME_REGEX.test(name)) return null;
 
   return { world, name };
@@ -59,11 +55,9 @@ export function rankingSearchTargetHref(
   { page, worldName }: { page: number; worldName?: string },
 ): string {
   const params = new URLSearchParams({
-    page: String(page),
     [FIND_WORLD_PARAM]: query.world,
     [FIND_NAME_PARAM]: query.name,
   });
-  if (worldName) params.set("world_name", worldName);
 
-  return `/ranking?${params.toString()}`;
+  return `${rankingHref("level", { worldName, page })}?${params.toString()}`;
 }

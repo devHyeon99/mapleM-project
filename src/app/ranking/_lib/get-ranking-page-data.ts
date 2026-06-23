@@ -8,16 +8,12 @@ import {
   resolveRankingDate,
 } from "@/entities/ranking/server";
 import { handleCommonNexonError } from "@/shared/api/nexon";
-import {
-  normalizeRankingPage,
-  normalizeRankingWorldName,
-} from "./ranking-query";
+import type { RankingFilters } from "./ranking-query";
 
 export async function getRankingPageData(
   type: RankingType,
-  searchParams: { [key: string]: string | string[] | undefined },
+  { worldName, page: requestedPage }: RankingFilters,
 ) {
-  const worldName = normalizeRankingWorldName(searchParams.world_name);
   const date = await resolveRankingDate();
 
   try {
@@ -27,7 +23,7 @@ export async function getRankingPageData(
       worldName,
     });
 
-    const uiPage = normalizeRankingPage(searchParams.page, totalPages);
+    const uiPage = Math.min(Math.max(requestedPage, 1), totalPages);
     const apiPage = Math.ceil(uiPage / RANKING_UI_PAGES_PER_API_PAGE);
 
     const data = await fetchRankingCached(type, date, worldName, apiPage);

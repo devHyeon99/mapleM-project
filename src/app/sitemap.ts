@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { RANKING_TYPES } from "@/entities/ranking";
+import { RANKING_TYPES, rankingHref } from "@/entities/ranking";
 import { SITE_URL } from "@/shared/config/site";
 
 // lastModified/changeFrequency/priority 는 두지 않음.
@@ -10,9 +10,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // /tools 하위 도구는 검색 노출 대상이 아니므로 /tools 하나만 싣는다.
   const staticRoutes = ["/", "/guild", "/ranking", "/tools"];
 
-  // "level" 은 /ranking 이 담당하므로 중복 URL 을 만들지 않는다.
+  // rankingHref("level") 는 /ranking 이라 staticRoutes 와 겹친다. 중복 URL 을 만들지 않는다.
   const rankingRoutes = RANKING_TYPES.filter((type) => type !== "level").map(
-    (type) => `/ranking/${type}`,
+    (type) => rankingHref(type),
   );
 
   return [...staticRoutes, ...rankingRoutes].map((path) => ({

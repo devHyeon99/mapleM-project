@@ -1,6 +1,7 @@
 "use client";
 
-import { usePathname, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
+import { rankingHref, type RankingType } from "@/entities/ranking";
 import {
   Pagination,
   PaginationContent,
@@ -21,22 +22,27 @@ const PAGES_PER_GROUP_MOBILE = 5;
 interface RankingPaginationProps {
   currentPage: number;
   totalPages: number;
+  type: RankingType;
+  /** 현재 걸린 월드 필터. 없으면 전체 월드. */
+  worldName?: string;
 }
 
 export function RankingPagination({
   currentPage,
   totalPages,
+  type,
+  worldName,
 }: RankingPaginationProps) {
-  const pathname = usePathname();
+  // 페이지를 넘겨도 캐릭터 검색 결과는 남기려고 쿼리를 그대로 옮긴다.
   const searchParams = useSearchParams();
 
   // 안전한 현재 페이지 계산
   const safeCurrentPage = Math.max(1, Math.min(currentPage, totalPages));
 
   const createPageUrl = (pageNumber: number) => {
-    const params = new URLSearchParams(searchParams.toString());
-    params.set("page", pageNumber.toString());
-    return `${pathname}?${params.toString()}`;
+    const href = rankingHref(type, { worldName, page: pageNumber });
+    const query = searchParams.toString();
+    return query ? `${href}?${query}` : href;
   };
 
   // 뷰포트별 페이지 그룹 계산 (모바일 5개, 데스크탑 10개)

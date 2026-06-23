@@ -40,7 +40,13 @@ export function RankingBoard({
         </TabMessageSection>
       )}
 
-      {hasRankingData && <RankingFilters date={fetchParams.date} />}
+      {hasRankingData && (
+        <RankingFilters
+          date={fetchParams.date}
+          type={type}
+          worldName={fetchParams.worldName}
+        />
+      )}
 
       {hasRankingData && (
         <section aria-labelledby="ranking-table-title">
@@ -62,6 +68,8 @@ export function RankingBoard({
         <RankingPagination
           currentPage={fetchParams.page}
           totalPages={fetchParams.totalPages}
+          type={type}
+          worldName={fetchParams.worldName}
         />
       )}
     </div>

@@ -4,6 +4,7 @@ import {
   resolveRankingDate,
 } from "@/entities/ranking/server";
 import { RankingIcon } from "@/entities/ranking/ui/RankingIcon";
+import { rankingHref } from "@/entities/ranking";
 import { worldIconSrc } from "@/shared/config/constants/worlds";
 import { Skeleton } from "@/shared/ui/skeleton";
 
@@ -53,7 +54,7 @@ export async function WorldCharacterCount() {
         {counts.map(({ worldName, count }) => (
           <li key={worldName}>
             <Link
-              href={`/ranking?world_name=${encodeURIComponent(worldName)}`}
+              href={rankingHref("level", { worldName })}
               prefetch={false}
               className="hover:bg-accent flex items-center gap-2 rounded-md px-2 py-1.5 transition-colors"
             >

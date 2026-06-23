@@ -3,17 +3,18 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/shared/lib/utils";
-import { RANKING_LABELS, RANKING_TYPES } from "@/entities/ranking";
+import { RANKING_LABELS, RANKING_TYPES, rankingHref } from "@/entities/ranking";
 
 export function RankingTabs() {
   const pathname = usePathname();
 
-  // /ranking 은 기본적으로 level 탭을 활성화한다.
-  const lastSegment = pathname.split("/").pop() || "";
+  // 경로는 /ranking/[type]/[world]/[page] 라 타입은 항상 두 번째 세그먼트다.
+  // /ranking 처럼 타입이 없으면 level 탭을 활성화한다.
+  const typeSegment = pathname.split("/")[2] ?? "";
   const activeType = RANKING_TYPES.includes(
-    lastSegment as (typeof RANKING_TYPES)[number],
+    typeSegment as (typeof RANKING_TYPES)[number],
   )
-    ? (lastSegment as (typeof RANKING_TYPES)[number])
+    ? (typeSegment as (typeof RANKING_TYPES)[number])
     : "level";
 
   return (
@@ -30,7 +31,7 @@ export function RankingTabs() {
                   "text-muted-foreground hover:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 inline-flex h-9 w-full items-center justify-center rounded-2xl border border-transparent px-2 py-1 text-sm font-medium whitespace-nowrap transition-colors outline-none focus-visible:ring-[3px]",
                   isActive && "bg-card/80 text-foreground shadow-sm",
                 )}
-                href={type === "level" ? "/ranking" : `/ranking/${type}`}
+                href={rankingHref(type)}
                 // 랭킹 페이지는 searchParams 를 읽어 동적 라우트다.
                 // 기본 prefetch 는 loading 경계까지만 받아와 여기선 쓸모가 없고,
                 // 탭을 누를 때마다 RSC 를 새로 받으며 스켈레톤이 번쩍인다.

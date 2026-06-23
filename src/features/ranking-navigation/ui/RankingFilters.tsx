@@ -1,6 +1,7 @@
 "use client";
 
-import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { rankingHref, type RankingType } from "@/entities/ranking";
 import {
   Select,
   SelectContent,
@@ -25,24 +26,26 @@ const RANKING_DATE_HELP_ITEMS = [
 interface RankingFiltersProps {
   /** 서버에서 랭킹 조회에 사용한 기준 일자(yyyy-MM-dd). 표시 일자와 데이터 일자를 일치시킨다. */
   date: string;
+  type: RankingType;
+  /** 현재 걸린 월드 필터. 없으면 전체 월드. */
+  worldName?: string;
 }
 
-export function RankingFilters({ date }: RankingFiltersProps) {
+export function RankingFilters({ date, type, worldName }: RankingFiltersProps) {
   const router = useRouter();
-  const pathname = usePathname();
+  // 월드를 바꿔도 캐릭터 검색 결과는 남기려고 쿼리를 그대로 옮긴다.
   const searchParams = useSearchParams();
 
-  const currentWorld = searchParams.get("world_name") || "all";
+  const currentWorld = worldName ?? "all";
 
   const handleWorldChange = (value: string) => {
-    const params = new URLSearchParams(searchParams.toString());
-    if (value === "all") {
-      params.delete("world_name");
-    } else {
-      params.set("world_name", value);
-    }
-    params.set("page", "1");
-    router.replace(`${pathname}?${params.toString()}`);
+    // 월드를 바꾸면 1페이지로 돌아간다.
+    const href = rankingHref(type, {
+      worldName: value === "all" ? undefined : value,
+    });
+    const query = searchParams.toString();
+
+    router.replace(query ? `${href}?${query}` : href);
   };
 
   return (

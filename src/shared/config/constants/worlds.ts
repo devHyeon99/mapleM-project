@@ -26,6 +26,14 @@ const WORLD_NAMES_BY_SLUG: Record<string, string> = Object.fromEntries(
   Object.entries(WORLD_SLUGS).map(([name, slug]) => [slug, name]),
 );
 
+const REAL_WORLD_NAMES: ReadonlySet<string> = new Set(
+  WORLD_NAMES.filter((w) => w !== ALL_WORLD_NAME),
+);
+
+/** "전체" 를 뺀 실제 월드명인지. 필터·검색 입력 검증에 쓴다. */
+export const isRealWorldName = (value: string): boolean =>
+  REAL_WORLD_NAMES.has(value);
+
 /**
  * 한글 월드명 → URL 슬러그. 매핑에 없는 월드(넥슨이 새 월드를 추가한 경우)는 한글 그대로 돌려줘 링크가 끊기지 않게 한다.
  */

@@ -28,25 +28,22 @@ describe("readRankingSearchQuery", () => {
 
 describe("rankingSearchTargetHref", () => {
   const query = { world: "스카니아", name: "발자취" };
-  const paramsOf = (href: string) =>
-    new URL(href, "https://mmgg.gg").searchParams;
+  const urlOf = (href: string) => new URL(href, "https://mmgg.gg");
 
-  it("월드 필터와 페이지를 건 URL 에 검색 조건을 유지한다", () => {
-    const params = paramsOf(
+  it("월드 필터와 페이지는 경로에, 검색 조건은 쿼리에 싣는다", () => {
+    const url = urlOf(
       rankingSearchTargetHref(query, { page: 7, worldName: "스카니아" }),
     );
 
-    expect(params.get("world_name")).toBe("스카니아");
-    expect(params.get("page")).toBe("7");
-    expect(params.get("find_world")).toBe("스카니아");
-    expect(params.get("find_name")).toBe("발자취");
+    expect(url.pathname).toBe("/ranking/level/scania/7");
+    expect(url.searchParams.get("find_world")).toBe("스카니아");
+    expect(url.searchParams.get("find_name")).toBe("발자취");
   });
 
   it("월드를 생략하면 전체 월드 목록으로 보낸다", () => {
-    const params = paramsOf(rankingSearchTargetHref(query, { page: 19 }));
+    const url = urlOf(rankingSearchTargetHref(query, { page: 19 }));
 
-    expect(params.get("world_name")).toBeNull();
-    expect(params.get("page")).toBe("19");
-    expect(params.get("find_name")).toBe("발자취");
+    expect(url.pathname).toBe("/ranking/level/all/19");
+    expect(url.searchParams.get("find_name")).toBe("발자취");
   });
 });

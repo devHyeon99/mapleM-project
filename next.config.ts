@@ -4,6 +4,12 @@ import bundleAnalyzer from "@next/bundle-analyzer";
 const nextConfig: NextConfig = {
   poweredByHeader: false, // 보안상 'X-Powered-By: Next.js' 헤더를 응답에서
 
+  experimental: {
+    // 동적 라우트의 클라이언트 라우터 캐시 기본값이 0이라, 한 번 본 탭으로
+    // 돌아와도 매번 다시 받아온다. prefetch 해둔 결과도 즉시 만료된다.
+    staleTimes: { dynamic: 300 },
+  },
+
   // 개발 환경 데이터 페칭 로깅 설정
   logging: {
     fetches: {

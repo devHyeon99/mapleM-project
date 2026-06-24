@@ -32,11 +32,6 @@ export function RankingTabs() {
                   isActive && "bg-card/80 text-foreground shadow-sm",
                 )}
                 href={rankingHref(type)}
-                // 랭킹 페이지는 searchParams 를 읽어 동적 라우트다.
-                // 기본 prefetch 는 loading 경계까지만 받아와 여기선 쓸모가 없고,
-                // 탭을 누를 때마다 RSC 를 새로 받으며 스켈레톤이 번쩍인다.
-                // true 로 데이터까지 미리 받아두면 전환이 즉시 끝난다.
-                prefetch
               >
                 {RANKING_LABELS[type]}
               </Link>

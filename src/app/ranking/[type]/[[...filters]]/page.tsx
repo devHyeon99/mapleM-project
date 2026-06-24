@@ -10,6 +10,26 @@ import {
   renderRankingPage,
 } from "../../_lib/ranking-page";
 import { parseRankingFilters } from "../../_lib/ranking-query";
+import {
+  ALL_WORLD_NAME,
+  WORLD_NAMES,
+  worldSlug,
+} from "@/shared/config/constants/worlds";
+
+/**
+ * 1페이지만 미리 굽는다. 월드 8종 × 랭킹 9종까지는 유한하지만 페이지까지 곱하면
+ * 조합이 수만 개라 전부 구울 수 없다. 나머지는 dynamicParams 기본값에 맡겨
+ * 첫 요청 때 만들어지고, 그 뒤로는 다른 정적 페이지와 똑같이 캐시된다.
+ */
+export function generateStaticParams() {
+  const worlds = WORLD_NAMES.filter((world) => world !== ALL_WORLD_NAME);
+
+  return RANKING_TYPES.flatMap((type) => [
+    // /ranking/level 은 /ranking 으로 308 되므로 굽지 않는다.
+    ...(type === "level" ? [] : [{ type, filters: [] as string[] }]),
+    ...worlds.map((world) => ({ type, filters: [worldSlug(world)] })),
+  ]);
+}
 
 interface RankingPageProps {
   params: Promise<{ type: string; filters?: string[] }>;

@@ -1,7 +1,7 @@
 import { rankingHref, type RankingHighlight } from "@/entities/ranking";
 import { isRealWorldName } from "@/shared/config/constants/worlds";
 
-// 랭킹 필터(world_name/page)와 섞이지 않도록 검색 조건은 별도 파라미터로 둔다.
+// 랭킹 필터(경로 세그먼트)와 섞이지 않도록 검색 조건은 쿼리 파라미터로 둔다.
 export const FIND_WORLD_PARAM = "find_world";
 export const FIND_NAME_PARAM = "find_name";
 
@@ -14,18 +14,18 @@ export interface RankingSearchQuery {
   name: string;
 }
 
-const getSingleParam = (param: string | string[] | undefined) =>
-  Array.isArray(param) ? param[0] : param;
-
 /**
  * URL 파라미터에서 유효한 검색 조건만 뽑는다.
  * 규칙에 맞지 않으면 null 을 돌려줘 넥슨 API 를 아예 찌르지 않는다.
+ *
+ * 클라이언트의 `useSearchParams()` 와 라우트 핸들러의 `new URL(req.url).searchParams`
+ * 가 같은 타입이라, 검증을 양쪽에 복제하지 않고 이 함수 하나로 끝낸다.
  */
-export function readRankingSearchQuery(searchParams: {
-  [key: string]: string | string[] | undefined;
-}): RankingSearchQuery | null {
-  const world = getSingleParam(searchParams[FIND_WORLD_PARAM])?.trim();
-  const name = getSingleParam(searchParams[FIND_NAME_PARAM])?.trim();
+export function readRankingSearchQuery(
+  params: URLSearchParams,
+): RankingSearchQuery | null {
+  const world = params.get(FIND_WORLD_PARAM)?.trim();
+  const name = params.get(FIND_NAME_PARAM)?.trim();
 
   if (!world || !name) return null;
   // ocid 조회는 월드가 특정돼야 하므로 "전체" 는 검색 대상이 아니다.
@@ -36,13 +36,23 @@ export function readRankingSearchQuery(searchParams: {
 }
 
 /** 검색 조건을 랭킹 표에서 강조할 캐릭터로 옮긴다. */
-export function readRankingHighlight(searchParams: {
-  [key: string]: string | string[] | undefined;
-}): RankingHighlight | null {
-  const query = readRankingSearchQuery(searchParams);
+export function readRankingHighlight(
+  params: URLSearchParams,
+): RankingHighlight | null {
+  const query = readRankingSearchQuery(params);
   if (!query) return null;
 
   return { worldName: query.world, characterName: query.name };
+}
+
+/** 검색 조건을 쿼리스트링으로. 검색 결과를 유지한 채 이동할 때 쓴다. */
+export function rankingSearchParams(
+  query: RankingSearchQuery,
+): URLSearchParams {
+  return new URLSearchParams({
+    [FIND_WORLD_PARAM]: query.world,
+    [FIND_NAME_PARAM]: query.name,
+  });
 }
 
 /**
@@ -54,10 +64,5 @@ export function rankingSearchTargetHref(
   query: RankingSearchQuery,
   { page, worldName }: { page: number; worldName?: string },
 ): string {
-  const params = new URLSearchParams({
-    [FIND_WORLD_PARAM]: query.world,
-    [FIND_NAME_PARAM]: query.name,
-  });
-
-  return `${rankingHref("level", { worldName, page })}?${params.toString()}`;
+  return `${rankingHref("level", { worldName, page })}?${rankingSearchParams(query)}`;
 }

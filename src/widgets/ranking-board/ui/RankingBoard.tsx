@@ -1,12 +1,15 @@
+"use client";
+
+import { useSearchParams } from "next/navigation";
 import {
   RankingFilters,
   RankingPagination,
 } from "@/features/ranking-navigation";
+import { readRankingHighlight } from "@/features/ranking-search";
 import {
   RANKING_LABELS,
   RankingTable,
   type AnyRankingData,
-  type RankingHighlight,
   type RankingType,
 } from "@/entities/ranking";
 import { TabMessageSection } from "@/shared/ui/TabMessageSection";
@@ -20,15 +23,17 @@ interface RankingBoardProps {
     page: number;
     totalPages: number;
   };
-  highlight?: RankingHighlight | null;
 }
 
 export function RankingBoard({
   type,
   initialData,
   fetchParams,
-  highlight,
 }: RankingBoardProps) {
+  // 검색 조건은 URL 쿼리에 있다. 서버가 읽으면 라우트가 동적으로 확정되므로
+  // 이미 클라이언트인 이 경계에서 읽어 표로 내려보낸다.
+  const highlight = readRankingHighlight(useSearchParams());
+
   const hasRankingData = initialData.ranking.length > 0;
   const isSharenianRanking = type.includes("sharenian");
 

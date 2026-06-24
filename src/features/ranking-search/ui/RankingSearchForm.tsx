@@ -1,10 +1,9 @@
 "use client";
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { SearchForm } from "@/shared/ui/search-form";
 import {
-  FIND_NAME_PARAM,
-  FIND_WORLD_PARAM,
+  rankingSearchParams,
   RANKING_SEARCH_NAME_ERROR,
   RANKING_SEARCH_NAME_REGEX,
 } from "../model/params";
@@ -12,13 +11,12 @@ import {
 export function RankingSearchForm() {
   const router = useRouter();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
 
   const handleSearch = (world: string, name: string) => {
-    const params = new URLSearchParams(searchParams.toString());
-    params.set(FIND_WORLD_PARAM, world);
-    params.set(FIND_NAME_PARAM, name);
-    router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+    // 현재 경로(랭킹 종류·월드·페이지)는 두고 검색 조건만 갈아끼운다.
+    router.replace(`${pathname}?${rankingSearchParams({ world, name })}`, {
+      scroll: false,
+    });
   };
 
   return (

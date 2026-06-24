@@ -3,18 +3,16 @@ import type { Metadata } from "next";
 import {
   RANKING_LABELS,
   rankingHref,
-  type RankingHighlight,
   type RankingType,
 } from "@/entities/ranking";
 import { RankingBoard, RankingBoardSkeleton } from "@/widgets/ranking-board";
-import { RankingSearch, readRankingHighlight } from "@/features/ranking-search";
+import {
+  RankingSearch,
+  RankingSearchFallback,
+} from "@/features/ranking-search";
 import { SITE_NAME, SITE_URL } from "@/shared/config/site";
 import { getRankingPageData } from "./get-ranking-page-data";
 import type { RankingFilters } from "./ranking-query";
-
-export type RankingSearchParams = {
-  [key: string]: string | string[] | undefined;
-};
 
 export function buildRankingMetadata(
   type: RankingType,
@@ -82,35 +80,21 @@ export function buildRankingMetadata(
 async function RankingBoardLoader({
   type,
   filters,
-  highlight,
 }: {
   type: RankingType;
   filters: RankingFilters;
-  highlight?: RankingHighlight | null;
 }) {
   const { data, params: fetchParams } = await getRankingPageData(type, filters);
 
   return (
-    <RankingBoard
-      type={type}
-      initialData={data}
-      fetchParams={fetchParams}
-      highlight={highlight}
-    />
+    <RankingBoard type={type} initialData={data} fetchParams={fetchParams} />
   );
 }
 
 // 데이터 페치를 loading.tsx 대신 페이지 내부 Suspense 로 스트리밍한다.
 // 세그먼트에 loading.tsx 가 있으면 셸이 200으로 먼저 흘러나가
 // notFound()/permanentRedirect() 가 진짜 404/308 상태코드를 내지 못한다.
-export function renderRankingPage(
-  type: RankingType,
-  filters: RankingFilters,
-  searchParams: RankingSearchParams,
-) {
-  const highlight =
-    type === "level" ? readRankingHighlight(searchParams) : null;
-
+export function renderRankingPage(type: RankingType, filters: RankingFilters) {
   return (
     <>
       <h1 className="sr-only">
@@ -121,14 +105,14 @@ export function renderRankingPage(
       </p>
       {/* 랭킹은 전체 10,000위까지만 집계돼 표에서 직접 찾기 어렵다.
           레벨 랭킹에 한해 월드+닉네임으로 순위와 페이지를 먼저 알려준다. */}
-      {type === "level" && <RankingSearch searchParams={searchParams} />}
+      {type === "level" && (
+        <Suspense fallback={<RankingSearchFallback />}>
+          <RankingSearch />
+        </Suspense>
+      )}
 
       <Suspense fallback={<RankingBoardSkeleton />}>
-        <RankingBoardLoader
-          type={type}
-          filters={filters}
-          highlight={highlight}
-        />
+        <RankingBoardLoader type={type} filters={filters} />
       </Suspense>
     </>
   );

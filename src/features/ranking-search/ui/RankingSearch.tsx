@@ -1,16 +1,16 @@
-import { Suspense } from "react";
+"use client";
+
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { Skeleton } from "@/shared/ui/skeleton";
 import { RankingSearchForm } from "./RankingSearchForm";
 import {
-  findRankedCharacter,
-  type RankingSearchResult,
-} from "../model/find-ranked-character";
-import {
-  rankingSearchTargetHref,
   readRankingSearchQuery,
+  rankingSearchTargetHref,
   type RankingSearchQuery,
 } from "../model/params";
+import { useRankedCharacter } from "../model/use-ranked-character";
+import type { RankingSearchResult } from "../model/types";
 
 const PANEL_CLASS =
   "bg-muted flex min-h-10 flex-wrap items-center justify-between gap-x-4 gap-y-2 rounded-2xl px-4 py-2 text-sm shadow-sm";
@@ -84,22 +84,32 @@ function ResultPanel({
   );
 }
 
-async function RankingSearchResultPanel({
-  query,
-}: {
-  query: RankingSearchQuery;
-}) {
+function RankingSearchResultPanel({ query }: { query: RankingSearchQuery }) {
+  const { data, error, isPending } = useRankedCharacter(query);
+
+  if (isPending) return <Skeleton className="h-10 w-full rounded-2xl" />;
+
+  // 라우트 핸들러는 조회 실패도 결과로 돌려주므로, 여기 error 는 전송 실패다.
+  const result: RankingSearchResult = error
+    ? { status: "error", message: error.message }
+    : data!;
+
+  return <ResultPanel query={query} result={result} />;
+}
+
+/** 검색어가 없을 때 결과가 들어설 자리. 모바일에선 빈 줄이 되므로 감춘다. */
+function EmptyHint() {
   return (
-    <ResultPanel query={query} result={await findRankedCharacter(query)} />
+    <p className="text-muted-foreground hidden h-10 items-center px-1 text-sm md:flex">
+      월드와 이름을 넣으면 순위와 해당 페이지를 알려줘요.
+    </p>
   );
 }
 
-interface RankingSearchProps {
-  searchParams: { [key: string]: string | string[] | undefined };
-}
-
-export function RankingSearch({ searchParams }: RankingSearchProps) {
-  const query = readRankingSearchQuery(searchParams);
+export function RankingSearch() {
+  // 검색 조건을 서버가 아니라 여기서 읽는다. 페이지가 searchParams 를 읽으면
+  // 라우트 전체가 동적으로 확정돼 정적 렌더가 불가능해진다.
+  const query = readRankingSearchQuery(useSearchParams());
 
   return (
     <section
@@ -116,18 +126,30 @@ export function RankingSearch({ searchParams }: RankingSearchProps) {
       <div className="min-w-0 flex-1">
         {query ? (
           // 검색어가 바뀌면 스켈레톤부터 다시 보여주도록 key 를 준다.
-          <Suspense
+          <RankingSearchResultPanel
             key={`${query.world}:${query.name}`}
-            fallback={<Skeleton className="h-10 w-full rounded-2xl" />}
-          >
-            <RankingSearchResultPanel query={query} />
-          </Suspense>
+            query={query}
+          />
         ) : (
-          // 결과가 들어설 자리를 안내로 채운다. 모바일에선 빈 줄이 되므로 감춘다.
-          <p className="text-muted-foreground hidden h-10 items-center px-1 text-sm md:flex">
-            월드와 이름을 넣으면 순위와 해당 페이지를 알려줘요.
-          </p>
+          <EmptyHint />
         )}
+      </div>
+    </section>
+  );
+}
+
+/** useSearchParams 를 쓰므로 Suspense 가 필요하다. 빈 상태와 같은 높이로 맞춘다. */
+export function RankingSearchFallback() {
+  return (
+    <section
+      aria-hidden="true"
+      className="mb-3 flex flex-col gap-2 border-b pb-3 md:flex-row md:items-start md:gap-3"
+    >
+      <div className="md:w-[320px] md:shrink-0">
+        <Skeleton className="h-10 w-full rounded-2xl" />
+      </div>
+      <div className="min-w-0 flex-1">
+        <EmptyHint />
       </div>
     </section>
   );

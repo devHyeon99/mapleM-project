@@ -1,30 +1,13 @@
 import "server-only";
 import { fetchOcid } from "@/entities/character/server";
-import {
-  RANKING_UI_ITEMS_PER_PAGE,
-  type LevelRanking,
-} from "@/entities/ranking";
+import { RANKING_UI_ITEMS_PER_PAGE } from "@/entities/ranking";
 import {
   findLevelRankingByOcid,
   resolveRankingDate,
 } from "@/entities/ranking/server";
 import { handleCommonNexonError } from "@/shared/api/nexon";
 import type { RankingSearchQuery } from "./params";
-
-export type RankingSearchResult =
-  /** 해당 월드에 그 이름의 캐릭터가 없음 */
-  | { status: "no-character" }
-  /** 캐릭터는 있지만 전체 10,000위 밖이라 랭킹에 집계되지 않음 */
-  | { status: "unranked" }
-  | {
-      status: "ranked";
-      entry: LevelRanking;
-      /** 전체 월드 목록에서의 페이지 */
-      overallPage: number;
-      /** 해당 월드로 필터링한 목록에서의 페이지 */
-      worldPage: number;
-    }
-  | { status: "error"; message: string };
+import type { RankingSearchResult } from "./types";
 
 /**
  * 월드+닉네임으로 ocid 를 얻고, 그 ocid 로 레벨 랭킹을 조회한다.

@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { RANKING_TYPES, rankingHref } from "@/entities/ranking";
 import { SITE_URL } from "@/shared/config/site";
+import { ALL_WORLD_NAME, WORLD_NAMES } from "@/shared/config/constants/worlds";
 
 // lastModified/changeFrequency/priority 는 두지 않음.
 // 구글은 changefreq 와 priority 를 무시하고, lastmod 는 검증 가능할 때만 씀.
@@ -10,12 +11,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // /tools 하위 도구는 검색 노출 대상이 아니므로 /tools 하나만 싣는다.
   const staticRoutes = ["/", "/guild", "/ranking", "/tools"];
 
-  // rankingHref("level") 는 /ranking 이라 staticRoutes 와 겹친다. 중복 URL 을 만들지 않는다.
-  const rankingRoutes = RANKING_TYPES.filter((type) => type !== "level").map(
-    (type) => rankingHref(type),
-  );
+  // 정적으로 굽는 조합이 그대로 색인 대상이다. 월드별 페이지는 제목·설명·표가
+  // 서로 달라 중복이 아니고, canonical 도 자기 자신을 가리킨다.
+  // 2페이지 이후는 noindex 라 싣지 않는다.
+  const worlds = WORLD_NAMES.filter((world) => world !== ALL_WORLD_NAME);
+  const rankingRoutes = RANKING_TYPES.flatMap((type) => [
+    rankingHref(type),
+    ...worlds.map((worldName) => rankingHref(type, { worldName })),
+  ]);
 
-  return [...staticRoutes, ...rankingRoutes].map((path) => ({
-    url: `${SITE_URL}${path}`,
-  }));
+  // rankingHref("level") 는 /ranking 이라 staticRoutes 와 겹친다.
+  const paths = [...new Set([...staticRoutes, ...rankingRoutes])];
+
+  return paths.map((path) => ({ url: `${SITE_URL}${path}` }));
 }

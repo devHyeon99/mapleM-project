@@ -1,14 +1,12 @@
 "use client";
 
 import { useCharacterVmatrix } from "@/entities/skill/model/hooks/useCharacterVmatrix";
+import { TabCard } from "@/shared/ui/TabCard";
 import { TabMessageSection } from "@/shared/ui/TabMessageSection";
 import { TabLoadingBox } from "../../TabLoadingBox";
 
-import { CoreList } from "./CoreList";
-import { EnhancementCoreItem } from "./EnhancementCoreItem";
-import { SkillCoreItem } from "./SkillCoreItem";
-import { TabCard } from "@/shared/ui/TabCard";
-import { groupCoresByType } from "./vmatrix-tab.utils";
+import { CoreItem } from "./CoreItem";
+import { groupCoresByType, isEquipped } from "./vmatrix-tab.utils";
 
 interface VmatrixTabProps {
   ocid: string;
@@ -28,21 +26,17 @@ export const VmatrixTab = ({ ocid, level }: VmatrixTabProps) => {
     );
   }
 
-  if (isLoading)
-    return <TabLoadingBox className="min-h-[1467px] md:min-h-[1467px]" />;
+  if (isLoading) return <TabLoadingBox className="min-h-[1467px]" />;
 
   if (isError) {
     return (
-      <div
-        role="alert"
-        className="rounded-md border border-red-200 p-3 text-sm text-red-500"
-      >
+      <div role="alert" className="p-3 text-sm text-red-500">
         오류 발생: {(error as Error).message}
       </div>
     );
   }
 
-  const cores = data?.character_v_core_equipment ?? [];
+  const cores = (data?.character_v_core_equipment ?? []).filter(isEquipped);
 
   if (cores.length === 0) {
     return (
@@ -52,48 +46,17 @@ export const VmatrixTab = ({ ocid, level }: VmatrixTabProps) => {
     );
   }
 
-  const { skillCores, enhancementCores, unknownCores } =
-    groupCoresByType(cores);
-
   return (
-    <div className="space-y-2">
-      <TabCard title="스킬 코어">
-        {skillCores.length > 0 ? (
-          <CoreList
-            items={skillCores}
-            renderItem={(core) => <SkillCoreItem core={core} />}
-          />
-        ) : (
-          <TabMessageSection
-            className="min-h-0"
-            message="장착된 스킬 코어가 없습니다."
-          />
-        )}
-      </TabCard>
-
-      <TabCard title="강화 코어">
-        {enhancementCores.length > 0 ? (
-          <CoreList
-            items={enhancementCores}
-            className="flex flex-col gap-2"
-            renderItem={(core) => <EnhancementCoreItem core={core} />}
-          />
-        ) : (
-          <TabMessageSection
-            className="min-h-0"
-            message="장착된 강화 코어가 없습니다."
-          />
-        )}
-      </TabCard>
-
-      {unknownCores.length > 0 ? (
-        <TabCard title="기타 코어">
-          <CoreList
-            items={unknownCores}
-            renderItem={(core) => <SkillCoreItem core={core} />}
-          />
+    <div className="flex flex-col gap-2">
+      {groupCoresByType(cores).map(({ label, cores: groupCores }) => (
+        <TabCard key={label} title={label}>
+          <ul className="space-y-1">
+            {groupCores.map((core, index) => (
+              <CoreItem key={index} core={core} />
+            ))}
+          </ul>
         </TabCard>
-      ) : null}
+      ))}
     </div>
   );
 };

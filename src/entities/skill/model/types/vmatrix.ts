@@ -1,15 +1,9 @@
 /**
- * 개별 V코어 슬롯 정보
+ * 개별 V코어 정보
  */
 export interface VCoreEquipment {
-  /** 슬롯 고유 ID (1~26) */
-  slot_id: string;
-
-  /** 슬롯 강화 단계 (0~5) */
-  slot_level: number;
-
-  /** V코어 이름 (예: '쉐도우 스피어', '도미니언') */
-  vcore_name: string;
+  /** V코어 타입 (Skill | Enhancement | JobList | Common | Special) */
+  vcore_type: string;
 
   /** V코어 레벨 (1~25) */
   vcore_level: number;
@@ -18,19 +12,31 @@ export interface VCoreEquipment {
   vcore_skill_name1: string;
 
   /** 연결된 두 번째 스킬 이름 */
-  vcore_skill_name2: string;
+  vcore_skill_name2: string | null;
 
   /** 연결된 세 번째 스킬 이름 */
-  vcore_skill_name3: string;
+  vcore_skill_name3: string | null;
 
-  /** V코어 타입 */
-  vcore_type: "Skill" | "Enhancement";
+  /** 연결된 네 번째 스킬 이름 */
+  vcore_skill_name4: string | null;
+
+  /** 기간제 여부 (0:영구, 1:기간제) */
+  vcore_expire_flag: string;
+
+  /** 만료 시간 (UTC0) */
+  vcore_expire_date: string | null;
+
+  /** 장착 여부 (0:미장착, 1:장착) */
+  vcore_equipment_flag: string;
 }
 
 /**
  * 캐릭터의 V매트릭스 전체 데이터
  */
 export interface CharacterVMatrix {
-  /** 슬롯별 V코어 장비 정보 목록 */
+  /** 캐릭터 직업 */
+  character_class: string;
+
+  /** V코어 목록 */
   character_v_core_equipment: VCoreEquipment[];
 }

@@ -6,6 +6,7 @@ import { TabLoadingBox } from "../../TabLoadingBox";
 import { InfoDescriptionRow } from "@/shared/ui/InfoRow";
 import { TabCard } from "@/shared/ui/TabCard";
 import { cn } from "@/shared/lib/utils";
+import { HEXA_LEVEL_REQUIREMENT } from "@/shared/config/constants/hexa";
 import { useCharacterHexaMatrixStat } from "@/entities/character";
 import type { CharacterHexaMatrixStat } from "@/entities/character";
 import { Badge } from "@/shared/ui/badge";
@@ -21,9 +22,11 @@ export const HexaStatTab = ({ ocid, level }: HexaStatTabProps) => {
     level,
   );
 
-  if (level < 250) {
+  if (level < HEXA_LEVEL_REQUIREMENT) {
     return (
-      <TabMessageSection message="HEXA 스탯 시스템은 Lv.250 이상 이용 가능합니다." />
+      <TabMessageSection
+        message={`HEXA 스탯 시스템은 Lv.${HEXA_LEVEL_REQUIREMENT} 이상 이용 가능합니다.`}
+      />
     );
   }
 

@@ -6,6 +6,7 @@ import { TabMessageSection } from "@/shared/ui/TabMessageSection";
 import { TabLoadingBox } from "../../TabLoadingBox";
 import { useCharacterHexaMatrixSkill } from "@/entities/skill/model/hooks/useCharacterHexaMatrixSkill";
 import type { CharacterHexaMatrixSkill } from "@/entities/skill/model/types/hexamatrix-skill";
+import { HEXA_LEVEL_REQUIREMENT } from "@/shared/config/constants/hexa";
 
 interface HexaSkillTabProps {
   ocid: string;
@@ -13,8 +14,6 @@ interface HexaSkillTabProps {
 }
 
 type HexaSkillItem = CharacterHexaMatrixSkill["hexamatrix_skill"][number];
-
-const LEVEL_REQUIREMENT = 250;
 
 const formatLevel = (n: number) => n.toString().padStart(2, "0");
 
@@ -73,10 +72,10 @@ export const HexaSkillTab = ({ ocid, level }: HexaSkillTabProps) => {
     level,
   );
 
-  if (level < LEVEL_REQUIREMENT) {
+  if (level < HEXA_LEVEL_REQUIREMENT) {
     return (
       <TabMessageSection
-        message={`HEXA 스킬 시스템은 Lv.${LEVEL_REQUIREMENT} 이상 이용 가능합니다.`}
+        message={`HEXA 스킬 시스템은 Lv.${HEXA_LEVEL_REQUIREMENT} 이상 이용 가능합니다.`}
       />
     );
   }

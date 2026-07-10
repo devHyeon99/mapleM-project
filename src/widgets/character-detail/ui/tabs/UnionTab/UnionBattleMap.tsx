@@ -5,6 +5,7 @@ import { SegmentedToggle } from "@/shared/ui/SegmentedToggle";
 import type { CharacterUnionRaider } from "@/entities/character";
 import { TabCard } from "@/shared/ui/TabCard";
 import { formatQueryError } from "@/shared/ui/TabMessageSection";
+import { cn } from "@/shared/lib/utils";
 
 interface UnionBattleMapProps {
   raiderData: CharacterUnionRaider | null | undefined;
@@ -39,6 +40,57 @@ const CELL_SIDES = [
   [1, 0, "1px 0", "inset -1px 0"],
 ] as const;
 
+/** 배치도 격자 크기. 셀 개수는 두 값에서 파생시킨다 */
+const BOARD_COLS = 22;
+const BOARD_ROWS = 20;
+const BOARD_CELLS = BOARD_COLS * BOARD_ROWS;
+
+const BATTLE_MAP_TITLE = "유니온 배치도";
+
+type BlockCell = { type: string; blockIndex: number };
+
+/**
+ * 좌표 문자열 -> 블록 조회용 Map.
+ * blockIndex는 인접 셀이 같은 블록인지 판별해 외곽선을 그릴 때 쓴다
+ */
+const buildBlockMap = (
+  raiders: CharacterUnionRaider["battle_map"][number]["union_raider"],
+) => {
+  const blockMap = new Map<string, BlockCell>();
+  raiders.forEach((block, blockIndex) => {
+    block.block_position.forEach((pos) => {
+      if (pos.cell_x !== null && pos.cell_y !== null) {
+        blockMap.set(`${pos.cell_x},${pos.cell_y}`, {
+          type: block.block_type,
+          blockIndex,
+        });
+      }
+    });
+  });
+  return blockMap;
+};
+
+/** 로딩·실패 안내. 배치도와 높이를 맞춰 카드 크기가 튀지 않게 한다 */
+const BattleMapStatus = ({
+  message,
+  isError,
+}: {
+  message: string;
+  isError?: boolean;
+}) => (
+  <TabCard title={BATTLE_MAP_TITLE}>
+    <div
+      role={isError ? "alert" : undefined}
+      className={cn(
+        "flex h-[388px] items-center justify-center text-sm",
+        isError ? "text-destructive font-medium" : "text-muted-foreground",
+      )}
+    >
+      {message}
+    </div>
+  </TabCard>
+);
+
 export const UnionBattleMap = ({
   raiderData,
   isLoading,
@@ -53,28 +105,10 @@ export const UnionBattleMap = ({
       .map((map) => map.preset_no);
   }, [raiderData]);
 
-  if (isLoading) {
-    return (
-      <TabCard title="유니온 배치도">
-        <div className="text-muted-foreground flex h-88 items-center justify-center text-sm">
-          배치도 불러오는 중...
-        </div>
-      </TabCard>
-    );
-  }
+  if (isLoading) return <BattleMapStatus message="배치도 불러오는 중..." />;
 
-  if (error !== undefined) {
-    return (
-      <TabCard title="유니온 배치도">
-        <div
-          role="alert"
-          className="text-destructive flex h-88 items-center justify-center text-sm font-medium"
-        >
-          {formatQueryError(error)}
-        </div>
-      </TabCard>
-    );
-  }
+  if (error !== undefined)
+    return <BattleMapStatus isError message={formatQueryError(error)} />;
 
   if (!raiderData) return null;
 
@@ -94,23 +128,15 @@ export const UnionBattleMap = ({
 
   if (!currentPreset) return null;
 
-  // 블록 위치 최적화 조회용 Map (블록별 식별자를 함께 담아 테두리 계산에 사용)
-  const blockMap = new Map<string, { type: string; id: number }>();
-  currentPreset.union_raider.forEach((block, id) => {
-    block.block_position.forEach((pos) => {
-      if (pos.cell_x !== null && pos.cell_y !== null) {
-        blockMap.set(`${pos.cell_x},${pos.cell_y}`, { type: block.block_type, id });
-      }
-    });
-  });
+  const blockMap = buildBlockMap(currentPreset.union_raider);
 
   return (
     <TabCard
-      title="유니온 배치도"
+      title={BATTLE_MAP_TITLE}
       className="overflow-hidden"
       action={
         <SegmentedToggle
-          ariaLabel="유니온 배치도 프리셋 선택"
+          ariaLabel={`${BATTLE_MAP_TITLE} 프리셋 선택`}
           value={activePreset}
           onChange={setSelectedPreset}
           options={sortedPresetNos.map((preset) => ({
@@ -120,31 +146,33 @@ export const UnionBattleMap = ({
         />
       }
     >
-      {/* 보드 컨테이너: 400px 안에서 22칸이 모두 보이도록 설정 */}
+      {/* 보드 컨테이너: 400px 안에서 가로 칸이 모두 보이도록 설정 */}
       <div
         role="img"
-        aria-label={`유니온 배치도. 현재 선택된 프리셋 ${activePreset}`}
+        aria-label={`${BATTLE_MAP_TITLE}. 현재 선택된 프리셋 ${activePreset}`}
         className="relative mx-auto w-full max-w-[400px] border bg-[#3B424A] shadow-inner"
       >
         <div
           aria-hidden="true"
           className="grid"
           style={{
-            gridTemplateColumns: `repeat(22, minmax(0, 1fr))`,
+            gridTemplateColumns: `repeat(${BOARD_COLS}, minmax(0, 1fr))`,
           }}
         >
-          {Array.from({ length: 440 }).map((_, i) => {
-            const x = i % 22;
-            const y = Math.floor(i / 22);
+          {Array.from({ length: BOARD_CELLS }).map((_, i) => {
+            const x = i % BOARD_COLS;
+            const y = Math.floor(i / BOARD_COLS);
             const cell = blockMap.get(`${x},${y}`);
 
-            if (!cell) return <div key={`${x}-${y}`} className="aspect-square" />;
+            if (!cell)
+              return <div key={`${x}-${y}`} className="aspect-square" />;
 
             const color = BLOCK_COLORS.get(cell.type) ?? COMMON_BLOCK.color;
             // 같은 블록 쪽은 색을 1px 넓혀 서브픽셀 틈을 메우고,
             // 다른 블록/빈칸 쪽에만 외곽선을 그려 블록 하나가 한 덩어리로 보이게 한다
             const boxShadow = CELL_SIDES.map(([dx, dy, fill, outline]) =>
-              blockMap.get(`${x + dx},${y + dy}`)?.id === cell.id
+              blockMap.get(`${x + dx},${y + dy}`)?.blockIndex ===
+              cell.blockIndex
                 ? `${fill} 0 0 ${color}`
                 : `${outline} 0 0 ${BLOCK_OUTLINE_COLOR}`,
             ).join(", ");
@@ -166,7 +194,7 @@ export const UnionBattleMap = ({
           style={{
             backgroundImage:
               "linear-gradient(to right, #FFFFFF14 1px, transparent 1px), linear-gradient(to bottom, #FFFFFF14 1px, transparent 1px)",
-            backgroundSize: "calc(100% / 22) calc(100% / 22)",
+            backgroundSize: `calc(100% / ${BOARD_COLS}) calc(100% / ${BOARD_COLS})`,
           }}
         />
       </div>

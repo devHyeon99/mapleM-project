@@ -26,7 +26,7 @@ export const VmatrixTab = ({ ocid, level }: VmatrixTabProps) => {
     );
   }
 
-  if (isLoading) return <TabLoadingBox className="min-h-[1467px]" />;
+  if (isLoading) return <TabLoadingBox className="min-h-[1113px]" />;
 
   if (isError) return <TabMessageSection error={error} />;
 

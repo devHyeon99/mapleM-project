@@ -26,7 +26,7 @@ export const JewelTab = ({ ocid, level }: JewelTabProps) => {
   }
 
   if (isLoading)
-    return <TabLoadingBox className="min-h-[421px] md:min-h-[421px]" />;
+    return <TabLoadingBox className="min-h-[429px]" />;
 
   if (isError) return <TabMessageSection error={error} />;
 

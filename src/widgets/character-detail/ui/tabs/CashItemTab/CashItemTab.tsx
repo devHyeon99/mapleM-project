@@ -24,7 +24,7 @@ export const CashItemTab = ({ ocid }: CashItemTabProps) => {
   } = useCashItemTab(data);
 
   if (isLoading) {
-    return <TabLoadingBox className="min-h-[408px] md:min-h-[474px]" />;
+    return <TabLoadingBox className="min-h-[349px] md:min-h-[390px]" />;
   }
 
   if (isError) return <TabMessageSection error={error} />;

@@ -31,7 +31,7 @@ export const HexaStatTab = ({ ocid, level }: HexaStatTabProps) => {
   }
 
   if (isLoading)
-    return <TabLoadingBox className="min-h-[485px] md:min-h-[485px]" />;
+    return <TabLoadingBox className="min-h-[499px] wide:min-h-[282px]" />;
 
   if (isError) return <TabMessageSection error={error} />;
 

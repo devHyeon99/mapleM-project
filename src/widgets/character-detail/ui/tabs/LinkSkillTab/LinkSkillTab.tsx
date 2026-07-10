@@ -24,7 +24,7 @@ export const LinkSkillTab = ({ ocid }: LinkSkillTabProps) => {
   } = useLinkSkillTab(ocid);
 
   if (isLoading)
-    return <TabLoadingBox className="min-h-[750px] md:min-h-[646px]" />;
+    return <TabLoadingBox className="min-h-[710px] md:min-h-[606px]" />;
 
   if (isError) return <TabMessageSection error={error} />;
 

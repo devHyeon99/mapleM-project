@@ -81,7 +81,7 @@ export const HexaSkillTab = ({ ocid, level }: HexaSkillTabProps) => {
   }
 
   if (isLoading)
-    return <TabLoadingBox className="min-h-[668px] md:min-h-[668px]" />;
+    return <TabLoadingBox className="min-h-[700px] wide:min-h-[442px]" />;
 
   if (isError) return <TabMessageSection error={error} />;
 

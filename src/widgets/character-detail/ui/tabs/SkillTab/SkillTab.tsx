@@ -30,7 +30,7 @@ export const SkillTab = ({ ocid }: SkillTabProps) => {
   const [setNo, setSetNo] = useState(1);
 
   if (isLoading)
-    return <TabLoadingBox className="min-h-[790px] md:min-h-[309px]" />;
+    return <TabLoadingBox className="min-h-[794px] md:min-h-[305px]" />;
 
   if (isError) return <TabMessageSection error={error} />;
 

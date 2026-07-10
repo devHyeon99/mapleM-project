@@ -39,7 +39,7 @@ export const StatTab = ({ ocid, level }: StatTabProps) => {
   );
 
   if (isLoading)
-    return <TabLoadingBox className="min-h-[598px] md:min-h-[405px]" />;
+    return <TabLoadingBox className="min-h-[710px] md:min-h-[477px]" />;
 
   if (isError) return <TabMessageSection error={error} />;
 

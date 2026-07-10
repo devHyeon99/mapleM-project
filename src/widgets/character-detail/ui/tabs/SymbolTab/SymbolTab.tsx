@@ -31,7 +31,7 @@ export const SymbolTab = ({ ocid, level }: SymbolTabProps) => {
 
   // 로딩 상태
   if (isLoading)
-    return <TabLoadingBox className="min-h-[854px] md:min-h-[497px]" />;
+    return <TabLoadingBox className="min-h-[886px] md:min-h-[609px]" />;
 
   // 에러 상태
   if (isError) return <TabMessageSection error={error} />;

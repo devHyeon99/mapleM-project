@@ -27,13 +27,7 @@ export const CashItemTab = ({ ocid }: CashItemTabProps) => {
     return <TabLoadingBox className="min-h-[408px] md:min-h-[474px]" />;
   }
 
-  if (isError) {
-    return (
-      <div className="text-destructive flex h-40 items-center justify-center p-4 text-sm font-medium">
-        오류 발생: {(error as Error).message}
-      </div>
-    );
-  }
+  if (isError) return <TabMessageSection error={error} />;
 
   if (!data || !hasCashItemContent) {
     return (

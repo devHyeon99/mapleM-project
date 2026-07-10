@@ -33,13 +33,7 @@ export const HexaStatTab = ({ ocid, level }: HexaStatTabProps) => {
   if (isLoading)
     return <TabLoadingBox className="min-h-[485px] md:min-h-[485px]" />;
 
-  if (isError) {
-    return (
-      <div className="p-3 text-sm text-red-500">
-        오류 발생: {(error as Error).message}
-      </div>
-    );
-  }
+  if (isError) return <TabMessageSection error={error} />;
 
   const statCores = data?.hexamatrix_stat ?? [];
 

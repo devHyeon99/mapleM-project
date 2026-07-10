@@ -32,13 +32,7 @@ export const SkillTab = ({ ocid }: SkillTabProps) => {
   if (isLoading)
     return <TabLoadingBox className="min-h-[790px] md:min-h-[309px]" />;
 
-  if (isError) {
-    return (
-      <div role="alert" className="p-4 text-sm text-red-500">
-        오류 발생: {(error as Error).message}
-      </div>
-    );
-  }
+  if (isError) return <TabMessageSection error={error} />;
 
   if (!data?.skill) {
     return (

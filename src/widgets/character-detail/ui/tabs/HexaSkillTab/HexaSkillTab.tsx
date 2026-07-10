@@ -83,13 +83,7 @@ export const HexaSkillTab = ({ ocid, level }: HexaSkillTabProps) => {
   if (isLoading)
     return <TabLoadingBox className="min-h-[668px] md:min-h-[668px]" />;
 
-  if (isError) {
-    return (
-      <div className="p-3 text-sm text-red-500">
-        오류 발생: {(error as Error).message}
-      </div>
-    );
-  }
+  if (isError) return <TabMessageSection error={error} />;
 
   const skills = data?.hexamatrix_skill ?? [];
   if (skills.length === 0) {

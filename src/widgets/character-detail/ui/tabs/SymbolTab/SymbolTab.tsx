@@ -34,15 +34,7 @@ export const SymbolTab = ({ ocid, level }: SymbolTabProps) => {
     return <TabLoadingBox className="min-h-[854px] md:min-h-[497px]" />;
 
   // 에러 상태
-  if (isError) {
-    const errorMessage =
-      error instanceof Error
-        ? error.message
-        : "알 수 없는 오류가 발생했습니다.";
-    return (
-      <div className="p-4 text-sm text-red-500">오류 발생: {errorMessage}</div>
-    );
-  }
+  if (isError) return <TabMessageSection error={error} />;
 
   // 데이터 없음 예외 처리 (심볼 둘 다 없을 때)
   if (!data || (arcaneSymbols.length === 0 && authenticSymbols.length === 0)) {

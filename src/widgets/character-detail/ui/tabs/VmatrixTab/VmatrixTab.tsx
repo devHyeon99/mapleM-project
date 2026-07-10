@@ -28,13 +28,7 @@ export const VmatrixTab = ({ ocid, level }: VmatrixTabProps) => {
 
   if (isLoading) return <TabLoadingBox className="min-h-[1467px]" />;
 
-  if (isError) {
-    return (
-      <div role="alert" className="p-3 text-sm text-red-500">
-        오류 발생: {(error as Error).message}
-      </div>
-    );
-  }
+  if (isError) return <TabMessageSection error={error} />;
 
   const cores = (data?.character_v_core_equipment ?? []).filter(isEquipped);
 

@@ -26,13 +26,7 @@ export const LinkSkillTab = ({ ocid }: LinkSkillTabProps) => {
   if (isLoading)
     return <TabLoadingBox className="min-h-[750px] md:min-h-[646px]" />;
 
-  if (isError) {
-    return (
-      <div className="p-4 text-sm text-red-500">
-        오류 발생: {(error as Error).message}
-      </div>
-    );
-  }
+  if (isError) return <TabMessageSection error={error} />;
 
   if (isEmpty || !mergedData) {
     return (

@@ -41,13 +41,7 @@ export const StatTab = ({ ocid, level }: StatTabProps) => {
   if (isLoading)
     return <TabLoadingBox className="min-h-[598px] md:min-h-[405px]" />;
 
-  if (isError) {
-    return (
-      <div className="text-destructive flex h-40 items-center justify-center p-4 text-sm font-medium">
-        오류 발생: {(error as Error).message}
-      </div>
-    );
-  }
+  if (isError) return <TabMessageSection error={error} />;
 
   if (!data) {
     return (

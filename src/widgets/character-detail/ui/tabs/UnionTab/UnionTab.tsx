@@ -13,10 +13,15 @@ interface UnionTabProps {
 }
 
 export const UnionTab = ({ ocid, data, ranking }: UnionTabProps) => {
-  const { data: raiderData, isLoading: isRaiderLoading } = useUnionRaider(
-    ocid,
-    data?.union_level ?? null,
-  );
+  const {
+    data: raiderData,
+    isLoading: isRaiderLoading,
+    isError: isRaiderError,
+    error: raiderError,
+  } = useUnionRaider(ocid, data?.union_level ?? null);
+
+  // 공격대 조회 실패는 해당 섹션에만 전달함 (유니온 카드·레벨 총합 효과는 props라 정상 표시)
+  const raiderErrorProp = isRaiderError ? raiderError : undefined;
 
   if (!data || data.union_level === null) {
     return (
@@ -30,7 +35,11 @@ export const UnionTab = ({ ocid, data, ranking }: UnionTabProps) => {
     <div className="flex flex-col gap-2">
       <UnionCard data={data} ranking={ranking} />
 
-      <UnionBattleMap raiderData={raiderData} isLoading={isRaiderLoading} />
+      <UnionBattleMap
+        raiderData={raiderData}
+        isLoading={isRaiderLoading}
+        error={raiderErrorProp}
+      />
 
       <section aria-label="유니온 효과 요약" className="flex flex-col gap-2">
         <UnionEffect
@@ -43,11 +52,13 @@ export const UnionTab = ({ ocid, data, ranking }: UnionTabProps) => {
             title="점령 효과"
             options={raiderData?.use_union_occupied_option}
             isLoading={isRaiderLoading}
+            error={raiderErrorProp}
           />
           <UnionEffect
             title="공격대원 효과"
             options={raiderData?.use_union_raider_option}
             isLoading={isRaiderLoading}
+            error={raiderErrorProp}
           />
         </div>
       </section>

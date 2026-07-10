@@ -4,10 +4,12 @@ import { useMemo, useState } from "react";
 import { SegmentedToggle } from "@/shared/ui/SegmentedToggle";
 import type { CharacterUnionRaider } from "@/entities/character";
 import { TabCard } from "@/shared/ui/TabCard";
+import { formatQueryError } from "@/shared/ui/TabMessageSection";
 
 interface UnionBattleMapProps {
   raiderData: CharacterUnionRaider | null | undefined;
   isLoading?: boolean;
+  error?: Error | null;
 }
 
 /** 직업 블록. 배열 순서가 곧 범례 순서 */
@@ -40,6 +42,7 @@ const CELL_SIDES = [
 export const UnionBattleMap = ({
   raiderData,
   isLoading,
+  error,
 }: UnionBattleMapProps) => {
   const [selectedPreset, setSelectedPreset] = useState<number | null>(null);
 
@@ -55,6 +58,19 @@ export const UnionBattleMap = ({
       <TabCard title="유니온 배치도">
         <div className="text-muted-foreground flex h-88 items-center justify-center text-sm">
           배치도 불러오는 중...
+        </div>
+      </TabCard>
+    );
+  }
+
+  if (error !== undefined) {
+    return (
+      <TabCard title="유니온 배치도">
+        <div
+          role="alert"
+          className="text-destructive flex h-88 items-center justify-center text-sm font-medium"
+        >
+          {formatQueryError(error)}
         </div>
       </TabCard>
     );

@@ -1,6 +1,10 @@
 import { ReactNode } from "react";
 import { cn } from "@/shared/lib/utils";
 
+/** 조회 실패 안내 문구. 카드 밖 인라인 표시에서도 문구를 맞추기 위해 분리함 */
+export const formatQueryError = (error?: Error | null) =>
+  `오류 발생: ${error?.message ?? "알 수 없는 오류가 발생했습니다."}`;
+
 interface TabMessageSectionProps {
   className?: string;
   message?: string;
@@ -15,9 +19,7 @@ export const TabMessageSection = ({
   error,
 }: TabMessageSectionProps) => {
   const isError = error !== undefined;
-  const text = isError
-    ? `오류 발생: ${error?.message ?? "알 수 없는 오류가 발생했습니다."}`
-    : message;
+  const text = isError ? formatQueryError(error) : message;
 
   return (
     <section

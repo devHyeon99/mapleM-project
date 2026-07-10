@@ -69,7 +69,7 @@ type CoreSectionProps = {
 const HexaStatCoreSection = ({ slot, statInfo }: CoreSectionProps) => {
   return (
     <TabCard title={`스탯 코어 ${slot}`}>
-      <div className="space-y-2">
+      <div className="wide:flex-row flex flex-col gap-4">
         {statInfo.map((page) => (
           <HexaStatPageCard key={page.page_no} page={page} />
         ))}
@@ -85,11 +85,22 @@ type PageCardProps = {
 const HexaStatPageCard = ({ page }: PageCardProps) => {
   const isActive = page.activate_flag === "1";
 
+  const statGroups = [
+    { title: "메인스탯", stats: [[page.main_stat, page.main_stat_level]] },
+    {
+      title: "서브스탯",
+      stats: [
+        [page.sub_1_stat, page.sub_1_stat_level],
+        [page.sub_2_stat, page.sub_2_stat_level],
+      ],
+    },
+  ] as const;
+
   return (
     <div
       className={cn(
-        "bg-card space-y-3 rounded-2xl p-4",
-        isActive ? "bg-secondary shadow-sm" : "bg-secondary opacity-40",
+        "bg-secondary w-full space-y-3 rounded-2xl p-4",
+        isActive ? "shadow-sm" : "opacity-40",
       )}
     >
       {/* 헤더 */}
@@ -100,46 +111,27 @@ const HexaStatPageCard = ({ page }: PageCardProps) => {
 
       <Separator />
 
-      <dl className="space-y-3">
-        {/* 메인 스탯 */}
-        <div className="space-y-1">
-          <p className="text-sm font-bold tracking-wider uppercase">메인스탯</p>
-          <InfoDescriptionRow
-            label={page.main_stat}
-            variant="between"
-            isHighlight={isActive}
-            valueClassName="font-semibold"
-            isNumeric
-          >
-            Lv.{page.main_stat_level}
-          </InfoDescriptionRow>
+      {statGroups.map((group) => (
+        <div key={group.title} className="space-y-1">
+          <p className="text-sm font-bold tracking-wider uppercase">
+            {group.title}
+          </p>
+          <dl className="flex flex-col gap-1">
+            {group.stats.map(([name, statLevel]) => (
+              <InfoDescriptionRow
+                key={name}
+                label={name}
+                variant="between"
+                isHighlight={isActive}
+                valueClassName="font-semibold"
+                isNumeric
+              >
+                Lv.{statLevel}
+              </InfoDescriptionRow>
+            ))}
+          </dl>
         </div>
-
-        {/* 서브 스탯 */}
-        <div className="space-y-1">
-          <p className="text-sm font-bold tracking-wider uppercase">서브스탯</p>
-          <div className="flex flex-col gap-1">
-            <InfoDescriptionRow
-              label={page.sub_1_stat}
-              variant="between"
-              isHighlight={isActive}
-              valueClassName="font-semibold"
-              isNumeric
-            >
-              Lv.{page.sub_1_stat_level}
-            </InfoDescriptionRow>
-            <InfoDescriptionRow
-              label={page.sub_2_stat}
-              variant="between"
-              isHighlight={isActive}
-              valueClassName="font-semibold"
-              isNumeric
-            >
-              Lv.{page.sub_2_stat_level}
-            </InfoDescriptionRow>
-          </div>
-        </div>
-      </dl>
+      ))}
     </div>
   );
 };

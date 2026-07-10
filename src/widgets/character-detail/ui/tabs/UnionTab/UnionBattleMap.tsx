@@ -194,7 +194,7 @@ export const UnionBattleMap = ({
           style={{
             backgroundImage:
               "linear-gradient(to right, #FFFFFF14 1px, transparent 1px), linear-gradient(to bottom, #FFFFFF14 1px, transparent 1px)",
-            backgroundSize: `calc(100% / ${BOARD_COLS}) calc(100% / ${BOARD_COLS})`,
+            backgroundSize: `calc(100% / ${BOARD_COLS}) calc(100% / ${BOARD_ROWS})`,
           }}
         />
       </div>

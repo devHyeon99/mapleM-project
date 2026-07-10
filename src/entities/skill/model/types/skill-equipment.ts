@@ -2,8 +2,8 @@
 export interface CharacterEquipmentSkill {
   /** 현재 사용 중인 스킬 모드 */
   skill_mode: number;
-  /** 해당 스킬을 장착한 스킬 세팅 */
-  equipment_skill_set: string;
+  /** 해당 스킬을 장착한 스킬 세팅 (1~3) */
+  equipment_skill_set: number;
   /** 스킬 장착 슬롯 인덱스 */
   slot_id: string;
   /** 스킬 명 */
@@ -11,11 +11,11 @@ export interface CharacterEquipmentSkill {
   /** 스킬 아이콘 */
   skill_icon: string;
   /** 스킬 타입 */
-  skill_type: string;
+  skill_type: string | null;
   /** 스킬 차수 */
-  skill_grade: string;
+  skill_grade: string | null;
   /** 추가 기능 활성화 여부 */
-  add_feature_flag: string;
+  add_feature_flag: string | null;
 }
 
 // 프리셋

@@ -9,14 +9,12 @@ interface SkillIconTooltipProps {
   src: string;
   alt: string;
   tooltip: string;
-  iconClassName?: string;
 }
 
 export const SkillIconTooltip = ({
   src,
   alt,
   tooltip,
-  iconClassName = "h-8 w-8 object-contain",
 }: SkillIconTooltipProps) => {
   const isHoverDevice = useHoverDevice();
 
@@ -28,8 +26,8 @@ export const SkillIconTooltip = ({
         width={32}
         height={32}
         unoptimized
-        className={iconClassName}
-        style={{ width: "auto", height: "auto", imageRendering: "pixelated" }}
+        className="h-8 w-8 object-contain"
+        style={{ imageRendering: "pixelated" }}
       />
     </button>
   );

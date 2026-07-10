@@ -1,4 +1,5 @@
 import type { CharacterEquipmentSkill } from "@/entities/skill/model";
+import { stripSkillLevel } from "@/entities/skill/lib/stripSkillLevel";
 import { SkillIconTooltip } from "./SkillIconTooltip";
 
 interface SkillSlotProps {
@@ -6,29 +7,21 @@ interface SkillSlotProps {
 }
 
 export const SkillSlot = ({ skill }: SkillSlotProps) => {
-  // 스킬 데이터 분석 (프리셋 여부 확인)
-  const isPresetSkill = skill?.skill_name.includes("스킬 프리셋");
-  const presetNumber = isPresetSkill
-    ? skill?.skill_name.match(/(\d+번)/)?.[0]?.replace("번", "") || "P"
-    : null;
+  const name = skill ? stripSkillLevel(skill.skill_name) : null;
+  const presetNo = name?.match(/^(\d+)번 스킬 프리셋$/)?.[1];
 
   return (
-    <div className="bg-secondary relative flex h-13 w-13 items-center justify-center overflow-hidden rounded-full border-2 shadow-sm">
-      {!skill ? (
-        // 슬롯은 있는데 장착된 스킬이 없음
-        <span className="text-muted-foreground text-xs font-medium">
-          빈 슬롯
-        </span>
-      ) : isPresetSkill ? (
-        // 프리셋 스킬 (텍스트 렌더링)
+    <div className="bg-secondary flex h-13 w-13 shrink-0 items-center justify-center overflow-hidden rounded-full border-2 shadow-sm">
+      {!skill || !name ? (
+        <span className="text-muted-foreground/50 text-xl leading-none">+</span>
+      ) : presetNo ? (
         <span className="text-foreground text-center text-xs font-medium">
-          {presetNumber}번 <br /> 프리셋
+          {presetNo}번 <br /> 프리셋
         </span>
       ) : (
-        // 일반 스킬 (이미지 렌더링)
         <SkillIconTooltip
           src={skill.skill_icon}
-          alt={skill.skill_name}
+          alt={name}
           tooltip={skill.skill_name}
         />
       )}

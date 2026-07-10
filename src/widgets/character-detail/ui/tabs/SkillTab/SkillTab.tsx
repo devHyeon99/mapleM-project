@@ -1,36 +1,46 @@
 "use client";
 
+import { useState } from "react";
+import { useCharacterSkillEquipment } from "@/entities/skill/model/hooks/useCharacterSkillEquipment";
 import { TabMessageSection } from "@/shared/ui/TabMessageSection";
 import { TabCard } from "@/shared/ui/TabCard";
-
-import { useSkillTab } from "./useSkillTab";
-import { EQUIPPED_SKILL_HELP_ITEMS, SkillTabHeader } from "./SkillTabHeader";
 import { HelpPopover } from "@/shared/ui/HelpPopover";
+import { TooltipProvider } from "@/shared/ui/tooltip";
+import { TabLoadingBox } from "../../TabLoadingBox";
+
+import { EQUIPPED_SKILL_HELP_ITEMS, SkillTabHeader } from "./SkillTabHeader";
 import { SkillPreset } from "./SkillPreset";
 import { SkillGridDisplay } from "./SkillGridDisplay";
-import { StealSkillCard } from "./StealSkillCard";
-import { StellaMemorizeCard } from "./StellaMemorizeCard";
-import { TabLoadingBox } from "../../TabLoadingBox";
+import { SkillListCard } from "./SkillListCard";
 
 interface SkillTabProps {
   ocid: string;
 }
 
-export const SkillTab = ({ ocid }: SkillTabProps) => {
-  const { query, ui, layout } = useSkillTab(ocid);
+const stealSlotLabel = (slot: string) => {
+  const slotNumber = Number(slot);
 
-  if (query.isLoading)
+  return Number.isFinite(slotNumber)
+    ? `${slotNumber + 1}번 슬롯`
+    : `${slot} 슬롯`;
+};
+
+export const SkillTab = ({ ocid }: SkillTabProps) => {
+  const { data, isLoading, isError, error } = useCharacterSkillEquipment(ocid);
+  const [setNo, setSetNo] = useState(1);
+
+  if (isLoading)
     return <TabLoadingBox className="min-h-[790px] md:min-h-[309px]" />;
 
-  if (query.isError) {
+  if (isError) {
     return (
-      <div className="p-4 text-sm text-red-500">
-        오류 발생: {(query.error as Error).message}
+      <div role="alert" className="p-4 text-sm text-red-500">
+        오류 발생: {(error as Error).message}
       </div>
     );
   }
 
-  if (!query.data || !query.data.skill) {
+  if (!data?.skill) {
     return (
       <TabMessageSection
         message={`캐릭터가 접속한 기록이 없어 스킬 데이터를 불러올 수 없습니다.`}
@@ -38,12 +48,14 @@ export const SkillTab = ({ ocid }: SkillTabProps) => {
     );
   }
 
-  const stealSkills = query.data.skill.steal_skill ?? [];
-  const stellaMemorizeSkills = query.data.skill.stella_memorize ?? [];
+  const equipmentSkills = data.skill.equipment_skill ?? [];
+  const presets = data.skill.preset ?? [];
+  const stealSkills = data.skill.steal_skill ?? [];
+  const stellaMemorizeSkills = data.skill.stella_memorize ?? [];
 
   if (
-    !layout.hasEquipment &&
-    !layout.hasPreset &&
+    equipmentSkills.length === 0 &&
+    presets.length === 0 &&
     stealSkills.length === 0 &&
     stellaMemorizeSkills.length === 0
   ) {
@@ -55,50 +67,59 @@ export const SkillTab = ({ ocid }: SkillTabProps) => {
   }
 
   return (
-    <div className="flex flex-col gap-2">
-      <div className="flex flex-col gap-2 md:flex-row md:items-stretch">
-        <TabCard
-          title="장착 스킬"
-          className="min-w-0 flex-1 basis-0"
-          action={
-            <HelpPopover
-              ariaLabel="장착 스킬 도움말"
-              items={EQUIPPED_SKILL_HELP_ITEMS}
-              iconType="exclamation"
-            />
-          }
-        >
-          {layout.hasEquipment && (
-            <>
-              <SkillTabHeader
-                selectedMode={ui.mode}
-                onModeChange={ui.setMode}
-                selectedSet={ui.setNo}
-                onSetChange={ui.setSetNo}
-                skillSetKeys={layout.skillSetKeys}
+    <TooltipProvider delayDuration={200}>
+      <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 md:flex-row md:items-stretch">
+          <TabCard
+            title="장착 스킬"
+            className="min-w-0 flex-1 basis-0"
+            action={
+              <HelpPopover
+                ariaLabel="장착 스킬 도움말"
+                items={EQUIPPED_SKILL_HELP_ITEMS}
+                iconType="exclamation"
               />
-
-              {layout.hasSetData ? (
+            }
+          >
+            {equipmentSkills.length > 0 ? (
+              <>
+                <SkillTabHeader selectedSet={setNo} onSetChange={setSetNo} />
                 <SkillGridDisplay
-                  key={`${ui.mode}-${ui.setNo}`}
-                  setNo={Number(ui.setNo)}
-                  mode={layout.modeNumber}
-                  skills={layout.currentSetSkills}
+                  key={setNo}
+                  setNo={setNo}
+                  skills={equipmentSkills.filter(
+                    (skill) => skill.equipment_skill_set === setNo,
+                  )}
                 />
-              ) : (
-                <TabMessageSection
-                  message={`${ui.mode}타입에 대한 스킬 세팅이 없습니다.`}
-                  className="min-h-none mt-2"
-                />
-              )}
-            </>
-          )}
-        </TabCard>
-        <SkillPreset presets={query.data.skill.preset} />
-      </div>
+              </>
+            ) : (
+              <TabMessageSection
+                message="장착한 스킬이 없습니다."
+                className="min-h-none"
+              />
+            )}
+          </TabCard>
 
-      <StealSkillCard skills={stealSkills} />
-      <StellaMemorizeCard skills={stellaMemorizeSkills} />
-    </div>
+          <SkillPreset presets={presets} />
+        </div>
+
+        <SkillListCard
+          title="스틸 스킬"
+          items={stealSkills.map((skill) => ({
+            icon: skill.skill_icon,
+            label: stealSlotLabel(skill.skill_slot),
+            name: skill.skill_name,
+          }))}
+        />
+        <SkillListCard
+          title="스텔라 메모라이즈"
+          items={stellaMemorizeSkills.map((skill) => ({
+            icon: skill.skill_icon,
+            label: `${skill.equipment_skill_set}번 프리셋`,
+            name: skill.skill_name,
+          }))}
+        />
+      </div>
+    </TooltipProvider>
   );
 };

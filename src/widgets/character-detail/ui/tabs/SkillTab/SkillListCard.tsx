@@ -1,32 +1,33 @@
-import type { CharacterStealSkill } from "@/entities/skill/model";
 import Image from "next/image";
+import { stripSkillLevel } from "@/entities/skill/lib/stripSkillLevel";
 import { TabCard } from "@/shared/ui/TabCard";
 
-interface StealSkillCardProps {
-  skills: CharacterStealSkill[];
+export interface SkillListItem {
+  icon: string;
+  /** 아이콘 위에 붙는 위치 설명 (슬롯 번호, 프리셋 번호 등) */
+  label: string;
+  /** "Lv.5 다크 사이트" 처럼 레벨이 붙어 와도 되며 표시할 때 떼어낸다 */
+  name: string;
 }
 
-const getSkillSlotLabel = (slot: string) => {
-  const slotNumber = Number(slot);
+interface SkillListCardProps {
+  title: string;
+  items: SkillListItem[];
+}
 
-  return Number.isFinite(slotNumber)
-    ? `${slotNumber + 1}번 슬롯`
-    : `${slot} 슬롯`;
-};
-
-export const StealSkillCard = ({ skills }: StealSkillCardProps) => {
-  if (skills.length === 0) return null;
+export const SkillListCard = ({ title, items }: SkillListCardProps) => {
+  if (items.length === 0) return null;
 
   return (
-    <TabCard title="스틸 스킬">
+    <TabCard title={title}>
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-5">
-        {skills.map((skill) => (
+        {items.map((item) => (
           <div
-            key={`${skill.skill_slot}-${skill.skill_name}`}
+            key={`${item.label}-${item.name}`}
             className="flex min-w-0 items-center gap-2"
           >
             <Image
-              src={skill.skill_icon}
+              src={item.icon}
               alt=""
               aria-hidden="true"
               width={32}
@@ -37,10 +38,10 @@ export const StealSkillCard = ({ skills }: StealSkillCardProps) => {
             />
             <div className="flex min-w-0 flex-col">
               <span className="text-muted-foreground text-xs">
-                {getSkillSlotLabel(skill.skill_slot)}
+                {item.label}
               </span>
               <span className="truncate text-sm font-medium">
-                {skill.skill_name}
+                {stripSkillLevel(item.name)}
               </span>
             </div>
           </div>

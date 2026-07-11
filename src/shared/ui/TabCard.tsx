@@ -5,6 +5,8 @@ import { Separator } from "@/shared/ui/separator";
 interface TabCardProps {
   /** 카드 제목. 없으면 헤더와 구분선을 렌더링하지 않음 */
   title?: string;
+  /** 제목 바로 옆에 붙는 값 (포스 총합 등) */
+  titleSuffix?: ReactNode;
   /** 제목 우측 컨트롤 (프리셋 토글, 도움말, 요약 값 등) */
   action?: ReactNode;
   /** 헤더 아래 구분선 숨김 */
@@ -15,6 +17,7 @@ interface TabCardProps {
 
 export const TabCard = ({
   title,
+  titleSuffix,
   action,
   hideSeparator,
   className,
@@ -36,7 +39,10 @@ export const TabCard = ({
               hideSeparator && "mb-2",
             )}
           >
-            <h3 className="font-bold">{title}</h3>
+            <div className="flex shrink-0 items-baseline gap-2">
+              <h3 className="font-bold">{title}</h3>
+              {titleSuffix}
+            </div>
             {action}
           </div>
           {!hideSeparator && <Separator className="my-2" />}

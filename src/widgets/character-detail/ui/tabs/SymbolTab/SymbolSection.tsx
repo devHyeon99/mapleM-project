@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import type { SymbolItem as CharacterSymbolItem } from "@/entities/character";
 import { SymbolItem } from "./SymbolItem";
-import { sumSymbolForce } from "@/shared/lib/symbol-force";
+import { sumSymbolForce, sumSymbolStats } from "@/shared/lib/symbol-force";
 import { TabCard } from "@/shared/ui/TabCard";
 
 interface SymbolSectionProps {
@@ -17,6 +17,9 @@ export const SymbolSection = ({ title, items }: SymbolSectionProps) => {
     return sumSymbolForce(safeItems);
   }, [safeItems]);
 
+  // 포스를 뺀 나머지 옵션 합산
+  const totalStats = useMemo(() => sumSymbolStats(safeItems), [safeItems]);
+
   // 아이템이 없으면 렌더링하지 않음
   if (safeItems.length === 0) return null;
 
@@ -24,12 +27,23 @@ export const SymbolSection = ({ title, items }: SymbolSectionProps) => {
     <TabCard
       title={title}
       className="flex-1"
-      action={
-        <span className="text-sm font-semibold text-orange-400">
-          {title === "아케인 심볼"
-            ? `아케인포스 ${totalForce.toLocaleString()}`
-            : `어센틱포스 ${totalForce.toLocaleString()}`}
+      titleSuffix={
+        <span className="text-xs font-medium text-orange-400">
+          {title === "아케인 심볼" ? "아케인포스" : "어센틱포스"}{" "}
+          {totalForce.toLocaleString()}
         </span>
+      }
+      action={
+        <div className="flex min-w-0 flex-wrap items-center justify-end gap-x-2 text-xs font-medium">
+          {totalStats.map((stat) => (
+            <span
+              key={`${stat.name}-${stat.value}`}
+              className="text-muted-foreground"
+            >
+              {stat.name} +{stat.value}
+            </span>
+          ))}
+        </div>
       }
     >
       <ul className="flex flex-col gap-3">

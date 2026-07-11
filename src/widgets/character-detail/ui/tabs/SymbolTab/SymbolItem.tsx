@@ -24,7 +24,7 @@ export const SymbolItem = ({ name, icon, level, option }: SymbolItemProps) => {
       </div>
       <div className="min-w-0">
         <p className="truncate text-sm font-semibold">{name}</p>
-        <p className="text-xs">Lv. {level}</p>
+        <p className="text-xs font-medium text-orange-400">Lv. {level}</p>
         <p className="text-muted-foreground mt-0.5 text-xs">{option}</p>
       </div>
     </li>

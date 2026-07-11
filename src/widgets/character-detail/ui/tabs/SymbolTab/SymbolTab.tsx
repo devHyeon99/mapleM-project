@@ -46,7 +46,7 @@ export const SymbolTab = ({ ocid, level }: SymbolTabProps) => {
   }
 
   return (
-    <div className="flex flex-col gap-2 md:flex-row md:justify-between">
+    <div className="wide:flex-row wide:justify-between flex flex-col gap-2">
       {/* 아케인 심볼 섹션 */}
       {arcaneSymbols.length > 0 && (
         <SymbolSection title="아케인 심볼" items={arcaneSymbols} />

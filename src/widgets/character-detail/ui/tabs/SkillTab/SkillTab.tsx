@@ -63,7 +63,7 @@ export const SkillTab = ({ ocid }: SkillTabProps) => {
   return (
     <TooltipProvider delayDuration={200}>
       <div className="flex flex-col gap-2">
-        <div className="flex flex-col gap-2 md:flex-row md:items-stretch">
+        <div className="wide:flex-row flex flex-col gap-2">
           <TabCard
             title="장착 스킬"
             className="min-w-0 flex-1 basis-0"

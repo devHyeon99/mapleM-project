@@ -35,7 +35,7 @@ export const SkillPreset = ({ presets }: SkillPresetProps) => {
           className="min-h-none"
         />
       ) : (
-        <div className="grid gap-2 md:grid-cols-2">
+        <div className="grid grid-cols-2 gap-2">
           {presets.map((preset) => {
             const skills = [
               { name: preset.skill_name_1, icon: preset.skill_icon_1 },

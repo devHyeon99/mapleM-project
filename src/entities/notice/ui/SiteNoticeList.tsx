@@ -9,22 +9,23 @@ interface SiteNoticeListProps {
   error?: string | null;
 }
 
-const ROTATE_MS = 10000;
+const ROTATE_MS = 5000;
 
 export function SiteNoticeList({ items, error = null }: SiteNoticeListProps) {
   const [index, setIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
   const isRotatable = !error && items.length > 1;
 
   useEffect(() => {
-    if (!isRotatable || isPaused) return;
+    if (!isRotatable || isPaused || isExpanded) return;
 
     const timer = window.setInterval(() => {
       setIndex((prev) => (prev + 1) % items.length);
     }, ROTATE_MS);
 
     return () => window.clearInterval(timer);
-  }, [isRotatable, isPaused, items.length]);
+  }, [isRotatable, isPaused, isExpanded, items.length]);
 
   if (error || items.length === 0) {
     return (
@@ -40,17 +41,24 @@ export function SiteNoticeList({ items, error = null }: SiteNoticeListProps) {
 
   return (
     <div
-      className="bg-card text-card-foreground w-full rounded-xs px-5 py-4 pt-4"
+      className="bg-card text-card-foreground w-full overflow-hidden rounded-xs px-5 py-4"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onFocus={() => setIsPaused(true)}
       onBlur={() => setIsPaused(false)}
     >
       <div className="min-w-0" aria-live="polite" aria-atomic="true">
-        <div className="flex flex-col gap-2 text-sm font-medium md:flex-row md:items-center md:text-base">
+        <button
+          key={current.id}
+          type="button"
+          onClick={() => setIsExpanded((prev) => !prev)}
+          className="animate-in fade-in slide-in-from-bottom-4 flex w-full min-w-0 flex-col gap-2 text-left text-sm font-medium duration-1000 md:flex-row md:items-center md:text-base"
+        >
           <Badge>{current.title}</Badge>
-          <p className="text-primary text-wrap">{current.content}</p>
-        </div>
+          <p className={isExpanded ? "text-primary" : "text-primary truncate"}>
+            {current.content}
+          </p>
+        </button>
       </div>
     </div>
   );

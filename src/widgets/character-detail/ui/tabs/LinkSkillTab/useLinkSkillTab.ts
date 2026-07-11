@@ -34,7 +34,6 @@ export const useLinkSkillTab = (ocid: string) => {
     isError,
     error,
     isEmpty,
-    defaultPreset,
     activePreset,
     setSelectedPreset,
   };

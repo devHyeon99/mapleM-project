@@ -8,31 +8,34 @@ interface LinkSkillItemProps {
   skill: LinkSkillInfo;
 }
 
+// 다이얼로그 내부 아이콘은 열리자마자 보여야 하므로 lazy를 쓰지 않는다
+const SkillIcon = ({ src, eager }: { src: string; eager?: boolean }) => (
+  <Image
+    src={src}
+    alt=""
+    aria-hidden="true"
+    width={32}
+    height={32}
+    unoptimized
+    loading={eager ? "eager" : "lazy"}
+    className="size-8 shrink-0 object-contain"
+    style={{ imageRendering: "pixelated" }}
+  />
+);
+
 export const LinkSkillItem = ({ skill }: LinkSkillItemProps) => {
   return (
     <StickyFooterDialog
       title="링크 스킬 설명"
       description={`${skill.skill_name} 링크 스킬 상세 정보`}
-      contentClassName="w-[22rem] max-w-[calc(100%-2rem)] border-2"
+      contentClassName="w-[22rem] max-w-[calc(100%-2rem)]"
       bodyClassName="space-y-2"
       trigger={
         <button
           type="button"
           className="flex w-full cursor-pointer items-start gap-2 rounded-md p-1 text-left"
         >
-          <Image
-            src={skill.skill_icon}
-            alt={skill.skill_name}
-            unoptimized
-            loading="lazy"
-            width={32}
-            height={32}
-            style={{
-              width: "auto",
-              height: "auto",
-              imageRendering: "pixelated",
-            }}
-          />
+          <SkillIcon src={skill.skill_icon} />
           <div className="flex min-w-0 flex-col">
             <span className="truncate text-sm font-semibold">
               {skill.skill_name}
@@ -45,15 +48,7 @@ export const LinkSkillItem = ({ skill }: LinkSkillItemProps) => {
       }
     >
       <div className="flex items-center gap-2">
-        <Image
-          src={skill.skill_icon}
-          alt={skill.skill_name}
-          unoptimized
-          loading="lazy"
-          width={32}
-          height={32}
-          style={{ width: "auto", height: "auto", imageRendering: "pixelated" }}
-        />
+        <SkillIcon src={skill.skill_icon} eager />
         <div>
           <h4 className="text-sm font-semibold">{skill.skill_name}</h4>
           <p className="text-xs font-medium text-orange-400">

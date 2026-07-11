@@ -19,7 +19,7 @@ export const SymbolItem = ({ name, icon, level, option }: SymbolItemProps) => {
           loading="lazy"
           unoptimized
           className="h-full w-full object-contain"
-          style={{ width: "auto", height: "auto", imageRendering: "pixelated" }}
+          style={{ imageRendering: "pixelated" }}
         />
       </div>
       <div className="min-w-0">

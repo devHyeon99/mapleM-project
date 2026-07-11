@@ -30,7 +30,8 @@ const FIELD_SIZES = {
    * 테두리를 입히되, 자리를 차지하던 border-transparent 를 덮는 거라 높이는 그대로다.
    */
   sm: {
-    world: "h-10! w-[100px] pl-4 border-muted-foreground/30 dark:border-transparent",
+    world:
+      "h-10! w-[100px] pl-4 border-muted-foreground/30 dark:border-transparent",
     input:
       "h-10 pr-10 pl-3 border-muted-foreground/30 border-l-transparent dark:border-transparent",
     submit: "right-2 size-7",
@@ -133,7 +134,7 @@ export function SearchFormField({
             variant="ghost"
             size="icon"
             className={cn(
-              "text-muted-foreground hover:text-foreground focus-visible:ring-ring/60 absolute top-1/2 -translate-y-1/2 focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-offset-transparent",
+              "text-muted-foreground hover:text-foreground focus-visible:ring-ring/60 absolute inset-y-0 my-auto focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-offset-transparent",
               sizing.submit,
             )}
           >

@@ -70,6 +70,7 @@ export default async function Home() {
       </div>
 
       <section
+        data-nosnippet
         className="bg-card mb-2 w-full overflow-hidden rounded-3xl shadow-sm"
         aria-labelledby="site-notice-heading"
       >
@@ -88,6 +89,7 @@ export default async function Home() {
 
       {/* 공지사항 섹션 */}
       <section
+        data-nosnippet
         className="bg-card mb-2 w-full overflow-hidden rounded-3xl shadow-sm"
         aria-labelledby="notice-heading"
       >
@@ -102,6 +104,7 @@ export default async function Home() {
 
       {/* 월드별 캐릭터 수. 캐시 미스일 때 랭킹 50페이지 수집이 메인 렌더를 막지 않도록 스트리밍한다. */}
       <section
+        data-nosnippet
         className="bg-card w-full overflow-hidden rounded-3xl shadow-sm"
         aria-labelledby="world-character-count-heading"
       >

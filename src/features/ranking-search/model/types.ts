@@ -1,4 +1,4 @@
-import type { LevelRanking } from "@/entities/ranking";
+import type { BaseRanking } from "@/entities/ranking";
 
 /**
  * 검색 결과. 조회는 서버에서, 표시는 클라이언트에서 하므로 타입만 따로 둔다.
@@ -11,7 +11,7 @@ export type RankingSearchResult =
   | { status: "unranked" }
   | {
       status: "ranked";
-      entry: LevelRanking;
+      entry: BaseRanking;
       /** 전체 월드 목록에서의 페이지 */
       overallPage: number;
       /** 해당 월드로 필터링한 목록에서의 페이지 */

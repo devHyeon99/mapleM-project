@@ -1,5 +1,9 @@
 import { describe, it, expect } from "vitest";
-import { rankingSearchTargetHref, readRankingSearchQuery } from "./params";
+import {
+  rankingSearchTargetHref,
+  readRankingSearchQuery,
+  readSearchableRankingType,
+} from "./params";
 
 /** 화면과 라우트 핸들러 모두 URLSearchParams 를 넘기므로 테스트도 같은 타입으로 준다. */
 const sp = (record: Record<string, string>) =>
@@ -23,13 +27,31 @@ describe("readRankingSearchQuery", () => {
   });
 });
 
+describe("readSearchableRankingType", () => {
+  const typeOf = (type: string) =>
+    readSearchableRankingType(new URLSearchParams({ type }));
+
+  it("샤레니안을 뺀 랭킹 종류만 검색 대상이다", () => {
+    expect(typeOf("level")).toBe("level");
+    expect(typeOf("achievement")).toBe("achievement");
+    // 길드 랭킹이라 찾을 캐릭터가 없다
+    expect(typeOf("sharenian-battlefield")).toBeNull();
+    expect(typeOf("sharenian-waterway")).toBeNull();
+    expect(typeOf("없는타입")).toBeNull();
+    expect(readSearchableRankingType(new URLSearchParams())).toBeNull();
+  });
+});
+
 describe("rankingSearchTargetHref", () => {
   const query = { world: "스카니아", name: "발자취" };
   const urlOf = (href: string) => new URL(href, "https://mmgg.gg");
 
   it("월드 필터와 페이지는 경로에, 검색 조건은 쿼리에 싣는다", () => {
     const url = urlOf(
-      rankingSearchTargetHref(query, { page: 7, worldName: "스카니아" }),
+      rankingSearchTargetHref("level", query, {
+        page: 7,
+        worldName: "스카니아",
+      }),
     );
 
     expect(url.pathname).toBe("/ranking/level/scania/7");
@@ -38,9 +60,20 @@ describe("rankingSearchTargetHref", () => {
   });
 
   it("월드를 생략하면 전체 월드 목록으로 보낸다", () => {
-    const url = urlOf(rankingSearchTargetHref(query, { page: 19 }));
+    const url = urlOf(rankingSearchTargetHref("level", query, { page: 19 }));
 
     expect(url.pathname).toBe("/ranking/level/all/19");
     expect(url.searchParams.get("find_name")).toBe("발자취");
+  });
+
+  it("랭킹 종류는 경로 세그먼트로 나간다", () => {
+    const url = urlOf(
+      rankingSearchTargetHref("dojang", query, {
+        page: 7,
+        worldName: "스카니아",
+      }),
+    );
+
+    expect(url.pathname).toBe("/ranking/dojang/scania/7");
   });
 });

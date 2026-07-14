@@ -127,6 +127,13 @@ export const RANKING_TYPES = [
 
 export type RankingType = (typeof RANKING_TYPES)[number];
 
+export const isRankingType = (value: unknown): value is RankingType =>
+  RANKING_TYPES.includes(value as RankingType);
+
+/** 샤레니안은 길드 랭킹이라 캐릭터 정보가 없다. 캐릭터 검색·하이라이트 대상이 아니다. */
+export const isSharenianRanking = (type: RankingType) =>
+  type.startsWith("sharenian");
+
 export interface RankingResponse<T> {
   ranking: T[];
 }

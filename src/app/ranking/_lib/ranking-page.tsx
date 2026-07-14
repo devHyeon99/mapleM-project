@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import {
+  isSharenianRanking,
   RANKING_LABELS,
   rankingHref,
   type RankingType,
@@ -103,11 +104,10 @@ export function renderRankingPage(type: RankingType, filters: RankingFilters) {
       <p className="sr-only">
         메이플스토리M {RANKING_LABELS[type]} 랭킹 정보를 확인해보세요.
       </p>
-      {/* 랭킹은 전체 10,000위까지만 집계돼 표에서 직접 찾기 어렵다.
-          레벨 랭킹에 한해 월드+닉네임으로 순위와 페이지를 먼저 알려준다. */}
-      {type === "level" && (
+
+      {!isSharenianRanking(type) && (
         <Suspense fallback={<RankingSearchFallback />}>
-          <RankingSearch />
+          <RankingSearch type={type} />
         </Suspense>
       )}
 

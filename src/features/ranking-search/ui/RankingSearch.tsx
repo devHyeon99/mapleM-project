@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { RANKING_LABELS, type RankingType } from "@/entities/ranking";
 import { Skeleton } from "@/shared/ui/skeleton";
 import { RankingSearchForm } from "./RankingSearchForm";
 import {
@@ -19,9 +20,11 @@ const LINK_CLASS =
   "inline-flex items-center gap-1 font-medium underline-offset-4 hover:text-orange-500 hover:underline";
 
 function ResultPanel({
+  type,
   query,
   result,
 }: {
+  type: RankingType;
   query: RankingSearchQuery;
   result: RankingSearchResult;
 }) {
@@ -46,7 +49,7 @@ function ResultPanel({
 
         <span className="flex flex-row items-center gap-3">
           <Link
-            href={rankingSearchTargetHref(query, { page: overallPage })}
+            href={rankingSearchTargetHref(type, query, { page: overallPage })}
             prefetch={false}
             className={LINK_CLASS}
           >
@@ -56,7 +59,7 @@ function ResultPanel({
           <span className="bg-border block h-3 w-px" aria-hidden="true" />
 
           <Link
-            href={rankingSearchTargetHref(query, {
+            href={rankingSearchTargetHref(type, query, {
               page: worldPage,
               worldName: query.world,
             })}
@@ -74,7 +77,7 @@ function ResultPanel({
     result.status === "no-character"
       ? `${query.world} 월드에 "${query.name}" 캐릭터가 없습니다.`
       : result.status === "unranked"
-        ? `${who} 은(는) 전체 10,000위 밖이라 랭킹에 집계되지 않습니다.`
+        ? `${who} 은(는) ${RANKING_LABELS[type]} 랭킹 전체 10,000위 밖입니다.`
         : result.message;
 
   return (
@@ -84,8 +87,14 @@ function ResultPanel({
   );
 }
 
-function RankingSearchResultPanel({ query }: { query: RankingSearchQuery }) {
-  const { data, error, isPending } = useRankedCharacter(query);
+function RankingSearchResultPanel({
+  type,
+  query,
+}: {
+  type: RankingType;
+  query: RankingSearchQuery;
+}) {
+  const { data, error, isPending } = useRankedCharacter(type, query);
 
   if (isPending) return <Skeleton className="h-10 w-full rounded-2xl" />;
 
@@ -94,7 +103,7 @@ function RankingSearchResultPanel({ query }: { query: RankingSearchQuery }) {
     ? { status: "error", message: error.message }
     : data!;
 
-  return <ResultPanel query={query} result={result} />;
+  return <ResultPanel type={type} query={query} result={result} />;
 }
 
 /** 검색어가 없을 때 결과가 들어설 자리. 모바일에선 빈 줄이 되므로 감춘다. */
@@ -106,7 +115,7 @@ function EmptyHint() {
   );
 }
 
-export function RankingSearch() {
+export function RankingSearch({ type }: { type: RankingType }) {
   // 검색 조건을 서버가 아니라 여기서 읽는다. 페이지가 searchParams 를 읽으면
   // 라우트 전체가 동적으로 확정돼 정적 렌더가 불가능해진다.
   const query = readRankingSearchQuery(useSearchParams());
@@ -127,7 +136,8 @@ export function RankingSearch() {
         {query ? (
           // 검색어가 바뀌면 스켈레톤부터 다시 보여주도록 key 를 준다.
           <RankingSearchResultPanel
-            key={`${query.world}:${query.name}`}
+            key={`${type}:${query.world}:${query.name}`}
+            type={type}
             query={query}
           />
         ) : (

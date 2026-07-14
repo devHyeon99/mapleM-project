@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { formatKoreanNumber } from "../lib/format-korean-number";
 import type { RankingType, AnyRankingData } from "../model/types/ranking";
 import {
   HIGHLIGHT_ROW_CLASS,
@@ -43,8 +44,9 @@ const getStatData = (
       if ("character_level" in item) value = item.character_level.toString();
       break;
     case "combat-power":
+      // 자릿수가 커서 쉼표만으로는 규모가 잡히지 않는다.
       if ("character_combat_power" in item)
-        value = item.character_combat_power.toLocaleString();
+        value = formatKoreanNumber(item.character_combat_power);
       break;
     case "union":
       if ("union_level" in item) value = item.union_level.toLocaleString();

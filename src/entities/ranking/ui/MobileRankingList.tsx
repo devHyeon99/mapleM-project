@@ -72,6 +72,13 @@ const getStatData = (
   return { label, value };
 };
 
+/** 숫자만으로는 읽히지 않는 랭킹(유니온·업적)의 등급 */
+const getStatGrade = (item: AnyRankingData): string | null => {
+  if ("union_grade" in item) return item.union_grade;
+  if ("achievement_grade_name" in item) return item.achievement_grade_name;
+  return null;
+};
+
 interface MobileRankingListProps {
   type: RankingType;
   data: AnyRankingData[];
@@ -88,7 +95,7 @@ export const MobileRankingList = ({
       {/* 헤더 영역 */}
       <li
         aria-hidden="true"
-        className="bg-secondary flex h-10 items-center gap-4 px-3 py-2 text-sm font-medium"
+        className="bg-secondary flex h-10 items-center gap-4 p-2 text-sm font-medium"
       >
         <span className="w-8 text-center">순위</span>
         <span className="w-8">정보</span>
@@ -124,7 +131,7 @@ const RankingRow = memo(
       // 개별 행을 li로 변경
       <li
         className={cn(
-          "bg-card flex items-center justify-between p-3",
+          "bg-card flex items-center justify-between p-2",
           isHighlightedRow(item, context) && HIGHLIGHT_ROW_CLASS,
         )}
       >
@@ -132,7 +139,7 @@ const RankingRow = memo(
           <div className="flex w-8 shrink-0 flex-col items-center justify-center">
             {/* 순위 정보에 대한 접근성 레이블 추가 */}
             <span
-              className="text-foreground text-lg font-bold"
+              className="text-foreground text-sm font-bold"
               aria-label={`순위: ${item.ranking}위`}
             >
               {Renderers.Rank(item, context)}
@@ -254,11 +261,20 @@ const StatDisplay = ({
   type: RankingType;
 }) => {
   const { label, value } = getStatData(item, type);
+  const grade = getStatGrade(item);
 
   return (
-    <div className="flex gap-0.5">
-      {label && <span className="text-muted-foreground text-sm">{label}</span>}
-      <span className="text-primary text-sm font-bold">{value}</span>
+    <div className="flex flex-col items-end">
+      <div className="flex gap-0.5">
+        {label && (
+          <span className="text-muted-foreground text-sm">{label}</span>
+        )}
+        <span className="text-primary text-sm font-bold">{value}</span>
+      </div>
+
+      {grade && (
+        <span className="text-muted-foreground mt-0.5 text-xs">{grade}</span>
+      )}
     </div>
   );
 };

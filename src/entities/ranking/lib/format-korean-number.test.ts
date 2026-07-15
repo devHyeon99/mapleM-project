@@ -6,6 +6,8 @@ describe("formatKoreanNumber", () => {
     expect(formatKoreanNumber(2091045036)).toBe("20억 9104만 5036");
     expect(formatKoreanNumber(1160708352)).toBe("11억 6070만 8352");
     expect(formatKoreanNumber(12345)).toBe("1만 2345");
+    // 시간의 근원 최대 데미지는 조 단위까지 감
+    expect(formatKoreanNumber(174785378861079)).toBe("174조 7853억 7886만 1079");
   });
 
   it("비어 있는 자리는 건너뛴다", () => {

@@ -44,7 +44,7 @@ const getStatData = (
       if ("character_level" in item) value = item.character_level.toString();
       break;
     case "combat-power":
-      // 자릿수가 커서 쉼표만으로는 규모가 잡히지 않는다.
+      // 자릿수가 커서 쉼표만으로는 규모가 안 잡힘
       if ("character_combat_power" in item)
         value = formatKoreanNumber(item.character_combat_power);
       break;
@@ -62,7 +62,8 @@ const getStatData = (
         value = item.achievement_score.toLocaleString();
       break;
     case "root-of-time":
-      if ("max_damage" in item) value = item.max_damage.toLocaleString();
+      // 조 단위까지 가므로 쉼표보다 단위 끊기가 읽힘
+      if ("max_damage" in item) value = formatKoreanNumber(item.max_damage);
       break;
     default:
       if (type.includes("sharenian") && "season_score" in item) {
@@ -133,31 +134,29 @@ const RankingRow = memo(
       // 개별 행을 li로 변경
       <li
         className={cn(
-          "bg-card flex items-center justify-between p-2",
+          "bg-card flex items-center gap-4 p-2",
           isHighlightedRow(item, context) && HIGHLIGHT_ROW_CLASS,
         )}
       >
-        <div className="flex min-w-0 items-center gap-4">
-          <div className="flex w-8 shrink-0 flex-col items-center justify-center">
-            {/* 순위 정보에 대한 접근성 레이블 추가 */}
-            <span
-              className="text-foreground text-sm font-bold"
-              aria-label={`순위: ${item.ranking}위`}
-            >
-              {Renderers.Rank(item, context)}
-            </span>
-          </div>
-
-          <div className="flex min-w-0 flex-col">
-            {isSharenian ? (
-              <SharenianInfo item={item} />
-            ) : (
-              <GeneralInfo item={item} context={context} />
-            )}
-          </div>
+        <div className="flex w-8 shrink-0 flex-col items-center justify-center">
+          {/* 순위 정보에 대한 접근성 레이블 추가 */}
+          <span
+            className="text-foreground text-sm font-bold"
+            aria-label={`순위: ${item.ranking}위`}
+          >
+            {Renderers.Rank(item, context)}
+          </span>
         </div>
 
-        <div className="shrink-0 pl-2">
+        {/* 값을 오른쪽 칸이 아니라 아랫줄에 배치. 시간의 근원처럼 조 단위까지 가는
+            값이 이름·직업·길드와 가로 폭을 다투지 않게 함 */}
+        <div className="flex min-w-0 flex-1 flex-col">
+          {isSharenian ? (
+            <SharenianInfo item={item} />
+          ) : (
+            <GeneralInfo item={item} context={context} />
+          )}
+
           <StatDisplay item={item} type={type} />
         </div>
       </li>
@@ -172,31 +171,29 @@ const SharenianInfo = ({ item }: { item: AnyRankingData }) => {
   const guildMark = "guild_mark_icon" in item ? item.guild_mark_icon : null;
 
   return (
-    <>
-      <div className="flex items-center gap-1">
-        {guildMark && (
-          <RankingIcon
-            src={guildMark}
-            alt="guild mark"
-            className="h-4 w-4 rounded-xs bg-white"
-            size={16}
-          />
-        )}
-        {item.guild_name && (
-          <Link
-            href={guildHref(item.world_name, item.guild_name)}
-            prefetch={false}
-            className="truncate text-sm font-bold"
-          >
-            {item.guild_name}
-          </Link>
-        )}
-      </div>
+    <div className="flex min-w-0 items-center gap-1.5">
+      {guildMark && (
+        <RankingIcon
+          src={guildMark}
+          alt="guild mark"
+          className="h-4 w-4 shrink-0 rounded-xs bg-white"
+          size={16}
+        />
+      )}
+      {item.guild_name && (
+        <Link
+          href={guildHref(item.world_name, item.guild_name)}
+          prefetch={false}
+          className="shrink-0 truncate text-sm font-bold"
+        >
+          {item.guild_name}
+        </Link>
+      )}
 
-      <div className="text-muted-foreground mt-0.5 flex items-center gap-1.5 text-xs">
-        <span className="truncate">{item.world_name}</span>
-      </div>
-    </>
+      <span className="text-muted-foreground truncate text-xs">
+        {item.world_name}
+      </span>
+    </div>
   );
 };
 
@@ -214,43 +211,42 @@ const GeneralInfo = ({
   const guildName = "guild_name" in item ? item.guild_name : null;
 
   return (
-    <>
-      <div className="flex items-center gap-1.5">
-        <RankingIcon
-          src={worldIconSrc(item.world_name)}
-          alt={item.world_name}
-          className="h-3.5 w-3.5"
-          size={14}
-        />
-        <Link
-          href={characterHref(item.world_name, item.character_name)}
-          prefetch={false}
-          onNavigate={() =>
-            context.addCharacterHistory(item.character_name, item.world_name)
-          }
-          className="truncate text-sm font-bold"
-        >
-          {item.character_name}
-        </Link>
-      </div>
+    // 이름과 직업·길드를 한 줄에 배치. 이름을 먼저 지키고 뒤쪽부터 줄어들게 함
+    <div className="flex min-w-0 items-center gap-1.5">
+      <RankingIcon
+        src={worldIconSrc(item.world_name)}
+        alt={item.world_name}
+        className="h-3.5 w-3.5 shrink-0"
+        size={14}
+      />
+      <Link
+        href={characterHref(item.world_name, item.character_name)}
+        prefetch={false}
+        onNavigate={() =>
+          context.addCharacterHistory(item.character_name, item.world_name)
+        }
+        className="shrink-0 truncate text-sm font-bold"
+      >
+        {item.character_name}
+      </Link>
 
-      <div className="text-muted-foreground mt-0.5 flex items-center gap-1.5 text-xs">
-        <span>{jobName || ""}</span>
+      <span className="text-muted-foreground flex min-w-0 items-center gap-1.5 text-xs">
+        <span className="truncate">{jobName || ""}</span>
 
         {guildName && (
           <>
-            <span className="bg-border h-2 w-[1px]" />
+            <span className="bg-border h-2 w-[1px] shrink-0" />
             <Link
               href={guildHref(item.world_name, guildName)}
               prefetch={false}
-              className="flex max-w-[100px] items-center gap-1 truncate"
+              className="truncate"
             >
               {guildName}
             </Link>
           </>
         )}
-      </div>
-    </>
+      </span>
+    </div>
   );
 };
 
@@ -266,16 +262,14 @@ const StatDisplay = ({
   const grade = getStatGrade(item);
 
   return (
-    <div className="flex flex-col items-end">
-      <div className="flex gap-0.5">
-        {label && (
-          <span className="text-muted-foreground text-sm">{label}</span>
-        )}
-        <span className="text-primary text-sm font-bold">{value}</span>
-      </div>
+    <div className="mt-0.5 flex items-baseline gap-1.5">
+      <span className="text-primary flex gap-0.5 text-sm font-bold">
+        {label && <span>{label}</span>}
+        <span>{value}</span>
+      </span>
 
       {grade && (
-        <span className="text-muted-foreground mt-0.5 text-xs">{grade}</span>
+        <span className="text-muted-foreground truncate text-xs">{grade}</span>
       )}
     </div>
   );

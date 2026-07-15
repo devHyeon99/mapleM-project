@@ -24,12 +24,12 @@ export const isHighlightedRow = (
   item.character_name === ctx.highlight.characterName;
 
 const getMainStatValue = (item: AnyRankingData): string => {
-  // 전투력은 자릿수가 커서 쉼표만으로는 규모가 잡히지 않는다.
+  // 전투력·최대 데미지는 자릿수가 커서 쉼표만으로는 규모가 안 잡힘
   if ("character_combat_power" in item)
     return formatKoreanNumber(item.character_combat_power);
   if ("dojang_floor" in item) return `${item.dojang_floor}층`;
   if ("tower_floor" in item) return `${item.tower_floor}층`;
-  if ("max_damage" in item) return item.max_damage.toLocaleString();
+  if ("max_damage" in item) return formatKoreanNumber(item.max_damage);
   if ("season_score" in item) return Number(item.season_score).toLocaleString();
   if ("achievement_score" in item)
     return item.achievement_score.toLocaleString();

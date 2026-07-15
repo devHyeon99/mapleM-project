@@ -8,10 +8,10 @@ import type {
 } from "../model/types/ranking";
 
 /**
- * ocid 로 랭킹 한 건을 조회한다. 샤레니안(길드 랭킹)을 뺀 모든 종류가 ocid 를 받는다.
- * 랭킹 API 는 전체 10,000위까지만 집계하므로 그 밖의 캐릭터는 빈 배열이 온다.
+ * ocid 로 랭킹 한 건 조회. 샤레니안(길드 랭킹)을 뺀 모든 종류가 ocid 를 받음
+ * 랭킹 API 는 전체 10,000위까지만 집계하므로 그 밖의 캐릭터는 빈 배열이 옴
  *
- * 순위 계산에 쓰는 건 ranking/world_ranking 뿐이라 종류별 스탯까지 좁히지 않는다.
+ * 순위 계산에 쓰는 건 ranking/world_ranking 뿐이라 종류별 스탯까지 좁히지 않음
  */
 async function _findRankingByOcid(
   type: RankingType,

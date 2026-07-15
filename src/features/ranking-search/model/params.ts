@@ -10,7 +10,7 @@ import { isRealWorldName } from "@/shared/config/constants/worlds";
 // 랭킹 필터(경로 세그먼트)와 섞이지 않도록 검색 조건은 쿼리 파라미터로 둔다.
 export const FIND_WORLD_PARAM = "find_world";
 export const FIND_NAME_PARAM = "find_name";
-/** 랭킹 종류는 페이지 URL 이 경로로 이미 갖고 있어, 조회 API 로 갈 때만 쓴다. */
+/** 랭킹 종류는 페이지 URL 이 경로로 이미 갖고 있어, 조회 API 로 갈 때만 씀 */
 export const FIND_TYPE_PARAM = "type";
 
 export const RANKING_SEARCH_NAME_REGEX = /^[a-zA-Z0-9가-힣]{2,8}$/;
@@ -44,8 +44,8 @@ export function readRankingSearchQuery(
 }
 
 /**
- * 검색 대상이 되는 랭킹 종류만 뽑는다.
- * 샤레니안은 길드 랭킹이라 캐릭터가 없어 검색 자체가 성립하지 않는다.
+ * 검색 대상이 되는 랭킹 종류만 추출.
+ * 샤레니안은 길드 랭킹이라 캐릭터가 없어 검색 자체가 성립하지 않음
  */
 export function readSearchableRankingType(
   params: URLSearchParams,
@@ -78,7 +78,7 @@ export function rankingSearchParams(
 
 /**
  * 검색된 캐릭터가 실제로 보이는 랭킹 페이지 URL.
- * 랭킹 종류는 경로 세그먼트라 쿼리에 싣지 않는다.
+ * 랭킹 종류는 경로 세그먼트라 쿼리에 싣지 않음
  * worldName 을 주면 그 월드로 필터링한 목록, 생략하면 전체 월드 목록이다.
  * 이동한 뒤에도 결과 패널과 행 하이라이트가 유지되도록 검색 조건을 함께 싣는다.
  */

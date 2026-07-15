@@ -13,7 +13,7 @@ import type { RankingSearchQuery } from "./params";
 import type { RankingSearchResult } from "./types";
 
 /**
- * 월드+닉네임으로 ocid 를 얻고, 그 ocid 로 해당 종류의 랭킹을 조회한다.
+ * 월드+닉네임으로 ocid 를 얻고, 그 ocid 로 해당 종류의 랭킹을 조회함
  *
  * 검색 실패가 랭킹 페이지 전체를 죽이면 안 되므로 throw 하지 않고 결과로 돌려준다.
  */

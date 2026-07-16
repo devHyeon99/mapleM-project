@@ -1,10 +1,6 @@
 import { Metadata } from "next";
 import { notFound, permanentRedirect } from "next/navigation";
-import {
-  RANKING_TYPES,
-  rankingHref,
-  type RankingType,
-} from "@/entities/ranking";
+import { isRankingType, RANKING_TYPES, rankingHref } from "@/entities/ranking";
 import {
   buildRankingMetadata,
   renderRankingPage,
@@ -39,20 +35,12 @@ interface RankingPageProps {
 async function readParams(params: RankingPageProps["params"]) {
   const { type, filters } = await params;
 
-  if (!RANKING_TYPES.includes(type as RankingType)) {
-    notFound();
-  }
+  if (!isRankingType(type)) notFound();
 
   const parsed = parseRankingFilters(filters);
-  if (!parsed) {
-    notFound();
-  }
+  if (!parsed) notFound();
 
-  return {
-    type: type as RankingType,
-    segments: filters ?? [],
-    filters: parsed,
-  };
+  return { type, segments: filters ?? [], filters: parsed };
 }
 
 export async function generateMetadata({

@@ -69,19 +69,13 @@ async function calculateRankingTotalPages({
   return Math.max(1, pagesBeforeLast + pagesInLast);
 }
 
-const getRankingTotalPagesCached = (
-  type: RankingType,
-  date: string,
-  worldName?: string,
-) =>
+export const getRankingTotalPages = ({
+  type,
+  date,
+  worldName,
+}: TotalPagesParams): Promise<number> =>
   unstable_cache(
     async () => calculateRankingTotalPages({ type, date, worldName }),
     ["ranking-total-pages", type, date, worldName ?? "all"],
     { revalidate: 86400 },
   )();
-
-export async function getRankingTotalPages(
-  params: TotalPagesParams,
-): Promise<number> {
-  return getRankingTotalPagesCached(params.type, params.date, params.worldName);
-}

@@ -8,46 +8,50 @@ import {
 } from "@/shared/ui/table";
 import { Skeleton } from "@/shared/ui/skeleton";
 import { cn } from "@/shared/lib/utils";
-import { RANKING_UI_ITEMS_PER_PAGE } from "@/entities/ranking";
+import {
+  RANKING_UI_ITEMS_PER_PAGE,
+  rankingColumns,
+  type RankingType,
+} from "@/entities/ranking";
 
-const COLUMN_WIDTHS = [
-  "w-[60px]",
-  "w-[80px]",
-  "w-[150px]",
-  "w-[120px]",
-  "w-[120px]",
-  "w-[120px]",
-];
+const ROWS = Array.from({ length: RANKING_UI_ITEMS_PER_PAGE });
 
 function RankingFiltersSkeleton() {
   return (
     <div className="flex w-full flex-col-reverse items-center justify-between gap-2 md:flex-row">
-      <Skeleton className="h-8 w-full md:w-[195px]" />
+      <Skeleton className="h-10 w-full md:w-[195px]" />
       <Skeleton className="h-5 w-44 self-end" />
     </div>
   );
 }
 
-function DesktopTableSkeleton() {
-  const rows = Array.from({ length: RANKING_UI_ITEMS_PER_PAGE });
+/** 컬럼 폭은 실제 표와 같은 정의에서 가져옴. 손으로 복제하면 종류마다 어긋남 */
+function DesktopTableSkeleton({ type }: { type: RankingType }) {
+  const columns = rankingColumns(type);
 
   return (
     <div className="hidden border-b md:block">
       <Table>
         <TableHeader className="bg-muted/80 dark:bg-accent">
           <TableRow>
-            {COLUMN_WIDTHS.map((width, index) => (
-              <TableHead key={index} className={cn("text-center", width)}>
+            {columns.map((col, index) => (
+              <TableHead
+                key={index}
+                className={cn("text-center", col.className)}
+              >
                 <Skeleton className="mx-auto h-4 w-10" />
               </TableHead>
             ))}
           </TableRow>
         </TableHeader>
         <TableBody className="bg-card">
-          {rows.map((_, rowIndex) => (
+          {ROWS.map((_, rowIndex) => (
             <TableRow key={rowIndex} className="h-12.5">
-              {COLUMN_WIDTHS.map((width, colIndex) => (
-                <TableCell key={colIndex} className={cn("text-center", width)}>
+              {columns.map((col, colIndex) => (
+                <TableCell
+                  key={colIndex}
+                  className={cn("text-center", col.className)}
+                >
                   <Skeleton className="mx-auto h-4 w-4/5" />
                 </TableCell>
               ))}
@@ -59,31 +63,24 @@ function DesktopTableSkeleton() {
   );
 }
 
+/** 모바일 행은 [순위] [이름·직업·길드 / 값] 두 줄이라 그 골격에 맞춤 */
 function MobileListSkeleton() {
-  const rows = Array.from({ length: RANKING_UI_ITEMS_PER_PAGE });
-
   return (
     <ul className="bg-background flex flex-col divide-y border-b md:hidden">
       <li
         aria-hidden="true"
-        className="bg-secondary flex h-10 items-center gap-4 px-3 py-2"
+        className="bg-secondary flex h-10 items-center gap-4 p-2"
       >
         <Skeleton className="h-4 w-8" />
         <Skeleton className="h-4 w-8" />
       </li>
-      {rows.map((_, index) => (
-        <li
-          key={index}
-          className="bg-card flex items-center justify-between p-3"
-        >
-          <div className="flex min-w-0 items-center gap-4">
-            <Skeleton className="h-5 w-6 shrink-0" />
-            <div className="flex min-w-0 flex-col gap-1.5">
-              <Skeleton className="h-4 w-24" />
-              <Skeleton className="h-3 w-32" />
-            </div>
+      {ROWS.map((_, index) => (
+        <li key={index} className="bg-card flex items-center gap-4 p-2">
+          <Skeleton className="h-5 w-8 shrink-0" />
+          <div className="flex min-w-0 flex-1 flex-col gap-1">
+            <Skeleton className="h-4 w-44" />
+            <Skeleton className="h-4 w-32" />
           </div>
-          <Skeleton className="h-4 w-12 shrink-0" />
         </li>
       ))}
     </ul>
@@ -100,7 +97,7 @@ function RankingPaginationSkeleton() {
   );
 }
 
-export function RankingBoardSkeleton() {
+export function RankingBoardSkeleton({ type }: { type: RankingType }) {
   return (
     <div
       aria-busy="true"
@@ -108,7 +105,7 @@ export function RankingBoardSkeleton() {
       className="flex w-full flex-col gap-4"
     >
       <RankingFiltersSkeleton />
-      <DesktopTableSkeleton />
+      <DesktopTableSkeleton type={type} />
       <MobileListSkeleton />
       <RankingPaginationSkeleton />
     </div>

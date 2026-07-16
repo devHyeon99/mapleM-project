@@ -1,11 +1,17 @@
 "use client";
 
 import Link from "next/link";
-import { formatKoreanNumber } from "../lib/format-korean-number";
-import type { RankingType, AnyRankingData } from "../model/types/ranking";
 import {
+  isSharenianRanking,
+  type AnyRankingData,
+  type RankingType,
+} from "../model/types/ranking";
+import {
+  getMainStat,
+  getMainStatGrade,
   HIGHLIGHT_ROW_CLASS,
   isHighlightedRow,
+  rankingItemKey,
   Renderers,
 } from "./ranking-table.renderers";
 import type { RankingTableContext } from "./ranking-table.renderers";
@@ -14,73 +20,6 @@ import { RankingIcon } from "./RankingIcon";
 import { worldIconSrc } from "@/shared/config/constants/worlds";
 import { characterHref, guildHref } from "@/shared/lib/url";
 import { cn } from "@/shared/lib/utils";
-
-// 리스트 아이템의 고유 Key 생성
-const getItemKey = (
-  item: AnyRankingData,
-  type: RankingType,
-  index: number,
-): string => {
-  if ("character_name" in item) {
-    return `${item.world_name}-${item.character_name}-${item.ranking}`;
-  }
-  if ("guild_name" in item) {
-    return `${item.world_name}-${item.guild_name}-${item.ranking}`;
-  }
-  return `${type}-${(item as { ranking: number }).ranking}-${index}`;
-};
-
-// 랭킹 타입에 따른 라벨과 값 추출
-const getStatData = (
-  item: AnyRankingData,
-  type: RankingType,
-): { label: string; value: string } => {
-  let label = "";
-  let value = "-";
-
-  switch (type) {
-    case "level":
-      label = "Lv.";
-      if ("character_level" in item) value = item.character_level.toString();
-      break;
-    case "combat-power":
-      // 자릿수가 커서 쉼표만으로는 규모가 안 잡힘
-      if ("character_combat_power" in item)
-        value = formatKoreanNumber(item.character_combat_power);
-      break;
-    case "union":
-      if ("union_level" in item) value = item.union_level.toLocaleString();
-      break;
-    case "dojang":
-      if ("dojang_floor" in item) value = `${item.dojang_floor}층`;
-      break;
-    case "kerning-m-tower":
-      if ("tower_floor" in item) value = `${item.tower_floor}층`;
-      break;
-    case "achievement":
-      if ("achievement_score" in item)
-        value = item.achievement_score.toLocaleString();
-      break;
-    case "root-of-time":
-      // 조 단위까지 가므로 쉼표보다 단위 끊기가 읽힘
-      if ("max_damage" in item) value = formatKoreanNumber(item.max_damage);
-      break;
-    default:
-      if (type.includes("sharenian") && "season_score" in item) {
-        value = Number(item.season_score).toLocaleString();
-      }
-      break;
-  }
-
-  return { label, value };
-};
-
-/** 숫자만으로는 읽히지 않는 랭킹(유니온·업적)의 등급 */
-const getStatGrade = (item: AnyRankingData): string | null => {
-  if ("union_grade" in item) return item.union_grade;
-  if ("achievement_grade_name" in item) return item.achievement_grade_name;
-  return null;
-};
 
 interface MobileRankingListProps {
   type: RankingType;
@@ -105,9 +44,9 @@ export const MobileRankingList = ({
       </li>
 
       {/* 리스트 영역 */}
-      {data.map((item, index) => (
+      {data.map((item) => (
         <RankingRow
-          key={getItemKey(item, type, index)}
+          key={rankingItemKey(item)}
           item={item}
           type={type}
           context={context}
@@ -128,7 +67,7 @@ const RankingRow = memo(
     type: RankingType;
     context: RankingTableContext;
   }) => {
-    const isSharenian = type.includes("sharenian");
+    const isSharenian = isSharenianRanking(type);
 
     return (
       // 개별 행을 li로 변경
@@ -157,7 +96,7 @@ const RankingRow = memo(
             <GeneralInfo item={item} context={context} />
           )}
 
-          <StatDisplay item={item} type={type} />
+          <StatDisplay item={item} />
         </div>
       </li>
     );
@@ -251,15 +190,9 @@ const GeneralInfo = ({
 };
 
 // 통계 표시 컴포넌트
-const StatDisplay = ({
-  item,
-  type,
-}: {
-  item: AnyRankingData;
-  type: RankingType;
-}) => {
-  const { label, value } = getStatData(item, type);
-  const grade = getStatGrade(item);
+const StatDisplay = ({ item }: { item: AnyRankingData }) => {
+  const { label, value } = getMainStat(item);
+  const grade = getMainStatGrade(item);
 
   return (
     <div className="mt-0.5 flex items-baseline gap-1.5">

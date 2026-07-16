@@ -111,7 +111,7 @@ export function renderRankingPage(type: RankingType, filters: RankingFilters) {
         </Suspense>
       )}
 
-      <Suspense fallback={<RankingBoardSkeleton />}>
+      <Suspense fallback={<RankingBoardSkeleton type={type} />}>
         <RankingBoardLoader type={type} filters={filters} />
       </Suspense>
     </>

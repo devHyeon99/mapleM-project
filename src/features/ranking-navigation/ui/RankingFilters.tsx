@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { rankingHref, type RankingType } from "@/entities/ranking";
+import { rankingHrefWithQuery, type RankingType } from "@/entities/ranking";
 import {
   Select,
   SelectContent,
@@ -33,20 +33,19 @@ interface RankingFiltersProps {
 
 export function RankingFilters({ date, type, worldName }: RankingFiltersProps) {
   const router = useRouter();
-  // 월드를 바꿔도 캐릭터 검색 결과는 남기려고 쿼리를 그대로 옮긴다.
   const searchParams = useSearchParams();
 
   const currentWorld = worldName ?? "all";
 
-  const handleWorldChange = (value: string) => {
-    // 월드를 바꾸면 1페이지로 돌아간다.
-    const href = rankingHref(type, {
-      worldName: value === "all" ? undefined : value,
-    });
-    const query = searchParams.toString();
-
-    router.replace(query ? `${href}?${query}` : href);
-  };
+  // 월드를 바꾸면 1페이지로 돌아감
+  const handleWorldChange = (value: string) =>
+    router.replace(
+      rankingHrefWithQuery(
+        type,
+        { worldName: value === "all" ? undefined : value },
+        searchParams,
+      ),
+    );
 
   return (
     <section

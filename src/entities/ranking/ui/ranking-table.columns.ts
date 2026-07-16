@@ -1,5 +1,9 @@
 import type { ReactNode } from "react";
-import type { AnyRankingData } from "../model/types/ranking";
+import {
+  isSharenianRanking,
+  type AnyRankingData,
+  type RankingType,
+} from "../model/types/ranking";
 import { Renderers, type RankingTableContext } from "./ranking-table.renderers";
 
 export interface ColumnDef {
@@ -17,7 +21,7 @@ const createBaseColumns = (statHeader: string): ColumnDef[] => [
   { header: "길드", className: "w-[120px]", cell: Renderers.SubInfo },
 ];
 
-export const RANKING_COLUMNS: Record<string, ColumnDef[]> = {
+const RANKING_COLUMNS: Record<string, ColumnDef[]> = {
   // 일반 랭킹
   level: createBaseColumns("레벨"),
   dojang: createBaseColumns("무릉 층수"),
@@ -65,3 +69,12 @@ export const RANKING_COLUMNS: Record<string, ColumnDef[]> = {
     { header: "등급", className: "w-[80px]", cell: Renderers.Grade },
   ],
 };
+
+/**
+ * 랭킹 종류에 맞는 컬럼 정의. 표와 스켈레톤이 같은 폭을 보도록 조회를 한 곳에 둠.
+ * 샤레니안 두 종류만 표를 공유하고, 나머지는 종류 이름이 곧 키임.
+ */
+export const rankingColumns = (type: RankingType): ColumnDef[] =>
+  isSharenianRanking(type)
+    ? RANKING_COLUMNS.sharenian
+    : (RANKING_COLUMNS[type] ?? RANKING_COLUMNS.level);

@@ -11,16 +11,17 @@ import {
 } from "@/shared/ui/table";
 import { cn } from "@/shared/lib/utils";
 import { useRecentSearch } from "@/shared/lib/hooks/useRecentSearch";
-import { RANKING_COLUMNS } from "./ranking-table.columns";
+import { rankingColumns } from "./ranking-table.columns";
 import {
   HIGHLIGHT_ROW_CLASS,
   isHighlightedRow,
+  rankingItemKey,
   type RankingTableContext,
 } from "./ranking-table.renderers";
 import type {
-  RankingType,
   AnyRankingData,
   RankingHighlight,
+  RankingType,
 } from "../model/types/ranking";
 import { MobileRankingList } from "./MobileRankingList";
 
@@ -50,12 +51,7 @@ export const RankingTable = ({
     return data.slice(startIndex, startIndex + 20);
   }, [data, currentPage]);
 
-  const columns = useMemo(() => {
-    if (type.includes("sharenian")) return RANKING_COLUMNS.sharenian;
-    if (type === "union") return RANKING_COLUMNS.union;
-    if (type === "achievement") return RANKING_COLUMNS.achievement;
-    return RANKING_COLUMNS[type] || RANKING_COLUMNS.level;
-  }, [type]);
+  const columns = useMemo(() => rankingColumns(type), [type]);
 
   const context = useMemo<RankingTableContext>(
     () => ({
@@ -91,18 +87,12 @@ export const RankingTable = ({
           </TableHeader>
 
           <TableBody className="bg-card">
-            {items.map((item, index) => {
-              // Key 생성 로직
-              const uniqueKey =
-                ("character_name" in item
-                  ? `${item.world_name}-${item.character_name}`
-                  : "guild_name" in item
-                    ? `${item.world_name}-${item.guild_name}`
-                    : `${type}-${index}`) + `-${item.ranking}`;
+            {items.map((item) => {
+              const key = rankingItemKey(item);
 
               return (
                 <TableRow
-                  key={uniqueKey}
+                  key={key}
                   className={cn(
                     "hover:bg-accent/30 dark:hover:bg-accent/50 h-12.5",
                     isHighlightedRow(item, context) && HIGHLIGHT_ROW_CLASS,
@@ -110,7 +100,7 @@ export const RankingTable = ({
                 >
                   {columns.map((col, colIndex) => (
                     <TableCell
-                      key={`${uniqueKey}-col-${colIndex}`}
+                      key={`${key}-col-${colIndex}`}
                       className={cn("text-center", col.className)}
                     >
                       {col.cell(item, context)}

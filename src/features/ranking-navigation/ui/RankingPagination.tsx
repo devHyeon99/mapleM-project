@@ -1,7 +1,8 @@
 "use client";
 
+import type { ReactNode } from "react";
 import { useSearchParams } from "next/navigation";
-import { rankingHref, type RankingType } from "@/entities/ranking";
+import { rankingHrefWithQuery, type RankingType } from "@/entities/ranking";
 import {
   Pagination,
   PaginationContent,
@@ -16,8 +17,13 @@ import {
 } from "lucide-react";
 import { cn } from "@/shared/lib/utils";
 
-const PAGES_PER_GROUP_DESKTOP = 10;
-const PAGES_PER_GROUP_MOBILE = 5;
+/** << >> 는 뷰포트별로 건너뛰는 폭이 달라 두 벌을 만들어 두고 CSS 로 가림 */
+const PAGE_GROUPS = [
+  { size: 5, className: "md:hidden" },
+  { size: 10, className: "hidden md:block" },
+] as const;
+
+const [MOBILE_GROUP, DESKTOP_GROUP] = PAGE_GROUPS;
 
 interface RankingPaginationProps {
   currentPage: number;
@@ -27,28 +33,49 @@ interface RankingPaginationProps {
   worldName?: string;
 }
 
+/** 화살표 네 개(<< < > >>)가 공유하는 껍데기. 비활성일 때 포커스에서도 빠짐 */
+function ArrowLink({
+  href,
+  label,
+  disabled,
+  children,
+}: {
+  href: string;
+  label: string;
+  disabled: boolean;
+  children: ReactNode;
+}) {
+  return (
+    <PaginationLink
+      href={href}
+      aria-label={label}
+      size="icon"
+      className={cn(disabled && "pointer-events-none opacity-50")}
+      tabIndex={disabled ? -1 : 0}
+    >
+      {children}
+    </PaginationLink>
+  );
+}
+
 export function RankingPagination({
   currentPage,
   totalPages,
   type,
   worldName,
 }: RankingPaginationProps) {
-  // 페이지를 넘겨도 캐릭터 검색 결과는 남기려고 쿼리를 그대로 옮긴다.
   const searchParams = useSearchParams();
 
-  // 안전한 현재 페이지 계산
   const safeCurrentPage = Math.max(1, Math.min(currentPage, totalPages));
 
-  const createPageUrl = (pageNumber: number) => {
-    const href = rankingHref(type, { worldName, page: pageNumber });
-    const query = searchParams.toString();
-    return query ? `${href}?${query}` : href;
-  };
+  const pageUrl = (page: number) =>
+    rankingHrefWithQuery(type, { worldName, page }, searchParams);
 
-  // 뷰포트별 페이지 그룹 계산 (모바일 5개, 데스크탑 10개)
+  // 현재 페이지가 속한 그룹의 범위와, 그 앞뒤 그룹으로 건너뛸 페이지
   const group = (size: number) => {
     const start = (Math.ceil(safeCurrentPage / size) - 1) * size + 1;
     const end = Math.min(start + size - 1, totalPages);
+
     return {
       start,
       end,
@@ -59,55 +86,46 @@ export function RankingPagination({
     };
   };
 
-  const desktop = group(PAGES_PER_GROUP_DESKTOP);
-  const mobile = group(PAGES_PER_GROUP_MOBILE);
+  const desktop = group(DESKTOP_GROUP.size);
+  const mobile = group(MOBILE_GROUP.size);
 
-  const arrowClass = (disabled: boolean) =>
-    cn(disabled && "pointer-events-none opacity-50");
+  const groupJump = (edge: "prev" | "next") =>
+    PAGE_GROUPS.map(({ size, className }) => {
+      const g = group(size);
+      const isPrev = edge === "prev";
+      const disabled = isPrev ? g.isFirst : g.isLast;
+      const Icon = isPrev ? ChevronsLeft : ChevronsRight;
+
+      return (
+        <PaginationItem key={`${edge}-group-${size}`} className={className}>
+          <ArrowLink
+            href={pageUrl(isPrev ? g.prevPage : g.nextPage)}
+            label={`${isPrev ? "이전" : "다음"} ${size}페이지로 이동`}
+            disabled={disabled}
+          >
+            <Icon className="h-4 w-4" />
+          </ArrowLink>
+        </PaginationItem>
+      );
+    });
 
   return (
     // nav 태그 역할을 하는 Pagination 컴포넌트에 한글 레이블 추가
     <Pagination aria-label="랭킹 페이지네이션">
       <PaginationContent>
-        {/* 이전 그룹 이동 (<<) - 모바일 5페이지 / 데스크탑 10페이지 */}
-        {[mobile, desktop].map((g, index) => {
-          const isMobile = index === 0;
-          const size = isMobile
-            ? PAGES_PER_GROUP_MOBILE
-            : PAGES_PER_GROUP_DESKTOP;
+        {groupJump("prev")}
 
-          return (
-            <PaginationItem
-              key={`prev-group-${size}`}
-              className={isMobile ? "md:hidden" : "hidden md:block"}
-            >
-              <PaginationLink
-                href={createPageUrl(g.prevPage)}
-                aria-label={`이전 ${size}페이지로 이동`}
-                size="icon"
-                className={arrowClass(g.isFirst)}
-                tabIndex={g.isFirst ? -1 : 0}
-              >
-                <ChevronsLeft className="h-4 w-4" />
-              </PaginationLink>
-            </PaginationItem>
-          );
-        })}
-
-        {/* 이전 페이지 (<) */}
         <PaginationItem>
-          <PaginationLink
-            href={createPageUrl(safeCurrentPage - 1)}
-            aria-label="이전 페이지로 이동"
-            size="icon"
-            className={arrowClass(safeCurrentPage <= 1)}
-            tabIndex={safeCurrentPage <= 1 ? -1 : 0}
+          <ArrowLink
+            href={pageUrl(safeCurrentPage - 1)}
+            label="이전 페이지로 이동"
+            disabled={safeCurrentPage <= 1}
           >
             <ChevronLeft className="h-4 w-4" />
-          </PaginationLink>
+          </ArrowLink>
         </PaginationItem>
 
-        {/* 페이지 번호 렌더링 */}
+        {/* 번호는 데스크탑 그룹만큼 만들고, 모바일 그룹 밖은 CSS 로 가림 */}
         {Array.from(
           { length: desktop.end - desktop.start + 1 },
           (_, i) => desktop.start + i,
@@ -118,10 +136,10 @@ export function RankingPagination({
           return (
             <PaginationItem
               key={page}
-              className={isVisibleOnMobile ? "" : "hidden md:block"}
+              className={cn(!isVisibleOnMobile && "hidden md:block")}
             >
               <PaginationLink
-                href={createPageUrl(page)}
+                href={pageUrl(page)}
                 isActive={isCurrent}
                 aria-current={isCurrent ? "page" : undefined}
                 className={isCurrent ? "bg-card" : "hover:bg-accent"}
@@ -132,43 +150,17 @@ export function RankingPagination({
           );
         })}
 
-        {/* 다음 페이지 (>) */}
         <PaginationItem>
-          <PaginationLink
-            href={createPageUrl(safeCurrentPage + 1)}
-            aria-label="다음 페이지로 이동"
-            size="icon"
-            className={arrowClass(safeCurrentPage >= totalPages)}
-            tabIndex={safeCurrentPage >= totalPages ? -1 : 0}
+          <ArrowLink
+            href={pageUrl(safeCurrentPage + 1)}
+            label="다음 페이지로 이동"
+            disabled={safeCurrentPage >= totalPages}
           >
             <ChevronRight className="h-4 w-4" />
-          </PaginationLink>
+          </ArrowLink>
         </PaginationItem>
 
-        {/* 다음 그룹 이동 (>>) - 모바일 5페이지 / 데스크탑 10페이지 */}
-        {[mobile, desktop].map((g, index) => {
-          const isMobile = index === 0;
-          const size = isMobile
-            ? PAGES_PER_GROUP_MOBILE
-            : PAGES_PER_GROUP_DESKTOP;
-
-          return (
-            <PaginationItem
-              key={`next-group-${size}`}
-              className={isMobile ? "md:hidden" : "hidden md:block"}
-            >
-              <PaginationLink
-                href={createPageUrl(g.nextPage)}
-                aria-label={`다음 ${size}페이지로 이동`}
-                size="icon"
-                className={arrowClass(g.isLast)}
-                tabIndex={g.isLast ? -1 : 0}
-              >
-                <ChevronsRight className="h-4 w-4" />
-              </PaginationLink>
-            </PaginationItem>
-          );
-        })}
+        {groupJump("next")}
       </PaginationContent>
     </Pagination>
   );

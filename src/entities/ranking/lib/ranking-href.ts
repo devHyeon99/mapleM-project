@@ -39,3 +39,18 @@ export function rankingHref(
 
   return page <= 1 ? `${base}/${slug}` : `${base}/${slug}/${page}`;
 }
+
+/**
+ * 현재 쿼리를 유지한 채 이동할 랭킹 URL.
+ * 월드를 바꾸거나 페이지를 넘겨도 캐릭터 검색 결과가 남아야 해서 쿼리를 그대로 옮김.
+ */
+export function rankingHrefWithQuery(
+  type: RankingType,
+  options: RankingHrefOptions,
+  params: URLSearchParams,
+): string {
+  const href = rankingHref(type, options);
+  const query = params.toString();
+
+  return query ? `${href}?${query}` : href;
+}

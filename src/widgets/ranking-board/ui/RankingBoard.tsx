@@ -31,8 +31,6 @@ export function RankingBoard({
   initialData,
   fetchParams,
 }: RankingBoardProps) {
-  // 검색 조건은 URL 쿼리에 있다. 서버가 읽으면 라우트가 동적으로 확정되므로
-  // 이미 클라이언트인 이 경계에서 읽어 표로 내려보낸다.
   const highlight = readRankingHighlight(useSearchParams());
 
   const hasRankingData = initialData.ranking.length > 0;
@@ -47,36 +45,34 @@ export function RankingBoard({
       )}
 
       {hasRankingData && (
-        <RankingFilters
-          date={fetchParams.date}
-          type={type}
-          worldName={fetchParams.worldName}
-        />
-      )}
-
-      {hasRankingData && (
-        <section aria-labelledby="ranking-table-title">
-          <h2 id="ranking-table-title" className="sr-only">
-            {fetchParams.worldName || "전체"} 월드 {RANKING_LABELS[type]} 랭킹
-            목록
-          </h2>
-          <RankingTable
+        <>
+          <RankingFilters
+            date={fetchParams.date}
             type={type}
-            data={initialData.ranking}
-            currentPage={fetchParams.page}
             worldName={fetchParams.worldName}
-            highlight={highlight}
           />
-        </section>
-      )}
 
-      {hasRankingData && (
-        <RankingPagination
-          currentPage={fetchParams.page}
-          totalPages={fetchParams.totalPages}
-          type={type}
-          worldName={fetchParams.worldName}
-        />
+          <section aria-labelledby="ranking-table-title">
+            <h2 id="ranking-table-title" className="sr-only">
+              {fetchParams.worldName || "전체"} 월드 {RANKING_LABELS[type]} 랭킹
+              목록
+            </h2>
+            <RankingTable
+              type={type}
+              data={initialData.ranking}
+              currentPage={fetchParams.page}
+              worldName={fetchParams.worldName}
+              highlight={highlight}
+            />
+          </section>
+
+          <RankingPagination
+            currentPage={fetchParams.page}
+            totalPages={fetchParams.totalPages}
+            type={type}
+            worldName={fetchParams.worldName}
+          />
+        </>
       )}
     </div>
   );

@@ -3,19 +3,20 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/shared/lib/utils";
-import { RANKING_LABELS, RANKING_TYPES, rankingHref } from "@/entities/ranking";
+import {
+  isRankingType,
+  RANKING_LABELS,
+  RANKING_TYPES,
+  rankingHref,
+} from "@/entities/ranking";
 
 export function RankingTabs() {
   const pathname = usePathname();
 
-  // 경로는 /ranking/[type]/[world]/[page] 라 타입은 항상 두 번째 세그먼트다.
-  // /ranking 처럼 타입이 없으면 level 탭을 활성화한다.
-  const typeSegment = pathname.split("/")[2] ?? "";
-  const activeType = RANKING_TYPES.includes(
-    typeSegment as (typeof RANKING_TYPES)[number],
-  )
-    ? (typeSegment as (typeof RANKING_TYPES)[number])
-    : "level";
+  // 경로는 /ranking/[type]/[world]/[page] 라 타입은 항상 두 번째 세그먼트임.
+  // /ranking 처럼 타입이 없으면 level 탭이 활성화됨.
+  const typeSegment = pathname.split("/")[2];
+  const activeType = isRankingType(typeSegment) ? typeSegment : "level";
 
   return (
     <nav aria-label="랭킹 종류 이동" className="w-full">

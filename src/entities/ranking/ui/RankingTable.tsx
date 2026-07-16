@@ -28,7 +28,6 @@ import { MobileRankingList } from "./MobileRankingList";
 interface RankingTableProps {
   type: RankingType;
   data: AnyRankingData[];
-  currentPage: number;
   worldName?: string;
   highlight?: RankingHighlight | null;
   className?: string;
@@ -37,19 +36,11 @@ interface RankingTableProps {
 export const RankingTable = ({
   type,
   data,
-  currentPage,
   worldName,
   highlight,
   className,
 }: RankingTableProps) => {
   const { addHistory } = useRecentSearch("character-search-history");
-
-  const items = useMemo(() => {
-    if (!data || data.length === 0) return [];
-    const relativePageIndex = (currentPage - 1) % 10;
-    const startIndex = relativePageIndex * 20;
-    return data.slice(startIndex, startIndex + 20);
-  }, [data, currentPage]);
 
   const columns = useMemo(() => rankingColumns(type), [type]);
 
@@ -87,7 +78,7 @@ export const RankingTable = ({
           </TableHeader>
 
           <TableBody className="bg-card">
-            {items.map((item) => {
+            {data.map((item) => {
               const key = rankingItemKey(item);
 
               return (
@@ -119,7 +110,7 @@ export const RankingTable = ({
 
       {/* 모바일 뷰 */}
       <div className="block md:hidden">
-        <MobileRankingList type={type} data={items} context={context} />
+        <MobileRankingList type={type} data={data} context={context} />
       </div>
     </div>
   );

@@ -60,7 +60,6 @@ export function RankingBoard({
             <RankingTable
               type={type}
               data={initialData.ranking}
-              currentPage={fetchParams.page}
               worldName={fetchParams.worldName}
               highlight={highlight}
             />

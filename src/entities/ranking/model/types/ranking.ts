@@ -44,13 +44,11 @@ interface KerningMTowerSpec {
 }
 interface UnionSpec {
   union_grade: string;
-  union_grade_icon: string;
   union_level: number;
 }
 interface AchievementSpec {
   achievement_score: number;
   achievement_grade_name: string;
-  achievement_grade_icon: string;
   main_honor_badge: AchievementBadge[];
 }
 export interface AchievementBadge {

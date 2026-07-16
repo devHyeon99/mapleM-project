@@ -119,11 +119,11 @@ export const Renderers = {
     );
   },
 
-  // 메인 스탯 표시
+  // 메인 스탯 표시. 굵기는 종류마다 강조 대상이 달라 컬럼 정의(cellClassName)가 정함
   MainStat: (item: AnyRankingData) => {
     const { label, value } = getMainStat(item);
     return (
-      <span className="text-sm font-bold">
+      <span className="text-sm">
         {label}
         {value}
       </span>
@@ -151,7 +151,7 @@ export const Renderers = {
 
     // 유니온·업적 -> 등급 정보
     const grade = getMainStatGrade(item);
-    if (grade) return <span className="text-sm font-medium">{grade}</span>;
+    if (grade) return <span className="text-sm">{grade}</span>;
 
     // 일반 캐릭터 -> 소속 길드 (기본값)
     return renderGuildInfo(item);

@@ -101,7 +101,11 @@ export const RankingTable = ({
                   {columns.map((col, colIndex) => (
                     <TableCell
                       key={`${key}-col-${colIndex}`}
-                      className={cn("text-center", col.className)}
+                      className={cn(
+                        "text-center",
+                        col.className,
+                        col.cellClassName,
+                      )}
                     >
                       {col.cell(item, context)}
                     </TableCell>

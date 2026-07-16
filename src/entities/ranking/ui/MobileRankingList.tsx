@@ -195,15 +195,23 @@ const StatDisplay = ({ item }: { item: AnyRankingData }) => {
   const grade = getMainStatGrade(item);
 
   return (
+    // 등급이 있는 랭킹(유니온·업적)은 등급이 주인공이라 앞에 두고 값에서 힘을 뺌
     <div className="mt-0.5 flex items-baseline gap-1.5">
-      <span className="text-primary flex gap-0.5 text-sm font-bold">
+      {grade && (
+        <span className="text-primary truncate text-sm font-bold">{grade}</span>
+      )}
+
+      <span
+        className={cn(
+          "flex gap-0.5",
+          grade
+            ? "text-muted-foreground text-xs"
+            : "text-primary text-sm font-bold",
+        )}
+      >
         {label && <span>{label}</span>}
         <span>{value}</span>
       </span>
-
-      {grade && (
-        <span className="text-muted-foreground truncate text-xs">{grade}</span>
-      )}
     </div>
   );
 };

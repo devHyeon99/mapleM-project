@@ -9,6 +9,8 @@ import { Renderers, type RankingTableContext } from "./ranking-table.renderers";
 export interface ColumnDef {
   header: string;
   className?: string;
+  /** 데이터 셀에만 붙는 클래스. 헤더 톤은 그대로 두고 값만 손볼 때 씀 */
+  cellClassName?: string;
   cell: (item: AnyRankingData, ctx: RankingTableContext) => ReactNode;
 }
 
@@ -17,7 +19,12 @@ const createBaseColumns = (statHeader: string): ColumnDef[] => [
   { header: "월드", className: "w-[80px]", cell: Renderers.World },
   { header: "캐릭터", className: "w-[150px]", cell: Renderers.Identity },
   { header: "직업", className: "w-[120px]", cell: Renderers.Job },
-  { header: statHeader, className: "w-[120px]", cell: Renderers.MainStat },
+  {
+    header: statHeader,
+    className: "w-[120px]",
+    cellClassName: "font-bold",
+    cell: Renderers.MainStat,
+  },
   { header: "길드", className: "w-[120px]", cell: Renderers.SubInfo },
 ];
 
@@ -34,15 +41,21 @@ const RANKING_COLUMNS: Record<string, ColumnDef[]> = {
     { header: "순위", className: "w-[60px]", cell: Renderers.Rank },
     { header: "월드", className: "w-[80px]", cell: Renderers.World },
     { header: "캐릭터", className: "w-[150px]", cell: Renderers.Identity },
-    // 길드 정보를 강제로 표시하기 위해 전용 Renderer 사용
-    { header: "길드", className: "w-[120px]", cell: Renderers.Guild },
     {
       header: "유니온 레벨",
       className: "w-[100px]",
+      cellClassName: "text-muted-foreground",
       cell: Renderers.MainStat,
     },
     // SubInfo는 유니온 등급(grade)을 우선 표시하므로 여기 사용
-    { header: "등급", className: "w-[120px]", cell: Renderers.SubInfo },
+    {
+      header: "등급",
+      className: "w-[120px]",
+      cellClassName: "font-bold",
+      cell: Renderers.SubInfo,
+    },
+    // 길드 정보를 강제로 표시하기 위해 전용 Renderer 사용
+    { header: "길드", className: "w-[120px]", cell: Renderers.Guild },
   ],
 
   // 업적 랭킹
@@ -50,8 +63,18 @@ const RANKING_COLUMNS: Record<string, ColumnDef[]> = {
     { header: "순위", className: "w-[60px]", cell: Renderers.Rank },
     { header: "월드", className: "w-[80px]", cell: Renderers.World },
     { header: "캐릭터", className: "w-[150px]", cell: Renderers.Identity },
-    { header: "업적 점수", className: "w-[100px]", cell: Renderers.MainStat },
-    { header: "등급", className: "w-[120px]", cell: Renderers.SubInfo },
+    {
+      header: "업적 점수",
+      className: "w-[100px]",
+      cellClassName: "text-muted-foreground",
+      cell: Renderers.MainStat,
+    },
+    {
+      header: "등급",
+      className: "w-[120px]",
+      cellClassName: "font-bold",
+      cell: Renderers.SubInfo,
+    },
     {
       header: "대표 뱃지",
       className: "w-[120px] hidden md:table-cell",
@@ -65,7 +88,12 @@ const RANKING_COLUMNS: Record<string, ColumnDef[]> = {
     { header: "월드", className: "w-[80px]", cell: Renderers.World },
     { header: "길드", className: "w-[150px]", cell: Renderers.Identity },
     { header: "마스터", className: "w-[120px]", cell: Renderers.SubInfo },
-    { header: "점수", className: "w-[120px]", cell: Renderers.MainStat },
+    {
+      header: "점수",
+      className: "w-[120px]",
+      cellClassName: "font-bold",
+      cell: Renderers.MainStat,
+    },
     { header: "등급", className: "w-[80px]", cell: Renderers.Grade },
   ],
 };

@@ -6,6 +6,7 @@ export interface BaseRanking {
   ranking: number; // 전체 월드 랭킹 순위
   world_ranking: number; // 소속 월드 랭킹 순위
   world_name: string; // 월드 명
+  job_ranking?: number; // 직업 필터를 걸었을 때만 붙는 그 직업 안에서의 순위. 넥슨 응답에 없는 값이라 fetchRankingPageByJob 이 매김.
 }
 
 /**

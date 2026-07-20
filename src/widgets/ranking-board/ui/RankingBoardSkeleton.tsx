@@ -9,6 +9,7 @@ import {
 import { Skeleton } from "@/shared/ui/skeleton";
 import { cn } from "@/shared/lib/utils";
 import {
+  isJobFilterable,
   RANKING_UI_ITEMS_PER_PAGE,
   rankingColumns,
   type RankingType,
@@ -16,11 +17,17 @@ import {
 
 const ROWS = Array.from({ length: RANKING_UI_ITEMS_PER_PAGE });
 
-function RankingFiltersSkeleton() {
+/** 셀렉트 개수가 실제 필터와 어긋나면 로딩이 끝날 때 줄이 밀리므로 직업 셀렉트 유무를 같이 봄 */
+function RankingFiltersSkeleton({ type }: { type: RankingType }) {
   return (
     <div className="flex w-full flex-col-reverse items-center justify-between gap-2 md:flex-row">
-      <Skeleton className="h-10 w-full md:w-[195px]" />
-      <Skeleton className="h-5 w-44 self-end" />
+      <div className="flex w-full flex-row gap-2 md:w-auto">
+        <Skeleton className="h-8 flex-1 md:w-[195px] md:flex-none" />
+        {isJobFilterable(type) && (
+          <Skeleton className="h-8 flex-1 md:w-[195px] md:flex-none" />
+        )}
+      </div>
+      <Skeleton className="h-5 w-50 self-end" />
     </div>
   );
 }
@@ -97,6 +104,16 @@ function RankingPaginationSkeleton() {
   );
 }
 
+/** 필터·페이지네이션은 그대로 두고 표만 로딩으로 바꿀 때 씀 */
+export function RankingRowsSkeleton({ type }: { type: RankingType }) {
+  return (
+    <div aria-busy="true" aria-label="랭킹 정보를 불러오는 중">
+      <DesktopTableSkeleton type={type} />
+      <MobileListSkeleton />
+    </div>
+  );
+}
+
 export function RankingBoardSkeleton({ type }: { type: RankingType }) {
   return (
     <div
@@ -104,7 +121,7 @@ export function RankingBoardSkeleton({ type }: { type: RankingType }) {
       aria-label="랭킹 정보를 불러오는 중"
       className="flex w-full flex-col gap-4"
     >
-      <RankingFiltersSkeleton />
+      <RankingFiltersSkeleton type={type} />
       <DesktopTableSkeleton type={type} />
       <MobileListSkeleton />
       <RankingPaginationSkeleton />

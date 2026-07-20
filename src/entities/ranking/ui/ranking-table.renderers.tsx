@@ -25,6 +25,17 @@ export const rankingItemKey = (item: AnyRankingData): string => {
   return `${world_name}-${ranking}`;
 };
 
+/**
+ * 행에 찍을 순위. 좁혀 본 목록에서는 그 목록 안 순위를 보여주는 게 맞으므로
+ * 직업 > 월드 > 전체 순으로 좁은 쪽을 먼저 씀. 표·모바일·aria 가 같이 참조함.
+ */
+export const rankValue = (
+  item: AnyRankingData,
+  ctx: RankingTableContext,
+): number =>
+  item.job_ranking ??
+  (ctx.isWorldRankingView ? item.world_ranking : item.ranking);
+
 /** 검색으로 찾은 행 강조. 다크/라이트 양쪽에서 통하는 톤으로 배경만 얹는다. */
 export const HIGHLIGHT_ROW_CLASS = "bg-orange-500/15 hover:bg-orange-500/20!";
 
@@ -53,7 +64,8 @@ export const getMainStat = (
     return { value: formatKoreanNumber(item.character_combat_power) };
   if ("dojang_floor" in item) return { value: `${item.dojang_floor}층` };
   if ("tower_floor" in item) return { value: `${item.tower_floor}층` };
-  if ("max_damage" in item) return { value: formatKoreanNumber(item.max_damage) };
+  if ("max_damage" in item)
+    return { value: formatKoreanNumber(item.max_damage) };
   if ("season_score" in item)
     return { value: Number(item.season_score).toLocaleString() };
   if ("achievement_score" in item)
@@ -75,9 +87,7 @@ export const getMainStatGrade = (item: AnyRankingData): string | null => {
 export const Renderers = {
   // 순위 표시
   Rank: (item: AnyRankingData, ctx: RankingTableContext) => (
-    <span className="text-foreground font-bold">
-      {ctx.isWorldRankingView ? item.world_ranking : item.ranking}
-    </span>
+    <span className="text-foreground font-bold">{rankValue(item, ctx)}</span>
   ),
 
   // 월드명 표시

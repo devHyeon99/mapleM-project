@@ -12,6 +12,7 @@ import {
   HIGHLIGHT_ROW_CLASS,
   isHighlightedRow,
   rankingItemKey,
+  rankValue,
   Renderers,
 } from "./ranking-table.renderers";
 import type { RankingTableContext } from "./ranking-table.renderers";
@@ -81,7 +82,7 @@ const RankingRow = memo(
           {/* 순위 정보에 대한 접근성 레이블 추가 */}
           <span
             className="text-foreground text-sm font-bold"
-            aria-label={`순위: ${item.ranking}위`}
+            aria-label={`순위: ${rankValue(item, context)}위`}
           >
             {Renderers.Rank(item, context)}
           </span>

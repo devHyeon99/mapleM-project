@@ -1,3 +1,5 @@
+import { CONTACT_URL } from "@/shared/config/site";
+
 export type NavLink = {
   href: string;
   label: string;
@@ -24,7 +26,7 @@ export const navLinks: ReadonlyArray<NavLink> = [
     activePath: "/tools",
   },
   {
-    href: "https://open.kakao.com/me/maplestorymgg",
+    href: CONTACT_URL,
     label: "문의",
     openInNewTab: true,
   },

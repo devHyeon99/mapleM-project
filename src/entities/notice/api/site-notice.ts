@@ -1,6 +1,6 @@
 import "server-only";
 import { unstable_cache } from "next/cache";
-import { createClient } from "@supabase/supabase-js";
+import { createPublicSupabaseClient } from "@/shared/api/supabase/public-client";
 import type { SiteNoticeItem } from "../model/types";
 
 const SITE_NOTICE_LIMIT = 10;
@@ -19,23 +19,10 @@ function isNoticeActive(nowMs: number, notice: SiteNoticeItem) {
 }
 
 async function querySiteNotices(): Promise<SiteNoticeItem[]> {
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const supabaseKey =
-    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ??
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
-  // 설정 누락과 조회 실패는 원인이 로그에만 남는다. 던지는 메시지는 그대로
-  // 화면에 렌더되므로, 환경변수 이름이나 Supabase 내부 오류를 담지 않는다.
-  if (!supabaseUrl || !supabaseKey) {
-    console.error(
-      "CRITICAL: Supabase 설정 누락. NEXT_PUBLIC_SUPABASE_URL 과 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY(또는 _ANON_KEY)를 확인하세요.",
-    );
-    throw new Error(SITE_NOTICE_ERROR_MESSAGE);
-  }
-
-  const supabase = createClient(supabaseUrl, supabaseKey, {
-    auth: { persistSession: false, autoRefreshToken: false },
-  });
+  // 설정 누락 원인은 클라이언트가 로그로만 남김. 던지는 메시지는 그대로 화면에
+  // 렌더되므로, 환경변수 이름이나 Supabase 내부 오류를 담지 않는다.
+  const supabase = createPublicSupabaseClient();
+  if (!supabase) throw new Error(SITE_NOTICE_ERROR_MESSAGE);
 
   const { data, error } = await supabase
     .from("notices")

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { GuildSearch } from "@/features/guild-search";
+import { GuildPromotionSection } from "./_lib/GuildPromotionSection";
+import { SharenianGuildBoard } from "./_lib/SharenianGuildBoard";
 
 export const metadata: Metadata = {
   title: "메이플스토리M 길드 검색",
@@ -36,25 +38,26 @@ export const metadata: Metadata = {
 
 export default async function GuildPage() {
   return (
-    <div className="mt-4 flex flex-col items-center gap-4">
-      <div className="flex flex-col items-center gap-2">
-        <h1 className="text-2xl font-bold md:text-3xl">길드 검색</h1>
-        <p className="sr-only" data-nosnippet>
-          메이플스토리M 길드 검색
-        </p>
-      </div>
-      <div className="sr-only">
-        <h2>메이플스토리M 길드 정보 조회 서비스</h2>
-        <p>
-          메엠지지에서 스카니아, 루나, 엘리시움 등 전 서버의 길드 정보를
-          검색하세요. 해당 길드의 정보와 길드원, 길드 스킬 및 어빌리티 정보를
-          상세하게 확인할 수 있습니다.
-        </p>
+    <div className="wide:px-0 mb-6 flex flex-col items-center px-4">
+      <div className="flex h-65 w-full flex-col items-center justify-center gap-2">
+        <div className="flex flex-col items-center gap-2">
+          <h1 className="text-3xl font-semibold drop-shadow-md md:text-4xl">
+            길드 검색
+          </h1>
+          <p className="max-w-2xl text-base font-medium text-balance drop-shadow-sm sm:text-lg">
+            길드 검색과 모집중인 길드를 찾아보세요.
+          </p>
+        </div>
+
+        {/* 검색 */}
+        <search className="w-full max-w-3xl" aria-label="길드 검색">
+          <GuildSearch />
+        </search>
       </div>
 
-      <div className="w-full max-w-3xl px-4">
-        <GuildSearch />
-      </div>
+      <GuildPromotionSection />
+
+      <SharenianGuildBoard />
     </div>
   );
 }

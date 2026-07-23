@@ -35,6 +35,10 @@ export const JOB_GROUPS = [
     ],
   },
   {
+    race: "영웅",
+    jobs: ["아란", "루미너스", "에반", "메르세데스", "팬텀", "은월"],
+  },
+  {
     race: "레지스탕스",
     jobs: ["블래스터", "배틀메이지", "와일드헌터", "메카닉", "제논"],
   },
@@ -44,10 +48,6 @@ export const JOB_GROUPS = [
   { race: "레프", jobs: ["아델", "일리움", "칼리", "아크"] },
   { race: "아니마", jobs: ["호영", "라라", "렌"] },
   { race: "샤인", jobs: ["시아", "에릴", "아이엘"] },
-  {
-    race: "영웅",
-    jobs: ["아란", "루미너스", "에반", "메르세데스", "팬텀", "은월"],
-  },
 ] as const;
 
 const JOB_NAME_SET: ReadonlySet<string> = new Set(

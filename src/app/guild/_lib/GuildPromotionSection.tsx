@@ -41,7 +41,7 @@ export async function GuildPromotionSection() {
         <GuildPromotionView items={items} variant="card" />
       ) : (
         // 목록이 비어도 섹션을 숨기지 않음. 홍보 문의로 이어지는 게 이 자리의 일임
-        <div className="border-border/60 rounded-2xl border border-dashed px-4 py-10 text-center">
+        <div className="bg-card rounded-2xl px-4 py-10 text-center shadow-sm">
           <p className="text-sm font-medium">
             아직 등록된 길드 홍보가 없습니다.
           </p>

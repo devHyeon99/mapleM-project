@@ -9,6 +9,9 @@ export const WORLD_NAMES = [
   "유니온",
   "엘리시움",
   "아케인",
+  // 챌린저스 한시 월드 — 서버 종료 시 이 항목과 아래 슬러그,
+  // public/worlds/challengers.png, entities/ranking/lib/empty-message.ts 분기를 함께 제거할 것
+  "챌린저스",
 ] as const;
 
 // 넥슨 API 는 한글 월드명만 받음. 슬러그는 URL 세그먼트와 /public/worlds 이미지 파일명에만 쓰는 표현
@@ -20,6 +23,7 @@ const WORLD_SLUGS: Record<string, string> = {
   유니온: "union",
   엘리시움: "elysium",
   아케인: "arcane",
+  챌린저스: "challengers",
 };
 
 const WORLD_NAMES_BY_SLUG: Record<string, string> = Object.fromEntries(

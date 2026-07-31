@@ -5,6 +5,7 @@ import {
   ALL_JOB_VALUE,
   isJobFilterable,
   JOB_PARAM,
+  PAGE_PARAM,
   rankingHrefWithQuery,
   readRankingJob,
   type RankingType,
@@ -51,19 +52,26 @@ export function RankingFilters({ date, type, worldName }: RankingFiltersProps) {
   const currentWorld = worldName ?? "all";
   const currentJob = readRankingJob(searchParams) ?? ALL_JOB_VALUE;
 
+  // 경로와 쿼리 양쪽에 페이지가 있을 수 있어, 1페이지로 되돌릴 때 둘 다 지워야 함
+  const resetToFirstPage = () => {
+    const params = new URLSearchParams(searchParams);
+    params.delete(PAGE_PARAM);
+    return params;
+  };
+
   // 월드를 바꾸면 1페이지로 돌아감. 직업은 쿼리에 실려 그대로 따라감
   const handleWorldChange = (value: string) =>
     router.replace(
       rankingHrefWithQuery(
         type,
         { worldName: value === "all" ? undefined : value },
-        searchParams,
+        resetToFirstPage(),
       ),
     );
 
   // 직업도 마찬가지로 1페이지부터. 거른 결과의 총 페이지 수가 원본보다 훨씬 적음
   const handleJobChange = (value: string) => {
-    const params = new URLSearchParams(searchParams);
+    const params = resetToFirstPage();
 
     if (value === ALL_JOB_VALUE) params.delete(JOB_PARAM);
     else params.set(JOB_PARAM, value);

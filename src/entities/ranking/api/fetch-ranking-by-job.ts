@@ -14,7 +14,7 @@ import { fetchRankingCached } from "./fetch-ranking";
  */
 
 /** 한 번에 띄우는 넥슨 요청 수. 50개를 한꺼번에 던지지 않으려는 상한 */
-const FETCH_CONCURRENCY = 10;
+export const FETCH_CONCURRENCY = 25;
 
 async function collectRankingByJob(
   type: RankingType,

@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { isJobFilterable, readRankingJob } from "./job-filter";
+import { isJobFilterable, readRankingJob, readRankingPage } from "./job-filter";
 
 describe("readRankingJob", () => {
   it("직업 목록에 있는 값만 읽는다", () => {
@@ -13,6 +13,30 @@ describe("readRankingJob", () => {
     expect(readRankingJob(new URLSearchParams("job=없는직업"))).toBeNull();
     expect(readRankingJob(new URLSearchParams("job="))).toBeNull();
     expect(readRankingJob(new URLSearchParams())).toBeNull();
+  });
+});
+
+describe("readRankingPage", () => {
+  it("1 이상 정수만 읽는다", () => {
+    expect(readRankingPage(new URLSearchParams("page=5"))).toBe(5);
+    expect(readRankingPage(new URLSearchParams("page=250"))).toBe(250);
+  });
+
+  it("경로 세그먼트와 같은 규칙으로 앞자리 0·소수점·음수를 막는다", () => {
+    for (const bad of [
+      "page=0",
+      "page=01",
+      "page=1.5",
+      "page=-2",
+      "page=abc",
+      "page=",
+    ]) {
+      expect(readRankingPage(new URLSearchParams(bad))).toBeNull();
+    }
+  });
+
+  it("없으면 null 이라 호출부가 경로 세그먼트로 되돌아간다", () => {
+    expect(readRankingPage(new URLSearchParams())).toBeNull();
   });
 });
 

@@ -53,7 +53,16 @@ export async function GET(req: Request) {
           page,
         }),
       },
-      { status: 200 },
+      {
+        status: 200,
+        // 같은 조합이면 응답이 하루 내내 같음. CDN 에 맡겨 두 번째 방문자부터는
+        // 서버리스 호출과 1만 행 역직렬화를 건너뜀. 06:00 갱신 반영이 최대 1시간
+        // 늦지만 stale-while-revalidate 라 그동안 기다리는 사람은 없음
+        headers: {
+          "Cache-Control":
+            "public, s-maxage=3600, stale-while-revalidate=86400",
+        },
+      },
     );
   } catch (error) {
     // 점검 중·호출량 초과 등을 사람이 읽을 문구로 바꿔 다시 던짐

@@ -13,7 +13,9 @@ vi.mock("./fetch-ranking", () => ({
   fetchRankingCached: (...args: unknown[]) => fetchRankingCached(...args),
 }));
 
-const { fetchRankingPageByJob } = await import("./fetch-ranking-by-job");
+const { fetchRankingPageByJob, FETCH_CONCURRENCY } = await import(
+  "./fetch-ranking-by-job"
+);
 
 /** page 번째 API 페이지 200행. 짝수 순위만 히어로가 되게 섞음 */
 const apiPage = (page: number, size = 200): AnyRankingData[] =>
@@ -82,8 +84,8 @@ describe("fetchRankingPageByJob", () => {
       page: 1,
     });
 
-    // 첫 묶음 10페이지만 던지고 멈춤
-    expect(fetchRankingCached).toHaveBeenCalledTimes(10);
+    // 첫 묶음만 던지고 멈춤
+    expect(fetchRankingCached).toHaveBeenCalledTimes(FETCH_CONCURRENCY);
     expect(result.totalPages).toBe(15); // 600행 중 300건 / 20
   });
 

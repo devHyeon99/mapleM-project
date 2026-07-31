@@ -14,6 +14,7 @@ import {
   rankingEmptyMessage,
   RankingTable,
   readRankingJob,
+  readRankingPage,
   type AnyRankingData,
   type RankingType,
 } from "@/entities/ranking";
@@ -41,11 +42,18 @@ export function RankingBoard({
 
   // 넥슨 API 에 직업 파라미터가 없어 직업 랭킹만 클라이언트에서 따로 조회함
   const jobName = isJobFilterable(type) ? readRankingJob(searchParams) : null;
+
+  // 직업이 걸리면 페이지가 쿼리에 실려 온다. 경로 세그먼트는 예전에 공유된 URL
+  // (`/ranking/level/all/5?job=…`)을 위한 폴백으로만 남는다.
+  const page = jobName
+    ? (readRankingPage(searchParams) ?? fetchParams.page)
+    : fetchParams.page;
+
   const jobQuery = useJobRanking({
     type,
     worldName: fetchParams.worldName,
     jobName,
-    page: fetchParams.page,
+    page,
   });
 
   const jobPage = jobName ? jobQuery.data : undefined;
@@ -106,7 +114,7 @@ export function RankingBoard({
           </section>
 
           <RankingPagination
-            currentPage={jobPage?.page ?? fetchParams.page}
+            currentPage={page}
             totalPages={jobPage?.totalPages ?? fetchParams.totalPages}
             type={type}
             worldName={fetchParams.worldName}

@@ -2,7 +2,13 @@
 
 import type { ReactNode } from "react";
 import { useSearchParams } from "next/navigation";
-import { rankingHrefWithQuery, type RankingType } from "@/entities/ranking";
+import {
+  isJobFilterable,
+  PAGE_PARAM,
+  rankingHrefWithQuery,
+  readRankingJob,
+  type RankingType,
+} from "@/entities/ranking";
 import {
   Pagination,
   PaginationContent,
@@ -68,8 +74,22 @@ export function RankingPagination({
 
   const safeCurrentPage = Math.max(1, Math.min(currentPage, totalPages));
 
-  const pageUrl = (page: number) =>
-    rankingHrefWithQuery(type, { worldName, page }, searchParams);
+  // 직업이 걸린 목록은 경로를 1페이지에 세워 둔 채 페이지만 쿼리로 옮긴다.
+  // 세그먼트가 그대로라 페이지를 넘겨도 보드가 리마운트되지 않는다.
+  const jobFiltered =
+    isJobFilterable(type) && readRankingJob(searchParams) !== null;
+
+  const pageUrl = (page: number) => {
+    if (!jobFiltered) {
+      return rankingHrefWithQuery(type, { worldName, page }, searchParams);
+    }
+
+    const params = new URLSearchParams(searchParams);
+    if (page <= 1) params.delete(PAGE_PARAM);
+    else params.set(PAGE_PARAM, String(page));
+
+    return rankingHrefWithQuery(type, { worldName }, params);
+  };
 
   // 현재 페이지가 속한 그룹의 범위와, 그 앞뒤 그룹으로 건너뛸 페이지
   const group = (size: number) => {

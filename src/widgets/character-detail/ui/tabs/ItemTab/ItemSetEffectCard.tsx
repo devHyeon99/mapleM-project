@@ -2,6 +2,7 @@
 
 import { useMemo } from "react";
 import type { SortedItemSlot } from "@/entities/item";
+import { ABSOLABS_CORRECTION_NOTE } from "@/entities/set-effect/lib/absolabsCorrection";
 import { formatEffectValue } from "@/entities/set-effect/lib/formatEffectValue";
 import { getActiveEquipmentSets } from "@/entities/set-effect/lib/getActiveEquipmentSets";
 import {
@@ -45,6 +46,11 @@ export const ItemSetEffectCard = ({ items }: ItemSetEffectCardProps) => {
                     ? ` + ${set.appliedStarForceThreshold}성`
                     : ""}
                 </p>
+                {set.correctedFromArcaneShade ? (
+                  <p className="text-muted-foreground text-xs font-medium">
+                    {ABSOLABS_CORRECTION_NOTE}
+                  </p>
+                ) : null}
               </div>
             </AccordionTrigger>
 

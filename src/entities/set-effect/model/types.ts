@@ -86,4 +86,6 @@ export interface ActiveEquipmentSet {
   appliedStarForceThreshold: number | null;
   starForceEffects: ResolvedSetEffectRow[];
   combinedEffects: ResolvedSetEffectRow[];
+  /** 아케인셰이드 1종 보정으로 세트 수가 1 늘어난 상태인지 */
+  correctedFromArcaneShade: boolean;
 }

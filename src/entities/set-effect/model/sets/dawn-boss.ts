@@ -5,7 +5,7 @@ export const DAWN_BOSS_SET: EquipmentSetDefinition = {
   displayName: "칠흑의 보스",
   displayOrder: 10,
   minSetCount: 2,
-  maxSetCount: 8,
+  maxSetCount: 9,
   itemNames: [
     "루즈 컨트롤 머신 마크",
     "마력이 깃든 안대",
@@ -15,6 +15,8 @@ export const DAWN_BOSS_SET: EquipmentSetDefinition = {
     "커맨더 포스 이어링",
     "창세의 뱃지",
   ],
+  // 저주받은 마도서(포켓)·미트라의 분노(엠블렘)는 여러 종류 중 택1이라 접미/접두로 매칭
+  itemNamePrefixes: ["미트라의 분노"],
   itemNameSuffixes: ["의 마도서"],
   setEffects: [
     {
@@ -29,6 +31,7 @@ export const DAWN_BOSS_SET: EquipmentSetDefinition = {
         6: 10_000,
         7: 15_000,
         8: 30_000,
+        9: 40_000,
       },
     },
     {
@@ -43,6 +46,7 @@ export const DAWN_BOSS_SET: EquipmentSetDefinition = {
         6: 7_000,
         7: 9_000,
         8: 20_000,
+        9: 25_000,
       },
     },
     {
@@ -57,6 +61,7 @@ export const DAWN_BOSS_SET: EquipmentSetDefinition = {
         6: 7,
         7: 10,
         8: 15,
+        9: 20,
       },
     },
     {
@@ -71,6 +76,7 @@ export const DAWN_BOSS_SET: EquipmentSetDefinition = {
         6: 9,
         7: 12,
         8: 20,
+        9: 28,
       },
     },
     {
@@ -85,6 +91,7 @@ export const DAWN_BOSS_SET: EquipmentSetDefinition = {
         6: 9,
         7: 12,
         8: 20,
+        9: 28,
       },
     },
     {
@@ -99,6 +106,7 @@ export const DAWN_BOSS_SET: EquipmentSetDefinition = {
         6: 9,
         7: 12,
         8: 20,
+        9: 28,
       },
     },
     {
@@ -106,13 +114,14 @@ export const DAWN_BOSS_SET: EquipmentSetDefinition = {
       label: "최대 대미지",
       unit: "flat",
       values: {
-        2: 2_000_000,
-        3: 5_000_000,
-        4: 8_000_000,
-        5: 11_000_000,
-        6: 13_000_000,
-        7: 20_000_000,
-        8: 30_000_000,
+        2: 3_000_000,
+        3: 7_500_000,
+        4: 12_000_000,
+        5: 16_500_000,
+        6: 19_500_000,
+        7: 22_500_000,
+        8: 45_000_000,
+        9: 60_000_000,
       },
     },
     {
@@ -127,6 +136,7 @@ export const DAWN_BOSS_SET: EquipmentSetDefinition = {
         6: 15,
         7: 20,
         8: 25,
+        9: 30,
       },
     },
     {
@@ -141,6 +151,7 @@ export const DAWN_BOSS_SET: EquipmentSetDefinition = {
         6: 15,
         7: 20,
         8: 25,
+        9: 30,
       },
     },
   ],

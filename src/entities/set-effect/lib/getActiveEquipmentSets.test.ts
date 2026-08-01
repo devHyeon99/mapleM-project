@@ -231,4 +231,83 @@ describe("getActiveEquipmentSets", () => {
         ?.value,
     ).toBe(21);
   });
+
+  it("아케인셰이드 1종은 앱솔랩스 세트 수를 1 보정한다", () => {
+    const items: CharacterItemEquipment[] = [
+      createItem("아케인셰이드 시프슈트", "한벌옷", {
+        starforce_upgrade: "35",
+      }),
+      createItem("앱솔랩스 시프캡", "모자", { starforce_upgrade: "18" }),
+      createItem("앱솔랩스 시프글러브", "장갑", { starforce_upgrade: "18" }),
+      createItem("앱솔랩스 시프슈즈", "신발", { starforce_upgrade: "18" }),
+      createItem("앱솔랩스 시프숄더", "어깨", { starforce_upgrade: "18" }),
+      createItem("앱솔랩스 시프케이프", "망토", { starforce_upgrade: "18" }),
+      createItem("앱솔랩스 시프대거", "무기", { starforce_upgrade: "18" }),
+    ];
+
+    const sets = getActiveEquipmentSets(items);
+    const absolabs = sets.find((set) => set.id === "absolabs");
+    const arcaneShade = sets.find((set) => set.id === "arcane-shade");
+
+    expect(absolabs?.count).toBe(7);
+    expect(absolabs?.correctedFromArcaneShade).toBe(true);
+    // 아케인셰이드 한벌옷 35성은 2배인 70으로 계산돼 앱솔랩스 108에 합산된다
+    expect(absolabs?.totalStarForce).toBe(178);
+    expect(absolabs?.appliedStarForceThreshold).toBe(140);
+    expect(arcaneShade?.totalStarForce).toBe(70);
+    expect(arcaneShade?.effects).toEqual([]);
+  });
+
+  it("아케인셰이드 2종부터는 보정이 해제된다", () => {
+    const items: CharacterItemEquipment[] = [
+      createItem("아케인셰이드 나이트로드", "한벌옷"),
+      createItem("아케인셰이드 대거", "무기"),
+      createItem("앱솔랩스 나이트헬름", "모자"),
+      createItem("앱솔랩스 나이트글러브", "장갑"),
+    ];
+
+    const sets = getActiveEquipmentSets(items);
+
+    expect(sets.find((set) => set.id === "absolabs")?.count).toBe(2);
+    expect(
+      sets.find((set) => set.id === "absolabs")?.correctedFromArcaneShade,
+    ).toBe(false);
+    expect(sets.find((set) => set.id === "arcane-shade")?.count).toBe(2);
+  });
+
+  it("앱솔랩스를 하나도 안 입으면 보정하지 않는다", () => {
+    const items: CharacterItemEquipment[] = [
+      createItem("아케인셰이드 나이트로드", "한벌옷"),
+    ];
+
+    const sets = getActiveEquipmentSets(items);
+
+    expect(sets.find((set) => set.id === "absolabs")).toBeUndefined();
+  });
+
+  it("칠흑의 보스는 엠블렘·마도서까지 포함해 9세트까지 계산한다", () => {
+    const items: CharacterItemEquipment[] = [
+      createItem("루즈 컨트롤 머신 마크", "얼굴장식"),
+      createItem("마력이 깃든 안대", "눈장식"),
+      createItem("몽환의 벨트", "벨트"),
+      createItem("저주받은 적의 마도서", "포켓"),
+      createItem("거대한 공포", "반지"),
+      createItem("고통의 근원", "목걸이"),
+      createItem("커맨더 포스 이어링", "귀고리"),
+      createItem("창세의 뱃지", "뱃지"),
+      createItem("미트라의 분노 : 도적", "엠블렘"),
+    ];
+
+    const dawnBoss = getActiveEquipmentSets(items).find(
+      (set) => set.id === "dawn-boss",
+    );
+    const effect = (key: string) =>
+      dawnBoss?.effects.find((row) => row.key === key)?.value;
+
+    expect(dawnBoss?.count).toBe(9);
+    expect(effect("maxDamageIncrease")).toBe(60_000_000);
+    expect(effect("finalDamage")).toBe(28);
+    expect(effect("ignoreDefense")).toBe(30);
+    expect(effect("stance")).toBe(30);
+  });
 });

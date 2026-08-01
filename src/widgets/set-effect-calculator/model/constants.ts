@@ -44,18 +44,16 @@ export const SET_OPTIONS = [
   })),
 ];
 
-export const STAR_FORCE_THRESHOLDS_BY_SET_ID = new Map(
+// 세트별 스타포스 강화 최고 구간 — 입력 상한으로만 쓰므로 구간 목록은 들고 있지 않음
+export const MAX_STAR_FORCE_BY_SET_ID = new Map(
   SELECTABLE_SET_DEFINITIONS.map((definition) => [
     definition.id,
-    definition.starForceEffects?.length
-      ? Array.from(
-          new Set(
-            definition.starForceEffects.flatMap((effect) =>
-              Object.keys(effect.values).map(Number),
-            ),
-          ),
-        ).sort((a, b) => a - b)
-      : [],
+    Math.max(
+      0,
+      ...(definition.starForceEffects ?? []).flatMap((effect) =>
+        Object.keys(effect.values).map(Number),
+      ),
+    ),
   ]),
 );
 

@@ -1,8 +1,8 @@
 "use client";
 
-import { BuildEditorCard } from "./BuildEditorCard";
-import { DiffResultCard } from "./DiffResultCard";
 import { useCalculator } from "../model/use-calculator";
+import { BuildEditorCard } from "./BuildEditorCard";
+import { ComparisonCard } from "./ComparisonCard";
 
 export function SetEffectCalculator() {
   const {
@@ -10,12 +10,12 @@ export function SetEffectCalculator() {
     buildB,
     resultA,
     resultB,
-    diffEffects,
+    comparisonRows,
     buildAHandlers,
     buildBHandlers,
   } = useCalculator();
 
-  // 라벨을 한 곳에서 정의해 편집 카드와 비교 결과 요약이 같은 이름을 쓰게 한다
+  // 라벨을 한 곳에서 정의해 편집 카드와 비교표가 같은 이름을 쓰게 한다
   const builds = [
     {
       label: "세팅 A",
@@ -40,12 +40,12 @@ export function SetEffectCalculator() {
             title={label}
             buildState={state}
             result={result}
-            {...handlers}
+            handlers={handlers}
           />
         ))}
       </div>
 
-      <DiffResultCard diffEffects={diffEffects} builds={builds} />
+      <ComparisonCard rows={comparisonRows} />
     </div>
   );
 }

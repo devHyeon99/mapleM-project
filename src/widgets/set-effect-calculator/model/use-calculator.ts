@@ -2,13 +2,14 @@
 
 import {
   useCallback,
+  useMemo,
   useState,
   type Dispatch,
   type SetStateAction,
 } from "react";
 
 import {
-  buildDiffEffects,
+  buildComparisonRows,
   buildResultFromState,
   getClampedCount,
   getClampedStarForce,
@@ -18,9 +19,11 @@ import {
   createInitialBuildState,
   MAX_BUILD_ROWS,
 } from "./constants";
-import type { BuildState } from "./types";
+import type { BuildHandlers, BuildState } from "./types";
 
-function useBuildActions(setState: Dispatch<SetStateAction<BuildState>>) {
+function useBuildActions(
+  setState: Dispatch<SetStateAction<BuildState>>,
+): BuildHandlers {
   // 특정 row를 찾아 부분 업데이트
   const updateRow = useCallback(
     (
@@ -76,29 +79,28 @@ function useBuildActions(setState: Dispatch<SetStateAction<BuildState>>) {
     );
   }, [setState]);
 
+  const onRemoveRow = useCallback(
+    (rowId: string) => {
+      // 마지막 한 줄은 남겨 둬야 다시 입력할 자리가 생김
+      setState((prev) =>
+        prev.length <= 1 ? prev : prev.filter((row) => row.id !== rowId),
+      );
+    },
+    [setState],
+  );
+
   const onReset = useCallback(() => {
     // 기본 상태로 초기화
     setState(createInitialBuildState());
   }, [setState]);
-
-  const onRemoveRow = useCallback(
-    (rowId: string) => {
-      // 최소 한 행은 유지하고 선택 행만 제거
-      setState((prev) => {
-        if (prev.length <= 1) return prev;
-        return prev.filter((row) => row.id !== rowId);
-      });
-    },
-    [setState],
-  );
 
   return {
     onSetChange,
     onCountChange,
     onStarForceChange,
     onAddRow,
-    onReset,
     onRemoveRow,
+    onReset,
   };
 }
 
@@ -109,19 +111,21 @@ export function useCalculator() {
   const buildAHandlers = useBuildActions(setBuildA);
   const buildBHandlers = useBuildActions(setBuildB);
 
-  const resultA = buildResultFromState(buildA);
-  const resultB = buildResultFromState(buildB);
-  // 두 세팅의 총합 효과 차이 계산
-  const diffEffects = buildDiffEffects(
-    resultA.totalEffects,
-    resultB.totalEffects,
+  // 한쪽만 바꿔도 매 렌더마다 양쪽을 다시 계산하던 것을 세팅별로 끊음
+  const resultA = useMemo(() => buildResultFromState(buildA), [buildA]);
+  const resultB = useMemo(() => buildResultFromState(buildB), [buildB]);
+  // 두 세팅의 총합 효과를 한 줄씩 짝지어 비교표로 만듦
+  const comparisonRows = useMemo(
+    () => buildComparisonRows(resultA.totalEffects, resultB.totalEffects),
+    [resultA, resultB],
   );
+
   return {
     buildA,
     buildB,
     resultA,
     resultB,
-    diffEffects,
+    comparisonRows,
     buildAHandlers,
     buildBHandlers,
   };

@@ -1,9 +1,6 @@
 import {
   ABSOLABS_CORRECTION_SET_IDS,
-  combineEffects,
-  correctAbsolabsSet,
-  resolveSetEffects,
-  resolveStarForceEffects,
+  resolveActiveSet,
 } from "@/entities/set-effect";
 
 import {
@@ -89,35 +86,16 @@ export const buildResultFromState = (rows: BuildState): BuildResult => {
     countMap.has(definition.id),
   ).map((definition) => {
     const selected = countMap.get(definition.id)!;
-    // 같은 세트를 여러 행에 나눠 담으면 합계가 상한을 넘을 수 있어 여기서 한 번 더 자른다
-    const matched = {
-      count: Math.min(selected.count, definition.maxSetCount),
-      totalStarForce: selected.totalStarForce,
-    };
-    // 아케인셰이드 1종은 앱솔랩스 1종·스타포스로 보정됨
-    const {
-      count,
-      totalStarForce,
-      applied: correctedFromArcaneShade,
-    } = definition.id === ABSOLABS_CORRECTION_SET_IDS.target
-      ? correctAbsolabsSet(arcaneShade, matched)
-      : { ...matched, applied: false };
 
-    const setEffects = resolveSetEffects(definition, count);
-    const { effects: starForceEffects } = resolveStarForceEffects(
+    return resolveActiveSet(
       definition,
-      totalStarForce,
+      {
+        // 같은 세트를 여러 행에 나눠 담으면 합계가 상한을 넘을 수 있어 여기서 한 번 더 자름
+        count: Math.min(selected.count, definition.maxSetCount),
+        totalStarForce: selected.totalStarForce,
+      },
+      arcaneShade,
     );
-    const combinedEffects = combineEffects(setEffects, starForceEffects);
-
-    return {
-      id: definition.id,
-      displayName: definition.displayName,
-      count,
-      totalStarForce,
-      combinedEffects,
-      correctedFromArcaneShade,
-    };
   });
 
   // 같은 effect key끼리 합산

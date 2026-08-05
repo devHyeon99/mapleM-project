@@ -2,9 +2,11 @@
 
 import { useMemo } from "react";
 import type { SortedItemSlot } from "@/entities/item";
-import { ABSOLABS_CORRECTION_NOTE } from "@/entities/set-effect/lib/absolabsCorrection";
-import { formatEffectValue } from "@/entities/set-effect/lib/formatEffectValue";
-import { getActiveEquipmentSets } from "@/entities/set-effect/lib/getActiveEquipmentSets";
+import {
+  ABSOLABS_CORRECTION_NOTE,
+  formatEffectValue,
+  getActiveEquipmentSets,
+} from "@/entities/set-effect";
 import {
   Accordion,
   AccordionContent,

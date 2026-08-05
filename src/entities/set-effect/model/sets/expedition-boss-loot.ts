@@ -3,7 +3,6 @@ import { EquipmentSetDefinition } from "../types";
 export const EXPEDITION_BOSS_LOOT_SET: EquipmentSetDefinition = {
   id: "expedition-boss-loot",
   displayName: "원정대 보스 전리품",
-  displayOrder: 12,
   minSetCount: 1,
   maxSetCount: 7,
   itemNames: [

@@ -3,7 +3,6 @@ import { EquipmentSetDefinition } from "../types";
 export const PENSALIR_LEGENDARY_SET: EquipmentSetDefinition = {
   id: "pensalir-legendary",
   displayName: "펜살리르(레전더리)",
-  displayOrder: 7,
   minSetCount: 2,
   maxSetCount: 4,
   itemMatchers: [

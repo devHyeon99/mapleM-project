@@ -5,47 +5,28 @@ import {
   buildResultFromState,
   getClampedStarForce,
 } from "./calculator";
-import type { BuildState } from "./types";
 
-const buildRow = (
-  setId: string,
-  count: number,
-  starForce = 0,
-): BuildState[number] => ({ id: `${setId}-row`, setId, count, starForce });
-
-describe("buildResultFromState 아케인셰이드 보정", () => {
-  it("아케인셰이드 1종은 앱솔랩스 세트 수를 1 보정한다", () => {
+describe("buildResultFromState", () => {
+  it("같은 세트를 나눠 담은 행을 합치고 세트 상한으로 자른다", () => {
     const { activeSets } = buildResultFromState([
-      buildRow("arcane-shade", 1, 70),
-      buildRow("absolabs", 6, 108),
+      { id: "a", setId: "absolabs", count: 5, starForce: 60 },
+      { id: "b", setId: "absolabs", count: 4, starForce: 48 },
     ]);
 
-    const absolabs = activeSets.find((set) => set.id === "absolabs");
-    const arcaneShade = activeSets.find((set) => set.id === "arcane-shade");
-
-    expect(absolabs?.count).toBe(7);
-    expect(absolabs?.correctedFromArcaneShade).toBe(true);
-    // 아케인셰이드 스타포스가 앱솔랩스에 합산돼 140 구간을 넘긴다
-    expect(absolabs?.totalStarForce).toBe(178);
-    expect(arcaneShade?.totalStarForce).toBe(70);
+    // 5 + 4 = 9 지만 앱솔랩스 상한은 7, 스타포스는 상한 없이 합산됨
+    expect(activeSets).toHaveLength(1);
+    expect(activeSets[0].count).toBe(7);
+    expect(activeSets[0].totalStarForce).toBe(108);
   });
 
-  it("아케인셰이드 2종부터는 보정이 해제된다", () => {
-    const { activeSets } = buildResultFromState([
-      buildRow("arcane-shade", 2),
-      buildRow("absolabs", 6),
+  it("선택 안 함과 0세트 행은 계산에서 빠진다", () => {
+    const { activeSets, totalEffects } = buildResultFromState([
+      { id: "a", setId: "none", count: 3, starForce: 30 },
+      { id: "b", setId: "absolabs", count: 0, starForce: 60 },
     ]);
 
-    const absolabs = activeSets.find((set) => set.id === "absolabs");
-
-    expect(absolabs?.count).toBe(6);
-    expect(absolabs?.correctedFromArcaneShade).toBe(false);
-  });
-
-  it("앱솔랩스를 고르지 않으면 보정하지 않는다", () => {
-    const { activeSets } = buildResultFromState([buildRow("arcane-shade", 1)]);
-
-    expect(activeSets.find((set) => set.id === "absolabs")).toBeUndefined();
+    expect(activeSets).toEqual([]);
+    expect(totalEffects).toEqual([]);
   });
 });
 

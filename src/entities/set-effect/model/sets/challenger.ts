@@ -3,7 +3,6 @@ import { EquipmentSetDefinition } from "../types";
 export const CHALLENGER_SET: EquipmentSetDefinition = {
   id: "challenger",
   displayName: "도전자의 장비",
-  displayOrder: 3,
   minSetCount: 8,
   maxSetCount: 8,
   itemMatchers: [

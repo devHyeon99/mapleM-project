@@ -3,7 +3,6 @@ import { EquipmentSetDefinition } from "../types";
 export const ROOT_ABYSS_UNIQUE_SET: EquipmentSetDefinition = {
   id: "root-abyss-unique",
   displayName: "루타비스(유니크)",
-  displayOrder: 5,
   minSetCount: 2,
   maxSetCount: 4,
   nameNormalization: "stripBracketPrefix",

@@ -1,9 +1,15 @@
 import type { CharacterItemEquipment } from "@/entities/item";
 import {
+  ActiveEquipmentSet,
   EFFECT_META,
   EquipmentSetDefinition,
   ResolvedSetEffectRow,
 } from "../model";
+import {
+  ABSOLABS_CORRECTION_SET_IDS,
+  correctAbsolabsSet,
+  type CorrectableSetState,
+} from "./absolabsCorrection";
 
 // 세트 스타포스 계산용으로 장비 한 개의 스타포스를 숫자로 변환
 export function parseStarForce(item: CharacterItemEquipment): number {
@@ -109,4 +115,37 @@ export function combineEffects(
   });
 
   return Array.from(effectMap.values());
+}
+
+// 세트 하나의 착용 수·스타포스를 활성 세트 한 건으로 해석.
+// 착용 장비에서 세거나 계산기에서 직접 입력받거나 앞단만 다르고 이 뒤는 같음
+export function resolveActiveSet(
+  definition: EquipmentSetDefinition,
+  matched: CorrectableSetState,
+  arcaneShade: CorrectableSetState,
+): ActiveEquipmentSet {
+  // 아케인셰이드 1종은 앱솔랩스 1종·스타포스로 보정됨
+  const {
+    count,
+    totalStarForce,
+    applied: correctedFromArcaneShade,
+  } = definition.id === ABSOLABS_CORRECTION_SET_IDS.target
+    ? correctAbsolabsSet(arcaneShade, matched)
+    : { ...matched, applied: false };
+
+  const setEffects = resolveSetEffects(definition, count);
+  const { appliedThreshold, effects: starForceEffects } =
+    resolveStarForceEffects(definition, totalStarForce);
+
+  return {
+    id: definition.id,
+    displayName: definition.displayName,
+    count,
+    effects: setEffects,
+    totalStarForce,
+    appliedStarForceThreshold: appliedThreshold,
+    starForceEffects,
+    combinedEffects: combineEffects(setEffects, starForceEffects),
+    correctedFromArcaneShade,
+  };
 }

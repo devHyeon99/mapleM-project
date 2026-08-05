@@ -3,7 +3,6 @@ import { EquipmentSetDefinition } from "../types";
 export const ABSOLABS_SET: EquipmentSetDefinition = {
   id: "absolabs",
   displayName: "앱솔랩스",
-  displayOrder: 2,
   minSetCount: 2,
   maxSetCount: 7,
   itemNamePrefixes: ["앱솔랩스"],

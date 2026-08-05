@@ -3,7 +3,6 @@ import { EquipmentSetDefinition } from "../types";
 export const DAWN_BOSS_SET: EquipmentSetDefinition = {
   id: "dawn-boss",
   displayName: "칠흑의 보스",
-  displayOrder: 10,
   minSetCount: 2,
   maxSetCount: 9,
   itemNames: [

@@ -1,33 +1,17 @@
 import {
-  ABSOLABS_SET,
-  ARCANE_SHADE_SET,
-  COMMANDER_LOOT_SET,
-  DAWN_BOSS_SET,
-  EXPEDITION_BOSS_LOOT_SET,
-  MUSPELL_LEGENDARY_SET,
-  MUSPELL_UNIQUE_SET,
-  PENSALIR_LEGENDARY_SET,
-  PENSALIR_UNIQUE_SET,
-  ROOT_ABYSS_LEGENDARY_SET,
-  ROOT_ABYSS_UNIQUE_SET,
+  CHALLENGER_SET,
+  EQUIPMENT_SET_DEFINITIONS,
   type EquipmentSetDefinition,
 } from "@/entities/set-effect";
 
 import type { BuildRow, BuildState } from "./types";
 
-export const SELECTABLE_SET_DEFINITIONS: EquipmentSetDefinition[] = [
-  ARCANE_SHADE_SET,
-  ABSOLABS_SET,
-  ROOT_ABYSS_LEGENDARY_SET,
-  ROOT_ABYSS_UNIQUE_SET,
-  PENSALIR_LEGENDARY_SET,
-  PENSALIR_UNIQUE_SET,
-  MUSPELL_LEGENDARY_SET,
-  MUSPELL_UNIQUE_SET,
-  DAWN_BOSS_SET,
-  COMMANDER_LOOT_SET,
-  EXPEDITION_BOSS_LOOT_SET,
-];
+// 도전자는 이벤트 전용이라 세트효과 계산 대상에서 뺌.
+// 순서는 엔티티 정의를 그대로 따름
+export const SELECTABLE_SET_DEFINITIONS: EquipmentSetDefinition[] =
+  EQUIPMENT_SET_DEFINITIONS.filter(
+    (definition) => definition.id !== CHALLENGER_SET.id,
+  );
 
 export const SET_BY_ID = new Map(
   SELECTABLE_SET_DEFINITIONS.map((definition) => [definition.id, definition]),

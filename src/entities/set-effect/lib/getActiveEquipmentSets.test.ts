@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { CharacterItemEquipment } from "@/entities/item";
+import { EQUIPMENT_SET_DEFINITIONS } from "../model";
 import { getActiveEquipmentSets } from "./getActiveEquipmentSets";
 
 function createItem(
@@ -227,8 +228,9 @@ describe("getActiveEquipmentSets", () => {
       )?.value,
     ).toBe(9);
     expect(
-      arcaneShade?.combinedEffects.find((effect) => effect.key === "finalDamage")
-        ?.value,
+      arcaneShade?.combinedEffects.find(
+        (effect) => effect.key === "finalDamage",
+      )?.value,
     ).toBe(21);
   });
 
@@ -309,5 +311,27 @@ describe("getActiveEquipmentSets", () => {
     expect(effect("finalDamage")).toBe(28);
     expect(effect("ignoreDefense")).toBe(30);
     expect(effect("stance")).toBe(30);
+  });
+});
+
+// 배열 순서가 곧 아이템 탭·계산기의 노출 순서라 순서가 밀리면 여기서 걸림
+describe("EQUIPMENT_SET_DEFINITIONS", () => {
+  it("등급 쌍은 레전더리를 먼저 둔다", () => {
+    expect(
+      EQUIPMENT_SET_DEFINITIONS.map((definition) => definition.id),
+    ).toEqual([
+      "arcane-shade",
+      "absolabs",
+      "challenger",
+      "root-abyss-legendary",
+      "root-abyss-unique",
+      "pensalir-legendary",
+      "pensalir-unique",
+      "muspell-legendary",
+      "muspell-unique",
+      "dawn-boss",
+      "commander-loot",
+      "expedition-boss-loot",
+    ]);
   });
 });

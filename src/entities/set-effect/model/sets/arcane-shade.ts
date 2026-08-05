@@ -3,7 +3,6 @@ import { EquipmentSetDefinition } from "../types";
 export const ARCANE_SHADE_SET: EquipmentSetDefinition = {
   id: "arcane-shade",
   displayName: "아케인셰이드",
-  displayOrder: 1,
   minSetCount: 2,
   maxSetCount: 7,
   itemNamePrefixes: ["아케인셰이드"],

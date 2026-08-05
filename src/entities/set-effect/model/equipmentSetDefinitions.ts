@@ -14,12 +14,13 @@ import {
 } from "./sets";
 import { EquipmentSetDefinition } from "./types";
 
+// 배열 순서가 곧 노출 순서임. 등급 쌍은 레전더리를 먼저 둠
 export const EQUIPMENT_SET_DEFINITIONS: EquipmentSetDefinition[] = [
   ARCANE_SHADE_SET,
   ABSOLABS_SET,
   CHALLENGER_SET,
-  ROOT_ABYSS_UNIQUE_SET,
   ROOT_ABYSS_LEGENDARY_SET,
+  ROOT_ABYSS_UNIQUE_SET,
   PENSALIR_LEGENDARY_SET,
   PENSALIR_UNIQUE_SET,
   MUSPELL_LEGENDARY_SET,

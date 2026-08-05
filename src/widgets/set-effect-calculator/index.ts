@@ -1,1 +1,1 @@
-export { SetEffectCalculatorPage } from "./ui";
+export { SetEffectCalculator } from "./ui/SetEffectCalculator";

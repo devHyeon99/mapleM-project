@@ -32,7 +32,9 @@ export function SetEffectCalculator() {
   ];
 
   return (
-    <div className="w-full space-y-4">
+    <section className="w-full space-y-4">
+      <h2 className="sr-only">세트 옵션 계산기</h2>
+
       <div className="grid gap-4 md:grid-cols-2">
         {builds.map(({ label, state, result, handlers }) => (
           <BuildEditorCard
@@ -46,6 +48,6 @@ export function SetEffectCalculator() {
       </div>
 
       <ComparisonCard rows={comparisonRows} />
-    </div>
+    </section>
   );
 }

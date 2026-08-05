@@ -54,7 +54,6 @@ export interface StarForceEffectRow {
 export interface EquipmentSetDefinition {
   id: string;
   displayName: string;
-  displayOrder: number;
   minSetCount: number;
   maxSetCount: number;
   nameNormalization?: ItemNameNormalization;

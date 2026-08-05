@@ -3,7 +3,6 @@ import { EquipmentSetDefinition } from "../types";
 export const MUSPELL_UNIQUE_SET: EquipmentSetDefinition = {
   id: "muspell-unique",
   displayName: "무스펠(유니크)",
-  displayOrder: 8,
   minSetCount: 2,
   maxSetCount: 4,
   itemMatchers: [

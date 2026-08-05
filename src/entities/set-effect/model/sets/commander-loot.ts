@@ -3,7 +3,6 @@ import { EquipmentSetDefinition } from "../types";
 export const COMMANDER_LOOT_SET: EquipmentSetDefinition = {
   id: "commander-loot",
   displayName: "군단장 전리품",
-  displayOrder: 11,
   minSetCount: 1,
   maxSetCount: 6,
   itemNames: [

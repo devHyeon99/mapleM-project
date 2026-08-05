@@ -3,7 +3,6 @@ import { EquipmentSetDefinition } from "../types";
 export const MUSPELL_LEGENDARY_SET: EquipmentSetDefinition = {
   id: "muspell-legendary",
   displayName: "무스펠(레전더리)",
-  displayOrder: 9,
   minSetCount: 2,
   maxSetCount: 4,
   itemMatchers: [

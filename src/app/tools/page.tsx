@@ -1,4 +1,4 @@
-import { SetEffectCalculatorPage } from "@/widgets/set-effect-calculator";
+import { SetEffectCalculator } from "@/widgets/set-effect-calculator";
 import { buildToolMetadata } from "./_lib/tool-metadata";
 
 export const metadata = buildToolMetadata({
@@ -27,7 +27,7 @@ export default function ToolsPage() {
         </p>
       </header>
 
-      <SetEffectCalculatorPage />
+      <SetEffectCalculator />
     </section>
   );
 }

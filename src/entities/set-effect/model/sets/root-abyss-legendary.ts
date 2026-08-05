@@ -3,7 +3,6 @@ import { EquipmentSetDefinition } from "../types";
 export const ROOT_ABYSS_LEGENDARY_SET: EquipmentSetDefinition = {
   id: "root-abyss-legendary",
   displayName: "루타비스(레전더리)",
-  displayOrder: 4,
   minSetCount: 2,
   maxSetCount: 4,
   itemMatchers: [

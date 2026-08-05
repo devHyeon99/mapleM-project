@@ -40,17 +40,14 @@ export interface EquipmentSetItemMatcher {
   equipmentLevels?: readonly number[];
 }
 
+// 표기와 단위는 EFFECT_META 가 키 단위로 들고 있음
 export interface SetEffectRow {
   key: EffectKey;
-  label: string;
-  unit: EffectUnit;
   values: EffectValueBySetCount;
 }
 
 export interface StarForceEffectRow {
   key: EffectKey;
-  label: string;
-  unit: EffectUnit;
   values: EffectValueByStarForce;
 }
 

@@ -10,80 +10,54 @@ export const ARCANE_SHADE_SET: EquipmentSetDefinition = {
   setEffects: [
     {
       key: "ignoreDefense",
-      label: "방어율 무시",
-      unit: "%",
       values: { 2: 15, 3: 20, 4: 25, 5: 30, 6: 35, 7: 40 },
     },
     {
       key: "moveSpeedIncrease",
-      label: "이동속도 증가",
-      unit: "%",
       values: { 2: 11, 3: 27, 4: 43, 5: 59, 6: 75, 7: 91 },
     },
     {
       key: "bossDefense",
-      label: "보스 방어력 증가",
-      unit: "%",
       values: { 2: 17, 3: 19, 4: 21, 5: 24, 6: 28, 7: 33 },
     },
     {
       key: "bossAttack",
-      label: "보스 공격력 증가",
-      unit: "%",
       values: { 2: 17, 3: 19, 4: 21, 5: 24, 6: 28, 7: 33 },
     },
     {
       key: "magicDamageReduction",
-      label: "마법 피해 감소",
-      unit: "%",
       values: { 2: 27, 3: 27.5, 4: 55, 5: 55.5, 6: 56, 7: 84 },
     },
     {
       key: "magicDamage",
-      label: "마법 대미지",
-      unit: "%",
       values: { 2: 20, 3: 24, 4: 28, 5: 32, 6: 37, 7: 62 },
     },
     {
       key: "magicAttack",
-      label: "마법 공격력",
-      unit: "%",
       values: { 2: 30, 3: 34, 4: 38, 5: 42, 6: 47, 7: 77 },
     },
     {
       key: "jumpIncrease",
-      label: "점프 높이",
-      unit: "%",
       values: { 2: 11, 3: 27, 4: 43, 5: 59, 6: 75, 7: 91 },
     },
     {
       key: "criticalDamageReduction",
-      label: "치명타 피해 감소",
-      unit: "%",
       values: { 2: 50, 3: 60, 4: 80, 5: 104, 6: 128, 7: 158 },
     },
     {
       key: "physicalDamageReduction",
-      label: "물리 피해 감소",
-      unit: "%",
       values: { 2: 27, 3: 27.5, 4: 55, 5: 55.5, 6: 56, 7: 84 },
     },
     {
       key: "physicalDamage",
-      label: "물리 대미지",
-      unit: "%",
       values: { 2: 20, 3: 24, 4: 28, 5: 32, 6: 37, 7: 62 },
     },
     {
       key: "physicalAttack",
-      label: "물리 공격력",
-      unit: "%",
       values: { 2: 30, 3: 34, 4: 38, 5: 42, 6: 47, 7: 77 },
     },
     {
       key: "maxDamageIncrease",
-      label: "최대 대미지 증가",
-      unit: "flat",
       values: {
         2: 165_000_000,
         3: 210_000_000,
@@ -95,34 +69,24 @@ export const ARCANE_SHADE_SET: EquipmentSetDefinition = {
     },
     {
       key: "finalDamage",
-      label: "최종 대미지",
-      unit: "%",
       values: { 2: 7, 3: 9, 4: 12, 5: 16, 6: 21, 7: 27 },
     },
     {
       key: "penetrationRate",
-      label: "관통률",
-      unit: "%",
       values: { 2: 12, 3: 13.5, 4: 36.5, 5: 38, 6: 39.5, 7: 63.5 },
     },
     {
       key: "criticalDamage",
-      label: "치명타 피해",
-      unit: "%",
       values: { 2: 50, 3: 60, 4: 80, 5: 104, 6: 128, 7: 158 },
     },
     {
       key: "blockRate",
-      label: "블록률",
-      unit: "%",
       values: { 2: 12, 3: 13.5, 4: 36.5, 5: 38, 6: 39.5, 7: 63.5 },
     },
   ],
   starForceEffects: [
     {
       key: "finalDamage",
-      label: "최종 대미지",
-      unit: "%",
       values: {
         55: 9,
         80: 11,
@@ -138,8 +102,6 @@ export const ARCANE_SHADE_SET: EquipmentSetDefinition = {
     },
     {
       key: "maxDamageIncrease",
-      label: "최대 대미지 증가",
-      unit: "flat",
       values: {
         55: 75_000_000,
         80: 90_000_000,
@@ -155,8 +117,6 @@ export const ARCANE_SHADE_SET: EquipmentSetDefinition = {
     },
     {
       key: "physicalAttack",
-      label: "물리 공격력",
-      unit: "%",
       values: {
         55: 17,
         80: 19.5,
@@ -172,8 +132,6 @@ export const ARCANE_SHADE_SET: EquipmentSetDefinition = {
     },
     {
       key: "physicalDamage",
-      label: "물리 대미지",
-      unit: "%",
       values: {
         55: 17,
         80: 19.5,
@@ -189,8 +147,6 @@ export const ARCANE_SHADE_SET: EquipmentSetDefinition = {
     },
     {
       key: "magicAttack",
-      label: "마법 공격력",
-      unit: "%",
       values: {
         55: 17,
         80: 19.5,
@@ -206,8 +162,6 @@ export const ARCANE_SHADE_SET: EquipmentSetDefinition = {
     },
     {
       key: "magicDamage",
-      label: "마법 대미지",
-      unit: "%",
       values: {
         55: 17,
         80: 19.5,
@@ -223,8 +177,6 @@ export const ARCANE_SHADE_SET: EquipmentSetDefinition = {
     },
     {
       key: "bossAttack",
-      label: "보스 공격력 증가",
-      unit: "%",
       values: {
         55: 16,
         80: 19,
@@ -240,8 +192,6 @@ export const ARCANE_SHADE_SET: EquipmentSetDefinition = {
     },
     {
       key: "ignoreDefense",
-      label: "방어율 무시",
-      unit: "%",
       values: {
         55: 7,
         80: 8,

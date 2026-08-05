@@ -26,8 +26,6 @@ export const EXPEDITION_BOSS_LOOT_SET: EquipmentSetDefinition = {
   setEffects: [
     {
       key: "physicalDefense",
-      label: "물리 방어력",
-      unit: "flat",
       values: {
         1: 300,
         2: 500,
@@ -40,8 +38,6 @@ export const EXPEDITION_BOSS_LOOT_SET: EquipmentSetDefinition = {
     },
     {
       key: "accuracy",
-      label: "명중률",
-      unit: "%",
       values: {
         1: 3,
         2: 6,
@@ -54,8 +50,6 @@ export const EXPEDITION_BOSS_LOOT_SET: EquipmentSetDefinition = {
     },
     {
       key: "magicDefense",
-      label: "마법 방어력",
-      unit: "flat",
       values: {
         1: 300,
         2: 500,
@@ -68,8 +62,6 @@ export const EXPEDITION_BOSS_LOOT_SET: EquipmentSetDefinition = {
     },
     {
       key: "maxHp",
-      label: "최대 HP",
-      unit: "flat",
       values: {
         1: 1_000,
         2: 2_000,
@@ -82,8 +74,6 @@ export const EXPEDITION_BOSS_LOOT_SET: EquipmentSetDefinition = {
     },
     {
       key: "hpRecovery",
-      label: "HP 회복력",
-      unit: "flat",
       values: {
         1: 100,
         2: 200,
@@ -96,8 +86,6 @@ export const EXPEDITION_BOSS_LOOT_SET: EquipmentSetDefinition = {
     },
     {
       key: "expRate",
-      label: "경험치 획득량",
-      unit: "%",
       values: {
         3: 3,
         4: 7,
@@ -108,8 +96,6 @@ export const EXPEDITION_BOSS_LOOT_SET: EquipmentSetDefinition = {
     },
     {
       key: "bossDefense",
-      label: "보스 방어력 증가",
-      unit: "%",
       values: {
         4: 3,
         5: 3,
@@ -119,8 +105,6 @@ export const EXPEDITION_BOSS_LOOT_SET: EquipmentSetDefinition = {
     },
     {
       key: "bossAttack",
-      label: "보스 공격력 증가",
-      unit: "%",
       values: {
         5: 3,
         6: 7,
@@ -129,8 +113,6 @@ export const EXPEDITION_BOSS_LOOT_SET: EquipmentSetDefinition = {
     },
     {
       key: "physicalDamageReduction",
-      label: "물리 피해 감소",
-      unit: "%",
       values: {
         6: 4,
         7: 8,
@@ -138,8 +120,6 @@ export const EXPEDITION_BOSS_LOOT_SET: EquipmentSetDefinition = {
     },
     {
       key: "magicDamageReduction",
-      label: "마법 피해 감소",
-      unit: "%",
       values: {
         6: 4,
         7: 8,
@@ -147,24 +127,18 @@ export const EXPEDITION_BOSS_LOOT_SET: EquipmentSetDefinition = {
     },
     {
       key: "maxMp",
-      label: "최대 MP",
-      unit: "flat",
       values: {
         7: 10_000,
       },
     },
     {
       key: "physicalDamage",
-      label: "물리 대미지",
-      unit: "%",
       values: {
         7: 5,
       },
     },
     {
       key: "magicDamage",
-      label: "마법 대미지",
-      unit: "%",
       values: {
         7: 5,
       },

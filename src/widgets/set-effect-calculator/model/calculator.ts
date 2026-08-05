@@ -177,7 +177,7 @@ export const buildComparisonRows = (
 
         return {
           key,
-          // 세트마다 같은 key 를 다른 문구로 적어둔 곳이 있어 A 쪽 표기를 기준으로 삼음
+          // 한쪽에만 있는 스탯이면 남은 쪽 표기를 씀
           label: effectA?.label ?? effectB?.label ?? key,
           unit: effectA?.unit ?? effectB?.unit ?? "%",
           valueA,

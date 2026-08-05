@@ -19,8 +19,6 @@ export const COMMANDER_LOOT_SET: EquipmentSetDefinition = {
   setEffects: [
     {
       key: "maxMp",
-      label: "최대 MP",
-      unit: "flat",
       values: {
         1: 2_000,
         2: 4_000,
@@ -32,8 +30,6 @@ export const COMMANDER_LOOT_SET: EquipmentSetDefinition = {
     },
     {
       key: "maxHp",
-      label: "최대 HP",
-      unit: "flat",
       values: {
         1: 3_000,
         2: 5_000,
@@ -45,8 +41,6 @@ export const COMMANDER_LOOT_SET: EquipmentSetDefinition = {
     },
     {
       key: "accuracy",
-      label: "명중률",
-      unit: "%",
       values: {
         1: 5,
         2: 8,
@@ -58,8 +52,6 @@ export const COMMANDER_LOOT_SET: EquipmentSetDefinition = {
     },
     {
       key: "bossDefense",
-      label: "보스 방어력 증가",
-      unit: "%",
       values: {
         2: 4,
         3: 4,
@@ -70,8 +62,6 @@ export const COMMANDER_LOOT_SET: EquipmentSetDefinition = {
     },
     {
       key: "physicalDamageReduction",
-      label: "물리 피해 감소",
-      unit: "%",
       values: {
         3: 1,
         4: 4,
@@ -81,8 +71,6 @@ export const COMMANDER_LOOT_SET: EquipmentSetDefinition = {
     },
     {
       key: "magicDamageReduction",
-      label: "마법 피해 감소",
-      unit: "%",
       values: {
         3: 1,
         4: 4,
@@ -92,8 +80,6 @@ export const COMMANDER_LOOT_SET: EquipmentSetDefinition = {
     },
     {
       key: "bossAttack",
-      label: "보스 공격력 증가",
-      unit: "%",
       values: {
         3: 4,
         4: 7,
@@ -103,8 +89,6 @@ export const COMMANDER_LOOT_SET: EquipmentSetDefinition = {
     },
     {
       key: "expRate",
-      label: "경험치 획득량",
-      unit: "%",
       values: {
         4: 5,
         5: 7,
@@ -113,8 +97,6 @@ export const COMMANDER_LOOT_SET: EquipmentSetDefinition = {
     },
     {
       key: "stance",
-      label: "스탠스",
-      unit: "flat",
       values: {
         4: 5,
         5: 10,
@@ -123,8 +105,6 @@ export const COMMANDER_LOOT_SET: EquipmentSetDefinition = {
     },
     {
       key: "finalDamage",
-      label: "최종 대미지",
-      unit: "%",
       values: {
         5: 0.5,
         6: 2.5,
@@ -132,8 +112,6 @@ export const COMMANDER_LOOT_SET: EquipmentSetDefinition = {
     },
     {
       key: "maxDamageIncrease",
-      label: "최대 대미지 증가",
-      unit: "flat",
       values: {
         5: 50_000,
         6: 250_000,

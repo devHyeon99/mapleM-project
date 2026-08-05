@@ -1,5 +1,9 @@
 import type { CharacterItemEquipment } from "@/entities/item";
-import { EquipmentSetDefinition, ResolvedSetEffectRow } from "../model";
+import {
+  EFFECT_META,
+  EquipmentSetDefinition,
+  ResolvedSetEffectRow,
+} from "../model";
 
 // 세트 스타포스 계산용으로 장비 한 개의 스타포스를 숫자로 변환
 export function parseStarForce(item: CharacterItemEquipment): number {
@@ -35,8 +39,7 @@ export function resolveSetEffects(
 
       return {
         key: effect.key,
-        label: effect.label,
-        unit: effect.unit,
+        ...EFFECT_META[effect.key],
         value: appliedCount == null ? null : effect.values[appliedCount],
       };
     })
@@ -71,8 +74,7 @@ export function resolveStarForceEffects(
     .map((effect) => {
       return {
         key: effect.key,
-        label: effect.label,
-        unit: effect.unit,
+        ...EFFECT_META[effect.key],
         value:
           appliedThreshold === null ? null : effect.values[appliedThreshold],
       };

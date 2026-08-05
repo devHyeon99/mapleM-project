@@ -21,8 +21,6 @@ export const DAWN_BOSS_SET: EquipmentSetDefinition = {
   setEffects: [
     {
       key: "maxHp",
-      label: "최대 HP",
-      unit: "flat",
       values: {
         2: 5_000,
         3: 5_000,
@@ -36,8 +34,6 @@ export const DAWN_BOSS_SET: EquipmentSetDefinition = {
     },
     {
       key: "maxMp",
-      label: "최대 MP",
-      unit: "flat",
       values: {
         2: 3_000,
         3: 3_000,
@@ -51,8 +47,6 @@ export const DAWN_BOSS_SET: EquipmentSetDefinition = {
     },
     {
       key: "expRate",
-      label: "경험치 획득량",
-      unit: "%",
       values: {
         2: 3,
         3: 3,
@@ -66,8 +60,6 @@ export const DAWN_BOSS_SET: EquipmentSetDefinition = {
     },
     {
       key: "bossDefense",
-      label: "보스 방어력 증가",
-      unit: "%",
       values: {
         2: 3,
         3: 3,
@@ -81,8 +73,6 @@ export const DAWN_BOSS_SET: EquipmentSetDefinition = {
     },
     {
       key: "bossAttack",
-      label: "보스 공격력 증가",
-      unit: "%",
       values: {
         2: 3,
         3: 3,
@@ -96,8 +86,6 @@ export const DAWN_BOSS_SET: EquipmentSetDefinition = {
     },
     {
       key: "finalDamage",
-      label: "최종 대미지",
-      unit: "%",
       values: {
         2: 0,
         3: 3,
@@ -111,8 +99,6 @@ export const DAWN_BOSS_SET: EquipmentSetDefinition = {
     },
     {
       key: "maxDamageIncrease",
-      label: "최대 대미지",
-      unit: "flat",
       values: {
         2: 3_000_000,
         3: 7_500_000,
@@ -126,8 +112,6 @@ export const DAWN_BOSS_SET: EquipmentSetDefinition = {
     },
     {
       key: "ignoreDefense",
-      label: "방어율 무시",
-      unit: "%",
       values: {
         2: 0,
         3: 0,
@@ -141,8 +125,6 @@ export const DAWN_BOSS_SET: EquipmentSetDefinition = {
     },
     {
       key: "stance",
-      label: "스탠스",
-      unit: "flat",
       values: {
         2: 0,
         3: 0,

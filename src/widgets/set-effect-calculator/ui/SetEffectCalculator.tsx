@@ -1,6 +1,6 @@
 "use client";
 
-import { useCalculator } from "../model/use-calculator";
+import { useCalculator } from "../model";
 import { BuildEditorCard } from "./BuildEditorCard";
 import { ComparisonCard } from "./ComparisonCard";
 

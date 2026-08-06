@@ -11,6 +11,8 @@ export function PotentialSimulator() {
 
   return (
     <section className="w-full space-y-4">
+      <h2 className="sr-only">환생의 불꽃 설정과 결과</h2>
+
       <div className="grid gap-4 lg:grid-cols-2">
         <PotentialSimulatorSettingsCard
           flameType={state.flameType}

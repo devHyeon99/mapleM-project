@@ -11,6 +11,8 @@ export function StarforceSimulator() {
 
   return (
     <section className="w-full space-y-4">
+      <h2 className="sr-only">스타포스 강화 설정과 결과</h2>
+
       <div className="grid gap-4 lg:grid-cols-2">
         <StarforceSimulatorSettingsCard
           equipmentCategory={state.equipmentCategory}

@@ -5,7 +5,7 @@ export function StarforceSimulatorHelpCard() {
   return (
     <Card className="gap-4 lg:col-span-2">
       <CardHeader className="flex justify-between">
-        <CardTitle className="text-lg">스타포스 확률표</CardTitle>
+        <CardTitle className="text-lg">스타포스 시뮬레이터 도움말</CardTitle>
         <Link
           className="self-end text-sm font-medium"
           prefetch={false}

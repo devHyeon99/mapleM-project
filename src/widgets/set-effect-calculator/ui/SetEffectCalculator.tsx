@@ -3,6 +3,7 @@
 import { useCalculator } from "../model";
 import { BuildEditorCard } from "./BuildEditorCard";
 import { ComparisonCard } from "./ComparisonCard";
+import { SetEffectHelpCard } from "./SetEffectHelpCard";
 
 export function SetEffectCalculator() {
   const {
@@ -33,7 +34,7 @@ export function SetEffectCalculator() {
 
   return (
     <section className="w-full space-y-4">
-      <h2 className="sr-only">세트 옵션 계산기</h2>
+      <h2 className="sr-only">세팅 입력과 비교</h2>
 
       <div className="grid gap-4 md:grid-cols-2">
         {builds.map(({ label, state, result, handlers }) => (
@@ -48,6 +49,8 @@ export function SetEffectCalculator() {
       </div>
 
       <ComparisonCard rows={comparisonRows} />
+
+      <SetEffectHelpCard />
     </section>
   );
 }

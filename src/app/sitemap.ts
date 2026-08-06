@@ -8,8 +8,17 @@ import { ALL_WORLD_NAME, WORLD_NAMES } from "@/shared/config/constants/worlds";
 // 이 사이트맵은 빌드 시점에 한 번 생성되므로 페이지별 실제 수정 시각을 댈 수 없음
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  // /tools 하위 도구는 검색 노출 대상이 아니므로 /tools 하나만 싣는다.
-  const staticRoutes = ["/", "/guild", "/guild/promotion", "/ranking", "/tools"];
+  // 도구는 페이지마다 제목·설명·기능이 달라 중복이 아니므로 하위 도구까지 전부 싣는다.
+  const staticRoutes = [
+    "/",
+    "/guild",
+    "/guild/promotion",
+    "/ranking",
+    "/tools",
+    "/tools/cube",
+    "/tools/potential",
+    "/tools/starforce",
+  ];
 
   // 정적으로 굽는 조합이 그대로 색인 대상이다. 월드별 페이지는 제목·설명·표가
   // 서로 달라 중복이 아니고, canonical 도 자기 자신을 가리킨다.

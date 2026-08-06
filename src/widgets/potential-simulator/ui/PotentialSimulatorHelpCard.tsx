@@ -5,7 +5,7 @@ export function PotentialSimulatorHelpCard() {
   return (
     <Card className="gap-4 lg:col-span-2">
       <CardHeader className="flex justify-between">
-        <CardTitle className="text-lg">시뮬레이터 도움말</CardTitle>
+        <CardTitle className="text-lg">추가옵션 시뮬레이터 도움말</CardTitle>
         <Link
           className="self-end text-sm font-medium"
           prefetch={false}

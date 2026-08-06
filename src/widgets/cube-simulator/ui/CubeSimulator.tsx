@@ -46,8 +46,9 @@ export function CubeSimulator() {
           cubeUsageCounts={state.cubeUsageCounts}
           upgradeProgress={state.upgradeProgress}
         />
-        <CubeSimulatorHelpCard />
       </div>
+
+      <CubeSimulatorHelpCard />
     </section>
   );
 }

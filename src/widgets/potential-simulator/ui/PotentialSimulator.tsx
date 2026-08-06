@@ -39,8 +39,9 @@ export function PotentialSimulator() {
           totalRollCount={state.totalRollCount}
           latestResult={state.latestResult}
         />
-        <PotentialSimulatorHelpCard />
       </div>
+
+      <PotentialSimulatorHelpCard />
     </section>
   );
 }

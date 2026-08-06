@@ -88,7 +88,7 @@ export function StarforceSimulatorResultCard({
         <CardTitle>스타포스 강화 결과</CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
-        <div className="bg-secondary ring-border grid gap-2 rounded-2xl p-4 shadow-sm ring">
+        <div className="grid gap-2">
           <div className="grid grid-cols-2 gap-x-4 gap-y-2">
             <SummaryRow label="장비 종류" value={equipmentCategoryLabel} />
             <SummaryRow label="총 시행" value={`${totalAttemptCount}회`} />

@@ -47,9 +47,9 @@ export function StarforceSimulator() {
           maxStarforce={state.maxStarforce}
           isDestroyed={state.isDestroyed}
         />
-
-        <StarforceSimulatorHelpCard />
       </div>
+
+      <StarforceSimulatorHelpCard />
     </section>
   );
 }

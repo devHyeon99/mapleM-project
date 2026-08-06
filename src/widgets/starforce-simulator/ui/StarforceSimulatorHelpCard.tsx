@@ -1,35 +1,27 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/shared/ui/card";
-import Link from "next/link";
+import { HelpCard, SIMULATOR_DISCLAIMER } from "@/shared/ui/HelpCard";
+
+const PROBABILITY_URL =
+  "https://m.nexon.com/probability/5782?language=ko&theme=";
+
+const SECTIONS = [
+  {
+    title: "옵션 효과",
+    items: [
+      "스타캐치(성공 +5%), 럭키데이(선택 수치만큼 성공 증가), 세이프티(하락 방지), 프로텍트(파괴 방지)",
+    ],
+  },
+  {
+    title: "시뮬레이터 이용 안내",
+    items: [SIMULATOR_DISCLAIMER],
+  },
+];
 
 export function StarforceSimulatorHelpCard() {
   return (
-    <Card className="gap-4 lg:col-span-2">
-      <CardHeader className="flex justify-between">
-        <CardTitle className="text-lg">스타포스 시뮬레이터 도움말</CardTitle>
-        <Link
-          className="self-end text-sm font-medium"
-          prefetch={false}
-          href="https://m.nexon.com/probability/5782?language=ko&theme="
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          확률표 보기
-        </Link>
-      </CardHeader>
-      <CardContent className="space-y-4">
-        <div className="bg-secondary ring-border grid gap-1 rounded-2xl p-4 text-sm shadow-sm ring">
-          <p className="font-medium">시뮬레이터 안내</p>
-          <p className="text-muted-foreground">
-            - 옵션 효과: 스타캐치(성공 +5%), 럭키데이(선택 수치만큼 성공 증가),
-            세이프티(하락 방지), 프로텍트(파괴 방지)
-          </p>
-
-          <p className="text-muted-foreground">
-            - 본 시뮬레이터는 넥슨이 공개한 확률표를 기준으로 구현했지만, 실제
-            결과와 차이가 있을 수 있습니다. 참고용으로만 이용해 주세요.
-          </p>
-        </div>
-      </CardContent>
-    </Card>
+    <HelpCard
+      title="스타포스 시뮬레이터 도움말"
+      sections={SECTIONS}
+      probabilityUrl={PROBABILITY_URL}
+    />
   );
 }

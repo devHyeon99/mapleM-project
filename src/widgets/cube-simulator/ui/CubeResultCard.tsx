@@ -91,17 +91,15 @@ export function CubeResultCard({
         <CardTitle>큐브 결과</CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
-        <div className="bg-secondary ring-border grid gap-2 rounded-2xl p-4 text-sm shadow-sm ring">
-          <div className="grid grid-cols-2 gap-x-4 gap-y-2">
-            <SummaryRow
-              label="장비 종류"
-              value={potentialData ? potentialData.label : "-"}
-            />
-            <SummaryRow
-              label="장비 레벨"
-              value={potentialData ? String(potentialData.level) : "-"}
-            />
-          </div>
+        <div className="grid gap-2 text-sm">
+          <SummaryRow
+            label="장비 종류"
+            value={potentialData ? potentialData.label : "-"}
+          />
+          <SummaryRow
+            label="장비 레벨"
+            value={potentialData ? String(potentialData.level) : "-"}
+          />
 
           <SummaryRow
             label="큐브 종류"

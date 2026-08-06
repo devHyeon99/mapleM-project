@@ -58,7 +58,7 @@ export function PotentialSimulatorResultCard({
         <CardTitle>추가옵션 결과</CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
-        <div className="bg-secondary ring-border grid gap-2 rounded-2xl p-4 shadow-sm ring">
+        <div className="grid gap-2">
           <SummaryRow label="환생의 불꽃 종류" value={flameLabel} />
           <SummaryRow label="장비 분류" value={equipmentLabel} />
           <SummaryRow label={levelRowLabel} value={levelRowValue} />
@@ -68,7 +68,7 @@ export function PotentialSimulatorResultCard({
 
           {latestResult ? (
             <div className="grid gap-2 text-sm">
-              <span className="text-sm font-medium">옵션결과</span>
+              <span className="font-medium">옵션결과</span>
               {latestResult.options.map((option, index) => (
                 <SummaryRow
                   key={`${option.key}-${index}`}

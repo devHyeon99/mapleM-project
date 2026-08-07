@@ -91,11 +91,6 @@ function toNextStar(currentStar: number, outcome: StarforceOutcome) {
 }
 
 const starforceRateModifiers: StarforceRateModifier[] = [
-  // 스타캐치 활성화 시 성공 확률 +5%
-  (rate, context) => {
-    if (!context.options.starCatchSuccess) return rate;
-    return increaseSuccessRate(rate, 5);
-  },
   // 럭키데이 주문서 사용 시 선택한 수치만큼 성공 확률 증가
   (rate, context) => {
     return increaseSuccessRate(rate, context.options.luckyDayRate);

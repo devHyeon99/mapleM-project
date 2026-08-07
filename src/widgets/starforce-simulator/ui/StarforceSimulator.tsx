@@ -26,7 +26,6 @@ export function StarforceSimulator() {
           equipmentCategoryOptions={state.equipmentCategoryOptions}
           onEquipmentCategoryChange={actions.onEquipmentCategoryChange}
           onCurrentStarChange={actions.onCurrentStarChange}
-          onStarCatchChange={actions.onStarCatchChange}
           onSafetyShieldChange={actions.onSafetyShieldChange}
           onProtectShieldChange={actions.onProtectShieldChange}
           onLuckyDayRateChange={actions.onLuckyDayRateChange}

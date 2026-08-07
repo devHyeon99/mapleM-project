@@ -24,7 +24,6 @@ export type StarforceModifierOptions = {
   safetyShield: boolean;
   protectShield: boolean;
   luckyDayRate: LuckyDayRate;
-  starCatchSuccess: boolean;
 };
 
 export type StarforceSimulationContext = {

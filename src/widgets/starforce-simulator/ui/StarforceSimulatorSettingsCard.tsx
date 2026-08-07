@@ -24,7 +24,6 @@ type Props = {
   }>;
   onEquipmentCategoryChange: (value: StarforceEquipmentCategory) => void;
   onCurrentStarChange: (value: number) => void;
-  onStarCatchChange: (checked: boolean) => void;
   onSafetyShieldChange: (checked: boolean) => void;
   onProtectShieldChange: (checked: boolean) => void;
   onLuckyDayRateChange: (value: LuckyDayRate) => void;
@@ -73,7 +72,6 @@ export function StarforceSimulatorSettingsCard({
   equipmentCategoryOptions,
   onEquipmentCategoryChange,
   onCurrentStarChange,
-  onStarCatchChange,
   onSafetyShieldChange,
   onProtectShieldChange,
   onLuckyDayRateChange,
@@ -120,12 +118,6 @@ export function StarforceSimulatorSettingsCard({
         </div>
 
         <div className="grid grid-cols-2 gap-4">
-          <ToggleSelectField
-            id="starforce-star-catch"
-            label="스타캐치 활성화"
-            checked={options.starCatchSuccess}
-            onCheckedChange={onStarCatchChange}
-          />
           <SelectField
             id="starforce-lucky-day-rate"
             label="럭키데이 주문서"

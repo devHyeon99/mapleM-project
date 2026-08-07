@@ -1,6 +1,10 @@
 import { describe, expect, it, vi } from "vitest";
 
-import { DEFAULT_STARFORCE_OPTIONS } from "./data";
+import {
+  DEFAULT_STARFORCE_OPTIONS,
+  STARFORCE_BASE_RATE_TABLE,
+  getBaseRateByTargetStar,
+} from "./data";
 import { resolveStarforceRate, simulateStarforce } from "./simulator";
 import type { StarforceModifierOptions } from "./types";
 
@@ -24,43 +28,50 @@ function totalOf(rate: {
   return rate.success + rate.keep + rate.decrease + rate.destroy;
 }
 
+describe("STARFORCE_BASE_RATE_TABLE", () => {
+  it("모든 행의 확률 합이 100 이다", () => {
+    for (const row of STARFORCE_BASE_RATE_TABLE) {
+      expect(totalOf(row.rate)).toBe(100);
+    }
+  });
+
+  it("하락은 6성, 파괴는 16성 도전부터 붙는다", () => {
+    expect(getBaseRateByTargetStar(5).decrease).toBe(0);
+    expect(getBaseRateByTargetStar(6).decrease).toBe(15);
+
+    expect(getBaseRateByTargetStar(15).destroy).toBe(0);
+    expect(getBaseRateByTargetStar(16).destroy).toBe(5);
+  });
+});
+
 describe("resolveStarforceRate", () => {
   it("모든 옵션 조합에서 확률 합이 100을 유지한다", () => {
     for (let star = 0; star < 36; star += 1) {
       for (const luckyDayRate of [0, 3, 5, 7, 10] as const) {
-        for (const starCatchSuccess of [false, true]) {
-          for (const safetyShield of [false, true]) {
-            for (const protectShield of [false, true]) {
-              const rate = resolveStarforceRate(
-                makeContext(star, {
-                  luckyDayRate,
-                  starCatchSuccess,
-                  safetyShield,
-                  protectShield,
-                }),
-              );
+        for (const safetyShield of [false, true]) {
+          for (const protectShield of [false, true]) {
+            const rate = resolveStarforceRate(
+              makeContext(star, {
+                luckyDayRate,
+                safetyShield,
+                protectShield,
+              }),
+            );
 
-              expect(totalOf(rate)).toBeCloseTo(100, 3);
-              expect(Math.min(...Object.values(rate))).toBeGreaterThanOrEqual(
-                0,
-              );
-            }
+            expect(totalOf(rate)).toBeCloseTo(100, 3);
+            expect(Math.min(...Object.values(rate))).toBeGreaterThanOrEqual(0);
           }
         }
       }
     }
   });
 
-  it("스타캐치와 럭키데이는 유지/하락/파괴 확률을 깎아 성공 확률로 옮긴다", () => {
-    // 15성 -> 16성 기본: 성공 10 / 유지 70 / 하락 15 / 파괴 5
-    const base = resolveStarforceRate(
-      makeContext(15, { starCatchSuccess: false }),
-    );
-    expect(base.success).toBe(10);
+  it("럭키데이는 유지/하락/파괴 확률을 깎아 성공 확률로 옮긴다", () => {
+    // 15성 -> 16성 기본: 성공 15 / 유지 65 / 하락 15 / 파괴 5
+    const base = resolveStarforceRate(makeContext(15));
+    expect(base.success).toBe(15);
 
-    const boosted = resolveStarforceRate(
-      makeContext(15, { starCatchSuccess: true, luckyDayRate: 10 }),
-    );
+    const boosted = resolveStarforceRate(makeContext(15, { luckyDayRate: 10 }));
     expect(boosted.success).toBe(25);
     expect(boosted.keep).toBe(55);
     expect(boosted.decrease).toBe(15);
@@ -70,7 +81,6 @@ describe("resolveStarforceRate", () => {
   it("쉴드는 해당 확률을 유지 확률로 흡수한다", () => {
     const rate = resolveStarforceRate(
       makeContext(15, {
-        starCatchSuccess: false,
         safetyShield: true,
         protectShield: true,
       }),
@@ -78,14 +88,12 @@ describe("resolveStarforceRate", () => {
 
     expect(rate.decrease).toBe(0);
     expect(rate.destroy).toBe(0);
-    expect(rate.keep).toBe(90);
+    expect(rate.keep).toBe(85);
   });
 
   it("성공 확률 증가분이 남은 확률보다 크면 성공 100%에서 멈춘다", () => {
-    // 1성 기본: 성공 95 / 유지 5 -> 스타캐치 5 + 럭키데이 10 은 5까지만 반영된다.
-    const rate = resolveStarforceRate(
-      makeContext(0, { starCatchSuccess: true, luckyDayRate: 10 }),
-    );
+    // 1성 -> 2성 기본: 성공 95 / 유지 5 -> 럭키데이 10 은 5까지만 반영된다.
+    const rate = resolveStarforceRate(makeContext(1, { luckyDayRate: 10 }));
 
     expect(rate.success).toBe(100);
     expect(totalOf(rate)).toBe(100);
@@ -97,7 +105,7 @@ describe("simulateStarforce", () => {
     const randomSpy = vi.spyOn(Math, "random");
 
     try {
-      // 16성 도전(성공 10 + 스타캐치 5 = 15) -> roll 0 은 성공.
+      // 16성 도전(성공 15) -> roll 0 은 성공.
       randomSpy.mockReturnValue(0);
       const success = simulateStarforce(makeContext(15));
       expect(success.outcome).toBe("success");
@@ -132,12 +140,14 @@ describe("simulateStarforce", () => {
     }
   });
 
-  it("0성에서 하락해도 음수가 되지 않는다", () => {
+  it("1성 도전은 어떤 난수에서도 성공한다", () => {
     const randomSpy = vi.spyOn(Math, "random").mockReturnValue(0.99);
 
     try {
       const result = simulateStarforce(makeContext(0));
-      expect(result.nextStar).toBeGreaterThanOrEqual(0);
+
+      expect(result.outcome).toBe("success");
+      expect(result.nextStar).toBe(1);
     } finally {
       randomSpy.mockRestore();
     }

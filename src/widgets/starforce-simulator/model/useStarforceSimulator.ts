@@ -170,13 +170,6 @@ export function useStarforceSimulator() {
     }
   }, [canEnhance, currentStar, equipmentCategory, resolvedOptions]);
 
-  const handleStarCatchChange = useCallback((checked: boolean) => {
-    setOptions((prev) => ({
-      ...prev,
-      starCatchSuccess: checked,
-    }));
-  }, []);
-
   const handleSafetyShieldChange = useCallback(
     (checked: boolean) => {
       if (checked && !canUseSafetyShield) return;
@@ -236,7 +229,6 @@ export function useStarforceSimulator() {
     actions: {
       onEquipmentCategoryChange: handleEquipmentCategoryChange,
       onCurrentStarChange: handleCurrentStarChange,
-      onStarCatchChange: handleStarCatchChange,
       onSafetyShieldChange: handleSafetyShieldChange,
       onProtectShieldChange: handleProtectShieldChange,
       onLuckyDayRateChange: handleLuckyDayRateChange,

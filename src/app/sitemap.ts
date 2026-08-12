@@ -18,6 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/tools/cube",
     "/tools/potential",
     "/tools/starforce",
+    "/tools/transmission",
   ];
 
   // 정적으로 굽는 조합이 그대로 색인 대상이다. 월드별 페이지는 제목·설명·표가

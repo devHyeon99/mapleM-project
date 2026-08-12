@@ -9,7 +9,8 @@ const TOOL_LINKS = [
   { href: "/tools", label: "세트옵션 계산기" },
   { href: "/tools/cube", label: "큐브 시뮬레이터" },
   { href: "/tools/potential", label: "추가옵션 시뮬레이터" },
-  { href: "/tools/starforce", label: "스타포스 강화" },
+  { href: "/tools/starforce", label: "스타포스 시뮬레이터" },
+  { href: "/tools/transmission", label: "장비 전수 계산" },
 ] as const;
 
 export function ToolsTabs() {
@@ -17,7 +18,7 @@ export function ToolsTabs() {
 
   return (
     <nav aria-label="도구 이동" className="mb-2 w-full">
-      <ul className="bg-muted grid list-none grid-cols-2 gap-1 rounded-3xl p-1 shadow-sm md:grid-cols-4">
+      <ul className="bg-muted grid list-none grid-cols-2 gap-1 rounded-3xl p-1 shadow-sm md:grid-cols-5">
         {TOOL_LINKS.map((link) => {
           const isActive = pathname === link.href;
 

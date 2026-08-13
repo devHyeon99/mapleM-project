@@ -11,5 +11,6 @@ export const ItemBaseOption = ({ item }: Props) => (
     options={item.item_basic_option}
     labelClassName="text-game-muted"
     valueClassName="text-orange-400"
+    masteryPoint={item.mastery_info?.base_option_point}
   />
 );

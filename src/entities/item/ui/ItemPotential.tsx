@@ -10,6 +10,7 @@ export const ItemPotential = ({ item }: Props) => (
     title="잠재능력"
     options={item.item_potential_option}
     grade={item.item_potential_option_grade}
+    masteryPoint={item.mastery_info?.potential_option_point}
     withGradeBadge
   />
 );

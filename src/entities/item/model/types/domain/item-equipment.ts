@@ -37,11 +37,15 @@ export interface CharacterItemEquipment {
   soul_equipment_flag?: string;
   soul_info?: SoulInfo | null;
   emblem_info?: EmblemInfo | null;
+
+  // 마스터리
+  mastery_info?: MasteryInfo | null;
 }
 
 export interface EquipmentPreset {
   preset_no: number;
   item_equipment: CharacterItemEquipment[];
+  soul_set_option?: string | null;
 }
 
 export interface SoulInfo {
@@ -54,6 +58,21 @@ export interface EmblemInfo {
   emblem_name: string;
   emblem_level: number;
   emblem_option: string;
+  description?: string;
+}
+
+/** 아이템 마스터리 정보 */
+export interface MasteryInfo {
+  mastery_level: number;
+  mastery_exp: number;
+  /** 기본 옵션 보너스 포인트 */
+  base_option_point: number;
+  /** 잠재 옵션 보너스 포인트 */
+  potential_option_point: number;
+  /** 추가 옵션 보너스 포인트 */
+  additional_option_point: number;
+  /** 에디셔널 잠재 옵션 보너스 포인트 */
+  additional_potential_option_point: number;
   description?: string;
 }
 

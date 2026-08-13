@@ -10,5 +10,6 @@ export const ItemAdditionalOption = ({ item }: Props) => (
     title="추가 옵션"
     options={item.item_additional_option}
     grade={item.item_additional_option_grade}
+    masteryPoint={item.mastery_info?.additional_option_point}
   />
 );

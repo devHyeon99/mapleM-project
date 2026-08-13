@@ -10,6 +10,7 @@ export const ItemAdditionalPotential = ({ item }: Props) => (
     title="에디셔널 잠재능력"
     options={item.item_additional_potential_option}
     grade={item.item_additional_potential_option_grade}
+    masteryPoint={item.mastery_info?.additional_potential_option_point}
     withGradeBadge
   />
 );

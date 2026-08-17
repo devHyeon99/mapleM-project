@@ -6,6 +6,7 @@ import { CharacterDetail } from "@/widgets/character-detail";
 import { fetchOcid, fetchCharacterDetail } from "@/entities/character/server";
 import { safeDecode } from "@/shared/lib/url";
 import { worldFromSlug } from "@/shared/config/constants/worlds";
+import { OG_IMAGE, OG_IMAGE_SIZE } from "@/shared/config/site";
 import { NotFoundMetadata } from "./not-found";
 
 interface CharacterPageProps {
@@ -41,13 +42,13 @@ export async function generateMetadata({
     openGraph: {
       title,
       description,
-      images: ["/og-image.png"],
+      images: [{ url: OG_IMAGE, ...OG_IMAGE_SIZE }],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: ["/og-image.png"],
+      images: [OG_IMAGE],
     },
     robots: {
       index: false,

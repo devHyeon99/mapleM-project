@@ -11,7 +11,12 @@ import {
   RankingSearch,
   RankingSearchFallback,
 } from "@/features/ranking-search";
-import { SITE_NAME, SITE_URL } from "@/shared/config/site";
+import {
+  OG_IMAGE,
+  OG_IMAGE_SIZE,
+  SITE_NAME,
+  SITE_URL,
+} from "@/shared/config/site";
 import { getRankingPageData } from "./get-ranking-page-data";
 import type { RankingFilters } from "./ranking-query";
 
@@ -45,7 +50,7 @@ export function buildRankingMetadata(
 
   // 2페이지 이후는 1페이지 URL 을 대표로 삼는다.
   const fullUrl = `${SITE_URL}${rankingHref(type, { worldName })}`;
-  const ogImageUrl = `${SITE_URL}/og-image.png`;
+  const ogImageUrl = `${SITE_URL}${OG_IMAGE}`;
 
   return {
     title,
@@ -63,8 +68,7 @@ export function buildRankingMetadata(
       images: [
         {
           url: ogImageUrl,
-          width: 1200,
-          height: 630,
+          ...OG_IMAGE_SIZE,
           alt: "메엠지지 메이플스토리M 랭킹",
         },
       ],

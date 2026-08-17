@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
-import { SITE_NAME } from "@/shared/config/site";
-
-const OG_IMAGE = "/og-image.png";
+import { OG_IMAGE, OG_IMAGE_SIZE, SITE_NAME } from "@/shared/config/site";
 
 type ToolMetadataInput = {
   title: string;
@@ -35,8 +33,7 @@ export function buildToolMetadata({
       images: [
         {
           url: OG_IMAGE,
-          width: 1200,
-          height: 630,
+          ...OG_IMAGE_SIZE,
           alt: `${SITE_NAME} ${title}`,
         },
       ],

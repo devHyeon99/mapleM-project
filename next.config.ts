@@ -1,7 +1,20 @@
+import { createHash } from "node:crypto";
+import { readFileSync } from "node:fs";
+import path from "node:path";
 import type { NextConfig } from "next";
 import bundleAnalyzer from "@next/bundle-analyzer";
 
+// OG 이미지 내용 해시. 이미지를 교체하면 값이 바뀌므로 크롤러·브라우저 캐시가 자동으로 갱신됨
+const ogVersion = createHash("sha1")
+  .update(readFileSync(path.join(process.cwd(), "public/og-image.png")))
+  .digest("hex")
+  .slice(0, 8);
+
 const nextConfig: NextConfig = {
+  env: {
+    NEXT_PUBLIC_OG_VERSION: ogVersion,
+  },
+
   poweredByHeader: false, // 보안상 'X-Powered-By: Next.js' 헤더를 응답에서
 
   // 개발 환경 데이터 페칭 로깅 설정

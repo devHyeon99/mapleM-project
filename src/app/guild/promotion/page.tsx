@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CONTACT_URL } from "@/shared/config/site";
+import { CONTACT_URL, OG_IMAGE, OG_IMAGE_SIZE } from "@/shared/config/site";
 import { Button } from "@/shared/ui/button";
 import { GuildPromotionView } from "@/entities/guild-promotion/ui/GuildPromotionView";
 import { getGuildPromotions } from "@/entities/guild-promotion/api/get-guild-promotions";
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     title: "메이플스토리M 길드 홍보 게시판 - 메엠지지",
     description: "메이플스토리M 길드원을 모집 중인 길드를 한곳에서 확인하세요.",
     url: "/guild/promotion",
-    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
+    images: [{ url: OG_IMAGE, ...OG_IMAGE_SIZE }],
   },
 };
 

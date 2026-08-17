@@ -7,6 +7,7 @@ import {
   CharactersSearchResultSkeleton,
 } from "@/widgets/characters-search-result";
 import { safeDecode } from "@/shared/lib/url";
+import { OG_IMAGE, OG_IMAGE_SIZE } from "@/shared/config/site";
 
 export async function generateMetadata({
   params,
@@ -24,13 +25,13 @@ export async function generateMetadata({
     openGraph: {
       title,
       description,
-      images: ["/og-image.png"],
+      images: [{ url: OG_IMAGE, ...OG_IMAGE_SIZE }],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: ["/og-image.png"],
+      images: [OG_IMAGE],
     },
     robots: {
       index: false,

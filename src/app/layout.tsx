@@ -4,7 +4,12 @@ import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { Providers } from "@/app/providers/Providers";
-import { SITE_METADATA_BASE, SITE_NAME } from "@/shared/config/site";
+import {
+  OG_IMAGE,
+  OG_IMAGE_SIZE,
+  SITE_METADATA_BASE,
+  SITE_NAME,
+} from "@/shared/config/site";
 import { Header, Footer } from "@/widgets/layout";
 
 const pretendard = localFont({
@@ -18,7 +23,6 @@ const pretendard = localFont({
 const SHARE_TITLE = `${SITE_NAME} - 메이플스토리M 캐릭터 검색 & 종합 정보`;
 const SHARE_DESCRIPTION =
   "메이플스토리M 캐릭터 정보, 랭킹, 게임 정보를 한눈에 확인하세요.";
-const OG_IMAGE = "/og-image.png";
 
 export const metadata: Metadata = {
   metadataBase: SITE_METADATA_BASE,
@@ -47,8 +51,7 @@ export const metadata: Metadata = {
     images: [
       {
         url: OG_IMAGE,
-        width: 1200,
-        height: 630,
+        ...OG_IMAGE_SIZE,
         alt: `${SITE_NAME} 미리보기`,
       },
     ],

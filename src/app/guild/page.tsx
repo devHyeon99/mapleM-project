@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { OG_IMAGE, OG_IMAGE_SIZE } from "@/shared/config/site";
 import { GuildSearch } from "@/features/guild-search";
 import { GuildPromotionSection } from "./_lib/GuildPromotionSection";
 import { SharenianGuildBoard } from "./_lib/SharenianGuildBoard";
@@ -19,9 +20,8 @@ export const metadata: Metadata = {
     url: "/guild",
     images: [
       {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
+        url: OG_IMAGE,
+        ...OG_IMAGE_SIZE,
         alt: "메엠지지 길드 검색",
       },
     ],
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     title: "메이플스토리M 길드 검색 - 메엠지지",
     description:
       "메엠지지에서 메이플스토리M 길드 검색을 통해 상세한 길드 정보를 확인해보세요.",
-    images: ["/og-image.png"],
+    images: [OG_IMAGE],
   },
 };
 

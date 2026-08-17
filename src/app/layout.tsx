@@ -64,16 +64,6 @@ export const metadata: Metadata = {
     description: SHARE_DESCRIPTION,
     images: [OG_IMAGE],
   },
-  icons: {
-    // 구글은 48 의 배수 정사각형 파비콘만 검색 결과에 쓴다. 32x32 인 favicon.ico 는
-    // 요건 미달이라 기본 아이콘으로 대체되므로, 96x96 PNG 를 별도로 선언한다.
-    // .ico 는 브라우저 탭용으로 남겨둔다.
-    icon: [
-      { url: "/favicon-96.png", sizes: "96x96", type: "image/png" },
-      { url: "/favicon.ico", sizes: "32x32" },
-    ],
-    apple: "/apple-touch-icon.png",
-  },
   robots: {
     index: true,
     follow: true,

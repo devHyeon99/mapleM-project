@@ -17,42 +17,12 @@ import {
 import { Input } from "@/shared/ui/input";
 import { Label } from "@/shared/ui/label";
 import { SegmentedToggle } from "@/shared/ui/SegmentedToggle";
+import { saveImageDataUrl } from "@/shared/lib/capture-image";
 import {
   DEFAULT_PHOTO_CARD_BACKGROUND,
   PHOTO_CARD_BACKGROUNDS,
 } from "../model/backgrounds";
 import { PhotoCard, formatCardDate } from "./PhotoCard";
-
-/**
- * iOS 는 `<a download>` 을 무시해서 눌러도 아무 일이 없다. 아이폰 크롬도 속은
- * WebKit 이라 똑같다. 대신 공유 시트를 띄우면 "이미지 저장" 으로 앨범에 넣을 수 있다.
- *
- * OS 를 UA 로 찍지 않고, 공유 시트가 자연스러운 환경(손가락으로 쓰는 기기)인지로
- * 고른다. 데스크톱은 기존처럼 바로 내려받는다.
- */
-const prefersShareSheet = (file: File): boolean => {
-  if (typeof navigator === "undefined") return false;
-  if (!navigator.canShare?.({ files: [file] })) return false;
-
-  return window.matchMedia("(pointer: coarse)").matches;
-};
-
-/**
- * iOS 판별. `<a download>` 무시는 기능 탐지로 알아낼 방법이 없어서 UA 를 본다.
- * (아이패드는 UA 가 맥으로 나와서 터치 지원까지 같이 확인한다.)
- *
- * 공유 시트는 HTTPS 에서만 쓸 수 있다. 사내망 IP(http://172.x.x.x) 로 열어보면
- * navigator.share 가 아예 없어서, iOS 에서는 저장할 방법이 하나도 남지 않는다.
- * 그때는 완성 이미지를 띄워 길게 눌러 저장하게 한다.
- */
-const isIOS = (): boolean => {
-  if (typeof navigator === "undefined") return false;
-
-  return (
-    /iP(hone|od|ad)/.test(navigator.userAgent) ||
-    (navigator.maxTouchPoints > 1 && /Macintosh/.test(navigator.userAgent))
-  );
-};
 
 const MESSAGE_MAX_LENGTH = 24;
 
@@ -88,33 +58,9 @@ export const PhotoCardDialog = ({ data }: PhotoCardDialogProps) => {
       const dataUrl = await toPng(cardRef.current, { pixelRatio: 3 });
       const fileName = `${data.character_name}_포토카드_${formatCardDate(new Date()).replaceAll(".", "-")}.png`;
 
-      const blob = await (await fetch(dataUrl)).blob();
-      const file = new File([blob], fileName, { type: "image/png" });
-
-      if (prefersShareSheet(file)) {
-        try {
-          await navigator.share({ files: [file] });
-          return;
-        } catch (cause) {
-          // 사용자가 공유 시트를 닫은 건 실패가 아니다
-          if (cause instanceof DOMException && cause.name === "AbortError") {
-            return;
-          }
-
-          console.warn("공유 시트를 열지 못했습니다.", cause);
-        }
-      }
-
-      // iOS 는 <a download> 를 눌러도 아무 일이 일어나지 않는다.
-      if (isIOS()) {
+      if ((await saveImageDataUrl(dataUrl, fileName)) === "long-press") {
         setSavedImage(dataUrl);
-        return;
       }
-
-      const link = document.createElement("a");
-      link.download = fileName;
-      link.href = dataUrl;
-      link.click();
     } catch (cause) {
       console.error("포토 카드 저장 실패:", cause);
       setError("이미지를 만들지 못했어요. 잠시 후 다시 시도해 주세요.");

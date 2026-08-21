@@ -16,6 +16,10 @@ import { Download, Loader2, Swords } from "lucide-react";
 import type { CharacterDetailData } from "@/entities/character";
 import { useCharacterStat } from "@/entities/character";
 import { SegmentedToggle } from "@/shared/ui/SegmentedToggle";
+import {
+  inlineRemoteImages,
+  saveImageDataUrl,
+} from "@/shared/lib/capture-image";
 import { SpecCardContent } from "./SpecCardContent";
 
 /** 저장 이미지가 기기와 무관하게 같도록 고정한 캡처 영역 폭 */
@@ -29,6 +33,9 @@ export const SpecCardDialog = ({ data }: SpecCardDialogProps) => {
   const ocid = data.ocid;
   const [open, setOpen] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  /** 내려받기가 막힌 기기에서 길게 눌러 저장하도록 보여주는 완성 이미지 */
+  const [savedImage, setSavedImage] = useState<string | null>(null);
 
   // 다이얼로그를 열었을 때만 불러옴
   const { data: statData, isLoading: isHyperStatLoading } = useCharacterStat(
@@ -108,34 +115,30 @@ export const SpecCardDialog = ({ data }: SpecCardDialogProps) => {
     return () => observer.disconnect();
   }, [containerEl, cardEl]);
 
-  // 이미지 저장 핸들러 (html-to-image 사용)
   const handleDownloadImage = async () => {
     if (!cardEl) return;
 
+    setError(null);
+    setIsDownloading(true);
+
+    // 넥슨 이미지 서버가 CORS 헤더를 중복으로 내려보내 html-to-image 의 fetch 가
+    // 막힌다. 캡처 직전에 외부 이미지를 data URL 로 심어 두고 끝나면 되돌린다.
+    const restoreImages = await inlineRemoteImages(cardEl);
+
     try {
-      setIsDownloading(true);
+      const dataUrl = await toPng(cardEl, { pixelRatio: 3 });
 
-      // html-to-image를 사용하여 DOM을 PNG 데이터 URL로 변환s
-      const dataUrl = await toPng(cardEl, {
-        cacheBust: true, // 이미지 캐시 문제 방지
-        pixelRatio: 3, // 해상도
-      });
-
-      // 파일명 생성
       const date = new Date().toISOString().split("T")[0];
       const fileName = `${data.character_name || "캐릭터"}_스펙카드_${date}.png`;
 
-      // 다운로드 트리거
-      const link = document.createElement("a");
-      link.download = fileName;
-      link.href = dataUrl;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    } catch (error) {
-      console.error("이미지 저장 중 오류 발생:", error);
-      alert("이미지 저장에 실패했습니다. 다시 시도해주세요.");
+      if ((await saveImageDataUrl(dataUrl, fileName)) === "long-press") {
+        setSavedImage(dataUrl);
+      }
+    } catch (cause) {
+      console.error("스펙 카드 저장 실패:", cause);
+      setError("이미지를 만들지 못했어요. 잠시 후 다시 시도해 주세요.");
     } finally {
+      restoreImages();
       setIsDownloading(false);
     }
   };
@@ -157,7 +160,7 @@ export const SpecCardDialog = ({ data }: SpecCardDialogProps) => {
           </DialogDescription>
         </DialogHeader>
 
-        {ocid && (
+        {ocid && !savedImage && (
           <div className="flex w-full gap-6">
             <SegmentedToggle
               label="장비 프리셋"
@@ -189,10 +192,16 @@ export const SpecCardDialog = ({ data }: SpecCardDialogProps) => {
           </div>
         )}
 
-        {ocid ? (
+        {savedImage ? (
+          /* eslint-disable-next-line @next/next/no-img-element */
+          <img
+            src={savedImage}
+            alt={`${data.character_name} 스펙 카드`}
+            className="w-full rounded-xl"
+          />
+        ) : ocid ? (
           /* 저장 이미지가 항상 같은 레이아웃이 되도록 캡처 영역은 고정 폭.
-             좁은 화면에서는 가로로 밀어서 봄 */
-          /* 폭 측정 기준 */
+             폭 측정 기준이기도 함 */
           <div ref={setContainerEl} className="w-full">
             {/* 축소된 만큼만 자리를 차지하도록 높이를 다시 잡아줌 */}
             <div
@@ -227,22 +236,35 @@ export const SpecCardDialog = ({ data }: SpecCardDialogProps) => {
           </div>
         )}
 
+        {error && (
+          <p className="text-destructive w-full text-xs" role="alert">
+            {error}
+          </p>
+        )}
+
         <DialogFooter className="w-full">
-          <Button
-            onClick={handleDownloadImage}
-            disabled={isDownloading || !ocid}
-          >
-            {isDownloading ? (
-              <>
-                <Loader2 className="h-4 w-4 animate-spin" />
-                저장 중...
-              </>
-            ) : (
-              <>
-                <Download className="h-4 w-4" /> 이미지 저장
-              </>
-            )}
-          </Button>
+          {savedImage ? (
+            <p className="text-muted-foreground w-full text-center text-xs">
+              스펙 카드 이미지를 길게 눌러{" "}
+              <b className="text-foreground">이미지 저장</b>을 하세요.
+            </p>
+          ) : (
+            <Button
+              onClick={handleDownloadImage}
+              disabled={isDownloading || !ocid}
+            >
+              {isDownloading ? (
+                <>
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                  저장 중...
+                </>
+              ) : (
+                <>
+                  <Download className="h-4 w-4" /> 이미지 저장
+                </>
+              )}
+            </Button>
+          )}
         </DialogFooter>
       </DialogContent>
     </Dialog>

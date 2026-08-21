@@ -126,9 +126,9 @@ export const PhotoCardDialog = ({ data }: PhotoCardDialogProps) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline" size="sm" className="mt-1 w-44 max-w-full">
+        <Button variant="outline" size="sm" className="">
           <IdCard className="size-4" />
-          포토카드 만들기
+          포토카드
         </Button>
       </DialogTrigger>
 

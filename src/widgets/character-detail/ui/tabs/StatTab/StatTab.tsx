@@ -34,9 +34,12 @@ const formatStatValue = (value: string) => {
 export const StatTab = ({ ocid, level }: StatTabProps) => {
   const { data, isLoading, isError, error } = useCharacterStat(ocid, level);
 
-  const { selectedPreset, onSelectPreset, currentHyperStatInfo } = useHyperStat(
-    data?.hyperStat,
-  );
+  const {
+    selectedPreset,
+    onSelectPreset,
+    availablePresetNos,
+    currentHyperStatInfo,
+  } = useHyperStat(data?.hyperStat);
 
   if (isLoading)
     return <TabLoadingBox className="min-h-[710px] md:min-h-[477px]" />;
@@ -89,13 +92,10 @@ export const StatTab = ({ ocid, level }: StatTabProps) => {
               ariaLabel="하이퍼 스탯 프리셋 선택"
               value={selectedPreset}
               onChange={onSelectPreset}
-              options={Array.from(
-                { length: Math.max(0, hyperStat.preset_count) },
-                (_, i) => ({
-                  value: i + 1,
-                  marked: i + 1 === Number(hyperStat.use_preset_no),
-                }),
-              )}
+              options={availablePresetNos.map((no) => ({
+                value: no,
+                marked: no === Number(hyperStat.use_preset_no),
+              }))}
             />
           )
         }

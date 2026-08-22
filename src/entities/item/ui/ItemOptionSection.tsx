@@ -51,8 +51,8 @@ export const ItemOptionSection = ({
           <span className="font-medium">{title}</span>
         )}
         {!!masteryPoint && (
-          <span className="text-game-muted ml-auto shrink-0 text-xs whitespace-nowrap">
-            마스터리 +{masteryPoint}
+          <span className="text-game-mastery ml-auto shrink-0 text-xs whitespace-nowrap">
+            마스터리 보너스 +{masteryPoint}
           </span>
         )}
       </div>

@@ -40,7 +40,7 @@
   --color-game-line: #3e3e3e;
   --color-game-text: #ededed;
   --color-game-muted: #a1a1a1;
-
+  --color-game-mastery: #ffd700;
   --breakpoint-wide: 1080px;
 
   /* text-xs(12px) 와 text-sm(14px) 사이. `text-13` 으로 쓴다. */

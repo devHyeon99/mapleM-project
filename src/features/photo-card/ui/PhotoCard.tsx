@@ -88,65 +88,11 @@ const CARD_STYLES = `
   letter-spacing: .16em;
   color: var(--mmpc-dim);
 }
-
-/* 게임 속 말풍선. 배경이 밝든 어둡든 같은 흰 풍선으로 둔다. */
-/*
-  위치까지 여기서 잡는다. 이 <style> 은 레이어 밖이라 Tailwind 유틸리티(@layer)보다
-  우선순위가 높아서, className 으로 absolute 를 줘도 여기 position 에 덮인다.
-*/
-.mmpc-bubble {
-  position: absolute;
-  /*
-    위(top)가 아니라 아래를 기준으로 잡는다. 글이 두 줄이 되면 풍선이 위로 자라서
-    캐릭터 머리와의 간격이 그대로 유지된다.
-  */
-  bottom: 199px;
-  left: 50%;
-  transform: translateX(-50%);
-  /* 캐릭터(z-index 2)보다 위에 둔다 */
-  z-index: 3;
-  max-width: 240px;
-  border-radius: 14px;
-  background: #FFFFFF;
-  color: #23262F;
-  padding: 7px 13px;
-  font-size: 12px;
-  font-weight: 700;
-  line-height: 1.45;
-  text-align: center;
-  /*
-    anywhere 를 쓰면 min-content 폭이 한 글자가 돼서, 너비가 자동인 이 풍선이
-    세로로 한 줄씩 쌓인다. break-word 는 실제 줄바꿈만 하고 폭 계산은 건드리지 않는다.
-  */
-  overflow-wrap: break-word;
-  width: max-content;
-  box-shadow: 0 0 0 1px rgba(20,22,30,.10), 0 2px 0 rgba(0,0,0,.14);
-}
-/*
-  꼬리는 SVG 로 그린다. 테두리(border)로 만든 삼각형은 box-shadow 가 삼각형이 아니라
-  요소의 사각형을 따라가서, 설원처럼 밝은 배경에서는 흰 꼬리가 배경에 묻힌다.
-  SVG 는 채우기와 외곽선을 같이 줄 수 있어 어떤 배경에서도 형태가 남는다.
-
-  경로가 두 빗변만 그리므로 풍선과 맞닿는 윗변에는 선이 생기지 않는다.
-  1px 겹쳐 올려서 풍선 아래 테두리도 가린다.
-*/
-.mmpc-bubble-tail {
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -8px;
-  margin-top: -1px;
-  width: 16px;
-  height: 9px;
-  filter: drop-shadow(0 2px 0 rgba(0,0,0,.14));
-}
 `;
 
 interface PhotoCardProps {
   data: CharacterDetailData;
   background: PhotoCardBackground;
-  /** 캐릭터 위에 띄울 말풍선. 비어 있으면 풍선을 그리지 않는다 */
-  message?: string;
 }
 
 const CardMark = ({
@@ -176,10 +122,9 @@ const CardMark = ({
 };
 
 export const PhotoCard = forwardRef<HTMLDivElement, PhotoCardProps>(
-  function PhotoCard({ data, background, message }, ref) {
+  function PhotoCard({ data, background }, ref) {
     const worldIcon = worldIconSrc(data.world_name);
     const spriteSrc = useInlinedImage(fullBodyImageSrc(data.character_image));
-    const bubbleText = message?.trim();
 
     return (
       <>
@@ -196,25 +141,6 @@ export const PhotoCard = forwardRef<HTMLDivElement, PhotoCardProps>(
           <div className="relative flex h-full flex-col">
             {/* 아트 윈도우 */}
             <div className="relative flex flex-1 items-center justify-center overflow-hidden">
-              {bubbleText && (
-                <div className="mmpc-bubble">
-                  {bubbleText}
-                  <svg
-                    className="mmpc-bubble-tail"
-                    viewBox="0 0 16 9"
-                    aria-hidden="true"
-                  >
-                    <path
-                      d="M1 0L8 8L15 0"
-                      fill="#FFFFFF"
-                      stroke="rgba(20,22,30,.14)"
-                      strokeWidth="1"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </div>
-              )}
-
               {/*
                 280x280 캔버스는 아래쪽이 대부분 투명 여백이라, 그대로 두면
                 캐릭터와 아래 정보 사이가 벌어진다. 여백만큼 내려서 간격을 좁힌다.

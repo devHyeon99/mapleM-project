@@ -1,6 +1,6 @@
 "use client";
 
-import { useId, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { IdCard, ImageDown, LoaderCircle } from "lucide-react";
 import type { CharacterDetailData } from "@/entities/character";
 import { Button } from "@/shared/ui/button";
@@ -13,8 +13,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/shared/ui/dialog";
-import { Input } from "@/shared/ui/input";
-import { Label } from "@/shared/ui/label";
 import { SegmentedToggle } from "@/shared/ui/SegmentedToggle";
 import { captureToPng, saveImageDataUrl } from "@/shared/lib/capture-image";
 import {
@@ -23,19 +21,15 @@ import {
 } from "../model/backgrounds";
 import { PhotoCard, formatCardDate } from "./PhotoCard";
 
-const MESSAGE_MAX_LENGTH = 24;
-
 interface PhotoCardDialogProps {
   data: CharacterDetailData;
 }
 
 export const PhotoCardDialog = ({ data }: PhotoCardDialogProps) => {
   const cardRef = useRef<HTMLDivElement>(null);
-  const messageId = useId();
   const [backgroundId, setBackgroundId] = useState(
     DEFAULT_PHOTO_CARD_BACKGROUND.id,
   );
-  const [message, setMessage] = useState("");
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   /** 내려받기가 막힌 기기에서 길게 눌러 저장하도록 보여주는 완성 이미지 */
@@ -94,12 +88,7 @@ export const PhotoCardDialog = ({ data }: PhotoCardDialogProps) => {
               className="w-80 rounded-2xl"
             />
           ) : (
-            <PhotoCard
-              ref={cardRef}
-              data={data}
-              background={background}
-              message={message}
-            />
+            <PhotoCard ref={cardRef} data={data} background={background} />
           )}
         </div>
 
@@ -115,22 +104,6 @@ export const PhotoCardDialog = ({ data }: PhotoCardDialogProps) => {
             setBackgroundId(next);
           }}
         />
-
-        <div className="flex flex-col gap-1.5">
-          <Label htmlFor={messageId} className="text-muted-foreground text-xs">
-            말풍선
-          </Label>
-          <Input
-            id={messageId}
-            value={message}
-            onChange={(event) => {
-              setSavedImage(null);
-              setMessage(event.target.value);
-            }}
-            maxLength={MESSAGE_MAX_LENGTH}
-            placeholder="텍스트를 입력하면 캐릭터 위에 표시돼요."
-          />
-        </div>
 
         {error && (
           <p className="text-destructive text-xs" role="alert">

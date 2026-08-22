@@ -109,23 +109,27 @@ const CharacterProfileInfoList = ({ data }: CharacterProfileCardProps) => {
       </div>
 
       <InfoDescriptionRow label="EXP">{expRate}%</InfoDescriptionRow>
-      <InfoDescriptionRow label="직업">
-        {data.character_class}
-      </InfoDescriptionRow>
-      <InfoDescriptionRow label="월드">{data.world_name}</InfoDescriptionRow>
-      <InfoDescriptionRow label="길드">
-        {hasGuild ? (
-          <Link
-            href={guildHref(data.world_name, guildName)}
-            prefetch={false}
-            className="hover:text-orange-400"
-          >
-            {guildName}
-          </Link>
-        ) : (
-          guildName
-        )}
-      </InfoDescriptionRow>
+
+      <div className="flex flex-row gap-3">
+        <InfoDescriptionRow label="직업">
+          {data.character_class}
+        </InfoDescriptionRow>
+        <InfoDescriptionRow label="월드">{data.world_name}</InfoDescriptionRow>
+        <InfoDescriptionRow label="길드">
+          {hasGuild ? (
+            <Link
+              href={guildHref(data.world_name, guildName)}
+              prefetch={false}
+              className="hover:text-orange-400"
+            >
+              {guildName}
+            </Link>
+          ) : (
+            guildName
+          )}
+        </InfoDescriptionRow>
+      </div>
+
       <div className="flex flex-wrap gap-3">
         <InfoDescriptionRow label="유니온">{unionDisplay}</InfoDescriptionRow>
         <RankingInfoRows

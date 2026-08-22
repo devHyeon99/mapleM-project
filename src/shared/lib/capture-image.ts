@@ -1,17 +1,16 @@
 "use client";
 
+import { toPng } from "html-to-image";
+
 /**
- * 넥슨 이미지 서버는 `Access-Control-Allow-Origin` 을 두 번 내려보내서(`'*, *'`)
- * 브라우저의 fetch() 가 CORS 위반으로 막는다. img 태그의 CORS 로딩은 통과한다.
- *
- * html-to-image 는 내부적으로 fetch 로 외부 이미지를 인라인하므로, 그대로 두면
- * 화면에는 보이는데 저장된 PNG 에서만 이미지가 빠진다. img + 캔버스로 직접
- * data URL 을 만들어 이 경로를 우회한다.
+ * 넥슨 이미지 서버는 `Access-Control-Allow-Origin` 을 두 번 내려보낼 때가 있어서
+ * (`'*, *'`) 브라우저의 fetch() 가 CORS 위반으로 막는다. img 태그의 CORS 로딩은
+ * 통과하므로 img + 캔버스로 직접 data URL 을 만들어 이 경로를 우회한다.
  *
  * 변환에 실패하면 원본 URL 을 그대로 돌려준다. 화면 표시는 유지되고,
  * 저장 결과에서만 해당 이미지가 빠진다.
  */
-const toDataUrl = (src: string): Promise<string> =>
+export const imageToDataUrl = (src: string): Promise<string> =>
   new Promise((resolve) => {
     const image = new Image();
     image.crossOrigin = "anonymous";
@@ -66,7 +65,7 @@ export const inlineRemoteImages = async (
   await Promise.all(
     targets.map(async (image) => {
       const source = image.currentSrc || image.src;
-      const dataUrl = await toDataUrl(source);
+      const dataUrl = await imageToDataUrl(source);
       if (dataUrl === source) return;
 
       // srcset 이 남아 있으면 브라우저가 그쪽 후보를 고를 수 있음
@@ -113,6 +112,46 @@ const isIOS = (): boolean => {
     /iP(hone|od|ad)/.test(navigator.userAgent) ||
     (navigator.maxTouchPoints > 1 && /Macintosh/.test(navigator.userAgent))
   );
+};
+
+/**
+ * WebKit(사파리·iOS 의 모든 브라우저) 여부.
+ * iOS 는 크롬이든 파이어폭스든 속이 WebKit 이라 같은 문제를 겪는다.
+ */
+const isWebKit = (): boolean => {
+  if (typeof navigator === "undefined") return false;
+  if (isIOS()) return true;
+
+  const ua = navigator.userAgent;
+  return /Safari/.test(ua) && !/Chrome|Chromium|Edg|OPR/.test(ua);
+};
+
+/** WebKit 에서 같은 노드를 다시 그리는 횟수 */
+const WEBKIT_CAPTURE_PASSES = 3;
+
+/**
+ * html-to-image 는 노드를 SVG foreignObject 로 직렬화해 캔버스에 그린다.
+ * WebKit 은 이때 안쪽 이미지가 아직 래스터화되지 않았는데도 SVG 의 load 를 먼저
+ * 띄워서, 첫 호출 결과에 이미지가 통째로 빠진다. 테두리·텍스트만 남는 그 증상이다.
+ *
+ * 같은 노드를 여러 번 그리면 두 번째부터는 채워진다. 라이브러리 쪽에 오래 남아
+ * 있는 문제라 호출부에서 반복하는 것 말고는 우회책이 없다.
+ */
+export const captureToPng = async (
+  node: HTMLElement,
+  options: Parameters<typeof toPng>[1],
+): Promise<string> => {
+  // 직전에 바꾼 이미지가 화면에 반영될 틈을 준다
+  await new Promise(requestAnimationFrame);
+
+  const passes = isWebKit() ? WEBKIT_CAPTURE_PASSES : 1;
+  let dataUrl = "";
+
+  for (let pass = 0; pass < passes; pass += 1) {
+    dataUrl = await toPng(node, options);
+  }
+
+  return dataUrl;
 };
 
 export type SaveImageResult =

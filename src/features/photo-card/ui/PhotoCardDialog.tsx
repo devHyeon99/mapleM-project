@@ -1,7 +1,6 @@
 "use client";
 
 import { useId, useRef, useState } from "react";
-import { toPng } from "html-to-image";
 import { IdCard, ImageDown, LoaderCircle } from "lucide-react";
 import type { CharacterDetailData } from "@/entities/character";
 import { Button } from "@/shared/ui/button";
@@ -17,7 +16,7 @@ import {
 import { Input } from "@/shared/ui/input";
 import { Label } from "@/shared/ui/label";
 import { SegmentedToggle } from "@/shared/ui/SegmentedToggle";
-import { saveImageDataUrl } from "@/shared/lib/capture-image";
+import { captureToPng, saveImageDataUrl } from "@/shared/lib/capture-image";
 import {
   DEFAULT_PHOTO_CARD_BACKGROUND,
   PHOTO_CARD_BACKGROUNDS,
@@ -55,7 +54,7 @@ export const PhotoCardDialog = ({ data }: PhotoCardDialogProps) => {
 
       // 캐릭터 이미지는 useInlinedImage 가 이미 data URL 로 바꿔 두므로
       // html-to-image 가 외부로 fetch 할 리소스는 남지 않는다.
-      const dataUrl = await toPng(cardRef.current, { pixelRatio: 3 });
+      const dataUrl = await captureToPng(cardRef.current, { pixelRatio: 3 });
       const fileName = `${data.character_name}_포토카드_${formatCardDate(new Date()).replaceAll(".", "-")}.png`;
 
       if ((await saveImageDataUrl(dataUrl, fileName)) === "long-press") {

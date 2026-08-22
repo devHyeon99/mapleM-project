@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { toPng } from "html-to-image";
 import { Button } from "@/shared/ui/button";
 import {
   Dialog,
@@ -17,6 +16,7 @@ import type { CharacterDetailData } from "@/entities/character";
 import { useCharacterStat } from "@/entities/character";
 import { SegmentedToggle } from "@/shared/ui/SegmentedToggle";
 import {
+  captureToPng,
   inlineRemoteImages,
   saveImageDataUrl,
 } from "@/shared/lib/capture-image";
@@ -126,7 +126,7 @@ export const SpecCardDialog = ({ data }: SpecCardDialogProps) => {
     const restoreImages = await inlineRemoteImages(cardEl);
 
     try {
-      const dataUrl = await toPng(cardEl, { pixelRatio: 3 });
+      const dataUrl = await captureToPng(cardEl, { pixelRatio: 3 });
 
       const date = new Date().toISOString().split("T")[0];
       const fileName = `${data.character_name || "캐릭터"}_스펙카드_${date}.png`;

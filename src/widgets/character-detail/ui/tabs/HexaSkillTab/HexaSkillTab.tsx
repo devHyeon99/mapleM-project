@@ -102,7 +102,7 @@ export const HexaSkillTab = ({ ocid, level }: HexaSkillTabProps) => {
 
   return (
     <div className="flex flex-col gap-2">
-      <div className="bg-card flex items-baseline justify-between rounded-2xl p-4 text-sm font-medium">
+      <div className="bg-card flex items-baseline justify-between rounded-2xl p-4 text-sm font-medium shadow-sm">
         <span className="font-bold">HEXA매트릭스 합산 점수</span>
         <span className="text-orange-400">
           {(data?.hexamatrix_total_score ?? 0).toLocaleString()}

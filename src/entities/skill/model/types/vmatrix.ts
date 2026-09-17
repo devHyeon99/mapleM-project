@@ -37,6 +37,9 @@ export interface CharacterVMatrix {
   /** 캐릭터 직업 */
   character_class: string;
 
+  /** V매트릭스 합산 점수 */
+  vmatrix_total_score: number;
+
   /** V코어 목록 */
   character_v_core_equipment: VCoreEquipment[];
 }

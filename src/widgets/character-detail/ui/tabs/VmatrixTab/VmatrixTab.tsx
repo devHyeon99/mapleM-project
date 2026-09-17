@@ -26,7 +26,7 @@ export const VmatrixTab = ({ ocid, level }: VmatrixTabProps) => {
     );
   }
 
-  if (isLoading) return <TabLoadingBox className="min-h-[1113px]" />;
+  if (isLoading) return <TabLoadingBox className="min-h-[1141px]" />;
 
   if (isError) return <TabMessageSection error={error} />;
 
@@ -41,7 +41,14 @@ export const VmatrixTab = ({ ocid, level }: VmatrixTabProps) => {
   }
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="wide:grid wide:grid-cols-2 flex flex-col gap-2 rounded-2xl">
+      <div className="bg-card col-span-2 flex items-baseline justify-between rounded-2xl p-4 text-sm font-medium">
+        <span className="font-bold">V매트릭스 합산 점수</span>
+        <span className="text-orange-400">
+          {(data?.vmatrix_total_score ?? 0).toLocaleString()}
+        </span>
+      </div>
+
       {groupCoresByType(cores).map(({ label, cores: groupCores }) => (
         <TabCard key={label} title={label}>
           <ul className="space-y-1">

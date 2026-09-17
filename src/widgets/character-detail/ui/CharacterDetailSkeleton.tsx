@@ -3,31 +3,46 @@ import { cn } from "@/shared/lib/utils";
 import { ALL_TABS, PROFILE_CARD_SHELL_CLASS } from "./config";
 
 function ProfileCardSkeleton() {
-  // 자리표시용이라 section/dl 같은 시맨틱은 쓰지 않는다.
-  // 높이는 실제 카드와 같은 구조·간격에서 나오고, min-h 는 최소 보장선이다.
+  // 자리표시용이라 section/dl 같은 시맨틱은 쓰지 않음.
+  // 높이는 실제 카드와 같은 구조·간격에서 나오고, min-h 는 최소 보장선임.
   return (
     <div
-      className={cn(PROFILE_CARD_SHELL_CLASS, "min-h-[504px] sm:min-h-[356px]")}
+      className={cn(PROFILE_CARD_SHELL_CLASS, "min-h-[476px] sm:min-h-[292px]")}
     >
       <div className="flex w-full flex-col items-center gap-4 sm:flex-row sm:items-start">
-        {/* 캐릭터 이미지 + 이름 */}
+        {/* 캐릭터 이미지 + 이름 + 카드 버튼 */}
         <div className="flex w-full shrink-0 flex-col items-center gap-2 sm:w-44">
           <Skeleton className="h-25 w-25 rounded-full" />
           <Skeleton className="h-6 w-24" />
+          <div className="flex flex-row gap-2 sm:w-full sm:flex-col">
+            <Skeleton className="h-7 w-24 sm:w-full" />
+            <Skeleton className="h-7 w-24 sm:w-full" />
+          </div>
         </div>
 
         {/* 정보 목록 */}
         <div className="flex w-full flex-col gap-3">
+          {/* 레벨 + 전체랭킹 + 월드랭킹 */}
           <div className="flex flex-wrap gap-3">
             <Skeleton className="h-5 w-20" />
+            <Skeleton className="h-5 w-28" />
+            <Skeleton className="h-5 w-28" />
           </div>
+          {/* EXP */}
           <Skeleton className="h-5 w-24" />
-          <Skeleton className="h-5 w-28" />
-          <Skeleton className="h-5 w-20" />
-          <Skeleton className="h-5 w-16" />
+          {/* 직업 · 월드 · 길드 */}
+          <div className="flex flex-row gap-3">
+            <Skeleton className="h-5 w-20" />
+            <Skeleton className="h-5 w-20" />
+            <Skeleton className="h-5 w-24" />
+          </div>
+          {/* 유니온 + 전체랭킹 + 월드랭킹 */}
           <div className="flex flex-wrap gap-3">
             <Skeleton className="h-5 w-20" />
+            <Skeleton className="h-5 w-28" />
+            <Skeleton className="h-5 w-28" />
           </div>
+          {/* 날짜 4행 */}
           <div className="flex flex-col gap-3">
             <Skeleton className="h-5 w-36" />
             <Skeleton className="h-5 w-40" />

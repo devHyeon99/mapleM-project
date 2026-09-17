@@ -31,7 +31,7 @@ export const HexaStatTab = ({ ocid, level }: HexaStatTabProps) => {
   }
 
   if (isLoading)
-    return <TabLoadingBox className="min-h-[499px] wide:min-h-[282px]" />;
+    return <TabLoadingBox className="wide:min-h-[282px] min-h-[499px]" />;
 
   if (isError) return <TabMessageSection error={error} />;
 
@@ -96,8 +96,8 @@ const HexaStatPageCard = ({ page }: PageCardProps) => {
   return (
     <div
       className={cn(
-        "bg-secondary w-full space-y-3 rounded-2xl p-4",
-        isActive ? "shadow-sm" : "opacity-40",
+        "w-full space-y-3 rounded-2xl border p-4",
+        isActive ? "dark:bg-secondary shadow-sm" : "opacity-40",
       )}
     >
       {/* 헤더 */}

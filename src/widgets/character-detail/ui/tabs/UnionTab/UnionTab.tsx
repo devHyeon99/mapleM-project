@@ -4,7 +4,6 @@ import { TabMessageSection } from "@/shared/ui/TabMessageSection";
 import { useUnionRaider, UnionCard } from "@/entities/character";
 import type { CharacterUnion, UnionRanking } from "@/entities/character";
 import { UnionEffect } from "./UnionEffect";
-import { UnionBattleMap } from "./UnionBattleMap";
 
 interface UnionTabProps {
   ocid: string;
@@ -35,32 +34,18 @@ export const UnionTab = ({ ocid, data, ranking }: UnionTabProps) => {
     <div className="flex flex-col gap-2">
       <UnionCard data={data} ranking={ranking} />
 
-      <UnionBattleMap
-        raiderData={raiderData}
-        isLoading={isRaiderLoading}
-        error={raiderErrorProp}
-      />
-
       <section aria-label="유니온 효과 요약" className="flex flex-col gap-2">
         <UnionEffect
           title="레벨 총합 효과 누적"
           options={data.union_level_total_option}
         />
 
-        <div className="grid grid-cols-2 items-stretch gap-2 [&>*]:h-full">
-          <UnionEffect
-            title="점령 효과"
-            options={raiderData?.use_union_occupied_option}
-            isLoading={isRaiderLoading}
-            error={raiderErrorProp}
-          />
-          <UnionEffect
-            title="공격대원 효과"
-            options={raiderData?.use_union_raider_option}
-            isLoading={isRaiderLoading}
-            error={raiderErrorProp}
-          />
-        </div>
+        <UnionEffect
+          title="공격대원 효과"
+          options={raiderData?.use_union_raider_option}
+          isLoading={isRaiderLoading}
+          error={raiderErrorProp}
+        />
       </section>
     </div>
   );

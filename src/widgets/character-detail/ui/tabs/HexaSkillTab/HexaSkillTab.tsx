@@ -81,7 +81,7 @@ export const HexaSkillTab = ({ ocid, level }: HexaSkillTabProps) => {
   }
 
   if (isLoading)
-    return <TabLoadingBox className="min-h-[700px] wide:min-h-[442px]" />;
+    return <TabLoadingBox className="wide:min-h-[470px] min-h-[728px]" />;
 
   if (isError) return <TabMessageSection error={error} />;
 
@@ -101,11 +101,20 @@ export const HexaSkillTab = ({ ocid, level }: HexaSkillTabProps) => {
   const publicCores = skills.filter((s) => s.skill_type === "공용 코어");
 
   return (
-    <div className="wide:grid-cols-2 wide:grid flex flex-col gap-2">
-      <HexaSkillSection title="스킬 코어" items={skillCores} />
-      <HexaSkillSection title="마스터리 코어" items={masteryCores} />
-      <HexaSkillSection title="강화 코어" items={enhancementCores} />
-      <HexaSkillSection title="공용 코어" items={publicCores} />
+    <div className="flex flex-col gap-2">
+      <div className="bg-card flex items-baseline justify-between rounded-2xl p-4 text-sm font-medium">
+        <span className="font-bold">HEXA매트릭스 합산 점수</span>
+        <span className="text-orange-400">
+          {(data?.hexamatrix_total_score ?? 0).toLocaleString()}
+        </span>
+      </div>
+
+      <div className="wide:grid-cols-2 wide:grid flex flex-col gap-2">
+        <HexaSkillSection title="스킬 코어" items={skillCores} />
+        <HexaSkillSection title="마스터리 코어" items={masteryCores} />
+        <HexaSkillSection title="강화 코어" items={enhancementCores} />
+        <HexaSkillSection title="공용 코어" items={publicCores} />
+      </div>
     </div>
   );
 };

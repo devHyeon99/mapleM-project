@@ -25,6 +25,12 @@ export interface HexaMatrixSkill {
  * 캐릭터의 HEXA 매트릭스 전체 데이터
  */
 export interface CharacterHexaMatrixSkill {
+  /** 캐릭터 직업 */
+  character_class: string;
+
+  /** HEXA매트릭스 합산 점수 */
+  hexamatrix_total_score: number;
+
   /** HEXA 매트릭스 코어 목록 */
   hexamatrix_skill: HexaMatrixSkill[];
 }

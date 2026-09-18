@@ -47,11 +47,19 @@ export async function fetchCharacterDetail(
   if (!trimmedOcid) throw new Error("ocid가 필요합니다.");
 
   const ocidQ = encodeURIComponent(trimmedOcid);
-  const rankingDate = await resolveRankingDate();
-  const rankingQuery = new URLSearchParams({
-    date: rankingDate,
-    ocid: trimmedOcid,
-  }).toString();
+
+  // 기준일이 필요한 건 랭킹 두 건뿐이라, 여기서 await 하면 날짜와 무관한
+  // 나머지 요청까지 판정이 끝날 때까지 묶이므로, 시작만 시키고 랭킹 쪽에서 기다리게함.
+  const rankingDatePromise = resolveRankingDate();
+
+  const fetchRanking = async <T>(path: string) => {
+    const query = new URLSearchParams({
+      date: await rankingDatePromise,
+      ocid: trimmedOcid,
+    }).toString();
+
+    return nexonFetch<T>(`${path}?${query}`, { next: { revalidate: 86400 } });
+  };
 
   const [
     basicResult,
@@ -79,12 +87,8 @@ export async function fetchCharacterDetail(
     nexonFetch<CharacterUnionResponse>(`/user/union?ocid=${ocidQ}`, {
       cache: "no-store",
     }),
-    nexonFetch<CharacterLevelRankingResponse>(`/ranking/level?${rankingQuery}`, {
-      next: { revalidate: 86400 },
-    }),
-    nexonFetch<CharacterUnionRankingResponse>(`/ranking/union?${rankingQuery}`, {
-      next: { revalidate: 86400 },
-    }),
+    fetchRanking<CharacterLevelRankingResponse>("/ranking/level"),
+    fetchRanking<CharacterUnionRankingResponse>("/ranking/union"),
   ]);
 
   // ocid 캐시(24h)에 남아있지만 삭제/개명된 캐릭터는 기본 정보 조회가
@@ -101,8 +105,14 @@ export async function fetchCharacterDetail(
   const guildData = getOptionalResult(guildResult, "guild");
   const androidData = getOptionalResult(androidResult, "android");
   const unionData = getOptionalResult(unionResult, "union");
-  const levelRankingData = getOptionalResult(levelRankingResult, "level-ranking");
-  const unionRankingData = getOptionalResult(unionRankingResult, "union-ranking");
+  const levelRankingData = getOptionalResult(
+    levelRankingResult,
+    "level-ranking",
+  );
+  const unionRankingData = getOptionalResult(
+    unionRankingResult,
+    "union-ranking",
+  );
 
   return {
     ocid: trimmedOcid,

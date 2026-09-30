@@ -1,8 +1,13 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import {
   canOtherWorldsHaveRanking,
   rankingEmptyMessage,
 } from "./empty-message";
+
+// 챌린저스 운영 기간 기준 동작을 검증 (재오픈 시 회귀 방지)
+vi.mock("@/shared/config/constants/worlds", () => ({
+  CHALLENGERS_ACTIVE: true,
+}));
 
 describe("rankingEmptyMessage", () => {
   it("샤레니안 랭킹은 종류 이름을 넣어 시작 전임을 알린다", () => {

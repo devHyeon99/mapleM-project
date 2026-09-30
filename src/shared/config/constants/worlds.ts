@@ -1,5 +1,11 @@
 export const ALL_WORLD_NAME = "전체" as const;
 
+/**
+ * 챌린저스 한시 월드 운영 여부. 서버 운영 기간(이벤트)에만 true 로 켬 (2026-10-01 종료).
+ * false 면 월드 목록·랭킹 분기에서 빠지고, 슬러그 매핑·이미지는 링크 보존을 위해 그대로 둠
+ */
+export const CHALLENGERS_ACTIVE = false;
+
 export const WORLD_NAMES = [
   ALL_WORLD_NAME,
   "스카니아",
@@ -9,9 +15,7 @@ export const WORLD_NAMES = [
   "유니온",
   "엘리시움",
   "아케인",
-  // 챌린저스 한시 월드 — 서버 종료 시 이 항목과 아래 슬러그,
-  // public/worlds/challengers.png, entities/ranking/lib/empty-message.ts 분기를 함께 제거할 것
-  "챌린저스",
+  ...(CHALLENGERS_ACTIVE ? (["챌린저스"] as const) : []),
 ] as const;
 
 // 넥슨 API 는 한글 월드명만 받음. 슬러그는 URL 세그먼트와 /public/worlds 이미지 파일명에만 쓰는 표현

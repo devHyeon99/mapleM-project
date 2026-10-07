@@ -1,10 +1,11 @@
 import "server-only";
 import { unstable_cache } from "next/cache";
 import {
+  RANKING_API_ITEMS_PER_PAGE,
   RANKING_MAX_API_PAGE,
   RANKING_UI_ITEMS_PER_PAGE,
 } from "../model/constants";
-import type { AnyRankingData, RankingType } from "../model/types/ranking";
+import type { RankingType } from "../model/types/ranking";
 import { isJobRow, type JobRankingPage } from "../lib/job-filter";
 import { fetchRankingCached } from "./fetch-ranking";
 
@@ -16,13 +17,17 @@ import { fetchRankingCached } from "./fetch-ranking";
 /** 한 번에 띄우는 넥슨 요청 수. 50개를 한꺼번에 던지지 않으려는 상한 */
 export const FETCH_CONCURRENCY = 25;
 
+/** 전체 랭킹 안에서 행의 위치. (API 페이지 - 1) * 200 + 페이지 안 인덱스 */
+const toPosition = (apiPage: number, index: number) =>
+  (apiPage - 1) * RANKING_API_ITEMS_PER_PAGE + index;
+
 async function collectRankingByJob(
   type: RankingType,
   date: string,
   worldName: string | undefined,
   jobName: string,
-): Promise<AnyRankingData[]> {
-  const matched: AnyRankingData[] = [];
+): Promise<number[]> {
+  const matched: number[] = [];
 
   for (
     let start = 1;
@@ -40,9 +45,11 @@ async function collectRankingByJob(
       pages.map((page) => fetchRankingCached(type, date, worldName, page)),
     );
 
-    for (const { ranking } of chunks) {
-      for (const row of ranking) if (isJobRow(row, jobName)) matched.push(row);
-    }
+    chunks.forEach(({ ranking }, i) => {
+      ranking.forEach((row, index) => {
+        if (isJobRow(row, jobName)) matched.push(toPosition(pages[i], index));
+      });
+    });
 
     // 빈 페이지가 나왔으면 그 뒤도 전부 비어 있음. 월드 필터가 걸린 랭킹이 여기서 일찍 끝남
     if (chunks.some(({ ranking }) => ranking.length === 0)) break;
@@ -52,8 +59,9 @@ async function collectRankingByJob(
 }
 
 /**
- * 직업으로 거른 전체 목록. 1만 행 훑기를 하루 한 번으로 묶는 캐시임.
- * 가장 흔한 직업이 약 1,200행(700KB) 이라 데이터 캐시 한도(2MB) 안에 들어감.
+ * 직업으로 거른 행의 위치 목록. 1만 행 훑기를 하루 한 번으로 묶는 캐시임.
+ * 행 자체는 fetchRankingCached 가 이미 캐싱하므로 위치(정수)만 저장해 ISR 쓰기를 줄임.
+ * 가장 흔한 직업이 약 1,200행이라 행을 통째로 담으면 700KB 인데, 위치만 담으면 수 KB 임.
  */
 const getRankingByJob = (
   type: RankingType,
@@ -63,7 +71,7 @@ const getRankingByJob = (
 ) =>
   unstable_cache(
     () => collectRankingByJob(type, date, worldName, jobName),
-    ["ranking-by-job", type, date, worldName ?? "all", jobName],
+    ["ranking-by-job-v2", type, date, worldName ?? "all", jobName],
     { revalidate: 86400 },
   )();
 
@@ -91,12 +99,34 @@ export async function fetchRankingPageByJob({
   );
   const uiPage = Math.min(Math.max(page, 1), totalPages);
   const offset = (uiPage - 1) * RANKING_UI_ITEMS_PER_PAGE;
+  const positions = matched.slice(offset, offset + RANKING_UI_ITEMS_PER_PAGE);
+
+  // 화면에 쓸 20행이 걸쳐 있는 API 페이지만 캐시에서 다시 읽음
+  const apiPages = [
+    ...new Set(
+      positions.map((p) => Math.floor(p / RANKING_API_ITEMS_PER_PAGE) + 1),
+    ),
+  ];
+  const loaded = new Map(
+    await Promise.all(
+      apiPages.map(
+        async (apiPage) =>
+          [
+            apiPage,
+            (await fetchRankingCached(type, date, worldName, apiPage)).ranking,
+          ] as const,
+      ),
+    ),
+  );
 
   return {
     // 좁혀 본 목록이라 전체 순위(91위, 123위…)를 그대로 두면 읽히지 않음. 직업 안 순위를 매겨 보냄
-    ranking: matched
-      .slice(offset, offset + RANKING_UI_ITEMS_PER_PAGE)
-      .map((row, index) => ({ ...row, job_ranking: offset + index + 1 })),
+    ranking: positions.map((position, index) => ({
+      ...loaded.get(Math.floor(position / RANKING_API_ITEMS_PER_PAGE) + 1)![
+        position % RANKING_API_ITEMS_PER_PAGE
+      ],
+      job_ranking: offset + index + 1,
+    })),
     page: uiPage,
     totalPages,
   };

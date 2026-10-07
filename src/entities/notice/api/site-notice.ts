@@ -4,7 +4,7 @@ import { createPublicSupabaseClient } from "@/shared/api/supabase/public-client"
 import type { SiteNoticeItem } from "../model/types";
 
 const SITE_NOTICE_LIMIT = 10;
-const SITE_NOTICE_REVALIDATE_SECONDS = 600;
+const SITE_NOTICE_REVALIDATE_SECONDS = 1800;
 const SITE_NOTICE_ERROR_MESSAGE = "사이트 공지사항을 불러오지 못했습니다.";
 
 function isNoticeActive(nowMs: number, notice: SiteNoticeItem) {

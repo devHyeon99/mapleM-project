@@ -84,8 +84,9 @@ describe("fetchRankingPageByJob", () => {
       page: 1,
     });
 
-    // 첫 묶음만 던지고 멈춤
-    expect(fetchRankingCached).toHaveBeenCalledTimes(FETCH_CONCURRENCY);
+    // 첫 묶음만 훑고 멈춤. 화면용 행을 다시 읽는 호출도 첫 묶음 범위를 넘지 않음
+    const pagesCalled = fetchRankingCached.mock.calls.map(([, , , p]) => p);
+    expect(Math.max(...pagesCalled)).toBe(FETCH_CONCURRENCY);
     expect(result.totalPages).toBe(15); // 600행 중 300건 / 20
   });
 

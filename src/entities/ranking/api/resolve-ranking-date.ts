@@ -4,8 +4,10 @@ import { subDays } from "date-fns";
 import { getRankingDate } from "@/shared/lib/ranking-date";
 import { fetchRankingCached } from "./fetch-ranking";
 
-/** 오늘 자 데이터가 아직 없을 때 다시 확인하기까지의 간격 */
-const PROBE_REVALIDATE_SECONDS = 600;
+/**
+ * 판정 결과를 다시 확인하기까지의 간격.
+ */
+const PROBE_REVALIDATE_SECONDS = 1800;
 
 /**
  * 넥슨이 오늘 자 랭킹을 아직 올리지 않았으면 전날 날짜로 내려간다.
@@ -39,8 +41,8 @@ async function probeRankingDate(
 /**
  * 화면과 API 요청에 쓸 랭킹 기준일.
  *
- * 판정 결과만 10분 캐싱한다. 데이터 캐시(24시간)와 분리해야, 넥슨이 늦게 올린 날에도
- * 올라온 시점부터 10분 안에 오늘 자로 넘어간다. 같이 묶으면 하루 종일 전날 데이터에
+ * 판정 결과만 30분 캐싱한다. 데이터 캐시(24시간)와 분리해야, 넥슨이 늦게 올린 날에도
+ * 올라온 시점부터 30분 안에 오늘 자로 넘어간다. 같이 묶으면 하루 종일 전날 데이터에
  * 갇힌다.
  */
 export const resolveRankingDate = () => {

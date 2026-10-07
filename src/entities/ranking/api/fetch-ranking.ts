@@ -33,14 +33,13 @@ async function _fetchRanking({ type, worldName, date, page }: Args) {
 
   const { ranking } = await nexonFetch<RankingResponse<AnyRankingData>>(
     `/ranking/${type}?${queryParams.toString()}`,
-    {
-      cache: "force-cache",
-    },
   );
 
   return { ranking: dropUnusedFields(ranking) };
 }
 
+// 데이터 캐시는 unstable_cache 한 겹만 둔다. fetch 에 force-cache 를 같이 걸면
+// 같은 응답이 ISR 쓰기로 두 번 잡힘
 export const fetchRankingCached = (
   type: RankingType,
   date: string,

@@ -12,7 +12,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
     "/",
     "/guild",
-    "/guild/promotion",
     "/ranking",
     "/tools",
     "/tools/cube",

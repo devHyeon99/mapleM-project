@@ -75,7 +75,7 @@
 ```
 src/
 ├── app/        # Next.js App Router (라우팅, 레이아웃, API Route, Provider)
-│   └── api/        # 서버 API Route (character, revalidate)
+│   └── api/        # 서버 API Route (character, guild, ranking, cron)
 ├── widgets/    # 독립적인 UI 블록 (character-detail, guild-detail,
 │               #   ranking-board, cube-simulator, starforce-simulator 등)
 ├── features/   # 사용자 상호작용 단위 (character-search, guild-search,
@@ -91,7 +91,6 @@ src/
 - **Nexon Open API 데이터 가공 레이어**를 entities에 두어, 원시 API 응답을 UI에 적합한 도메인 모델로 변환
 - **이미지 최적화**: AVIF/WebP 우선 포맷, 넥슨 이미지 서버에 대한 장기 캐시(TTL 1년) 적용으로 외부 요청 최소화
 - **보안 헤더 설정**: `X-Powered-By` 헤더 제거 등 기본 보안 강화
-- **revalidate API Route**를 통한 캐시 재검증 처리
 
 ---
 

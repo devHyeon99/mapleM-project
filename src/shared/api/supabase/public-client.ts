@@ -26,17 +26,3 @@ export function createPublicSupabaseClient() {
   });
 }
 
-/**
- * 게시자가 넣은 URL 을 링크·이미지로 쓰기 전 거르는 관문.
- * `javascript:` 같은 스킴이 href 로 들어가는 걸 막음
- */
-export function safeHttpUrl(value: string | null | undefined): string | null {
-  if (!value) return null;
-
-  try {
-    const { protocol } = new URL(value);
-    return protocol === "http:" || protocol === "https:" ? value : null;
-  } catch {
-    return null;
-  }
-}

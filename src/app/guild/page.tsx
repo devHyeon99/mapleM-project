@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { OG_IMAGE, OG_IMAGE_SIZE } from "@/shared/config/site";
 import { GuildSearch } from "@/features/guild-search";
-import { GuildPromotionSection } from "./_lib/GuildPromotionSection";
 import { SharenianGuildBoard } from "./_lib/SharenianGuildBoard";
 
 export const metadata: Metadata = {
@@ -45,7 +44,7 @@ export default async function GuildPage() {
             길드 검색
           </h1>
           <p className="max-w-2xl text-base font-medium text-balance drop-shadow-sm sm:text-lg">
-            길드 검색과 모집중인 길드를 찾아보세요.
+            길드를 검색하고 상세 정보를 확인해보세요.
           </p>
         </div>
 
@@ -54,8 +53,6 @@ export default async function GuildPage() {
           <GuildSearch />
         </search>
       </div>
-
-      <GuildPromotionSection />
 
       <SharenianGuildBoard />
     </div>

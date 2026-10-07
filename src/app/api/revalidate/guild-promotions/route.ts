@@ -1,18 +1,8 @@
-import { timingSafeEqual } from "node:crypto";
 import { revalidateTag } from "next/cache";
 import { NextResponse } from "next/server";
 
 import { GUILD_PROMOTIONS_TAG } from "@/entities/guild-promotion/api/get-guild-promotions";
-
-/** 길이가 다르면 비교 자체가 던지므로 먼저 거름. 길이는 어차피 응답 시간에 안 새어나감 */
-function matchesSecret(provided: string | undefined, secret: string) {
-  if (!provided) return false;
-
-  const a = Buffer.from(provided);
-  const b = Buffer.from(secret);
-
-  return a.length === b.length && timingSafeEqual(a, b);
-}
+import { matchesBearerSecret } from "@/shared/lib/match-secret";
 
 /**
  * 홍보 글을 쓰거나 고치면 Supabase Database Webhook 이 여기를 때림.
@@ -27,8 +17,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Not configured" }, { status: 503 });
   }
 
-  const provided = req.headers.get("authorization")?.replace(/^Bearer /, "");
-  if (!matchesSecret(provided, secret)) {
+  if (!matchesBearerSecret(req, secret)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

@@ -38,6 +38,12 @@ async function _fetchRanking({ type, worldName, date, page }: Args) {
   return { ranking: dropUnusedFields(ranking) };
 }
 
+/**
+ * 날짜별 랭킹 데이터 태그. 넥슨이 올리기 전에 조회돼 빈 결과가 24시간 굳은 항목을
+ * 크론이 올라온 걸 확인한 시점에 털어내는 용도
+ */
+export const rankingDataTag = (date: string) => `ranking-data:${date}`;
+
 // 데이터 캐시는 unstable_cache 한 겹만 둔다. fetch 에 force-cache 를 같이 걸면
 // 같은 응답이 ISR 쓰기로 두 번 잡힘
 export const fetchRankingCached = (
@@ -49,5 +55,5 @@ export const fetchRankingCached = (
   unstable_cache(
     async () => _fetchRanking({ type, date, worldName, page }),
     ["ranking-fetch-v2", type, date, worldName ?? "all", String(page)],
-    { revalidate: 86400 },
+    { revalidate: 86400, tags: [rankingDataTag(date)] },
   )();

@@ -39,6 +39,12 @@ interface RankingPaginationProps {
   worldName?: string;
 }
 
+/**
+ * 페이지 링크는 프리페치하지 않음. 링크마다 아직 아무도 안 연 페이지가 ISR 로 만들어져
+ * 저장되므로, 화면에 보이는 번호 수만큼 ISR 쓰기가 늘어남
+ */
+const PAGE_LINK_PREFETCH = false;
+
 /** 화살표 네 개(<< < > >>)가 공유하는 껍데기. 비활성일 때 포커스에서도 빠짐 */
 function ArrowLink({
   href,
@@ -54,6 +60,7 @@ function ArrowLink({
   return (
     <PaginationLink
       href={href}
+      prefetch={PAGE_LINK_PREFETCH}
       aria-label={label}
       size="icon"
       className={cn(disabled && "pointer-events-none opacity-50")}
@@ -160,6 +167,7 @@ export function RankingPagination({
             >
               <PaginationLink
                 href={pageUrl(page)}
+                prefetch={PAGE_LINK_PREFETCH}
                 isActive={isCurrent}
                 aria-current={isCurrent ? "page" : undefined}
                 className={isCurrent ? "bg-card" : "hover:bg-accent"}

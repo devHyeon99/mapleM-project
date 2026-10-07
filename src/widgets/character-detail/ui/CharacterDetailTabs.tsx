@@ -1,7 +1,7 @@
 "use client";
 
 import type { CharacterUnion, UnionRanking } from "@/entities/character";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 
 import { Tabs, TabsContent } from "@/shared/ui/tabs";
@@ -75,11 +75,14 @@ const CharacterDetailTabsWithUrl = (props: CharacterDetailTabsProps) => {
   const tabQuery = searchParams.get(TAB_QUERY_KEY);
   const tabFromUrl = isTabKey(tabQuery) ? tabQuery : DEFAULT_TAB;
   const [activeTab, setActiveTab] = useState<TabKey>(tabFromUrl);
+  const [prevTabFromUrl, setPrevTabFromUrl] = useState(tabFromUrl);
 
-  // 뒤로가기·앞으로가기 등 외부 URL 변경 시 activeTab을 URL과 동기화
-  useEffect(() => {
+  // 뒤로가기·앞으로가기 등 외부 URL 변경 시 activeTab을 URL과 동기화.
+  // effect 대신 렌더 중에 맞춰서 이전 탭이 한 번 그려졌다가 바뀌는 추가 렌더를 없앰
+  if (tabFromUrl !== prevTabFromUrl) {
+    setPrevTabFromUrl(tabFromUrl);
     setActiveTab(tabFromUrl);
-  }, [tabFromUrl]);
+  }
 
   const handleTabChange = (value: string) => {
     if (!isTabKey(value)) return;

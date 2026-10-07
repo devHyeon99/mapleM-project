@@ -62,7 +62,9 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
-        source: "/favicon.ico",
+        // app 디렉터리 아이콘 파일 컨벤션. 기본값 max-age=0 이라 방문마다 304 재검증 요청이 나감.
+        // HTML 은 내용 해시를 붙인 주소(?icon.<hash>.png)로 불러서 길게 캐시해도 교체가 반영됨
+        source: "/:file(favicon\\.ico|icon\\.png|apple-icon\\.png)",
         headers: [
           {
             key: "Cache-Control",
@@ -71,11 +73,13 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        source: "/apple-touch-icon.png",
+        // 기본값 max-age=0 이라 페이지를 열 때마다 304 재검증이 나감.
+        // 주소에 해시가 없어 immutable 은 쓰지 않음. 바꾸면 늦어도 하루 뒤 반영됨
+        source: "/manifest.webmanifest",
         headers: [
           {
             key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
+            value: "public, max-age=86400",
           },
         ],
       },

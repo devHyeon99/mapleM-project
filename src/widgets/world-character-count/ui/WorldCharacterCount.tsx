@@ -16,8 +16,8 @@ function Frame({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col gap-3 p-4 md:p-6">
-      <div className="flex flex-wrap items-baseline justify-between gap-x-2 px-2">
+    <div className="flex flex-col gap-3 p-5">
+      <div className="flex flex-wrap items-baseline justify-between gap-x-2">
         <h3 className="text-base font-bold">월드별 캐릭터 수 집계</h3>
         <p className="text-muted-foreground text-xs">
           전체 레벨 랭킹 10,000위 기준
@@ -56,7 +56,7 @@ export async function WorldCharacterCount() {
             <Link
               href={rankingHref("level", { worldName })}
               prefetch={false}
-              className="hover:bg-accent flex items-center gap-2 rounded-md px-2 py-1.5 transition-colors"
+              className="hover:bg-accent flex items-center gap-2 rounded-md py-1.5 transition-colors"
             >
               <RankingIcon
                 src={worldIconSrc(worldName)}

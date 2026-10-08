@@ -17,6 +17,9 @@ const nextConfig: NextConfig = {
 
   poweredByHeader: false, // 보안상 'X-Powered-By: Next.js' 헤더를 응답에서
 
+  // 컴포넌트·훅 자동 메모이제이션. 빌드 시 Babel 단계가 추가됨
+  reactCompiler: true,
+
   experimental: {
     // 개발 서버 전용. 요청 타임라인과 서버 fetch 캐시 상태를 기록해 MCP get_request_insights 로 조회함
     requestInsights: true,

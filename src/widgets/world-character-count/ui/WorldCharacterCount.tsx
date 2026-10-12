@@ -34,7 +34,11 @@ export async function WorldCharacterCount() {
   const date = await resolveRankingDate();
 
   // 랭킹 집계가 실패해도 메인 페이지의 나머지는 살린다.
-  const counts = await getLevelWorldCharacterCounts(date).catch(() => null);
+  // 화면에선 삼키되 원인(429 등)은 로그로 남김
+  const counts = await getLevelWorldCharacterCounts(date).catch((e) => {
+    console.error("[월드별 캐릭터 수] 집계 실패", e);
+    return null;
+  });
 
   if (!counts?.length) {
     // 실패 화면이 ISR 캐시에 굳지 않도록 공지 섹션과 같은 방식으로 처리함

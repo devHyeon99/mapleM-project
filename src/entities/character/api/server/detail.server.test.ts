@@ -12,7 +12,7 @@ vi.mock("@/shared/api/nexon/server", () => ({
   }),
 }));
 
-vi.mock("@/shared/api/nexon/handler", () => ({
+vi.mock("@/shared/api/nexon", () => ({
   isNexonNotFoundError: () => false,
 }));
 

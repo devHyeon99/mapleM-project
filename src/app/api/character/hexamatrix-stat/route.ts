@@ -16,8 +16,8 @@ export async function GET(req: Request) {
 
   try {
     const data = await nexonFetch<CharacterHexaMatrixStat>(
-      `/character/hexamatrix-stat?ocid=${encodeURIComponent(ocid)}`,
-      { cache: "no-store" },
+      "/character/hexamatrix-stat",
+      { params: { ocid }, cache: "no-store" },
     );
 
     return NextResponse.json<ApiResponse<CharacterHexaMatrixStat>>({ data });

@@ -15,12 +15,10 @@ export async function GET(req: Request) {
   }
 
   try {
-    const ocidQ = encodeURIComponent(ocid);
-
-    const data = await nexonFetch<CharacterJewelEquipment>(
-      `/character/jewel?ocid=${ocidQ}`,
-      { cache: "no-store" },
-    );
+    const data = await nexonFetch<CharacterJewelEquipment>("/character/jewel", {
+      params: { ocid },
+      cache: "no-store",
+    });
 
     return NextResponse.json<ApiResponse<CharacterJewelEquipment>>(
       { data },

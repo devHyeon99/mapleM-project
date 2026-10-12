@@ -15,10 +15,10 @@ export async function GET(req: Request) {
   }
 
   try {
-    const data = await nexonFetch<CharacterSymbol>(
-      `/character/symbol?ocid=${encodeURIComponent(ocid)}`,
-      { cache: "no-store" },
-    );
+    const data = await nexonFetch<CharacterSymbol>("/character/symbol", {
+      params: { ocid },
+      cache: "no-store",
+    });
 
     return NextResponse.json<ApiResponse<CharacterSymbol>>({ data });
   } catch (e: unknown) {

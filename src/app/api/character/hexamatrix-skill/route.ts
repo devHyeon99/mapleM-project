@@ -15,11 +15,9 @@ export async function GET(req: Request) {
   }
 
   try {
-    const ocidQ = encodeURIComponent(ocid);
-
     const data = await nexonFetch<CharacterHexaMatrixSkill>(
-      `/character/hexamatrix-skill?ocid=${ocidQ}`,
-      { cache: "no-store" },
+      "/character/hexamatrix-skill",
+      { params: { ocid }, cache: "no-store" },
     );
 
     return NextResponse.json<ApiResponse<CharacterHexaMatrixSkill>>({ data });

@@ -1,14 +1,10 @@
 import "server-only";
 import { nexonFetch } from "@/shared/api/nexon/server";
-import { isNexonNotFoundError } from "@/shared/api/nexon/handler";
+import { isNexonNotFoundError } from "@/shared/api/nexon";
 import type { CharacterOcidData } from "../../model/types/ocid";
 import { unstable_cache } from "next/cache";
 
 const OCID_CACHE_SECONDS = 60 * 60 * 24;
-
-function buildOcidEndpoint(world: string, name: string): string {
-  return `/id?character_name=${encodeURIComponent(name)}&world_name=${encodeURIComponent(world)}`;
-}
 
 // 캐시는 찾은 캐릭터만 담는 한 겹. 없는 캐릭터는 넥슨이 던지는 에러가 그대로 올라오고,
 // unstable_cache 는 reject 를 저장하지 않으므로 캐시에 남지 않음.
@@ -16,9 +12,9 @@ function buildOcidEndpoint(world: string, name: string): string {
 // 결과까지 5분마다 다시 쓰면서 조회 한 번에 ISR 쓰기가 두 번씩 잡혔음
 const fetchOcidCached = unstable_cache(
   async (world: string, name: string): Promise<CharacterOcidData> => {
-    const { ocid } = await nexonFetch<{ ocid: string }>(
-      buildOcidEndpoint(world, name),
-    );
+    const { ocid } = await nexonFetch<{ ocid: string }>("/id", {
+      params: { character_name: name, world_name: world },
+    });
 
     return { world_name: world, ocid, character_name: name };
   },

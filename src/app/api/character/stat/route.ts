@@ -29,20 +29,18 @@ export async function GET(req: Request) {
   const safeLevel = Number.isFinite(level) ? level : 0;
 
   try {
-    const ocidQ = encodeURIComponent(ocid);
     const shouldFetchHyperStat = safeLevel >= 140;
 
     const [statData, hyperStatData] = await Promise.all([
-      nexonFetch<CharacterStatContainer>(`/character/stat?ocid=${ocidQ}`, {
+      nexonFetch<CharacterStatContainer>("/character/stat", {
+        params: { ocid },
         cache: "no-store",
       }),
       shouldFetchHyperStat
-        ? nexonFetch<CharacterHyperStat>(
-            `/character/hyper-stat?ocid=${ocidQ}`,
-            {
-              cache: "no-store",
-            },
-          )
+        ? nexonFetch<CharacterHyperStat>("/character/hyper-stat", {
+            params: { ocid },
+            cache: "no-store",
+          })
         : Promise.resolve(null),
     ]);
 

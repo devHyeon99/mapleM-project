@@ -15,10 +15,10 @@ export async function GET(req: Request) {
   }
 
   try {
-    const data = await nexonFetch<LinkSkillResponse>(
-      `/character/link-skill?ocid=${encodeURIComponent(ocid)}`,
-      { cache: "no-store" },
-    );
+    const data = await nexonFetch<LinkSkillResponse>("/character/link-skill", {
+      params: { ocid },
+      cache: "no-store",
+    });
 
     return NextResponse.json<ApiResponse<LinkSkillResponse>>({ data });
   } catch (e: unknown) {

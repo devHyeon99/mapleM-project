@@ -19,10 +19,10 @@ export async function GET(req: Request) {
   }
 
   try {
-    const data = await nexonFetch<CharacterUnionRaider>(
-      `/user/union-raider?ocid=${encodeURIComponent(ocid)}`,
-      { cache: "no-store" },
-    );
+    const data = await nexonFetch<CharacterUnionRaider>("/user/union-raider", {
+      params: { ocid },
+      cache: "no-store",
+    });
 
     return NextResponse.json<ApiResponse<CharacterUnionRaider>>({ data });
   } catch (e: unknown) {

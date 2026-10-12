@@ -15,12 +15,10 @@ export async function GET(req: Request) {
   }
 
   try {
-    const ocidQ = encodeURIComponent(ocid);
-
-    const data = await nexonFetch<CharacterVMatrix>(
-      `/character/vmatrix?ocid=${ocidQ}`,
-      { cache: "no-store" },
-    );
+    const data = await nexonFetch<CharacterVMatrix>("/character/vmatrix", {
+      params: { ocid },
+      cache: "no-store",
+    });
 
     return NextResponse.json<ApiResponse<CharacterVMatrix>>({ data });
   } catch (e: unknown) {

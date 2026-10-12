@@ -28,11 +28,9 @@ type Args = {
 };
 
 async function _fetchRanking({ type, worldName, date, page }: Args) {
-  const queryParams = new URLSearchParams({ date, page: String(page) });
-  if (worldName) queryParams.append("world_name", worldName);
-
   const { ranking } = await nexonFetch<RankingResponse<AnyRankingData>>(
-    `/ranking/${type}?${queryParams.toString()}`,
+    `/ranking/${type}`,
+    { params: { date, page, world_name: worldName || undefined } },
   );
 
   return { ranking: dropUnusedFields(ranking) };

@@ -15,11 +15,9 @@ export async function GET(req: Request) {
   }
 
   try {
-    const ocidQ = encodeURIComponent(ocid);
-
     const data = await nexonFetch<CharacterSkillData>(
-      `/character/skill-equipment?ocid=${ocidQ}`,
-      { cache: "no-store" },
+      "/character/skill-equipment",
+      { params: { ocid }, cache: "no-store" },
     );
 
     return NextResponse.json<ApiResponse<CharacterSkillData>>({ data });

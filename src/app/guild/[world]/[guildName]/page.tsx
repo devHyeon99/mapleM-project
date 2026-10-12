@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { cache } from "react";
-import { isNexonNotFoundError } from "@/shared/api/nexon/handler";
+import { isNexonNotFoundError } from "@/shared/api/nexon";
 import { getGuildFullData } from "@/entities/guild/api/get-guild.server";
 import { GuildDetailView } from "@/widgets/guild-detail/ui/GuildDetailView";
 import { safeDecode } from "@/shared/lib/url";

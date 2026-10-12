@@ -19,7 +19,8 @@ async function _findRankingByOcid(
   date: string,
 ) {
   const { ranking } = await nexonFetch<RankingResponse<BaseRanking>>(
-    `/ranking/${type}?date=${date}&ocid=${encodeURIComponent(ocid)}`,
+    `/ranking/${type}`,
+    { params: { date, ocid } },
   );
 
   return ranking[0] ?? null;

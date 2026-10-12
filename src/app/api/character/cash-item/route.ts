@@ -18,17 +18,15 @@ export async function GET(req: Request) {
   }
 
   try {
-    const ocidQ = encodeURIComponent(ocid);
-
     const [cashRes, beautyRes] = await Promise.all([
-      nexonFetch<CharacterCashEquipmentData>(
-        `/character/cashitem-equipment?ocid=${ocidQ}`,
-        { cache: "no-store" },
-      ),
-      nexonFetch<CharacterBeautyData>(
-        `/character/beauty-equipment?ocid=${ocidQ}`,
-        { cache: "no-store" },
-      ),
+      nexonFetch<CharacterCashEquipmentData>("/character/cashitem-equipment", {
+        params: { ocid },
+        cache: "no-store",
+      }),
+      nexonFetch<CharacterBeautyData>("/character/beauty-equipment", {
+        params: { ocid },
+        cache: "no-store",
+      }),
     ]);
 
     return NextResponse.json<

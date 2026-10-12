@@ -9,22 +9,34 @@ const NEXON_API_BASE_URL = "https://open.api.nexon.com/maplestorym/v1";
 // 넥슨이 응답 없이 붙잡고 있을 때 끊는 시간. 평소 응답은 1초 이내
 const NEXON_TIMEOUT_MS = 10_000;
 
+interface NexonFetchOptions extends RequestInit {
+  // 캐릭터·길드·월드명이 한글이라 인코딩이 필수. 경로에 직접 붙이지 말고 여기로 넘김
+  // undefined 값은 생략됨
+  params?: Record<string, string | number | undefined>;
+}
+
 export async function nexonFetch<T>(
-  endpoint: string,
-  options: RequestInit = {},
+  path: string,
+  { params, ...init }: NexonFetchOptions = {},
 ): Promise<T> {
   const apiKey = process.env.NEXON_API_KEY;
   if (!apiKey) {
     throw new Error("ServerConfigError: NEXON_API_KEY가 설정되지 않았습니다.");
   }
 
-  const res = await fetch(`${NEXON_API_BASE_URL}${endpoint}`, {
-    ...options,
-    signal: options.signal ?? AbortSignal.timeout(NEXON_TIMEOUT_MS),
-    headers: {
-      "x-nxopen-api-key": apiKey,
-      ...(options.headers ?? {}),
-    },
+  const url = new URL(`${NEXON_API_BASE_URL}${path}`);
+  for (const [key, value] of Object.entries(params ?? {})) {
+    if (value !== undefined) url.searchParams.set(key, String(value));
+  }
+
+  // Headers 인스턴스로 넘어와도 내용이 유지되도록 객체 spread 대신 Headers 사용
+  const headers = new Headers(init.headers);
+  headers.set("x-nxopen-api-key", apiKey);
+
+  const res = await fetch(url.toString(), {
+    ...init,
+    signal: init.signal ?? AbortSignal.timeout(NEXON_TIMEOUT_MS),
+    headers,
   });
 
   if (!res.ok) {

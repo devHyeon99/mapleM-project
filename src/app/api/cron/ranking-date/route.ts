@@ -33,8 +33,8 @@ export async function GET(req: Request) {
   let published = false;
   try {
     const { ranking } = await nexonFetch<RankingResponse<BaseRanking>>(
-      `/ranking/level?date=${date}&page=1`,
-      { cache: "no-store" },
+      "/ranking/level",
+      { params: { date, page: 1 }, cache: "no-store" },
     );
     published = ranking.length > 0;
   } catch (cause) {

@@ -77,8 +77,9 @@ const nextConfig: NextConfig = {
       },
       {
         // 기본값 max-age=0 이라 페이지를 열 때마다 304 재검증이 나감.
+        // 매니페스트 아이콘은 Chrome 이 설치 가능 여부 판단용으로 방문마다 받아감.
         // 주소에 해시가 없어 immutable 은 쓰지 않음. 바꾸면 늦어도 하루 뒤 반영됨
-        source: "/manifest.webmanifest",
+        source: "/:file(manifest\\.webmanifest|icon-192\\.png|icon-512\\.png)",
         headers: [
           {
             key: "Cache-Control",

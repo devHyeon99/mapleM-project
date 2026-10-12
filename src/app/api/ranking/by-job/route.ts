@@ -9,7 +9,7 @@ import {
   fetchRankingPageByJob,
   resolveRankingDate,
 } from "@/entities/ranking/server";
-import { handleCommonNexonError } from "@/shared/api/nexon";
+import { nexonErrorResponse } from "@/shared/api/nexon/server";
 import { isRealWorldName } from "@/shared/config/constants/worlds";
 import type { ApiResponse } from "@/shared/model/types/ApiResponse";
 
@@ -65,8 +65,7 @@ export async function GET(req: Request) {
       },
     );
   } catch (error) {
-    // 점검 중·호출량 초과 등을 사람이 읽을 문구로 바꿔 다시 던짐
-    handleCommonNexonError(error);
-    throw error;
+    // 던지면 Next 가 빈 본문 500 으로 응답해 클라이언트가 문구를 못 읽음. 응답으로 변환
+    return nexonErrorResponse(error);
   }
 }

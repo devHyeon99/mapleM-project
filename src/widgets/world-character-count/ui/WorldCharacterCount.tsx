@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { connection } from "next/server";
 import {
   getLevelWorldCharacterCounts,
   resolveRankingDate,
@@ -36,6 +37,8 @@ export async function WorldCharacterCount() {
   const counts = await getLevelWorldCharacterCounts(date).catch(() => null);
 
   if (!counts?.length) {
+    // 실패 화면이 ISR 캐시에 굳지 않도록 공지 섹션과 같은 방식으로 처리함
+    await connection();
     return (
       <Frame>
         <p className="text-muted-foreground text-sm">

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { connection } from "next/server";
 import { CharacterSearch } from "@/features/character-search";
+import { SITE_NAME, SITE_URL } from "@/shared/config/site";
 import { getCombinedNotices } from "@/entities/notice/api/notice";
 import { getSiteNotices } from "@/entities/notice/api/site-notice";
 import { SiteNoticeList } from "@/entities/notice/ui/SiteNoticeList";
@@ -15,6 +16,17 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
+};
+
+// 검색 결과에 도메인 대신 사이트 이름을 표시하기 위한 구조화 데이터
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${SITE_URL}/#website`,
+  name: SITE_NAME,
+  alternateName: "MMGG",
+  url: SITE_URL,
+  inLanguage: "ko-KR",
 };
 
 // 던져진 메시지는 화면에 그대로 렌더된다. 원문 노출은 entities/notice/api 쪽에서
@@ -43,15 +55,19 @@ export default async function Home() {
     "사이트 공지사항을 불러오지 못했습니다.",
   );
 
-  // 공지 로딩이 일시적으로 실패한 경우, 에러 화면 HTML이 ISR 풀 라우트
-  // 캐시에 최대 revalidate 기간(30분) 동안 고정되어 복구 후에도 노출되는
-  // 문제를 막는다. 이 렌더만 동적으로 처리해 다음 요청에서 재시도되게 한다.
+  // 일시적 실패 화면이 ISR 캐시에 1시간 동안 굳는 것 방지용.
+  // 런타임 재생성 중이면 재생성이 중단되어 직전 정상 HTML이 계속 나감.
+  // 빌드 중이면 이번 배포 동안 / 가 동적 라우트로 전환됨
   if (noticeError || siteNoticeError) {
     await connection();
   }
 
   return (
     <div className="wide:px-0 flex flex-col items-center px-4">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+      />
       {/* 컨텐츠 영역 */}
       <div className="flex h-65 w-full flex-col items-center justify-center gap-2">
         <div className="flex flex-col items-center gap-2">

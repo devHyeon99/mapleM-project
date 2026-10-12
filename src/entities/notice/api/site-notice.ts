@@ -4,7 +4,7 @@ import { createPublicSupabaseClient } from "@/shared/api/supabase/public-client"
 import type { SiteNoticeItem } from "../model/types";
 
 const SITE_NOTICE_LIMIT = 10;
-const SITE_NOTICE_REVALIDATE_SECONDS = 1800;
+const SITE_NOTICE_REVALIDATE_SECONDS = 86400;
 const SITE_NOTICE_ERROR_MESSAGE = "사이트 공지사항을 불러오지 못했습니다.";
 
 function isNoticeActive(nowMs: number, notice: SiteNoticeItem) {
@@ -39,15 +39,7 @@ async function querySiteNotices(): Promise<SiteNoticeItem[]> {
     throw new Error(SITE_NOTICE_ERROR_MESSAGE);
   }
 
-  const nowMs = Date.now();
-
-  const rows = (data ?? []) as Array<
-    SiteNoticeItem & { is_published?: boolean }
-  >;
-
-  return rows
-    .filter((notice) => isNoticeActive(nowMs, notice))
-    .slice(0, SITE_NOTICE_LIMIT);
+  return (data ?? []) as SiteNoticeItem[];
 }
 
 const getCachedSiteNotices = unstable_cache(
@@ -60,5 +52,11 @@ const getCachedSiteNotices = unstable_cache(
 );
 
 export async function getSiteNotices(): Promise<SiteNoticeItem[]> {
-  return getCachedSiteNotices();
+  // 게시 기간 판정은 캐시 바깥에서 렌더마다 수행함.
+  // 캐시 안에서 거르면 종료된 공지가 캐시 주기(24시간) 동안 계속 노출됨
+  const nowMs = Date.now();
+
+  return (await getCachedSiteNotices())
+    .filter((notice) => isNoticeActive(nowMs, notice))
+    .slice(0, SITE_NOTICE_LIMIT);
 }

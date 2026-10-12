@@ -8,7 +8,7 @@ import {
   findRankingByOcid,
   resolveRankingDate,
 } from "@/entities/ranking/server";
-import { handleCommonNexonError } from "@/shared/api/nexon";
+import { mapNexonError } from "@/shared/api/nexon";
 import type { RankingSearchQuery } from "./params";
 import type { RankingSearchResult } from "./types";
 
@@ -38,11 +38,8 @@ export async function findRankedCharacter(
       worldPage: Math.ceil(entry.world_ranking / RANKING_UI_ITEMS_PER_PAGE),
     };
   } catch (error) {
-    try {
-      handleCommonNexonError(error);
-    } catch (mapped) {
-      return { status: "error", message: (mapped as Error).message };
-    }
+    const mapped = mapNexonError(error);
+    if (mapped) return { status: "error", message: mapped.message };
 
     console.error("[랭킹 검색] 조회에 실패했습니다.", error);
     return {

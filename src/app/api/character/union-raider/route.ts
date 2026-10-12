@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
-import { nexonFetch } from "@/shared/api/nexon/server";
-import { handleCommonNexonError } from "@/shared/api/nexon/handler";
+import { nexonFetch, nexonErrorResponse } from "@/shared/api/nexon/server";
 import type { ApiResponse } from "@/shared/model/types/ApiResponse";
 import type { CharacterUnionRaider } from "@/entities/character";
 
@@ -27,31 +26,6 @@ export async function GET(req: Request) {
 
     return NextResponse.json<ApiResponse<CharacterUnionRaider>>({ data });
   } catch (e: unknown) {
-    try {
-      handleCommonNexonError(e);
-    } catch (mapped) {
-      return NextResponse.json<ApiResponse<null>>(
-        {
-          error: {
-            name: "NexonCommonError",
-            message: (mapped as Error).message,
-          },
-        },
-        { status: 503 },
-      );
-    }
-
-    return NextResponse.json<ApiResponse<null>>(
-      {
-        error: {
-          name: "InternalError",
-          message:
-            e instanceof Error
-              ? e.message
-              : "유니온 공격대 정보 조회 중 오류가 발생했습니다.",
-        },
-      },
-      { status: 500 },
-    );
+    return nexonErrorResponse(e);
   }
 }

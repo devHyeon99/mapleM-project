@@ -25,7 +25,7 @@ export class NexonApiError extends Error {
     this.code = code;
   }
 
-  // 특정 에러 코인지 확인하는 헬퍼 메서드
+  // 특정 에러 코드인지 확인하는 헬퍼 메서드
   is(code: NexonErrorCode): boolean {
     return this.code === code;
   }

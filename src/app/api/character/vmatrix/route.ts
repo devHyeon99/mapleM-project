@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
-import { nexonFetch } from "@/shared/api/nexon/server";
-import { handleCommonNexonError } from "@/shared/api/nexon/handler";
+import { nexonFetch, nexonErrorResponse } from "@/shared/api/nexon/server";
 import type { ApiResponse } from "@/shared/model/types/ApiResponse";
 import type { CharacterVMatrix } from "@/entities/skill/model";
 
@@ -25,28 +24,6 @@ export async function GET(req: Request) {
 
     return NextResponse.json<ApiResponse<CharacterVMatrix>>({ data });
   } catch (e: unknown) {
-    try {
-      handleCommonNexonError(e);
-    } catch (mapped) {
-      return NextResponse.json<ApiResponse<null>>(
-        {
-          error: {
-            name: "NexonCommonError",
-            message: (mapped as Error).message,
-          },
-        },
-        { status: 503 },
-      );
-    }
-
-    return NextResponse.json<ApiResponse<null>>(
-      {
-        error: {
-          name: "InternalError",
-          message: e instanceof Error ? e.message : "오류 발생",
-        },
-      },
-      { status: 500 },
-    );
+    return nexonErrorResponse(e);
   }
 }

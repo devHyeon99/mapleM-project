@@ -1,3 +1,7 @@
-export { handleCommonNexonError, isNexonNotFoundError } from "./handler";
+export {
+  handleCommonNexonError,
+  isNexonNotFoundError,
+  mapNexonError,
+} from "./handler";
 export { NexonApiError, NEXON_ERROR_CODE } from "./errors";
 export type { NexonErrorCode } from "./errors";

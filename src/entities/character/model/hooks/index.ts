@@ -3,3 +3,4 @@ export { useCharacterJewel } from "./useCharacterJewel";
 export { useCharacterStat } from "./useCharacterStat";
 export { useCharacterSymbol } from "./useCharacterSymbol";
 export { useUnionRaider } from "./useUnionRaider";
+export { useUnionStat } from "./useUnionStat";

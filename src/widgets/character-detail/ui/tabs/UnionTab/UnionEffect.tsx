@@ -16,6 +16,8 @@ interface UnionEffectProps {
   options: string | UnionOption[] | null | undefined;
   isLoading?: boolean;
   error?: Error | null;
+  /** 제목 우측 컨트롤 (프리셋 토글 등) */
+  action?: ReactNode;
   className?: string;
 }
 
@@ -46,6 +48,7 @@ export const UnionEffect = ({
   options,
   isLoading,
   error,
+  action,
   className,
 }: UnionEffectProps) => {
   const renderBody = () => {
@@ -82,7 +85,7 @@ export const UnionEffect = ({
   };
 
   return (
-    <TabCard title={title} className={className}>
+    <TabCard title={title} action={action} className={className}>
       {renderBody()}
     </TabCard>
   );

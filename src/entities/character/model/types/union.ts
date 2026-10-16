@@ -23,3 +23,23 @@ export interface CharacterUnionRaider {
 }
 
 export type CharacterUnionRaiderResponse = CharacterUnionRaider;
+
+/**
+ * 유니온 스탯 정보
+ */
+export interface UnionStatEntry {
+  stat_name: string;
+  stat_point: number;
+  stat_value: string;
+}
+
+export interface UnionStatPreset {
+  preset_no: number;
+  union_stat: UnionStatEntry[];
+}
+
+export interface CharacterUnionStat {
+  use_preset_no: number;
+  use_union_stat: UnionStatEntry[];
+  union_stat_preset: UnionStatPreset[];
+}

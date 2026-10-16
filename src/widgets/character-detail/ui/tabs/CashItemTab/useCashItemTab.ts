@@ -9,6 +9,9 @@ import type {
 
 import type { CashItemLookMode } from "./CashItemTabHeader";
 
+/** 드레스업 모드를 뜻하는 character_look_mode 값 (일반 모드는 "0"·"3") */
+const DRESS_UP_LOOK_MODES = ["1", "4"];
+
 const DRESS_UP_SLOT_SUFFIX = " (드레스업 슬롯)";
 
 const normalizeDressUpCashItems = (
@@ -40,7 +43,8 @@ export const useCashItemTab = (data?: CharacterCashEquipmentData) => {
     data?.character_class === "엔젤릭버스터" && hasDressUpData;
   const effectiveLookMode: CashItemLookMode =
     selectedLookMode ??
-    (data?.character_look_mode === "1" && canUseDressUpMode
+    (DRESS_UP_LOOK_MODES.includes(data?.character_look_mode ?? "") &&
+    canUseDressUpMode
       ? "dressUp"
       : "normal");
   const isDressUpMode = effectiveLookMode === "dressUp";

@@ -25,6 +25,14 @@ export const ItemCashInfo = ({ item }: Props) => {
           labelClassName={MUTED_LABEL}
           valueClassName={HIGHLIGHT_VALUE}
         />
+        {item.freestyle_coupon_flag === "1" && (
+          <ItemOptionRow
+            label="프리스타일 쿠폰"
+            value="적용"
+            labelClassName={MUTED_LABEL}
+            valueClassName={HIGHLIGHT_VALUE}
+          />
+        )}
         <ItemOptionRow
           label="라벨"
           value={item.cash_item_label ?? "없음"}

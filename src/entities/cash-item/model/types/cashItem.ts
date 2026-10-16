@@ -38,6 +38,7 @@ export interface CashItemEquipment {
   miracle_anvil_item_icon: string | null; // 신비의 모루 외형 아이콘 URL
   cash_item_description: string; // 설명
   cash_item_gender: number | string | null; // 장착 가능 성별(공식 API: int64), 내부 변환 문자열 호환
+  freestyle_coupon_flag: string | null; // 프리스타일 쿠폰 적용 여부 ("0": 미적용, "1": 적용)
   cash_item_option: CashItemOption[]; // 옵션 목록
   date_expire: string | null; // 캐시 아이템 유효 기간
   date_option_expire: string | null; // 만료일 (UTC string or null)
@@ -67,6 +68,7 @@ export interface CharacterHair {
   base_color: string | null;
   mix_color: string | null;
   mix_rate: string | null;
+  freestyle_coupon_flag?: string | null; // 프리스타일 쿠폰 적용 여부 ("0": 미적용, "1": 적용)
 }
 
 // 성형 정보
@@ -75,6 +77,7 @@ export interface CharacterFace {
   base_color: string | null;
   mix_color: string | null;
   mix_rate: string | null;
+  freestyle_coupon_flag?: string | null; // 프리스타일 쿠폰 적용 여부 ("0": 미적용, "1": 적용)
 }
 
 // 뷰티 API 응답 전체 구조
@@ -103,7 +106,7 @@ export interface CharacterCashEquipmentData {
   character_gender: string;
   use_preset_no: number; // 현재 적용 중인 프리셋 번호
   use_additional_preset_no: number; // 현재 적용 중인 드레스업 프리셋 번호
-  character_look_mode: string; // "0": 일반, "1": 드레스업
+  character_look_mode: string; // "0"·"3": 일반, "1"·"4": 드레스업
 
   // 현재 장착 중인 장비
   cash_item_equipment: CashItemEquipment[];

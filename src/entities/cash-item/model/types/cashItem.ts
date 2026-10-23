@@ -82,8 +82,8 @@ export interface CharacterFace {
 
 // 뷰티 API 응답 전체 구조
 export interface CharacterBeautyData {
-  character_class: string;
-  character_gender: string;
+  character_class: string | null;
+  character_gender: string | null; // 뷰티 정보가 비면 null
 
   // 일반 모드
   character_hair: CharacterHair | null;

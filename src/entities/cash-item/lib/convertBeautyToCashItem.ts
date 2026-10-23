@@ -29,19 +29,27 @@ export const convertBeautyToCashItem = (
     ? beauty.additional_character_skin_name
     : beauty.character_skin_name;
 
+  // 넥슨이 뷰티 정보를 비워 보낼 때 성별도 null 로 옴. 여자로 단정하지 않고 비워 둠
+  const gender =
+    beauty.character_gender == null
+      ? null
+      : beauty.character_gender === "Male"
+        ? "남자"
+        : "여자";
+
   const result: CashItemEquipment[] = [];
 
-  // 헤어
-  if (hair) {
+  // 헤어. 정보가 비면 객체는 오고 안의 값만 전부 null 이라 이름으로 판정
+  if (hair?.hair_name) {
     result.push({
       cash_item_equipment_page_name: "헤어",
       cash_item_equipment_slot_name: "헤어",
-      cash_item_name: hair.hair_name || "헤어 정보 없음",
+      cash_item_name: hair.hair_name,
       cash_item_icon: ICONS.HAIR,
       miracle_anvil_item_name: null,
       miracle_anvil_item_icon: null,
       cash_item_description: "",
-      cash_item_gender: beauty.character_gender === "Male" ? "남자" : "여자",
+      cash_item_gender: gender,
       freestyle_coupon_flag: hair.freestyle_coupon_flag ?? null,
       cash_item_label: null,
       cash_item_coloring_prism: null,
@@ -58,17 +66,17 @@ export const convertBeautyToCashItem = (
     });
   }
 
-  // 성형
-  if (face) {
+  // 성형. 헤어와 같은 이유로 이름으로 판정
+  if (face?.face_name) {
     result.push({
       cash_item_equipment_page_name: "성형",
       cash_item_equipment_slot_name: "성형",
-      cash_item_name: face.face_name || "성형 정보 없음",
+      cash_item_name: face.face_name,
       cash_item_icon: ICONS.FACE,
       miracle_anvil_item_name: null,
       miracle_anvil_item_icon: null,
       cash_item_description: "",
-      cash_item_gender: beauty.character_gender === "Male" ? "남자" : "여자",
+      cash_item_gender: gender,
       freestyle_coupon_flag: face.freestyle_coupon_flag ?? null,
       cash_item_label: null,
       cash_item_coloring_prism: null,
@@ -95,7 +103,7 @@ export const convertBeautyToCashItem = (
       miracle_anvil_item_name: null,
       miracle_anvil_item_icon: null,
       cash_item_description: "",
-      cash_item_gender: beauty.character_gender === "Male" ? "남자" : "여자",
+      cash_item_gender: gender,
       freestyle_coupon_flag: null,
       cash_item_label: null,
       cash_item_coloring_prism: null,

@@ -21,7 +21,7 @@ export const ItemCashInfo = ({ item }: Props) => {
         />
         <ItemOptionRow
           label="성별"
-          value={item.cash_item_gender}
+          value={item.cash_item_gender ?? "-"}
           labelClassName={MUTED_LABEL}
           valueClassName={HIGHLIGHT_VALUE}
         />

@@ -10,4 +10,6 @@ export type CharacterItemTabData = Pick<
   | "android_equipment"
   | "heart_equipment"
   | "android_preset"
+  | "pets"
+  | "pet_set_option"
 >;

@@ -9,6 +9,7 @@ import type {
 import { CharacterBasic } from "./basic";
 import { CharacterUnion } from "./union";
 import { LevelRanking, UnionRanking } from "./ranking";
+import { CharacterPet, PetSetOption } from "./pet";
 
 /**
  * 통합 캐릭터 상세 정보 (CharacterDetailData)
@@ -35,4 +36,8 @@ export interface CharacterDetailData extends CharacterBasic {
   android_equipment?: AndroidEquipment | null;
   heart_equipment?: HeartEquipment | null;
   android_preset?: AndroidHeartEquipmentPreset[];
+
+  // 펫 정보 (1~3번 슬롯 순서, 빈 슬롯은 null)
+  pets?: (CharacterPet | null)[];
+  pet_set_option?: PetSetOption[];
 }

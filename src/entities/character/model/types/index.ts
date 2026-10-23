@@ -9,6 +9,7 @@ export * from "./ranking";
 export * from "./hyper-stat";
 export * from "./ocid";
 export * from "./guild";
+export * from "./pet";
 
 // 통합 상세 데이터 (조립된 데이터)
 export * from "./detail";

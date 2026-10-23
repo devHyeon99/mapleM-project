@@ -5,6 +5,7 @@ import { ItemTabHeader } from "./ItemTabHeader";
 import { ItemList } from "./ItemList";
 import { ItemTabFooter } from "./ItemTabFooter";
 import { useItemTab } from "./useItemTab";
+import { PetSetOptionCard } from "./PetSetOptionCard";
 import type { CharacterItemTabData } from "../../types";
 import { TabMessageSection } from "@/shared/ui/TabMessageSection";
 
@@ -31,7 +32,11 @@ export const ItemTab = ({ data }: ItemTabProps) => {
 
         <div className="bg-card rounded-b-2xl">
           {viewMode === "grid" ? (
-            <ItemGrid items={sortedItems} presetNo={effectiveSelectedPreset} />
+            <ItemGrid
+              items={sortedItems}
+              presetNo={effectiveSelectedPreset}
+              pets={data.pets}
+            />
           ) : (
             <ItemList
               items={sortedItems}
@@ -45,6 +50,7 @@ export const ItemTab = ({ data }: ItemTabProps) => {
         items={sortedItems}
         characterClass={data.character_class}
       />
+      <PetSetOptionCard setOptions={data.pet_set_option} />
     </div>
   );
 };

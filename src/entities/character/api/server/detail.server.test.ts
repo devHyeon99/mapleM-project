@@ -41,11 +41,12 @@ describe("fetchCharacterDetail", () => {
       "/character/guild",
       "/character/android-equipment",
       "/user/union",
+      "/character/pet-equipment",
     ]);
 
     releaseRankingDate("2026-09-18");
     await pending;
 
-    expect(requested.slice(5)).toEqual(["/ranking/level", "/ranking/union"]);
+    expect(requested.slice(6)).toEqual(["/ranking/level", "/ranking/union"]);
   });
 });

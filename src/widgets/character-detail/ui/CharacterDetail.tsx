@@ -21,6 +21,8 @@ export const CharacterDetail = ({
     android_equipment: characterData.android_equipment,
     heart_equipment: characterData.heart_equipment,
     android_preset: characterData.android_preset,
+    pets: characterData.pets,
+    pet_set_option: characterData.pet_set_option,
   };
 
   return (

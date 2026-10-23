@@ -1,13 +1,18 @@
+import type { CharacterPet } from "@/entities/character";
 import type { SortedItemSlot } from "@/entities/item";
-import { ItemDialog } from "@/features/item-dialog";
+import { ItemDialog, PetDialog } from "@/features/item-dialog";
 import { ItemEmptySlot } from "@/shared/ui/ItemEmptySlot";
 
 interface ItemGridProps {
   items: SortedItemSlot[];
   presetNo: number;
+  pets?: (CharacterPet | null)[];
 }
 
-export const ItemGrid = ({ items, presetNo }: ItemGridProps) => {
+// 펫은 마지막 줄(안드로이드·하트 줄) 5~7열에 명시 배치함
+const PET_COLUMN_CLASSES = ["col-start-5", "col-start-6", "col-start-7"];
+
+export const ItemGrid = ({ items, presetNo, pets = [] }: ItemGridProps) => {
   // 뷰포트가 아닌 컨테이너 폭을 7등분해서 좁은 화면에서도 남는 가로 공간을 모두 사용
   const slotSizeClass = "w-full";
 
@@ -61,6 +66,30 @@ export const ItemGrid = ({ items, presetNo }: ItemGridProps) => {
               label={slot.slotName}
               className={`aspect-square ${slotSizeClass}`}
             />
+          );
+        })}
+
+        {PET_COLUMN_CLASSES.map((columnClass, idx) => {
+          const pet = pets[idx];
+          const className = `row-start-6 ${columnClass} aspect-square ${slotSizeClass}`;
+
+          if (!pet) {
+            return (
+              <ItemEmptySlot
+                key={`pet-${idx}`}
+                label={`펫${idx + 1}`}
+                className={className}
+              />
+            );
+          }
+
+          return (
+            <div key={`pet-${idx}`} className={className}>
+              <PetDialog
+                pet={pet}
+                className="h-full w-full cursor-pointer shadow-sm"
+              />
+            </div>
           );
         })}
       </div>

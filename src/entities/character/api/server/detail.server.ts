@@ -14,6 +14,8 @@ import type {
   CharacterUnionResponse,
   CharacterLevelRankingResponse,
   CharacterUnionRankingResponse,
+  CharacterPet,
+  CharacterPetEquipmentResponse,
 } from "../../model/types";
 
 function getRequiredResult<T>(
@@ -40,6 +42,23 @@ function getOptionalResult<T>(
   return null;
 }
 
+// pet_1_* ~ pet_3_* 평탄 필드를 슬롯 순서 배열로 변환함
+function toPets(
+  data: CharacterPetEquipmentResponse | null,
+): (CharacterPet | null)[] {
+  return ([1, 2, 3] as const).map((no) => {
+    const name = data?.[`pet_${no}_name`];
+    if (!name) return null;
+
+    return {
+      name,
+      pet_type: data[`pet_${no}_pet_type`],
+      date_expire: data[`pet_${no}_date_expire`],
+      icon: data[`pet_${no}_icon`],
+    };
+  });
+}
+
 export async function fetchCharacterDetail(
   ocid: string,
 ): Promise<CharacterDetailData | null> {
@@ -62,6 +81,7 @@ export async function fetchCharacterDetail(
     guildResult,
     androidResult,
     unionResult,
+    petResult,
     levelRankingResult,
     unionRankingResult,
   ] = await Promise.allSettled([
@@ -85,6 +105,10 @@ export async function fetchCharacterDetail(
       params: { ocid: trimmedOcid },
       cache: "no-store",
     }),
+    nexonFetch<CharacterPetEquipmentResponse>("/character/pet-equipment", {
+      params: { ocid: trimmedOcid },
+      cache: "no-store",
+    }),
     fetchRanking<CharacterLevelRankingResponse>("/ranking/level"),
     fetchRanking<CharacterUnionRankingResponse>("/ranking/union"),
   ]);
@@ -103,6 +127,7 @@ export async function fetchCharacterDetail(
   const guildData = getOptionalResult(guildResult, "guild");
   const androidData = getOptionalResult(androidResult, "android");
   const unionData = getOptionalResult(unionResult, "union");
+  const petData = getOptionalResult(petResult, "pet");
   const levelRankingData = getOptionalResult(
     levelRankingResult,
     "level-ranking",
@@ -127,5 +152,7 @@ export async function fetchCharacterDetail(
     android_equipment: androidData?.android_equipment ?? null,
     heart_equipment: androidData?.heart_equipment ?? null,
     android_preset: androidData?.android_heart_equipment_preset ?? [],
+    pets: toPets(petData),
+    pet_set_option: petData?.pet_set_option ?? [],
   };
 }

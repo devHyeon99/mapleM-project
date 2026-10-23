@@ -23,6 +23,8 @@ const nextConfig: NextConfig = {
   experimental: {
     // 개발 서버 전용. 요청 타임라인과 서버 fetch 캐시 상태를 기록해 MCP get_request_insights 로 조회함
     requestInsights: true,
+    // 에이전트 자동 업그레이드 범위를 보안 패치로 한정함
+    agentUpgrade: "security",
   },
 
   // 개발 환경 데이터 페칭 로깅 설정

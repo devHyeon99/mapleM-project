@@ -1,13 +1,21 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { cache } from "react";
-import { CharacterSearch } from "@/features/character-search";
 import { CharacterDetail } from "@/widgets/character-detail";
 import { fetchOcid, fetchCharacterDetail } from "@/entities/character/server";
 import { safeDecode } from "@/shared/lib/url";
 import { worldFromSlug } from "@/shared/config/constants/worlds";
 import { OG_IMAGE, OG_IMAGE_SIZE } from "@/shared/config/site";
-import { NotFoundMetadata } from "./not-found";
+
+// 중첩 not-found.tsx 의 metadata export 는 적용되지 않아 여기서 반환함
+const NOT_FOUND_METADATA: Metadata = {
+  title: "캐릭터를 찾을 수 없음",
+  description: "요청하신 캐릭터 정보를 찾을 수 없습니다.",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 interface CharacterPageProps {
   params: Promise<{ world: string; name: string }>;
@@ -31,7 +39,7 @@ export async function generateMetadata({
   const decodedName = safeDecode(name);
 
   const pageData = await getPageData(decodedWorld, decodedName);
-  if (!pageData) return NotFoundMetadata;
+  if (!pageData) return NOT_FOUND_METADATA;
 
   const title = `${decodedName} (${decodedWorld}) - 캐릭터 정보`;
   const description = `${decodedWorld} 서버 ${decodedName} 캐릭터의 상세 정보를 확인하세요.`;
@@ -68,16 +76,12 @@ export default async function CharacterPage({ params }: CharacterPageProps) {
   const { ocid, characterData } = pageData;
 
   return (
-    <div className="wide:px-0 flex w-full flex-1 flex-col items-center px-4 py-6">
+    <>
       <h1 className="sr-only">
         {decodedName} ({decodedWorld}) 캐릭터 검색 결과
       </h1>
 
-      <search className="mb-2 w-full max-w-3xl" aria-label="캐릭터 재검색">
-        <CharacterSearch />
-      </search>
-
       <CharacterDetail ocid={ocid} characterData={characterData} />
-    </div>
+    </>
   );
 }

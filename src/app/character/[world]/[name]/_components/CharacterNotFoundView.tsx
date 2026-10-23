@@ -3,9 +3,9 @@
 import { useEffect, useMemo } from "react";
 import { usePathname } from "next/navigation";
 import { useRecentSearch } from "@/shared/lib/hooks/useRecentSearch";
-import { CharacterSearch } from "@/features/character-search";
 import { NotFoundMessage } from "@/shared/ui/NotFoundMessage";
 import { worldFromSlug } from "@/shared/config/constants/worlds";
+import { safeDecode } from "@/shared/lib/url";
 
 interface CharacterPathParams {
   name: string;
@@ -19,8 +19,8 @@ const parseCharacterPathname = (
   if (segments[1] !== "character" || segments.length < 4) return null;
 
   return {
-    world: worldFromSlug(decodeURIComponent(segments[2])),
-    name: decodeURIComponent(segments[3]),
+    world: worldFromSlug(safeDecode(segments[2])),
+    name: safeDecode(segments[3]),
   };
 };
 
@@ -38,21 +38,17 @@ export function CharacterNotFoundView() {
   }, [targetCharacter, removeHistoryByParams]);
 
   return (
-    <div className="flex flex-col items-center justify-center text-center">
-      <div className="mb-6.5 w-full max-w-3xl px-4 pt-2">
-        <CharacterSearch />
-      </div>
-      <NotFoundMessage
-        title="캐릭터를 찾을 수 없습니다"
-        subject={
-          targetCharacter
-            ? `${targetCharacter.world} ${targetCharacter.name}`
-            : undefined
-        }
-        description={
-          "캐릭터 닉네임이 정확한지 다시 확인해주세요.\n삭제되었거나 존재하지 않는 캐릭터일 수 있습니다."
-        }
-      />
-    </div>
+    <NotFoundMessage
+      className="mt-4.5"
+      title="캐릭터를 찾을 수 없습니다"
+      subject={
+        targetCharacter
+          ? `${targetCharacter.world} ${targetCharacter.name}`
+          : undefined
+      }
+      description={
+        "캐릭터 닉네임이 정확한지 다시 확인해주세요.\n삭제되었거나 존재하지 않는 캐릭터일 수 있습니다."
+      }
+    />
   );
 }

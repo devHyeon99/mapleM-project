@@ -93,12 +93,14 @@ export const handleCommonNexonError = (error: unknown): void => {
 };
 
 /**
- * "데이터 없음/파라미터 오류" (OPENAPI00004) 인지 확인하는 헬퍼
- * - 코드가독성을 위해 분리
+ * 조회 대상이 없는 에러인지 확인하는 헬퍼
+ * - OPENAPI00004: 없는 이름, 등록되지 않은 하위 리소스
+ * - OPENAPI00003: 식별자는 받았지만 상세 조회가 안 되는 대상
  */
 export const isNexonNotFoundError = (error: unknown): boolean => {
   return (
     error instanceof NexonApiError &&
-    error.is(NEXON_ERROR_CODE.BAD_REQUEST_PARAM)
+    (error.is(NEXON_ERROR_CODE.BAD_REQUEST_PARAM) ||
+      error.is(NEXON_ERROR_CODE.BAD_REQUEST_ID))
   );
 };

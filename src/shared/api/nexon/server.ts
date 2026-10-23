@@ -2,7 +2,7 @@ import "server-only";
 import { NextResponse } from "next/server";
 import type { ApiResponse } from "@/shared/model/types/ApiResponse";
 import { NexonApiError } from "./errors";
-import { mapNexonError } from "./handler";
+import { isNexonNotFoundError, mapNexonError } from "./handler";
 
 const NEXON_API_BASE_URL = "https://open.api.nexon.com/maplestorym/v1";
 
@@ -59,6 +59,14 @@ export async function nexonFetch<T>(
  * - 알 수 없는 에러는 원문에 내부 정보가 섞일 수 있어 로그로만 남기고 공통 문구로 응답
  */
 export function nexonErrorResponse(error: unknown) {
+  // 하위 리소스가 없는 캐릭터(헥사·V매트릭스 미보유 등)도 넥슨은 에러로 응답함. 오류가 아니라 기록 없음
+  if (isNexonNotFoundError(error)) {
+    return NextResponse.json<ApiResponse<null>>(
+      { error: { name: "NotFound", message: "조회된 기록이 없습니다." } },
+      { status: 404 },
+    );
+  }
+
   const mapped = mapNexonError(error);
   if (mapped) {
     return NextResponse.json<ApiResponse<null>>(

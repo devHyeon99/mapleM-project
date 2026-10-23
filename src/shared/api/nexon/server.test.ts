@@ -2,7 +2,8 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 
 vi.mock("server-only", () => ({}));
 
-import { nexonFetch } from "./server";
+import { NexonApiError, NEXON_ERROR_CODE } from "./errors";
+import { nexonErrorResponse, nexonFetch } from "./server";
 
 describe("nexonFetch", () => {
   afterEach(() => {
@@ -37,5 +38,14 @@ describe("nexonFetch", () => {
     const headers = init.headers as Headers;
     expect(headers.get("x-nxopen-api-key")).toBe("key");
     expect(headers.get("x-extra")).toBe("1");
+  });
+});
+
+describe("nexonErrorResponse", () => {
+  it("대상 없음(00004)은 404", () => {
+    const res = nexonErrorResponse(
+      new NexonApiError(NEXON_ERROR_CODE.BAD_REQUEST_PARAM, "원문"),
+    );
+    expect(res.status).toBe(404);
   });
 });

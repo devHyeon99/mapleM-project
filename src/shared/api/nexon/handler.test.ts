@@ -1,6 +1,10 @@
 import { describe, expect, it } from "vitest";
 import { NexonApiError, NEXON_ERROR_CODE } from "./errors";
-import { handleCommonNexonError, mapNexonError } from "./handler";
+import {
+  handleCommonNexonError,
+  isNexonNotFoundError,
+  mapNexonError,
+} from "./handler";
 
 const nexonError = (code: string) => new NexonApiError(code, "원문");
 
@@ -38,5 +42,19 @@ describe("handleCommonNexonError", () => {
 
   it("알 수 없는 에러는 통과", () => {
     expect(() => handleCommonNexonError(new Error("x"))).not.toThrow();
+  });
+});
+
+describe("isNexonNotFoundError", () => {
+  it("00003·00004 는 없음, 그 외는 아님", () => {
+    expect(
+      isNexonNotFoundError(nexonError(NEXON_ERROR_CODE.BAD_REQUEST_ID)),
+    ).toBe(true);
+    expect(
+      isNexonNotFoundError(nexonError(NEXON_ERROR_CODE.BAD_REQUEST_PARAM)),
+    ).toBe(true);
+    expect(
+      isNexonNotFoundError(nexonError(NEXON_ERROR_CODE.DATA_PREPARING)),
+    ).toBe(false);
   });
 });

@@ -1,5 +1,34 @@
 import type { ApiResponse } from "@/shared/model/types/ApiResponse";
 
+/** 내부 API 가 실패 상태로 응답한 에러. 재시도 판단용으로 상태 코드를 담음 */
+export class ApiRequestError extends Error {
+  constructor(
+    message: string,
+    readonly status: number,
+  ) {
+    super(message);
+    this.name = "ApiRequestError";
+  }
+}
+
+/** 기본 재시도 횟수 */
+const MAX_QUERY_RETRIES = 3;
+
+/**
+ * React Query 재시도 판단. 4xx 는 다시 보내도 결과가 같고 넥슨 호출량만 늘어 재시도하지 않음
+ * - 넥슨 OPENAPI00003·00004 가 내부 API 에서 404 로 변환되어 옴
+ * - 429(넥슨 OPENAPI00007)는 예외. React Query 기본 지수 백오프로 재시도
+ */
+export const shouldRetryQuery = (failureCount: number, error: unknown) => {
+  if (
+    error instanceof ApiRequestError &&
+    error.status < 500 &&
+    error.status !== 429
+  )
+    return false;
+  return failureCount < MAX_QUERY_RETRIES;
+};
+
 export interface InternalFetchOptions {
   /** fetch에 그대로 전달되는 RequestInit (cache는 기본 no-store). */
   init?: RequestInit;
@@ -36,10 +65,11 @@ export async function internalFetch<T>(
   const json = (await res.json().catch(() => ({}))) as ApiResponse<T>;
 
   if (!res.ok) {
-    throw new Error(
+    throw new ApiRequestError(
       json?.error?.message ??
         messages?.requestFailed?.(res.status) ??
         `API 요청 실패: ${res.status}`,
+      res.status,
     );
   }
   if (json.error) throw new Error(json.error.message);

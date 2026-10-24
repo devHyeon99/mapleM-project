@@ -1,11 +1,11 @@
 import { useMemo, useState } from "react";
 
-import { convertBeautyToCashItem } from "@/entities/cash-item/lib/convertBeautyToCashItem";
-import { sortCashItems } from "@/entities/cash-item/lib/sortCashItems";
-import type {
-  CashItemEquipment,
-  CharacterCashEquipmentData,
-} from "@/entities/cash-item/model/types";
+import {
+  convertBeautyToCashItem,
+  sortCashItems,
+  type CashItemEquipment,
+  type CharacterCashEquipmentData,
+} from "@/entities/cash-item";
 
 import type { CashItemLookMode } from "./CashItemTabHeader";
 

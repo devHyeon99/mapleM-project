@@ -1,4 +1,4 @@
-import type { VCoreEquipment } from "@/entities/skill/model/types/vmatrix";
+import type { VCoreEquipment } from "@/entities/skill";
 
 /** 코어 타입별 표시 순서 및 카드 제목 */
 const CORE_TYPE_LABELS: Record<string, string> = {

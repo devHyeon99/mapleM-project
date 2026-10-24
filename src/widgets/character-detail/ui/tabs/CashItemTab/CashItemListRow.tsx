@@ -1,4 +1,4 @@
-import type { CashItemEquipment } from "@/entities/cash-item/model/types/cashItem";
+import type { CashItemEquipment } from "@/entities/cash-item";
 import { ItemCashDialog } from "@/features/item-dialog";
 import { cn } from "@/shared/lib/utils";
 

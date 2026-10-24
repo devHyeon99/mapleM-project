@@ -1,5 +1,5 @@
 import { LinkSkillItem } from "./LinkSkillItem";
-import type { LinkSkillPreset } from "@/entities/skill/model";
+import type { LinkSkillPreset } from "@/entities/skill";
 
 interface LinkSkillListProps {
   activePresetData?: LinkSkillPreset;

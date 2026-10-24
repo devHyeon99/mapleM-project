@@ -1,6 +1,5 @@
 import { useMemo } from "react";
-import type { LinkSkillInfo } from "@/entities/skill/model";
-import { calculateTotalStats } from "@/entities/skill/lib/mergeLinkSkills";
+import { calculateTotalStats, type LinkSkillInfo } from "@/entities/skill";
 import { TabCard } from "@/shared/ui/TabCard";
 
 interface LinkSkillTotalStatProps {

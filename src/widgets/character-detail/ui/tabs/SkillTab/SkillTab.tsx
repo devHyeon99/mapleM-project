@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useCharacterSkillEquipment } from "@/entities/skill/model/hooks/useCharacterSkillEquipment";
+import { useCharacterSkillEquipment } from "@/entities/skill";
 import { TabMessageSection } from "@/shared/ui/TabMessageSection";
 import { TabCard } from "@/shared/ui/TabCard";
 import { HelpPopover } from "@/shared/ui/HelpPopover";

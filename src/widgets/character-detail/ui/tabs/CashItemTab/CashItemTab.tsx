@@ -1,6 +1,6 @@
 "use client";
 
-import { useCharacterCashEquipment } from "@/entities/cash-item/model/hooks/useCharacterCashEquipment";
+import { useCharacterCashEquipment } from "@/entities/cash-item";
 
 import { CashItemGrid } from "./CashItemGrid";
 import { CashItemList } from "./CashItemList";

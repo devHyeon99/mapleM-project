@@ -1,4 +1,4 @@
-import type { VCoreEquipment } from "@/entities/skill/model/types/vmatrix";
+import type { VCoreEquipment } from "@/entities/skill";
 
 import { getCoreName } from "./vmatrix-tab.utils";
 

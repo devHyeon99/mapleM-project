@@ -1,4 +1,4 @@
-import { SortedCashItemSlot } from "@/entities/cash-item/lib/sortCashItems";
+import { SortedCashItemSlot } from "@/entities/cash-item";
 import { cn } from "@/shared/lib/utils";
 import { ItemEmptyRow } from "@/shared/ui/ItemEmptyRow";
 import { CashItemListRow } from "./CashItemListRow";

@@ -1,5 +1,7 @@
-import type { CharacterEquipmentSkill } from "@/entities/skill/model";
-import { stripSkillLevel } from "@/entities/skill/lib/stripSkillLevel";
+import {
+  stripSkillLevel,
+  type CharacterEquipmentSkill,
+} from "@/entities/skill";
 import { SkillIconTooltip } from "./SkillIconTooltip";
 
 interface SkillSlotProps {

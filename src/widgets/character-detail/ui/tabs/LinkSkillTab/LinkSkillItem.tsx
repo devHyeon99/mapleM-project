@@ -1,8 +1,7 @@
 import Image from "next/image";
 import { Separator } from "@/shared/ui/separator";
 import { StickyFooterDialog } from "@/shared/ui/StickyFooterDialog";
-import { parseSkillOptions } from "@/entities/skill/lib/parseSkillOptions";
-import type { LinkSkillInfo } from "@/entities/skill/model";
+import { parseSkillOptions, type LinkSkillInfo } from "@/entities/skill";
 
 interface LinkSkillItemProps {
   skill: LinkSkillInfo;

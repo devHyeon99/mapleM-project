@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { stripSkillLevel } from "@/entities/skill/lib/stripSkillLevel";
+import { stripSkillLevel } from "@/entities/skill";
 import { TabCard } from "@/shared/ui/TabCard";
 
 export interface SkillListItem {

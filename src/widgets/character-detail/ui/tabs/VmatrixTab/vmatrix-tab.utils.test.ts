@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import type { VCoreEquipment } from "@/entities/skill/model/types/vmatrix";
+import type { VCoreEquipment } from "@/entities/skill";
 import { getCoreName, groupCoresByType, isEquipped } from "./vmatrix-tab.utils";
 
 const core = (over: Partial<VCoreEquipment>): VCoreEquipment => ({

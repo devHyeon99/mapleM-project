@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import type { CharacterEquipmentSkill } from "@/entities/skill/model";
+import type { CharacterEquipmentSkill } from "@/entities/skill";
 
 import { SkillSlot } from "./SkillSlot";
 import { SkillPagination } from "./SkillPagination";

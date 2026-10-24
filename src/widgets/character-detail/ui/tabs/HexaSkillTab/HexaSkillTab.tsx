@@ -4,8 +4,10 @@ import Image from "next/image";
 import { TabCard } from "@/shared/ui/TabCard";
 import { TabMessageSection } from "@/shared/ui/TabMessageSection";
 import { TabLoadingBox } from "../../TabLoadingBox";
-import { useCharacterHexaMatrixSkill } from "@/entities/skill/model/hooks/useCharacterHexaMatrixSkill";
-import type { CharacterHexaMatrixSkill } from "@/entities/skill/model/types/hexamatrix-skill";
+import {
+  useCharacterHexaMatrixSkill,
+  type CharacterHexaMatrixSkill,
+} from "@/entities/skill";
 import { HEXA_LEVEL_REQUIREMENT } from "@/shared/config/constants/hexa";
 
 interface HexaSkillTabProps {

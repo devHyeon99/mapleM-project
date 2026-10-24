@@ -1,4 +1,4 @@
-import type { CharacterSkillPreset } from "@/entities/skill/model";
+import type { CharacterSkillPreset } from "@/entities/skill";
 import { HelpPopover } from "@/shared/ui/HelpPopover";
 import { TabCard } from "@/shared/ui/TabCard";
 import { TabMessageSection } from "@/shared/ui/TabMessageSection";

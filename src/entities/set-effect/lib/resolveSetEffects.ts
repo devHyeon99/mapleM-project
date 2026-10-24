@@ -2,6 +2,7 @@ import type { CharacterItemEquipment } from "@/entities/item";
 import {
   ActiveEquipmentSet,
   EFFECT_META,
+  EFFECT_ORDER,
   EquipmentSetDefinition,
   ResolvedSetEffectRow,
 } from "../model";
@@ -93,7 +94,7 @@ export function resolveStarForceEffects(
   };
 }
 
-// 일반 세트 효과와 스타포스 효과를 같은 능력치 기준으로 합산
+// 일반 세트 효과와 스타포스 효과를 같은 능력치 기준으로 합산, EFFECT_ORDER 순 정렬
 export function combineEffects(
   setEffects: ResolvedSetEffectRow[],
   starForceEffects: ResolvedSetEffectRow[],
@@ -114,7 +115,9 @@ export function combineEffects(
     });
   });
 
-  return Array.from(effectMap.values());
+  return Array.from(effectMap.values()).sort(
+    (a, b) => EFFECT_ORDER.indexOf(a.key) - EFFECT_ORDER.indexOf(b.key),
+  );
 }
 
 // 세트 하나의 착용 수·스타포스를 활성 세트 한 건으로 해석.

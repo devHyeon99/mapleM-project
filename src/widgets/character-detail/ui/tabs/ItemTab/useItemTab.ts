@@ -2,10 +2,8 @@
 
 import { useMemo, useState } from "react";
 
-import {
-  sortItems,
-  sortItemsForList,
-} from "@/entities/item";
+import { sortItems, sortItemsForList } from "@/entities/item";
+import { getActiveEquipmentSets } from "@/entities/set-effect";
 import type { CharacterItemTabData } from "../../types";
 
 // API가 현재 장비 프리셋 번호를 내려주지 않을 때 사용할 기본 프리셋 번호
@@ -89,6 +87,19 @@ export const useItemTab = (data: CharacterItemTabData) => {
     currentHeart ?? null,
   );
 
+  // 안드로이드·하트를 제외한 장비 슬롯이 모두 비었는지 여부
+  const hasNoEquipItems = sortedItems.every(
+    (slot) =>
+      slot.slotName === "안드로이드" ||
+      slot.slotName === "하트" ||
+      slot.item === null,
+  );
+
+  // 효과가 있는 활성 장비 세트 목록
+  const activeSets = getActiveEquipmentSets(
+    sortedItems.map((slot) => slot.item),
+  ).filter((set) => set.combinedEffects.length > 0);
+
   // ItemTabHeader에 전달할 프리셋/보기 방식 제어 props
   const headerProps = {
     activePresetNo,
@@ -107,6 +118,8 @@ export const useItemTab = (data: CharacterItemTabData) => {
     effectiveSelectedPreset,
     headerProps,
     sortedItems,
+    hasNoEquipItems,
+    activeSets,
     viewMode,
   } as const;
 };

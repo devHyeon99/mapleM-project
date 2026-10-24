@@ -8,6 +8,7 @@ interface ItemListProps {
   items: SortedItemSlot[];
   presetNo: number;
   characterClass: string;
+  hasNoEquipItems: boolean;
   className?: string;
 }
 
@@ -15,6 +16,7 @@ export const ItemList = ({
   items,
   presetNo,
   characterClass,
+  hasNoEquipItems,
   className,
 }: ItemListProps) => {
   const isMagical = MAGICAL_CLASSES.includes(characterClass);
@@ -23,13 +25,6 @@ export const ItemList = ({
   const lastItemIndex = items.reduce((lastIndex, slot, index) => {
     return slot.item ? index : lastIndex;
   }, -1);
-
-  const hasNoEquipItems = items.every((slot) => {
-    if (slot.slotName === "안드로이드" || slot.slotName === "하트") {
-      return true;
-    }
-    return slot.item === null;
-  });
 
   if (hasNoEquipItems) {
     return (

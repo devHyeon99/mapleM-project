@@ -7,27 +7,23 @@ interface ItemGridProps {
   items: SortedItemSlot[];
   presetNo: number;
   pets?: (CharacterPet | null)[];
+  hasNoEquipItems: boolean;
 }
 
 // 펫은 마지막 줄(안드로이드·하트 줄) 5~7열에 명시 배치함
 const PET_COLUMN_CLASSES = ["col-start-5", "col-start-6", "col-start-7"];
 
-export const ItemGrid = ({ items, presetNo, pets = [] }: ItemGridProps) => {
+export const ItemGrid = ({
+  items,
+  presetNo,
+  pets = [],
+  hasNoEquipItems,
+}: ItemGridProps) => {
   // 뷰포트가 아닌 컨테이너 폭을 7등분해서 좁은 화면에서도 남는 가로 공간을 모두 사용
   const slotSizeClass = "w-full";
 
-  // 안드로이드와 하트를 제외한 순수 장비 아이템만 필터링해서 체크
-  const hasNoEquipItems = items.every((slot) => {
-    // 안드로이드나 하트 슬롯은 검사에서 제외 (무조건 true 반환해서 통과시킴)
-    if (slot.slotName === "안드로이드" || slot.slotName === "하트") {
-      return true;
-    }
-    // 나머지 슬롯은 item이 null이어야 함
-    return slot.item === null;
-  });
-
   return (
-    <div className="relative mx-auto flex w-full max-w-[28rem] flex-col items-center px-1 py-4">
+    <div className="wide:mx-0 wide:w-[28rem] wide:px-0 wide:py-0 relative mx-auto flex w-full max-w-[28rem] flex-col items-center px-1 py-4">
       <div
         className="grid w-full grid-cols-7 gap-1"
         aria-hidden={hasNoEquipItems}

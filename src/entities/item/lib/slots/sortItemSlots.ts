@@ -3,12 +3,12 @@ import {
   CharacterItemEquipment,
   HeartEquipment,
   ItemDisplay,
-} from "@/entities/item/model/types";
+} from "../../model/types";
 import {
   toAndroidDisplay,
   toEquipmentDisplay,
   toHeartDisplay,
-} from "@/entities/item/model/mappers";
+} from "../../model/mappers";
 import {
   EQUIP_SLOT_ORDER_GRID_ONEPIECE,
   EQUIP_SLOT_ORDER_GRID_TOPBOTTOM,

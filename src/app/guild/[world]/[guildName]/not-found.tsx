@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { GuildNotFoundView } from "@/widgets/guild-detail/ui/GuildNotFoundView";
+import { GuildNotFoundView } from "@/widgets/guild-detail";
 
 export const NotFoundMetadata: Metadata = {
   title: "길드 정보를 찾을 수 없습니다",

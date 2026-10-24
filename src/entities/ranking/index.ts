@@ -20,3 +20,4 @@ export {
 } from "./lib/empty-message";
 export { RankingTable } from "./ui/RankingTable";
 export { rankingColumns } from "./ui/ranking-table.columns";
+export { RankingIcon } from "./ui/RankingIcon";

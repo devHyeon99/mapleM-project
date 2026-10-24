@@ -1,4 +1,4 @@
-import { GuildDetailSkeleton } from "@/widgets/guild-detail/ui/GuildDetailSkeleton";
+import { GuildDetailSkeleton } from "@/widgets/guild-detail";
 
 export default function GuildLoading() {
   return <GuildDetailSkeleton />;

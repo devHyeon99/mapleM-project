@@ -1,6 +1,8 @@
-import { CashItemEquipment } from "@/entities/cash-item";
-import { ItemCashDetails } from "@/entities/cash-item/ui/ItemCashDetails";
-import { ItemCashIconBase } from "@/entities/cash-item/ui/ItemCashIconBase";
+import {
+  ItemCashDetails,
+  ItemCashIconBase,
+  type CashItemEquipment,
+} from "@/entities/cash-item";
 import { ITEM_DIALOG_SKIN } from "./itemDialogSkin";
 import { StickyFooterDialog } from "@/shared/ui/StickyFooterDialog";
 

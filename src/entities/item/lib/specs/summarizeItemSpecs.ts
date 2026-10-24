@@ -1,5 +1,5 @@
 import { MAGICAL_CLASSES } from "@/shared/config/constants/magic_class";
-import { CharacterItemEquipment } from "@/entities/item/model/types";
+import { CharacterItemEquipment } from "../../model/types";
 import { parseItemOption } from "../options/parseOptionValues";
 import { OPTION_KEYS } from "../options/optionConstants";
 

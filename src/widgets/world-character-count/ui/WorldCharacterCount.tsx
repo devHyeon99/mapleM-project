@@ -4,8 +4,7 @@ import {
   getLevelWorldCharacterCounts,
   resolveRankingDate,
 } from "@/entities/ranking/server";
-import { RankingIcon } from "@/entities/ranking/ui/RankingIcon";
-import { rankingHref } from "@/entities/ranking";
+import { RankingIcon, rankingHref } from "@/entities/ranking";
 import { worldIconSrc } from "@/shared/config/constants/worlds";
 import { Skeleton } from "@/shared/ui/skeleton";
 

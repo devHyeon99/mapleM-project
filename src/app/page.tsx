@@ -3,10 +3,9 @@ import { Suspense } from "react";
 import { connection } from "next/server";
 import { CharacterSearch } from "@/features/character-search";
 import { SITE_NAME, SITE_URL } from "@/shared/config/site";
-import { getCombinedNotices } from "@/entities/notice/api/notice";
-import { getSiteNotices } from "@/entities/notice/api/site-notice";
-import { SiteNoticeList } from "@/entities/notice/ui/SiteNoticeList";
-import { NoticeGrid } from "@/widgets/notice-grid/ui/NoticeGrid";
+import { getCombinedNotices, getSiteNotices } from "@/entities/notice/server";
+import { SiteNoticeList } from "@/entities/notice";
+import { NoticeGrid } from "@/widgets/notice-grid";
 import {
   WorldCharacterCount,
   WorldCharacterCountSkeleton,

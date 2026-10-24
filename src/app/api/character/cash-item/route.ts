@@ -4,7 +4,7 @@ import type { ApiResponse } from "@/shared/model/types/ApiResponse";
 import type {
   CharacterCashEquipmentData,
   CharacterBeautyData,
-} from "@/entities/cash-item/model/types";
+} from "@/entities/cash-item";
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { nexonFetch, nexonErrorResponse } from "@/shared/api/nexon/server";
 import type { ApiResponse } from "@/shared/model/types/ApiResponse";
-import type { LinkSkillResponse } from "@/entities/skill/model/types/link-skill";
+import type { LinkSkillResponse } from "@/entities/skill";
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);

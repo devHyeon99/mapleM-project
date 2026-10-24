@@ -4,7 +4,7 @@ import type {
   CharacterHexaMatrixStat,
   HyperStatInfo,
 } from "@/entities/character";
-import type { CharacterHexaMatrixSkill } from "@/entities/skill/model/types/hexamatrix-skill";
+import type { CharacterHexaMatrixSkill } from "@/entities/skill";
 
 export type MergedSpecData = CharacterDetailData & {
   symbol_data: CharacterSymbol | null;

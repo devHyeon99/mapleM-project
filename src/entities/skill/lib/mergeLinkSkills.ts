@@ -1,4 +1,4 @@
-import type { LinkSkillInfo } from "@/entities/skill/model";
+import type { LinkSkillInfo } from "../model";
 
 // 합산하지 않고 고정값을 유지해야 하는 옵션 키 목록
 const NON_STACKABLE_STATS = [

@@ -2,7 +2,7 @@ import { internalFetch } from "@/shared/api/internal";
 import type {
   CharacterCashEquipmentData,
   CharacterBeautyData,
-} from "@/entities/cash-item/model/types";
+} from "../model/types";
 
 export type CashItemCombined = CharacterCashEquipmentData & {
   beauty_data: CharacterBeautyData;

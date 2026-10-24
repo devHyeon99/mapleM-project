@@ -1,5 +1,5 @@
 import { internalFetch } from "@/shared/api/internal";
-import type { CharacterVMatrix } from "@/entities/skill/model";
+import type { CharacterVMatrix } from "../model";
 
 export async function getCharacterVmatrix(
   ocid: string,

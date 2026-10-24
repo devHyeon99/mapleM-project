@@ -1,7 +1,7 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { getCashItem } from "@/entities/cash-item/api/get-cash-item";
+import { getCashItem } from "../../api/get-cash-item";
 
 export const useCharacterCashEquipment = (ocid: string | null) => {
   return useQuery({

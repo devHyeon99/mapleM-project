@@ -21,6 +21,8 @@ interface StickyFooterDialogProps {
   title: ReactNode;
   /** 화면에는 노출되지 않는 스크린리더용 설명 */
   description?: ReactNode;
+  /** 스크롤 영역 위에 고정되는 머리 영역. 본문만 스크롤됨 */
+  header?: ReactNode;
   children: ReactNode;
   contentClassName?: string;
   bodyClassName?: string;
@@ -41,6 +43,7 @@ export const StickyFooterDialog = ({
   trigger,
   title,
   description,
+  header,
   children,
   contentClassName,
   bodyClassName,
@@ -101,8 +104,12 @@ export const StickyFooterDialog = ({
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
       <DialogContent
-        onOpenAutoFocus={() => {
-          if (showScrollAffordance) syncCanScrollDown();
+        onOpenAutoFocus={(event) => {
+          if (!showScrollAffordance) return;
+          syncCanScrollDown();
+          // 첫 포커스를 스크롤 영역 대신 다이얼로그 자체로 둠. 마우스로 열어도 포커스 링이 뜨던 문제 방지
+          event.preventDefault();
+          (event.currentTarget as HTMLElement | null)?.focus();
         }}
         className={cn(
           "flex max-h-[calc(100dvh-8rem)] w-full flex-col gap-0 overflow-hidden p-0 sm:max-w-md",
@@ -114,11 +121,18 @@ export const StickyFooterDialog = ({
           {description && <DialogDescription>{description}</DialogDescription>}
         </DialogHeader>
 
+        {header && <div className="shrink-0 px-4 pt-4">{header}</div>}
+
+        {/* 화살표 표시 시 스크롤바는 숨기고, 키보드 사용자를 위해 영역에 포커스를 줄 수 있게 함 */}
         <div
           ref={scrollAreaRef}
           onScroll={showScrollAffordance ? syncCanScrollDown : undefined}
+          tabIndex={showScrollAffordance ? 0 : undefined}
           className={cn(
             "min-h-0 flex-1 overflow-y-auto px-4 py-4",
+            header && "pt-3",
+            showScrollAffordance &&
+              "focus-visible:ring-ring [scrollbar-width:none] focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-inset [&::-webkit-scrollbar]:hidden",
             bodyClassName,
           )}
         >
@@ -136,10 +150,12 @@ export const StickyFooterDialog = ({
           )}
         >
           {canScrollDown && (
-            <ChevronDownIcon
+            <div
               aria-hidden="true"
-              className="absolute -top-7 left-1/2 size-5 -translate-x-1/2 animate-pulse text-orange-400"
-            />
+              className="from-popover pointer-events-none absolute inset-x-0 -top-12 flex h-12 items-end justify-center bg-linear-to-t to-transparent pb-1"
+            >
+              <ChevronDownIcon className="size-5 text-orange-500 motion-safe:animate-bounce" />
+            </div>
           )}
           <DialogClose asChild>
             <Button

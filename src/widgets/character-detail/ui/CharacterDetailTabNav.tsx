@@ -7,7 +7,7 @@ import { cn } from "@/shared/lib/utils";
 import { TabsList, TabsTrigger } from "@/shared/ui/tabs";
 
 import { getTabScrollTarget } from "../lib/tabScroll";
-import { ALL_TABS } from "./config";
+import { ALL_TABS } from "../config";
 
 interface ScrollButtonProps {
   direction: "left" | "right";

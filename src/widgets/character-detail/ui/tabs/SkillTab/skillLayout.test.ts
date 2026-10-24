@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
-import { getPageRows } from "./skill-layout.util";
+import { getPageRows } from "./skillLayout";
 
-describe("skill-layout.util", () => {
+describe("skillLayout", () => {
   it("세트 1 앞면 배치", () => {
     expect(getPageRows(1, "front")).toEqual([
       ["88", "87", "86", "85"],

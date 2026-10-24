@@ -9,7 +9,7 @@ import { ItemSpecSummary } from "./ItemSpecSummary";
 import { useItemTab } from "./useItemTab";
 import { PetSetOptionDialog } from "./PetSetOptionDialog";
 import { SetEffectTrigger } from "./SetEffectTrigger";
-import type { CharacterItemTabData } from "../../types";
+import type { CharacterItemTabData } from "../../../model/types";
 import { cn } from "@/shared/lib/utils";
 import { TabMessageSection } from "@/shared/ui/TabMessageSection";
 

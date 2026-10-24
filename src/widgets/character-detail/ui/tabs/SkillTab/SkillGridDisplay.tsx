@@ -5,7 +5,7 @@ import type { CharacterEquipmentSkill } from "@/entities/skill";
 
 import { SkillSlot } from "./SkillSlot";
 import { SkillPagination } from "./SkillPagination";
-import { getPageRows } from "./skill-layout.util";
+import { getPageRows } from "./skillLayout";
 
 /** 슬롯 지름(px). 행마다 절반씩 왼쪽으로 밀어 벌집 배치를 만든다 */
 const SLOT_SIZE = 52;

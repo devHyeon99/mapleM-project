@@ -1,8 +1,8 @@
 import type { CharacterUnion, UnionRanking } from "@/entities/character";
 import type { ReactNode } from "react";
 
-import type { TabKey } from "./config";
-import type { CharacterItemTabData } from "./types";
+import type { TabKey } from "../config";
+import type { CharacterItemTabData } from "../model/types";
 import {
   ItemTab,
   CashItemTab,

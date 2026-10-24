@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import type { VCoreEquipment } from "@/entities/skill";
-import { getCoreName, groupCoresByType, isEquipped } from "./vmatrix-tab.utils";
+import { getCoreName, groupCoresByType, isEquipped } from "./vmatrixCore";
 
 const core = (over: Partial<VCoreEquipment>): VCoreEquipment => ({
   vcore_type: "Skill",
@@ -15,7 +15,7 @@ const core = (over: Partial<VCoreEquipment>): VCoreEquipment => ({
   ...over,
 });
 
-describe("vmatrix-tab.utils", () => {
+describe("vmatrixCore", () => {
   it("코어명은 연결된 스킬명을 이어서 만든다", () => {
     expect(getCoreName(core({}))).toBe("프로스트 아크");
     expect(

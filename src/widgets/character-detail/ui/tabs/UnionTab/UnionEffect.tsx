@@ -5,10 +5,7 @@ import { TabCard } from "@/shared/ui/TabCard";
 import { formatQueryError } from "@/shared/ui/TabMessageSection";
 import { InfoRow } from "@/shared/ui/InfoRow";
 import { cn } from "@/shared/lib/utils";
-import {
-  parseUnionOptions,
-  splitUnionOptionValue,
-} from "../../../lib/parseUnionOptions";
+import { parseUnionOptions, splitUnionOptionValue } from "./parseUnionOptions";
 import type { UnionOption } from "@/entities/character";
 
 interface UnionEffectProps {

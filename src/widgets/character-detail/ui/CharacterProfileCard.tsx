@@ -9,7 +9,7 @@ import { SpecCardDialog } from "@/features/spec-card";
 import { worldIconSrc } from "@/shared/config/constants/worlds";
 import { guildHref } from "@/shared/lib/url";
 import { cn } from "@/shared/lib/utils";
-import { PROFILE_CARD_SHELL_CLASS } from "./config";
+import { PROFILE_CARD_SHELL_CLASS } from "../config";
 
 const NUMBER_FORMATTER = new Intl.NumberFormat("ko-KR");
 

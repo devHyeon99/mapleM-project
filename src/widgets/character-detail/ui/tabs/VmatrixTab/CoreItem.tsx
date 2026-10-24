@@ -1,6 +1,6 @@
 import type { VCoreEquipment } from "@/entities/skill";
 
-import { getCoreName } from "./vmatrix-tab.utils";
+import { getCoreName } from "./vmatrixCore";
 
 interface CoreItemProps {
   core: VCoreEquipment;

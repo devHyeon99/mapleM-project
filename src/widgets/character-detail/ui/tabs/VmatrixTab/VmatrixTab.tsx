@@ -6,7 +6,7 @@ import { TabMessageSection } from "@/shared/ui/TabMessageSection";
 import { TabLoadingBox } from "../../TabLoadingBox";
 
 import { CoreItem } from "./CoreItem";
-import { groupCoresByType, isEquipped } from "./vmatrix-tab.utils";
+import { groupCoresByType, isEquipped } from "./vmatrixCore";
 
 interface VmatrixTabProps {
   ocid: string;

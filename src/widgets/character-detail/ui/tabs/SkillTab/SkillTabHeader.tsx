@@ -1,7 +1,7 @@
 "use client";
 
 import { SegmentedToggle } from "@/shared/ui/SegmentedToggle";
-import { SKILL_SET_NOS } from "./skill-layout.util";
+import { SKILL_SET_NOS } from "./skillLayout";
 
 interface SkillTabHeaderProps {
   selectedSet: number;

@@ -1,6 +1,6 @@
 import { Skeleton } from "@/shared/ui/skeleton";
 import { cn } from "@/shared/lib/utils";
-import { ALL_TABS, PROFILE_CARD_SHELL_CLASS } from "./config";
+import { ALL_TABS, PROFILE_CARD_SHELL_CLASS } from "../config";
 
 function ProfileCardSkeleton() {
   // 자리표시용이라 section/dl 같은 시맨틱은 쓰지 않음.

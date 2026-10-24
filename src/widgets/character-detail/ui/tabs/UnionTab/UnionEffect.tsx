@@ -8,7 +8,7 @@ import { cn } from "@/shared/lib/utils";
 import {
   parseUnionOptions,
   splitUnionOptionValue,
-} from "@/widgets/character-detail/lib/parseUnionOptions";
+} from "../../../lib/parseUnionOptions";
 import type { UnionOption } from "@/entities/character";
 
 interface UnionEffectProps {

@@ -4,10 +4,11 @@ import { ItemGrid } from "./ItemGrid";
 import { ItemTabHeader } from "./ItemTabHeader";
 import { ItemTabSection } from "./ItemTabSection";
 import { ItemList } from "./ItemList";
-import { ItemSetEffectList } from "./ItemSetEffectList";
+import { ItemSetEffectDialog } from "./ItemSetEffectDialog";
 import { ItemSpecSummary } from "./ItemSpecSummary";
 import { useItemTab } from "./useItemTab";
-import { PetSetOptionList } from "./PetSetOptionList";
+import { PetSetOptionDialog } from "./PetSetOptionDialog";
+import { SetEffectTrigger } from "./SetEffectTrigger";
 import type { CharacterItemTabData } from "../../types";
 import { cn } from "@/shared/lib/utils";
 import { TabMessageSection } from "@/shared/ui/TabMessageSection";
@@ -98,7 +99,22 @@ export const ItemTab = ({ data }: ItemTabProps) => {
             meta={`${activeSets.length}개 적용`}
             flat={isGrid}
           >
-            <ItemSetEffectList sets={activeSets} />
+            <ul className="flex w-full flex-col gap-1.5">
+              {activeSets.map((set) => (
+                <li key={set.id}>
+                  <ItemSetEffectDialog
+                    set={set}
+                    trigger={
+                      <SetEffectTrigger
+                        name={set.displayName}
+                        count={set.count}
+                        starForce={set.appliedStarForceThreshold}
+                      />
+                    }
+                  />
+                </li>
+              ))}
+            </ul>
           </ItemTabSection>
         )}
         {petSetOptions.length > 0 && (
@@ -107,7 +123,21 @@ export const ItemTab = ({ data }: ItemTabProps) => {
             meta={`${petSetOptions.length}개 적용`}
             flat={isGrid}
           >
-            <PetSetOptionList setOptions={petSetOptions} />
+            <ul className="flex w-full flex-col gap-1.5">
+              {petSetOptions.map((set) => (
+                <li key={set.set_name}>
+                  <PetSetOptionDialog
+                    set={set}
+                    trigger={
+                      <SetEffectTrigger
+                        name={set.set_name}
+                        count={set.set_count}
+                      />
+                    }
+                  />
+                </li>
+              ))}
+            </ul>
           </ItemTabSection>
         )}
       </div>

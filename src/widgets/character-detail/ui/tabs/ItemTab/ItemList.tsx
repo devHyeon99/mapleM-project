@@ -20,8 +20,6 @@ export const ItemList = ({
   className,
 }: ItemListProps) => {
   const isMagical = MAGICAL_CLASSES.includes(characterClass);
-  const mainDamageType = isMagical ? "마법 대미지" : "물리 대미지";
-  const mainAtkType = isMagical ? "마법 공격력" : "물리 공격력";
   const lastItemIndex = items.reduce((lastIndex, slot, index) => {
     return slot.item ? index : lastIndex;
   }, -1);
@@ -45,8 +43,7 @@ export const ItemList = ({
               key={`item-${index}`}
               item={slot.item}
               isLast={index === lastItemIndex}
-              mainDamageType={mainDamageType}
-              mainAtkType={mainAtkType}
+              isMagical={isMagical}
             />
           );
         }

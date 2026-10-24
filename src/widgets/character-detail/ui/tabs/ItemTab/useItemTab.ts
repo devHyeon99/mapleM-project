@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 
 import { sortItems, sortItemsForList } from "@/entities/item";
 import { getActiveEquipmentSets } from "@/entities/set-effect";
@@ -29,15 +29,10 @@ export const useItemTab = (data: CharacterItemTabData) => {
   } = data;
 
   // 선택 가능한 장비/안드로이드 프리셋 번호 목록
-  // ItemTabHeader(memo)가 프리셋만 그대로일 때 리렌더를 건너뛰도록 참조를 고정한다
-  const availablePresetNos = useMemo(
-    () => presetList?.map((preset) => preset.preset_no) ?? [],
-    [presetList],
-  );
-  const availableAndroidPresetNos = useMemo(
-    () => androidPresetList?.map((preset) => preset.preset_no) ?? [],
-    [androidPresetList],
-  );
+  const availablePresetNos =
+    presetList?.map((preset) => preset.preset_no) ?? [];
+  const availableAndroidPresetNos =
+    androidPresetList?.map((preset) => preset.preset_no) ?? [];
 
   // 사용자가 아직 선택하지 않았거나 선택값이 유효하지 않을 때 사용할 프리셋 번호
   const fallbackPresetNo =

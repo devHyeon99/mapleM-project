@@ -1,86 +1,87 @@
-import type { CharacterItemEquipment } from "@/entities/item";
-import type { ItemOption } from "@/entities/item";
-import { ItemDialog } from "@/features/item-dialog";
 import { Star } from "lucide-react";
+import {
+  OPTION_KEYS,
+  parseItemOption,
+  type CharacterItemEquipment,
+  type ItemOption,
+} from "@/entities/item";
+import { ItemDialog } from "@/features/item-dialog";
+import { cn } from "@/shared/lib/utils";
 
 interface ItemListRowProps {
   item: CharacterItemEquipment;
   isLast?: boolean;
-  mainDamageType: string;
-  mainAtkType: string;
+  isMagical: boolean;
 }
+
+// 요약 대상 능력치의 약어·단위
+const STAT_LABELS: Record<string, { label: string; unit: string }> = {
+  [OPTION_KEYS.PHYSICAL_ATTACK]: { label: "물공", unit: "" },
+  [OPTION_KEYS.MAGICAL_ATTACK]: { label: "마공", unit: "" },
+  [OPTION_KEYS.PHYSICAL_DAMAGE]: { label: "물댐", unit: "%" },
+  [OPTION_KEYS.MAGICAL_DAMAGE]: { label: "마댐", unit: "%" },
+  [OPTION_KEYS.FINAL_DAMAGE]: { label: "최종", unit: "%" },
+  [OPTION_KEYS.BOSS_DAMAGE]: { label: "보공", unit: "%" },
+  [OPTION_KEYS.IGNORE_DEFENSE]: { label: "방무", unit: "%" },
+};
+
+const OPTION_SECTIONS = [
+  {
+    key: "item_potential_option",
+    label: "잠재",
+    className: "text-blue-500 dark:text-blue-400",
+  },
+  {
+    key: "item_additional_potential_option",
+    label: "에디",
+    className: "text-purple-500 dark:text-purple-400",
+  },
+  {
+    key: "item_additional_option",
+    label: "추옵",
+    className: "text-green-600 dark:text-green-400",
+  },
+] as const;
+
+// 대상 능력치만 합산해 "보공 30%, 방무 40%" 형태로 요약
+const getSummary = (options: ItemOption[] | null, targets: string[]) => {
+  const totals = new Map<string, number>();
+
+  options?.forEach((opt) => {
+    const { normalizedName, numericValue } = parseItemOption(
+      opt.option_name,
+      opt.option_value,
+    );
+    if (targets.includes(normalizedName)) {
+      totals.set(
+        normalizedName,
+        (totals.get(normalizedName) ?? 0) + numericValue,
+      );
+    }
+  });
+
+  return targets
+    .flatMap((name): string[] => {
+      const value = totals.get(name);
+      if (!value || value <= 0) return [];
+      const { label, unit } = STAT_LABELS[name];
+      return [`${label} ${parseFloat(value.toFixed(2))}${unit}`];
+    })
+    .join(", ");
+};
 
 export const ItemListRow = ({
   item,
   isLast = false,
-  mainDamageType,
-  mainAtkType,
+  isMagical,
 }: ItemListRowProps) => {
-  const TARGET_STATS = [
-    mainAtkType,
-    mainDamageType,
-    "최종 대미지",
-    "보스 공격력",
-    "방어율 무시",
+  const targets = [
+    isMagical ? OPTION_KEYS.MAGICAL_ATTACK : OPTION_KEYS.PHYSICAL_ATTACK,
+    isMagical ? OPTION_KEYS.MAGICAL_DAMAGE : OPTION_KEYS.PHYSICAL_DAMAGE,
+    OPTION_KEYS.FINAL_DAMAGE,
+    OPTION_KEYS.BOSS_DAMAGE,
+    OPTION_KEYS.IGNORE_DEFENSE,
   ];
-
-  const getSummaryFromOptions = (options: ItemOption[]) => {
-    const statsMap: Record<string, number> = {};
-
-    options.forEach((opt) => {
-      if (opt.option_name && TARGET_STATS.includes(opt.option_name)) {
-        const value =
-          opt.option_value != null
-            ? parseFloat(opt.option_value.replace(/[^0-9.]/g, ""))
-            : NaN;
-        if (!isNaN(value)) {
-          statsMap[opt.option_name] = (statsMap[opt.option_name] || 0) + value;
-        }
-      }
-    });
-
-    const summaryList = TARGET_STATS.map((statName) => {
-      const value = statsMap[statName];
-      if (value && value > 0) {
-        const displayValue = Number.isInteger(value)
-          ? value
-          : parseFloat(value.toFixed(2));
-
-        let displayName = statName;
-        let unit = "%";
-
-        if (statName === "보스 공격력") displayName = "보공";
-        else if (statName === "최종 대미지") displayName = "최종";
-        else if (statName === "방어율 무시") displayName = "방무";
-        else if (statName === "물리 대미지") displayName = "물댐";
-        else if (statName === "마법 대미지") displayName = "마댐";
-        else if (statName === "물리 공격력") {
-          displayName = "물공";
-          unit = "";
-        } else if (statName === "마법 공격력") {
-          displayName = "마공";
-          unit = "";
-        }
-
-        return `${displayName} ${displayValue}${unit}`;
-      }
-      return null;
-    }).filter(Boolean);
-
-    return summaryList.join(", ");
-  };
-
-  const potentialOptions = item.item_potential_option ?? [];
-  const potentialSummary = getSummaryFromOptions(potentialOptions);
-
-  const additionalPotentialOptions =
-    item.item_additional_potential_option ?? [];
-  const additionalPotentialSummary = getSummaryFromOptions(
-    additionalPotentialOptions,
-  );
-
-  const additionalOptions = item.item_additional_option ?? [];
-  const additionalSummary = getSummaryFromOptions(additionalOptions);
 
   // 스타포스
   const starforce =
@@ -90,10 +91,10 @@ export const ItemListRow = ({
 
   return (
     <div
-      className={[
+      className={cn(
         "bg-card hover:bg-accent/50 flex w-full items-center gap-3 p-4 transition-colors",
-        isLast ? "" : "border-b",
-      ].join(" ")}
+        !isLast && "border-b",
+      )}
     >
       <div className="h-14 w-14 shrink-0 self-start">
         <ItemDialog item={item} className="h-full w-full cursor-pointer" />
@@ -113,39 +114,26 @@ export const ItemListRow = ({
         </div>
 
         <div className="flex flex-col gap-2 md:flex-row">
-          {/* 잠재능력 */}
-          {potentialSummary && (
-            <p className="text-muted-foreground truncate text-xs">
-              <span className="inline-block min-w-[24px] font-semibold text-blue-500 dark:text-blue-400">
-                잠재
-              </span>
-              <span className="text-foreground/70 font-medium">
-                {potentialSummary}
-              </span>
-            </p>
-          )}
+          {OPTION_SECTIONS.map(({ key, label, className }) => {
+            const summary = getSummary(item[key], targets);
+            if (!summary) return null;
 
-          {additionalPotentialSummary && (
-            <p className="text-muted-foreground truncate text-xs">
-              <span className="inline-block min-w-[24px] font-semibold text-purple-500 dark:text-purple-400">
-                에디
-              </span>
-              <span className="text-foreground/70 font-medium">
-                {additionalPotentialSummary}
-              </span>
-            </p>
-          )}
-
-          {additionalSummary && (
-            <p className="text-muted-foreground truncate text-xs">
-              <span className="inline-block min-w-[24px] font-semibold text-green-600 dark:text-green-400">
-                추옵
-              </span>
-              <span className="text-foreground/70 font-medium">
-                {additionalSummary}
-              </span>
-            </p>
-          )}
+            return (
+              <p key={key} className="text-muted-foreground truncate text-xs">
+                <span
+                  className={cn(
+                    "inline-block min-w-[24px] font-semibold",
+                    className,
+                  )}
+                >
+                  {label}
+                </span>
+                <span className="text-foreground/70 font-medium">
+                  {summary}
+                </span>
+              </p>
+            );
+          })}
         </div>
       </div>
     </div>

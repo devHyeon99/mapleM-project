@@ -19,9 +19,7 @@ export const ItemGrid = ({
   pets = [],
   hasNoEquipItems,
 }: ItemGridProps) => {
-  // 뷰포트가 아닌 컨테이너 폭을 7등분해서 좁은 화면에서도 남는 가로 공간을 모두 사용
-  const slotSizeClass = "w-full";
-
+  // 슬롯은 뷰포트가 아닌 컨테이너 폭을 7등분해서 좁은 화면에서도 남는 가로 공간을 모두 사용
   return (
     <div className="wide:mx-0 wide:w-[28rem] wide:px-0 wide:py-0 relative mx-auto flex w-full max-w-[28rem] flex-col items-center px-1 py-4">
       <div
@@ -34,7 +32,7 @@ export const ItemGrid = ({
             return (
               <div
                 key={`spacer-${idx}`}
-                className={`aspect-square ${slotSizeClass}`}
+                className={"aspect-square w-full"}
                 aria-hidden="true"
               />
             );
@@ -45,7 +43,7 @@ export const ItemGrid = ({
             return (
               <div
                 key={`${presetNo}-${slot.item.item_name}-${idx}`}
-                className={`aspect-square ${slotSizeClass}`}
+                className={"aspect-square w-full"}
               >
                 <ItemDialog
                   item={slot.item}
@@ -60,14 +58,14 @@ export const ItemGrid = ({
             <ItemEmptySlot
               key={`empty-${idx}`}
               label={slot.slotName}
-              className={`aspect-square ${slotSizeClass}`}
+              className={"aspect-square w-full"}
             />
           );
         })}
 
         {PET_COLUMN_CLASSES.map((columnClass, idx) => {
           const pet = pets[idx];
-          const className = `row-start-6 ${columnClass} aspect-square ${slotSizeClass}`;
+          const className = `row-start-6 ${columnClass} aspect-square w-full`;
 
           if (!pet) {
             return (

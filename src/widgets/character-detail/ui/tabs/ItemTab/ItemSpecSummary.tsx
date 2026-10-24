@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import type { SortedItemSlot } from "@/entities/item";
 import { getItemSpec } from "@/entities/item";
 
@@ -11,11 +10,9 @@ export const ItemSpecSummary = ({
   items,
   characterClass,
 }: ItemSpecSummaryProps) => {
-  const itemList = useMemo(() => items.map((slot) => slot.item), [items]);
-
-  const { labelDamage, labelAtk, potential, additional, chuop } = useMemo(
-    () => getItemSpec(itemList, characterClass),
-    [characterClass, itemList],
+  const { labelDamage, labelAtk, potential, additional, chuop } = getItemSpec(
+    items.map((slot) => slot.item),
+    characterClass,
   );
 
   const stats = [

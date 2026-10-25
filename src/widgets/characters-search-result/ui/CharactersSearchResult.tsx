@@ -6,11 +6,10 @@ import { NotFoundMessage } from "@/shared/ui/NotFoundMessage";
 import { useRecentSearch } from "@/shared/lib/hooks/useRecentSearch";
 import { characterHref } from "@/shared/lib/url";
 import { STORAGE_KEYS } from "@/shared/config/constants/storage";
-import type { CharacterOcidData } from "@/entities/character";
 
 interface CharactersSearchResultProps {
   name: string;
-  characters: CharacterOcidData[];
+  characters: { world_name: string; character_name: string }[];
   failedWorlds?: number;
 }
 
@@ -75,7 +74,8 @@ export function CharactersSearchResult({
 
       <ul className="flex w-full flex-col gap-2">
         {characters.map((char) => (
-          <li key={char.ocid}>
+          // 같은 이름은 월드당 하나뿐이라 월드명으로 충분함
+          <li key={char.world_name}>
             <Link
               href={characterHref(char.world_name, char.character_name)}
               prefetch={false}

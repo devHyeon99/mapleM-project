@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { nexonFetch, nexonErrorResponse } from "@/shared/api/nexon/server";
-import type { ApiResponse } from "@/shared/model/types/ApiResponse";
+import type { ApiResponse } from "@/shared/api/internal";
 import type { CharacterUnionStat } from "@/entities/character";
 
 /**

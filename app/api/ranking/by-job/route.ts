@@ -11,7 +11,7 @@ import {
 } from "@/entities/ranking/index.server";
 import { nexonErrorResponse } from "@/shared/api/nexon/server";
 import { isRealWorldName } from "@/shared/config/constants/worlds";
-import type { ApiResponse } from "@/shared/model/types/ApiResponse";
+import type { ApiResponse } from "@/shared/api/internal";
 
 const badRequest = (message: string) =>
   NextResponse.json<ApiResponse<null>>(

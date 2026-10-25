@@ -1,4 +1,4 @@
-import type { ApiResponse } from "@/shared/model/types/ApiResponse";
+import type { ApiResponse } from "./api-response";
 
 /** 내부 API 가 실패 상태로 응답한 에러. 재시도 판단용으로 상태 코드를 담음 */
 export class ApiRequestError extends Error {

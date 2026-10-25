@@ -1,6 +1,6 @@
 import "server-only";
 import { NextResponse } from "next/server";
-import type { ApiResponse } from "@/shared/model/types/ApiResponse";
+import type { ApiResponse } from "@/shared/api/internal";
 import { NexonApiError } from "./errors";
 import { isNexonNotFoundError, mapNexonError } from "./handler";
 

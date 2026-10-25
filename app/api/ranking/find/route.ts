@@ -5,7 +5,7 @@ import {
   readSearchableRankingType,
 } from "@/features/ranking-search/index.server";
 import type { RankingSearchResult } from "@/features/ranking-search";
-import type { ApiResponse } from "@/shared/model/types/ApiResponse";
+import type { ApiResponse } from "@/shared/api/internal";
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);

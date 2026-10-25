@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { SearchForm } from "@/shared/ui/search-form";
 import { guildHref } from "@/shared/lib/url";
+import { STORAGE_KEYS } from "@/shared/config/constants/storage";
 
 const VALIDATION_REGEX = /^[a-zA-Z0-9가-힣]{2,12}$/;
 const VALIDATION_ERROR_MESSAGE =
@@ -21,8 +22,8 @@ export function GuildSearch() {
 
   return (
     <SearchForm
-      historyKey="guild-search-history"
-      lastWorldKey="guild-last-world"
+      historyKey={STORAGE_KEYS.GUILD_SEARCH_HISTORY}
+      lastWorldKey={STORAGE_KEYS.GUILD_LAST_WORLD}
       placeholder="길드명을 입력하세요"
       onSubmit={handleSearch}
       onValidate={handleValidate}

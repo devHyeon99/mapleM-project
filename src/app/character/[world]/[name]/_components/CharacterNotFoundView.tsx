@@ -6,6 +6,7 @@ import { useRecentSearch } from "@/shared/lib/hooks/useRecentSearch";
 import { NotFoundMessage } from "@/shared/ui/NotFoundMessage";
 import { worldFromSlug } from "@/shared/config/constants/worlds";
 import { safeDecode } from "@/shared/lib/url";
+import { STORAGE_KEYS } from "@/shared/config/constants/storage";
 
 interface CharacterPathParams {
   name: string;
@@ -26,7 +27,9 @@ const parseCharacterPathname = (
 
 export function CharacterNotFoundView() {
   const pathname = usePathname();
-  const { removeHistoryByParams } = useRecentSearch("character-search-history");
+  const { removeHistoryByParams } = useRecentSearch(
+    STORAGE_KEYS.CHARACTER_SEARCH_HISTORY,
+  );
   const targetCharacter = useMemo(
     () => parseCharacterPathname(pathname),
     [pathname],

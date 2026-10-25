@@ -24,6 +24,7 @@ import type {
   RankingType,
 } from "../model/types/ranking";
 import { MobileRankingList } from "./MobileRankingList";
+import { STORAGE_KEYS } from "@/shared/config/constants/storage";
 
 interface RankingTableProps {
   type: RankingType;
@@ -40,7 +41,7 @@ export const RankingTable = ({
   highlight,
   className,
 }: RankingTableProps) => {
-  const { addHistory } = useRecentSearch("character-search-history");
+  const { addHistory } = useRecentSearch(STORAGE_KEYS.CHARACTER_SEARCH_HISTORY);
 
   const columns = useMemo(() => rankingColumns(type), [type]);
 

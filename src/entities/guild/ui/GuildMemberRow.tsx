@@ -8,6 +8,7 @@ import { WORLD_NAMES } from "@/shared/config/constants/worlds";
 import { useRecentSearch } from "@/shared/lib/hooks/useRecentSearch";
 import { characterHref } from "@/shared/lib/url";
 import { ShieldCheck } from "lucide-react";
+import { STORAGE_KEYS } from "@/shared/config/constants/storage";
 
 type WorldName = (typeof WORLD_NAMES)[number];
 
@@ -23,7 +24,7 @@ export function GuildMemberRow({
   worldName,
 }: GuildMemberRowProps) {
   const router = useRouter();
-  const { addHistory } = useRecentSearch("character-search-history");
+  const { addHistory } = useRecentSearch(STORAGE_KEYS.CHARACTER_SEARCH_HISTORY);
 
   // 행 클릭 핸들러 (모바일/편의성)
   const handleRowClick = () => {

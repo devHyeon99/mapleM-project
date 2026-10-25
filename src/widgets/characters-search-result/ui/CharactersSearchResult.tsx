@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/shared/ui/card";
 import { NotFoundMessage } from "@/shared/ui/NotFoundMessage";
 import { useRecentSearch } from "@/shared/lib/hooks/useRecentSearch";
 import { characterHref } from "@/shared/lib/url";
+import { STORAGE_KEYS } from "@/shared/config/constants/storage";
 import type { CharacterOcidData } from "@/entities/character";
 
 interface CharactersSearchResultProps {
@@ -32,7 +33,7 @@ export function CharactersSearchResult({
   characters,
   failedWorlds = 0,
 }: CharactersSearchResultProps) {
-  const { addHistory } = useRecentSearch("character-search-history");
+  const { addHistory } = useRecentSearch(STORAGE_KEYS.CHARACTER_SEARCH_HISTORY);
 
   if (characters.length === 0) {
     return failedWorlds > 0 ? (

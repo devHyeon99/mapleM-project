@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { SearchForm } from "@/shared/ui/search-form";
 import { ALL_WORLD_NAME } from "@/shared/config/constants/worlds";
 import { characterHref } from "@/shared/lib/url";
+import { STORAGE_KEYS } from "@/shared/config/constants/storage";
 
 const VALIDATION_REGEX = /^[a-zA-Z0-9가-힣]{2,8}$/;
 const VALIDATION_ERROR_MESSAGE =
@@ -27,8 +28,8 @@ export const CharacterSearch = () => {
 
   return (
     <SearchForm
-      historyKey="character-search-history"
-      lastWorldKey="character-last-world"
+      historyKey={STORAGE_KEYS.CHARACTER_SEARCH_HISTORY}
+      lastWorldKey={STORAGE_KEYS.CHARACTER_LAST_WORLD}
       placeholder="캐릭터 이름을 입력하세요"
       onValidate={handleValidate}
       errorMessage={VALIDATION_ERROR_MESSAGE}

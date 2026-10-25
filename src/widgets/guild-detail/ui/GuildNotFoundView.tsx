@@ -5,10 +5,13 @@ import { usePathname } from "next/navigation";
 import { useRecentSearch } from "@/shared/lib/hooks/useRecentSearch";
 import { NotFoundMessage } from "@/shared/ui/NotFoundMessage";
 import { worldFromSlug } from "@/shared/config/constants/worlds";
+import { STORAGE_KEYS } from "@/shared/config/constants/storage";
 
 export function GuildNotFoundView() {
   const pathname = usePathname();
-  const { removeHistoryByParams } = useRecentSearch("guild-search-history");
+  const { removeHistoryByParams } = useRecentSearch(
+    STORAGE_KEYS.GUILD_SEARCH_HISTORY,
+  );
 
   const processedRef = useRef(false);
 

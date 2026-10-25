@@ -2,7 +2,7 @@ import { CashItemEquipment } from "../model/types";
 import {
   CASH_EQUIP_SLOT_ORDER_ONEPIECE,
   CASH_EQUIP_SLOT_ORDER_TOPBOTTOM,
-} from "@/shared/config/constants/cash_slot";
+} from "../config/cashSlotOrder";
 
 // 컴포넌트에서 사용할 데이터 구조 정의
 export interface SortedCashItemSlot {

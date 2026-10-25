@@ -14,7 +14,7 @@ import {
   EQUIP_SLOT_ORDER_GRID_TOPBOTTOM,
   EQUIP_SLOT_ORDER_LIST_ONEPIECE,
   EQUIP_SLOT_ORDER_LIST_TOPBOTTOM,
-} from "@/shared/config/constants/item_slot";
+} from "../../config/itemSlotOrder";
 
 export interface SortedItemSlot {
   slotName: string;

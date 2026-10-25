@@ -20,7 +20,7 @@ vi.mock("@/shared/api/nexon/server", () => ({
   nexonFetch: (...args: unknown[]) => nexonFetch(...args),
 }));
 
-vi.mock("@/entities/ranking/server", () => ({
+vi.mock("@/entities/ranking/index.server", () => ({
   RANKING_DATE_TAG: "ranking-date",
   rankingDataTag: (date: string) => `ranking-data:${date}`,
 }));

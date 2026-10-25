@@ -1,7 +1,7 @@
 import "server-only";
 import { ALL_WORLD_NAME, WORLD_NAMES } from "@/shared/config/constants/worlds";
 import { CHARACTER_NAME_REGEX } from "@/shared/config/constants/character";
-import { fetchOcid } from "@/entities/character/server";
+import { fetchOcid } from "@/entities/character/index.server";
 import { unstable_cache } from "next/cache";
 
 const SEARCH_ALL_CACHE_SECONDS = 60 * 5;

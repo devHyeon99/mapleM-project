@@ -3,7 +3,7 @@ import {
   findRankedCharacter,
   readRankingSearchQuery,
   readSearchableRankingType,
-} from "@/features/ranking-search/server";
+} from "@/features/ranking-search/index.server";
 import type { RankingSearchResult } from "@/features/ranking-search";
 import type { ApiResponse } from "@/shared/model/types/ApiResponse";
 

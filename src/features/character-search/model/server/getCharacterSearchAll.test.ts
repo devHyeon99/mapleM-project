@@ -5,7 +5,7 @@ const cacheWrites: unknown[] = [];
 
 vi.mock("server-only", () => ({}));
 
-vi.mock("@/entities/character/server", () => ({ fetchOcid }));
+vi.mock("@/entities/character/index.server", () => ({ fetchOcid }));
 
 // unstable_cache 처럼 resolve 만 저장하고 reject 는 그대로 던짐
 vi.mock("next/cache", () => ({

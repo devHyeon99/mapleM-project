@@ -3,7 +3,7 @@ import { connection } from "next/server";
 import {
   getLevelWorldCharacterCounts,
   resolveRankingDate,
-} from "@/entities/ranking/server";
+} from "@/entities/ranking/index.server";
 import { RankingIcon, rankingHref } from "@/entities/ranking";
 import { worldIconSrc } from "@/shared/config/constants/worlds";
 import { Skeleton } from "@/shared/ui/skeleton";

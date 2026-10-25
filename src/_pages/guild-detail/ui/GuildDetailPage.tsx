@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { cache } from "react";
 import { isNexonNotFoundError } from "@/shared/api/nexon";
-import { getGuildFullData } from "@/entities/guild/server";
+import { getGuildFullData } from "@/entities/guild/index.server";
 import { GuildDetailView } from "./GuildDetailView";
 import { safeDecode } from "@/shared/lib/url";
 import { worldFromSlug } from "@/shared/config/constants/worlds";

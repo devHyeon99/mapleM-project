@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { getCharacterSearchAll } from "@/features/character-search/server";
+import { getCharacterSearchAll } from "@/features/character-search/index.server";
 import { CharactersSearchResult } from "./CharactersSearchResult";
 import { CharactersSearchResultSkeleton } from "./CharactersSearchResultSkeleton";
 import { safeDecode } from "@/shared/lib/url";

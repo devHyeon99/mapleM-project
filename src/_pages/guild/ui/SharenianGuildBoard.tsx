@@ -9,7 +9,7 @@ import {
 import {
   fetchRankingCached,
   resolveRankingDate,
-} from "@/entities/ranking/server";
+} from "@/entities/ranking/index.server";
 import { Card, CardAction, CardHeader } from "@/shared/ui/card";
 import { formatDateKST } from "@/shared/lib/date";
 import { guildHref } from "@/shared/lib/url";

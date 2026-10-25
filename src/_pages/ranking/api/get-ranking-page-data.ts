@@ -7,7 +7,7 @@ import {
   fetchRankingCached,
   getRankingTotalPages,
   resolveRankingDate,
-} from "@/entities/ranking/server";
+} from "@/entities/ranking/index.server";
 import { handleCommonNexonError } from "@/shared/api/nexon";
 import type { RankingFilters } from "../model/ranking-query";
 

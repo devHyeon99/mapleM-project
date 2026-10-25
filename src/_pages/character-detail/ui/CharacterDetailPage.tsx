@@ -2,8 +2,11 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { cache } from "react";
 import { CharacterDetail } from "./CharacterDetail";
-import { fetchOcid, fetchCharacterDetail } from "@/entities/character/server";
-import { resolveRankingDate } from "@/entities/ranking/server";
+import {
+  fetchOcid,
+  fetchCharacterDetail,
+} from "@/entities/character/index.server";
+import { resolveRankingDate } from "@/entities/ranking/index.server";
 import { safeDecode } from "@/shared/lib/url";
 import { worldFromSlug } from "@/shared/config/constants/worlds";
 import { OG_IMAGE, OG_IMAGE_SIZE } from "@/shared/config/site";

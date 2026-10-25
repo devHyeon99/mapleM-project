@@ -1,5 +1,5 @@
 import "server-only";
-import { fetchOcid } from "@/entities/character/server";
+import { fetchOcid } from "@/entities/character/index.server";
 import {
   RANKING_UI_ITEMS_PER_PAGE,
   type RankingType,
@@ -7,7 +7,7 @@ import {
 import {
   findRankingByOcid,
   resolveRankingDate,
-} from "@/entities/ranking/server";
+} from "@/entities/ranking/index.server";
 import { mapNexonError } from "@/shared/api/nexon";
 import type { RankingSearchQuery } from "./params";
 import type { RankingSearchResult } from "./types";

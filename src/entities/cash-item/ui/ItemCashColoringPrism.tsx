@@ -1,5 +1,5 @@
-import { COLOR_RANGE_LABEL } from "@/shared/config/constants/color_prism";
-import { CashItemEquipment } from "@/entities/cash-item";
+import { COLOR_RANGE_LABEL } from "../config/colorRangeLabel";
+import type { CashItemEquipment } from "../model";
 
 interface Props {
   coloringPrism: CashItemEquipment["cash_item_coloring_prism"];

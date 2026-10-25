@@ -8,7 +8,7 @@ import {
   GuildSkillList,
   type Guild,
 } from "@/entities/guild";
-import { GUILD_TABS, TAB_MIN_HEIGHT_CLASS } from "./config";
+import { GUILD_TABS, TAB_MIN_HEIGHT_CLASS } from "../config/guild-tabs";
 
 interface GuildDetailViewProps {
   guildData: Guild;

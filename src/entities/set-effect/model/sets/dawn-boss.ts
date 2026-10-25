@@ -1,4 +1,4 @@
-import { EquipmentSetDefinition } from "../types";
+import { EquipmentSetDefinition } from "../setEffect";
 
 export const DAWN_BOSS_SET: EquipmentSetDefinition = {
   id: "dawn-boss",

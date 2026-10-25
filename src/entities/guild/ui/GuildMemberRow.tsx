@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { TableCell, TableRow } from "@/shared/ui/table";
-import { GuildMember } from "../model/types";
+import { GuildMember } from "../model/guild";
 import { WORLD_NAMES } from "@/shared/config/constants/worlds";
 import { useRecentSearch } from "@/shared/lib/hooks/useRecentSearch";
 import { characterHref } from "@/shared/lib/url";

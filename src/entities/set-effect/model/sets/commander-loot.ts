@@ -1,4 +1,4 @@
-import { EquipmentSetDefinition } from "../types";
+import { EquipmentSetDefinition } from "../setEffect";
 
 export const COMMANDER_LOOT_SET: EquipmentSetDefinition = {
   id: "commander-loot",

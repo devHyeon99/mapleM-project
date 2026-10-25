@@ -1,4 +1,4 @@
-import { EquipmentSetDefinition } from "../types";
+import { EquipmentSetDefinition } from "../setEffect";
 
 export const PENSALIR_LEGENDARY_SET: EquipmentSetDefinition = {
   id: "pensalir-legendary",

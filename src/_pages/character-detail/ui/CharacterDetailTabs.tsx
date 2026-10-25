@@ -10,7 +10,7 @@ import { ALL_TABS, type TabKey } from "../config";
 import { CharacterDetailTabContent } from "./CharacterDetailTabContent";
 import { CharacterDetailTabNav } from "./CharacterDetailTabNav";
 import { TabLoadingBox } from "./TabLoadingBox";
-import type { CharacterItemTabData } from "../model/types";
+import type { CharacterItemTabData } from "../model/item-tab";
 
 const DEFAULT_TAB: TabKey = "Item";
 const TAB_QUERY_KEY = "tab";

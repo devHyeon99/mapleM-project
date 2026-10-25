@@ -1,4 +1,4 @@
-import { EquipmentSetDefinition } from "../types";
+import { EquipmentSetDefinition } from "../setEffect";
 
 export const MUSPELL_UNIQUE_SET: EquipmentSetDefinition = {
   id: "muspell-unique",

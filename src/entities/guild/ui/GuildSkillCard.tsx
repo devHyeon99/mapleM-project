@@ -1,6 +1,6 @@
 import { Badge } from "@/shared/ui/badge";
 import { Card, CardContent } from "@/shared/ui/card";
-import type { GuildSkill } from "../model/types";
+import type { GuildSkill } from "../model/guild";
 import Image from "next/image";
 
 interface GuildSkillCardProps {

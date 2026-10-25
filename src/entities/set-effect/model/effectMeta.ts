@@ -1,4 +1,4 @@
-import { EffectKey, EffectUnit } from "./types";
+import { EffectKey, EffectUnit } from "./setEffect";
 
 // 능력치 표기와 단위는 세트가 아니라 키에 딸린 값임.
 // 세트 데이터마다 적어두면 같은 키가 세트별로 다른 문구로 굳어짐

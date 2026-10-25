@@ -2,7 +2,7 @@ import type { CharacterUnion, UnionRanking } from "@/entities/character";
 import type { ReactNode } from "react";
 
 import type { TabKey } from "../config";
-import type { CharacterItemTabData } from "../model/types";
+import type { CharacterItemTabData } from "../model/item-tab";
 import {
   ItemTab,
   CashItemTab,

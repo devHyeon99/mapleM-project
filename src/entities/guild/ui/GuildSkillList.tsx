@@ -1,5 +1,5 @@
 import { getVisibleGuildSkills } from "../lib/getVisibleGuildSkills";
-import type { GuildSkill } from "../model/types";
+import type { GuildSkill } from "../model/guild";
 import { GuildEmptyState } from "./GuildEmptyState";
 import { GuildSkillCard } from "./GuildSkillCard";
 

@@ -10,7 +10,7 @@ import {
 } from "@/entities/ranking/index.server";
 import { mapNexonError } from "@/shared/api/nexon";
 import type { RankingSearchQuery } from "./params";
-import type { RankingSearchResult } from "./types";
+import type { RankingSearchResult } from "./search-result";
 
 /**
  * 월드+닉네임으로 ocid 를 얻고, 그 ocid 로 해당 종류의 랭킹을 조회함

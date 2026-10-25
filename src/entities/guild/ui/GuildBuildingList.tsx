@@ -1,4 +1,4 @@
-import type { GuildBuilding } from "../model/types";
+import type { GuildBuilding } from "../model/guild";
 import { GuildBuildingCard } from "./GuildBuildingCard";
 import { GuildEmptyState } from "./GuildEmptyState";
 

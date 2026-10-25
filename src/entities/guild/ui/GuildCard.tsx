@@ -4,7 +4,7 @@ import { Badge } from "@/shared/ui/badge";
 import { HelpPopover } from "@/shared/ui/HelpPopover";
 import { formatDateKST, parseValidDate } from "@/shared/lib/date";
 import { GuildMark } from "./GuildMark";
-import type { Guild } from "../model/types";
+import type { Guild } from "../model/guild";
 
 interface GuildCardProps {
   data: Guild;

@@ -1,4 +1,4 @@
-import { EquipmentSetDefinition } from "../types";
+import { EquipmentSetDefinition } from "../setEffect";
 
 export const CHALLENGER_SET: EquipmentSetDefinition = {
   id: "challenger",

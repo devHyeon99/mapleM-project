@@ -6,7 +6,7 @@ import {
   rankingSearchParams,
   type RankingSearchQuery,
 } from "./params";
-import type { RankingSearchResult } from "./types";
+import type { RankingSearchResult } from "./search-result";
 
 // ocid 도 랭킹도 하루 한 번 바뀌는 값이라 같은 검색어를 다시 조회할 이유가 없다.
 const CACHE_MS = 10 * 60 * 1000;

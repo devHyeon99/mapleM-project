@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { GuildAbility } from "../model/types";
+import type { GuildAbility } from "../model/guild";
 import { groupGuildAbilities } from "./groupGuildAbilities";
 
 function createAbility(ability_no: number, ability_name: string): GuildAbility {

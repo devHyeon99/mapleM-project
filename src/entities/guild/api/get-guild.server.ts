@@ -1,7 +1,7 @@
 import "server-only";
 
 import { nexonFetch } from "@/shared/api/nexon/server";
-import type { Guild } from "../model/types";
+import type { Guild } from "../model/guild";
 
 interface GetGuildParams {
   worldName: string;

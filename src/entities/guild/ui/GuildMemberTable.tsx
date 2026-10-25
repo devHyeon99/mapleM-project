@@ -19,7 +19,7 @@ import {
   TableRow,
 } from "@/shared/ui/table";
 import { ArrowUpDown } from "lucide-react";
-import { GuildMember } from "../model/types";
+import { GuildMember } from "../model/guild";
 import { GuildMemberRow } from "./GuildMemberRow";
 
 interface GuildMemberTableProps {

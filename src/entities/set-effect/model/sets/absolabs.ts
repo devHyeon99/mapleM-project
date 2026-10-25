@@ -1,4 +1,4 @@
-import { EquipmentSetDefinition } from "../types";
+import { EquipmentSetDefinition } from "../setEffect";
 
 export const ABSOLABS_SET: EquipmentSetDefinition = {
   id: "absolabs",

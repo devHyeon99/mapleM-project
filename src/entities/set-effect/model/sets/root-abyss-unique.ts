@@ -1,4 +1,4 @@
-import { EquipmentSetDefinition } from "../types";
+import { EquipmentSetDefinition } from "../setEffect";
 
 export const ROOT_ABYSS_UNIQUE_SET: EquipmentSetDefinition = {
   id: "root-abyss-unique",

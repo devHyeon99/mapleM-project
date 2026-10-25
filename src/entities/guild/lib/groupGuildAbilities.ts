@@ -1,4 +1,4 @@
-import type { GuildAbility } from "../model/types";
+import type { GuildAbility } from "../model/guild";
 
 // 넥슨 API는 어빌리티가 몇 차인지 내려주지 않아 이름·옵션 키워드로 차수를 역추정한다.
 const KEYWORDS = {

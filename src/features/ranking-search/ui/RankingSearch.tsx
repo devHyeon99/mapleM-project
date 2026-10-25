@@ -11,7 +11,7 @@ import {
   type RankingSearchQuery,
 } from "../model/params";
 import { useRankedCharacter } from "../model/use-ranked-character";
-import type { RankingSearchResult } from "../model/types";
+import type { RankingSearchResult } from "../model/search-result";
 
 const PANEL_CLASS =
   "bg-muted flex min-h-10 flex-wrap items-center justify-between gap-x-4 gap-y-2 rounded-2xl px-4 py-2 text-sm shadow-sm";

@@ -1,5 +1,5 @@
 import { groupGuildAbilities } from "../lib/groupGuildAbilities";
-import type { GuildAbility } from "../model/types";
+import type { GuildAbility } from "../model/guild";
 import { GuildAbilityCard } from "./GuildAbilityCard";
 import { GuildEmptyState } from "./GuildEmptyState";
 

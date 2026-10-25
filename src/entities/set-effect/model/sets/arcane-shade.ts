@@ -1,4 +1,4 @@
-import { EquipmentSetDefinition } from "../types";
+import { EquipmentSetDefinition } from "../setEffect";
 
 export const ARCANE_SHADE_SET: EquipmentSetDefinition = {
   id: "arcane-shade",

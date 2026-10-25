@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/shared/ui/card";
 import { Skeleton } from "@/shared/ui/skeleton";
-import { GUILD_TABS, TAB_HEIGHT_CLASS } from "./config";
+import { GUILD_TABS, TAB_HEIGHT_CLASS } from "../config/guild-tabs";
 
 // GuildCard 와 같은 DOM 구조를 그대로 따라감.
 // 높이를 고정하면 모바일(세로 배치)에서 실제 카드보다 짧아지므로 내용으로 높이를 잡음

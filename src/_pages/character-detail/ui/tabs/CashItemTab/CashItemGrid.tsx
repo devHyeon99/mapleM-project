@@ -1,4 +1,4 @@
-import { ItemCashDialog } from "@/features/item-dialog";
+import { ItemCashDialog } from "../../item-dialog";
 import { SortedCashItemSlot } from "@/entities/cash-item";
 import { ItemEmptySlot } from "@/shared/ui/ItemEmptySlot";
 

@@ -1,5 +1,5 @@
 import type { CashItemEquipment } from "@/entities/cash-item";
-import { ItemCashDialog } from "@/features/item-dialog";
+import { ItemCashDialog } from "../../item-dialog";
 import { cn } from "@/shared/lib/utils";
 
 interface CashItemListRowProps {

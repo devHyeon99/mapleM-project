@@ -18,7 +18,7 @@ import { captureToPng, saveImageDataUrl } from "@/shared/lib/capture-image";
 import {
   DEFAULT_PHOTO_CARD_BACKGROUND,
   PHOTO_CARD_BACKGROUNDS,
-} from "../model/backgrounds";
+} from "../../model/photo-card/backgrounds";
 import { PhotoCard, formatCardDate } from "./PhotoCard";
 
 interface PhotoCardDialogProps {

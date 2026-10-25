@@ -8,7 +8,7 @@ import { ItemEmptySlot } from "@/shared/ui/ItemEmptySlot";
 import { Badge } from "@/shared/ui/badge";
 import { InfoRow } from "@/shared/ui/InfoRow";
 import { sumSymbolForce } from "@/entities/character";
-import type { MergedSpecData } from "../model/types";
+import type { MergedSpecData } from "../../model/spec-card";
 
 const COLUMN_COUNT = 7;
 

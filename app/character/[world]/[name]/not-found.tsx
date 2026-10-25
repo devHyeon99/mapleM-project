@@ -1,5 +1,1 @@
-import { CharacterNotFoundView } from "./_components/CharacterNotFoundView";
-
-export default function NotFound() {
-  return <CharacterNotFoundView />;
-}
+export { CharacterNotFoundView as default } from "@/_pages/character-detail";

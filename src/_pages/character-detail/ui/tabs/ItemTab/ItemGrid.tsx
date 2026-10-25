@@ -1,6 +1,6 @@
 import type { CharacterPet } from "@/entities/character";
 import type { SortedItemSlot } from "@/entities/item";
-import { ItemDialog, PetDialog } from "@/features/item-dialog";
+import { ItemDialog, PetDialog } from "../../item-dialog";
 import { ItemEmptySlot } from "@/shared/ui/ItemEmptySlot";
 
 interface ItemGridProps {

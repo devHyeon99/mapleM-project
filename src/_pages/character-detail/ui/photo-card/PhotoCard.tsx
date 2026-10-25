@@ -4,8 +4,8 @@ import { forwardRef } from "react";
 import type { CharacterDetailData } from "@/entities/character";
 import { worldIconSrc } from "@/shared/config/constants/worlds";
 import { SITE_HOST } from "@/shared/config/site";
-import { useInlinedImage } from "../lib/useInlinedImage";
-import type { PhotoCardBackground } from "../model/backgrounds";
+import { useInlinedImage } from "../../lib/photo-card/useInlinedImage";
+import type { PhotoCardBackground } from "../../model/photo-card/backgrounds";
 
 const NUMBER_FORMATTER = new Intl.NumberFormat("ko-KR");
 

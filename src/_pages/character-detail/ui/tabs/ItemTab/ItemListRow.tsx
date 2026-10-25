@@ -5,7 +5,7 @@ import {
   type CharacterItemEquipment,
   type ItemOption,
 } from "@/entities/item";
-import { ItemDialog } from "@/features/item-dialog";
+import { ItemDialog } from "../../item-dialog";
 import { cn } from "@/shared/lib/utils";
 
 interface ItemListRowProps {

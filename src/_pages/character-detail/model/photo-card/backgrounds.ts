@@ -5,7 +5,7 @@ import {
   OCEAN_IMAGE,
   SNOWFALL_IMAGE,
   STARFIELD_IMAGE,
-} from "../lib/patterns";
+} from "../../lib/photo-card/patterns";
 
 /** 배경 위에 추가로 그리는 워터마크. 프리셋마다 다르다. */
 export type PhotoCardMark = "world";

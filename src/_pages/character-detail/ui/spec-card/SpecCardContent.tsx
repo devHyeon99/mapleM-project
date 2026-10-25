@@ -11,7 +11,7 @@ import type {
 } from "@/entities/character";
 import { sortItems } from "@/entities/item";
 import { SITE_HOST } from "@/shared/config/site";
-import type { MergedSpecData } from "../model/types";
+import type { MergedSpecData } from "../../model/spec-card";
 
 import { EquipmentGrid } from "./EquipmentGrid";
 import { RightStatColumn } from "./RightStatColumn";

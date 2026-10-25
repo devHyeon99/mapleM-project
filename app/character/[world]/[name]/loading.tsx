@@ -1,5 +1,1 @@
-import { CharacterDetailSkeleton } from "@/widgets/character-detail";
-
-export default function CharacterLoading() {
-  return <CharacterDetailSkeleton />;
-}
+export { CharacterDetailSkeleton as default } from "@/_pages/character-detail";

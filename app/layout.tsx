@@ -11,7 +11,7 @@ import {
   SITE_METADATA_BASE,
   SITE_NAME,
 } from "@/shared/config/site";
-import { Header, Footer } from "@/widgets/layout";
+import { Header, Footer } from "@/_app/layout";
 
 const SHARE_TITLE = `${SITE_NAME} - 메이플스토리M 캐릭터 검색 & 종합 정보`;
 const SHARE_DESCRIPTION =

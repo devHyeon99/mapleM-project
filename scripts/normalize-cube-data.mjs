@@ -11,7 +11,7 @@ const rootDir = path.resolve(__dirname, "..");
 const MODES = ["potential", "additional"];
 const sourceDirOf = (mode) => path.join(__dirname, "source", mode);
 const outputDirOf = (mode) =>
-  path.join(rootDir, "src/widgets/cube-simulator/model/data/generated", mode);
+  path.join(rootDir, "src/_pages/tools/cube-simulator/model/data/generated", mode);
 
 const tierMap = new Map([
   ["레어", "rare"],

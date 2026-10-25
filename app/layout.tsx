@@ -4,7 +4,7 @@ import { Analytics } from "@vercel/analytics/next";
 // 한글 포함 Pretendard 를 unicode-range 조각으로 나눠, 페이지에 쓰인 글자의 조각만 내려받음
 import "pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css";
 import "@/_app/styles/globals.css";
-import { Providers } from "@/_app/providers/Providers";
+import { Providers } from "@/_app/providers";
 import {
   OG_IMAGE,
   OG_IMAGE_SIZE,

@@ -1,6 +1,6 @@
 import { CharacterItemEquipment } from "../model/types";
 import { getStarforce } from "../lib";
-import { StarIcon } from "@/shared/ui/StarIcon";
+import { StarIcon } from "./StarIcon";
 
 interface Props {
   item: CharacterItemEquipment;

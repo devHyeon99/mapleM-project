@@ -1,7 +1,7 @@
 import "server-only";
 import { unstable_cache } from "next/cache";
 import { subDays } from "date-fns";
-import { getRankingDate } from "@/shared/lib/ranking-date";
+import { getRankingDate } from "../lib/ranking-date";
 import { fetchRankingCached } from "./fetch-ranking";
 
 /**

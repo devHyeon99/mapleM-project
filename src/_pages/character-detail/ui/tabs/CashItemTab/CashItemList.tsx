@@ -1,6 +1,6 @@
 import { SortedCashItemSlot } from "@/entities/cash-item";
 import { cn } from "@/shared/lib/utils";
-import { ItemEmptyRow } from "@/shared/ui/ItemEmptyRow";
+import { ItemEmptyRow } from "../../ItemEmptyRow";
 import { CashItemListRow } from "./CashItemListRow";
 
 interface CashItemListProps {

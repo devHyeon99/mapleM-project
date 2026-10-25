@@ -21,3 +21,4 @@ export {
 export { RankingTable } from "./ui/RankingTable";
 export { rankingColumns } from "./ui/ranking-table.columns";
 export { RankingIcon } from "./ui/RankingIcon";
+export { getRankingDate } from "./lib/ranking-date";

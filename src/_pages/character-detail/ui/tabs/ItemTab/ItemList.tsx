@@ -1,7 +1,7 @@
 import type { SortedItemSlot } from "@/entities/item";
 import { MAGICAL_CLASSES } from "@/shared/config/constants/magic_class";
 import { cn } from "@/shared/lib/utils";
-import { ItemEmptyRow } from "@/shared/ui/ItemEmptyRow";
+import { ItemEmptyRow } from "../../ItemEmptyRow";
 import { ItemListRow } from "./ItemListRow";
 
 interface ItemListProps {

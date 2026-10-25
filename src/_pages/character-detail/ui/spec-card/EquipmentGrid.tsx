@@ -4,7 +4,7 @@ import {
   ItemIconBase,
   type SortedItemSlot,
 } from "@/entities/item";
-import { ItemEmptySlot } from "@/shared/ui/ItemEmptySlot";
+import { ItemEmptySlot } from "../ItemEmptySlot";
 import { Badge } from "@/shared/ui/badge";
 import { InfoRow } from "@/shared/ui/InfoRow";
 import { sumSymbolForce } from "@/entities/character";

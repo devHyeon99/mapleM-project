@@ -1,13 +1,16 @@
 import { revalidateTag, unstable_cache } from "next/cache";
 import { NextResponse } from "next/server";
 
-import type { BaseRanking, RankingResponse } from "@/entities/ranking";
+import {
+  getRankingDate,
+  type BaseRanking,
+  type RankingResponse,
+} from "@/entities/ranking";
 import {
   RANKING_DATE_TAG,
   rankingDataTag,
 } from "@/entities/ranking/index.server";
 import { nexonFetch } from "@/shared/api/nexon/server";
-import { getRankingDate } from "@/shared/lib/ranking-date";
 import { matchesBearerSecret } from "@/shared/lib/match-secret";
 
 /**

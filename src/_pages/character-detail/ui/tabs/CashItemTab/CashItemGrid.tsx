@@ -1,6 +1,6 @@
 import { ItemCashDialog } from "../../item-dialog";
 import { SortedCashItemSlot } from "@/entities/cash-item";
-import { ItemEmptySlot } from "@/shared/ui/ItemEmptySlot";
+import { ItemEmptySlot } from "../../ItemEmptySlot";
 
 interface CashItemGridProps {
   items: SortedCashItemSlot[];

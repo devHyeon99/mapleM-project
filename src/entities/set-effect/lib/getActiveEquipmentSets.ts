@@ -1,4 +1,4 @@
-import type { CharacterItemEquipment } from "@/entities/item";
+import type { CharacterItemEquipment } from "@/shared/api/nexon";
 
 import { ActiveEquipmentSet, EQUIPMENT_SET_DEFINITIONS } from "../model";
 import { ABSOLABS_CORRECTION_SET_IDS } from "./absolabsCorrection";

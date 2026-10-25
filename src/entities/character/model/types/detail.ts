@@ -5,7 +5,7 @@ import type {
   AndroidEquipment,
   HeartEquipment,
   AndroidHeartEquipmentPreset,
-} from "@/entities/item";
+} from "@/shared/api/nexon";
 import { CharacterBasic } from "./basic";
 import { CharacterUnion } from "./union";
 import { LevelRanking, UnionRanking } from "./ranking";

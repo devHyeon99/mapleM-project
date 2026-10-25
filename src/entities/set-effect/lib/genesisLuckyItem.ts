@@ -1,4 +1,4 @@
-import type { CharacterItemEquipment } from "@/entities/item";
+import type { CharacterItemEquipment } from "@/shared/api/nexon";
 import {
   ABSOLABS_SET,
   ARCANE_SHADE_SET,

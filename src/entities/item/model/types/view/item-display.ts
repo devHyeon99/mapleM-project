@@ -1,4 +1,4 @@
-import { CharacterItemEquipment } from "../domain/item-equipment";
+import type { CharacterItemEquipment } from "@/shared/api/nexon";
 
 export type ItemSourceType = "equipment" | "android" | "heart";
 

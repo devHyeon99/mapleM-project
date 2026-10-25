@@ -6,7 +6,7 @@ import { resolveRankingDate } from "@/entities/ranking/server";
 import type {
   CharacterItemEquipmentResponse,
   CharacterAndroidEquipment,
-} from "@/entities/item";
+} from "@/shared/api/nexon";
 import type {
   CharacterDetailData,
   CharacterBasicResponse,

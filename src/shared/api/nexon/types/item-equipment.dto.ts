@@ -1,7 +1,7 @@
 import {
   CharacterItemEquipment,
   EquipmentPreset,
-} from "../domain/item-equipment";
+} from "./item-equipment";
 
 /** 장비 조회 API 응답 (/character/item-equipment) */
 export interface CharacterItemEquipmentResponse {

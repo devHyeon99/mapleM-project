@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { CharacterItemEquipment } from "@/entities/item";
+import type { CharacterItemEquipment } from "@/shared/api/nexon";
 import { EQUIPMENT_SET_DEFINITIONS } from "../model";
 import { getActiveEquipmentSets } from "./getActiveEquipmentSets";
 

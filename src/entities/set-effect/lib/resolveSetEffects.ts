@@ -1,4 +1,4 @@
-import type { CharacterItemEquipment } from "@/entities/item";
+import type { CharacterItemEquipment } from "@/shared/api/nexon";
 import {
   ActiveEquipmentSet,
   EFFECT_META,

@@ -1,11 +1,9 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import {
-  RankingFilters,
-  RankingPagination,
-  useJobRanking,
-} from "@/features/ranking-navigation";
+import { RankingFilters } from "./RankingFilters";
+import { RankingPagination } from "./RankingPagination";
+import { useJobRanking } from "../model/use-job-ranking";
 import { readRankingHighlight } from "@/features/ranking-search";
 import {
   canOtherWorldsHaveRanking,

@@ -9,7 +9,7 @@ import {
   resolveRankingDate,
 } from "@/entities/ranking/server";
 import { handleCommonNexonError } from "@/shared/api/nexon";
-import type { RankingFilters } from "./ranking-query";
+import type { RankingFilters } from "../model/ranking-query";
 
 export async function getRankingPageData(
   type: RankingType,

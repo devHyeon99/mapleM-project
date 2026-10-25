@@ -6,7 +6,8 @@ import {
   rankingHref,
   type RankingType,
 } from "@/entities/ranking";
-import { RankingBoard, RankingBoardSkeleton } from "@/widgets/ranking-board";
+import { RankingBoard } from "./RankingBoard";
+import { RankingBoardSkeleton } from "./RankingBoardSkeleton";
 import {
   RankingSearch,
   RankingSearchFallback,
@@ -17,8 +18,8 @@ import {
   SITE_NAME,
   SITE_URL,
 } from "@/shared/config/site";
-import { getRankingPageData } from "./get-ranking-page-data";
-import type { RankingFilters } from "./ranking-query";
+import { getRankingPageData } from "../api/get-ranking-page-data";
+import type { RankingFilters } from "../model/ranking-query";
 
 /** 레벨 랭킹은 랭킹의 대표 페이지라 종류 라벨 대신 전체 종류를 훑어 줌 */
 const LEVEL_SUMMARY = "레벨, 무릉도장, 유니온, 전투력 등 주요 랭킹을 제공합니다.";

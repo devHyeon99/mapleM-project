@@ -1,4 +1,4 @@
-import { RankingTabs } from "@/features/ranking-navigation";
+import { RankingTabs } from "@/_pages/ranking";
 
 // /ranking 과 /ranking/[type] 이 공유하는 레이아웃.
 // 탭을 레이아웃에 두어 타입 전환 시에도 유지되고,

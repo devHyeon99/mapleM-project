@@ -2,7 +2,6 @@ import "server-only";
 
 import { nexonFetch } from "@/shared/api/nexon/server";
 import { isNexonNotFoundError } from "@/shared/api/nexon";
-import { resolveRankingDate } from "@/entities/ranking/server";
 import type {
   CharacterItemEquipmentResponse,
   CharacterAndroidEquipment,
@@ -59,15 +58,17 @@ function toPets(
   });
 }
 
+/**
+ * 랭킹 기준일은 entities/ranking 소유라 호출하는 페이지에서 판정을 시작해 promise 로 넘겨받음.
+ * 기준일이 필요한 건 랭킹 두 건뿐이라, 미리 await 하면 날짜와 무관한
+ * 나머지 요청까지 판정이 끝날 때까지 묶이므로 랭킹 쪽에서만 기다리게함.
+ */
 export async function fetchCharacterDetail(
   ocid: string,
+  rankingDatePromise: Promise<string>,
 ): Promise<CharacterDetailData | null> {
   const trimmedOcid = ocid.trim();
   if (!trimmedOcid) throw new Error("ocid가 필요합니다.");
-
-  // 기준일이 필요한 건 랭킹 두 건뿐이라, 여기서 await 하면 날짜와 무관한
-  // 나머지 요청까지 판정이 끝날 때까지 묶이므로, 시작만 시키고 랭킹 쪽에서 기다리게함.
-  const rankingDatePromise = resolveRankingDate();
 
   const fetchRanking = async <T>(path: string) =>
     nexonFetch<T>(path, {

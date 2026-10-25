@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { cache } from "react";
 import { CharacterDetail } from "@/widgets/character-detail";
 import { fetchOcid, fetchCharacterDetail } from "@/entities/character/server";
+import { resolveRankingDate } from "@/entities/ranking/server";
 import { safeDecode } from "@/shared/lib/url";
 import { worldFromSlug } from "@/shared/config/constants/worlds";
 import { OG_IMAGE, OG_IMAGE_SIZE } from "@/shared/config/site";
@@ -25,7 +26,10 @@ const getPageData = cache(async (world: string, name: string) => {
   const ocidData = await fetchOcid(world, name);
   if (!ocidData?.ocid) return null;
 
-  const characterData = await fetchCharacterDetail(ocidData.ocid);
+  const characterData = await fetchCharacterDetail(
+    ocidData.ocid,
+    resolveRankingDate(),
+  );
   if (!characterData) return null;
 
   return { ocid: ocidData.ocid, characterData };

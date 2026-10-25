@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { SiteNoticeItem } from "../model/types";
+import type { SiteNoticeItem } from "../model/notice";
 import { Badge } from "@/shared/ui/badge";
 
 interface SiteNoticeListProps {

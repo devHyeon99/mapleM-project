@@ -1,4 +1,5 @@
-import { NoticeCard, type NoticeData } from "@/entities/notice";
+import type { NoticeData } from "../model/notice";
+import { NoticeCard } from "./NoticeCard";
 import { Card, CardContent, CardHeader, CardTitle } from "@/shared/ui/card";
 
 interface NoticeGridProps {

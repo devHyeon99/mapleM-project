@@ -1,7 +1,7 @@
 import "server-only";
 import { nexonFetch } from "@/shared/api/nexon/server";
 import { handleCommonNexonError } from "@/shared/api/nexon";
-import { NoticeItem, NoticeData } from "../model/types";
+import { NoticeItem, NoticeData } from "../model/notice";
 
 const NOTICE_REVALIDATE_SECONDS = 3600;
 

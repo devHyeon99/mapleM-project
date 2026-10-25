@@ -1,7 +1,7 @@
 import "server-only";
 import { unstable_cache } from "next/cache";
 import { createPublicSupabaseClient } from "@/shared/api/supabase/public-client";
-import type { SiteNoticeItem } from "../model/types";
+import type { SiteNoticeItem } from "../model/notice";
 
 const SITE_NOTICE_LIMIT = 10;
 const SITE_NOTICE_REVALIDATE_SECONDS = 86400;

@@ -8,7 +8,7 @@
   --color-background: var(--background);
   --color-page: var(--page);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-pretendard), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Pretendard Variable", ui-sans-serif, system-ui, sans-serif;
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);

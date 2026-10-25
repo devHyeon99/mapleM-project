@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
+// 한글 포함 Pretendard 를 unicode-range 조각으로 나눠, 페이지에 쓰인 글자의 조각만 내려받음
+import "pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css";
 import "./globals.css";
 import { Providers } from "@/app/providers/Providers";
 import {
@@ -11,14 +12,6 @@ import {
   SITE_NAME,
 } from "@/shared/config/site";
 import { Header, Footer } from "@/widgets/layout";
-
-const pretendard = localFont({
-  src: "../shared/assets/fonts/PretendardStdVariable.woff2",
-  variable: "--font-pretendard",
-  display: "swap",
-  weight: "100 900",
-  adjustFontFallback: false,
-});
 
 const SHARE_TITLE = `${SITE_NAME} - 메이플스토리M 캐릭터 검색 & 종합 정보`;
 const SHARE_DESCRIPTION =
@@ -90,7 +83,7 @@ export default function RootLayout({
   const isProd = process.env.NODE_ENV === "production";
 
   return (
-    <html lang="ko" className={pretendard.variable} suppressHydrationWarning>
+    <html lang="ko" suppressHydrationWarning>
       <body className="relative flex min-h-screen flex-col font-sans">
         <Providers>
           <Header />

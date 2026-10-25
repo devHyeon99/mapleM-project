@@ -5,16 +5,16 @@ import { SearchForm } from "@/shared/ui/search-form";
 import { ALL_WORLD_NAME } from "@/shared/config/constants/worlds";
 import { characterHref } from "@/shared/lib/url";
 import { STORAGE_KEYS } from "@/shared/config/constants/storage";
-
-const VALIDATION_REGEX = /^[a-zA-Z0-9가-힣]{2,8}$/;
-const VALIDATION_ERROR_MESSAGE =
-  "캐릭터명은 2~8자의 한글, 영어, 숫자만 가능합니다.";
+import {
+  CHARACTER_NAME_ERROR,
+  CHARACTER_NAME_REGEX,
+} from "@/shared/config/constants/character";
 
 export const CharacterSearch = () => {
   const router = useRouter();
 
   const handleValidate = (_world: string, name: string) => {
-    return VALIDATION_REGEX.test(name);
+    return CHARACTER_NAME_REGEX.test(name);
   };
 
   const handleSearch = (world: string, name: string) => {
@@ -32,7 +32,7 @@ export const CharacterSearch = () => {
       lastWorldKey={STORAGE_KEYS.CHARACTER_LAST_WORLD}
       placeholder="캐릭터 이름을 입력하세요"
       onValidate={handleValidate}
-      errorMessage={VALIDATION_ERROR_MESSAGE}
+      errorMessage={CHARACTER_NAME_ERROR}
       onSubmit={handleSearch}
       includeAllWorld={true}
     />

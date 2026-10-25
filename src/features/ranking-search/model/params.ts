@@ -6,16 +6,13 @@ import {
   type RankingType,
 } from "@/entities/ranking";
 import { isRealWorldName } from "@/shared/config/constants/worlds";
+import { CHARACTER_NAME_REGEX } from "@/shared/config/constants/character";
 
 // 랭킹 필터(경로 세그먼트)와 섞이지 않도록 검색 조건은 쿼리 파라미터로 둔다.
 export const FIND_WORLD_PARAM = "find_world";
 export const FIND_NAME_PARAM = "find_name";
 /** 랭킹 종류는 페이지 URL 이 경로로 이미 갖고 있어, 조회 API 로 갈 때만 씀 */
 export const FIND_TYPE_PARAM = "type";
-
-export const RANKING_SEARCH_NAME_REGEX = /^[a-zA-Z0-9가-힣]{2,8}$/;
-export const RANKING_SEARCH_NAME_ERROR =
-  "캐릭터명은 2~8자의 한글, 영어, 숫자만 가능합니다.";
 
 export interface RankingSearchQuery {
   world: string;
@@ -38,7 +35,7 @@ export function readRankingSearchQuery(
   if (!world || !name) return null;
   // ocid 조회는 월드가 특정돼야 하므로 "전체" 는 검색 대상이 아니다.
   if (!isRealWorldName(world)) return null;
-  if (!RANKING_SEARCH_NAME_REGEX.test(name)) return null;
+  if (!CHARACTER_NAME_REGEX.test(name)) return null;
 
   return { world, name };
 }

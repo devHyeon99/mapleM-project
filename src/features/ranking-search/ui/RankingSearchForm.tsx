@@ -4,10 +4,10 @@ import { usePathname, useRouter } from "next/navigation";
 import { SearchForm } from "@/shared/ui/search-form";
 import { STORAGE_KEYS } from "@/shared/config/constants/storage";
 import {
-  rankingSearchParams,
-  RANKING_SEARCH_NAME_ERROR,
-  RANKING_SEARCH_NAME_REGEX,
-} from "../model/params";
+  CHARACTER_NAME_ERROR,
+  CHARACTER_NAME_REGEX,
+} from "@/shared/config/constants/character";
+import { rankingSearchParams } from "../model/params";
 
 export function RankingSearchForm() {
   const router = useRouter();
@@ -28,8 +28,8 @@ export function RankingSearchForm() {
       // 랭킹 카드 안의 보조 컨트롤이라 같은 카드의 h-10 월드 필터와 높이를 맞춘다.
       size="sm"
       placeholder="캐릭터 이름"
-      onValidate={(_world, name) => RANKING_SEARCH_NAME_REGEX.test(name)}
-      errorMessage={RANKING_SEARCH_NAME_ERROR}
+      onValidate={(_world, name) => CHARACTER_NAME_REGEX.test(name)}
+      errorMessage={CHARACTER_NAME_ERROR}
       onSubmit={handleSearch}
     />
   );

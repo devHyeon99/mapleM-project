@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { CharacterSearch } from "@/features/character-search";
 import { getCharacterSearchAll } from "@/features/character-search/server";
 import {
   CharactersSearchResult,
@@ -49,11 +48,7 @@ export default async function CharactersPage({
   const decodedName = safeDecode(name);
 
   return (
-    <div className="wide:px-0 flex w-full flex-col items-center px-4 py-6">
-      <search className="w-full max-w-3xl" aria-label="캐릭터 재검색">
-        <CharacterSearch />
-      </search>
-
+    <>
       <h1 className="sr-only">
         전체 월드 내 &quot;{decodedName}&quot; 검색 결과
       </h1>
@@ -63,7 +58,7 @@ export default async function CharactersPage({
       >
         <CharactersResultSection name={decodedName} />
       </Suspense>
-    </div>
+    </>
   );
 }
 

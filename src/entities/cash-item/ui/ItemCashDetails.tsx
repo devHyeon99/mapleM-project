@@ -1,4 +1,4 @@
-import { CashItemEquipment } from "@/entities/cash-item";
+import type { CashItemEquipment } from "../model";
 import { ItemCashColoringPrism } from "./ItemCashColoringPrism";
 import { ItemCashDescription } from "./ItemCashDescription";
 import { ItemCashHeader } from "./ItemCashHeader";

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { cn } from "@/shared/lib/utils";
-import { CashItemEquipment } from "@/entities/cash-item";
+import type { CashItemEquipment } from "../model";
 import { ItemIconFrame } from "@/shared/ui/ItemIconFrame";
 
 interface ItemCashIconBaseProps {

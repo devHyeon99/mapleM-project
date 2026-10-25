@@ -57,6 +57,24 @@ export default defineConfig([
     },
   },
 
+  {
+    files: ["src/entities/cash-item/**/*.{ts,tsx}"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            {
+              group: ["@/entities/cash-item", "@/entities/cash-item/**"],
+              message:
+                "Use relative imports inside the cash-item entity to avoid barrel re-entry.",
+            },
+          ],
+        },
+      ],
+    },
+  },
+
   globalIgnores([
     ".next/**",
     "out/**",

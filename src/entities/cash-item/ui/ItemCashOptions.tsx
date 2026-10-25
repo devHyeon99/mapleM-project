@@ -1,4 +1,4 @@
-import { CashItemEquipment } from "@/entities/cash-item";
+import type { CashItemEquipment } from "../model";
 import { formatDateKST, parseValidDate } from "@/shared/lib/date";
 import { ItemOptionRow } from "@/shared/ui/ItemOptionRow";
 

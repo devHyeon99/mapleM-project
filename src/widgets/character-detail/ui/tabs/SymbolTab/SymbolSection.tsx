@@ -1,7 +1,10 @@
 import { useMemo } from "react";
-import type { SymbolItem as CharacterSymbolItem } from "@/entities/character";
+import {
+  sumSymbolForce,
+  sumSymbolStats,
+  type SymbolItem as CharacterSymbolItem,
+} from "@/entities/character";
 import { SymbolItem } from "./SymbolItem";
-import { sumSymbolForce, sumSymbolStats } from "@/shared/lib/symbol-force";
 import { TabCard } from "@/shared/ui/TabCard";
 
 interface SymbolSectionProps {

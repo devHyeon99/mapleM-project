@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { sumSymbolStats } from "./symbol-force";
+import { sumSymbolStats } from "./symbolForce";
 
 const symbol = (symbol_option: string) => ({ symbol_option });
 

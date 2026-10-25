@@ -73,17 +73,20 @@
 **Feature-Sliced Design (FSD)** 방법론을 기반으로 레이어를 분리해 관심사를 명확히 나누고 확장성과 유지보수성을 확보했습니다.
 
 ```
+app/            # Next.js App Router (라우팅 전용. 페이지는 src/_pages 를 re-export)
+└── api/            # 서버 API Route (character, ranking, cron)
 src/
-├── app/        # Next.js App Router (라우팅, 레이아웃, API Route, Provider)
-│   └── api/        # 서버 API Route (character, guild, ranking, cron)
-├── widgets/    # 독립적인 UI 블록 (character-detail, guild-detail,
-│               #   ranking-board, cube-simulator, starforce-simulator 등)
-├── features/   # 사용자 상호작용 단위 (character-search, guild-search,
-│               #   item-popover, share-spec-card)
+├── _app/       # FSD app 레이어 (Provider, 전역 스타일, Header/Footer)
+├── _pages/     # 페이지 단위 화면·데이터 조회 (home, character-detail,
+│               #   characters-search, guild, guild-detail, ranking, tools/*)
+├── features/   # 여러 페이지가 쓰는 사용자 상호작용 (character-search,
+│               #   guild-search, ranking-search, tools-navigation)
 ├── entities/   # 비즈니스 도메인 모델 (character, guild, item, ranking,
-│               #   skill, set-effect, cash-item, notice 등)
+│               #   skill, set-effect, cash-item)
 └── shared/     # 공용 모듈 (api[nexon/supabase], lib, ui, model, config)
 ```
+
+FSD 레이어 이름은 Next.js 의 `app`·`pages` 폴더 규칙과 겹치지 않게 `_app`·`_pages` 로 둡니다.
 
 ### 주요 설계 포인트
 

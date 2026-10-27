@@ -189,6 +189,8 @@ export const StickyFooterDialog = ({
           className={cn(
             "min-h-0 flex-1 overflow-y-auto px-4 py-4",
             header && "pt-3",
+            // 버튼 영역 위 패딩과 겹쳐 버튼 위만 넓어지는 것 방지
+            canSave && "pb-0",
             showScrollAffordance &&
               "focus-visible:ring-ring [scrollbar-width:none] focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-inset [&::-webkit-scrollbar]:hidden",
             bodyClassName,

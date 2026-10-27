@@ -1,7 +1,7 @@
 "use client";
 
 import { ReactNode, useCallback, useEffect, useRef, useState } from "react";
-import { ChevronDownIcon } from "lucide-react";
+import { ChevronDownIcon, Download, Loader2 } from "lucide-react";
 import {
   Dialog,
   DialogClose,
@@ -14,6 +14,11 @@ import {
 } from "@/shared/ui/dialog";
 import { Button } from "@/shared/ui/button";
 import { cn } from "@/shared/lib/utils";
+import {
+  captureToPng,
+  inlineRemoteImages,
+  saveImageDataUrl,
+} from "@/shared/lib/capture-image";
 
 interface StickyFooterDialogProps {
   trigger: ReactNode;
@@ -30,7 +35,13 @@ interface StickyFooterDialogProps {
   closeButtonClassName?: string;
   /** 본문에 스크롤이 남아 있을 때 푸터 위에 아래 화살표를 표시 */
   showScrollAffordance?: boolean;
+  /** 지정 시 푸터에 본문을 PNG로 저장하는 버튼 추가. 확장자 제외 파일명 */
+  saveImageFileName?: string;
+  saveButtonClassName?: string;
 }
+
+/** 캡처 이미지 가장자리 여백(px). 스크롤 영역 패딩과 동일 */
+const CAPTURE_PADDING = 16;
 
 const hasRemainingScroll = (element: HTMLDivElement | null) => {
   if (!element) return false;
@@ -50,12 +61,19 @@ export const StickyFooterDialog = ({
   footerClassName,
   closeButtonClassName,
   showScrollAffordance = false,
+  saveImageFileName,
+  saveButtonClassName,
 }: StickyFooterDialogProps) => {
   const scrollAreaRef = useRef<HTMLDivElement>(null);
   const bodyContentRef = useRef<HTMLDivElement>(null); // 내부 콘텐츠 크기 변화 감지용
   const frameRef = useRef<number | null>(null);
   const [open, setOpen] = useState(false);
   const [canScrollDown, setCanScrollDown] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
+  /** 내려받기가 막힌 기기에서 길게 눌러 저장하도록 보여주는 완성 이미지 */
+  const [savedImage, setSavedImage] = useState<string | null>(null);
+  const canSave = !!saveImageFileName;
 
   const syncCanScrollDown = useCallback(() => {
     if (frameRef.current !== null) {
@@ -93,10 +111,50 @@ export const StickyFooterDialog = ({
     setOpen(nextOpen);
     if (!nextOpen) {
       setCanScrollDown(false);
+      setSaveError(null);
+      setSavedImage(null);
       if (frameRef.current !== null) {
         cancelAnimationFrame(frameRef.current);
         frameRef.current = null;
       }
+    }
+  };
+
+  const handleSaveImage = async () => {
+    const node = bodyContentRef.current;
+    if (!node || !saveImageFileName) return;
+
+    setSaveError(null);
+    setIsSaving(true);
+
+    // 넥슨 이미지 서버 CORS 우회용. 캡처 직전 외부 이미지를 data URL로 교체 후 복원
+    const restoreImages = await inlineRemoteImages(node);
+
+    try {
+      // 배경·여백은 바깥 요소에 있어 캡처 대상에 직접 지정. 스크롤로 가려진 부분까지 전체 캡처됨
+      const dialog = node.closest<HTMLElement>("[role=dialog]");
+      const backgroundColor = dialog
+        ? getComputedStyle(dialog).backgroundColor
+        : undefined;
+      const dataUrl = await captureToPng(node, {
+        pixelRatio: 3,
+        backgroundColor,
+        width: node.offsetWidth + CAPTURE_PADDING * 2,
+        height: node.offsetHeight + CAPTURE_PADDING * 2,
+        style: { padding: `${CAPTURE_PADDING}px`, boxSizing: "content-box" },
+      });
+
+      const result = await saveImageDataUrl(
+        dataUrl,
+        `${saveImageFileName}.png`,
+      );
+      if (result === "long-press") setSavedImage(dataUrl);
+    } catch (cause) {
+      console.error("이미지 저장 실패:", cause);
+      setSaveError("이미지를 만들지 못했어요. 잠시 후 다시 시도해 주세요.");
+    } finally {
+      restoreImages();
+      setIsSaving(false);
     }
   };
 
@@ -136,7 +194,15 @@ export const StickyFooterDialog = ({
             bodyClassName,
           )}
         >
-          {showScrollAffordance ? (
+          {savedImage ? (
+            <>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={savedImage} alt="저장할 이미지" className="w-full" />
+              <p className="mt-2 text-center text-xs opacity-70">
+                이미지를 길게 눌러 <b>이미지 저장</b>을 하세요.
+              </p>
+            </>
+          ) : showScrollAffordance || canSave ? (
             <div ref={bodyContentRef}>{children}</div>
           ) : (
             children
@@ -147,6 +213,8 @@ export const StickyFooterDialog = ({
           className={cn(
             "bg-secondary relative m-0 flex-row items-stretch justify-center p-0 sm:justify-center",
             footerClassName,
+            // 버튼 두 개일 땐 일반 확인/취소 다이얼로그처럼 여백을 두고 나란히 배치
+            canSave && "flex-wrap gap-2 p-3",
           )}
         >
           {canScrollDown && (
@@ -157,12 +225,35 @@ export const StickyFooterDialog = ({
               <ChevronDownIcon className="size-5 text-orange-500 motion-safe:animate-bounce" />
             </div>
           )}
+          {saveError && (
+            <p className="w-full text-center text-xs text-red-400" role="alert">
+              {saveError}
+            </p>
+          )}
+          {canSave && (
+            <Button
+              onClick={handleSaveImage}
+              disabled={isSaving || !!savedImage}
+              className={cn(
+                "h-9 flex-1 touch-manipulation rounded-md",
+                saveButtonClassName,
+              )}
+            >
+              {isSaving ? (
+                <Loader2 className="animate-spin" />
+              ) : (
+                <Download />
+              )}
+              이미지 저장
+            </Button>
+          )}
           <DialogClose asChild>
             <Button
               variant="ghost"
               className={cn(
                 "h-10 w-full touch-manipulation rounded-none hover:bg-black/10 active:bg-black/20 dark:hover:bg-white/10 dark:active:bg-white/20",
                 closeButtonClassName,
+                canSave && "h-9 w-auto flex-1 rounded-md",
               )}
             >
               닫기

@@ -23,6 +23,7 @@ export const ItemCashDialog = ({ item, className }: ItemCashDialogProps) => {
       title={`${displayName} 상세 정보`}
       description={`${displayName} 아이템 상세 정보입니다.`}
       showScrollAffordance
+      saveImageFileName={displayName}
       {...ITEM_DIALOG_SKIN}
     >
       <ItemCashDetails item={item} />

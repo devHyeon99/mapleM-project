@@ -33,6 +33,7 @@ export const PetDialog = ({ pet, className }: PetDialogProps) => {
       }
       title={`${pet.name} 상세 정보`}
       description={`${pet.name} 펫 상세 정보입니다.`}
+      saveImageFileName={pet.name}
       {...ITEM_DIALOG_SKIN}
     >
       <div className="border-game-line flex items-center gap-2 border-b pb-2">

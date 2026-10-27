@@ -18,6 +18,7 @@ export const ItemDialog = ({ item, className }: ItemDialogProps) => {
       title={`${item.item_name} 상세 정보`}
       description={`${item.item_name} 아이템 상세 정보입니다.`}
       showScrollAffordance
+      saveImageFileName={item.item_name}
       {...ITEM_DIALOG_SKIN}
     >
       <ItemDetails item={item} />

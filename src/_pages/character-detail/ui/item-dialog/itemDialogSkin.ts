@@ -14,7 +14,10 @@ export const ITEM_DIALOG_SKIN = {
   ].join(" "),
   bodyClassName:
     "overscroll-contain [-ms-overflow-style:none] [-webkit-overflow-scrolling:touch] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
-  footerClassName: "bg-game-surface-strong border-game-line shrink-0",
+  footerClassName: "border-game-line shrink-0 bg-transparent",
+  // 이미지 저장·닫기 두 버튼을 나란히 두는 푸터 기준
   closeButtonClassName:
-    "text-game-text hover:text-game-text h-8 border-none bg-transparent shadow-none transition-none hover:bg-white/10! active:bg-white/15!",
+    "text-game-text hover:text-game-text border-none bg-white/10 shadow-none transition-none hover:bg-white/15! active:bg-white/20!",
+  saveButtonClassName:
+    "border-none bg-orange-500 text-white shadow-none hover:bg-orange-500/85 active:bg-orange-600",
 } as const;

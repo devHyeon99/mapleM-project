@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   normalizeOptionName,
   parseNumericOptionValue,
+  splitOptionText,
 } from "./parseOptionValues";
 
 describe("parseNumericOptionValue", () => {
@@ -27,5 +28,23 @@ describe("normalizeOptionName", () => {
     expect(normalizeOptionName("마댐")).toBe("마법 대미지");
     expect(normalizeOptionName(" 보공 ")).toBe("보스 공격력");
     expect(normalizeOptionName("최종  대미지")).toBe("최종 대미지");
+  });
+});
+
+describe("splitOptionText", () => {
+  it("천 단위 쉼표는 유지하고 옵션 구분 쉼표로만 나눈다", () => {
+    expect(splitOptionText("최대 대미지 119,000,000, 치명타 피해 15%")).toEqual(
+      [
+        { name: "최대 대미지", value: "119,000,000" },
+        { name: "치명타 피해", value: "15%" },
+      ],
+    );
+  });
+
+  it("끝이 수치가 아니면 문장 전체를 옵션명으로 둔다", () => {
+    expect(splitOptionText("스킬 사용 가능")).toEqual([
+      { name: "스킬 사용 가능", value: "" },
+    ]);
+    expect(splitOptionText(null)).toEqual([]);
   });
 });

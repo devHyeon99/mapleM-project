@@ -44,3 +44,21 @@ export function parseItemOption(
     valueText: optionValue ?? "",
   };
 }
+
+// 문자열 한 줄로 오는 옵션(엠블렘·소울)을 "옵션명 / 값" 목록으로 분리
+// "1,500" 같은 천 단위 쉼표는 나누지 않음. 끝이 수치가 아니면 value는 빈 문자열
+export function splitOptionText(
+  optionText: string | null | undefined,
+): { name: string; value: string }[] {
+  if (!optionText) return [];
+
+  return optionText
+    .split(/,(?!\d{3}(?:\D|$))/)
+    .map((part) => part.trim())
+    .filter(Boolean)
+    .map((opt) => {
+      const match = opt.match(/^(.+?)\s([+-]?[\d,.]+%?)$/);
+      if (!match) return { name: opt, value: "" };
+      return { name: match[1], value: match[2] };
+    });
+}

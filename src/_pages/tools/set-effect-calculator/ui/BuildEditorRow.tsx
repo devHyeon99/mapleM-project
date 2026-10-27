@@ -26,7 +26,7 @@ import {
  * 두 줄로 접힐 때는 옅은 바탕으로 묶어 줘야 어느 줄이 한 장비인지 구분됨
  */
 const EDITOR_GRID =
-  "grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)_auto] items-center gap-x-2 gap-y-1.5 rounded-2xl border p-2 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,0.85fr)_minmax(0,0.95fr)_auto] lg:bg-transparent lg:p-0 lg:border-none";
+  "grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)_auto] items-center gap-x-2 gap-y-1.5 rounded-card border p-2 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,0.85fr)_minmax(0,0.95fr)_auto] lg:bg-transparent lg:p-0 lg:border-none";
 
 interface BuildEditorRowProps {
   row: BuildRow;

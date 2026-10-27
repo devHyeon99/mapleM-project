@@ -29,7 +29,7 @@ export function SiteNoticeList({ items, error = null }: SiteNoticeListProps) {
 
   if (error || items.length === 0) {
     return (
-      <div className="bg-card text-card-foreground w-full rounded-xs px-6 py-4">
+      <div className="bg-card text-card-foreground w-full rounded-none px-6 py-4">
         <p className="text-muted-foreground text-body font-medium">
           {error ?? "등록된 공지사항이 없습니다."}
         </p>
@@ -41,7 +41,7 @@ export function SiteNoticeList({ items, error = null }: SiteNoticeListProps) {
 
   return (
     <div
-      className="bg-card text-card-foreground w-full overflow-hidden rounded-xs px-5 py-4"
+      className="bg-card text-card-foreground w-full overflow-hidden rounded-none px-5 py-4"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onFocus={() => setIsPaused(true)}

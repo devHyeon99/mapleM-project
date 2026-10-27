@@ -106,7 +106,7 @@ export const ItemListRow = ({
             {item.item_name}
           </span>
           {starforce && (
-            <div className="text-caption flex items-center gap-0.5 rounded bg-yellow-500/20 px-1.5 py-0.5 font-semibold text-yellow-600 dark:text-yellow-400">
+            <div className="text-caption flex items-center gap-0.5 rounded-full bg-yellow-500/20 px-1.5 py-0.5 font-semibold text-yellow-600 dark:text-yellow-400">
               <Star className="size-3 fill-current" />
               <span>{starforce}</span>
             </div>

@@ -46,13 +46,13 @@ export const ItemTab = ({ data }: ItemTabProps) => {
       className={cn(
         "flex flex-col gap-2",
         isGrid &&
-          "wide:grid wide:grid-cols-[auto_1fr] wide:gap-0 wide:bg-card wide:rounded-2xl wide:shadow-sm",
+          "wide:grid wide:grid-cols-[auto_1fr] wide:gap-0 wide:bg-card wide:rounded-card wide:shadow-sm",
       )}
     >
       {/* wide 2열에서는 contents로 풀려 헤더·본문이 바깥 grid 칸에 직접 배치됨 */}
       <div
         className={cn(
-          "relative flex flex-col rounded-2xl shadow-sm",
+          "rounded-card relative flex flex-col shadow-sm",
           isGrid && "wide:contents",
         )}
       >
@@ -60,7 +60,7 @@ export const ItemTab = ({ data }: ItemTabProps) => {
           <ItemTabHeader {...headerProps} />
         </div>
 
-        <div className="bg-card wide:p-6 rounded-b-2xl">
+        <div className="bg-card wide:p-6 rounded-b-card">
           {isGrid ? (
             <ItemGrid
               items={sortedItems}

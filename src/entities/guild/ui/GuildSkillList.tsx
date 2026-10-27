@@ -15,7 +15,7 @@ export function GuildSkillList({ skills }: GuildSkillListProps) {
   }
 
   return (
-    <div className="bg-card border-border divide-border ring-foreground/5 dark:ring-foreground/10 flex flex-col divide-y overflow-hidden rounded-[min(var(--radius-4xl),24px)] shadow-sm ring-1">
+    <div className="bg-card border-border divide-border ring-foreground/5 dark:ring-foreground/10 rounded-card flex flex-col divide-y overflow-hidden shadow-sm ring-1">
       {visibleSkills.map((skill) => (
         <GuildSkillCard key={skill.skill_name} skill={skill} />
       ))}

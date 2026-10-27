@@ -10,7 +10,7 @@ interface NoticeGridProps {
 export function NoticeGrid({ data, error }: NoticeGridProps) {
   if (error || !data) {
     return (
-      <Card className="w-full gap-2 rounded-xs border-none">
+      <Card className="w-full gap-2 rounded-none border-none">
         <CardHeader>
           <CardTitle className="text-heading">공지사항</CardTitle>
         </CardHeader>

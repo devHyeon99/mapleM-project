@@ -113,7 +113,7 @@ export function CharacterDetailTabNav() {
   }, []);
 
   return (
-    <div className="group bg-card relative w-full overflow-hidden rounded-2xl shadow-sm">
+    <div className="group bg-card rounded-card relative w-full overflow-hidden shadow-sm">
       <ScrollFade direction="left" visible={canScrollLeft} />
       <ScrollFade direction="right" visible={canScrollRight} />
 

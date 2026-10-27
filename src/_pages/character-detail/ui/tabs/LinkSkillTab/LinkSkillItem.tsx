@@ -32,7 +32,7 @@ export const LinkSkillItem = ({ skill }: LinkSkillItemProps) => {
       trigger={
         <button
           type="button"
-          className="flex w-full cursor-pointer items-start gap-2 rounded-md p-1 text-left"
+          className="rounded-item flex w-full cursor-pointer items-start gap-2 p-1 text-left"
         >
           <SkillIcon src={skill.skill_icon} />
           <div className="flex min-w-0 flex-col">

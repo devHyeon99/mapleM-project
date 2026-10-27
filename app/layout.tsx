@@ -98,7 +98,7 @@ export default function RootLayout({
               aria-hidden="true"
               data-nosnippet
             >
-              <div className="bg-muted/30 text-muted-foreground sticky top-24 flex h-[600px] w-full items-center justify-center rounded-lg border">
+              <div className="bg-muted/30 text-muted-foreground rounded-box sticky top-24 flex h-[600px] w-full items-center justify-center border">
                 <span className="text-body">Left Wing Ad</span>
               </div>
             </aside>
@@ -112,7 +112,7 @@ export default function RootLayout({
               aria-hidden="true"
               data-nosnippet
             >
-              <div className="bg-muted/30 text-muted-foreground sticky top-24 flex h-[600px] w-full items-center justify-center rounded-lg border">
+              <div className="bg-muted/30 text-muted-foreground rounded-box sticky top-24 flex h-[600px] w-full items-center justify-center border">
                 <span className="text-body">Right Wing Ad</span>
               </div>
             </aside>

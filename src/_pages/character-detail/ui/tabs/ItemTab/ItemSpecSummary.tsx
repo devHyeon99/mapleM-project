@@ -28,7 +28,7 @@ export const ItemSpecSummary = ({
   return (
     <dl className="grid grid-cols-2 gap-1.5">
       {stats.map(({ label, value }) => (
-        <div key={label} className="bg-muted/60 rounded-lg px-3 py-2">
+        <div key={label} className="bg-muted/60 rounded-box px-3 py-2">
           <dt className="text-muted-foreground text-caption truncate">
             {label}
           </dt>

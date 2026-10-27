@@ -35,7 +35,7 @@ export const IconWithText = ({
       <RankingIcon
         src={iconSrc}
         alt="icon"
-        className="bg-secondary h-5 w-5 rounded-xs dark:bg-white"
+        className="bg-secondary rounded-icon h-5 w-5 dark:bg-white"
         size={20}
       />
     )}

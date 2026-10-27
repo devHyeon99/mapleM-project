@@ -98,7 +98,7 @@ function RankingPaginationSkeleton() {
   return (
     <div className="flex items-center justify-center gap-1">
       {Array.from({ length: 9 }).map((_, index) => (
-        <Skeleton key={index} className="h-9 w-9 rounded-md" />
+        <Skeleton key={index} className="rounded-control h-9 w-9" />
       ))}
     </div>
   );

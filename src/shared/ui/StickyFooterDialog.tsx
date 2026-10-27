@@ -238,7 +238,7 @@ export const StickyFooterDialog = ({
               onClick={handleSaveImage}
               disabled={isSaving || !!savedImage}
               className={cn(
-                "h-9 flex-1 touch-manipulation rounded-md",
+                "h-9 flex-1 touch-manipulation",
                 saveButtonClassName,
               )}
             >
@@ -252,7 +252,7 @@ export const StickyFooterDialog = ({
               className={cn(
                 "h-10 w-full touch-manipulation rounded-none hover:bg-black/10 active:bg-black/20 dark:hover:bg-white/10 dark:active:bg-white/20",
                 closeButtonClassName,
-                canSave && "h-9 w-auto flex-1 rounded-md",
+                canSave && "rounded-control h-9 w-auto flex-1",
               )}
             >
               닫기

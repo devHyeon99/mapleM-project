@@ -82,7 +82,7 @@ export async function SharenianGuildBoard() {
               <CardAction className="self-center">
                 <Link
                   href={rankingHref(type)}
-                  className="text-muted-foreground hover:text-foreground focus-visible:ring-ring text-caption flex items-center gap-0.5 rounded-sm transition-colors focus-visible:ring-2 focus-visible:outline-none"
+                  className="text-muted-foreground hover:text-foreground focus-visible:ring-ring text-caption rounded-item flex items-center gap-0.5 transition-colors focus-visible:ring-2 focus-visible:outline-none"
                 >
                   더보기
                   <ChevronRight aria-hidden="true" className="size-3" />

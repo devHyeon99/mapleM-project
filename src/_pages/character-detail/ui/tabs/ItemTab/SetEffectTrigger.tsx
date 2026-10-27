@@ -18,7 +18,7 @@ export const SetEffectTrigger = ({
   return (
     <button
       type="button"
-      className="hover:bg-muted/60 focus-visible:ring-ring text-body flex w-full cursor-pointer items-center gap-2 rounded-lg border px-3 py-2.5 text-left transition-colors focus-visible:ring-2 focus-visible:outline-none"
+      className="hover:bg-muted/60 focus-visible:ring-ring text-body rounded-box flex w-full cursor-pointer items-center gap-2 border px-3 py-2.5 text-left transition-colors focus-visible:ring-2 focus-visible:outline-none"
       {...props}
     >
       <span className="min-w-0 flex-1 truncate font-semibold">{name}</span>

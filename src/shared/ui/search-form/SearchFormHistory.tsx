@@ -33,7 +33,7 @@ export const SearchFormHistory = ({
     <div
       ref={containerRef}
       className={cn(
-        "flex max-h-90 flex-col overflow-hidden rounded-xl shadow-md outline-none",
+        "rounded-popover flex max-h-90 flex-col overflow-hidden shadow-md outline-none",
         "text-popover-foreground bg-popover border",
         "focus:ring-ring",
         className,

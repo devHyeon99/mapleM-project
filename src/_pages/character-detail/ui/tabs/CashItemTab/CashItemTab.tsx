@@ -38,10 +38,10 @@ export const CashItemTab = ({ ocid }: CashItemTabProps) => {
   }
 
   return (
-    <div className="relative flex flex-col rounded-2xl shadow-sm">
+    <div className="rounded-card relative flex flex-col shadow-sm">
       <CashItemTabHeader {...headerProps} />
 
-      <div className="bg-card rounded-b-2xl">
+      <div className="bg-card rounded-b-card">
         {viewMode === "grid" ? (
           <div className="flex w-full flex-col items-center py-4">
             <CashItemGrid

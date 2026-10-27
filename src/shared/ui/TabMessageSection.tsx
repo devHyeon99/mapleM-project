@@ -25,7 +25,7 @@ export const TabMessageSection = ({
     <section
       role={isError ? "alert" : undefined}
       className={cn(
-        "bg-card flex h-full min-h-91.5 flex-col items-center justify-center gap-2 rounded-2xl p-6 text-center shadow-sm",
+        "bg-card rounded-card flex h-full min-h-91.5 flex-col items-center justify-center gap-2 p-6 text-center shadow-sm",
         className,
       )}
     >

@@ -27,7 +27,7 @@ export const TabCard = ({
     <section
       aria-label={title}
       className={cn(
-        "bg-card flex w-full flex-col rounded-2xl p-4 shadow-sm",
+        "bg-card rounded-card flex w-full flex-col p-4 shadow-sm",
         className,
       )}
     >

@@ -9,7 +9,7 @@ interface GuildAbilityCardProps {
 
 export function GuildAbilityCard({ ability }: GuildAbilityCardProps) {
   return (
-    <Card className="rounded-xs shadow-none ring-0">
+    <Card className="rounded-none shadow-none ring-0">
       <CardContent className="flex items-center gap-3 px-3 md:px-4">
         <Image
           src={ability.ability_icon}

@@ -6,8 +6,8 @@ import { cn } from "@/shared/lib/utils";
  * 마크가 투명 배경이라 어느 쪽이든 밝은 판을 깔아야 다크 모드에서 보임
  */
 const SIZES = {
-  lg: { plate: "size-16 rounded-sm border shadow-sm md:ml-6", px: 38 },
-  sm: { plate: "size-7 rounded-sm ring-1 ring-border/70", px: 20 },
+  lg: { plate: "size-16 rounded-icon border shadow-sm md:ml-6", px: 38 },
+  sm: { plate: "size-7 rounded-icon ring-1 ring-border/70", px: 20 },
 } as const;
 
 interface GuildMarkProps {

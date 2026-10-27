@@ -12,7 +12,7 @@ export function ToolsTabs() {
 
   return (
     <nav aria-label="도구 이동" className="mb-2 w-full">
-      <ul className="bg-muted grid list-none grid-cols-2 gap-1 rounded-3xl p-1 shadow-sm md:grid-cols-5">
+      <ul className="bg-muted rounded-card grid list-none grid-cols-2 gap-1 p-1 shadow-sm md:grid-cols-5">
         {TOOL_LINKS.map((link) => {
           const isActive = pathname === link.href;
 
@@ -22,7 +22,7 @@ export function ToolsTabs() {
                 href={link.href}
                 aria-current={isActive ? "page" : undefined}
                 className={cn(
-                  "text-muted-foreground hover:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 text-body inline-flex h-9 w-full items-center justify-center rounded-2xl border border-transparent px-2 py-1 font-medium whitespace-nowrap transition-colors outline-none focus-visible:ring-[3px]",
+                  "text-muted-foreground hover:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 text-body rounded-control inline-flex h-9 w-full items-center justify-center border border-transparent px-2 py-1 font-medium whitespace-nowrap transition-colors outline-none focus-visible:ring-[3px]",
                   isActive && "bg-card/80 text-foreground shadow-sm",
                 )}
               >

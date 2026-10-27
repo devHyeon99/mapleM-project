@@ -21,7 +21,7 @@ export function GuildAbilityList({ abilities }: GuildAbilityListProps) {
   const groups = groupGuildAbilities(abilities);
 
   return (
-    <div className="bg-card border-border ring-foreground/5 dark:ring-foreground/10 flex flex-col overflow-hidden rounded-[min(var(--radius-4xl),24px)] shadow-sm ring-1">
+    <div className="bg-card border-border ring-foreground/5 dark:ring-foreground/10 rounded-card flex flex-col overflow-hidden shadow-sm ring-1">
       {groups.map((groupAbilities, groupIndex) => {
         if (groupAbilities.length === 0) return null;
 

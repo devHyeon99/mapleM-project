@@ -14,7 +14,7 @@ import { useRankedCharacter } from "../model/use-ranked-character";
 import type { RankingSearchResult } from "../model/search-result";
 
 const PANEL_CLASS =
-  "bg-muted flex min-h-10 flex-wrap items-center justify-between gap-x-4 gap-y-2 rounded-2xl px-4 py-2 text-body shadow-sm";
+  "bg-muted flex min-h-10 flex-wrap items-center justify-between gap-x-4 gap-y-2 rounded-card px-4 py-2 text-body shadow-sm";
 
 const LINK_CLASS =
   "inline-flex items-center gap-1 font-medium underline-offset-4 hover:text-orange-500 hover:underline";
@@ -96,7 +96,7 @@ function RankingSearchResultPanel({
 }) {
   const { data, error, isPending } = useRankedCharacter(type, query);
 
-  if (isPending) return <Skeleton className="h-10 w-full rounded-2xl" />;
+  if (isPending) return <Skeleton className="rounded-card h-10 w-full" />;
 
   // 라우트 핸들러는 조회 실패도 결과로 돌려주므로, 여기 error 는 전송 실패다.
   const result: RankingSearchResult = error
@@ -156,7 +156,7 @@ export function RankingSearchFallback() {
       className="mb-3 flex flex-col gap-2 border-b pb-3 md:flex-row md:items-start md:gap-3"
     >
       <div className="md:w-[320px] md:shrink-0">
-        <Skeleton className="h-10 w-full rounded-2xl" />
+        <Skeleton className="rounded-card h-10 w-full" />
       </div>
       <div className="min-w-0 flex-1">
         <EmptyHint />

@@ -24,10 +24,10 @@ export function CharactersSearchResultSkeleton({
               <CardContent className="flex items-center justify-between">
                 <div>
                   <div className="flex h-7 items-center">
-                    <Skeleton className="h-5 w-32 rounded" />
+                    <Skeleton className="h-5 w-32" />
                   </div>
                   <div className="flex h-5 items-center">
-                    <Skeleton className="h-4 w-20 rounded" />
+                    <Skeleton className="h-4 w-20" />
                   </div>
                 </div>
                 <Skeleton className="size-5 rounded-full" />

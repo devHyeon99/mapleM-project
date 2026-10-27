@@ -62,7 +62,7 @@ export async function WorldCharacterCount() {
             <Link
               href={rankingHref("level", { worldName })}
               prefetch={false}
-              className="hover:bg-accent flex items-center gap-2 rounded-md py-1.5 transition-colors"
+              className="hover:bg-accent rounded-item flex items-center gap-2 py-1.5 transition-colors"
             >
               <RankingIcon
                 src={worldIconSrc(worldName)}

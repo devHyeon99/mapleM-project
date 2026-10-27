@@ -41,7 +41,7 @@ export const JewelPentagon = ({
       {/* 중앙 세트 옵션 텍스트 */}
       {String(activePageData.jewel_page_no) === String(useJewelPageNo) && (
         <div className="pointer-events-none absolute top-1/2 left-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center">
-          <div className="text-body flex flex-col items-center rounded-lg p-2 text-center font-medium">
+          <div className="text-body rounded-box flex flex-col items-center p-2 text-center font-medium">
             {parseSetOption?.map((item, index) => (
               <p key={`${item}-${index}`} className="text-foreground">
                 {item}

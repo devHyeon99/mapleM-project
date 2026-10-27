@@ -40,7 +40,7 @@ export const SkillIconTooltip = ({
           side="bottom"
           align="center"
           sideOffset={6}
-          className="bg-foreground text-background text-caption w-fit rounded-md border-0 px-3 py-1.5 shadow-none"
+          className="bg-foreground text-background text-caption rounded-item w-fit border-0 px-3 py-1.5 shadow-none"
         >
           {tooltip}
         </PopoverContent>

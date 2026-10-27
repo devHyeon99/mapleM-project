@@ -34,11 +34,11 @@ export const ItemSetEffectDialog = ({
           <header className="border-b pb-3">
             <p className="text-heading">{set.displayName}</p>
             <div className="text-caption mt-1.5 flex flex-wrap gap-1.5 font-medium">
-              <span className="rounded-md bg-orange-500/15 px-2 py-0.5 text-orange-500">
+              <span className="rounded-full bg-orange-500/15 px-2 py-0.5 text-orange-500">
                 {set.count}세트 착용
               </span>
               {set.appliedStarForceThreshold !== null && (
-                <span className="bg-muted text-muted-foreground rounded-md px-2 py-0.5">
+                <span className="bg-muted text-muted-foreground rounded-full px-2 py-0.5">
                   스타포스 {set.totalStarForce}성 ·{" "}
                   {set.appliedStarForceThreshold}성 효과 적용
                 </span>

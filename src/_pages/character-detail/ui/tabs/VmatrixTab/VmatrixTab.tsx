@@ -41,8 +41,8 @@ export const VmatrixTab = ({ ocid, level }: VmatrixTabProps) => {
   }
 
   return (
-    <div className="wide:grid wide:grid-cols-2 flex flex-col gap-2 rounded-2xl">
-      <div className="bg-card text-body col-span-2 flex items-baseline justify-between rounded-2xl p-4 font-medium shadow-sm">
+    <div className="wide:grid wide:grid-cols-2 rounded-card flex flex-col gap-2">
+      <div className="bg-card text-body rounded-card col-span-2 flex items-baseline justify-between p-4 font-medium shadow-sm">
         <span className="font-semibold">V매트릭스 합산 점수</span>
         <span className="text-orange-400">
           {(data?.vmatrix_total_score ?? 0).toLocaleString()}

@@ -9,7 +9,7 @@ function GuildCardSkeleton() {
     <Card className="w-full border-none">
       <CardContent className="px-0">
         <div className="flex flex-col items-center gap-4 md:flex-row md:items-start">
-          <Skeleton className="size-16 shrink-0 rounded-sm md:ml-6" />
+          <Skeleton className="rounded-icon size-16 shrink-0 md:ml-6" />
           <div className="w-full flex-1 space-y-4">
             <div className="space-y-1">
               <div className="flex flex-col items-center justify-center md:flex-row md:justify-start md:gap-2">

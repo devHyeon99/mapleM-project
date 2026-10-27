@@ -10,7 +10,7 @@ interface SymbolItemProps {
 export const SymbolItem = ({ name, icon, level, option }: SymbolItemProps) => {
   return (
     <li className="flex items-start gap-3 py-1">
-      <div className="bg-secondary flex h-10 w-10 shrink-0 rounded border-2 p-0.5">
+      <div className="bg-secondary rounded-icon flex h-10 w-10 shrink-0 border-2 p-0.5">
         <Image
           src={icon}
           alt={name}

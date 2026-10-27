@@ -21,7 +21,7 @@ export const ItemTabSection = ({
     <section
       aria-label={title}
       className={cn(
-        "bg-card flex w-full flex-col gap-2.5 rounded-2xl p-4 shadow-sm",
+        "bg-card rounded-card flex w-full flex-col gap-2.5 p-4 shadow-sm",
         flat && "wide:p-0 wide:shadow-none",
       )}
     >

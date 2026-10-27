@@ -57,7 +57,7 @@ function ProfileCardSkeleton() {
 
 function TabNavSkeleton() {
   return (
-    <div className="bg-card w-full overflow-hidden rounded-2xl shadow-sm">
+    <div className="bg-card rounded-card w-full overflow-hidden shadow-sm">
       <div className="flex h-12 items-center whitespace-nowrap">
         {ALL_TABS.map((tab) => (
           <div key={tab.value} className="flex h-12 shrink-0 items-center px-5">
@@ -73,7 +73,7 @@ function TabPanelSkeleton({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "bg-card flex w-full items-center justify-center rounded-2xl p-4 shadow-sm",
+        "bg-card rounded-card flex w-full items-center justify-center p-4 shadow-sm",
         className,
       )}
     >

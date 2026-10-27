@@ -78,7 +78,7 @@ export function SearchFormField({
   const historyLabelId = `${inputId}-history-label`;
 
   return (
-    <div className="flex w-full items-center rounded-2xl shadow-sm">
+    <div className="rounded-control flex w-full items-center shadow-sm">
       <SearchFormWorldSelect
         value={world}
         onValueChange={onWorldChange}

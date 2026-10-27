@@ -12,7 +12,7 @@ export function GuildBuildingList({ buildings }: GuildBuildingListProps) {
   }
 
   return (
-    <div className="bg-card border-border divide-border ring-foreground/5 dark:ring-foreground/10 flex flex-col divide-y overflow-hidden rounded-[min(var(--radius-4xl),24px)] shadow-sm ring-1">
+    <div className="bg-card border-border divide-border ring-foreground/5 dark:ring-foreground/10 rounded-card flex flex-col divide-y overflow-hidden shadow-sm ring-1">
       {buildings.map((building) => (
         <GuildBuildingCard key={building.building_name} building={building} />
       ))}

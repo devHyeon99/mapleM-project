@@ -51,7 +51,7 @@ export const SkillPreset = ({ presets }: SkillPresetProps) => {
                     {preset.preset_slot_no}번 스킬 프리셋
                   </span>
                   {preset.preset_command_flag === "활성화" && (
-                    <span className="bg-primary/10 text-primary text-micro rounded px-1.5 py-0.5 font-semibold">
+                    <span className="bg-primary/10 text-primary text-micro rounded-full px-1.5 py-0.5 font-semibold">
                       커맨드 ON
                     </span>
                   )}

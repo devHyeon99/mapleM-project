@@ -36,7 +36,7 @@ export const PetSetOptionDialog = ({
           <header className="border-b pb-3">
             <p className="text-heading">{set.set_name}</p>
             <div className="text-caption mt-1.5 flex flex-wrap gap-1.5 font-medium">
-              <span className="rounded-md bg-orange-500/15 px-2 py-0.5 text-orange-500">
+              <span className="rounded-full bg-orange-500/15 px-2 py-0.5 text-orange-500">
                 {set.set_count}세트 착용
               </span>
             </div>

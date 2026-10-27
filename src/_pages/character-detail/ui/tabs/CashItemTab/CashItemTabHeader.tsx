@@ -38,7 +38,7 @@ export const CashItemTabHeader = memo(function CashItemTabHeader({
   return (
     <section
       aria-label="캐시 탭 헤더 컨트롤"
-      className="bg-card wide:px-6 wide:py-4 flex w-full items-end justify-between gap-x-4 gap-y-3 rounded-t-2xl border-b px-4 py-2"
+      className="bg-card wide:px-6 wide:py-4 rounded-t-card flex w-full items-end justify-between gap-x-4 gap-y-3 border-b px-4 py-2"
     >
       <SegmentedToggle
         label="캐시 프리셋"

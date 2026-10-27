@@ -32,6 +32,17 @@
   --color-divider: var(--divider);
 
   /*
+   * 모서리 역할 토큰. 규칙은 RADIUS.md 참고.
+   * sm~4xl 단계는 shadcn 생성 코드 호환용으로만 유지, 직접 사용 금지.
+   */
+  --radius-icon: 0.25rem;
+  --radius-box: 0.625rem;
+  --radius-item: 0.875rem;
+  --radius-control: 1.125rem;
+  --radius-popover: 1.125rem;
+  --radius-card: 1.25rem;
+
+  /*
    * 아이템 상세 다이얼로그 전용 팔레트.
    * 게임 툴팁 톤을 그대로 쓰기 때문에 라이트/다크 모드와 무관하게 같은 값을 유지한다.
    */

@@ -31,7 +31,7 @@ export const ItemTabHeader = ({
   return (
     <section
       aria-label="장비 탭 헤더 컨트롤"
-      className="bg-card wide:px-6 wide:py-4 flex w-full justify-between rounded-t-2xl border-b px-4 py-2"
+      className="bg-card wide:px-6 wide:py-4 rounded-t-card flex w-full justify-between border-b px-4 py-2"
     >
       <div className="flex gap-6">
         <SegmentedToggle

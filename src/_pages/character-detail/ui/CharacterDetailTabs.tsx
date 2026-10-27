@@ -50,7 +50,7 @@ const CharacterDetailTabsView = ({
           <TabsContent
             key={tab.value}
             value={tab.value}
-            className="rounded-2xl"
+            className="rounded-card"
           >
             <CharacterDetailTabContent
               tabKey={tab.value}

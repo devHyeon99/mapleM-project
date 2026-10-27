@@ -15,6 +15,7 @@ const twMerge = extendTailwindMerge({
         "caption",
         "micro",
       ],
+      radius: ["icon", "box", "item", "control", "popover", "card"],
     },
   },
 });

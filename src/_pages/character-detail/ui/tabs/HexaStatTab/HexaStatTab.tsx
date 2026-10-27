@@ -96,7 +96,7 @@ const HexaStatPageCard = ({ page }: PageCardProps) => {
   return (
     <div
       className={cn(
-        "w-full space-y-3 rounded-2xl border p-4",
+        "rounded-box w-full space-y-3 border p-4",
         isActive ? "dark:bg-secondary shadow-sm" : "opacity-40",
       )}
     >

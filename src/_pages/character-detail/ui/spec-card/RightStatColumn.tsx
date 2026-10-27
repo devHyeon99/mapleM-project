@@ -26,7 +26,7 @@ export const RightStatColumn = ({ data }: RightStatColumnProps) => {
   const hexaSkills = data.hexa_skill_data?.hexamatrix_skill ?? [];
 
   return (
-    <div className="flex h-full flex-col gap-3 text-xs">
+    <div className="text-caption flex h-full flex-col gap-3">
       {/* HEXA STAT 섹션 */}
       <div>
         <SectionTitle>HEXA STAT</SectionTitle>
@@ -35,7 +35,7 @@ export const RightStatColumn = ({ data }: RightStatColumnProps) => {
             as="li"
             labelClassName="shrink"
             label={hexaStat?.main_stat ?? "메인스탯"}
-            className="text-xs"
+            className="text-caption"
           >
             {hexaStat ? `Lv.${hexaStat.main_stat_level}` : "0"}
           </InfoRow>
@@ -43,7 +43,7 @@ export const RightStatColumn = ({ data }: RightStatColumnProps) => {
             as="li"
             labelClassName="shrink"
             label={hexaStat?.sub_1_stat ?? "부스탯1"}
-            className="text-xs"
+            className="text-caption"
           >
             {hexaStat ? `Lv.${hexaStat.sub_1_stat_level}` : "0"}
           </InfoRow>
@@ -51,7 +51,7 @@ export const RightStatColumn = ({ data }: RightStatColumnProps) => {
             as="li"
             labelClassName="shrink"
             label={hexaStat?.sub_2_stat ?? "부스탯2"}
-            className="text-xs"
+            className="text-caption"
           >
             {hexaStat ? `Lv.${hexaStat.sub_2_stat_level}` : "0"}
           </InfoRow>
@@ -77,7 +77,7 @@ export const RightStatColumn = ({ data }: RightStatColumnProps) => {
                   style={{ imageRendering: "pixelated" }}
                 />
               </span>
-              <span className="text-muted-foreground text-[10px] font-semibold">
+              <span className="text-muted-foreground text-micro font-semibold">
                 LV.{skill.slot_level}
               </span>
             </li>
@@ -97,7 +97,7 @@ export const RightStatColumn = ({ data }: RightStatColumnProps) => {
               as="li"
               labelClassName="shrink"
               className={cn(
-                "text-xs",
+                "text-caption",
                 // 한 칸에 안 들어가는 긴 옵션은 한 줄을 다 씀
                 info.stat_type.length > HYPER_STAT_HALF_WIDTH_MAX &&
                   "col-span-2",

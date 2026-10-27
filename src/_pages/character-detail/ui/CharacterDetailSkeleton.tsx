@@ -77,7 +77,7 @@ function TabPanelSkeleton({ className }: { className?: string }) {
         className,
       )}
     >
-      <p className="text-muted-foreground text-sm">데이터 불러오는 중...</p>
+      <p className="text-muted-foreground text-body">데이터 불러오는 중...</p>
     </div>
   );
 }

@@ -20,7 +20,7 @@ export const ItemCashColoringPrism = ({ coloringPrism }: Props) => {
   const colorRangeLabel = color_range ? COLOR_RANGE_LABEL[color_range] : "";
 
   return (
-    <div className="border-game-line border-b py-1 text-sm">
+    <div className="border-game-line text-body border-b py-1">
       <p>컬러링 프리즘</p>
       <dl>
         <div className="grid grid-cols-[max-content_1fr] gap-x-2">

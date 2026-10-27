@@ -23,16 +23,16 @@ export function GuildSkillCard({ skill }: GuildSkillCardProps) {
           />
 
           <div className="grid w-full grid-cols-[1fr_auto] items-center gap-x-2 gap-y-1">
-            <span className="truncate text-sm font-bold md:text-base">
+            <span className="text-body md:text-body-lg truncate font-semibold">
               {skill.skill_name}
             </span>
 
-            <Badge className="h-4 w-11.5 flex-shrink-0 px-1.5 text-xs font-bold md:h-5">
+            <Badge className="text-caption h-4 w-11.5 flex-shrink-0 px-1.5 font-semibold md:h-5">
               Lv. {skill.skill_level}
             </Badge>
 
             {skill.skill_option && (
-              <p className="text-muted-foreground col-span-2 text-xs leading-tight md:text-sm">
+              <p className="text-muted-foreground text-caption md:text-body col-span-2 leading-tight">
                 {skill.skill_option}
               </p>
             )}

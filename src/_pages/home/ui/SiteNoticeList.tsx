@@ -30,7 +30,7 @@ export function SiteNoticeList({ items, error = null }: SiteNoticeListProps) {
   if (error || items.length === 0) {
     return (
       <div className="bg-card text-card-foreground w-full rounded-xs px-6 py-4">
-        <p className="text-muted-foreground text-sm font-medium">
+        <p className="text-muted-foreground text-body font-medium">
           {error ?? "등록된 공지사항이 없습니다."}
         </p>
       </div>
@@ -52,7 +52,7 @@ export function SiteNoticeList({ items, error = null }: SiteNoticeListProps) {
           key={current.id}
           type="button"
           onClick={() => setIsExpanded((prev) => !prev)}
-          className="animate-in fade-in slide-in-from-bottom-4 flex w-full min-w-0 flex-col gap-2 text-left text-sm font-medium duration-1000 md:flex-row md:items-center md:text-base"
+          className="animate-in fade-in slide-in-from-bottom-4 text-body md:text-body-lg flex w-full min-w-0 flex-col gap-2 text-left font-medium duration-1000 md:flex-row md:items-center"
         >
           <Badge>{current.title}</Badge>
           <p className={isExpanded ? "text-primary" : "text-primary truncate"}>

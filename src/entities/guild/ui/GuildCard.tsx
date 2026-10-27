@@ -21,19 +21,17 @@ export function GuildCard({ data }: GuildCardProps) {
           <div className="w-full flex-1 space-y-4 text-center md:text-left">
             <div className="space-y-1">
               <div className="flex flex-col items-center justify-center md:flex-row md:justify-start md:gap-2">
-                <h1 className="text-3xl font-bold tracking-tight">
-                  {data.guild_name}
-                </h1>
-                <Badge className="mt-1 bg-amber-500 font-bold md:self-start">
+                <h1 className="text-display">{data.guild_name}</h1>
+                <Badge className="mt-1 bg-amber-500 font-semibold md:self-start">
                   Lv. {data.guild_level}
                 </Badge>
               </div>
-              <p className="text-muted-foreground text-sm font-medium">
+              <p className="text-muted-foreground text-body font-medium">
                 {data.world_name}
               </p>
             </div>
 
-            <dl className="flex flex-row justify-center gap-6 text-sm md:justify-start">
+            <dl className="text-body flex flex-row justify-center gap-6 md:justify-start">
               <div className="flex flex-col gap-1">
                 <dt className="text-muted-foreground flex items-center justify-center gap-1 md:justify-start">
                   <ShieldCheck
@@ -42,14 +40,16 @@ export function GuildCard({ data }: GuildCardProps) {
                   />
                   길드마스터
                 </dt>
-                <dd className="font-bold">{data.guild_master_name}</dd>
+                <dd className="font-semibold">{data.guild_master_name}</dd>
               </div>
               <div className="flex flex-col gap-1">
                 <dt className="text-muted-foreground flex items-center justify-center gap-1 md:justify-start">
                   <Users aria-hidden="true" className="text-primary size-4" />{" "}
                   길드인원
                 </dt>
-                <dd className="font-bold">{data.guild_member_count} / 56</dd>
+                <dd className="font-semibold">
+                  {data.guild_member_count} / 56
+                </dd>
               </div>
               <div className="flex flex-col gap-1">
                 <dt className="text-muted-foreground flex items-center justify-center gap-1 md:justify-start">
@@ -59,7 +59,7 @@ export function GuildCard({ data }: GuildCardProps) {
                   />{" "}
                   창설일
                 </dt>
-                <dd className="font-bold">
+                <dd className="font-semibold">
                   {createdDate ? (
                     <time dateTime={createdDate.toISOString()}>
                       {formatDateKST(createdDate)}

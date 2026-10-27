@@ -102,11 +102,11 @@ export const ItemListRow = ({
 
       <div className="flex min-w-0 flex-1 flex-col justify-center gap-0.5">
         <div className="mb-0.5 flex items-center justify-between">
-          <span className="truncate text-base leading-none font-semibold">
+          <span className="text-body-lg truncate leading-none font-semibold">
             {item.item_name}
           </span>
           {starforce && (
-            <div className="flex items-center gap-0.5 rounded bg-yellow-500/20 px-1.5 py-0.5 text-xs font-bold text-yellow-600 dark:text-yellow-400">
+            <div className="text-caption flex items-center gap-0.5 rounded bg-yellow-500/20 px-1.5 py-0.5 font-semibold text-yellow-600 dark:text-yellow-400">
               <Star className="size-3 fill-current" />
               <span>{starforce}</span>
             </div>
@@ -119,7 +119,10 @@ export const ItemListRow = ({
             if (!summary) return null;
 
             return (
-              <p key={key} className="text-muted-foreground truncate text-xs">
+              <p
+                key={key}
+                className="text-muted-foreground text-caption truncate"
+              >
                 <span
                   className={cn(
                     "inline-block min-w-[24px] font-semibold",

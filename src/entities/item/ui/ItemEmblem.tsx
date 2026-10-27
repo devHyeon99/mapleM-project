@@ -31,7 +31,7 @@ export const ItemEmblem = ({ item }: Props) => {
   const options = parseOptions(emblem.emblem_option);
 
   return (
-    <div className="border-game-line border-b py-1 text-sm">
+    <div className="border-game-line text-body border-b py-1">
       <p className="text-orange-400">
         Lv.{emblem.emblem_level} {emblem.emblem_name}
       </p>

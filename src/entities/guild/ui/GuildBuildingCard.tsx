@@ -25,15 +25,15 @@ export function GuildBuildingCard({ building }: GuildBuildingCardProps) {
       <CardContent>
         <div className="flex flex-1 flex-col gap-0.5">
           <div className="flex items-center justify-between">
-            <span className="text-sm font-bold md:text-base">
+            <span className="text-body md:text-body-lg font-semibold">
               {building.building_name}
             </span>
-            <Badge className="h-4 w-11.5 px-1.5 text-xs font-bold md:h-5">
+            <Badge className="text-caption h-4 w-11.5 px-1.5 font-semibold md:h-5">
               Lv. {building.building_level}
             </Badge>
           </div>
           {description && (
-            <p className="text-muted-foreground text-xs leading-snug md:text-sm">
+            <p className="text-muted-foreground text-caption md:text-body leading-snug">
               {description}
             </p>
           )}

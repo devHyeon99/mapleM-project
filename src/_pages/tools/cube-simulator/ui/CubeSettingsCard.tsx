@@ -151,7 +151,7 @@ export function CubeSettingsCard({
         </div>
         {isDataLoading ? (
           <div className="bg-secondary flex flex-1 items-center justify-center p-4 shadow-sm">
-            <p className="text-muted-foreground text-center text-sm">
+            <p className="text-muted-foreground text-body text-center">
               장비 데이터를 불러오는 중입니다.
             </p>
           </div>

@@ -26,9 +26,9 @@ export const NotFoundMessage = ({
       )}
     >
       <AlertTriangle className="text-destructive mb-2 size-12" />
-      <h2 className="text-xl font-medium tracking-tight">{title}</h2>
-      {subject && <p className="mt-2 text-xl font-medium">{subject}</p>}
-      <p className="text-muted-foreground mt-2 text-sm whitespace-pre-line">
+      <h2 className="text-title">{title}</h2>
+      {subject && <p className="text-heading mt-2 font-semibold">{subject}</p>}
+      <p className="text-muted-foreground text-body mt-2 whitespace-pre-line">
         {description}
       </p>
     </div>

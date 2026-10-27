@@ -4,7 +4,17 @@ import { extendTailwindMerge } from "tailwind-merge";
 const twMerge = extendTailwindMerge({
   extend: {
     theme: {
-      text: ["13"],
+      text: [
+        "display",
+        "title",
+        "heading",
+        "subheading",
+        "body-lg",
+        "body",
+        "body-sm",
+        "caption",
+        "micro",
+      ],
     },
   },
 });

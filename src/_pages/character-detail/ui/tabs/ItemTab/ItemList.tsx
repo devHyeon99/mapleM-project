@@ -27,7 +27,7 @@ export const ItemList = ({
   if (hasNoEquipItems) {
     return (
       <section className="grid min-h-78 place-content-center text-center">
-        <p className="text-muted-foreground text-sm">
+        <p className="text-muted-foreground text-body">
           {presetNo}번 프리셋 정보가 없습니다.
         </p>
       </section>

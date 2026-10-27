@@ -22,16 +22,16 @@ export function GuildAbilityCard({ ability }: GuildAbilityCardProps) {
         />
 
         <div className="grid min-w-0 flex-1 grid-cols-[1fr_auto] items-center gap-x-2 gap-y-0.5">
-          <span className="truncate text-sm font-bold md:text-base">
+          <span className="text-body md:text-body-lg truncate font-semibold">
             {ability.ability_name.replace(/Lv\.\d+\s/, "")}{" "}
           </span>
 
-          <Badge className="h-4 w-11.5 px-1.5 text-xs font-bold md:h-5">
+          <Badge className="text-caption h-4 w-11.5 px-1.5 font-semibold md:h-5">
             Lv. {ability.ability_level}
           </Badge>
 
           {ability.ability_option && (
-            <p className="text-muted-foreground col-span-2 text-xs leading-tight md:text-sm">
+            <p className="text-muted-foreground text-caption md:text-body col-span-2 leading-tight">
               {ability.ability_option}
             </p>
           )}

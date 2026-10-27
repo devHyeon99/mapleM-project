@@ -38,7 +38,7 @@ export const MobileRankingList = ({
       {/* 헤더 영역 */}
       <li
         aria-hidden="true"
-        className="bg-secondary flex h-10 items-center gap-4 p-2 text-sm font-medium"
+        className="bg-secondary text-body flex h-10 items-center gap-4 p-2 font-medium"
       >
         <span className="w-8 text-center">순위</span>
         <span className="w-8">정보</span>
@@ -81,7 +81,7 @@ const RankingRow = memo(
         <div className="flex w-8 shrink-0 flex-col items-center justify-center">
           {/* 순위 정보에 대한 접근성 레이블 추가 */}
           <span
-            className="text-foreground text-sm font-bold"
+            className="text-foreground text-body font-semibold"
             aria-label={`순위: ${rankValue(item, context)}위`}
           >
             {Renderers.Rank(item, context)}
@@ -124,13 +124,13 @@ const SharenianInfo = ({ item }: { item: AnyRankingData }) => {
         <Link
           href={guildHref(item.world_name, item.guild_name)}
           prefetch={false}
-          className="shrink-0 truncate text-sm font-bold"
+          className="text-body shrink-0 truncate font-semibold"
         >
           {item.guild_name}
         </Link>
       )}
 
-      <span className="text-muted-foreground truncate text-xs">
+      <span className="text-muted-foreground text-caption truncate">
         {item.world_name}
       </span>
     </div>
@@ -165,12 +165,12 @@ const GeneralInfo = ({
         onNavigate={() =>
           context.addCharacterHistory(item.character_name, item.world_name)
         }
-        className="shrink-0 truncate text-sm font-bold"
+        className="text-body shrink-0 truncate font-semibold"
       >
         {item.character_name}
       </Link>
 
-      <span className="text-muted-foreground flex min-w-0 items-center gap-1.5 text-xs">
+      <span className="text-muted-foreground text-caption flex min-w-0 items-center gap-1.5">
         <span className="truncate">{jobName || ""}</span>
 
         {guildName && (
@@ -199,15 +199,17 @@ const StatDisplay = ({ item }: { item: AnyRankingData }) => {
     // 등급이 있는 랭킹(유니온·업적)은 등급이 주인공이라 앞에 두고 값에서 힘을 뺌
     <div className="mt-0.5 flex items-baseline gap-1.5">
       {grade && (
-        <span className="text-primary truncate text-sm font-bold">{grade}</span>
+        <span className="text-primary text-body truncate font-semibold">
+          {grade}
+        </span>
       )}
 
       <span
         className={cn(
           "flex gap-0.5",
           grade
-            ? "text-muted-foreground text-xs"
-            : "text-primary text-sm font-bold",
+            ? "text-muted-foreground text-caption"
+            : "text-primary text-body font-semibold",
         )}
       >
         {label && <span>{label}</span>}

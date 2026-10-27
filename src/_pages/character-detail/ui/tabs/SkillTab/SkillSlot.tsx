@@ -15,9 +15,11 @@ export const SkillSlot = ({ skill }: SkillSlotProps) => {
   return (
     <div className="bg-secondary flex h-13 w-13 shrink-0 items-center justify-center overflow-hidden rounded-full border-2 shadow-sm">
       {!skill || !name ? (
-        <span className="text-muted-foreground/50 text-xl leading-none">+</span>
+        <span className="text-muted-foreground/50 text-title leading-none font-normal">
+          +
+        </span>
       ) : presetNo ? (
-        <span className="text-foreground text-center text-xs font-medium">
+        <span className="text-foreground text-caption text-center font-medium">
           {presetNo}번 <br /> 프리셋
         </span>
       ) : (

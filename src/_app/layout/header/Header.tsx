@@ -9,7 +9,7 @@ export function Header() {
       {/* 키보드 사용자가 헤더 내비게이션을 건너뛰고 본문으로 이동 (WCAG 2.4.1) */}
       <a
         href="#main"
-        className="focus:bg-card focus:ring-ring sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-4 focus:z-50 focus:rounded-md focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:shadow-md focus:ring-2"
+        className="focus:bg-card focus:ring-ring focus:text-body sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-4 focus:z-50 focus:rounded-md focus:px-4 focus:py-2 focus:font-medium focus:shadow-md focus:ring-2"
       >
         본문 바로가기
       </a>

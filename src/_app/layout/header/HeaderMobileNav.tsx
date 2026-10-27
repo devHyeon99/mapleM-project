@@ -49,9 +49,7 @@ export function HeaderMobileNav() {
               <XIcon className="size-6" />
             </Button>
           </SheetClose>
-          <SheetTitle className="text-xl font-semibold tracking-tight">
-            MMGG
-          </SheetTitle>
+          <SheetTitle className="text-title">MMGG</SheetTitle>
           <SheetDescription className="sr-only">
             모바일 전용 메뉴입니다.
           </SheetDescription>
@@ -65,16 +63,14 @@ export function HeaderMobileNav() {
             >
               {link.children ? (
                 <>
-                  <h2 className="text-foreground text-lg font-semibold">
-                    {link.label}
-                  </h2>
+                  <h2 className="text-foreground text-heading">{link.label}</h2>
                   <ul className="flex list-none flex-col gap-1">
                     {link.children.map((child) => (
                       <li key={child.href}>
                         <HeaderNavLink
                           link={child}
                           onClick={close}
-                          className="text-muted-foreground hover:text-foreground data-[active]:text-foreground block py-1.5 text-[15px] font-medium transition-colors data-[active]:font-semibold"
+                          className="text-muted-foreground hover:text-foreground data-[active]:text-foreground text-body-lg block py-1.5 font-medium transition-colors data-[active]:font-semibold"
                         />
                       </li>
                     ))}
@@ -84,7 +80,7 @@ export function HeaderMobileNav() {
                 <HeaderNavLink
                   link={link}
                   onClick={close}
-                  className="text-foreground inline-flex items-start gap-1 text-lg font-semibold"
+                  className="text-foreground text-heading inline-flex items-start gap-1"
                 />
               )}
             </section>

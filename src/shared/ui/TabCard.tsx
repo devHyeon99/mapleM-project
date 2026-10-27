@@ -40,7 +40,7 @@ export const TabCard = ({
             )}
           >
             <div className="flex shrink-0 items-baseline gap-2">
-              <h3 className="font-bold">{title}</h3>
+              <h3 className="text-subheading">{title}</h3>
               {titleSuffix}
             </div>
             {action}

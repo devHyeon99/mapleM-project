@@ -47,11 +47,11 @@ export const SkillPreset = ({ presets }: SkillPresetProps) => {
             return (
               <div key={preset.preset_slot_no} className="bg-card">
                 <div className="mb-2 flex items-center justify-between">
-                  <span className="text-sm font-medium">
+                  <span className="text-body font-medium">
                     {preset.preset_slot_no}번 스킬 프리셋
                   </span>
                   {preset.preset_command_flag === "활성화" && (
-                    <span className="bg-primary/10 text-primary rounded px-1.5 py-0.5 text-[10px] font-semibold">
+                    <span className="bg-primary/10 text-primary text-micro rounded px-1.5 py-0.5 font-semibold">
                       커맨드 ON
                     </span>
                   )}

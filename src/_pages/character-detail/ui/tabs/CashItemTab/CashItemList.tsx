@@ -28,7 +28,7 @@ export const CashItemList = ({
           className,
         )}
       >
-        <p className="text-muted-foreground text-sm">
+        <p className="text-muted-foreground text-body">
           {presetNo}번 프리셋 정보가 없습니다.
         </p>
       </section>

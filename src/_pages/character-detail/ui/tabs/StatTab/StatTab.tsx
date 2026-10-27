@@ -112,14 +112,14 @@ export const StatTab = ({ ocid, level }: StatTabProps) => {
                 >
                   Lv.{info.stat_level}
                 </InfoDescriptionRow>
-                <p className="text-foreground mb-1 text-xs">
+                <p className="text-foreground text-caption mb-1">
                   {info.stat_increase}
                 </p>
               </Fragment>
             ))}
           </dl>
         ) : (
-          <div className="text-muted-foreground flex min-h-43 items-center justify-center text-sm">
+          <div className="text-muted-foreground text-body flex min-h-43 items-center justify-center">
             투자한 하이퍼 스탯이 없습니다.
           </div>
         )}

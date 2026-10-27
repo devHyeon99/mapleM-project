@@ -17,7 +17,7 @@ export const LinkSkillTotalStat = ({ skills }: LinkSkillTotalStatProps) => {
         {totalStats.map((stat) => (
           <div
             key={stat.name}
-            className="flex items-center justify-between text-sm"
+            className="text-body flex items-center justify-between"
           >
             <span className="text-muted-foreground">{stat.name}</span>
             <span className="font-medium text-orange-400">{stat.value}</span>

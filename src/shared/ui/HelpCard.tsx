@@ -49,10 +49,10 @@ export function HelpCard({ title, sections, probabilityUrl }: HelpCardProps) {
       </CardHeader>
 
       <CardContent>
-        <div className="grid gap-4 text-sm">
+        <div className="text-body grid gap-4">
           {sections.map((section) => (
             <div key={section.title} className="grid gap-1">
-              <p className="font-medium">{section.title}</p>
+              <p className="font-semibold">{section.title}</p>
 
               <ul className="grid gap-1">
                 {section.items.map((item) => (

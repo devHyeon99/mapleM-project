@@ -10,7 +10,7 @@ export function CoreItem({ core }: CoreItemProps) {
   const name = getCoreName(core);
 
   return (
-    <li className="flex items-start justify-between gap-3 text-sm font-medium">
+    <li className="text-body flex items-start justify-between gap-3 font-medium">
       <span
         className="text-muted-foreground min-w-0 flex-1 truncate"
         title={name}

@@ -58,14 +58,14 @@ export async function SharenianGuildBoard() {
   return (
     <section aria-labelledby="sharenian-guild-heading" className="w-full">
       <div className="mb-3 flex flex-col">
-        <h2 id="sharenian-guild-heading" className="text-lg font-bold">
+        <h2 id="sharenian-guild-heading" className="text-heading">
           상위 길드
         </h2>
         <div className="flex flex-row justify-between">
-          <p className="text-muted-foreground text-13 mt-0.5 break-keep">
+          <p className="text-muted-foreground text-body-sm mt-0.5 break-keep">
             샤레니안 전장과 지하수로 상위 10개 길드입니다.
           </p>
-          <p className="text-muted-foreground shrink-0 self-center text-xs">
+          <p className="text-muted-foreground text-caption shrink-0 self-center">
             <time dateTime={date}>{formatDateKST(date)}</time>
           </p>
         </div>
@@ -76,13 +76,13 @@ export async function SharenianGuildBoard() {
           <Card key={type} size="sm" className="gap-0">
             {/* CardHeader 는 CardAction 이 있으면 2열 그리드가 됨. 제목 왼쪽 / 링크 오른쪽 */}
             <CardHeader className="items-center gap-0 border-b">
-              <h3 className="text-13 truncate font-bold">
+              <h3 className="text-body-sm truncate font-semibold">
                 {RANKING_LABELS[type]}
               </h3>
               <CardAction className="self-center">
                 <Link
                   href={rankingHref(type)}
-                  className="text-muted-foreground hover:text-foreground focus-visible:ring-ring flex items-center gap-0.5 rounded-sm text-xs transition-colors focus-visible:ring-2 focus-visible:outline-none"
+                  className="text-muted-foreground hover:text-foreground focus-visible:ring-ring text-caption flex items-center gap-0.5 rounded-sm transition-colors focus-visible:ring-2 focus-visible:outline-none"
                 >
                   더보기
                   <ChevronRight aria-hidden="true" className="size-3" />
@@ -94,7 +94,7 @@ export async function SharenianGuildBoard() {
                 좌우 여백은 카드 간격 토큰(size="sm" = 16px)에 맞춘 px-4 임 */}
             {rows.length === 0 ? (
               // 10행 목록과 같은 높이(행 48px = 마크 28px + py-2.5, 구분선 9px). 나란할 때는 그리드 stretch 로도 맞춰짐
-              <p className="text-muted-foreground text-13 flex min-h-[calc(10*3rem+9px)] flex-1 items-center justify-center px-4 text-center break-keep">
+              <p className="text-muted-foreground text-body-sm flex min-h-[calc(10*3rem+9px)] flex-1 items-center justify-center px-4 text-center break-keep">
                 {NOT_STARTED_MESSAGES[type]}
               </p>
             ) : (
@@ -110,8 +110,8 @@ export async function SharenianGuildBoard() {
                       <span
                         className={
                           row.ranking <= 3
-                            ? "text-foreground text-13 w-4 shrink-0 font-bold tabular-nums"
-                            : "text-muted-foreground text-13 w-4 shrink-0 tabular-nums"
+                            ? "text-foreground text-body-sm w-4 shrink-0 font-semibold tabular-nums"
+                            : "text-muted-foreground text-body-sm w-4 shrink-0 tabular-nums"
                         }
                       >
                         {row.ranking}
@@ -123,10 +123,10 @@ export async function SharenianGuildBoard() {
                         size="sm"
                       />
 
-                      <span className="text-13 min-w-0 truncate font-semibold">
+                      <span className="text-body-sm min-w-0 truncate font-semibold">
                         {row.guild_name}
                       </span>
-                      <span className="text-muted-foreground ml-auto shrink-0 text-xs">
+                      <span className="text-muted-foreground text-caption ml-auto shrink-0">
                         {row.world_name}
                       </span>
                     </Link>

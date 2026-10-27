@@ -29,7 +29,7 @@ export function GuildAbilityList({ abilities }: GuildAbilityListProps) {
 
         return (
           <section key={groupIndex} className="flex flex-col">
-            <h3 className="bg-foreground/[0.08] py-1.5 text-center text-sm font-bold md:text-base">
+            <h3 className="bg-foreground/[0.08] text-body md:text-body-lg py-1.5 text-center font-semibold">
               {GROUP_TITLES[groupIndex]}
             </h3>
 

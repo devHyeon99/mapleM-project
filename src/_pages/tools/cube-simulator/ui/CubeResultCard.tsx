@@ -91,7 +91,7 @@ export function CubeResultCard({
         <CardTitle>큐브 결과</CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
-        <div className="grid gap-2 text-sm">
+        <div className="text-body grid gap-2">
           <SummaryRow
             label="장비 종류"
             value={potentialData ? potentialData.label : "-"}
@@ -164,7 +164,7 @@ export function CubeResultCard({
                 ))}
               </div>
             ) : (
-              <p className="text-muted-foreground text-center text-sm">
+              <p className="text-muted-foreground text-body text-center">
                 최근 큐브 사용 결과가 없습니다.
               </p>
             )}

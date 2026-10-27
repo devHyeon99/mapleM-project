@@ -42,8 +42,8 @@ export const LoadErrorMessage = ({
     >
       {children}
       <AlertTriangle className="text-destructive mb-2 size-12" />
-      <h2 className="mb-2 text-xl font-medium tracking-tight">{title}</h2>
-      <p className="text-muted-foreground mb-8 text-sm">
+      <h2 className="text-title mb-2">{title}</h2>
+      <p className="text-muted-foreground text-body mb-8">
         일시적인 오류가 발생했거나 게임/API 점검 중일 수 있습니다.
         <br />
         잠시 후 다시 시도해주세요.

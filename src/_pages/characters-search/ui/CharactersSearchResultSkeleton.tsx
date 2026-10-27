@@ -9,10 +9,10 @@ export function CharactersSearchResultSkeleton({
   return (
     <div className="flex w-full flex-col items-center">
       <div className="flex w-full flex-col items-center gap-1 py-10">
-        <p className="text-lg font-bold md:text-2xl">
+        <p className="text-title">
           전체 월드 내 <strong>&quot;{name}&quot;</strong> 검색 결과
         </p>
-        <p className="text-muted-foreground text-sm md:text-base">
+        <p className="text-muted-foreground text-body md:text-body-lg">
           검색 결과를 불러오는 중입니다...
         </p>
       </div>

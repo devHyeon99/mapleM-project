@@ -36,10 +36,10 @@ export const LinkSkillItem = ({ skill }: LinkSkillItemProps) => {
         >
           <SkillIcon src={skill.skill_icon} />
           <div className="flex min-w-0 flex-col">
-            <span className="truncate text-sm font-semibold">
+            <span className="text-body truncate font-semibold">
               {skill.skill_name}
             </span>
-            <span className="text-xs font-medium text-orange-400">
+            <span className="text-caption font-medium text-orange-400">
               Lv.{skill.skill_level}
             </span>
           </div>
@@ -49,8 +49,8 @@ export const LinkSkillItem = ({ skill }: LinkSkillItemProps) => {
       <div className="flex items-center gap-2">
         <SkillIcon src={skill.skill_icon} eager />
         <div>
-          <h4 className="text-sm font-semibold">{skill.skill_name}</h4>
-          <p className="text-xs font-medium text-orange-400">
+          <h4 className="text-body font-semibold">{skill.skill_name}</h4>
+          <p className="text-caption font-medium text-orange-400">
             Lv.{skill.skill_level}
           </p>
         </div>
@@ -58,13 +58,13 @@ export const LinkSkillItem = ({ skill }: LinkSkillItemProps) => {
 
       <Separator className="my-2" />
 
-      <p className="text-muted-foreground text-xs whitespace-pre-line">
+      <p className="text-muted-foreground text-caption whitespace-pre-line">
         {skill.skill_description}
       </p>
 
       <Separator className="my-2" />
 
-      <ul className="space-y-1 text-xs">
+      <ul className="text-caption space-y-1">
         {parseSkillOptions(skill.skill_effect).map((opt, i) => (
           <li
             key={`${opt.name}-${opt.value}-${i}`}

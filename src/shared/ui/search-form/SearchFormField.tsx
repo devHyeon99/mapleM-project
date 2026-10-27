@@ -112,7 +112,7 @@ export function SearchFormField({
               openHistory();
             }}
             className={cn(
-              "bg-card dark:bg-input/50 relative rounded-l-none placeholder:text-sm focus-visible:ring-2",
+              "bg-card dark:bg-input/50 placeholder:text-body relative rounded-l-none focus-visible:ring-2",
               sizing.input,
             )}
           />

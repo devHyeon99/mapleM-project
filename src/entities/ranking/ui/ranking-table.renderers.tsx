@@ -87,12 +87,14 @@ export const getMainStatGrade = (item: AnyRankingData): string | null => {
 export const Renderers = {
   // 순위 표시
   Rank: (item: AnyRankingData, ctx: RankingTableContext) => (
-    <span className="text-foreground font-bold">{rankValue(item, ctx)}</span>
+    <span className="text-foreground font-semibold">
+      {rankValue(item, ctx)}
+    </span>
   ),
 
   // 월드명 표시
   World: (item: AnyRankingData) => (
-    <span className="text-foreground text-sm font-medium">
+    <span className="text-foreground text-body font-medium">
       {item.world_name}
     </span>
   ),
@@ -123,7 +125,7 @@ export const Renderers = {
   Job: (item: AnyRankingData) => {
     const jobName = "character_class" in item ? item.character_class : "-";
     return (
-      <span className="text-muted-foreground text-sm font-medium">
+      <span className="text-muted-foreground text-body font-medium">
         {jobName}
       </span>
     );
@@ -133,7 +135,7 @@ export const Renderers = {
   MainStat: (item: AnyRankingData) => {
     const { label, value } = getMainStat(item);
     return (
-      <span className="text-sm">
+      <span className="text-body">
         {label}
         {value}
       </span>
@@ -161,7 +163,7 @@ export const Renderers = {
 
     // 유니온·업적 -> 등급 정보
     const grade = getMainStatGrade(item);
-    if (grade) return <span className="text-sm">{grade}</span>;
+    if (grade) return <span className="text-body">{grade}</span>;
 
     // 일반 캐릭터 -> 소속 길드 (기본값)
     return renderGuildInfo(item);
@@ -170,7 +172,7 @@ export const Renderers = {
   // 업적 뱃지 목록
   Badge: (item: AnyRankingData) => {
     if (!("main_honor_badge" in item) || !item.main_honor_badge) {
-      return <span className="text-muted-foreground text-xs">-</span>;
+      return <span className="text-muted-foreground text-caption">-</span>;
     }
 
     return (
@@ -192,7 +194,7 @@ export const Renderers = {
   // 길드 등급 아이콘
   Grade: (item: AnyRankingData) => {
     if (!("grade_icon" in item) || !item.grade_icon) {
-      return <span className="text-muted-foreground text-xs">-</span>;
+      return <span className="text-muted-foreground text-caption">-</span>;
     }
 
     return (

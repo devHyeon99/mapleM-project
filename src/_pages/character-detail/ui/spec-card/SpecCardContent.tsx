@@ -59,7 +59,7 @@ export const SpecCardContent = ({
     return (
       <div className="text-muted-foreground flex h-[523px] w-full flex-col items-center justify-center gap-4 rounded-lg border">
         <Loader2 className="text-primary h-10 w-10 animate-spin" />
-        <p className="text-sm">상세 스펙 정보를 불러오고 있습니다...</p>
+        <p className="text-body">상세 스펙 정보를 불러오고 있습니다...</p>
       </div>
     );
   }

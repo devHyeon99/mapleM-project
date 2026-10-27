@@ -57,14 +57,12 @@ export function GuildMemberTable({
   return (
     <div className="flex flex-col gap-2">
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold">
-          길드원 목록 ({members.length}명)
-        </h2>
+        <h2 className="text-heading">길드원 목록 ({members.length}명)</h2>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" size="sm" className="h-8 gap-1 shadow-sm">
               <ArrowUpDown className="size-3" />
-              <span className="text-13">{sortLabels[sortBy]}</span>
+              <span className="text-body-sm">{sortLabels[sortBy]}</span>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
@@ -74,13 +72,16 @@ export function GuildMemberTable({
                 value={sortBy}
                 onValueChange={(v) => setSortBy(v as SortType)}
               >
-                <DropdownMenuRadioItem className="text-13" value="activity">
+                <DropdownMenuRadioItem
+                  className="text-body-sm"
+                  value="activity"
+                >
                   기여도순
                 </DropdownMenuRadioItem>
-                <DropdownMenuRadioItem className="text-13" value="level">
+                <DropdownMenuRadioItem className="text-body-sm" value="level">
                   레벨순
                 </DropdownMenuRadioItem>
-                <DropdownMenuRadioItem className="text-13" value="name">
+                <DropdownMenuRadioItem className="text-body-sm" value="name">
                   이름순
                 </DropdownMenuRadioItem>
               </DropdownMenuRadioGroup>

@@ -56,7 +56,7 @@ export const CashItemGrid = ({ items, presetNo }: CashItemGridProps) => {
 
       {hasNoEquipItems && (
         <div className="bg-card/70 absolute inset-0 flex items-center justify-center text-center backdrop-blur-[2px]">
-          <p className="text-muted-foreground text-sm font-bold">
+          <p className="text-muted-foreground text-body font-medium">
             {presetNo}번 프리셋 정보가 없습니다.
           </p>
         </div>

@@ -97,7 +97,7 @@ const CharacterProfileInfoList = ({ data }: CharacterProfileCardProps) => {
   );
 
   return (
-    <dl className="flex w-full flex-col gap-3 text-sm">
+    <dl className="text-body flex w-full flex-col gap-3">
       <div className="flex flex-wrap gap-3">
         <InfoDescriptionRow label="레벨">
           {NUMBER_FORMATTER.format(data.character_level)}

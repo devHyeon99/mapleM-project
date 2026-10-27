@@ -59,14 +59,14 @@ export function CharactersSearchResult({
   return (
     <div className="flex w-full flex-col items-center">
       <div className="flex w-full flex-col items-center gap-1 py-10">
-        <p className="text-lg font-bold md:text-2xl">
+        <p className="text-title">
           전체 월드 내 <strong>&quot;{name}&quot;</strong> 검색 결과
         </p>
-        <p className="text-muted-foreground text-sm md:text-base">
+        <p className="text-muted-foreground text-body md:text-body-lg">
           총 {characters.length}개의 검색 결과가 있습니다.
         </p>
         {failedWorlds > 0 && (
-          <p className="text-destructive text-xs md:text-sm">
+          <p className="text-destructive text-caption md:text-body">
             {failedWorlds}개 월드는 조회에 실패해 결과에서 빠졌을 수 있습니다.
           </p>
         )}
@@ -86,10 +86,10 @@ export function CharactersSearchResult({
               <Card className="hover:bg-accent cursor-pointer border-none py-4">
                 <CardContent className="flex items-center justify-between">
                   <div>
-                    <p className="text-lg font-semibold">
+                    <p className="text-body-lg font-semibold">
                       {char.character_name}
                     </p>
-                    <p className="text-muted-foreground text-sm">
+                    <p className="text-muted-foreground text-body">
                       {char.world_name}
                     </p>
                   </div>

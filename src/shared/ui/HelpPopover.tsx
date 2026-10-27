@@ -54,7 +54,7 @@ export const HelpPopover = ({
         align={align}
         className={cn("w-80 p-3", contentClassName)}
       >
-        <div className="flex flex-col gap-2 text-xs leading-relaxed">
+        <div className="text-caption flex flex-col gap-2 leading-relaxed">
           {items.map((item, index) => (
             <p key={index}>
               <span className="text-foreground font-semibold">

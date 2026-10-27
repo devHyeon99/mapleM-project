@@ -26,8 +26,10 @@ export const ItemTabSection = ({
       )}
     >
       <div className="flex items-center justify-between gap-2">
-        <h3 className="text-sm font-bold">{title}</h3>
-        {meta && <span className="text-muted-foreground text-xs">{meta}</span>}
+        <h3 className="text-body font-semibold">{title}</h3>
+        {meta && (
+          <span className="text-muted-foreground text-caption">{meta}</span>
+        )}
       </div>
       {children}
     </section>

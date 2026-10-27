@@ -40,7 +40,7 @@ export const SkillIconTooltip = ({
           side="bottom"
           align="center"
           sideOffset={6}
-          className="bg-foreground text-background w-fit rounded-md border-0 px-3 py-1.5 text-xs shadow-none"
+          className="bg-foreground text-background text-caption w-fit rounded-md border-0 px-3 py-1.5 shadow-none"
         >
           {tooltip}
         </PopoverContent>
@@ -51,7 +51,7 @@ export const SkillIconTooltip = ({
   return (
     <Tooltip>
       <TooltipTrigger asChild>{iconTrigger}</TooltipTrigger>
-      <TooltipContent side="bottom" className="text-xs">
+      <TooltipContent side="bottom" className="text-caption">
         {tooltip}
       </TooltipContent>
     </Tooltip>

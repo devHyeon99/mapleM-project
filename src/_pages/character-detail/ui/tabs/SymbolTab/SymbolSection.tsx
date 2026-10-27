@@ -31,13 +31,13 @@ export const SymbolSection = ({ title, items }: SymbolSectionProps) => {
       title={title}
       className="flex-1"
       titleSuffix={
-        <span className="text-xs font-medium text-orange-400">
+        <span className="text-caption font-medium text-orange-400">
           {title === "아케인 심볼" ? "아케인포스" : "어센틱포스"}{" "}
           {totalForce.toLocaleString()}
         </span>
       }
       action={
-        <div className="flex min-w-0 flex-wrap items-center justify-end gap-x-2 text-xs font-medium">
+        <div className="text-caption flex min-w-0 flex-wrap items-center justify-end gap-x-2 font-medium">
           {totalStats.map((stat) => (
             <span
               key={`${stat.name}-${stat.value}`}

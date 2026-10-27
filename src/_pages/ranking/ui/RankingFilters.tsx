@@ -35,7 +35,7 @@ const RANKING_DATE_HELP_ITEMS = [
 ] as const;
 
 const FILTER_TRIGGER_CLASS =
-  "bg-muted hover:bg-accent h-10 w-full border-none text-sm shadow-sm md:w-[195px] [&_svg]:!opacity-100";
+  "bg-muted hover:bg-accent h-10 w-full border-none text-body shadow-sm md:w-[195px] [&_svg]:!opacity-100";
 
 interface RankingFiltersProps {
   /** 서버에서 랭킹 조회에 사용한 기준 일자(yyyy-MM-dd). 표시 일자와 데이터 일자를 일치시킨다. */
@@ -141,7 +141,7 @@ export function RankingFilters({ date, type, worldName }: RankingFiltersProps) {
       </div>
 
       <div className="flex flex-row items-center gap-2 self-end">
-        <p className="text-muted-foreground text-sm">
+        <p className="text-muted-foreground text-body">
           랭킹 기준 : <time dateTime={date}>{date + " 06:00"}</time>
         </p>
         <HelpPopover

@@ -106,14 +106,14 @@ export const PhotoCardDialog = ({ data }: PhotoCardDialogProps) => {
         />
 
         {error && (
-          <p className="text-destructive text-xs" role="alert">
+          <p className="text-destructive text-caption" role="alert">
             {error}
           </p>
         )}
 
         <DialogFooter>
           {savedImage ? (
-            <p className="text-muted-foreground w-full text-center text-xs">
+            <p className="text-muted-foreground text-caption w-full text-center">
               포토 카드 이미지를 길게 눌러{" "}
               <b className="text-foreground">이미지 저장</b>을 하세요.
             </p>

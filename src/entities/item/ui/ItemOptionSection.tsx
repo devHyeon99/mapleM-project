@@ -33,13 +33,13 @@ export const ItemOptionSection = ({
   const gradeInfo = getGradeInfo(grade);
 
   return (
-    <div className="border-game-line border-b py-1 text-sm">
+    <div className="border-game-line text-body border-b py-1">
       <div className="flex items-baseline gap-1">
         {withGradeBadge ? (
           <>
             <span
               className={cn(
-                "h-3.5 rounded-tl-xs rounded-br-xs px-1 text-[10px] font-bold text-white",
+                "text-micro h-3.5 rounded-tl-xs rounded-br-xs px-1 text-white",
                 gradeInfo?.bgColor,
               )}
             >
@@ -51,7 +51,7 @@ export const ItemOptionSection = ({
           <span className="font-medium">{title}</span>
         )}
         {!!masteryPoint && (
-          <span className="text-game-mastery ml-auto shrink-0 text-xs whitespace-nowrap">
+          <span className="text-game-mastery text-caption ml-auto shrink-0 whitespace-nowrap">
             마스터리 보너스 +{masteryPoint}
           </span>
         )}

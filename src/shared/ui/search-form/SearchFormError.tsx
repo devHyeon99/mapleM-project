@@ -18,7 +18,7 @@ export function SearchFormError({
     <div
       id={id}
       className={cn(
-        "animate-in slide-in-from-top-1 fade-in-0 flex items-center justify-end gap-1.5 px-1 text-xs font-bold md:text-sm",
+        "animate-in slide-in-from-top-1 fade-in-0 text-caption md:text-body flex items-center justify-end gap-1.5 px-1 font-medium",
         className,
       )}
       role="alert"

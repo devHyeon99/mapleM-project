@@ -14,7 +14,7 @@ import { useRankedCharacter } from "../model/use-ranked-character";
 import type { RankingSearchResult } from "../model/search-result";
 
 const PANEL_CLASS =
-  "bg-muted flex min-h-10 flex-wrap items-center justify-between gap-x-4 gap-y-2 rounded-2xl px-4 py-2 text-sm shadow-sm";
+  "bg-muted flex min-h-10 flex-wrap items-center justify-between gap-x-4 gap-y-2 rounded-2xl px-4 py-2 text-body shadow-sm";
 
 const LINK_CLASS =
   "inline-flex items-center gap-1 font-medium underline-offset-4 hover:text-orange-500 hover:underline";
@@ -109,7 +109,7 @@ function RankingSearchResultPanel({
 /** 검색어가 없을 때 결과가 들어설 자리. 모바일에선 빈 줄이 되므로 감춘다. */
 function EmptyHint() {
   return (
-    <p className="text-muted-foreground hidden h-10 items-center px-1 text-sm md:flex">
+    <p className="text-muted-foreground text-body hidden h-10 items-center px-1 md:flex">
       월드와 이름을 넣으면 순위와 해당 페이지를 알려줘요.
     </p>
   );

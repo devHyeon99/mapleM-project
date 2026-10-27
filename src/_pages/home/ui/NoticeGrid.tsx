@@ -12,10 +12,10 @@ export function NoticeGrid({ data, error }: NoticeGridProps) {
     return (
       <Card className="w-full gap-2 rounded-xs border-none">
         <CardHeader>
-          <CardTitle className="text-lg font-bold">공지사항</CardTitle>
+          <CardTitle className="text-heading">공지사항</CardTitle>
         </CardHeader>
         <CardContent>
-          <p className="text-muted-foreground text-sm">
+          <p className="text-muted-foreground text-body">
             {error ?? "넥슨 공지사항을 불러오는 중 오류가 발생했습니다."}
           </p>
         </CardContent>

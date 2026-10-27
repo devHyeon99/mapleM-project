@@ -34,14 +34,14 @@ export const PetSetOptionDialog = ({
       header={
         <>
           <header className="border-b pb-3">
-            <p className="text-lg font-bold">{set.set_name}</p>
-            <div className="mt-1.5 flex flex-wrap gap-1.5 text-xs font-medium">
+            <p className="text-heading">{set.set_name}</p>
+            <div className="text-caption mt-1.5 flex flex-wrap gap-1.5 font-medium">
               <span className="rounded-md bg-orange-500/15 px-2 py-0.5 text-orange-500">
                 {set.set_count}세트 착용
               </span>
             </div>
           </header>
-          <p className="text-muted-foreground pt-3 text-xs font-semibold">
+          <p className="text-muted-foreground text-caption pt-3 font-semibold">
             세트 능력치
           </p>
         </>
@@ -52,7 +52,7 @@ export const PetSetOptionDialog = ({
           {options.map(({ label, value }) => (
             <div
               key={label}
-              className="flex items-center justify-between gap-3 text-[13px] md:text-sm"
+              className="text-body-sm md:text-body flex items-center justify-between gap-3"
             >
               <dt className="text-muted-foreground">{label}</dt>
               {value && <dd className="shrink-0 font-semibold">{value}</dd>}

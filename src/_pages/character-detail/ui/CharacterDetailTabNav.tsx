@@ -155,7 +155,7 @@ export function CharacterDetailTabNav() {
             value={tab.value}
             aria-describedby={`${tab.value}-tab-description`}
             className={cn(
-              "text-muted-foreground relative h-12 shrink-0 rounded-none border-0 px-5 text-sm font-semibold",
+              "text-muted-foreground text-body relative h-12 shrink-0 rounded-none border-0 px-5 font-semibold",
               "data-[state=active]:bg-transparent!",
             )}
           >

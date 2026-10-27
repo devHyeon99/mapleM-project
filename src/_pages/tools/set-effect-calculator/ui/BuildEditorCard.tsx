@@ -29,10 +29,10 @@ function ActiveSetChips({ result }: { result: BuildResult }) {
 
   return (
     <div className="border-divider mt-auto space-y-2 pt-2">
-      <p className="text-sm font-medium">적용 중인 세트</p>
+      <p className="text-body font-medium">적용 중인 세트</p>
 
       {result.activeSets.length === 0 ? (
-        <p className="text-muted-foreground text-13">
+        <p className="text-muted-foreground text-body-sm">
           장비와 세트 수를 고르면 여기에 표시됩니다.
         </p>
       ) : (
@@ -40,7 +40,7 @@ function ActiveSetChips({ result }: { result: BuildResult }) {
           {result.activeSets.map((set) => (
             <li
               key={set.id}
-              className="bg-secondary ring-border text-13 flex items-center gap-1.5 rounded-full px-2.5 py-1 ring"
+              className="bg-secondary ring-border text-body-sm flex items-center gap-1.5 rounded-full px-2.5 py-1 ring"
             >
               <span className="font-medium">{set.displayName}</span>
               <span className="text-muted-foreground tabular-nums">
@@ -52,7 +52,7 @@ function ActiveSetChips({ result }: { result: BuildResult }) {
       )}
 
       {isCorrected && (
-        <p className="text-muted-foreground text-xs">
+        <p className="text-muted-foreground text-caption">
           {ABSOLABS_CORRECTION_NOTE}
         </p>
       )}
@@ -76,8 +76,8 @@ export function BuildEditorCard({
     <Card className="h-full gap-3">
       <CardHeader className="flex flex-row items-center justify-between gap-2">
         <div className="flex items-baseline gap-2">
-          <CardTitle className="font-bold">{title}</CardTitle>
-          <span className="text-muted-foreground text-xs tabular-nums">
+          <CardTitle>{title}</CardTitle>
+          <span className="text-muted-foreground text-caption tabular-nums">
             {buildState.length} / {MAX_BUILD_ROWS}
           </span>
         </div>

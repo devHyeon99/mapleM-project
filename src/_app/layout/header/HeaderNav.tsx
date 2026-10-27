@@ -12,7 +12,7 @@ export function HeaderNav() {
         <HeaderNavItem key={link.href}>
           <HeaderNavLink
             link={link}
-            className="text-muted-foreground hover:text-foreground data-[active]:text-foreground group-hover:text-foreground inline-flex items-start gap-1 rounded-md px-4 py-1 text-lg transition-colors"
+            className="text-muted-foreground hover:text-foreground data-[active]:text-foreground group-hover:text-foreground text-body-lg inline-flex items-start gap-1 rounded-md px-4 py-1 transition-colors"
           />
           {link.children ? (
             // 크롤러용으로 항상 렌더링, hover·키보드 포커스(focus-visible) 일 때만 노출
@@ -26,7 +26,7 @@ export function HeaderNav() {
                   <li key={child.href}>
                     <HeaderNavLink
                       link={child}
-                      className="text-muted-foreground hover:text-foreground data-[active]:text-foreground hover:bg-muted focus-visible:bg-muted focus-visible:text-foreground block rounded-xl px-3 py-2 text-sm font-medium whitespace-nowrap transition-colors outline-none data-[active]:font-semibold"
+                      className="text-muted-foreground hover:text-foreground data-[active]:text-foreground hover:bg-muted focus-visible:bg-muted focus-visible:text-foreground text-body block rounded-xl px-3 py-2 font-medium whitespace-nowrap transition-colors outline-none data-[active]:font-semibold"
                     />
                   </li>
                 ))}

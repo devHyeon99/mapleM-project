@@ -48,7 +48,7 @@ export const PetDialog = ({ pet, className }: PetDialogProps) => {
         <span className="self-start">{pet.name}</span>
       </div>
 
-      <div className="border-game-line border-b py-1 text-sm">
+      <div className="border-game-line text-body border-b py-1">
         <p className="font-medium">펫 정보</p>
         <dl className="flex flex-col">
           <ItemOptionRow

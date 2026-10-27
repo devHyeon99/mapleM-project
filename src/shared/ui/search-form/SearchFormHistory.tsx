@@ -39,7 +39,7 @@ export const SearchFormHistory = ({
         className,
       )}
     >
-      <div className="text-muted-foreground flex items-center justify-between px-4 py-2 text-sm font-medium">
+      <div className="text-muted-foreground text-body flex items-center justify-between px-4 py-2 font-medium">
         <span id={labelId}>최근 검색</span>
 
         {hasHistory && (
@@ -48,7 +48,7 @@ export const SearchFormHistory = ({
             variant="ghost"
             size="sm"
             onClick={onClear}
-            className="hover:text-destructive h-auto px-1 py-0 text-sm hover:bg-transparent!"
+            className="hover:text-destructive text-body h-auto px-1 py-0 hover:bg-transparent!"
             aria-label="최근 검색 기록 전체 삭제"
           >
             전체삭제
@@ -62,7 +62,7 @@ export const SearchFormHistory = ({
         className="min-h-0 flex-1 overflow-y-auto"
       >
         {!hasHistory && (
-          <li className="text-muted-foreground py-6 text-center text-sm">
+          <li className="text-muted-foreground text-body py-6 text-center">
             최근 검색 기록이 없습니다.
           </li>
         )}
@@ -100,7 +100,7 @@ const HistoryItemRow = ({
   onRemove: (id: string) => void;
 }) => {
   return (
-    <li className="hover:bg-accent flex items-center pr-2 text-sm transition-colors">
+    <li className="hover:bg-accent text-body flex items-center pr-2 transition-colors">
       <button
         type="button"
         onClick={() => onSelect(item)}
@@ -117,7 +117,7 @@ const HistoryItemRow = ({
         <span className="truncate font-medium">{item.name}</span>
         <Badge
           variant="secondary"
-          className="bg-input/30! text-muted-foreground px-1.5 py-0.5 text-xs font-bold"
+          className="bg-input/30! text-muted-foreground text-caption px-1.5 py-0.5 font-medium"
         >
           {item.world}
         </Badge>

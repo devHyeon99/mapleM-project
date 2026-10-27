@@ -37,10 +37,10 @@ export const SkillListCard = ({ title, items }: SkillListCardProps) => {
               style={{ imageRendering: "pixelated" }}
             />
             <div className="flex min-w-0 flex-col">
-              <span className="text-muted-foreground text-xs">
+              <span className="text-muted-foreground text-caption">
                 {item.label}
               </span>
-              <span className="truncate text-sm font-medium">
+              <span className="text-body truncate font-medium">
                 {stripSkillLevel(item.name)}
               </span>
             </div>

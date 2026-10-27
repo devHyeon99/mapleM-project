@@ -31,7 +31,7 @@ const EffectStatus = ({
   <div
     role={isError ? "alert" : undefined}
     className={cn(
-      "flex h-48 items-center justify-center text-sm",
+      "text-body flex h-48 items-center justify-center",
       isError ? "text-destructive font-medium" : "text-muted-foreground",
       className,
     )}
@@ -53,7 +53,7 @@ export const UnionEffect = ({
       return <EffectStatus isError>{formatQueryError(error)}</EffectStatus>;
 
     if (isLoading)
-      return <EffectStatus className="text-xs">로딩 중...</EffectStatus>;
+      return <EffectStatus className="text-caption">로딩 중...</EffectStatus>;
 
     const parsedList = parseUnionOptions(options);
     if (parsedList.length === 0)

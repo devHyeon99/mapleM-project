@@ -8,14 +8,14 @@ export function ResultLine({
 }) {
   return (
     <div>
-      <div className="flex items-center justify-between text-sm">
+      <div className="text-body flex items-center justify-between">
         <p className="min-w-0 font-medium">{line ? line.option.label : "-"}</p>
         <p className="font-semibold text-orange-500">
           {line ? formatPotentialValue(line.option) : "-"}
         </p>
       </div>
       {line ? (
-        <p className="text-muted-foreground text-xs">
+        <p className="text-muted-foreground text-caption">
           {line.option.chance.toFixed(5)}%
         </p>
       ) : null}

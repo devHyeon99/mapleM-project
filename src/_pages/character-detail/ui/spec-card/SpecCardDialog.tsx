@@ -237,14 +237,14 @@ export const SpecCardDialog = ({ data }: SpecCardDialogProps) => {
         )}
 
         {error && (
-          <p className="text-destructive w-full text-xs" role="alert">
+          <p className="text-destructive text-caption w-full" role="alert">
             {error}
           </p>
         )}
 
         <DialogFooter className="w-full">
           {savedImage ? (
-            <p className="text-muted-foreground w-full text-center text-xs">
+            <p className="text-muted-foreground text-caption w-full text-center">
               스펙 카드 이미지를 길게 눌러{" "}
               <b className="text-foreground">이미지 저장</b>을 하세요.
             </p>

@@ -44,7 +44,7 @@ function LedgerRow({ row }: { row: ComparisonRow }) {
     >
       <dt
         className={cn(
-          "text-13 truncate font-medium",
+          "text-body-sm truncate font-medium",
           CELL.label,
           isUnchanged && "text-muted-foreground",
         )}
@@ -54,7 +54,7 @@ function LedgerRow({ row }: { row: ComparisonRow }) {
 
       <dd
         className={cn(
-          "text-muted-foreground text-xs tabular-nums",
+          "text-muted-foreground text-caption tabular-nums",
           CELL.values,
         )}
       >
@@ -69,7 +69,7 @@ function LedgerRow({ row }: { row: ComparisonRow }) {
 
       <dd
         className={cn(
-          "text-sm font-bold tabular-nums",
+          "text-body font-semibold tabular-nums",
           CELL.delta,
           getDeltaClassName(row.delta),
         )}
@@ -117,7 +117,7 @@ export function ComparisonCard({ rows }: { rows: ComparisonRow[] }) {
             <div
               className={cn(
                 LEDGER_GRID,
-                "border-divider text-muted-foreground border-b py-2 text-xs font-medium",
+                "border-divider text-muted-foreground text-caption border-b py-2 font-medium",
               )}
             >
               <span className={CELL.label}>스탯</span>

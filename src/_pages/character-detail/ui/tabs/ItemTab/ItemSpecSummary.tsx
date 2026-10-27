@@ -29,8 +29,10 @@ export const ItemSpecSummary = ({
     <dl className="grid grid-cols-2 gap-1.5">
       {stats.map(({ label, value }) => (
         <div key={label} className="bg-muted/60 rounded-lg px-3 py-2">
-          <dt className="text-muted-foreground truncate text-xs">{label}</dt>
-          <dd className="mt-0.5 text-[15px] font-semibold tabular-nums">
+          <dt className="text-muted-foreground text-caption truncate">
+            {label}
+          </dt>
+          <dd className="text-body-lg mt-0.5 font-semibold tabular-nums">
             {value}
           </dd>
         </div>

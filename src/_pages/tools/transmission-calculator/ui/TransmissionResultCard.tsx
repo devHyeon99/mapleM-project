@@ -19,27 +19,27 @@ export function TransmissionResultCard({ result }: Props) {
 
       <CardContent className="space-y-4">
         {rows.length === 0 ? (
-          <p className="text-muted-foreground text-sm">
+          <p className="text-muted-foreground text-body">
             전수할 옵션을 하나 이상 선택해 주세요.
           </p>
         ) : (
           <ul className="grid gap-2">
             {rows.map((row) => (
-              <li key={row.key} className="grid gap-0.5 text-sm">
+              <li key={row.key} className="text-body grid gap-0.5">
                 <div className="flex items-center justify-between gap-3">
                   <span>
                     {row.label}
-                    <span className="ml-1.5 text-xs">{row.detail}</span>
+                    <span className="text-caption ml-1.5">{row.detail}</span>
                   </span>
                   <span className="font-medium">
                     {formatMesoInEok(row.cost.meso)}
                   </span>
                 </div>
                 <div className="flex items-center justify-between gap-3">
-                  <span className="text-muted-foreground text-xs">
+                  <span className="text-muted-foreground text-caption">
                     {formatMeso(row.cost.meso)} 메소
                   </span>
-                  <span className="text-muted-foreground text-xs">
+                  <span className="text-muted-foreground text-caption">
                     주문서 {row.cost.scroll}개
                   </span>
                 </div>
@@ -52,15 +52,15 @@ export function TransmissionResultCard({ result }: Props) {
 
         <div className="grid gap-1">
           <div className="flex items-center justify-between gap-3">
-            <span className="text-sm font-medium">필요 메소</span>
+            <span className="text-body font-medium">필요 메소</span>
             <span className="font-semibold">{formatMesoInEok(total.meso)}</span>
           </div>
-          <p className="text-muted-foreground text-right text-xs">
+          <p className="text-muted-foreground text-caption text-right">
             {formatMeso(total.meso)} 메소
           </p>
 
           <div className="flex items-center justify-between gap-3">
-            <span className="text-sm font-medium">전수 주문서</span>
+            <span className="text-body font-medium">전수 주문서</span>
             <span className="font-semibold">{total.scroll}개</span>
           </div>
         </div>

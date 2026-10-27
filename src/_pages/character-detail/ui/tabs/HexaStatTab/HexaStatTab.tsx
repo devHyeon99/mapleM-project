@@ -102,7 +102,7 @@ const HexaStatPageCard = ({ page }: PageCardProps) => {
     >
       {/* 헤더 */}
       <div className="flex items-center justify-between">
-        <span className="text-sm font-bold">페이지 {page.page_no}</span>
+        <span className="text-body font-semibold">페이지 {page.page_no}</span>
         {isActive && <Badge className="font-medium">현재 적용 중</Badge>}
       </div>
 
@@ -110,7 +110,7 @@ const HexaStatPageCard = ({ page }: PageCardProps) => {
 
       {statGroups.map((group) => (
         <div key={group.title} className="space-y-1">
-          <p className="text-sm font-bold tracking-wider uppercase">
+          <p className="text-body font-semibold tracking-wider uppercase">
             {group.title}
           </p>
           <dl className="flex flex-col gap-1">

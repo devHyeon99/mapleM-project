@@ -20,7 +20,7 @@ const getEmblemImgNumber = (level: number) => {
   return null; // 범위 밖이거나 0일 때
 };
 
-const BADGE_SIZE = "wide:h-3.5 wide:w-3.5 wide:text-[10px] h-3 w-3 text-[9px]";
+const BADGE_SIZE = "wide:h-3.5 wide:w-3.5 wide:text-micro h-3 w-3 text-[9px]";
 const BADGE_BASE =
   "flex items-center justify-center subpixel-antialiased leading-none";
 

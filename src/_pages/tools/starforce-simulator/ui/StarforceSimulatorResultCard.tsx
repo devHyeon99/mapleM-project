@@ -13,7 +13,7 @@ import type {
 
 function SummaryRow({ label, value }: { label: string; value: string }) {
   return (
-    <div className="flex items-center justify-between gap-3 text-sm">
+    <div className="text-body flex items-center justify-between gap-3">
       <span className="text-muted-foreground">{label}</span>
       <span className="font-medium">{value}</span>
     </div>
@@ -22,7 +22,7 @@ function SummaryRow({ label, value }: { label: string; value: string }) {
 
 function RateRow({ label, value }: { label: string; value: number }) {
   return (
-    <div className="flex items-center justify-between gap-3 text-sm">
+    <div className="text-body flex items-center justify-between gap-3">
       <span className="text-muted-foreground">{label}</span>
       <span className="font-medium">{value.toFixed(2)}%</span>
     </div>
@@ -138,7 +138,7 @@ export function StarforceSimulatorResultCard({
           <Separator className="my-2" />
 
           {latestResult && (
-            <div className="grid gap-2 text-sm">
+            <div className="text-body grid gap-2">
               <div className="flex items-center justify-between">
                 <span className="font-medium">최근 결과</span>
                 <Badge
@@ -161,7 +161,7 @@ export function StarforceSimulatorResultCard({
                 <RateRow label="파괴" value={expectedRate.destroy} />
               </>
             ) : (
-              <p className="text-muted-foreground text-sm">
+              <p className="text-muted-foreground text-body">
                 {equipmentCategory == null
                   ? "장비 종류를 선택해 주세요."
                   : isAtMaxStarforce
@@ -172,7 +172,7 @@ export function StarforceSimulatorResultCard({
           </div>
 
           {isDestroyed ? (
-            <p className="text-destructive text-sm">
+            <p className="text-destructive text-body">
               장비가 파괴되었습니다. 초기화 후 다시 강화를 시작해 주세요.
             </p>
           ) : null}

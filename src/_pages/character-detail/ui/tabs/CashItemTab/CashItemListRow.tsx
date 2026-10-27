@@ -39,11 +39,11 @@ export const CashItemListRow = ({
 
       <div className="flex min-w-0 flex-1 flex-col justify-center gap-0.5">
         <div className="mb-0.5 flex items-center justify-between gap-2">
-          <span className="text-base font-semibold">{displayName}</span>
+          <span className="text-body-lg font-semibold">{displayName}</span>
           {item.cash_item_label && (
             <span
               className={cn(
-                "shrink-0 text-xs font-semibold",
+                "text-caption shrink-0 font-semibold",
                 getCashLabelStyle(item.cash_item_label),
               )}
             >

@@ -12,7 +12,7 @@ export const ItemInfo = ({ item }: Props) => {
   if (!item.equipment_level) return null;
 
   return (
-    <div className="border-game-line border-b py-1 text-sm">
+    <div className="border-game-line text-body border-b py-1">
       <p className="font-medium">아이템 정보</p>
 
       <dl className="flex flex-col">

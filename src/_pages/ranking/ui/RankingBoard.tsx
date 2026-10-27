@@ -78,7 +78,7 @@ export function RankingBoard({
       {/* 넥슨 API 가 집계 없는 월드·종류에도 빈 배열을 주므로, 비는 이유를 문구로 구분해 줌 */}
       {!hasRankingData ? (
         <TabMessageSection
-          className="text-muted-foreground min-h-40! text-sm shadow-none"
+          className="text-muted-foreground text-body min-h-40! shadow-none"
           message={rankingEmptyMessage(type, fetchParams.worldName)}
         />
       ) : (
@@ -98,7 +98,7 @@ export function RankingBoard({
               )
             ) : rows.length === 0 ? (
               <TabMessageSection
-                className="text-muted-foreground min-h-40! text-sm shadow-none"
+                className="text-muted-foreground text-body min-h-40! shadow-none"
                 message={`${jobName} 랭커가 집계 범위 안에 없습니다.`}
               />
             ) : (

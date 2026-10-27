@@ -99,7 +99,7 @@ export default function RootLayout({
               data-nosnippet
             >
               <div className="bg-muted/30 text-muted-foreground sticky top-24 flex h-[600px] w-full items-center justify-center rounded-lg border">
-                <span className="text-sm">Left Wing Ad</span>
+                <span className="text-body">Left Wing Ad</span>
               </div>
             </aside>
 
@@ -113,7 +113,7 @@ export default function RootLayout({
               data-nosnippet
             >
               <div className="bg-muted/30 text-muted-foreground sticky top-24 flex h-[600px] w-full items-center justify-center rounded-lg border">
-                <span className="text-sm">Right Wing Ad</span>
+                <span className="text-body">Right Wing Ad</span>
               </div>
             </aside>
           </main>

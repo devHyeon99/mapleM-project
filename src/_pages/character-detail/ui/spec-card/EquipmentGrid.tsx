@@ -73,13 +73,13 @@ export const EquipmentGrid = ({ items, data }: EquipmentGridProps) => {
     <div className="grid grid-cols-7 gap-1">
       {/* 명시 배치라 자동 배치되는 슬롯들이 이 영역들을 알아서 비켜감 */}
       <ul className="col-span-2 col-start-3 row-start-1 flex flex-col gap-1 px-1">
-        <InfoRow as="li" className="text-xs" label="스타포스">
+        <InfoRow as="li" className="text-caption" label="스타포스">
           {totalStarforce}
         </InfoRow>
-        <InfoRow as="li" className="text-xs" label="아케인 포스">
+        <InfoRow as="li" className="text-caption" label="아케인 포스">
           {totalArcaneForce}
         </InfoRow>
-        <InfoRow as="li" className="text-xs" label="어센틱 포스">
+        <InfoRow as="li" className="text-caption" label="어센틱 포스">
           {totalAuthenticForce}
         </InfoRow>
       </ul>
@@ -101,17 +101,17 @@ export const EquipmentGrid = ({ items, data }: EquipmentGridProps) => {
 
         <div className="flex flex-col items-center gap-0.5">
           <div className="flex gap-2">
-            <InfoRow label="직업" className="text-xs">
+            <InfoRow label="직업" className="text-caption">
               {data.character_class}
             </InfoRow>
-            <InfoRow label="월드" className="text-xs">
+            <InfoRow label="월드" className="text-caption">
               {data.world_name}
             </InfoRow>
           </div>
-          <InfoRow label="유니온" className="text-xs">
+          <InfoRow label="유니온" className="text-caption">
             {data.union_data?.union_level?.toLocaleString() ?? "0"}
           </InfoRow>
-          <InfoRow label="길드" className="text-xs">
+          <InfoRow label="길드" className="text-caption">
             {data.guild_name ?? "-"}
           </InfoRow>
         </div>
@@ -154,7 +154,7 @@ export const EquipmentGrid = ({ items, data }: EquipmentGridProps) => {
         <InfoRow
           as="li"
           variant="between"
-          className="text-xs"
+          className="text-caption"
           label={`잠재 (${labelDamage}+보공)`}
         >
           {potential.toFixed(2)}%
@@ -162,7 +162,7 @@ export const EquipmentGrid = ({ items, data }: EquipmentGridProps) => {
         <InfoRow
           as="li"
           variant="between"
-          className="text-xs"
+          className="text-caption"
           label={`에디 (${labelDamage}+보공)`}
         >
           {additional.toFixed(2)}%
@@ -170,7 +170,7 @@ export const EquipmentGrid = ({ items, data }: EquipmentGridProps) => {
         <InfoRow
           as="li"
           variant="between"
-          className="text-xs"
+          className="text-caption"
           label="추옵 (최종 대미지)"
         >
           {chuop.finalDamage.toFixed(2)}%
@@ -178,7 +178,7 @@ export const EquipmentGrid = ({ items, data }: EquipmentGridProps) => {
         <InfoRow
           as="li"
           variant="between"
-          className="text-xs"
+          className="text-caption"
           label={`추옵 (${labelAtk})`}
         >
           {chuop.atk.toLocaleString()}

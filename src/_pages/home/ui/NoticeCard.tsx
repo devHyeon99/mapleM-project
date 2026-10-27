@@ -20,12 +20,12 @@ export function NoticeCard({ title, moreHref, items }: NoticeCardProps) {
   return (
     <Card className="h-full w-full gap-2 rounded-xs border-none shadow-none ring-0">
       <CardHeader className="flex flex-row items-center justify-between space-y-0">
-        <CardTitle className="text-lg font-bold">{title}</CardTitle>
+        <CardTitle className="text-heading">{title}</CardTitle>
         <Button
           variant="link"
           size="sm"
           asChild
-          className="text-muted-foreground -mx-3 h-8 text-sm hover:text-orange-500"
+          className="text-muted-foreground text-body -mx-3 h-8 hover:text-orange-500"
         >
           <Link href={moreHref} target="_blank" rel="noopener noreferrer">
             더보기
@@ -45,13 +45,13 @@ export function NoticeCard({ title, moreHref, items }: NoticeCardProps) {
               >
                 <span
                   className={clsx(
-                    "text-primary truncate text-sm font-medium md:text-base",
+                    "text-primary text-body md:text-body-lg truncate font-medium",
                     "transition-all duration-200 group-hover:translate-x-0.5 group-hover:text-orange-500",
                   )}
                 >
                   {item.title}
                 </span>
-                <time className="text-muted-foreground text-xs">
+                <time className="text-muted-foreground text-caption">
                   {item.date}
                 </time>
               </Link>

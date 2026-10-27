@@ -32,7 +32,7 @@ export const TabMessageSection = ({
       {text ? (
         <p
           className={cn(
-            "text-sm whitespace-pre-line",
+            "text-body whitespace-pre-line",
             isError ? "text-destructive font-medium" : "text-muted-foreground",
           )}
         >

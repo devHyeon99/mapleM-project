@@ -41,7 +41,7 @@ export const SegmentedToggle = <T extends string | number>({
   return (
     <div className={cn("flex min-w-0 flex-col gap-1", className)}>
       {label && (
-        <Label className="text-muted-foreground text-xs">{label}</Label>
+        <Label className="text-muted-foreground text-caption">{label}</Label>
       )}
       <ToggleGroup
         type="single"
@@ -60,7 +60,7 @@ export const SegmentedToggle = <T extends string | number>({
             key={option.value}
             value={String(option.value)}
             aria-label={option.ariaLabel}
-            className="relative text-xs font-semibold"
+            className="text-caption relative font-semibold"
           >
             {option.content ?? option.value}
             {option.marked && (

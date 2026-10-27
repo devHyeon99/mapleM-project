@@ -16,7 +16,7 @@ function SummaryRow({
   const isOptionVariant = variant === "option";
 
   return (
-    <div className="flex items-center justify-between gap-3 text-sm">
+    <div className="text-body flex items-center justify-between gap-3">
       <span
         className={
           isOptionVariant ? "text-foreground" : "text-muted-foreground"
@@ -67,7 +67,7 @@ export function PotentialSimulatorResultCard({
           <Separator className="my-2" />
 
           {latestResult ? (
-            <div className="grid gap-2 text-sm">
+            <div className="text-body grid gap-2">
               <span className="font-medium">옵션결과</span>
               {latestResult.options.map((option, index) => (
                 <SummaryRow
@@ -83,7 +83,7 @@ export function PotentialSimulatorResultCard({
               ))}
             </div>
           ) : (
-            <p className="text-muted-foreground text-center text-sm">
+            <p className="text-muted-foreground text-body text-center">
               아직 시뮬레이션 결과가 없습니다.
             </p>
           )}

@@ -47,7 +47,7 @@ export const ItemCashOptions = ({
           : date;
 
   return (
-    <div className="border-game-line border-b py-1 text-sm">
+    <div className="border-game-line text-body border-b py-1">
       <span>아이템 옵션</span>
       <dl>
         {hasOptions &&

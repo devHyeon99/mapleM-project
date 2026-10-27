@@ -24,10 +24,12 @@ export const SymbolItem = ({ name, icon, level, option }: SymbolItemProps) => {
       </div>
       <div className="w-full min-w-0">
         <div className="flex flex-row justify-between">
-          <p className="truncate text-sm font-semibold">{name}</p>
-          <p className="text-xs font-medium text-orange-400">Lv. {level}</p>
+          <p className="text-body truncate font-semibold">{name}</p>
+          <p className="text-caption font-medium text-orange-400">
+            Lv. {level}
+          </p>
         </div>
-        <p className="text-muted-foreground mt-0.5 text-xs">{option}</p>
+        <p className="text-muted-foreground text-caption mt-0.5">{option}</p>
       </div>
     </li>
   );

@@ -14,7 +14,7 @@ export const ItemEmptySlot = ({ label, className }: ItemEmptySlotProps) => {
       )}
       title={`${label} 슬롯 (비어있음)`}
     >
-      <span className="text-muted-foreground text-[10px] leading-tight font-semibold select-none sm:text-xs">
+      <span className="text-muted-foreground text-micro sm:text-caption leading-tight font-semibold select-none">
         {label.replace(/\s*\(.*?\)/, "")}
       </span>
     </div>

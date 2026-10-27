@@ -47,16 +47,16 @@ function HexaSkillSection({
 
             <div className="min-w-0 flex-1">
               <div className="flex items-baseline justify-between gap-2">
-                <span className="truncate text-sm font-medium">
+                <span className="text-body truncate font-medium">
                   {core.skill_name}
                 </span>
-                <span className="shrink-0 text-xs font-medium text-orange-400">
+                <span className="text-caption shrink-0 font-medium text-orange-400">
                   Lv.{formatLevel(core.slot_level)}
                 </span>
               </div>
 
               {core.skill_description && (
-                <p className="text-muted-foreground mt-1 text-xs whitespace-pre-line">
+                <p className="text-muted-foreground text-caption mt-1 whitespace-pre-line">
                   {core.skill_description}
                 </p>
               )}
@@ -104,8 +104,8 @@ export const HexaSkillTab = ({ ocid, level }: HexaSkillTabProps) => {
 
   return (
     <div className="flex flex-col gap-2">
-      <div className="bg-card flex items-baseline justify-between rounded-2xl p-4 text-sm font-medium shadow-sm">
-        <span className="font-bold">HEXA매트릭스 합산 점수</span>
+      <div className="bg-card text-body flex items-baseline justify-between rounded-2xl p-4 font-medium shadow-sm">
+        <span className="font-semibold">HEXA매트릭스 합산 점수</span>
         <span className="text-orange-400">
           {(data?.hexamatrix_total_score ?? 0).toLocaleString()}
         </span>

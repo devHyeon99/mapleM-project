@@ -102,7 +102,7 @@ export function BuildEditorRow({
         disabled={maxStarForce === 0}
         // 상한을 자리표시자로 알려줘야 몇까지 넣을 수 있는지 눌러보지 않아도 안다
         placeholder={maxStarForce === 0 ? "효과 없음" : `★ 0~${maxStarForce}`}
-        className="col-start-2 row-start-2 tabular-nums placeholder:text-sm lg:col-start-3 lg:row-start-1"
+        className="placeholder:text-body col-start-2 row-start-2 tabular-nums lg:col-start-3 lg:row-start-1"
         // 0은 빈 칸으로 둬야 지우고 새로 입력할 수 있음
         value={row.starForce > 0 ? row.starForce : ""}
         onChange={(event) =>

@@ -19,7 +19,7 @@ export const JewelDisplay = ({ jewel }: { jewel: JewelInfo }) => {
   const { label, value } = splitJewelOption(jewel.jewel_option);
 
   return (
-    <div className="flex h-21.5 w-24 flex-col items-center text-center text-xs">
+    <div className="text-caption flex h-21.5 w-24 flex-col items-center text-center">
       <div className="relative">
         <Image
           src={jewel.jewel_icon}

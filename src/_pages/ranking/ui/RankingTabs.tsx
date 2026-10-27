@@ -29,7 +29,7 @@ export function RankingTabs() {
               <Link
                 aria-current={isActive ? "page" : undefined}
                 className={cn(
-                  "text-muted-foreground hover:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 inline-flex h-9 w-full items-center justify-center rounded-2xl border border-transparent px-2 py-1 text-sm font-medium whitespace-nowrap transition-colors outline-none focus-visible:ring-[3px]",
+                  "text-muted-foreground hover:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 text-body inline-flex h-9 w-full items-center justify-center rounded-2xl border border-transparent px-2 py-1 font-medium whitespace-nowrap transition-colors outline-none focus-visible:ring-[3px]",
                   isActive && "bg-card/80 text-foreground shadow-sm",
                 )}
                 href={rankingHref(type)}

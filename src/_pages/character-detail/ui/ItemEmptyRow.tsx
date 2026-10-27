@@ -17,13 +17,13 @@ export const ItemEmptyRow = ({ label, className }: EmptyItemRowProps) => {
     >
       {/* 왼쪽 아이콘 박스 */}
       <div className="bg-muted/70 flex h-12 w-12 shrink-0 items-center justify-center rounded-xs border-2">
-        <span className="text-muted-foreground px-1 text-center text-xs">
+        <span className="text-muted-foreground text-caption px-1 text-center">
           {displayLabel}
         </span>
       </div>
 
       {/* 오른쪽 텍스트 */}
-      <div className="text-muted-foreground text-sm">
+      <div className="text-muted-foreground text-body">
         {label ? `착용 중인 ${displayLabel} 없음` : "비어 있음"}
       </div>
     </div>

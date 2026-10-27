@@ -42,7 +42,7 @@ export function HeaderNavLink({
       {link.badge ? (
         <span
           aria-hidden="true"
-          className="text-background rounded-full bg-orange-500 px-1 py-0.5 text-[10px] leading-none font-bold"
+          className="text-background text-micro rounded-full bg-orange-500 px-1 py-0.5 leading-none"
         >
           {link.badge}
         </span>

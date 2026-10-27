@@ -18,8 +18,8 @@ function Frame({
   return (
     <div className="flex flex-col gap-3 p-5">
       <div className="flex flex-wrap items-baseline justify-between gap-x-2">
-        <h3 className="text-base font-bold">월드별 캐릭터 수 집계</h3>
-        <p className="text-muted-foreground text-xs">
+        <h3 className="text-subheading">월드별 캐릭터 수 집계</h3>
+        <p className="text-muted-foreground text-caption">
           전체 레벨 랭킹 10,000위 기준
           {date ? ` · ${date}` : ""}
         </p>
@@ -44,7 +44,7 @@ export async function WorldCharacterCount() {
     await connection();
     return (
       <Frame>
-        <p className="text-muted-foreground text-sm">
+        <p className="text-muted-foreground text-body">
           월드별 캐릭터 수를 불러오지 못했습니다.
         </p>
       </Frame>
@@ -70,7 +70,7 @@ export async function WorldCharacterCount() {
                 className="h-4 w-4"
                 size={16}
               />
-              <span className="w-14 shrink-0 text-sm font-medium">
+              <span className="text-body w-14 shrink-0 font-medium">
                 {worldName}
               </span>
               <span
@@ -82,9 +82,9 @@ export async function WorldCharacterCount() {
                   style={{ width: `${(count / max) * 100}%` }}
                 />
               </span>
-              <span className="w-24 shrink-0 text-right text-sm tabular-nums">
+              <span className="text-body w-24 shrink-0 text-right tabular-nums">
                 {count.toLocaleString()}
-                <span className="text-muted-foreground ml-1 text-xs">
+                <span className="text-muted-foreground text-caption ml-1">
                   {((count / total) * 100).toFixed(1)}%
                 </span>
               </span>

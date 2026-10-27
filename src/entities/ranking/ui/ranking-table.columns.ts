@@ -22,7 +22,7 @@ const createBaseColumns = (statHeader: string): ColumnDef[] => [
   {
     header: statHeader,
     className: "w-[120px]",
-    cellClassName: "font-bold",
+    cellClassName: "font-semibold",
     cell: Renderers.MainStat,
   },
   { header: "길드", className: "w-[120px]", cell: Renderers.SubInfo },
@@ -51,7 +51,7 @@ const RANKING_COLUMNS: Record<string, ColumnDef[]> = {
     {
       header: "등급",
       className: "w-[120px]",
-      cellClassName: "font-bold",
+      cellClassName: "font-semibold",
       cell: Renderers.SubInfo,
     },
     // 길드 정보를 강제로 표시하기 위해 전용 Renderer 사용
@@ -72,7 +72,7 @@ const RANKING_COLUMNS: Record<string, ColumnDef[]> = {
     {
       header: "등급",
       className: "w-[120px]",
-      cellClassName: "font-bold",
+      cellClassName: "font-semibold",
       cell: Renderers.SubInfo,
     },
     {
@@ -91,7 +91,7 @@ const RANKING_COLUMNS: Record<string, ColumnDef[]> = {
     {
       header: "점수",
       className: "w-[120px]",
-      cellClassName: "font-bold",
+      cellClassName: "font-semibold",
       cell: Renderers.MainStat,
     },
     { header: "등급", className: "w-[80px]", cell: Renderers.Grade },

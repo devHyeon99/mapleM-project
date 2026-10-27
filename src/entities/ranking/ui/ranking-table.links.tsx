@@ -17,7 +17,7 @@ export const LinkText = ({
     href={href}
     prefetch={false}
     onNavigate={onNavigate}
-    className="text-sm font-medium underline-offset-4 hover:text-orange-500 hover:underline"
+    className="text-body font-medium underline-offset-4 hover:text-orange-500 hover:underline"
   >
     {children}
   </Link>
@@ -55,5 +55,5 @@ export const renderGuildInfo = (item: AnyRankingData) => {
       </IconWithText>
     );
   }
-  return <span className="text-muted-foreground text-xs">-</span>;
+  return <span className="text-muted-foreground text-caption">-</span>;
 };

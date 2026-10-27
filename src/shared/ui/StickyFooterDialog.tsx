@@ -198,7 +198,7 @@ export const StickyFooterDialog = ({
             <>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={savedImage} alt="저장할 이미지" className="w-full" />
-              <p className="mt-2 text-center text-xs opacity-70">
+              <p className="text-caption mt-2 text-center opacity-70">
                 이미지를 길게 눌러 <b>이미지 저장</b>을 하세요.
               </p>
             </>
@@ -226,7 +226,10 @@ export const StickyFooterDialog = ({
             </div>
           )}
           {saveError && (
-            <p className="w-full text-center text-xs text-red-400" role="alert">
+            <p
+              className="text-caption w-full text-center text-red-400"
+              role="alert"
+            >
               {saveError}
             </p>
           )}
@@ -239,11 +242,7 @@ export const StickyFooterDialog = ({
                 saveButtonClassName,
               )}
             >
-              {isSaving ? (
-                <Loader2 className="animate-spin" />
-              ) : (
-                <Download />
-              )}
+              {isSaving ? <Loader2 className="animate-spin" /> : <Download />}
               이미지 저장
             </Button>
           )}

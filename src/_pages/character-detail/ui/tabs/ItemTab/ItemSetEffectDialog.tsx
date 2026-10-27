@@ -32,8 +32,8 @@ export const ItemSetEffectDialog = ({
       header={
         <>
           <header className="border-b pb-3">
-            <p className="text-lg font-bold">{set.displayName}</p>
-            <div className="mt-1.5 flex flex-wrap gap-1.5 text-xs font-medium">
+            <p className="text-heading">{set.displayName}</p>
+            <div className="text-caption mt-1.5 flex flex-wrap gap-1.5 font-medium">
               <span className="rounded-md bg-orange-500/15 px-2 py-0.5 text-orange-500">
                 {set.count}세트 착용
               </span>
@@ -45,7 +45,7 @@ export const ItemSetEffectDialog = ({
               )}
             </div>
           </header>
-          <p className="text-muted-foreground pt-3 text-xs font-semibold">
+          <p className="text-muted-foreground text-caption pt-3 font-semibold">
             합산 능력치
           </p>
         </>
@@ -60,7 +60,7 @@ export const ItemSetEffectDialog = ({
             return (
               <div
                 key={effect.key}
-                className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-0.5 text-[13px] md:text-sm"
+                className="text-body-sm md:text-body flex flex-wrap items-baseline justify-between gap-x-3 gap-y-0.5"
               >
                 <dt className="text-muted-foreground">{effect.label}</dt>
                 <dd className="ml-auto font-semibold tabular-nums">
@@ -68,7 +68,7 @@ export const ItemSetEffectDialog = ({
                 </dd>
                 {/* 세트·스타포스 양쪽에서 오는 능력치만 합계 아래 출처 분리 표기 */}
                 {fromSet != null && fromStarForce != null && (
-                  <dd className="text-muted-foreground basis-full text-right text-xs tabular-nums">
+                  <dd className="text-muted-foreground text-caption basis-full text-right tabular-nums">
                     세트 {formatEffectValue(fromSet, effect.unit)} ·{" "}
                     <span className="text-yellow-600 dark:text-yellow-400">
                       스타포스 {formatEffectValue(fromStarForce, effect.unit)}
@@ -82,7 +82,7 @@ export const ItemSetEffectDialog = ({
       </section>
 
       {set.correctedFromArcaneShade && (
-        <p className="text-muted-foreground mt-3 border-t pt-3 text-xs">
+        <p className="text-muted-foreground text-caption mt-3 border-t pt-3">
           {ABSOLABS_CORRECTION_NOTE}
         </p>
       )}

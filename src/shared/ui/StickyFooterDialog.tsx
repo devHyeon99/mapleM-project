@@ -170,7 +170,8 @@ export const StickyFooterDialog = ({
           (event.currentTarget as HTMLElement | null)?.focus();
         }}
         className={cn(
-          "flex max-h-[calc(100dvh-8rem)] w-full flex-col gap-0 overflow-hidden p-0 sm:max-w-md",
+          // --dialog-fade: 하단 스크롤 안내 그라데이션 색. 배경색을 바꾸는 스킨은 같은 색으로 덮어씀
+          "flex max-h-[calc(100dvh-8rem)] w-full flex-col gap-0 overflow-hidden p-0 [--dialog-fade:var(--color-popover)] sm:max-w-md",
           contentClassName,
         )}
       >
@@ -222,7 +223,7 @@ export const StickyFooterDialog = ({
           {canScrollDown && (
             <div
               aria-hidden="true"
-              className="from-popover pointer-events-none absolute inset-x-0 -top-12 flex h-12 items-end justify-center bg-linear-to-t to-transparent pb-1"
+              className="pointer-events-none absolute inset-x-0 -top-12 flex h-12 items-end justify-center bg-linear-to-t from-(--dialog-fade) to-transparent pb-1"
             >
               <ChevronDownIcon className="size-5 text-orange-500 motion-safe:animate-bounce" />
             </div>

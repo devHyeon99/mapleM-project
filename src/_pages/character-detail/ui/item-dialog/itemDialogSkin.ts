@@ -7,7 +7,7 @@
 export const ITEM_DIALOG_SKIN = {
   contentClassName: [
     "text-game-text border-game-line bg-game-surface flex w-72 flex-col gap-1 border ring-0 [--dialog-fade:var(--color-game-surface)]",
-    "max-h-[calc(100dvh-12rem)] overflow-hidden overscroll-contain sm:max-h-[85vh]",
+    "max-h-[calc(100dvh-6rem)] overflow-hidden overscroll-contain sm:max-h-[85vh]",
     // 우상단 닫기(X) 버튼은 기본 스타일이 테마를 타므로 같은 팔레트로 맞춤
     // (ghost 변형의 hover:text-foreground가 라이트 모드에서 글자를 검게 만들어 호버 색도 고정)
     "[&>button]:bg-game-surface-strong [&>button]:text-game-text [&>button:hover]:bg-white/15 [&>button:hover]:text-game-text",

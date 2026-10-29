@@ -43,6 +43,48 @@ interface StickyFooterDialogProps {
 /** 캡처 이미지 가장자리 여백(px). 스크롤 영역 패딩과 동일 */
 const CAPTURE_PADDING = 16;
 
+/**
+ * 저장 이미지 최소 가로/세로 비율. 포토 카드와 같은 5:7.
+ * 세로로 긴 이미지는 폰 화면 비율과 비슷해 사진 앱이 꽉 채워 자르므로 양옆 여백으로 맞춤
+ */
+const CAPTURE_MIN_ASPECT = 5 / 7;
+
+/** 저장 배율. 3배는 파일이 과하게 커서 2배로 낮춤 */
+const CAPTURE_PIXEL_RATIO = 2;
+
+/** 캡처 시 본문 최대 폭(px). 데스크톱 다이얼로그(max-w-md) 본문 폭과 동일 */
+const CAPTURE_MAX_CONTENT_WIDTH = 416;
+
+/**
+ * 비율을 빈 여백 대신 본문 폭으로 맞춤. 폭을 넓히면 별 줄 등이 펴져 높이가 줄어드므로
+ * 몇 번 반복해 5:7 에 수렴시킴. 최대 폭에 걸려도 모자라면 그때만 양옆 여백으로 채움.
+ * 화면 밖 복제본(clone)의 폭을 바꿔 재므로 화면 변화 없음. 끝나면 clone 은 그 폭으로 남음
+ */
+const measureCaptureSize = (clone: HTMLElement, minWidth: number) => {
+  const heightAt = (contentWidth: number) => {
+    clone.style.width = `${contentWidth}px`;
+    return clone.offsetHeight + CAPTURE_PADDING * 2;
+  };
+
+  let contentWidth = minWidth;
+  for (let pass = 0; pass < 4; pass += 1) {
+    const target =
+      Math.floor(heightAt(contentWidth) * CAPTURE_MIN_ASPECT) -
+      CAPTURE_PADDING * 2;
+    contentWidth = Math.min(
+      CAPTURE_MAX_CONTENT_WIDTH,
+      Math.max(minWidth, target),
+    );
+  }
+
+  const height = heightAt(contentWidth);
+  const width = Math.max(
+    contentWidth + CAPTURE_PADDING * 2,
+    Math.ceil(height * CAPTURE_MIN_ASPECT),
+  );
+  return { contentWidth, width, height };
+};
+
 const hasRemainingScroll = (element: HTMLDivElement | null) => {
   if (!element) return false;
   const remainingScroll =
@@ -130,18 +172,40 @@ export const StickyFooterDialog = ({
     // 넥슨 이미지 서버 CORS 우회용. 캡처 직전 외부 이미지를 data URL로 교체 후 복원
     const restoreImages = await inlineRemoteImages(node);
 
+    // html-to-image 는 자식의 계산된 폭까지 복사하므로 넓힌 레이아웃은 실제 DOM 이 필요함.
+    // 같은 부모 안 화면 밖에 복제본을 두어 스타일 맥락 유지
+    const clone = node.cloneNode(true) as HTMLElement;
+    clone.setAttribute("aria-hidden", "true");
+    Object.assign(clone.style, {
+      position: "absolute",
+      left: "-10000px",
+      top: "0",
+    });
+    node.parentElement?.appendChild(clone);
+
     try {
       // 배경·여백은 바깥 요소에 있어 캡처 대상에 직접 지정. 스크롤로 가려진 부분까지 전체 캡처됨
       const dialog = node.closest<HTMLElement>("[role=dialog]");
       const backgroundColor = dialog
         ? getComputedStyle(dialog).backgroundColor
         : undefined;
-      const dataUrl = await captureToPng(node, {
-        pixelRatio: 3,
+      const { contentWidth, width, height } = measureCaptureSize(
+        clone,
+        node.offsetWidth,
+      );
+      const paddingX = (width - contentWidth) / 2;
+      const dataUrl = await captureToPng(clone, {
+        pixelRatio: CAPTURE_PIXEL_RATIO,
         backgroundColor,
-        width: node.offsetWidth + CAPTURE_PADDING * 2,
-        height: node.offsetHeight + CAPTURE_PADDING * 2,
-        style: { padding: `${CAPTURE_PADDING}px`, boxSizing: "content-box" },
+        width,
+        height,
+        style: {
+          padding: `${CAPTURE_PADDING}px ${paddingX}px`,
+          // width·height 에 여백 포함. 본문 폭은 contentWidth 로 넓어짐
+          boxSizing: "border-box",
+          // 화면 밖 배치가 캡처 결과로 복사되지 않게 해제
+          position: "static",
+        },
       });
 
       const result = await saveImageDataUrl(
@@ -153,6 +217,7 @@ export const StickyFooterDialog = ({
       console.error("이미지 저장 실패:", cause);
       setSaveError("이미지를 만들지 못했어요. 잠시 후 다시 시도해 주세요.");
     } finally {
+      clone.remove();
       restoreImages();
       setIsSaving(false);
     }

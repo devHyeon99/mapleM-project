@@ -84,17 +84,17 @@ export const inlineRemoteImages = async (
 };
 
 /**
- * iOS 는 `<a download>` 을 무시해서 눌러도 아무 일이 없다. 아이폰 크롬도 속은
- * WebKit 이라 똑같다. 대신 공유 시트를 띄우면 "이미지 저장" 으로 앨범에 넣을 수 있다.
+ * iOS 는 `<a download>` 을 무시해서 눌러도 아무 일이 없음. 아이폰 크롬도 속은
+ * WebKit 이라 동일. 대신 공유 시트의 "이미지 저장" 으로 앨범 저장 가능.
  *
- * OS 를 UA 로 찍지 않고, 공유 시트가 자연스러운 환경(손가락으로 쓰는 기기)인지로
- * 고른다. 데스크톱은 기존처럼 바로 내려받는다.
+ * 안드로이드 공유 시트에는 갤러리 저장 항목이 없어서 공유 시트 사용 불가.
+ * 안드로이드·데스크톱은 `<a download>` 로 바로 내려받음.
  */
 const prefersShareSheet = (file: File): boolean => {
   if (typeof navigator === "undefined") return false;
   if (!navigator.canShare?.({ files: [file] })) return false;
 
-  return window.matchMedia("(pointer: coarse)").matches;
+  return isIOS();
 };
 
 /**
